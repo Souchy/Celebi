@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bc4eboq674vxi"]
+
+[ext_resource type="PackedScene" uid="uid://dbdt0kul1qp4s" path="res://ui/spellbar.tscn" id="1_qd0rf"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_svktc"]
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_d5h4r"]
+albedo_color = Color(0, 1, 0.14902, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="SpellBar" parent="." instance=ExtResource( "1_qd0rf" )]
+offset_left = 100.0
+offset_top = 45.0
+offset_right = 443.0
+offset_bottom = 277.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource( "BoxMesh_svktc" )
+surface_material_override/0 = SubResource( "ORMMaterial3D_d5h4r" )
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.936733, -0.14194, 0.319975, 0, 0.914098, 0.405493, -0.350044, -0.379838, 0.856266, 1.55751, 1.79968, 3.4501)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 4.5154, 4.51705)
+light_indirect_energy = 0.0

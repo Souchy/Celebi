@@ -1,0 +1,74 @@
+{
+
+    "normal": [
+        {
+            "name": "normal punch",
+            "type": "normal",
+            "power": 20,
+            "cost": 1,
+            "range": 1
+        },
+        {
+            "name": "scratch",
+            "type": "normal",
+            "power": 20,
+            "cost": 1,
+            "range": 1
+        },
+        {
+            "name": "bite",
+            "type": "normal",
+            "power": 20,
+            "cost": 1,
+            "range": 1
+        }
+    ],
+    "earth": [
+        {
+            "name": "ground spikes",
+            "type": "earth",
+            "power": 20,
+            "cost": 1,
+            "range": 1
+        }
+    ],
+    "water": [
+        {
+            "name": "bubble",
+            "type": "normal",
+            "power": 20,
+            "cost": 1,
+            "range": 1
+        },
+        {
+            "name": "water gun",
+            "type": "normal",
+            "power": 20,
+            "cost": 1,
+            "range": 1
+        }
+    ],
+    "air": [
+        {
+            "name": "gust",
+            "type": "normal",
+            "power": 20,
+            "cost": 1,
+            "range": 1
+        }
+    ],
+    "fire": [
+        {
+            "name": "fireball",
+            "type": "normal",
+            "power": 20,
+            "cost": 1,
+            "range": 1
+        }
+    ]
+
+
+
+
+
+}
