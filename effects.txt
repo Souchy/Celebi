@@ -1,0 +1,32 @@
+
+damage {
+    int power;
+}
+
+applyStatus {
+    status 
+        effects
+}
+
+dashDist, dastTo
+push, pull
+{
+    int distance
+}
+
+teleport {}
+
+summon {
+    creatureID
+    
+    raiseDead spell can use summon effect {
+        creatureID
+        filter : corpse
+    }
+}
+
+flee, scare {
+    // make the creature swap out and force another one on the board
+}
+
+

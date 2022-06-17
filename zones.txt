@@ -1,0 +1,26 @@
+
+
+// zones : 
+//  "cible" est toujours au centre x/2, y/2
+//  1/0 pour activer ou pas
+
+// types pre-built :
+//  ligne
+//  ligne perpendiculaire
+//  rectangle / carré
+//  rectangle vide
+//  cercle
+//  anneau
+//  arc
+//  cone
+//  étoile
+//  croix
+//  croix diagonale
+//  custom: set le w/h et clique sur les cellules voulues
+
+
+[
+    [1,0,1],
+    [0,1,0],
+    [1,0,1]
+]

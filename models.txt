@@ -1,0 +1,160 @@
+
+creature {
+    name,
+    description
+    spells[]
+    stats
+    status[]
+}
+
+spell {
+    name,
+    description,
+    spellConditions{}
+    cost[]
+        resourceType
+        amount
+    effects[]
+}
+
+spellConditions {
+    aoe<targetTypeFilter> cellconditions
+    int cast per target
+    int cast per turn
+    int cooldown
+    range :
+        int range min/max
+        aoe<boolean> range pattern min/max
+}
+
+effect {
+    name,
+    description,
+    type
+    aoe<boolean>
+    targetTypeFilter
+}
+
+action {
+    effect
+    target
+    source
+    apply()
+}
+
+target {
+    position
+    targetTypeFilter
+}
+
+targetType {
+    emptyCell = 1,
+    ally = 2,
+    enemy = 4,
+    summon = 8,
+    corpse = 16
+}
+
+targetTypeFilter {
+    int filter = ally | enemy | summon; // etc...
+}
+
+
+aoe<T> {
+    map<int, T> map;
+}
+
+status {
+    int duration
+    int stacks
+    boolean canStack
+    boolean canRefresh
+    boolean canDebuff
+    effects[]
+}
+
+trigger {
+    onTurnEnd
+    onTurnStart
+    onRoundEnd
+    onRoundStart
+
+    onEffectSource {
+        effectType,
+    }
+    onEffectTarget {
+        effectType,
+    }
+    // onDamageRecv
+    // onDamageDone
+    // onHealingRecv
+    // onHealingDone
+}
+
+spell.apply(source, target) {
+    stack = new List<>;
+    for(e : effects) {
+        e.stackAoe(stack, source, target)
+    }
+}
+
+effect.stackAoe(stack, source, target) {
+    stack = new List<>;
+    for(cell in e.aoe + target)
+        stackEffects(stack, e, target, source)
+}
+
+effect.stackEffects(List<Effect> stack, e, target, source) {
+    if(e.targetTypeFilter != target.targetTypeFilter)
+        return
+
+    stack.add(new action(e, target, source));    
+
+    // target triggers
+    for(s on target.creature.status) {
+        if(s.triggersOn(e.type) && s.triggersOnTarget) {
+            for(e in status.effects) {
+                stackAoe(stack, e, source, target)
+            }
+        }
+    }
+    // source triggers
+    for(s on source.creature.status) {
+        if(s.triggersOn(e.type) && s.triggersOnSource) {
+            for(e in status.effects) {
+                stackAoe(stack, e, target, source)
+            }
+        }
+    }
+}
+
+
+
+exemple de prévisualisation difficile :
+    - sort poussse + tape
+        target devien invu lorsque poussé
+        target devrait prendre 0 dégât
+
+    - sort qui vole des stats + tape
+        source gagne des stats
+        source devrait taper plus fort
+
+    créé objet de stats temporaire dans le stack d'action? 
+    
+    Stack {
+        actions[]
+        source
+        map<creature, stats> bonus
+        stackEffects() { 
+            bonus[target].add(invu)
+            damage.compile() 
+            bonus[source].add(volstats)
+        }
+    }
+
+
+    CompiledDamageEffect {
+        int damageDone
+        source, 
+        target
+    }
