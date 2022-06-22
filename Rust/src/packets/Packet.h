@@ -1,5 +1,5 @@
 #pragma once
-class Status
+class Packet
 {
 };
 

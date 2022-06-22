@@ -13,21 +13,54 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="dll">
+      <UniqueIdentifier>{794a8576-bfd7-4eee-981a-18a8ff6bbc59}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="framework.h">
+    <ClInclude Include="src/main/Aoe.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="pch.h">
+    <ClInclude Include="src/main/Board.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="dllmain.cpp">
+    <ClInclude Include="src/main/Creature.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src/main/Effect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src/main/Spell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src/main/Stats.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src/main/Status.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src/main/Target.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src/main/Effect.cpp">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src/main/Spell.cpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src/dll/framework.h">
+      <Filter>dll</Filter>
+    </ClInclude>
+    <ClInclude Include="src/dll/pch.h">
+      <Filter>dll</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src/dll/dllmain.cpp">
+      <Filter>dll</Filter>
     </ClCompile>
-    <ClCompile Include="pch.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src/dll/pch.cpp">
+      <Filter>dll</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

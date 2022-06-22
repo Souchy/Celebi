@@ -14,5 +14,6 @@ class Effect {
         string type;
         Aoe aoe;
         TargetTypeFilter filter;
-        void stackEffects(Target source, Target target);
+        //void stackEffects(Target source, Target target);
 };
+

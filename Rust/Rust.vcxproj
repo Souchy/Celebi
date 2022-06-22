@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -139,12 +139,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="framework.h" />
-    <ClInclude Include="pch.h" />
+    <ClInclude Include="src\effects\AddStatus.h" />
+    <ClInclude Include="src\effects\Flee.h" />
+    <ClInclude Include="src\effects\move\Dash.h" />
+    <ClInclude Include="src\effects\move\Push.h" />
+    <ClInclude Include="src\effects\Damage.h" />
+    <ClInclude Include="src\main\CasterAction.h" />
+    <ClInclude Include="src\models\Aoe.h" />
+    <ClInclude Include="src\models\Board.h" />
+    <ClInclude Include="src\models\Creature.h" />
+    <ClInclude Include="src\models\Effect.h" />
+    <ClInclude Include="src\models\Spell.h" />
+    <ClInclude Include="src\models\Stats.h" />
+    <ClInclude Include="src\models\Status.h" />
+    <ClInclude Include="src\models\Target.h" />
+    <ClInclude Include="src/dll/framework.h" />
+    <ClInclude Include="src/dll/pch.h" />
+    <ClInclude Include="src\effects\move\Teleport.h" />
+    <ClInclude Include="src\effects\move\Swap.h" />
+    <ClInclude Include="src\effects\Summon.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="pch.cpp">
+    <ClInclude Include="src\models\Effect.cpp" />
+    <ClInclude Include="src\models\Spell.cpp" />
+    <ClCompile Include="src/dll/dllmain.cpp" />
+    <ClCompile Include="src/dll/pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

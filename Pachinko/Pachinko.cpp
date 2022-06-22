@@ -29,6 +29,9 @@
 #endif
 #include <GLFW/glfw3.h> // Will drag system OpenGL headers
 
+#include <vector>
+#include <string>
+
 // [Win32] Our example includes a copy of glfw3.lib pre-compiled with VS2010 to maximize ease of testing and compatibility with old VS compilers.
 // To link with VS2010-era libraries, VS2015+ requires linking with legacy_stdio_definitions.lib, which we do using this pragma.
 // Your own project should not be affected, as you are likely to link with a newer binary of GLFW that is adequate for your version of Visual Studio.
@@ -39,6 +42,88 @@
 static void glfw_error_callback(int error, const char* description)
 {
     fprintf(stderr, "Glfw Error %d: %s\n", error, description);
+}
+
+int width = 5;
+int height = 5;
+std::vector<int> table;
+
+void init() {
+}
+
+void toggleButton(int i) {
+    int val = table[i];
+    std::string bb = "asdb" + std::to_string(i);
+    char b[3] = {'b', i};
+    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(val == 0, val == 1, 0, 1));
+    if (ImGui::Button(b, ImVec2(32, 32))) {
+        table[i] = (val + 1) % 2;
+    }
+    ImGui::PopStyleColor();
+}
+
+void aoeTable() {
+    //ImGui::SetNextWindowPos(ImVec2(300, 10));
+    //ImGui::SetNextWindowSize(ImVec2(300, 300));
+
+    ImGui::Begin("Aoe Table");
+    ImGui::SliderInt("Width", &width, 1, 16);
+    ImGui::SliderInt("Height", &height, 1, 16);
+    if (ImGui::Button("Clear")) {
+        table.clear();
+    }
+    if (ImGui::Button("Circle")) {
+        for (int i = 1; i < width - 1; i++) {
+            for (int j = 1; j < height - 1; j++) {
+                table[i + j * width] = 1;
+            }
+        }
+    }
+    table.resize(width * height);
+    //ImGui::BeginTable("aoe", ImGuiTableFlags_::ImGuiTableFlags_Borders);
+    ImGui::BeginTable("aoe", width, ImGuiTableFlags_Borders);
+    for (int i = 0; i < table.size(); i++) {
+        if (i % width == 0) {
+            ImGui::TableNextRow();
+        }
+        ImGui::TableNextColumn();
+        toggleButton(i);
+    }
+    //for (int i = 0; i < width; i++) {
+        //ImGui::TableNextRow();
+        //for (int j = 0; j < height; j++) {
+            //ImGui::TableNextColumn();
+            //toggleButton(i);
+        //}
+    //}
+    ImGui::EndTable();
+    ImGui::End();
+}
+
+
+void introWindow(bool* show_demo_window, bool* show_another_window, ImVec4* clear_color) {
+    // 2. Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
+    {
+        static float f = 0.0f;
+        static int counter = 0;
+
+        ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
+
+        ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
+        ImGui::Checkbox("Demo Window", show_demo_window);      // Edit bools storing our window open/close state
+        ImGui::Checkbox("Another Window", show_another_window);
+
+        ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
+        ImGui::ColorEdit3("clear color", (float*) clear_color); // Edit 3 floats representing a color
+
+        if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
+            counter++;
+        ImGui::SameLine();
+        ImGui::Text("counter = %d", counter);
+
+        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+        ImGui::End();
+    }
 }
 
 int main(int, char**)
@@ -129,41 +214,22 @@ int main(int, char**)
         ImGui::NewFrame();
 
         // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
-        if (show_demo_window)
-            ImGui::ShowDemoWindow(&show_demo_window);
+        //if (show_demo_window)
+            //ImGui::ShowDemoWindow(&show_demo_window);
 
-        // 2. Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
-        {
-            static float f = 0.0f;
-            static int counter = 0;
+        introWindow(&show_demo_window, &show_another_window, &clear_color);
 
-            ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
-
-            ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
-            ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
-            ImGui::Checkbox("Another Window", &show_another_window);
-
-            ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-            ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
-
-            if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-                counter++;
-            ImGui::SameLine();
-            ImGui::Text("counter = %d", counter);
-
-            ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-            ImGui::End();
-        }
+        aoeTable();
 
         // 3. Show another simple window.
-        if (show_another_window)
-        {
-            ImGui::Begin("Another Window", &show_another_window);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
-            ImGui::Text("Hello from another window!");
-            if (ImGui::Button("Close Me"))
-                show_another_window = false;
-            ImGui::End();
-        }
+        //if (show_another_window)
+        //{
+        //    ImGui::Begin("Another Window", &show_another_window);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
+        //    ImGui::Text("Hello from another window!");
+        //    if (ImGui::Button("Close Me"))
+        //        show_another_window = false;
+        //    ImGui::End();
+        //}
 
         // Rendering
         ImGui::Render();
