@@ -5,6 +5,7 @@
 class Trigger {
 public: 
 	std::function<void()> lambda;
+	Trigger() {}
 	Trigger(std::function<void()> action) {
 		lambda = action;
 	}

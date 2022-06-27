@@ -116,7 +116,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Rust;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -140,10 +140,36 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Umbreon.cpp" />
+    <ClCompile Include="src\Umbreon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\ActionPipeline.h" />
+    <ClInclude Include="src\handlers\CastSpellHandler.h" />
+    <ClInclude Include="src\handlers\PacketHandler.h" />
+    <ClInclude Include="src\models\Aoe.h" />
+    <ClInclude Include="src\models\Board.h" />
+    <ClInclude Include="src\models\Creature.h" />
+    <ClInclude Include="src\models\Effect.h" />
+    <ClInclude Include="src\models\effects\AddStatus.h" />
+    <ClInclude Include="src\models\effects\Damage.h" />
+    <ClInclude Include="src\models\effects\Flee.h" />
+    <ClInclude Include="src\models\effects\move\Dash.h" />
+    <ClInclude Include="src\models\effects\move\Push.h" />
+    <ClInclude Include="src\models\effects\move\Swap.h" />
+    <ClInclude Include="src\models\effects\move\Teleport.h" />
+    <ClInclude Include="src\models\effects\Summon.h" />
+    <ClInclude Include="src\models\Fight.h" />
+    <ClInclude Include="src\models\Spell.h" />
+    <ClInclude Include="src\models\Stats.h" />
+    <ClInclude Include="src\models\Status.h" />
+    <ClInclude Include="src\models\Target.h" />
+    <ClInclude Include="src\models\Trigger.h" />
+    <ClInclude Include="src\packets\CastSpell.h" />
+    <ClInclude Include="src\packets\Move.h" />
+    <ClInclude Include="src\packets\Packet.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

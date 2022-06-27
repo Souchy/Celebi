@@ -4,19 +4,21 @@
 #include <iostream>
 
 
-#include "src/models/Spell.h"
+#include "models/Creature.h"
+#include "models/Spell.h"
 
 
 // CLIENT
 int main() {
     std::cout << "Hello World!\n";
-
-    Spell s;
+    //Spell s;
 }
 
 
 void receiveCastSpell(int source, int target, int spell) {
-
+    Creature s;
+    Spell s;
+    
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

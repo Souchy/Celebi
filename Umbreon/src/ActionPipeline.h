@@ -6,6 +6,7 @@
 #include "../models/Stats.h"
 
 class ActionPipeline {
+public:
     Creature source;
     Stats statsSource;
     vector<EffectAction> actions;

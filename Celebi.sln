@@ -5,14 +5,17 @@ VisualStudioVersion = 17.2.32505.173
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Pachinko", "Pachinko\Pachinko.vcxproj", "{028C0062-9D98-47A7-ACC3-97E774387952}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Rust", "Rust\Rust.vcxproj", "{5C5C6BD6-3066-46F9-AFC8-48CB3B754C5B}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Espeon", "Espeon\Espeon.vcxproj", "{77D8BB6F-7D69-4065-920E-C256D7852790}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Umbreon", "Umbreon\Umbreon.vcxproj", "{9AB0F2FD-84F8-4485-9A43-6028F7FC8BE8}"
-	ProjectSection(ProjectDependencies) = postProject
-		{5C5C6BD6-3066-46F9-AFC8-48CB3B754C5B} = {5C5C6BD6-3066-46F9-AFC8-48CB3B754C5B}
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{1F624B5F-2BF0-48C5-BA77-F4FBE25762EC}"
+	ProjectSection(SolutionItems) = preProject
+		doc\cu.md = doc\cu.md
+		doc\mdd.puml = doc\mdd.puml
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UmbreonTest", "Umbreon\UmbreonTest\UmbreonTest.vcxproj", "{F4F9BC51-1063-4855-AF35-6A2753D5D34C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,14 +33,6 @@ Global
 		{028C0062-9D98-47A7-ACC3-97E774387952}.Release|x64.Build.0 = Release|x64
 		{028C0062-9D98-47A7-ACC3-97E774387952}.Release|x86.ActiveCfg = Release|Win32
 		{028C0062-9D98-47A7-ACC3-97E774387952}.Release|x86.Build.0 = Release|Win32
-		{5C5C6BD6-3066-46F9-AFC8-48CB3B754C5B}.Debug|x64.ActiveCfg = Debug|x64
-		{5C5C6BD6-3066-46F9-AFC8-48CB3B754C5B}.Debug|x64.Build.0 = Debug|x64
-		{5C5C6BD6-3066-46F9-AFC8-48CB3B754C5B}.Debug|x86.ActiveCfg = Debug|Win32
-		{5C5C6BD6-3066-46F9-AFC8-48CB3B754C5B}.Debug|x86.Build.0 = Debug|Win32
-		{5C5C6BD6-3066-46F9-AFC8-48CB3B754C5B}.Release|x64.ActiveCfg = Release|x64
-		{5C5C6BD6-3066-46F9-AFC8-48CB3B754C5B}.Release|x64.Build.0 = Release|x64
-		{5C5C6BD6-3066-46F9-AFC8-48CB3B754C5B}.Release|x86.ActiveCfg = Release|Win32
-		{5C5C6BD6-3066-46F9-AFC8-48CB3B754C5B}.Release|x86.Build.0 = Release|Win32
 		{77D8BB6F-7D69-4065-920E-C256D7852790}.Debug|x64.ActiveCfg = Debug|x64
 		{77D8BB6F-7D69-4065-920E-C256D7852790}.Debug|x64.Build.0 = Debug|x64
 		{77D8BB6F-7D69-4065-920E-C256D7852790}.Debug|x86.ActiveCfg = Debug|Win32
@@ -54,6 +49,14 @@ Global
 		{9AB0F2FD-84F8-4485-9A43-6028F7FC8BE8}.Release|x64.Build.0 = Release|x64
 		{9AB0F2FD-84F8-4485-9A43-6028F7FC8BE8}.Release|x86.ActiveCfg = Release|Win32
 		{9AB0F2FD-84F8-4485-9A43-6028F7FC8BE8}.Release|x86.Build.0 = Release|Win32
+		{F4F9BC51-1063-4855-AF35-6A2753D5D34C}.Debug|x64.ActiveCfg = Debug|x64
+		{F4F9BC51-1063-4855-AF35-6A2753D5D34C}.Debug|x64.Build.0 = Debug|x64
+		{F4F9BC51-1063-4855-AF35-6A2753D5D34C}.Debug|x86.ActiveCfg = Debug|Win32
+		{F4F9BC51-1063-4855-AF35-6A2753D5D34C}.Debug|x86.Build.0 = Debug|Win32
+		{F4F9BC51-1063-4855-AF35-6A2753D5D34C}.Release|x64.ActiveCfg = Release|x64
+		{F4F9BC51-1063-4855-AF35-6A2753D5D34C}.Release|x64.Build.0 = Release|x64
+		{F4F9BC51-1063-4855-AF35-6A2753D5D34C}.Release|x86.ActiveCfg = Release|Win32
+		{F4F9BC51-1063-4855-AF35-6A2753D5D34C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

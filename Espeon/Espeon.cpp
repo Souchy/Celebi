@@ -3,12 +3,12 @@
 
 #include <iostream>
 
-#include "src/models/Spell.h"
+//#include "src/models/Spell.h"
 
 int main() {
     std::cout << "Hello World!\n";
 
-    Spell s;
+    //Spell s;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
