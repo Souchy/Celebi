@@ -1,0 +1,12 @@
+{
+    "_id": {
+        "$oid": "62b9a7728e991d82fc1568fe"
+    },
+    "name": "",
+    "description": "",
+    "icon": "",
+    "vfxSource": "",
+    "vfxTarget": "",
+    "animationSource": "",
+    "animationTarget": ""
+}

@@ -1,0 +1,54 @@
+{
+    "_id": {
+        "$oid": "62b9a7728e991d82fc1568fe"
+    },
+    "costs": [
+        {
+            "resource": "ap",
+            "value": 3
+        }
+    ],
+    "restrictions": {
+        "cooldown": 0,
+        "castPerTurn": 0,
+        "castPerTarget": 0,
+        "aoeConditions": [
+            [
+                4
+            ],
+            [
+                4
+            ],
+            [
+                4
+            ]
+        ]
+    },
+    "statements": [
+        {
+            "condition": {
+                "type": "StatCondition",
+                "children": [],
+                "childLink": "and",
+                "actor": "source",
+                "mod": "ap",
+                "value": 5,
+                "op": "gt"
+            },
+            "children": [],
+            "effects": [
+                {
+                    "id": 1,
+                    "power": 10
+                },
+                {
+                    "id": 3,
+                    "status": {
+                        "stats": {},
+                        "triggers": []
+                    }
+                }
+            ]
+        }
+    ]
+}

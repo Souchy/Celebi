@@ -2,10 +2,30 @@
 
 #include "../ActionPipeline.h"
 
+enum ConditionLink {
+    and,
+    or
+};
+enum Actor {
+    source,
+    target,
+    accumulator_last,
+    accumulator_total
+};
+enum ComparisonOperator {
+    eq,
+    gt,
+    ge,
+    lt,
+    le
+};
+
 class Condition {
 public:
     Condition() {}
     ~Condition() {}
+    vector<Condition> children;
+    ConditionLink childLink;
     Actor actor;
     bool verify(ActionPipeline p);
 };
@@ -45,28 +65,6 @@ public:
             break;
         }
     }
-};
-
-enum Actor {
-    source,
-    target,
-    accumulator_last,
-    accumulator_total
-};
-
-
-struct ConditionIsEqual {
-    
-};
-struct ConditionGT {
-
-};
-enum ComparisonOperator {
-    eq,
-    gt,
-    ge,
-    lt,
-    le
 };
 
 class Comparator {
