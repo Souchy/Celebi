@@ -5,9 +5,7 @@
 
 
 #include "models/Creature.h"
-// #include "models/Spell.h"
-
-
+#include "models/Spell.h"
 
 
 // CLIENT

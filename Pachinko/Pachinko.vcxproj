@@ -70,6 +70,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -150,6 +153,11 @@
     <ClInclude Include="$(HOMEPATH)/source/repos/imgui/backends\imgui_impl_glfw.h" />
     <ClInclude Include="$(HOMEPATH)/source/repos/imgui/backends\imgui_impl_opengl3.h" />
     <ClInclude Include="$(HOMEPATH)/source/repos/imgui/backends\imgui_impl_opengl3_loader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Umbreon\Umbreon.vcxproj">
+      <Project>{9ab0f2fd-84f8-4485-9a43-6028f7fc8be8}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

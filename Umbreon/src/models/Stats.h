@@ -5,10 +5,6 @@
 #include <map>
 using namespace std;
 
-#include "Creature.h"
-#include "Status.h"
-#include "Effect.h"
-
 enum Mod {
     BOUND_START,
 
@@ -35,7 +31,7 @@ private:
 public:
     Stats() {
         for(int m = Mod::BOUND_START; m < Mod::BOUND_END; m++) {
-            stats.insert(m, 0);  
+            stats[m] = 0;
         }
     }
     ~Stats() {
@@ -46,6 +42,6 @@ public:
     }
     void add(int mod, int val) {
         int old = get(mod);
-        stats.insert(mod, old + val);
+        stats[mod] = old + val;
     }
 };

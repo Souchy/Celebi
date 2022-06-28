@@ -35,7 +35,7 @@ public:
 		table[row * width + col] = val;
 	}
 	int size() {
-		return table.size(); // ou table.size() ou width * height
+		return width * height; // table.size(); // ou table.size() ou width * height
 	}
 	void fill(T val) {
 		for (int i = 0; i < size(); i++) {
@@ -47,7 +47,7 @@ public:
 		//this->height = height;
 		//table.resize(width * height);
 		while (this->width < width) {
-
+			break;
 		}
 	}
 	void addColumn(int colIndex) {

@@ -1,12 +1,12 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <map>
 #include "Aoe.h"
 #include "Effect.h"
 #include "Trigger.h"
 #include "Stats.h"
-#include <map>
-#include "conditions/Condition.h"
+// #include "conditions/Condition.h"
 
 struct SpellConditions {
     Aoe cellConditions = Aoe(1,1);
@@ -22,7 +22,7 @@ struct Cost {
 };
 
 struct Statement {
-    Condition condition;
+    // Condition condition;
     vector<Statement> children;
     vector<Effect> effects;
 };
