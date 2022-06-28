@@ -27,7 +27,7 @@ struct Statement {
     vector<Effect> effects;
 };
 
-struct SpellStatus {
+struct SpellStats {
     int castsThisTurn;
     std::map<int, int> castsPerTarget;
     int lastTurnCast;
@@ -49,7 +49,7 @@ public:
     ~Spell() {}
 
     SpellAssets assets;
-    SpellStatus status; // for an instance of the spell
+    SpellStats status; // for an instance of the spell
 
     SpellConditions conditions;
     vector<Cost> costs;

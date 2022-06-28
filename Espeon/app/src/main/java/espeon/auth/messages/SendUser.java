@@ -1,14 +1,13 @@
 package espeon.auth.messages;
 
-// import com.souchy.randd.annotationprocessor.ID;
+import com.souchy.randd.annotationprocessor.ID;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.tealwaters.commons.Deserializer;
-// import com.souchy.randd.jade.meta.User;
 
 import espeon.auth.jade.User;
 import io.netty.buffer.ByteBuf;
 
-// @ID(id = 0005)
+@ID(id = 0005)
 public class SendUser implements BBMessage {
 	
 	public User user;

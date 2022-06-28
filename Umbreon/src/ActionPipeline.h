@@ -1,28 +1,34 @@
 #pragma once
 
 #include <vector>
-#include "../models/Spell.h"
-#include "../models/Effect.h"
-#include "../models/Stats.h"
-
-class ActionPipeline {
-public:
-    Creature source;
-    Stats statsSource;
-    vector<EffectAction> actions;
-};
+#include "models/Spell.h"
+#include "models/Effect.h"
+#include "models/Stats.h"
+#include "models/Creature.h"
 
 class EffectAction {
 public:
     EffectAction();
     ~EffectAction();
+
     Target target;
     Stats statsTarget;
-    //Creature source; //Target source;
-    //Stats statsSource;
+
+    Target source; // Creature source; //
+    Stats statsSource;
+
     Effect effect;
 };
 
+class ActionPipeline {
+public:
+    Target source; //Creature source;
+    Stats statsSource;
+    vector<EffectAction> actions;
+};
+
+
+/*
 Stats getTotalStats(Creature c) {
     Stats total = c.stats; // copy base stats
     // compileStats(s, c.stats);
@@ -41,13 +47,14 @@ void addStats(Stats dest, Stats from) {
 
 
 void castSpell(Spell s, Target source, Target target) {
+    Board b;
     vector<EffectAction> actions;
-    for (auto e : s.effects) {
+    for (auto statement : s.statements) {
         EffectAction a;
         Creature s, t;
-        a.source = source;
+        a.source = b.getCreature(source); // source;
         a.target = target;
-        a.statsSource = getTotalStats(s);
+        //a.statsSource = getTotalStats(s);
         a.statsTarget = getTotalStats(t);
     }
 }
@@ -56,3 +63,4 @@ void castSpell(Spell s, Target source, Target target) {
 void stackEffect(vector<EffectAction> actions) {
 
 }
+*/

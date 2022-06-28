@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "Board.h"
+#include "../util/Position.h"
 
 enum TargetType {
 	any = 0,

@@ -9,6 +9,26 @@ using namespace std;
 #include "Status.h"
 #include "Effect.h"
 
+enum Mod {
+    BOUND_START,
+
+    ap,
+    ap_max,
+    mp,
+    mp_max,
+    hp,
+    hp_max,
+
+    attack,
+    defense,
+    sp_attack,
+    sp_defense,
+    speed,
+
+    BOUND_END
+};
+
+
 class Stats {
 private:
     map<int, int> stats;
@@ -29,24 +49,3 @@ public:
         stats.insert(mod, old + val);
     }
 };
-
-
-enum Mod {
-    BOUND_START,
-
-    ap,
-    ap_max,
-    mp,
-    mp_max,
-    hp,
-    hp_max,
-
-    attack,
-    defense,
-    sp_attack,
-    sp_defense,
-    speed,
-
-    BOUND_END
-};
-

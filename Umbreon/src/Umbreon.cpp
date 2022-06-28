@@ -5,7 +5,9 @@
 
 
 #include "models/Creature.h"
-#include "models/Spell.h"
+// #include "models/Spell.h"
+
+
 
 
 // CLIENT
@@ -16,8 +18,8 @@ int main() {
 
 
 void receiveCastSpell(int source, int target, int spell) {
-    Creature s;
-    Spell s;
+    //Creature s;
+    //Spell s;
     
 }
 

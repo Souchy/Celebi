@@ -1,10 +1,11 @@
 #pragma once
 
-#include "../ActionPipeline.h"
+#include "../../ActionPipeline.h"
+#include "../Fight.h"
 
 enum ConditionLink {
-    and,
-    or
+    AND,
+    OR
 };
 enum Actor {
     source,
@@ -28,6 +29,21 @@ public:
     ConditionLink childLink;
     Actor actor;
     bool verify(ActionPipeline p);
+    
+    static bool compare(ComparisonOperator e, int a, int b) {
+        switch (e) {
+        case eq:
+            return a == b;
+        case gt:
+            return a > b;
+        case ge:
+            return a >= b;
+        case lt:
+            return a < b;
+        case le:
+            return a <= b;
+        }
+    }
 };
 
 
@@ -57,30 +73,16 @@ public:
     ComparisonOperator op;
     bool verify(ActionPipeline p) {
         auto a = p.actions.back();
+        Fight f;
+        Board b;
+        int cid = b.getCreatureId(p.source);
+        Creature* cs = f.getCreature(cid);
         switch(actor) {
-            case source:
-                return Comparator::compare(op, p.source.stats.get(mod), value);
+            case Actor::source:
+                return Condition::compare(op, cs->stats.get(mod), value);
             break;
-            case target:
+            case Actor::target:
             break;
         }
     }
 };
-
-class Comparator {
-public:
-    static bool compare(ComparisonOperator e, int a, int b) {
-        switch (e) {
-            case eq:
-                return a == b;
-            case gt:
-                return a > b;
-            case ge:
-                return a >= b;
-            case lt:
-                return a < b;
-            case le:
-                return a <= b;
-        }
-    }
-}

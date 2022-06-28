@@ -8,11 +8,14 @@ public:
 	vector<Creature> creatures;
 	vector<int> timeline;
 
-	Creature getCreature(int id) {
+	Fight();
+	~Fight();
+
+	Creature* getCreature(int id) {
 		for (auto c : creatures)
 			if (c.id == id)
-				return c;
-		return nullptr;
+				return &c;
+		throw nullptr;
 	}
 
 };

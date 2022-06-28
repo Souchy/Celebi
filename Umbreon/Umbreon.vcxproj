@@ -146,6 +146,7 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\util\Position.h" />
     <ClInclude Include="src\ActionPipeline.h" />
     <ClInclude Include="src\handlers\CastSpellHandler.h" />
     <ClInclude Include="src\handlers\PacketHandler.h" />

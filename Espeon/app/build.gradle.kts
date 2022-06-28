@@ -30,9 +30,9 @@ dependencies {
     implementation("org.javassist:javassist:3.29.0-GA")
     implementation("org.reflections:reflections:0.10.2")
 
-    implementation(files("../../../../../GitPiranha/r and d/Commons WS/Teal Net/Teal Net.jar"))   
-    implementation(files("../../../../../GitPiranha/r and d/Commons WS/TealWaters/tealwaters.jar"))   
-    implementation(files("../../../../../GitPiranha/r and d/annotationprocessor.jar"))   
+    implementation(files("../../../../GitPiranha/r and d/Commons WS/Teal Net/Teal Net.jar"))   
+    implementation(files("../../../../GitPiranha/r and d/Commons WS/TealWaters/tealwaters.jar"))   
+    implementation(files("../../../../GitPiranha/r and d/annotationprocessor.jar"))   
 }
 
 application {

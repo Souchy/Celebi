@@ -2,22 +2,29 @@
 
 #include <vector>
 #include "../util/Table.h"
-
-class Position {
-public:
-    int x, y, z;
-};
+#include "../util/Position.h"
+//#include "Creature.h"
 
 class Cell {
 public:
-    Cell();
-    ~Cell();
+    Cell() {}
+    ~Cell() {}
     Position pos;
+    int creatureId;
 };
 
 
 class Board {
 public:
-    //vector<Cell> cells;
-    Table<Cell> cells;
+    Table<Cell> cells = Table<Cell>(24, 24, Cell());
+
+    Board() {
+        //for (auto i : cells.size()) {
+        //}
+    }
+    ~Board() {}
+
+    int getCreatureId(Target t) {
+        return 0;
+    }
 };
