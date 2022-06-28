@@ -14,6 +14,8 @@
 
 
 #include <iostream>
+#include <cstring>
+using namespace std;
 
 // Dear ImGui: standalone example application for GLFW + OpenGL 3, using programmable pipeline
 // (GLFW is a cross-platform general purpose library for handling windows, inputs, OpenGL/Vulkan/Metal graphics context creation, etc.)
@@ -21,13 +23,14 @@
 // Read online: https://github.com/ocornut/imgui/tree/master/docs
 
 #include "imgui.h"
-#include "imgui_impl_glfw.h"
-#include "imgui_impl_opengl3.h"
+#include "backends/imgui_impl_glfw.h"
+#include "backends/imgui_impl_opengl3.h"
 #include <stdio.h>
 #if defined(IMGUI_IMPL_OPENGL_ES2)
 #include <GLES2/gl2.h>
 #endif
-#include <GLFW/glfw3.h> // Will drag system OpenGL headers
+// #include <examples/libs/glfw/include/GLFW/glfw3.h> // Will drag system OpenGL headers
+#include "examples/libs/glfw/include/GLFW/glfw3.h"
 
 #include <vector>
 #include <string>
@@ -53,10 +56,16 @@ void init() {
 
 void toggleButton(int i) {
     int val = table[i];
-    std::string bb = "asdb" + std::to_string(i);
-    char b[3] = {'b', i};
+    std::string bb = "b " + std::to_string(i);
+    // char b[3] = {'b', i};
+    
+    
+    char* char_arr;
+    string str_obj("G" + std::to_string(i));
+    char_arr = &str_obj[0];
+
     ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(val == 0, val == 1, 0, 1));
-    if (ImGui::Button(b, ImVec2(32, 32))) {
+    if (ImGui::Button(char_arr, ImVec2(32, 32))) {
         table[i] = (val + 1) % 2;
     }
     ImGui::PopStyleColor();

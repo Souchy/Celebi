@@ -2,12 +2,17 @@
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "C/C++: g++.exe build active file",
+            "label": "C/C++: g++.exe build active file1",
             "command": "C:\\msys64\\mingw64\\bin\\g++.exe",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
+                "-I",
+                "${USERPROFILE}/source/repos/imgui",
+                "${USERPROFILE}/source/repos/imgui/backends",
+                "${USERPROFILE}/source/repos/imgui/examples/libs/glfw/include",
+                "${USERPROFILE}/source/repos/imgui/examples/libs/glfw/include/GLFW",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
@@ -32,7 +37,7 @@
                 "-g",
                 "${workspaceFolder}/Umbreon/src/Umbreon.cpp",
                 "-o",
-                "${workspaceFolder}/Umbreon/x64/Debug/Umbreon.exe"
+                "${workspaceFolder}/Umbreon/Umbreon.exe"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/Umbreon"
@@ -50,16 +55,28 @@
             "type": "cppbuild",
             "label": "Build Pachinko",
             "command": "C:\\msys64\\mingw64\\bin\\g++.exe",
+            // "command": "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.32.31326/bin/Hostx64/x64/cl.exe",
             "args": [
+                "-std=c++17",        
                 "-fdiagnostics-color=always",
+                "-I",
+                "${USERPROFILE}/source/repos/imgui",
+                // "-I",
+                // "${USERPROFILE}/source/repos/imgui/backends",
+                // "-I",
+                // "${USERPROFILE}/source/repos/imgui/examples/libs/glfw/include",
+                // "-I",
+                // "${USERPROFILE}/source/repos/imgui/examples/libs/glfw/include/GLFW",
+                // "${USERPROFILE}/source/repos/imgui/backends/imgui_impl_glfw.h",
+                // "${USERPROFILE}/source/repos/imgui/backends/imgui_impl_opengl3.h",
+                // "${USERPROFILE}/source/repos/imgui/examples/libs/glfw/include/GLFW/glfw3.h",
                 "-g",
-                "C:/Users/robyn/source/repos/imgui/imgui.h",
                 "${workspaceFolder}/Pachinko/Pachinko.cpp",
-                // "%HOMEPATH%/source/repos/imgui",
-                // "%HOMEPATH%/source/repos/imgui/backends",
-                // "C:/Users/robyn/source/repos/imgui/examples/libs/glfw/include",
+                // "${USERPROFILE}/source/repos/imgui",
+                // "${USERPROFILE}/source/repos/imgui/backends",
+                // "${USERPROFILE}/source/repos/imgui/examples/libs/glfw/include",
                 "-o",
-                "${workspaceFolder}/Pachinko/x64/Debug/Pachinko.exe"
+                "${workspaceFolder}/Pachinko/Pachinko.exe"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/Pachinko",

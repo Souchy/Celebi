@@ -4,9 +4,9 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${env.PATH}/../../../source/repos/imgui",
-                "${env.PATH}/../../../source/repos/imgui/backends",
-                "${env.PATH}/../../../source/repos/imgui/examples/libs/glfw/include"
+                "${USERPROFILE}/source/repos/imgui"
+                // "C:/Users/robyn/source/repos/imgui/backends",
+                // "C:/Users/robyn/source/repos/imgui/examples/libs/glfw/include"
             ],
             "defines": [
                 "_DEBUG",
@@ -20,5 +20,5 @@
             "intelliSenseMode": "windows-msvc-x64"
         }
     ],
-    "version": 4
+    "version": 4,
 }
