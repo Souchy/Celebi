@@ -2,6 +2,8 @@
     "_id": {
         "$oid": "62b9a7728e991d82fc1568fe"
     },
+    "name": "Fleche de repulsion",
+    "description": "Occasionne des dommages. Si la source a un haut special, réduit la défense des cibles. Si la défense des cibles est basse, pousse les cibles, sinon les attire.",
     "costs": [
         {
             "resource": "ap",
@@ -24,31 +26,106 @@
             ]
         ]
     },
-    "statements": [
+    "lines": [
         {
+            "type": "statement",
+            "effect": {
+                "modelid": 1,
+                "power": 10
+            }
+        },
+        {
+            "type": "group",
             "condition": {
                 "type": "StatCondition",
-                "children": [],
-                "childLink": "and",
                 "actor": "source",
-                "mod": "ap",
-                "value": 5,
-                "op": "gt"
+                "mod": "special",
+                "value": 3,
+                "op": "ge",
+                "children": [],
+                "childLink": "and"
             },
-            "children": [],
-            "effects": [
+            "children": [
                 {
-                    "id": 1,
-                    "power": 10
-                },
+                    "effect": {
+                        "statusid": 2,
+                        "stats": {
+                            "defense": -2
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "group",
+            "condition": {
+                "type": "StatCondition",
+                "actor": "target",
+                "mod": "defense",
+                "value": 3,
+                "op": "le",
+                "children": [],
+                "childLink": "and"
+            },
+            "children": [
                 {
-                    "id": 3,
-                    "status": {
-                        "stats": {},
-                        "triggers": []
+                    "effect": {
+                        "modelid": 2,
+                        "push": 1
+                    }
+                }
+            ],
+            "childrenOtherwise": [
+                {
+                    "effect": {
+                        "modelid": 2,
+                        "pull": 1
                     }
                 }
             ]
         }
-    ]
+    ],
+    "root": {
+        "condition": null,
+        "effect": {
+            "modelid": 1,
+            "power": 10
+        },
+        "children": [
+            {
+                "condition": {
+                    "type": "StatCondition",
+                    "actor": "source",
+                    "mod": "special",
+                    "value": 3,
+                    "op": "ge",
+                    "children": [],
+                    "childLink": "and"
+                },
+                "effect": {
+                    "statusid": 2,
+                    "stats": {
+                        "defense": -2
+                    }
+                },
+                "children": []
+            },
+            {
+                "condition": {
+                    "type": "StatCondition",
+                    "actor": "target",
+                    "mod": "defense",
+                    "value": 3,
+                    "op": "le",
+                    "children": [],
+                    "childLink": "and"
+                },
+                "effect": {
+                    "modelid": 2,
+                    "push": 1
+                },
+                "children": []
+            }
+        ]
+    }
 }

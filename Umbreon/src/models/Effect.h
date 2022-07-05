@@ -21,9 +21,9 @@ public:
     ~Effect() {}
 
     int type;
-    EffectAssets assets;
-    
     Aoe aoe = Aoe(1, 1);
     TargetTypeFilter filter;
+    
+    EffectAssets assets;
 };
 

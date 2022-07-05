@@ -33,6 +33,8 @@ dependencies {
     implementation(files("../../../../GitPiranha/r and d/Commons WS/Teal Net/Teal Net.jar"))   
     implementation(files("../../../../GitPiranha/r and d/Commons WS/TealWaters/tealwaters.jar"))   
     implementation(files("../../../../GitPiranha/r and d/annotationprocessor.jar"))   
+    
+    implementation("io.github.spair:imgui-java-app:1.86.4")
 }
 
 application {

@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Launch Espeon's Pachinko",
+      "request": "launch",
+      "mainClass": "espeon.Pachinko",
+      "projectName": "app"
+    },
+    {
+      "type": "java",
       "name": "Launch Espeon",
       "request": "launch",
       "mainClass": "espeon.Espeon",
