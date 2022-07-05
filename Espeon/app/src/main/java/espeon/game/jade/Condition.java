@@ -4,31 +4,40 @@ import java.util.List;
 
 public abstract class Condition {
 
-    public static enum ConditionType {
-        stat,
-        timeline;
-    }
-    
-    public ConditionType type;
     public Actor actor;
     public List<Condition> children;
     public ConditionLink childLink;
-    // public abstract boolean verify(); // ActionPipeline p);
+
+    public Condition() {
+    }
     
+    public ConditionType type() {
+        if(this instanceof StatCondition) return ConditionType.stat;
+        else
+        if(this instanceof TimelineCondition) return ConditionType.timeline;
+        throw new RuntimeException("Illegal Condition Type: " + this.getClass().getCanonicalName());
+    }
+
     public boolean compare(ComparisonOperator e, int a, int b) {
         switch (e) {
             case eq:
-                return a == b;
+            return a == b;
             case gt:
-                return a > b;
+            return a > b;
             case ge:
-                return a >= b;
+            return a >= b;
             case lt:
-                return a < b;
+            return a < b;
             case le:
-                return a <= b;
+            return a <= b;
         }
         throw new RuntimeException("Switch case unsupported for " + e);
+    }
+
+
+    public static enum ConditionType {
+        stat,
+        timeline;
     }
 
     public static enum ComparisonOperator {

@@ -1,4 +1,4 @@
-package espeon.game.jade;
+package espeon.game.types;
 
 public enum EffectType {
     

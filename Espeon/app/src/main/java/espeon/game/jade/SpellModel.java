@@ -6,10 +6,11 @@ import espeon.game.red.Aoe;
 
 public class SpellModel {
     
+    public int id;
     public SpellConditions conditions;
     public List<Cost> costs;
     // public Statement root;
-    public List<SpellLine> lines;
+    public List<Statement> statements;
 
     // SpellStats status; // for an instance of the spell
 
@@ -25,66 +26,5 @@ public class SpellModel {
         public Mod resource;
         public int amount;
     };
-
-    /**
-     * {
-     *      condition: "target.stats.hp>30",
-     *      effect: null,
-     *      {
-     *          condition: null,
-     *          effect: "damage10",
-     *          children: null
-     *      },
-     *      {
-     *          condition: null,
-     *          effect: "push3",
-     *          children: null
-     *      }
-     * }
-     */
-    
-    // public class Statement {
-    //     public Condition condition;
-    //     public EffectModel effect;
-    //     // public List<EffectModel> effects;
-    //     public List<Statement> children;
-    // };
-
-    public interface SpellLine {
-        public boolean isGroup();
-        public SpellLineGroup asGroup();
-        public SpellLineStatement asStatement();
-    }
-
-    public class SpellLineGroup implements SpellLine {
-        public Condition condition;
-        public List<SpellLine> children;
-        public List<SpellLine> childrenOtherwise;
-        public boolean isGroup() {
-            return true;
-        }
-        @Override
-        public SpellLineGroup asGroup() {
-            return this;
-        }
-        @Override
-        public SpellLineStatement asStatement() {
-            return null;
-        }
-    }
-    public class SpellLineStatement implements SpellLine {
-        public EffectModel effect;
-        public boolean isGroup() {
-            return false;
-        }
-        @Override
-        public SpellLineGroup asGroup() {
-            return null;
-        }
-        @Override
-        public SpellLineStatement asStatement() {
-            return this;
-        }
-    }
 
 }

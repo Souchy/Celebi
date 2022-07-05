@@ -7,7 +7,7 @@ public class Target {
         
     public static enum TargetType {
         /** any meaning unfiltered */
-        any,
+        nothing,
         emptyCell,
         ally,
         enemy,
@@ -42,7 +42,7 @@ public class Target {
     }
 
     public static class TargetTypeFilter {
-        public int value = TargetType.any.value;
+        public int value = TargetType.all.value;
 
         public TargetTypeFilter() { }
         public TargetTypeFilter(TargetType v) {
@@ -57,8 +57,11 @@ public class Target {
         public boolean equals(TargetTypeFilter filter) {
             return value == filter.value;
         }
-        public boolean isAny() {
-            return value == TargetType.any.value;
+        public boolean isNothing() {
+            return value == TargetType.nothing.value;
+        }
+        public boolean isAll() {
+            return value == TargetType.all.value;
         }
 
         /**

@@ -26,9 +26,9 @@
             ]
         ]
     },
-    "lines": [
+    "statements": [
         {
-            "type": "statement",
+            "type": "effect",
             "effect": {
                 "modelid": 1,
                 "power": 10
@@ -39,7 +39,7 @@
             "condition": {
                 "type": "StatCondition",
                 "actor": "source",
-                "mod": "special",
+                "mod": "sp_attack",
                 "value": 3,
                 "op": "ge",
                 "children": [],

@@ -2,11 +2,14 @@ package espeon.game.red;
 
 import java.util.function.Consumer;
 
+import espeon.game.jade.Position;
 import espeon.game.jade.Target.TargetTypeFilter;
 import espeon.util.Table;
 
 public class Aoe extends Table<TargetTypeFilter> {
     
+	public Position origin = new Position();
+
     public Aoe() {
         this(1, 1);
     }
@@ -99,4 +102,12 @@ public class Aoe extends Table<TargetTypeFilter> {
             super();
         }
     }
+	public static Aoe newLine(int len, TargetTypeFilter defaul) {
+		Aoe aoe = new Aoe(1, len, defaul);
+		return aoe;
+	}
+	public static Aoe newLinePerpendicular(int len, TargetTypeFilter defaul) {
+		Aoe aoe = new Aoe(len, 1, defaul);
+		return aoe;
+	}
 }

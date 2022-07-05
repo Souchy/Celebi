@@ -1,16 +1,16 @@
 package espeon.game.jade;
 
-import espeon.game.jade.Target.TargetTypeFilter;
 import espeon.game.red.Aoe;
+import espeon.game.types.EffectType;
 
-public class EffectModel {
+public abstract class EffectModel {
 
-    public int id;
+    // public int id;
     public Aoe aoe = new Aoe();
-    public TargetTypeFilter filter;
+    // public TargetTypeFilter filter;
 
-    public EffectType type() {
-        return EffectType.valueOf(id);
-    }
+    public abstract EffectType type(); // {
+        // return EffectType.valueOf(id);
+    // }
 
 }

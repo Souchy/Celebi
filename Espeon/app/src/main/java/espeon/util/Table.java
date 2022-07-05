@@ -2,6 +2,8 @@ package espeon.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 public class Table<T> {
 
@@ -63,6 +65,9 @@ public class Table<T> {
 		if (row < 0 || row >= height) return;
 		if (col < 0 || col >= width) return;
 		list.set(row * width + col, v);
+    }
+    public void set(int id, T v) {
+        list.set(id, v);
     }
     public void add(int row, int col, T v) {
         if (row < 0 || row >= height) return;
@@ -186,6 +191,19 @@ public class Table<T> {
                 removeRow(this.height - 1);
             }
         }
+    }
+
+    public void foreach(Consumer<T> consumer) {
+        for(var t : list)
+            consumer.accept(t);
+    }
+    public T findOne(Predicate<T> predicate) {
+        for(var t : list) {
+            if(predicate.test(t)) {
+                return t;
+            }
+        }
+        return null;
     }
     
 }

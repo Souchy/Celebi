@@ -5,11 +5,13 @@ import java.util.Map;
 
 public class Spell {
     
-    public int id;
-    public int modelid;
-    public SpellMemory memory;
+    private static int counter = 1;
 
-    private class SpellMemory {
+    public int id = counter++;
+    public int modelid;
+    public Memory memory;
+
+    public class Memory {
         public Map<Integer, Integer> castsPerTarget = new HashMap<>();
         public int castsThisTurn;
         public int lastTurnCast;

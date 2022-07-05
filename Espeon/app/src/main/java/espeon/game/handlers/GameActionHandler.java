@@ -1,18 +1,22 @@
 package espeon.game.handlers;
 
+import javax.swing.Action;
+
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessageHandler;
 
-import espeon.game.Conditions;
-import espeon.game.Diamonds;
+import espeon.game.controllers.ActionPipeline;
+import espeon.game.controllers.Conditions;
+import espeon.game.controllers.Diamonds;
+import espeon.game.controllers.ActionPipeline.EffectAction;
+import espeon.game.jade.EffectModel;
 import espeon.game.jade.SpellModel;
+import espeon.game.jade.Statement;
 // import espeon.game.jade.SpellModel.Statement;
 import espeon.game.messages.game.*;
-import espeon.game.red.ActionPipeline;
 import espeon.game.red.Board;
 import espeon.game.red.Creature;
 import espeon.game.red.Spell;
 import io.netty.channel.ChannelHandlerContext;
-import espeon.game.red.ActionPipeline.EffectAction;
 import espeon.game.red.compiledEffects.*;
 import espeon.game.jade.SpellModel.*;
 
@@ -25,6 +29,7 @@ public class GameActionHandler implements BBMessageHandler<GameAction> {
 
     @Override
     public void handle(ChannelHandlerContext client, GameAction message) {
+        ActionPipeline p = new ActionPipeline(message.client, message.actionid, message.cellid);
         switch(message.type()) {
             case move:
                 break;
@@ -35,54 +40,32 @@ public class GameActionHandler implements BBMessageHandler<GameAction> {
             case forfeit:
                 break;
             case spell:
-                castSpell(client, message);
+                castSpell(client, p);
                 break;
         }
     }
 
 
-    private void castSpell(ChannelHandlerContext client, GameAction message) {
-        Spell s = Diamonds.getSpellInstance(message.actionid);
+    public void castSpell(ChannelHandlerContext client, ActionPipeline p) {
+        Spell s = Diamonds.getSpell(p.actionid);
         SpellModel sm = Diamonds.getSpellModel(s.modelid);
-        Creature caster = Diamonds.getCreatureInstance(message.client);
+        Creature caster = Diamonds.getCreatureInstance(p.sourceid);
         if(!caster.spells.contains(s.id)) {
             // caster does not know this spell ! 
             // return error message
             return;
         }
 
-        ActionPipeline p = new ActionPipeline(message.client, message.actionid, message.cellid);
-
         for (var cost : sm.costs) {
             // new CostAction
         }
+        // check spell memory conditions
         
-        for(var line : sm.lines) {
-            processStatement(p, line);
+        for(var line : sm.statements) {
+            // System.out.println("Cast spell statement: " + line.hashCode());
+            p.processStatement(line);
         }
         // processStatement(p, sm.root);
-    }
-
-    private void processStatement(ActionPipeline p, SpellLine sl) {
-        if(sl.isGroup()) {
-            var group = sl.asGroup();
-            if(Conditions.verify(group.condition, p)) {
-                for (var line : group.children) {
-                    processStatement(p, line);
-                }
-            } else {
-                for (var line : group.childrenOtherwise) {
-                    processStatement(p, line);
-                }
-            }
-        } else {
-            var s = sl.asStatement();
-            Board b = null;
-            var cells = b.filterCells(p.cellid, s.effect.aoe);
-            for(var c : cells) { // for(int i = 0; i < s.effect.aoe.size(); i++) {
-                p.push(s.effect, p.sourceid, c.id);
-            }
-        }
     }
     
 }

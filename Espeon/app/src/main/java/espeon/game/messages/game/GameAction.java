@@ -4,7 +4,7 @@ import com.souchy.randd.annotationprocessor.ID;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.tealwaters.commons.Deserializer;
 
-import espeon.game.jade.GameActionType;
+import espeon.game.types.GameActionType;
 import io.netty.buffer.ByteBuf;
 
 @ID(id = 1001)
