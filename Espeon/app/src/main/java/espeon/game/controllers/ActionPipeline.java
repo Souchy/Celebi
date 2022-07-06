@@ -18,6 +18,30 @@ import espeon.game.red.Board.Cell;
 import espeon.game.red.compiledeffects.CompiledEffect;
 
 public class ActionPipeline {
+
+    /*
+     Action1 {
+        sourceid
+        actionid
+        cellid
+        statements [
+            s1 {
+
+            }
+            s2 {
+
+            }
+        ]
+     }
+     */
+
+     /*
+      * Exemples: 
+      * Piège magnétique : liste tous les persos, puis applique l'attirance pour chacun
+      * 
+      */
+
+
     
     public final int sourceid;
     public final int actionid;
@@ -83,9 +107,9 @@ public class ActionPipeline {
     }
     
     public class EffectAction {
-        public EffectModel effect;
         public int sourceid;
         public int cellid;
+        public EffectModel effect;
         // public Map<Integer, Stats> stats = new HashMap<>(lastStats);
         // public Map<Integer, Integer> positions = new HashMap<>(lastPositions);
         // public CompiledEffect compiled;

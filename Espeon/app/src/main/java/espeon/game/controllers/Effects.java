@@ -75,7 +75,9 @@ public class Effects {
         Fight fight = Diamonds.getFightByClient(action.sourceid);
         Board board = fight.board;
         Cell cell = board.get(action.cellid);
-        var aoe = e.aoe;
+
+
+
         return null;
     }
     public static CompiledEffect compileTranslateTo(EffectAction action, MoveTo e) {
@@ -85,7 +87,7 @@ public class Effects {
         Cell cell = board.get(action.cellid);
         var aoe = e.aoe;
         if(cell.creatures.size() > 0) {
-            if(e.translateToFarthestAvailable) {
+            if(e.cellByCell) {
                 
             } else {
     

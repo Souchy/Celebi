@@ -9,7 +9,7 @@ public class MoveTo extends MoveEffect {
      * if true: move to the farthest available cell in the path
      * if false : cancel the move if the target cell is occupied
      */
-    public boolean translateToFarthestAvailable = false;
+    public boolean cellByCell = false;
 
     // Destination aoe (can move whole areas of people)
     private Aoe to = new Aoe();

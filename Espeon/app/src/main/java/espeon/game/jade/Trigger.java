@@ -1,9 +1,12 @@
 package espeon.game.jade;
 
+import java.util.List;
+
 import com.souchy.randd.commons.tealwaters.commons.Lambda;
 
 public class Trigger {
-    Lambda lambda;
+    public Lambda lambda;
+    public List<Statement> statements;
 
     public Trigger(Lambda lambda) {
         this.lambda = lambda;
@@ -25,6 +28,13 @@ public class Trigger {
         boolean onStart = false;
         boolean onEnd = false;
         public OnTimeline(Lambda lambda) {
+            super(lambda);
+        }
+    }
+
+    public static class OnMove extends Trigger {
+
+        public OnMove(Lambda lambda) {
             super(lambda);
         }
     }

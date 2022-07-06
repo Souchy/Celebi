@@ -1,0 +1,54 @@
+@startuml mdd
+
+class Statement {
+    Aoe aoe
+    Effect effect
+    List<Statement> children
+    Condition condition
+}
+
+class Status {
+    Stats
+    List<Trigger> triggers
+}
+
+class Trigger {
+    List<Statement> statements
+}
+
+class Creature {
+    Stats stats
+    List<Status> status
+}
+class Cell {
+    List<Status> status
+}
+
+class ActionPipeline {
+    Stack<CompiledEffect> compiled
+    start(Action a)
+    addAction(Action a)
+}
+
+class Action {
+    int sourceid
+    int actionid
+    int cellid
+    process(ActionPipeline p)
+    processStatement(s: Statement) 
+    ' processStatement(s: Statement) {
+    '     List<Effect> entityffects = Effects.distributeEffect(s.effect)
+    ' }
+}
+
+
+class Effects {
+    List<Effect> distributeEffect(EffectModel e)
+    compileDamage()
+    compileTranslateBy()
+    compileTranslateTo()
+    compileTeleportBy()
+    compileTeleportTo()
+    compileTeleportSymmetrically()
+    compileTeleportToPrevious()
+}
