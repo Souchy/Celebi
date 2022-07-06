@@ -7,7 +7,7 @@ public class Spell {
     
     private static int counter = 1;
 
-    public int id = counter++;
+    public final int id = counter++;
     public int modelid;
     public Memory memory;
 
