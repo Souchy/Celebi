@@ -1,4 +1,4 @@
-package espeon.game.red.compiledEffects;
+package espeon.game.red.compiledeffects;
 
 public class CompiledSummon extends CompiledEffect {
     public int creatureid;

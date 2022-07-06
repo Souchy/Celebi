@@ -1,6 +1,7 @@
-package espeon.game.red.compiledEffects;
+package espeon.game.red.compiledeffects;
 
 public class CompiledMove extends CompiledEffect {
+    
     public int creatureid;
     public int cellid;
 

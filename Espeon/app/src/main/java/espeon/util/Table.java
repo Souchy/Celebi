@@ -123,6 +123,9 @@ public class Table<T> {
 		}
 		width--;
     }
+    public void addRow() {
+        addRow(height - 1);
+    }
     public void addRow(int rowIndex) {
         height++;
         for (int col = 0; col < width; col++) {

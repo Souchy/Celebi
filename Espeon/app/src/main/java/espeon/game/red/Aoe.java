@@ -65,15 +65,27 @@ public class Aoe extends Table<TargetTypeFilter> {
 	}
 
 	public void print() {
-		String str = "";
-		int i = 0;
+		String str = "[";
+		int row = 0;
+		int col = 0;
 		for (var val : list) {
-			i++;
-            String space = "\t";
-			if (i == width) {
-				i = 0;
-                space = "\n";
+			if(col == 0) {
+				if(row == 0)
+					str += "[";
+				else
+					str += " [";
 			}
+			col++;
+            String space = ",\t";
+			if (col == width) {
+				col = 0;
+				row++;
+				if(row == height)
+					space = "]]\n";
+				else
+            	    space = "]\n";
+			}
+			// str += "}";
             // System.out.print("" + val.value + space);
 			str += val.value + space;
 		}

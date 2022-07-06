@@ -1,4 +1,4 @@
-package espeon.game.red.compiledEffects;
+package espeon.game.red.compiledeffects;
 
 public class CompiledStatusEffect extends CompiledEffect {
     public int entityid; // cell or creature

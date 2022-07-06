@@ -8,7 +8,6 @@ import espeon.game.controllers.ActionPipeline;
 import espeon.game.controllers.Conditions;
 import espeon.game.controllers.Diamonds;
 import espeon.game.controllers.ActionPipeline.EffectAction;
-import espeon.game.jade.EffectModel;
 import espeon.game.jade.SpellModel;
 import espeon.game.jade.Statement;
 // import espeon.game.jade.SpellModel.Statement;
@@ -16,8 +15,8 @@ import espeon.game.messages.game.*;
 import espeon.game.red.Board;
 import espeon.game.red.Creature;
 import espeon.game.red.Spell;
+import espeon.game.red.compiledeffects.*;
 import io.netty.channel.ChannelHandlerContext;
-import espeon.game.red.compiledEffects.*;
 import espeon.game.jade.SpellModel.*;
 
 public class GameActionHandler implements BBMessageHandler<GameAction> {

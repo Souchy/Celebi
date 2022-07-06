@@ -15,7 +15,7 @@ import espeon.game.jade.Statement.StatementGroup;
 import espeon.game.red.Board;
 import espeon.game.red.Stats;
 import espeon.game.red.Board.Cell;
-import espeon.game.red.compiledEffects.CompiledEffect;
+import espeon.game.red.compiledeffects.CompiledEffect;
 
 public class ActionPipeline {
     
@@ -116,6 +116,10 @@ public class ActionPipeline {
                 lastPositions.put(entityid, cell.id);
             }
             lastPositions.put(entityid, cellid);
+        }
+        @Override
+        public String toString() {
+            return "EffectAction@"+hashCode() + ": " + effect.type();
         }
     }
 
