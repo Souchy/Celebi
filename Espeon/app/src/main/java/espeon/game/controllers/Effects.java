@@ -10,7 +10,6 @@ import espeon.game.jade.effects.moves.MoveTo;
 import espeon.game.jade.effects.moves.MoveToPrevious;
 import espeon.game.red.Board;
 import espeon.game.red.Creature;
-import espeon.game.red.Stats;
 import espeon.game.red.Board.Cell;
 import espeon.game.red.compiledeffects.CompiledDamage;
 import espeon.game.red.compiledeffects.CompiledEffect;
@@ -60,6 +59,12 @@ public class Effects {
     public static CompiledEffect compileMove(EffectAction action, MoveEffect e) {
         CompiledMove m = new CompiledMove();
         switch(e.moveType) {
+            case teleportation:
+                break;
+            case translation:
+                break;
+            default:
+                break;
 
         }
         return null;
@@ -67,33 +72,63 @@ public class Effects {
 
     public static CompiledEffect compileTranslateBy(EffectAction action, MoveBy e) {
         CompiledMove m = new CompiledMove();
-        var c = action.cellid;
+        Fight fight = Diamonds.getFightByClient(action.sourceid);
+        Board board = fight.board;
+        Cell cell = board.get(action.cellid);
+        var aoe = e.aoe;
         return null;
     }
     public static CompiledEffect compileTranslateTo(EffectAction action, MoveTo e) {
         CompiledMove m = new CompiledMove();
-        var c = action.cellid;
+        Fight fight = Diamonds.getFightByClient(action.sourceid);
+        Board board = fight.board;
+        Cell cell = board.get(action.cellid);
+        var aoe = e.aoe;
+        if(cell.creatures.size() > 0) {
+            if(e.translateToFarthestAvailable) {
+                
+            } else {
+    
+            }
+        } else {
+
+        }
         return null;
     }
     
     public static CompiledEffect compileTeleportBy(EffectAction action, MoveBy e) {
         CompiledMove m = new CompiledMove();
-        var c = action.cellid;
+        Fight fight = Diamonds.getFightByClient(action.sourceid);
+        Board board = fight.board;
+        Cell cell = board.get(action.cellid);
+
+        var from = e.aoe;
         return null;
     }
     public static CompiledEffect compileTeleportTo(EffectAction action, MoveTo e) {
         CompiledMove m = new CompiledMove();
-        var c = action.cellid;
+        Fight fight = Diamonds.getFightByClient(action.sourceid);
+        Board board = fight.board;
+        Cell cell = board.get(action.cellid);
+        var from = e.from();
+        var to = e.to();
         return null;
     }
     public static CompiledEffect compileTeleportSymmetrically(EffectAction action, MoveSymmetrically e) {
         CompiledMove m = new CompiledMove();
-        var c = action.cellid;
+        Fight fight = Diamonds.getFightByClient(action.sourceid);
+        Board board = fight.board;
+        Cell cell = board.get(action.cellid);
+        var aoe = e.aoe;
+        var center = e.aoe.origin;
         return null;
     }
     public static CompiledEffect compileTeleportToPrevious(EffectAction action, MoveToPrevious e) {
         CompiledMove m = new CompiledMove();
-        var c = action.cellid;
+        Fight fight = Diamonds.getFightByClient(action.sourceid);
+        Board board = fight.board;
+        Cell cell = board.get(action.cellid);
+        var aoe = e.aoe;
         return null;
     }
 
