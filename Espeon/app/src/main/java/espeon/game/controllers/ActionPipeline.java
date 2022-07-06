@@ -41,6 +41,22 @@ public class ActionPipeline {
       * 
       */
 
+    /*
+    Action1 {
+        statement push (positions1)
+        Action2 {
+            statement damage (positions2)
+        }
+        statement damage (positions1)
+    }
+    */
+
+    /*
+     * Action
+     * Spell : Action
+     * Trigger : Action
+     * both have a list of statements to execute when they are activated 
+     */
 
     
     public final int sourceid;
