@@ -3,17 +3,13 @@ package espeon.game.red;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Creature {
+public class Creature extends Entity {
 
-    public static final int noid = 0;
-
-    private static int counter = 1;
-
-    public final int id = counter++;
     public int modelid;
 
     public Stats stats;
     public List<Integer> spells;
+    public List<Status> status;
     
 
     public Creature copy() {
@@ -23,6 +19,12 @@ public class Creature {
         c.stats = stats.copy();
         c.spells = new ArrayList<>(spells);
         return c;
+    }
+
+
+    @Override
+    public EntityType type() {
+        return EntityType.creature;
     }
 
 }

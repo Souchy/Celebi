@@ -19,7 +19,6 @@ import espeon.game.jade.EffectModel;
 import espeon.game.jade.Mod;
 import espeon.game.jade.SpellModel;
 import espeon.game.jade.Statement;
-import espeon.game.jade.StatusModel;
 import espeon.game.jade.Condition.Actor;
 import espeon.game.jade.Condition.ComparisonOperator;
 import espeon.game.jade.Condition.StatCondition;
@@ -35,6 +34,7 @@ import espeon.game.red.Board;
 import espeon.game.red.Creature;
 import espeon.game.red.Spell;
 import espeon.game.red.Stats;
+import espeon.game.red.Status;
 import espeon.game.red.Board.Cell;
 
 class ActionTest extends FightMock {

@@ -6,36 +6,42 @@ import espeon.game.jade.Mod;
 
 public class Stats {
     
-    public Map<Mod, Integer> stats;
+    public Map<Mod, Integer> map;
     
     public Stats() {
-        stats = new HashMap<>();
-        for(int m = 0; m < Mod.values().length; m++) {
-            stats.put(Mod.values()[m], 0);
+        map = new HashMap<>();
+        for(var m : Mod.values()) {
+            set(m, 0);
         }
     }
 
     public int get(Mod mod) {
-        return stats.get(mod);
+        return map.get(mod);
     }
 
     public void set(Mod mod, int val) {
-        stats.put(mod, val);
+        map.put(mod, val);
     }
 
     public void add(Mod mod, int val) {
         int old = get(mod);
-        stats.put(mod, old + val);
+        map.put(mod, old + val);
     }
     
     public void sub(Mod mod, int val) {
         int old = get(mod);
-        stats.put(mod, old - val);
+        map.put(mod, old - val);
+    }
+
+    public void add(Stats stats) {
+        for(var m : Mod.values()) {
+            add(m, stats.get(m));
+        }
     }
 
     public Stats copy() {
         Stats s = new Stats();
-        s.stats = new HashMap<>(stats);
+        s.map = new HashMap<>(map);
         return s;
     }
 

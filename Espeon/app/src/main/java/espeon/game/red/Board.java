@@ -1,12 +1,12 @@
 package espeon.game.red;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Stack;
+import java.util.Map;
 
-import espeon.game.jade.StatusModel;
-import espeon.game.jade.Target.TargetTypeFilter;
+import espeon.emerald.Constants;
 import espeon.util.Table;
 
 public class Board {
@@ -42,20 +42,35 @@ public class Board {
         return list;
     }
 
-    public class Cell {
+    public class Cell extends Entity {
         public final int id = counter++;
-        public List<StatusModel> status = new ArrayList<>();
-        public LinkedList<Integer> creatures = new LinkedList<>();
-        public int getBottom() {
+        public List<Status> status = new ArrayList<>();
+        // public LinkedList<Integer> creatures = new LinkedList<>();
+        public Map<Integer, Integer> creatures = new HashMap<>();
+        public int getGround() {
             if(creatures.size() == 0) return Creature.noid;
-            return creatures.peekLast();
+            return creatures.get(0);
         }
-        public int getTop() {
+        public int getBottomMost() {
             if(creatures.size() == 0) return Creature.noid;
-            return creatures.peekFirst();
+            for(int i = Constants.maxDepth(); i <= Constants.maxHeight(); i++) {
+                if(creatures.containsKey(i)) {
+                    return creatures.get(i);
+                }
+            }
+            return Creature.noid;
         }
-        public List<Integer> getCreatures() {
-            return creatures;
+        public int getTopMost() {
+            if(creatures.size() == 0) return Creature.noid;
+            for(int i = Constants.maxHeight(); i >= Constants.maxDepth(); i--) {
+                if(creatures.containsKey(i)) {
+                    return creatures.get(i);
+                }
+            }
+            return Creature.noid;
+        }
+        public Collection<Integer> getCreatures() {
+            return creatures.values();
         }
         public int getX() {
             return cells.getCol(id);
@@ -63,10 +78,14 @@ public class Board {
         public int getY() {
             return cells.getRow(id);
         }
+        @Override
+        public EntityType type() {
+            return EntityType.cell;
+        }
     }
 
     public Cell findCreatureCell(int sourceid) {
-        return cells.findOne(c -> c.getBottom() == sourceid);
+        return cells.findOne(c -> c.getBottomMost() == sourceid);
     }
 
 }

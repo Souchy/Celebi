@@ -6,15 +6,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
-import javax.swing.Action;
-
 import espeon.game.jade.EffectModel;
 import espeon.game.jade.Mod;
 import espeon.game.jade.Statement;
 import espeon.game.jade.Statement.StatementGroup;
 import espeon.game.red.Board;
+import espeon.game.red.Cell;
+import espeon.game.red.Effect;
 import espeon.game.red.Stats;
-import espeon.game.red.Board.Cell;
 import espeon.game.red.compiledeffects.CompiledEffect;
 
 public class ActionPipeline {
@@ -44,10 +43,51 @@ public class ActionPipeline {
     /*
     Action1 {
         statement push (positions1)
+            effect push creature1
+            effect push creature2
+            effect push creature3
         Action2 {
             statement damage (positions2)
+                effect damage creature1
         }
         statement damage (positions1)
+            effect damage creature1
+            effect damage creature2
+            effect damage creature3
+    }
+    */
+
+    /*
+     * EffectAction
+     *      
+     */
+
+     /*
+      StatementGroup {
+        Context context1;
+        List<statements> [
+            statement push (positions1) {
+                effect push creature1,
+                effect push creature2,
+                effect push creature3
+            },
+            StatementGroup {
+                Context context2 = context1.copy()
+                List<statements> []
+            }
+            statement push (positions1) {
+                effect push creature1,
+                effect push creature2,
+                effect push creature3
+            },
+        ]
+      }
+      */
+
+    /*
+    Context {
+        map<int, int> positions;
+        map<int, stats> stats;
     }
     */
 
@@ -66,11 +106,7 @@ public class ActionPipeline {
     public Stack<EffectAction> stack = new Stack<>();
     public Stack<CompiledEffect> compiled = new Stack<>();
 
-    // stats per entity id
-    public Map<Integer, Stats> lastStats = new HashMap<>();
-    // cellid per entity id
-    public Map<Integer, Integer> lastPositions = new HashMap<>();
-    
+    public Context context;
 
     public ActionPipeline(int sourceid, int actionid, int cellid) {
         this.sourceid = sourceid;
@@ -79,13 +115,20 @@ public class ActionPipeline {
         Fight f = Diamonds.getFightByClient(sourceid);
         Cell casterCell = f.board.findCreatureCell(sourceid);
         Stats casterStats = Diamonds.getCreatureInstance(sourceid).stats;
-        lastStats.put(sourceid, casterStats);
-        lastPositions.put(sourceid, casterCell.id);
+        context.stats.put(sourceid, casterStats);
+        context.positions.put(sourceid, casterCell.id);
     }
 
     public void start() {
 
     }
+
+    public void pushAction(int sourceid, int actionid, int cellid) {
+    	
+    }
+    // public void pushAction(Action a) {
+    	
+    // }
     
     public void processStatement(Statement s) {
         if(s.isGroup()) {
@@ -100,66 +143,72 @@ public class ActionPipeline {
                 }
             }
         } else {
-            EffectModel effect = s.asEffect();
+            EffectModel em = s.asEffect();
             Board board = Diamonds.getFightByClient(sourceid).board;
-            List<Cell> cells = board.getCellsInAoe(this.cellid, effect.aoe);
+            List<Cell> cells = board.getCellsInAoe(this.cellid, em.aoe);
             Cell cell = board.get(cellid);
             System.out.printf("Process statement %s on cellid [%s] {%s, %s} \n", s.hashCode(), cell.id, cell.getX(), cell.getY());
             for(var c : cells) { 
                 System.out.printf("Cell in aoe [%s] {%s, %s} \n", c.id, c.getX(), c.getY());
-                this.push(effect, this.sourceid, c.id);
+                Effect e = new Effect();
+                e.entityid = c.id;
+                e.model = em;
+                this.push(e, this.sourceid, c.id);
             }
         }
     }
 
-    public void push(EffectModel m, int sourceid, int cellid) {
+    public void push(Effect e, int sourceid, int cellid) {
         var action = new EffectAction();
         stack.push(action);
-        action.effect = m;
+        action.effect = e;
         action.sourceid = sourceid;
         action.cellid = cellid;
-        var e = Effects.compile(this, action);
-        compiled.push(e);
+        var ce = Effects.compile(this, action);
+        compiled.push(ce);
     }
     
     public class EffectAction {
         public int sourceid;
         public int cellid;
-        public EffectModel effect;
+        public Effect effect;
         // public Map<Integer, Stats> stats = new HashMap<>(lastStats);
         // public Map<Integer, Integer> positions = new HashMap<>(lastPositions);
         // public CompiledEffect compiled;
+
         public int getStat(int entityid, Mod mod) {
-            if(!lastStats.containsKey(entityid)) {
+            if(!context.stats.containsKey(entityid)) {
                 var stats = Diamonds.getCreatureInstance(entityid).stats;
-                lastStats.put(entityid, stats);
+                context.stats.put(entityid, stats);
             }
-            return lastStats.get(entityid).get(mod);
+            return context.stats.get(entityid).get(mod);
         }
         public void setStat(int entityid, Mod mod, int val) {
-            if(!lastStats.containsKey(entityid)) {
+            if(!context.stats.containsKey(entityid)) {
                 var stats = Diamonds.getCreatureInstance(entityid).stats;
-                lastStats.put(entityid, stats);
+                context.stats.put(entityid, stats);
             }
-            lastStats.get(entityid).stats.put(mod, val);
+            context.stats.get(entityid).set(mod, val);
         }
+
         public int getPosition(int entityid) {
-            if(!lastPositions.containsKey(entityid)) {
+            if(!context.positions.containsKey(entityid)) {
                 var cell = Diamonds.getFightByClient(entityid).board.findCreatureCell(entityid);
-                lastPositions.put(entityid, cell.id);
+                context.positions.put(entityid, cell.id);
             }
-            return lastPositions.get(entityid);
+            return context.positions.get(entityid);
         }
         public void setPosition(int entityid, int cellid) {
-            if(!lastPositions.containsKey(entityid)) {
+            if(!context.positions.containsKey(entityid)) {
                 var cell = Diamonds.getFightByClient(entityid).board.findCreatureCell(entityid);
-                lastPositions.put(entityid, cell.id);
+                context.positions.put(entityid, cell.id);
             }
-            lastPositions.put(entityid, cellid);
+            context.positions.put(entityid, cellid);
         }
+
         @Override
         public String toString() {
-            return "EffectAction@"+hashCode() + ": " + effect.type();
+            return "EffectAction@"+hashCode() + ": " + effect.model.type();
         }
     }
 

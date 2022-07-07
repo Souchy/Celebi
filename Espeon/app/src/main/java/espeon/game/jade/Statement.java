@@ -2,8 +2,6 @@ package espeon.game.jade;
 
 import java.util.List;
 
-import espeon.game.red.Effect;
-
 public interface Statement {
 
     public boolean isGroup();
@@ -42,41 +40,4 @@ public interface Statement {
         }
     }
     
-    // public interface SpellLine {
-    //     public boolean isGroup();
-    //     public SpellLineGroup asGroup();
-    //     public SpellLineStatement asStatement();
-    // }
-
-    // public class SpellLineGroup implements SpellLine {
-    //     public Condition condition;
-    //     public List<SpellLine> children;
-    //     public List<SpellLine> childrenOtherwise;
-    //     public boolean isGroup() {
-    //         return true;
-    //     }
-    //     @Override
-    //     public SpellLineGroup asGroup() {
-    //         return this;
-    //     }
-    //     @Override
-    //     public SpellLineStatement asStatement() {
-    //         return null;
-    //     }
-    // }
-    // public class SpellLineStatement implements SpellLine {
-    //     public EffectModel effect;
-    //     public boolean isGroup() {
-    //         return false;
-    //     }
-    //     @Override
-    //     public SpellLineGroup asGroup() {
-    //         return null;
-    //     }
-    //     @Override
-    //     public SpellLineStatement asStatement() {
-    //         return this;
-    //     }
-    // }
-
 }

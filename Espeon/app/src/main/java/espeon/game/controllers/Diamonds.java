@@ -25,6 +25,9 @@ public class Diamonds {
         // get the fight by client.fightid
         return fights.get(clientid);
     }
+    // public static SpellModel getStatusModel(int id) {
+    //     return statusModels.get(id);
+    // }
 
 
     public static void setCreature(int id, Creature c) {

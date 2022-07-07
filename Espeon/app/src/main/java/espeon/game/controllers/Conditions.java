@@ -6,6 +6,9 @@ import espeon.game.jade.Condition.TimelineCondition;
 
 public class Conditions {
     
+    public static boolean verify(Condition c, NewPipeline p) {
+        return true;
+    }
     public static boolean verify(Condition c, ActionPipeline p) {
         switch(c.type()) {
             case stat:

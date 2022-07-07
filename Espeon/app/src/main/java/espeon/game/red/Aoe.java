@@ -1,13 +1,15 @@
 package espeon.game.red;
 
+import java.util.ArrayList;
 import java.util.function.Consumer;
 
 import espeon.game.jade.Position;
 import espeon.game.jade.Target.TargetTypeFilter;
+import espeon.game.types.Direction;
 import espeon.util.Table;
 
 public class Aoe extends Table<TargetTypeFilter> {
-    
+
 	public Position origin = new Position();
 
     public Aoe() {
@@ -30,6 +32,19 @@ public class Aoe extends Table<TargetTypeFilter> {
     public Aoe(int w, int h, TargetTypeFilter defaul) {
         super(w, h, defaul);
     }
+
+	public Aoe rotate(Direction r) {
+		Aoe copy = this.copy();
+		// TODO
+		return copy;
+	}
+
+	public Aoe copy() {
+		Aoe copy = new Aoe();
+		copy.list = new ArrayList<>(this.list);
+		copy.origin = origin.copy();
+		return copy;
+	}
 
 	public void setAoe(Aoe a) {
 		int u = (width - a.width) / 2;

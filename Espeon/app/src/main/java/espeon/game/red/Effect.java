@@ -1,9 +1,10 @@
 package espeon.game.red;
 
+import espeon.game.jade.EffectModel;
+
 public class Effect {
     
-    public int model;
-
-    public int cellid;
+    public EffectModel model;
+    public int entityid;
 
 }
