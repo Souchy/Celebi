@@ -1,4 +1,4 @@
-package espeon.game.messages.game;
+package espeon.game.net.messages;
 
 import com.souchy.randd.annotationprocessor.ID;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
@@ -11,40 +11,37 @@ import io.netty.buffer.ByteBuf;
 public class GameAction implements BBMessage {
     
 	public int client; // pas besoin pour client->server mais besoin pour server->clients
-    public int actionid;
-	// public int cellx;
-    // public int celly;
+	public GameActionType type;
+	// spell id
+    public int spellid;
 	public int cellid;
-
-	public GameActionType type() {
-		return GameActionType.valueOf(actionid);
-	}
+	
 
 	public GameAction() {}
-	public GameAction(int client, int actionid, int cellid) { //int cellx, int celly) {
+	public GameAction(GameActionType type, int client, int actionid, int cellid) { 
 		this.client = client;
-        this.actionid = actionid;
+		this.type = type;
+        this.spellid = actionid;
 		this.cellid = cellid;
-		// this.cellx = cellx;
-		// this.celly = celly;
 	}
 
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
 		writeInt(out, client);
-		writeInt(out, actionid);
+		writeInt(out, type.ordinal());
+
+		writeInt(out, spellid);
 		writeInt(out, cellid);
-		// writeInt(out, cellx);
-		// writeInt(out, celly);
 		return out;
 	}
 
 	@Override
 	public BBMessage deserialize(ByteBuf in) {
-		actionid = readInt(in);
+		int typeid = readInt(in);
+		type = GameActionType.values()[typeid];
+
+		spellid = readInt(in);
 		cellid = readInt(in);
-		// cellx = readInt(in);
-		// celly = readInt(in);
 		return this;
 	}
 

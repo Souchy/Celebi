@@ -16,7 +16,7 @@ import com.souchy.randd.commons.tealwaters.commons.Factory;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.commons.tealwaters.logging.Logging;
 
-import espeon.game.handlers.AuthenticationFilter;
+import espeon.auth.AuthenticationFilter;
 
 import org.bson.types.ObjectId;
 import java.util.Map;

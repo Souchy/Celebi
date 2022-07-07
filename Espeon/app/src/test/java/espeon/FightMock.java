@@ -10,10 +10,9 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import espeon.game.controllers.ActionPipeline;
+import espeon.game.controllers.Board;
 import espeon.game.controllers.Diamonds;
 import espeon.game.controllers.Fight;
-import espeon.game.handlers.GameActionHandler;
 import espeon.game.jade.Condition;
 import espeon.game.jade.EffectModel;
 import espeon.game.jade.Mod;
@@ -32,8 +31,8 @@ import espeon.game.jade.effects.DamageEffect;
 import espeon.game.jade.effects.moves.MoveBy;
 import espeon.game.jade.effects.moves.Translate;
 import espeon.game.jade.effects.moves.MoveEffect.MoveType;
+import espeon.game.net.handlers.GameActionHandler;
 import espeon.game.red.Aoe;
-import espeon.game.red.Board;
 import espeon.game.red.Creature;
 import espeon.game.red.Spell;
 import espeon.game.red.Stats;
@@ -62,9 +61,9 @@ class FightMock {
         setupSpell();
         setupCreatures();
 
-        f.board.get(5, 1).creatures.push(1);
-        f.board.get(4, 5).creatures.push(2);
-        f.board.get(6, 5).creatures.push(3);
+        f.board.get(5, 1).setGround(1); // .creatures.push(1);
+        f.board.get(4, 5).setGround(2); // .creatures.push(2);
+        f.board.get(6, 5).setGround(3); // .creatures.push(3);
     }
     
     public static void setupCreatures() {
@@ -116,7 +115,7 @@ class FightMock {
     public static void setupSpell() {
         spell = new Spell();
         spell.modelid = sm.id;
-        spell.memory = spell.new Memory();
+        // spell.memory = spell.new Memory();
         Diamonds.setSpell(spell.id, spell);
     }
 

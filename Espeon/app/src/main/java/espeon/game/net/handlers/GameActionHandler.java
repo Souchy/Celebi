@@ -1,23 +1,26 @@
-package espeon.game.handlers;
+package espeon.game.net.handlers;
 
-import javax.swing.Action;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessageHandler;
 
-import espeon.game.controllers.ActionPipeline;
+import espeon.game.controllers.Board;
 import espeon.game.controllers.Conditions;
 import espeon.game.controllers.Diamonds;
-import espeon.game.controllers.ActionPipeline.EffectAction;
+import espeon.game.controllers.actionpipeline.NewPipeline;
 import espeon.game.jade.SpellModel;
 import espeon.game.jade.Statement;
 // import espeon.game.jade.SpellModel.Statement;
-import espeon.game.messages.game.*;
-import espeon.game.red.Board;
+import espeon.game.net.messages.GameAction;
+import espeon.game.red.Action;
 import espeon.game.red.Creature;
+import espeon.game.red.Entity;
 import espeon.game.red.Spell;
 import espeon.game.red.compiledeffects.*;
 import io.netty.channel.ChannelHandlerContext;
 import espeon.game.jade.SpellModel.*;
+import espeon.game.jade.effects.moves.MoveEffect.MoveType;
 
 public class GameActionHandler implements BBMessageHandler<GameAction> {
 
@@ -28,24 +31,44 @@ public class GameActionHandler implements BBMessageHandler<GameAction> {
 
     @Override
     public void handle(ChannelHandlerContext client, GameAction message) {
-        ActionPipeline p = new ActionPipeline(message.client, message.actionid, message.cellid);
-        switch(message.type()) {
+        int currentPlaying = Entity.noid; // f.timeline.getCurrentPlayingCreature();
+        
+        // check if creature is owned by the client
+        // otherwise refuse the message
+        if(false) {
+            return;
+        }
+
+        switch(message.type) {
             case move:
+                break;
+            case spell:
+                playSpell(client, message, currentPlaying);
                 break;
             case pass:
                 break;
-            case quit: 
-                break;
             case forfeit:
-                break;
-            case spell:
-                castSpell(client, p);
                 break;
         }
     }
 
+    private void playMove(ChannelHandlerContext client, GameAction message, int currentPlaying) {
+        List<Integer> cells = new ArrayList<>();
+        // check path for obstacles / plausibility
+        for(var cellid : cells) {
+            // trigger cell.onmove but not onend
+        }
+    }
 
-    public void castSpell(ChannelHandlerContext client, ActionPipeline p) {
+    private void playSpell(ChannelHandlerContext client, GameAction message, int currentPlaying) {
+        NewPipeline p = new NewPipeline();
+        Spell s = Diamonds.getSpell(message.spellid);
+
+        p.start(null, currentPlaying, message.cellid);
+    }
+
+    /*/
+    public void castSpell(ChannelHandlerContext client, NewPipeline p) {
         Spell s = Diamonds.getSpell(p.actionid);
         SpellModel sm = Diamonds.getSpellModel(s.modelid);
         Creature caster = Diamonds.getCreatureInstance(p.sourceid);
@@ -66,5 +89,6 @@ public class GameActionHandler implements BBMessageHandler<GameAction> {
         }
         // processStatement(p, sm.root);
     }
-    
+    */
+
 }

@@ -11,12 +11,14 @@ public class Status {
     public int spellModelSource;
 
     public Stats stats;
-    // public List<Statement> statements;
-    public List<Trigger> triggers;
-    // triggers for the list of effects
- 
+    
     public int stacks;
     public int duration;
     public boolean canStack;
     public boolean canRefresh;
+
+    
+    // triggers for the list of effects
+    public List<Trigger> triggers;
+ 
 }

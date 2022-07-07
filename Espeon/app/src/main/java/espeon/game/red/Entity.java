@@ -10,10 +10,10 @@ public abstract class Entity {
     }
 
     private static IDGenerator counter = new IDGenerator();
-    public static final int noid = 0;
+    public static final int noid = -1;
     
     public final int id = counter.get();
 
     public abstract EntityType type();
-
+    
 }

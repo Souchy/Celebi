@@ -6,7 +6,9 @@ import com.souchy.randd.commons.tealwaters.commons.Lambda;
 
 public class Trigger {
     public Lambda lambda;
+    
     public List<Statement> statements;
+
 
     public Trigger(Lambda lambda) {
         this.lambda = lambda;

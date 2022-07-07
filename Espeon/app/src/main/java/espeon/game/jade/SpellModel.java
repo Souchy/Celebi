@@ -9,11 +9,10 @@ public class SpellModel {
     public int id;
     public SpellConditions conditions;
     public List<Cost> costs;
-    // public Statement root;
+    
     public List<Statement> statements;
 
-    // SpellStats status; // for an instance of the spell
-
+    
     public class SpellConditions {
         public Aoe cellConditions = new Aoe(1,1);
         public int castPerTarget = 0;

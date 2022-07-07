@@ -1,0 +1,64 @@
+package espeon.game.red;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import espeon.emerald.Constants;
+
+public class Cell extends Entity {
+    
+    // public final int id = this.board.counter++;
+    public List<Status> status = new ArrayList<>();
+    // public LinkedList<Integer> creatures = new LinkedList<>();
+    public Map<Integer, Integer> creatures = new HashMap<>();
+
+    public void setGround(int creatureid) {
+        this.creatures.put(0, creatureid);
+    }
+    
+
+    public int getGround() {
+        if(creatures.size() == 0) return Creature.noid;
+        return creatures.get(0);
+    }
+
+
+    public int getBottomMost() {
+        if(creatures.size() == 0) return Creature.noid;
+        for(int i = Constants.maxDepth(); i <= Constants.maxHeight(); i++) {
+            if(creatures.containsKey(i)) {
+                return creatures.get(i);
+            }
+        }
+        return Creature.noid;
+    }
+
+    public int getTopMost() {
+        if(creatures.size() == 0) return Creature.noid;
+        for(int i = Constants.maxHeight(); i >= Constants.maxDepth(); i--) {
+            if(creatures.containsKey(i)) {
+                return creatures.get(i);
+            }
+        }
+        return Creature.noid;
+    }
+
+    public Collection<Integer> getCreatures() {
+        return creatures.values();
+    }
+
+    // public int getX() {
+    //     return this.board.cells.getCol(id);
+    // }
+    // public int getY() {
+    //     return this.board.cells.getRow(id);
+    // }
+
+    @Override
+    public EntityType type() {
+        return EntityType.cell;
+    }
+}

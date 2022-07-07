@@ -1,4 +1,4 @@
-package espeon.game.handlers;
+package espeon.auth;
 
 import org.bson.types.ObjectId;
 import static com.mongodb.client.model.Filters.and;
