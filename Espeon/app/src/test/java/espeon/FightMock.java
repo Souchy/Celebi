@@ -31,7 +31,6 @@ import espeon.game.jade.effects.DamageEffect;
 import espeon.game.jade.effects.moves.MoveBy;
 import espeon.game.jade.effects.moves.Translate;
 import espeon.game.jade.effects.moves.MoveEffect.MoveType;
-import espeon.game.net.handlers.GameActionHandler;
 import espeon.game.red.Action;
 import espeon.game.red.Aoe;
 import espeon.game.red.Creature;
@@ -51,7 +50,7 @@ class FightMock {
     @BeforeAll
     public static void setup() {
         f = new Fight();
-        f.board = new Board();
+        // f.board = new Board(f);
         // f.creatures = new ArrayList<>();
         // f.timeline = new ArrayList<>();
         // f.timeline.add(1);
@@ -61,7 +60,7 @@ class FightMock {
         setupAction();
         setupSpellModel();
         setupSpell();
-        setupCreatures();
+        setupCreatures(f);
         
         // spawn with no summoner adds the creature to the front of the list so we do it in reverse
         f.spawn(Entity.noid, t2.id);
@@ -73,9 +72,10 @@ class FightMock {
         f.board.get(6, 5).setGround(3); // .creatures.push(3);
     }
     
-    public static void setupCreatures() {
+    public static void setupCreatures(Fight f) {
         {
-            caster = new Creature();
+            caster = new Creature(f.id, f.newEntityId());
+            caster.ownerid = "";
             caster.modelid = 1;
             caster.spells = new ArrayList<>();
             caster.spells.add(spell.id);
@@ -90,11 +90,12 @@ class FightMock {
             caster.stats.add(Mod.defense, 5);
             // f.creatures.add(caster);
             // f.timeline.add(caster.id);
-            Diamonds.setFightClient(caster.id, f);
+            // Diamonds.setFightClient(caster.id, f);
             Diamonds.setCreature(caster.id, caster);
         }
         {
-            t1 = new Creature();
+            t1 = new Creature(f.id, f.newEntityId());
+            t1.ownerid = "";
             t1.modelid = 1;
             t1.spells = new ArrayList<>();
             t1.stats = new Stats();
@@ -108,13 +109,13 @@ class FightMock {
             t1.stats.add(Mod.defense, 5);
             // f.creatures.add(target);
             // f.timeline.add(t1.id);
-            Diamonds.setFightClient(t1.id, f);
+            // Diamonds.setFightClient(t1.id, f);
             Diamonds.setCreature(t1.id, t1);
         }
         {
-            t2 = t1.copy();
+            t2 = t1.copy(f.newEntityId());
             // f.timeline.add(t2.id);
-            Diamonds.setFightClient(t2.id, f);
+            // Diamonds.setFightClient(t2.id, f);
             Diamonds.setCreature(t2.id, t2);
         }        
     }

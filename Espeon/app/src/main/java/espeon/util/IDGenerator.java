@@ -1,16 +1,20 @@
 package espeon.util;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class IDGenerator {
     
-    private int counter = 0;
+    private final AtomicInteger counter;
 
-    public IDGenerator() {}
+    public IDGenerator() { 
+        this(0); 
+    }
     public IDGenerator(int start) {
-        counter = start;
+        counter = new AtomicInteger(start);
     }
 
     public int get() {
-        return counter++;
+        return counter.getAndIncrement();
     }
 
 }

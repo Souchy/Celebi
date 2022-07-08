@@ -12,12 +12,18 @@ public abstract class Entity {
         creature;
     }
 
-    private static IDGenerator counter = new IDGenerator();
+    // private static IDGenerator counter = new IDGenerator();
     public static final int noid = -1;
     
-    public final int id = counter.get();
+    public final int fightid;
+    public final int id; // = counter.get();
 
-    public abstract EntityType type();
     public List<Status> status = new ArrayList<>();
+    public abstract EntityType type();
+
+    public Entity(int fightid, int id) {
+        this.fightid = fightid;
+        this.id = id;
+    }
 
 }

@@ -24,6 +24,14 @@ public abstract class Node {
     // Node's parent
     public NodeGroup parent = null;
 
+    public Node getRoot() {
+        if(parent != null) return parent.getRoot();
+        return this;
+    }
+    public int getFightId() {
+        return context.fightid;
+    }
+
     public NodeGroup asGroup() {
         return null;
     }

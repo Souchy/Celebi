@@ -9,6 +9,8 @@ import espeon.game.red.Status;
 
 public class Context {
 
+    // fight id
+    public int fightid;
     // stats per entity id
     public Map<Integer, Stats> stats = new HashMap<>();
     // cellid per entity id

@@ -25,8 +25,12 @@ public class NewPipeline {
     /**
      * Root node for the root action
      */
-    public NodeGroup root;
+    public NodeGroup root = Node.newRoot();
 
+    public NewPipeline(int fightid) {
+        root.context = new Context(); // TODO Context
+        root.context.fightid = fightid;
+    }
     
     /**
      * Start the pipeline with the root action
@@ -42,10 +46,12 @@ public class NewPipeline {
     public void add(Action a, int sourceid, int cellid, NodeEffect brother) {
         // create a new group for the action
         NodeGroup group = null;
-        if(root == null && brother == null) {
+        if(brother == null) { //} && root == null) {
             // create a group as the root
-            root = group = Node.newRoot();
-            root.context = new Context(); // TODO Context
+            // root = group = Node.newRoot();
+            // root.context = new Context(); // TODO Context
+            group = root.newGroup();
+            root.children.add(group);
         } else {
             // create a group and add it to its brother's parent
             NodeGroup parent = brother.parent;
@@ -101,7 +107,7 @@ public class NewPipeline {
             }
         } else {
             EffectModel em = s.asEffect();
-            Board board = Diamonds.getFightByClient(parent.sourceid).board;
+            Board board = Diamonds.getFight(parent.getFightId()).board; //Diamonds.getFightByClient(parent.sourceid).board;
             List<Cell> cells = board.getCellsInAoe(cellid, em.aoe);
             
             for(var c : cells) { 

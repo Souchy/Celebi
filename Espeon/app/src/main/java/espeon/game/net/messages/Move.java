@@ -9,7 +9,6 @@ public class Move implements BBMessage {
 
     @Override
     public Deserializer<ByteBuf, BBMessage> create() {
-        // TODO Auto-generated method stub
         return null;
     }
     

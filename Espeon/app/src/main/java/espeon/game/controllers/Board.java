@@ -10,11 +10,13 @@ import espeon.util.Table;
 
 public class Board {
     
+    // public final int fightid;
     private Table<Cell> cells = new Table<>(24, 24, null);
 
-    public Board() {
+    public Board(Fight f) {
+        // this.fightid = f.id;
         for(int i = 0; i < cells.size(); i++) {
-            cells.set(i, new Cell());
+            cells.set(i, new Cell(f.id, f.newEntityId()));
         }
     }
     

@@ -21,6 +21,7 @@ import espeon.game.red.Creature;
 import espeon.game.red.Entity;
 import espeon.game.red.Stats;
 import espeon.game.red.Status;
+import espeon.game.red.Entity.EntityType;
 import espeon.game.red.compiledeffects.CompiledDamage;
 import espeon.game.red.compiledeffects.CompiledEffect;
 import espeon.game.red.compiledeffects.CompiledMove;
@@ -111,19 +112,24 @@ public class Effects {
 
     public static CompiledEffect compileTranslateBy(NodeEffect action, MoveBy e) {
         CompiledMove m = new CompiledMove();
-        // Fight fight = Diamonds.getFightByClient(action.sourceid);
-        // Board board = fight.board;
-        // Cell cell = board.get(action.cellid);
-
-
+        // Entity entity = Diamonds.getEntity(action.effect.entityid);
+        // Fight fight = Diamonds.getFight(entity.fightid);
+        // if(entity.type() != EntityType.creature) throw new RuntimeException("Entity does not correspond to a creature.");
+        // Creature creature = (Creature) entity;
+        // int action.context.positions.get(action.effect.entityid);
+        Fight fight = Diamonds.getFight(action.getFightId());
 
         return null;
     }
     public static CompiledEffect compileTranslateTo(NodeEffect action, MoveTo e) {
         CompiledMove m = new CompiledMove();
-        Fight fight = Diamonds.getFightByClient(action.sourceid);
-        Board board = fight.board;
-        Cell cell = board.get(action.effect.entityid); // action.cellid);
+        Entity entity = Diamonds.getEntity(action.effect.entityid);
+        if(entity.type() != EntityType.cell) {
+            throw new RuntimeException("Entity does not correspond to a cell.");
+        }
+        Fight fight = Diamonds.getFight(entity.fightid);
+        // Board board = fight.board;
+        Cell cell = (Cell) entity; // Cell cell = board.get(action.effect.entityid); // action.cellid);
 
         var aoe = e.aoe;
         if(cell.creatures.size() > 0) {
@@ -140,27 +146,30 @@ public class Effects {
     
     public static CompiledEffect compileTeleportBy(NodeEffect action, MoveBy e) {
         CompiledMove m = new CompiledMove();
-        Fight fight = Diamonds.getFightByClient(action.sourceid);
+        Entity entity = Diamonds.getEntity(action.effect.entityid);
+        Fight fight = Diamonds.getFight(entity.fightid);
         Board board = fight.board;
-        Cell cell = board.get(action.effect.entityid);
+        // Cell cell = board.get(action.effect.entityid);
 
         var from = e.aoe;
         return null;
     }
     public static CompiledEffect compileTeleportTo(NodeEffect action, MoveTo e) {
         CompiledMove m = new CompiledMove();
-        Fight fight = Diamonds.getFightByClient(action.sourceid);
+        Entity entity = Diamonds.getEntity(action.effect.entityid);
+        Fight fight = Diamonds.getFight(entity.fightid);
         Board board = fight.board;
-        Cell cell = board.get(action.effect.entityid);
+        // Cell cell = board.get(action.effect.entityid);
         var from = e.from();
         var to = e.to();
         return null;
     }
     public static CompiledEffect compileTeleportSymmetrically(NodeEffect action, MoveSymmetrically e) {
         CompiledMove m = new CompiledMove();
-        Fight fight = Diamonds.getFightByClient(action.sourceid);
+        Entity entity = Diamonds.getEntity(action.effect.entityid);
+        Fight fight = Diamonds.getFight(entity.fightid);
         Board board = fight.board;
-        Cell cell = board.get(action.effect.entityid);
+        // Cell cell = board.get(action.effect.entityid);
         var aoe = e.aoe;
         var center = e.aoe.origin;
         return null;

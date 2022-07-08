@@ -1,18 +1,17 @@
 package espeon.game.red;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import espeon.emerald.Constants;
 
 public class Cell extends Entity {
     
-    // public final int id = this.board.counter++;
-    // public List<Status> status = new ArrayList<>();
-    // public LinkedList<Integer> creatures = new LinkedList<>();
+    public Cell(int fightid, int id) {
+        super(fightid, id);
+    }
+
     public Map<Integer, Integer> creatures = new HashMap<>();
 
     public void setGround(int creatureid) {
@@ -49,13 +48,6 @@ public class Cell extends Entity {
     public Collection<Integer> getCreatures() {
         return creatures.values();
     }
-
-    // public int getX() {
-    //     return this.board.cells.getCol(id);
-    // }
-    // public int getY() {
-    //     return this.board.cells.getRow(id);
-    // }
 
     @Override
     public EntityType type() {
