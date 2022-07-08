@@ -41,6 +41,7 @@ public class Target {
         }
     }
 
+
     public static class TargetTypeFilter {
         public int value = TargetType.all.value;
 

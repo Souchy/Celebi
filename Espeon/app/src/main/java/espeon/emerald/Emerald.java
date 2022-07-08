@@ -35,6 +35,8 @@ import com.souchy.randd.commons.tealwaters.logging.Logging;
 // import com.souchy.randd.jade.meta.User;
 
 import espeon.auth.jade.User;
+import espeon.game.jade.SpellModel;
+import espeon.game.red.Action;
 
 /**
  * MongoDB access
@@ -48,7 +50,7 @@ public final class Emerald {
 	//private
 	static MongoClient client;
 
-	private static final String root = "hidden_piranha";
+	private static final String root = "Celebi";
 	
 //	static {
 //		init();
@@ -123,7 +125,15 @@ public final class Emerald {
 	public static MongoCollection<User> users() {
 		return collection(User.class); // get(users, User.class);
 	}
-/*
+
+	public static MongoCollection<SpellModel> spells() {
+		return collection(SpellModel.class);
+	}
+	public static MongoCollection<Action> actions() {
+		return collection(Action.class);
+	}
+
+	/*
 	public static MongoCollection<Deck> decks() {
 		return collection(Deck.class); // get(decks, Deck.class);
 	}

@@ -20,29 +20,29 @@ public class Cell extends Entity {
     
 
     public int getGround() {
-        if(creatures.size() == 0) return Creature.noid;
+        if(creatures.size() == 0) return Entity.noid;
         return creatures.get(0);
     }
 
 
     public int getBottomMost() {
-        if(creatures.size() == 0) return Creature.noid;
+        if(creatures.size() == 0) return Entity.noid;
         for(int i = Constants.maxDepth(); i <= Constants.maxHeight(); i++) {
             if(creatures.containsKey(i)) {
                 return creatures.get(i);
             }
         }
-        return Creature.noid;
+        return Entity.noid;
     }
 
     public int getTopMost() {
-        if(creatures.size() == 0) return Creature.noid;
+        if(creatures.size() == 0) return Entity.noid;
         for(int i = Constants.maxHeight(); i >= Constants.maxDepth(); i--) {
             if(creatures.containsKey(i)) {
                 return creatures.get(i);
             }
         }
-        return Creature.noid;
+        return Entity.noid;
     }
 
     public Collection<Integer> getCreatures() {

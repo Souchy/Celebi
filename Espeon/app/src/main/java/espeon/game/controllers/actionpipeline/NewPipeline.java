@@ -49,8 +49,9 @@ public class NewPipeline {
             // create a group as the root
             // root = group = Node.newRoot();
             // root.context = new Context(); // TODO Context
-            group = root.newGroup();
-            root.children.add(group);
+            // group = root.newGroup();
+            // root.children.add(group);
+            group = root;
         } else {
             // create a group and add it to its brother's parent
             NodeGroup parent = brother.parent;

@@ -4,56 +4,39 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import espeon.game.controllers.Board;
 import espeon.game.controllers.Diamonds;
-import espeon.game.controllers.Fight;
-import espeon.game.jade.Condition;
-import espeon.game.jade.EffectModel;
-import espeon.game.jade.Mod;
-import espeon.game.jade.SpellModel;
-import espeon.game.jade.Statement;
-import espeon.game.jade.Condition.Actor;
-import espeon.game.jade.Condition.ComparisonOperator;
-import espeon.game.jade.Condition.StatCondition;
-import espeon.game.jade.SpellModel.Cost;
-import espeon.game.jade.SpellModel.SpellConditions;
-import espeon.game.jade.Statement.StatementGroup;
-import espeon.game.jade.Target.TargetType;
-import espeon.game.jade.Target.TargetTypeFilter;
-import espeon.game.jade.effects.DamageEffect;
-import espeon.game.red.Aoe;
 import espeon.game.red.Cell;
-import espeon.game.red.Creature;
-import espeon.game.red.Spell;
-import espeon.game.red.Stats;
-import espeon.game.red.Status;
 
-class ActionTest extends FightMock {
+class ActionTest {
+
+    private FightMock mock;
+
+    @BeforeAll
+    void setupFight() {
+        mock = new FightMock();
+    }
 
     @Test
     public void testDiamondsSetup() {
         int fightid = 1;
-        // assertEquals(ActionTest.f,  Diamonds.getFightByClient(caster.id));
-        assertEquals(ActionTest.caster, Diamonds.getCreatureInstance(fightid, caster.id));
-        assertEquals(ActionTest.t1, Diamonds.getCreatureInstance(fightid, t1.id));
-        assertEquals(ActionTest.t2, Diamonds.getCreatureInstance(fightid, t2.id));
-        assertEquals(ActionTest.sm, Diamonds.getSpellModel(sm.id));
-        assertEquals(ActionTest.spell, Diamonds.getSpell(fightid, spell.id));
-        assertEquals(f.board.get(0, 0).id, 0, "Cell id should start at 0.");
+        // assertEquals(mock.f,  Diamonds.getFightByClient(caster.id));
+        assertEquals(mock.caster, Diamonds.getCreatureInstance(fightid, mock.caster.id));
+        assertEquals(mock.t1, Diamonds.getCreatureInstance(fightid, mock.t1.id));
+        assertEquals(mock.t2, Diamonds.getCreatureInstance(fightid, mock.t2.id));
+        assertEquals(mock.sm, Diamonds.getSpellModel(mock.sm.id));
+        assertEquals(mock.spell, Diamonds.getSpell(fightid, mock.spell.id));
+        assertEquals(mock.f.board.get(0, 0).id, 0, "Cell id should start at 0.");
     }
 
     @Test
     public void testCell() {
-        for(int x = 0; x < f.board.getWidth(); x++) {
-            for(int y = 0; y < f.board.getHeight(); y++) {
-                Cell c = f.board.get(x, y);
-                var pos = f.board.getPos(c.id);
+        for(int x = 0; x < mock.f.board.getWidth(); x++) {
+            for(int y = 0; y < mock.f.board.getHeight(); y++) {
+                Cell c = mock.f.board.get(x, y);
+                var pos = mock.f.board.getPos(c.id);
                 System.out.printf("Cell at [%s, %s] = [%s] {%s, %s} \n", x, y, c.id, pos.x, pos.y); //c.getX(), c.getY());
                 assertEquals(pos.x, x); // c.getX(), x);
                 assertEquals(pos.y, y); // c.getY(), y);

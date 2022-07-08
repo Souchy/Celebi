@@ -10,7 +10,6 @@ import espeon.game.net.ChannelAttributes;
 import espeon.game.net.messages.CastSpell;
 import espeon.game.red.Action;
 import espeon.game.red.Creature;
-import espeon.game.red.Entity;
 import espeon.game.red.Spell;
 import io.netty.channel.ChannelHandlerContext;
 
@@ -25,8 +24,10 @@ public class CastSpellHandler implements BBMessageHandler<CastSpell> {
     public void handle(ChannelHandlerContext client, CastSpell message) {
         String clientid = client.channel().id().asLongText();
         Fight f = client.channel().attr(ChannelAttributes.fightKey).get();
-        // Fight f = Diamonds.getFightByClient();
-        // int currentPlaying = Entity.noid; // f.timeline.getCurrentPlayingCreature();
+        castSpell(f, clientid, message);
+    }
+
+    public void castSpell(Fight f, String clientid, CastSpell message) {
         int currentPlaying = f.getCurrentPlayingCreature();
         Creature playingCreature = Diamonds.getCreatureInstance(f.id, currentPlaying);
 
@@ -41,7 +42,7 @@ public class CastSpellHandler implements BBMessageHandler<CastSpell> {
         SpellModel sm = Diamonds.getSpellModel(s.modelid);
         Action a = Diamonds.getAction(sm.actionid);
 
-        p.start(null, currentPlaying, message.cellid);
+        p.start(a, currentPlaying, message.cellid);
     }
 
     

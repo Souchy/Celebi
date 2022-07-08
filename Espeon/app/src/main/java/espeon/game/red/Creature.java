@@ -9,6 +9,7 @@ public class Creature extends Entity {
     public int modelid;
     
     public Stats stats;
+    // public int statsid;
     public List<Integer> spells;
     // public List<Status> status;
     

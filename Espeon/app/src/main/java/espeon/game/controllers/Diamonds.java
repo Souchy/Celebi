@@ -45,6 +45,9 @@ public class Diamonds {
     public static void setSpellModel(int id, SpellModel s) {
         spellModels.put(id, s);
     }
+    public static void setAction(int id, Action a) {
+        actions.put(id, a);
+    }
 
     public static void setCreature(int id, Creature c) {
         creatures.put(id, c);

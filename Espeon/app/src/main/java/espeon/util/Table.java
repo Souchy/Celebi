@@ -208,5 +208,13 @@ public class Table<T> {
         }
         return null;
     }
+
+    public String[] toStringArray() {
+        String[] arr = new String[list.size()];
+        for(int i = 0; i < size(); i++) {
+            arr[i] = String.valueOf(list.get(i));
+        }
+        return arr;
+    }
     
 }

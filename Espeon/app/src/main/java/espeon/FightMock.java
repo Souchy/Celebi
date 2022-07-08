@@ -1,23 +1,11 @@
 package espeon;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.ArrayList;
-import java.util.List;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
-import espeon.game.controllers.Board;
 import espeon.game.controllers.Diamonds;
 import espeon.game.controllers.Fight;
-import espeon.game.jade.Condition;
-import espeon.game.jade.EffectModel;
 import espeon.game.jade.Mod;
 import espeon.game.jade.SpellModel;
-import espeon.game.jade.Statement;
 import espeon.game.jade.Condition.Actor;
 import espeon.game.jade.Condition.ComparisonOperator;
 import espeon.game.jade.Condition.StatCondition;
@@ -25,12 +13,10 @@ import espeon.game.jade.SpellModel.Cost;
 import espeon.game.jade.SpellModel.SpellConditions;
 import espeon.game.jade.Statement.StatementEffect;
 import espeon.game.jade.Statement.StatementGroup;
-import espeon.game.jade.Target.TargetType;
 import espeon.game.jade.Target.TargetTypeFilter;
 import espeon.game.jade.effects.DamageEffect;
 import espeon.game.jade.effects.moves.MoveBy;
 import espeon.game.jade.effects.moves.Translate;
-import espeon.game.jade.effects.moves.MoveEffect.MoveType;
 import espeon.game.red.Action;
 import espeon.game.red.Aoe;
 import espeon.game.red.Creature;
@@ -38,17 +24,22 @@ import espeon.game.red.Entity;
 import espeon.game.red.Spell;
 import espeon.game.red.Stats;
 
-class FightMock {
+public class FightMock {
     
-    public static Fight f;
-    public static SpellModel sm;
-    public static Spell spell;
-    public static Creature caster;
-    public static Creature t1;
-    public static Creature t2;
+    public Fight f;
+    public SpellModel sm;
+    public Action action;
+    public Spell spell;
+    public Creature caster;
+    public Creature t1;
+    public Creature t2;
 
-    @BeforeAll
-    public static void setup() {
+    public FightMock() {
+        setup();
+    }
+
+    // @BeforeAll
+    public void setup() {
         f = new Fight();
         // f.board = new Board(f);
         // f.creatures = new ArrayList<>();
@@ -61,6 +52,7 @@ class FightMock {
         setupSpellModel();
         setupSpell();
         setupCreatures(f);
+
         
         // spawn with no summoner adds the creature to the front of the list so we do it in reverse
         f.spawn(Entity.noid, t2.id);
@@ -72,7 +64,7 @@ class FightMock {
         f.board.get(6, 5).setGround(3); // .creatures.push(3);
     }
     
-    public static void setupCreatures(Fight f) {
+    public void setupCreatures(Fight f) {
         {
             caster = new Creature(f.id, f.newEntityId());
             caster.ownerid = "";
@@ -120,21 +112,21 @@ class FightMock {
         }        
     }
     
-    public static void setupSpell() {
+    public void setupSpell() {
         spell = new Spell();
         spell.modelid = sm.id;
         // spell.memory = spell.new Memory();
         Diamonds.setSpell(spell.id, spell);
     }
 
-    public static void setupAction() {
-        Action a = new Action();
-        a.id = 1;
+    public void setupAction() {
+        action = new Action();
+        action.id = 1;
         var filter = new TargetTypeFilter(); // affects all by default
         // Statement push target if high defense, pull target if low defense
         {
             StatementGroup group = new StatementGroup();
-            a.statements.add(group);
+            action.statements.add(group);
             {
                 StatCondition con = new StatCondition();
                 group.condition = con;
@@ -167,7 +159,7 @@ class FightMock {
         // Statement Damage
         {
             StatementEffect se = new StatementEffect();
-            a.statements.add(se);
+            action.statements.add(se);
             {
                 DamageEffect em = new DamageEffect();
                 em.power = 10;
@@ -175,9 +167,10 @@ class FightMock {
                 se.effect = em;
             }
         }
+        Diamonds.setAction(action.id, action);
     }
 
-    public static void setupSpellModel() {
+    public void setupSpellModel() {
         sm = new SpellModel();
         sm.id = 1;
         sm.actionid = 1;

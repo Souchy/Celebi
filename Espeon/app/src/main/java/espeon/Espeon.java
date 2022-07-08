@@ -20,6 +20,7 @@ public class Espeon {
         int port = Integer.parseInt(args[1]);
         boolean ssl = Boolean.parseBoolean(args[2]);
         boolean mock = Boolean.parseBoolean(args[3]);
+        new FightMock();
 
         core = new EspeonServer(port, ssl);
         core.block();
