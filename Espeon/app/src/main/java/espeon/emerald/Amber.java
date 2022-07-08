@@ -10,11 +10,11 @@ import espeon.game.types.EffectType;
 
 public class Amber {
     
-    public static final String redPath = "celebi:amber:";
-
+    private static final String redPath = "celebi:amber:";
     public static final RedSpellModel spellModel = new RedSpellModel();
+    public static final RedSpellConditions spellConditions = new RedSpellConditions();
     
-    public static final class RedSpellModel {
+    static final class RedSpellModel {
         private static final String url = redPath + "spell:";
         /**
          * Keys are range patterns (circle, square, line, ring, square ring..) <br>
@@ -61,7 +61,7 @@ public class Amber {
             // Red.jedis.del(keys.toArray(new String[keys.size()]));
         }
     }
-    public static final class RedSpellConditions {
+    static final class RedSpellConditions {
         private static final String url = RedSpellModel.url;
         public Aoe getCellConditions(int id) {
             String origin = Red.jedis.get(url + id + ":cellConditions:origin");
@@ -94,7 +94,7 @@ public class Amber {
             Red.jedis.set(url + id + ":cooldown", String.valueOf(val));
         }
     }
-    public static final class RedEffectModel {
+    static final class RedEffectModel {
         private static final String url = redPath + "effect:";
         public Class<? extends EffectModel> clazz(int id) {
             return null;

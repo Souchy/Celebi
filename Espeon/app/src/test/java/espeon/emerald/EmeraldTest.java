@@ -1,4 +1,4 @@
-package espeon;
+package espeon.emerald;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import espeon.FightMock;
 import espeon.emerald.Emerald;
 
 public class EmeraldTest {

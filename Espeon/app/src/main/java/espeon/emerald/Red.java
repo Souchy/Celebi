@@ -4,13 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import espeon.game.jade.EffectModel;
 import espeon.game.jade.Mod;
-import espeon.game.red.Aoe;
-import espeon.game.red.Creature;
 import espeon.game.red.Stats;
 import espeon.game.red.Entity.EntityType;
-import espeon.game.types.EffectType;
 import redis.clients.jedis.JedisPooled;
 
 /**
@@ -20,7 +16,7 @@ public class Red {
     
     /** fights by id */
     public static final Map<Integer, Red> redFights = new HashMap<>();
-    public static final JedisPooled jedis = new JedisPooled("localhost", 6379);
+    public static final JedisPooled jedis = new JedisPooled("localhost", 7379);
 
 
     public final int fightid;

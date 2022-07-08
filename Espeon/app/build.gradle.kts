@@ -27,6 +27,9 @@ dependencies {
     implementation("com.google.code.gson:gson:2.9.0")
     implementation("org.javassist:javassist:3.29.0-GA")
     implementation("org.reflections:reflections:0.10.2")
+    implementation("org.slf4j:slf4j-api:latest.release")
+    implementation("org.slf4j:slf4j-simple:latest.release")
+
     // implementation("org.mongodb:mongodb-driver-reactivestreams:4.6.0")
     implementation("org.mongodb:mongodb-driver-sync:4.6.1")
     implementation("redis.clients:jedis:4.2.0")
