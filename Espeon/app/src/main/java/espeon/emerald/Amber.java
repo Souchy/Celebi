@@ -66,8 +66,8 @@ public class Amber {
         public Aoe getCellConditions(int id) {
             String origin = Red.jedis.get(url + id + ":cellConditions:origin");
             Position pos = new Position();
-            Red.jedis.rget
-            Aoe aoe = new Aoe();
+            // Red.jedis.rget
+            // Aoe aoe = new Aoe();
 
             return null;
         }
