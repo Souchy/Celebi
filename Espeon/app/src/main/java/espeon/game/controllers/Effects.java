@@ -30,11 +30,11 @@ public class Effects {
 
 
     public static CompiledEffect compile(NewPipeline p, NodeEffect action) {
-        CompiledEffect e = switch(action.effect.model.type()) {
-            case damage -> compileDamage(action, (DamageEffect) action.effect.model);
+        CompiledEffect e = switch(action.effectModel.type()) {
+            case damage -> compileDamage(action, (DamageEffect) action.effectModel);
             case flee -> null;
             case heal -> null;
-            case move -> compileMove(action, (MoveEffect) action.effect.model);
+            case move -> compileMove(action, (MoveEffect) action.effectModel);
             case status -> null;
             case summon -> null;
         };
@@ -43,7 +43,7 @@ public class Effects {
     }
 
     public static void addStatus(NodeEffect action, AddStatusEffect ef) {
-        Entity en = Diamonds.getEntity(action.effect.entityid);
+        Entity en = Diamonds.getEntity(action.getFightId(), action.targetEntityId);
         for(var status : en.status) {
             if(status.spellModelSource == ef.spellModelSource) {
                 // merge
@@ -73,7 +73,7 @@ public class Effects {
             // System.err.printf("Effects.compileDamage cell [%s] {%s, %s} has no creature.\n", action.cellid, pos.x, pos.y);
             // return null;
         // } 
-        int creatureid = action.effect.entityid;
+        int creatureid = action.targetEntityId;
         var compiled = new CompiledDamage();
         // var creatureTarget = Diamonds.getCreatureInstance(creatureid);
         // var creatureSource = Diamonds.getCreatureInstance(action.sourceid);
@@ -123,7 +123,7 @@ public class Effects {
     }
     public static CompiledEffect compileTranslateTo(NodeEffect action, MoveTo e) {
         CompiledMove m = new CompiledMove();
-        Entity entity = Diamonds.getEntity(action.effect.entityid);
+        Entity entity = Diamonds.getEntity(action.getFightId(), action.targetEntityId);
         if(entity.type() != EntityType.cell) {
             throw new RuntimeException("Entity does not correspond to a cell.");
         }
@@ -146,7 +146,7 @@ public class Effects {
     
     public static CompiledEffect compileTeleportBy(NodeEffect action, MoveBy e) {
         CompiledMove m = new CompiledMove();
-        Entity entity = Diamonds.getEntity(action.effect.entityid);
+        Entity entity = Diamonds.getEntity(action.getFightId(), action.targetEntityId);
         Fight fight = Diamonds.getFight(entity.fightid);
         Board board = fight.board;
         // Cell cell = board.get(action.effect.entityid);
@@ -156,7 +156,7 @@ public class Effects {
     }
     public static CompiledEffect compileTeleportTo(NodeEffect action, MoveTo e) {
         CompiledMove m = new CompiledMove();
-        Entity entity = Diamonds.getEntity(action.effect.entityid);
+        Entity entity = Diamonds.getEntity(action.getFightId(), action.targetEntityId);
         Fight fight = Diamonds.getFight(entity.fightid);
         Board board = fight.board;
         // Cell cell = board.get(action.effect.entityid);
@@ -166,7 +166,7 @@ public class Effects {
     }
     public static CompiledEffect compileTeleportSymmetrically(NodeEffect action, MoveSymmetrically e) {
         CompiledMove m = new CompiledMove();
-        Entity entity = Diamonds.getEntity(action.effect.entityid);
+        Entity entity = Diamonds.getEntity(action.getFightId(), action.targetEntityId);
         Fight fight = Diamonds.getFight(entity.fightid);
         Board board = fight.board;
         // Cell cell = board.get(action.effect.entityid);
@@ -179,7 +179,7 @@ public class Effects {
         // Fight fight = Diamonds.getFightByClient(action.sourceid);
         // Board board = fight.board;
         // Cell cell = board.get(action.effect.entityid);
-        Diamonds.getCreatureInstance(action.effect.entityid);
+        Diamonds.getCreatureInstance(action.getFightId(), action.targetEntityId);
         var aoe = e.aoe;
         return null;
     }

@@ -3,10 +3,6 @@ package espeon.game.controllers;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.checkerframework.checker.units.qual.s;
-
-import com.souchy.randd.annotationprocessor.ID;
-
 import espeon.game.jade.SpellModel;
 import espeon.game.red.Action;
 import espeon.game.red.Creature;
@@ -18,20 +14,21 @@ public class Diamonds {
     public static Fight getFight(int id) {
         return fights.get(id);
     }
-    public static Entity getEntity(int id) {
-        return creatures.get(id);
-    }
-    public static Creature getCreatureInstance(int id) {
-        return creatures.get(id);
-    }
     public static SpellModel getSpellModel(int id) {
         return spellModels.get(id);
     }
-    public static Spell getSpell(int id) {
-        return spells.get(id);
-    }
     public static Action getAction(int actionid) {
         return actions.get(actionid);
+    }
+    
+    public static Entity getEntity(int fightid, int id) {
+        return creatures.get(id);
+    }
+    public static Creature getCreatureInstance(int fightid, int id) {
+        return creatures.get(id);
+    }
+    public static Spell getSpell(int fightid, int id) {
+        return spells.get(id);
     }
     // public static Fight getFightByClient(String clientid) {
     //     // get the fight by client.fightid
@@ -45,15 +42,17 @@ public class Diamonds {
     public static void setFight(int id, Fight f) {
         fights.put(id, f);
     }
+    public static void setSpellModel(int id, SpellModel s) {
+        spellModels.put(id, s);
+    }
+
     public static void setCreature(int id, Creature c) {
         creatures.put(id, c);
     }
     public static void setSpell(int id, Spell s) {
         spells.put(id, s);
     }
-    public static void setSpellModel(int id, SpellModel s) {
-        spellModels.put(id, s);
-    }
+
     // public static void setFightClient(int id, Fight f) {
     //     // set fight id in the client's memory
     //     fights.put(id, f);

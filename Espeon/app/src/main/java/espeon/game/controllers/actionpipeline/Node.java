@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import espeon.game.controllers.Context;
-import espeon.game.red.Effect;
+import espeon.game.jade.EffectModel;
 
 /**
  * A node is either a group of nodes or a node that applies an effect
@@ -59,12 +59,14 @@ public abstract class Node {
             n.parent = this;
             return n;
         }
-        public NodeEffect newEffect(Effect e) {
+        public NodeEffect newEffect(EffectModel em, int entityid) { //Effect e) {
             NodeEffect n = new NodeEffect();
             n.context = context;
             n.sourceid = this.sourceid;
             n.parent = this;
-            n.effect = e;
+            // n.effect = e;
+            n.effectModel = em;
+            n.targetEntityId = entityid;
             return n;
         }
         public boolean isGroup() {
@@ -82,7 +84,12 @@ public abstract class Node {
         /**
          * Node's effect
          */
-        public Effect effect;
+        // public Effect effect;
+        /** the model to apply */
+        public EffectModel effectModel;
+        /** target can be a cell or a creature */
+        public int targetEntityId;
+        
         private NodeEffect() {}
         /**
          * Add brothers to this node's parent, right after it

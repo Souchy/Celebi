@@ -13,7 +13,6 @@ import espeon.game.jade.Statement;
 import espeon.game.jade.Statement.StatementGroup;
 import espeon.game.red.Action;
 import espeon.game.red.Cell;
-import espeon.game.red.Effect;
 
 
 /*
@@ -115,10 +114,10 @@ public class NewPipeline {
 
                 // apply to the cell
                 if(em.appliesCells) {
-                    var e = new Effect();
-                    e.model = em;
-                    e.entityid = c.id;
-                    step.newEffect(e);
+                    // var e = new Effect();
+                    // e.model = em;
+                    // e.entityid = c.id;
+                    step.newEffect(em, c.id);
                 }
                 // apply to the creatures on the cell
                 if(em.appliesCreatures) {
@@ -127,10 +126,10 @@ public class NewPipeline {
                         if(height >= c.creatures.size() || height < 0)  {
                             break;
                         } else {
-                            var e = new Effect();
-                            e.model = em;
-                            e.entityid = c.creatures.get(height);
-                            step.newEffect(e);
+                            // var e = new Effect();
+                            // e.model = em;
+                            // e.entityid = c.creatures.get(height);
+                            step.newEffect(em, c.creatures.get(height));
                         }
                     }
                 }

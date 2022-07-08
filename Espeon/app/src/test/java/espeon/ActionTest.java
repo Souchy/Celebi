@@ -38,12 +38,13 @@ class ActionTest extends FightMock {
 
     @Test
     public void testDiamondsSetup() {
-        assertEquals(ActionTest.caster, Diamonds.getCreatureInstance(caster.id));
-        assertEquals(ActionTest.t1, Diamonds.getCreatureInstance(t1.id));
-        assertEquals(ActionTest.t2, Diamonds.getCreatureInstance(t2.id));
-        assertEquals(ActionTest.sm, Diamonds.getSpellModel(sm.id));
+        int fightid = 1;
         // assertEquals(ActionTest.f,  Diamonds.getFightByClient(caster.id));
-        assertEquals(ActionTest.spell, Diamonds.getSpell(spell.id));
+        assertEquals(ActionTest.caster, Diamonds.getCreatureInstance(fightid, caster.id));
+        assertEquals(ActionTest.t1, Diamonds.getCreatureInstance(fightid, t1.id));
+        assertEquals(ActionTest.t2, Diamonds.getCreatureInstance(fightid, t2.id));
+        assertEquals(ActionTest.sm, Diamonds.getSpellModel(sm.id));
+        assertEquals(ActionTest.spell, Diamonds.getSpell(fightid, spell.id));
         assertEquals(f.board.get(0, 0).id, 0, "Cell id should start at 0.");
     }
 

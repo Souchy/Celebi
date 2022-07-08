@@ -28,7 +28,7 @@ public class CastSpellHandler implements BBMessageHandler<CastSpell> {
         // Fight f = Diamonds.getFightByClient();
         // int currentPlaying = Entity.noid; // f.timeline.getCurrentPlayingCreature();
         int currentPlaying = f.getCurrentPlayingCreature();
-        Creature playingCreature = Diamonds.getCreatureInstance(currentPlaying);
+        Creature playingCreature = Diamonds.getCreatureInstance(f.id, currentPlaying);
 
         // check if creature is owned by the client
         // otherwise refuse the message
@@ -37,7 +37,7 @@ public class CastSpellHandler implements BBMessageHandler<CastSpell> {
         }
         
         NewPipeline p = new NewPipeline(f.id);
-        Spell s = Diamonds.getSpell(message.spellid);
+        Spell s = Diamonds.getSpell(f.id, message.spellid);
         SpellModel sm = Diamonds.getSpellModel(s.modelid);
         Action a = Diamonds.getAction(sm.actionid);
 
