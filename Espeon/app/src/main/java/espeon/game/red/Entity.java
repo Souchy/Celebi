@@ -1,5 +1,8 @@
 package espeon.game.red;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import espeon.util.IDGenerator;
 
 public abstract class Entity {
@@ -15,5 +18,6 @@ public abstract class Entity {
     public final int id = counter.get();
 
     public abstract EntityType type();
-    
+    public List<Status> status = new ArrayList<>();
+
 }

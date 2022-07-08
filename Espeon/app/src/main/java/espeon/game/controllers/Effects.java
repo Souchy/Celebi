@@ -9,6 +9,7 @@ import espeon.game.controllers.actionpipeline.NewPipeline;
 import espeon.game.controllers.actionpipeline.Node.NodeEffect;
 import espeon.game.jade.EffectModel;
 import espeon.game.jade.Mod;
+import espeon.game.jade.effects.AddStatusEffect;
 import espeon.game.jade.effects.DamageEffect;
 import espeon.game.jade.effects.moves.MoveBy;
 import espeon.game.jade.effects.moves.MoveEffect;
@@ -17,6 +18,7 @@ import espeon.game.jade.effects.moves.MoveTo;
 import espeon.game.jade.effects.moves.MoveToPrevious;
 import espeon.game.red.Cell;
 import espeon.game.red.Creature;
+import espeon.game.red.Entity;
 import espeon.game.red.Stats;
 import espeon.game.red.Status;
 import espeon.game.red.compiledeffects.CompiledDamage;
@@ -37,6 +39,18 @@ public class Effects {
         };
         return e;
         // throw new IllegalArgumentException("Illegal effect type: " + action.effect.type());
+    }
+
+    public static void addStatus(NodeEffect action, AddStatusEffect ef) {
+        Entity en = Diamonds.getEntity(action.effect.entityid);
+        for(var status : en.status) {
+            if(status.spellModelSource == ef.spellModelSource) {
+                // merge
+                return;
+            }
+        }
+        Status status = new Status();
+        en.status.add(status);
     }
 
     public static void triggerStatus(Creature c) {

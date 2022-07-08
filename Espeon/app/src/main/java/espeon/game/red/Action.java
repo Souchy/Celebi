@@ -1,16 +1,18 @@
 package espeon.game.red;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import espeon.game.jade.Statement;
 import espeon.util.IDGenerator;
 
-public abstract class Action {
+public class Action {
     
-    private static IDGenerator counter = new IDGenerator();
+    // private static IDGenerator counter = new IDGenerator();
+    // public final int id = counter.get();
 
-    public final int id = counter.get();
+    public int id;
 
-    public List<Statement> statements;
+    public List<Statement> statements = new ArrayList<>();
 
 }

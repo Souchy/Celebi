@@ -4,23 +4,33 @@ import java.util.List;
 
 import com.souchy.randd.commons.tealwaters.commons.Lambda;
 
+import espeon.game.jade.effects.moves.MoveEffect.MoveType;
+import espeon.game.types.EffectType;
+
 public class Trigger {
-    public Lambda lambda;
     
-    public List<Statement> statements;
+    // public Lambda lambda;
+    
+    // public List<Statement> statements;
+    public int actionid;
 
 
-    public Trigger(Lambda lambda) {
-        this.lambda = lambda;
+    // public Trigger(Lambda lambda) {
+    //     this.lambda = lambda;
+    // }
+
+    public static enum TriggerTarget {
+        holder,
+        trigerrer;
     }
 
     public static class OnEffect extends Trigger {
-        int effectTypeId;
+        // int effectTypeId;
+        EffectType type;
         boolean ifSource; 
         boolean ifTarget;
-        public OnEffect(Lambda lambda, int effectTypeId) {
-            super(lambda);
-            this.effectTypeId = effectTypeId;
+        public OnEffect() { //int effectTypeId) {
+            // this.effectTypeId = effectTypeId;
         }
     }
     
@@ -29,15 +39,13 @@ public class Trigger {
         boolean onRound = false;
         boolean onStart = false;
         boolean onEnd = false;
-        public OnTimeline(Lambda lambda) {
-            super(lambda);
+        public OnTimeline() {
         }
     }
 
     public static class OnMove extends Trigger {
-
-        public OnMove(Lambda lambda) {
-            super(lambda);
+        public MoveType type;
+        public OnMove() {
         }
     }
 

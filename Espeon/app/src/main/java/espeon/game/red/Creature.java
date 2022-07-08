@@ -9,7 +9,7 @@ public class Creature extends Entity {
 
     public Stats stats;
     public List<Integer> spells;
-    public List<Status> status;
+    // public List<Status> status;
     
 
     public Creature copy() {

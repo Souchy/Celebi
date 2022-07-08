@@ -11,7 +11,7 @@ import espeon.emerald.Constants;
 public class Cell extends Entity {
     
     // public final int id = this.board.counter++;
-    public List<Status> status = new ArrayList<>();
+    // public List<Status> status = new ArrayList<>();
     // public LinkedList<Integer> creatures = new LinkedList<>();
     public Map<Integer, Integer> creatures = new HashMap<>();
 

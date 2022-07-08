@@ -10,7 +10,8 @@ public class SpellModel {
     public SpellConditions conditions;
     public List<Cost> costs;
     
-    public List<Statement> statements;
+    // public List<Statement> statements;
+    public int actionid;
 
     
     public class SpellConditions {

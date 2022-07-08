@@ -1,5 +1,6 @@
 package espeon.game.jade;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface Statement {
@@ -10,8 +11,8 @@ public interface Statement {
 
     public static class StatementGroup implements Statement {
         public Condition condition;
-        public List<Statement> children;
-        public List<Statement> childrenOtherwise;
+        public List<Statement> children = new ArrayList<>();
+        public List<Statement> childrenOtherwise = new ArrayList<>();
         public boolean isGroup() {
             return true;
         }

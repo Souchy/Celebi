@@ -7,11 +7,14 @@ import org.checkerframework.checker.units.qual.s;
 
 import espeon.game.jade.SpellModel;
 import espeon.game.red.Creature;
+import espeon.game.red.Entity;
 import espeon.game.red.Spell;
 
 public class Diamonds {
 
-    
+    public static Entity getEntity(int id) {
+        return creatures.get(id);
+    }
     public static Creature getCreatureInstance(int id) {
         return creatures.get(id);
     }
