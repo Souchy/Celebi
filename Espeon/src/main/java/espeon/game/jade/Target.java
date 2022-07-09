@@ -7,7 +7,7 @@ public class Target {
         
     public static enum TargetType {
         /** any meaning unfiltered */
-        nothing,
+        // nothing(0),
         emptyCell,
         ally,
         enemy,
@@ -15,6 +15,9 @@ public class Target {
         summon,
         summon_static,
         all(true);
+        public static final String allStr = "all";
+        public static final int all;
+        static {
         //ALL = emptyCell | ally | enemy | summon | summon_static | corpse,
         public final int value;
         private TargetType() {
@@ -32,9 +35,24 @@ public class Target {
                     v += Math.pow(2, i);
             }
             this.value = v;
-        }
-        private boolean isLast() {
             return this.ordinal() == TargetType.values().length - 1;
+        //     // if(ordinal() == 0)
+        //     //     value = 0;
+        //     // else
+        //     //     this.value = (int) Math.pow(2, ordinal());
+        //     for(int i = 0; i < this.ordinal(); i++) {
+        //         if(i == 0)
+        //             v += 0;
+        //         else
+        //             v += Math.pow(2, i);
+        //     }
+        //     this.value = v;
+        // }
+        // private boolean isLast() {
+        //     return this.ordinal() == TargetType.values().length - 1;
+        // }
+        public boolean isIn(int filter) {
+        }
         }
         public TargetTypeFilter toFilter() {
             return new TargetTypeFilter(this);

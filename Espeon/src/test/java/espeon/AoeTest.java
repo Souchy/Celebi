@@ -40,22 +40,22 @@ class AoeTest {
 
     @Test 
     void aoeGet() {
-        Aoe aoe = new Aoe(5, 5, new TargetTypeFilter(TargetType.corpse));
-        assertEquals(aoe.get(0, 0).value, TargetType.corpse.value);
-        assertEquals(aoe.get(4, 4).value, TargetType.corpse.value);
+        Aoe aoe = new Aoe(5, 5, TargetType.corpse.value);
+        assertEquals(aoe.get(0, 0), TargetType.corpse.value);
+        assertEquals(aoe.get(4, 4), TargetType.corpse.value);
     }
 
     @Test
     void aoeSet() {
-        Aoe aoe = new Aoe(5, 5, new TargetTypeFilter(TargetType.corpse));
-        aoe.set(4, 4, TargetType.ally.toFilter());
-        assertEquals(aoe.get(0, 0).value, TargetType.corpse.value);
-        assertEquals(aoe.get(4, 4).value, TargetType.ally.value);
+        Aoe aoe = new Aoe(5, 5, TargetType.corpse.value);
+        aoe.set(4, 4, TargetType.ally.value);
+        assertEquals(aoe.get(0, 0), TargetType.corpse.value);
+        assertEquals(aoe.get(4, 4), TargetType.ally.value);
     }
 
     @Test
     void aoeAddColumn() {
-        Aoe aoe = new Aoe(5, 5, new TargetTypeFilter(TargetType.corpse));
+        Aoe aoe = new Aoe(5, 5, TargetType.corpse.value);
         aoe.print();
         // System.out.println(Arrays.deepToString(aoe.toArray()));
         System.out.println("add column");
@@ -67,7 +67,7 @@ class AoeTest {
     
     @Test
     void aoeAddColumn2() {
-        Aoe aoe = new Aoe(1, 5, new TargetTypeFilter(TargetType.corpse));
+        Aoe aoe = new Aoe(1, 5, TargetType.corpse.value);
         assertEquals(aoe.size(), 5);
         aoe.print();
         // System.out.println("add column");
@@ -141,7 +141,7 @@ class AoeTest {
     
     @Test
     void aoeAddRow() {
-        Aoe aoe = new Aoe(5, 5, new TargetTypeFilter(TargetType.corpse));
+        Aoe aoe = new Aoe(5, 5, TargetType.corpse.value);
         aoe.print();
         System.out.println("add row");
         aoe.addRow(0);

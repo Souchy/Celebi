@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.function.Consumer;
 
 import espeon.game.jade.Position;
+import espeon.game.jade.Target.TargetType;
 import espeon.game.jade.Target.TargetTypeFilter;
 import espeon.game.types.Direction;
 import espeon.util.Table;
 
-public class Aoe extends Table<TargetTypeFilter> {
+public class Aoe extends Table<Integer> {
 
 	public Position origin = new Position();
 
@@ -17,19 +18,19 @@ public class Aoe extends Table<TargetTypeFilter> {
     }
 
     public Aoe(int w, int h) {
-        this(w, h, new TargetTypeFilter());
+        this(w, h, TargetType.all);
     }
 
 	public Aoe(int[][] vals) {
-		super(vals[0].length, vals.length, new TargetTypeFilter());
+		super(vals[0].length, vals.length, TargetType.nothing);
 		for (int i = 0; i < vals.length; i++) { // row
 			for (int j = 0; j < vals[i].length; j++) { // col
-				set(i, j, new TargetTypeFilter(vals[i][j]));
+				set(i, j, vals[i][j]); // new TargetTypeFilter(vals[i][j]));
 			}
 		}
 	}
 
-    public Aoe(int w, int h, TargetTypeFilter defaul) {
+    public Aoe(int w, int h, int defaul) {
         super(w, h, defaul);
     }
 
@@ -41,7 +42,8 @@ public class Aoe extends Table<TargetTypeFilter> {
 
 	public Aoe copy() {
 		Aoe copy = new Aoe();
-		copy.list = new ArrayList<>(this.list);
+		// copy.list = new ArrayList<>(this.list);
+		copy.list.addAll(this.list);
 		copy.origin = origin.copy();
 		return copy;
 	}
@@ -52,31 +54,44 @@ public class Aoe extends Table<TargetTypeFilter> {
 		setAoe(a, u, v);
 	}
 	public void setAoe(Aoe a, int u, int v) {
-		for (int i = 0; i < a.width; i++) { // row
-			for (int j = 0; j < a.height; j++) { // col
-				set(i + u, j + v, a.get(i, j));
+		for (int i = 0; i < a.width; i++) { // col
+			for (int j = 0; j < a.height; j++) { // row
+				set(i + u, j + v, a.get(j, i));
 			}
 		}
 	}
 	public void addAoe(Aoe a, int u, int v) {
-		for (int i = 0; i < a.width; i++) { // row
-			for (int j = 0; j < a.height; j++) { // col
-				addAt(i + u, j + v, a.get(i, j));
+		for (int i = 0; i < a.width; i++) { // col
+			for (int j = 0; j < a.height; j++) { // row
+				addAt(i + u, j + v, a.get(j, i));
+			}
+		}
+	}
+	public void orAoe(Aoe a, int u, int v) {
+		for (int i = 0; i < a.width; i++) { // col
+			for (int j = 0; j < a.height; j++) { // row
+				orAt(i + u, j + v, a.get(j, i));
 			}
 		}
 	}
 	public void removeAoe(Aoe a, int u, int v) {
-		for (int i = 0; i < a.width; i++) { // row
-			for (int j = 0; j < a.height; j++) { // col
-				removeAt(i + u, j + v, a.get(i, j));
+		for (int i = 0; i < a.width; i++) { // col
+			for (int j = 0; j < a.height; j++) { // row
+				removeAt(i + u, j + v, a.get(j, i));
 			}
 		}
 	}
-	public void addAt(int x, int y, TargetTypeFilter f) {
-		set(x, y, get(x, y).add(f));
+
+	// FIXME swap x and y because set/get use rows and columns instead
+	public void addAt(int x, int y, int filter) {
+		set(y, x, get(x, y) + filter);
 	}
-	public void removeAt(int x, int y, TargetTypeFilter f) {
-		set(x, y, get(x, y).sub(f));
+	public void orAt(int x, int y, int filter) {
+		set(y, x, get(x, y) | filter);
+	}
+	// FIXME swap x and y because set/get use rows and columns instead
+	public void removeAt(int x, int y, int filter) {
+		set(y, x, get(x, y) & ~filter);
 	}
 
 	public void print() {
@@ -102,14 +117,19 @@ public class Aoe extends Table<TargetTypeFilter> {
 			}
 			// str += "}";
             // System.out.print("" + val.value + space);
-			str += val.value + space;
+			str += val + space;
 		}
 		System.out.print(str);
 	}
 
-	public void foreach(Consumer<TargetTypeFilter> f) {
-		for (var val : list) {
-			f.accept(val);
+	// public void foreach(Consumer<TargetTypeFilter> f) {
+	// 	for (var val : list) {
+	// 		f.accept(val);
+	// 	}
+	// }
+	public void foreachId(Consumer<Integer> actionOnId) {
+		for(int i = 0; i < size(); i++) {
+			actionOnId.accept(i);
 		}
 	}
 
@@ -117,7 +137,7 @@ public class Aoe extends Table<TargetTypeFilter> {
 		int[][] arr = new int[height][width];
 		for(int i = 0; i < height; i++) {
 			for(int j = 0; j < width; j++) {
-				arr[i][j] = get(i, j).value;
+				arr[i][j] = get(i, j);
 			}
 		}
 		return arr;
@@ -130,11 +150,11 @@ public class Aoe extends Table<TargetTypeFilter> {
         }
     }
 	public static Aoe newLine(int len, TargetTypeFilter defaul) {
-		Aoe aoe = new Aoe(1, len, defaul);
+		Aoe aoe = new Aoe(1, len, defaul.value);
 		return aoe;
 	}
 	public static Aoe newLinePerpendicular(int len, TargetTypeFilter defaul) {
-		Aoe aoe = new Aoe(len, 1, defaul);
+		Aoe aoe = new Aoe(len, 1, defaul.value);
 		return aoe;
 	}
 }

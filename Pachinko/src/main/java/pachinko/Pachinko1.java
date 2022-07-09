@@ -1,12 +1,18 @@
 package pachinko;
 
 import espeon.game.red.*;
+import espeon.game.jade.Position;
+import espeon.game.jade.Target;
 import espeon.game.jade.Target.TargetType;
 import espeon.game.jade.Target.TargetTypeFilter;
 import espeon.util.Table;
 import imgui.ImGui;
+import imgui.ImVec2;
 import imgui.app.Application;
 import imgui.app.Configuration;
+import imgui.flag.ImGuiCol;
+import imgui.flag.ImGuiSelectableFlags;
+import imgui.flag.ImGuiTableColumnFlags;
 import imgui.flag.ImGuiTableFlags;
 import imgui.type.ImInt;
 
@@ -17,11 +23,10 @@ public class Pachinko1 extends Application {
     }
 
 
-    // private Table<TargetTypeFilter> table = new Table<>(5, 5, new TargetTypeFilter());
-    private Aoe aoe = new Aoe(5, 5);
+    private Aoe aoe = new Aoe(5, 5, 0);
 
     private Pachinko1() {
-        aoe.addColumn();
+        // aoe.addColumn();
     }
 
     @Override
@@ -29,16 +34,19 @@ public class Pachinko1 extends Application {
         config.setTitle("Dear ImGui is Awesome!");
     }
 
-    private int x[] = new int[] { 5 };
-    private int y[] = new int[] { 5 };
+    // private int x[] = new int[] { 5 };
+    // private int y[] = new int[] { 5 };
     // private ImInt imval = new ImInt();
+
+    private Position cursorHover = new Position();
+    private Position selected = new Position();
 
     @Override
     public void process() {
         ImGui.text("Hello, World!");
 
-        ImGui.sliderInt("x", x, 1, 16);
-        ImGui.sliderInt("y", y, 1, 16);
+        // ImGui.sliderInt("x", x, 1, 16);
+        // ImGui.sliderInt("y", y, 1, 16);
 
         if(ImGui.button("Add Col")) {
             aoe.addColumn();
@@ -46,26 +54,72 @@ public class Pachinko1 extends Application {
         if(ImGui.button("Add Row")) {
             aoe.addRow();
         } else {
-            ImGui.beginTable("aoe", aoe.getWidth(), ImGuiTableFlags.Borders);
-            for(int i = 0; i < aoe.getWidth(); i++) {
-                ImGui.tableNextRow();
-                for(int j = 0; j < aoe.getHeight(); j++) {
-                    ImGui.tableNextColumn();
-                    // ImGui.button("" + i + ", " + j);
-                    // ImGui.button("" + table.get(i, j));
-                    try {
-                        ImInt imval = new ImInt(aoe.get(i, j).value);
-                        if(ImGui.button("##i" + i + "j" + j)) { //ImGui.inputInt("##i" + i + "" + j, imval)) {
-                            aoe.set(i, j, new TargetTypeFilter(imval.get()));
-                        }
-                    } catch(Exception e) {
-                        System.out.printf("Error trying to display button at cell {%s, %s}\n", i, j);
-                        // e.printStackTrace();
-                    }
-                }
+            ImGui.text("Size {" + aoe.getWidth() + ", " + aoe.getHeight() + "}");
+            ImGui.text("Hover {" + cursorHover.x + ", " + cursorHover.y + "}");
+            ImGui.text("Selected {" + selected.x + ", " + selected.y + "}");
+            // ImGuiSelectableFlags.SpanAllColumns
+            // ImInt selectedVal = null;
+
+            renderAoe();
+
+            var filter = aoe.get(selected.y, selected.x);
+
+            renderFilterButton(TargetType.nothingStr, TargetType.nothing, TargetType.isNothing(filter), filter);
+            for(TargetType type : TargetType.values()) {
+                renderFilterButton(type.name(), type.value,  type.isIn(filter), filter);
             }
-            ImGui.endTable();
+            renderFilterButton(TargetType.allStr, TargetType.all, TargetType.isAll(filter), filter);
         }
     }
+
+    private void renderFilterButton(String name, int typeBit, boolean active, int filter) {
+        var color = active ? ImGui.getColorU32(0.2f, 0.2f, 1.0f, 1) : ImGui.getColorU32(1f, 0.2f, 0.2f, 1);
+        ImGui.pushStyleColor(ImGuiCol.Button, color);
+        if(ImGui.button(name)) {
+            if(active) {
+                aoe.set(selected.y, selected.x, TargetTypeFilter.sub(filter, typeBit));
+            } else {
+                aoe.set(selected.y, selected.x, TargetTypeFilter.add(filter, typeBit));
+            }
+        }
+        ImGui.popStyleColor();
+    }
+
+    private void renderAoe() {
+        ImGui.beginTable("aoe", aoe.getWidth(), ImGuiTableFlags.Borders);
+        for(int y = 0; y < aoe.getHeight(); y++) {
+            ImGui.tableNextRow();
+            // ImGui::TableSetBgColor(ImGuiTableBgTarget_CellBg, ImGui::GetColorU32(ImVec4(0.2f, 0.2f, 0.2f, 1)));
+            for(int x = 0; x < aoe.getWidth(); x++) {
+                ImGui.tableNextColumn();
+                var str = x + "," + y; // "x" + x + "y" + y;
+                
+                if(x == cursorHover.x || y == cursorHover.y) {
+                    ImGui.tableSetBgColor(imgui.flag.ImGuiTableBgTarget.CellBg, ImGui.getColorU32(0.2f, 0.2f, 0.2f, 1));
+                }
+                try {
+                    var value = aoe.get(y, x);
+
+                    if(ImGui.button(value + "##" + str, 32, 32)) {
+                        selected.x = x;
+                        selected.y = y;
+                    }
+
+                    if(ImGui.isItemHovered()) {
+                        cursorHover.x = x;
+                        cursorHover.y = y;
+                    }
+                    if(x == selected.x && y == selected.y) {
+                        ImGui.tableSetBgColor(imgui.flag.ImGuiTableBgTarget.CellBg, ImGui.getColorU32(1f, 0.2f, 0.2f, 1));
+                    }
+                } catch(Exception e) {
+                    System.out.println("Cell : " + str);
+                    e.printStackTrace();
+                }
+            }
+        }
+        ImGui.endTable();
+    }
+
 
 }

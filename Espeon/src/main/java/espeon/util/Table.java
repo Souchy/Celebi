@@ -38,10 +38,10 @@ public class Table<T> {
         }
     }
 
-    protected List<T> list = new ArrayList<>();
+    protected final List<T> list = new ArrayList<>();
+    protected final T defaul;
     protected int width;
     protected int height;
-    protected T defaul;
 
     public Table(int w, int h, T defaul) {
         this.width = w;
