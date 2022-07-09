@@ -14,8 +14,9 @@ public class Amber {
     public static final RedSpellModel spellModel = new RedSpellModel();
     public static final RedSpellConditions spellConditions = new RedSpellConditions();
     
-    static final class RedSpellModel {
+    public static final class RedSpellModel {
         private static final String url = redPath + "spell:";
+        private RedSpellModel() {}
         /**
          * Keys are range patterns (circle, square, line, ring, square ring..) <br>
          * Values are the size/range of each pattern
@@ -61,8 +62,10 @@ public class Amber {
             // Red.jedis.del(keys.toArray(new String[keys.size()]));
         }
     }
-    static final class RedSpellConditions {
+    public static final class RedSpellConditions {
         private static final String url = RedSpellModel.url;
+        private RedSpellConditions() {}
+
         public Aoe getCellConditions(int id) {
             String origin = Red.jedis.get(url + id + ":cellConditions:origin");
             Position pos = new Position();
@@ -96,6 +99,8 @@ public class Amber {
     }
     static final class RedEffectModel {
         private static final String url = redPath + "effect:";
+        private RedEffectModel() {}
+
         public Class<? extends EffectModel> clazz(int id) {
             return null;
         }
@@ -115,6 +120,8 @@ public class Amber {
 
     public static final class RedAction {
         private static final String url = redPath + "action:";
+        private RedAction() {}
+
         public void getStatements(int id) {
             // return 0;
         }

@@ -3,7 +3,8 @@
  */
 package pachinko;
 
-// import espeon.emerald.Red;
+import espeon.emerald.Amber;
+import espeon.emerald.Red;
 
 public class Pachinko {
     public String getGreeting() {
@@ -13,6 +14,8 @@ public class Pachinko {
     public static void main(String[] args) {
         System.out.println(new Pachinko().getGreeting());
 
-        // Red.jedis.get("");
+        Amber.spellModel.setActionId(1, "hi");
+        var a = Amber.spellModel.getActionId(1);
+        System.out.println("action a : " + a);
     }
 }
