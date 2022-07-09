@@ -31,6 +31,11 @@ public class Fight {
     public int newEntityId() {
         return entityCounter.get();
     }
+    /**
+     * Adds creatures to the timeline after the index of the summoner or at 0 if no summoner
+     * @param summoner
+     * @param summons
+     */
     public synchronized void spawn(Integer summoner, int... summons) {
         int index = timeline.indexOf(summoner);
         for(int i = 0; i < summons.length; i++) {

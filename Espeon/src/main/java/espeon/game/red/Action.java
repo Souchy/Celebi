@@ -11,7 +11,7 @@ public class Action {
     // private static IDGenerator counter = new IDGenerator();
     // public final int id = counter.get();
 
-    public int id;
+    public String id;
 
     public List<Statement> statements = new ArrayList<>();
 

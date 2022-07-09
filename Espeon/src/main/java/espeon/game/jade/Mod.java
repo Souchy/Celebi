@@ -17,4 +17,14 @@ public enum Mod {
     speed,
 
     BOUND_END;
+
+
+    public static final String[] names;
+    static {
+        int size = Mod.values().length;
+        names = new String[size];
+        for(int i = 0; i < size; i++) {
+            names[i] = Mod.values()[i].name();
+        }
+    }
 }

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import espeon.FightMock;
+import espeon.emerald.amber.Amber;
 
 public class AmberTest {
     
@@ -19,15 +20,15 @@ public class AmberTest {
 
     @Test void deleteSpellModel() {
         // delete data
-        Amber.spellModel.delete(mock.sm.id);
-        var val = Amber.spellModel.getActionId(mock.sm.id);
+        Amber.spells.delete(mock.sm.id);
+        var val = Amber.spells.getActionId(mock.sm.id);
         assertNull(val);
     }
     
     @Test void addSpellModel() {
-        Amber.spellModel.setActionId(mock.sm.id, String.valueOf(mock.sm.actionid));
-        String val = Amber.spellModel.getActionId(mock.sm.id);
-        assertEquals(val, String.valueOf(mock.sm.actionid));
+        Amber.spells.setActionId(mock.sm.id, mock.sm.actionid);
+        String val = Amber.spells.getActionId(mock.sm.id);
+        assertEquals(val, mock.sm.actionid);
     }
     
 

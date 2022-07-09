@@ -55,13 +55,16 @@ public class FightMock {
 
         
         // spawn with no summoner adds the creature to the front of the list so we do it in reverse
-        f.spawn(Entity.noid, t2.id);
-        f.spawn(Entity.noid, t1.id);
+        // f.spawn(Entity.noid, t2.id);
+        // f.spawn(Entity.noid, t1.id);
+        // f.spawn(Entity.noid, caster.id);
         f.spawn(Entity.noid, caster.id);
+        f.spawn(caster.id, t1.id);
+        f.spawn(t1.id, t2.id);
 
-        f.board.get(5, 1).setGround(1); // .creatures.push(1);
-        f.board.get(4, 5).setGround(2); // .creatures.push(2);
-        f.board.get(6, 5).setGround(3); // .creatures.push(3);
+        f.board.get(5, 1).setGround(caster.id); // .creatures.push(1);
+        f.board.get(4, 5).setGround(t1.id); // .creatures.push(2);
+        f.board.get(6, 5).setGround(t2.id); // .creatures.push(3);
     }
     
     public void setupCreatures(Fight f) {
@@ -121,7 +124,7 @@ public class FightMock {
 
     public void setupAction() {
         action = new Action();
-        action.id = 1;
+        action.id = "test";
         var filter = new TargetTypeFilter(); // affects all by default
         // Statement push target if high defense, pull target if low defense
         {
@@ -172,8 +175,8 @@ public class FightMock {
 
     public void setupSpellModel() {
         sm = new SpellModel();
-        sm.id = 1;
-        sm.actionid = 1;
+        sm.id = "1";
+        sm.actionid = "test";
         {
             SpellConditions sc = sm.new SpellConditions();
             sc.castPerTarget = 1;

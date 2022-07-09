@@ -6,12 +6,11 @@ import espeon.game.red.Aoe;
 
 public class SpellModel {
     
-    public int id;
+    public String id;
     public SpellConditions conditions;
     public List<Cost> costs;
     
-    // public List<Statement> statements;
-    public int actionid;
+    public String actionid;
 
     
     public class SpellConditions {

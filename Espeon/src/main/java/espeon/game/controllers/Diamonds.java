@@ -14,10 +14,10 @@ public class Diamonds {
     public static Fight getFight(int id) {
         return fights.get(id);
     }
-    public static SpellModel getSpellModel(int id) {
+    public static SpellModel getSpellModel(String id) {
         return spellModels.get(id);
     }
-    public static Action getAction(int actionid) {
+    public static Action getAction(String actionid) {
         return actions.get(actionid);
     }
     
@@ -42,10 +42,10 @@ public class Diamonds {
     public static void setFight(int id, Fight f) {
         fights.put(id, f);
     }
-    public static void setSpellModel(int id, SpellModel s) {
+    public static void setSpellModel(String id, SpellModel s) {
         spellModels.put(id, s);
     }
-    public static void setAction(int id, Action a) {
+    public static void setAction(String id, Action a) {
         actions.put(id, a);
     }
 
@@ -64,10 +64,10 @@ public class Diamonds {
 
     // Secret database simulation before we set up redis
     private static Map<Integer, Spell> spells = new HashMap<>();
-    private static Map<Integer, SpellModel> spellModels = new HashMap<>();
+    private static Map<String, SpellModel> spellModels = new HashMap<>();
     private static Map<Integer, Creature> creatures = new HashMap<>();
     // private static Map<String, Integer> fights = new HashMap<>();
     private static Map<Integer, Fight> fights = new HashMap<>();
-    private static Map<Integer, Action> actions = new HashMap<>();
+    private static Map<String, Action> actions = new HashMap<>();
 
 }

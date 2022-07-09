@@ -9,7 +9,7 @@ public class Spell {
     public final int id = counter++;
 
 
-    public int modelid;
+    public String modelid;
 
 
     public int turnLastCast = 0;

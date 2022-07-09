@@ -1,20 +1,36 @@
 package pachinko;
 
 import espeon.game.red.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+
+import espeon.emerald.amber.Amber;
 import espeon.game.jade.Position;
 import espeon.game.jade.Target;
 import espeon.game.jade.Target.TargetType;
 import espeon.game.jade.Target.TargetTypeFilter;
 import espeon.util.Table;
 import imgui.ImGui;
+import imgui.ImGuiStyle;
 import imgui.ImVec2;
+import imgui.ImVec4;
 import imgui.app.Application;
 import imgui.app.Configuration;
 import imgui.flag.ImGuiCol;
+import imgui.flag.ImGuiConfigFlags;
 import imgui.flag.ImGuiSelectableFlags;
+import imgui.flag.ImGuiStyleVar;
 import imgui.flag.ImGuiTableColumnFlags;
 import imgui.flag.ImGuiTableFlags;
+import imgui.flag.ImGuiWindowFlags;
+import imgui.type.ImBoolean;
 import imgui.type.ImInt;
+import pachinko.windows.ActionWindow;
+import pachinko.windows.CreatureWindow;
+import pachinko.windows.SpellModelWindow;
 
 public class Pachinko1 extends Application {
 
@@ -23,103 +39,46 @@ public class Pachinko1 extends Application {
     }
 
 
-    private Aoe aoe = new Aoe(5, 5, 0);
+    // private Aoe aoe = new Aoe(5, 5, 0);
+    public static final List<Window> windows = new ArrayList<>();
 
     private Pachinko1() {
-        // aoe.addColumn();
     }
+
+    @Override
+    protected void preRun() {
+        super.preRun();
+        ImGui.getIO().addConfigFlags(ImGuiConfigFlags.DockingEnable);
+        // ImGui.getIO().addConfigFlags(ImGuiConfigFlags.ViewportsEnable);
+
+        // windows.add(new SpellModelWindow("1"));
+        // windows.add(new AoeWindow(aoe));
+    }
+
 
     @Override
     protected void configure(Configuration config) {
-        config.setTitle("Dear ImGui is Awesome!");
+        config.setTitle("Pachinko");
     }
-
-    // private int x[] = new int[] { 5 };
-    // private int y[] = new int[] { 5 };
-    // private ImInt imval = new ImInt();
-
-    private Position cursorHover = new Position();
-    private Position selected = new Position();
 
     @Override
     public void process() {
-        ImGui.text("Hello, World!");
+        // ImGui.begin("Pachinko", new ImBoolean(false)); // , ImGuiWindowFlags.MenuBar);
+        // if(ImGui.button("new aoe")) {
+        // windows.add(new AoeWindow(aoe));
+        // }
 
-        // ImGui.sliderInt("x", x, 1, 16);
-        // ImGui.sliderInt("y", y, 1, 16);
+        SpellModelWindow.renderSpells();
+        ActionWindow.renderActions();
+        CreatureWindow.renderCreatures();
 
-        if(ImGui.button("Add Col")) {
-            aoe.addColumn();
-        } else 
-        if(ImGui.button("Add Row")) {
-            aoe.addRow();
-        } else {
-            ImGui.text("Size {" + aoe.getWidth() + ", " + aoe.getHeight() + "}");
-            ImGui.text("Hover {" + cursorHover.x + ", " + cursorHover.y + "}");
-            ImGui.text("Selected {" + selected.x + ", " + selected.y + "}");
-            // ImGuiSelectableFlags.SpanAllColumns
-            // ImInt selectedVal = null;
+        // ImGui.end();
 
-            renderAoe();
+        for(int i = 0; i < windows.size(); i++)
+            windows.get(i).render();
 
-            var filter = aoe.get(selected.y, selected.x);
-
-            renderFilterButton(TargetType.nothingStr, TargetType.nothing, TargetType.isNothing(filter), filter);
-            for(TargetType type : TargetType.values()) {
-                renderFilterButton(type.name(), type.value,  type.isIn(filter), filter);
-            }
-            renderFilterButton(TargetType.allStr, TargetType.all, TargetType.isAll(filter), filter);
-        }
     }
 
-    private void renderFilterButton(String name, int typeBit, boolean active, int filter) {
-        var color = active ? ImGui.getColorU32(0.2f, 0.2f, 1.0f, 1) : ImGui.getColorU32(1f, 0.2f, 0.2f, 1);
-        ImGui.pushStyleColor(ImGuiCol.Button, color);
-        if(ImGui.button(name)) {
-            if(active) {
-                aoe.set(selected.y, selected.x, TargetTypeFilter.sub(filter, typeBit));
-            } else {
-                aoe.set(selected.y, selected.x, TargetTypeFilter.add(filter, typeBit));
-            }
-        }
-        ImGui.popStyleColor();
-    }
-
-    private void renderAoe() {
-        ImGui.beginTable("aoe", aoe.getWidth(), ImGuiTableFlags.Borders);
-        for(int y = 0; y < aoe.getHeight(); y++) {
-            ImGui.tableNextRow();
-            // ImGui::TableSetBgColor(ImGuiTableBgTarget_CellBg, ImGui::GetColorU32(ImVec4(0.2f, 0.2f, 0.2f, 1)));
-            for(int x = 0; x < aoe.getWidth(); x++) {
-                ImGui.tableNextColumn();
-                var str = x + "," + y; // "x" + x + "y" + y;
-                
-                if(x == cursorHover.x || y == cursorHover.y) {
-                    ImGui.tableSetBgColor(imgui.flag.ImGuiTableBgTarget.CellBg, ImGui.getColorU32(0.2f, 0.2f, 0.2f, 1));
-                }
-                try {
-                    var value = aoe.get(y, x);
-
-                    if(ImGui.button(value + "##" + str, 32, 32)) {
-                        selected.x = x;
-                        selected.y = y;
-                    }
-
-                    if(ImGui.isItemHovered()) {
-                        cursorHover.x = x;
-                        cursorHover.y = y;
-                    }
-                    if(x == selected.x && y == selected.y) {
-                        ImGui.tableSetBgColor(imgui.flag.ImGuiTableBgTarget.CellBg, ImGui.getColorU32(1f, 0.2f, 0.2f, 1));
-                    }
-                } catch(Exception e) {
-                    System.out.println("Cell : " + str);
-                    e.printStackTrace();
-                }
-            }
-        }
-        ImGui.endTable();
-    }
 
 
 }
