@@ -1,16 +1,16 @@
-package espeon;
+package pachinko;
 
-import espeon.game.red.*;
-import espeon.game.jade.Target.TargetType;
-import espeon.game.jade.Target.TargetTypeFilter;
-import espeon.util.Table;
-import imgui.ImGui;
-import imgui.app.Application;
-import imgui.app.Configuration;
-import imgui.flag.ImGuiTableFlags;
-import imgui.type.ImInt;
+// import espeon.game.red.*;
+// import espeon.game.jade.Target.TargetType;
+// import espeon.game.jade.Target.TargetTypeFilter;
+// import espeon.util.Table;
+// import imgui.ImGui;
+// import imgui.app.Application;
+// import imgui.app.Configuration;
+// import imgui.flag.ImGuiTableFlags;
+// import imgui.type.ImInt;
 
-public class Pachinko extends Application {
+public class Pachinko1 extends Application {
 
     public static void main(String[] args) {
         launch(new Pachinko());
@@ -20,7 +20,7 @@ public class Pachinko extends Application {
     // private Table<TargetTypeFilter> table = new Table<>(5, 5, new TargetTypeFilter());
     private Aoe aoe = new Aoe(5, 5);
 
-    private Pachinko() {
+    private Pachinko1() {
         aoe.addColumn();
     }
 

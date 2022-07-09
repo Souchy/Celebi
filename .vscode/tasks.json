@@ -50,46 +50,7 @@
                 "isDefault": true
             },
             "detail": "Build Umbreon client project."
-        },
-        {
-            "type": "cppbuild",
-            "label": "Build Pachinko",
-            "command": "C:\\msys64\\mingw64\\bin\\g++.exe",
-            // "command": "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.32.31326/bin/Hostx64/x64/cl.exe",
-            "args": [
-                "-std=c++17",        
-                "-fdiagnostics-color=always",
-                "-I",
-                "${USERPROFILE}/source/repos/imgui",
-                // "-I",
-                // "${USERPROFILE}/source/repos/imgui/backends",
-                // "-I",
-                // "${USERPROFILE}/source/repos/imgui/examples/libs/glfw/include",
-                // "-I",
-                // "${USERPROFILE}/source/repos/imgui/examples/libs/glfw/include/GLFW",
-                // "${USERPROFILE}/source/repos/imgui/backends/imgui_impl_glfw.h",
-                // "${USERPROFILE}/source/repos/imgui/backends/imgui_impl_opengl3.h",
-                // "${USERPROFILE}/source/repos/imgui/examples/libs/glfw/include/GLFW/glfw3.h",
-                "-g",
-                "${workspaceFolder}/Pachinko/Pachinko.cpp",
-                // "${USERPROFILE}/source/repos/imgui",
-                // "${USERPROFILE}/source/repos/imgui/backends",
-                // "${USERPROFILE}/source/repos/imgui/examples/libs/glfw/include",
-                "-o",
-                "${workspaceFolder}/Pachinko/Pachinko.exe"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}/Pachinko",
-            },
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "detail": "Build Pachinko tool project."
-        },
+        }
     ],
     "version": "2.0.0"
 }

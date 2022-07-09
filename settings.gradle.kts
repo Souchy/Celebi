@@ -7,5 +7,6 @@
  * in the user manual at https://docs.gradle.org/7.3/userguide/multi_project_builds.html
  */
 
-rootProject.name = "Espeon"
-include("app")
+rootProject.name = "Celebi"
+include("Espeon")
+include("Pachinko")

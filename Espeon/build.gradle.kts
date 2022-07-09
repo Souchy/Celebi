@@ -34,9 +34,9 @@ dependencies {
     implementation("org.mongodb:mongodb-driver-sync:4.6.1")
     implementation("redis.clients:jedis:4.2.0")
 
-    implementation(files("../../../../GitPiranha/r and d/Commons WS/Teal Net/Teal Net.jar"))   
-    implementation(files("../../../../GitPiranha/r and d/Commons WS/TealWaters/tealwaters.jar"))   
-    implementation(files("../../../../GitPiranha/r and d/annotationprocessor.jar"))   
+    implementation(files("../../../GitPiranha/r and d/Commons WS/Teal Net/Teal Net.jar"))   
+    implementation(files("../../../GitPiranha/r and d/Commons WS/TealWaters/tealwaters.jar"))   
+    implementation(files("../../../GitPiranha/r and d/annotationprocessor.jar"))   
     
     implementation("io.github.spair:imgui-java-app:1.86.4")
 }
