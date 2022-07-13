@@ -1,16 +1,25 @@
 package espeon.game.red;
 
-import java.util.ArrayList;
 import java.util.function.Consumer;
 
 import espeon.game.jade.Position;
+import espeon.game.jade.Condition.Actor;
 import espeon.game.jade.Target.TargetType;
 import espeon.game.jade.Target.TargetTypeFilter;
-import espeon.game.types.Direction;
+import espeon.game.types.Direction8;
 import espeon.util.Table;
 
 public class Aoe extends Table<Integer> {
 
+	/**
+	 * Which actor to anchor the aoe to
+	 * i.e.: is the aoe placed at on the caster or on the target?
+	 */
+	public Actor anchor = Actor.target;
+
+	/**
+	 * Origin inside of the table
+	 */
 	public Position origin = new Position();
 
     public Aoe() {
@@ -34,9 +43,9 @@ public class Aoe extends Table<Integer> {
         super(w, h, defaul);
     }
 
-	public Aoe rotate(Direction r) {
+	public Aoe rotate(Direction8 r) {
 		Aoe copy = this.copy();
-		// TODO
+		// TODO rotate par rapport à l'origin locale
 		return copy;
 	}
 

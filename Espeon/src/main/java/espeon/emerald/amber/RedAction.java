@@ -9,4 +9,12 @@ public final class RedAction extends RedSpace {
     public void getStatements(String id) {
         // return 0;
     }
+
+    /*
+     * celebi:amber:action:1:statements [1,2,3,4]
+     * 
+     * celebi:amber:statement:1:
+     */
+
+
 }

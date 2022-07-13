@@ -216,5 +216,8 @@ public class Table<T> {
         }
         return arr;
     }
-    
+    public Table<T> fromStringArray(String[] arr) {
+        return this;
+    }
+
 }

@@ -21,6 +21,7 @@ public final class RedSpellConditions { // extends RedSpace {
         return null;
     }
     public void setCellConditions(int id, Aoe aoe) {
+        Red.jedis.set(url(id) + "aoewidth", String.valueOf(aoe.getWidth()));
         Red.jedis.rpush(url(id) + "aoe", aoe.toStringArray());
         Red.jedis.set(url(id) + "origin", aoe.origin.toString());
     }

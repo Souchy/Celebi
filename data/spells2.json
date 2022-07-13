@@ -10,7 +10,7 @@
             "value": 3
         }
     ],
-    "restrictions": {
+    "conditions": {
         "cooldown": 0,
         "castPerTurn": 0,
         "castPerTarget": 0,
