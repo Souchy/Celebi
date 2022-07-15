@@ -1,9 +1,11 @@
-package espeon.emerald;
+package espeon.emerald.amber;
 
 import java.util.Set;
 
+import espeon.emerald.Red;
+
 public abstract class RedSpace {
-    public final String url;
+    final String url;
     protected RedSpace(String url){
         this.url = url;
     }

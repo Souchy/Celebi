@@ -11,6 +11,9 @@ import pachinko.Window;
 public class CreatureWindow implements Window {
 
     public static Map<String, CreatureWindow> windows = new HashMap<>();
+    private static ImString newCreatureNameBean = new ImString();
+
+    
     public static void open(ImString id) {
         if(!windows.containsKey(id.get())) {
             windows.put(id.get(), new CreatureWindow(id));
@@ -19,6 +22,8 @@ public class CreatureWindow implements Window {
     public static void renderCreatures() {
         ImGui.begin("Creature Models");
         
+        ImGui.inputText("New creature nam##createCreature", newCreatureNameBean);
+        ImGui.sameLine();
         if(ImGui.button("Create new")) {
             // ...
         }

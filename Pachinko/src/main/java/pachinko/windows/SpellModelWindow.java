@@ -13,7 +13,7 @@ import imgui.flag.ImGuiComboFlags;
 import imgui.flag.ImGuiInputTextFlags;
 import imgui.type.ImInt;
 import imgui.type.ImString;
-import pachinko.Pachinko1;
+import pachinko.Pachinko;
 import pachinko.Window;
 
 public class SpellModelWindow implements Window {
@@ -30,7 +30,7 @@ public class SpellModelWindow implements Window {
     public static void renderSpells() {
         ImGui.begin("Spell Models");
         
-        ImGui.inputText("##createSpell", newSpellNameBean);
+        ImGui.inputText("New spell name##createSpell", newSpellNameBean);
         ImGui.sameLine();
         if(ImGui.button("Create new")) {
             Amber.spells.create(newSpellNameBean.get());
@@ -72,7 +72,9 @@ public class SpellModelWindow implements Window {
     public SpellModelWindow(String spellModel) {
         this.id = spellModel;
         this.actionBean = new ImString(Amber.spells.getActionId(id));
-        this.rangeBean = new ImInt(Amber.spells.getRange(id));
+        Integer range = Amber.spells.getRange(id);
+        if(range == null)  this.rangeBean = new ImInt(1);
+        else this.rangeBean = new ImInt(range);
     }
 
     @Override

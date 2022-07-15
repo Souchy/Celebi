@@ -3,9 +3,9 @@
   "configurations": [
     {
       "type": "java",
-      "name": "Launch Pachinko1",
+      "name": "Launch Pachinko",
       "request": "launch",
-      "mainClass": "pachinko.Pachinko1",
+      "mainClass": "pachinko.Pachinko",
       "projectName": "Pachinko"
     },
     {
@@ -20,14 +20,6 @@
         "false",
         "false"
       ]
-    },
-    {
-      "type": "java",
-      "name": "Launch Pachinko",
-      "request": "launch",
-      "mainClass": "pachinko.Pachinko",
-      "projectName": "Pachinko",
-      "args": []
     },
     {
       "name": "Run Umbreon",

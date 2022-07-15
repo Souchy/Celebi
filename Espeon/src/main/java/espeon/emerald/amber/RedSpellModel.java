@@ -3,7 +3,6 @@ package espeon.emerald.amber;
 import java.util.Map;
 
 import espeon.emerald.Red;
-import espeon.emerald.RedSpace;
 import espeon.game.jade.Mod;
 import espeon.util.Util;
 
@@ -11,7 +10,7 @@ public final class RedSpellModel extends RedSpace {
     RedSpellModel() {
         super(Amber.redPath + "spell:");
     }
-    public static final RedSpellConditions conditions = new RedSpellConditions();
+    public final RedSpellConditions conditions = new RedSpellConditions();
     
     // public void setSpellModel(int range, Map<String, String> costs, int actionid) {
     //     Red.jedis.set(key, value)

@@ -6,7 +6,7 @@ import java.util.Map;
 import espeon.emerald.amber.Amber;
 import imgui.ImGui;
 import imgui.type.ImString;
-import pachinko.Pachinko1;
+import pachinko.Pachinko;
 import pachinko.Window;
 
 public class ActionWindow implements Window {
@@ -24,6 +24,7 @@ public class ActionWindow implements Window {
         ImGui.begin("Actions");
         
         ImGui.inputText("##createAction", newActionNameBean);
+        ImGui.sameLine();
         if(ImGui.button("Create new")) {
             // ...
             Amber.actions.create(newActionNameBean.get());
