@@ -1,8 +1,8 @@
 package espeon.emerald.amber;
 
 import espeon.emerald.Red;
-import espeon.game.jade.Position;
 import espeon.game.red.Aoe;
+import espeon.game.red.Position;
 import espeon.util.Util;
 
 public final class RedSpellConditions { // extends RedSpace {

@@ -1,11 +1,16 @@
 package espeon.game.jade.aoes;
 
-import espeon.game.jade.Position;
 import espeon.game.jade.Condition.Actor;
 import espeon.game.jade.Target.TargetType;
+import espeon.game.red.Position;
 import espeon.game.types.Anchor;
 import espeon.game.types.Direction8;
 
+
+/**
+ * PerpendicularLine : ZoneType.line, localOrigin = Anchor.center, rotation = Direction8.right, 
+ * Cone : ZoneType.cone, localOrigin=Anchor.bottom, dotation = Direction8.top
+ */
 public class Zone {
     
     // type

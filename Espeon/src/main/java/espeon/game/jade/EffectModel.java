@@ -1,12 +1,14 @@
 package espeon.game.jade;
 
+import espeon.game.jade.aoes.Zone;
 import espeon.game.red.Aoe;
 import espeon.game.types.EffectType;
 
 public abstract class EffectModel {
 
     // public int id;
-    public Aoe aoe = new Aoe();
+    // public Aoe aoe = new Aoe();
+    public Zone zone = new Zone();
     // public TargetTypeFilter filter;
 
     public abstract EffectType type(); // {

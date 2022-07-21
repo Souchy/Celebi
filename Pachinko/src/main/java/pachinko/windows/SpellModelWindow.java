@@ -6,7 +6,7 @@ import java.util.Map;
 import org.checkerframework.checker.units.qual.s;
 
 import espeon.emerald.amber.Amber;
-import espeon.game.jade.Mod;
+import espeon.game.types.Mod;
 import espeon.util.Util;
 import imgui.ImGui;
 import imgui.flag.ImGuiComboFlags;

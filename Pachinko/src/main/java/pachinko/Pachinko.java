@@ -17,7 +17,6 @@ import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWImage;
 
 import espeon.emerald.amber.Amber;
-import espeon.game.jade.Position;
 import espeon.game.jade.Target;
 import espeon.game.jade.Target.TargetType;
 import espeon.game.jade.Target.TargetTypeFilter;

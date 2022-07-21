@@ -11,6 +11,7 @@ import espeon.game.controllers.actionpipeline.Node.NodeGroup;
 import espeon.game.jade.EffectModel;
 import espeon.game.jade.Statement;
 import espeon.game.jade.Statement.StatementGroup;
+import espeon.game.jade.aoes.ZoneBuilder;
 import espeon.game.red.Action;
 import espeon.game.red.Cell;
 
@@ -108,7 +109,9 @@ public class NewPipeline {
         } else {
             EffectModel em = s.asEffect();
             Board board = Diamonds.getFight(parent.getFightId()).board; //Diamonds.getFightByClient(parent.sourceid).board;
-            List<Cell> cells = board.getCellsInAoe(cellid, em.aoe);
+
+            var aoe = ZoneBuilder.build(em.zone);
+            List<Cell> cells = board.getCellsInAoe(cellid, aoe);
             
             for(var c : cells) { 
                 // System.out.printf("Cell in aoe [%s] {%s, %s} \n", c.id, c.getX(), c.getY());

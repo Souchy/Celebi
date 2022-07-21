@@ -1,4 +1,4 @@
-package espeon.game.jade;
+package espeon.game.red;
 
 public class Position {
     public int x, y, z;

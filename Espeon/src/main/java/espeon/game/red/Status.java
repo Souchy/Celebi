@@ -1,5 +1,6 @@
 package espeon.game.red;
 
+import java.util.ArrayList;
 import java.util.List;
 import espeon.game.jade.Trigger;
 
@@ -9,15 +10,17 @@ public class Status {
     public int source;
     public int spellModelSource;
 
-    public List<Status> instances;
     public MergeStrategy mergeStrategy;
+    public List<Status> stacks = new ArrayList<>();
     // public Map<StatusMod, Integer> mods = new HashMap<>();
     public int stacks() {
-        return instances.size();
+        return stacks.size();
     }
     public int maxStacks = 0;
 
-    public class StatusInstace {
+
+
+    public class StatusStack {
         /**
          * These apply once per stack. Stats with 10 hp and 5 stacks mean 50 hp
          */

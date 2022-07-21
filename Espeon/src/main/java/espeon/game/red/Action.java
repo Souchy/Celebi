@@ -6,6 +6,9 @@ import java.util.List;
 import espeon.game.jade.Statement;
 import espeon.util.IDGenerator;
 
+/**
+ * Used in Spells and status Triggers
+ */
 public class Action {
     
     // private static IDGenerator counter = new IDGenerator();

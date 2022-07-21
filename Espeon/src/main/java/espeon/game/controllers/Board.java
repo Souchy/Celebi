@@ -3,9 +3,9 @@ package espeon.game.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import espeon.game.jade.Position;
 import espeon.game.red.Aoe;
 import espeon.game.red.Cell;
+import espeon.game.red.Position;
 import espeon.util.Table;
 
 public class Board {
