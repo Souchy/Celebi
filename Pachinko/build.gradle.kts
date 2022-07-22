@@ -9,12 +9,23 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+    
+  id("org.openjfx.javafxplugin") version "0.0.10" apply true
 }
 
 repositories {
     // Use Maven Central for resolving dependencies.
+    // mavenCentral()
+    
+    mavenLocal()
     mavenCentral()
+    google()
+    gradlePluginPortal()
+    maven(url="https://oss.sonatype.org/content/repositories/snapshots/")
+    maven(url="https://oss.sonatype.org/content/repositories/releases/")
+    maven(url="https://jitpack.io")
 }
+
 
 dependencies {
     implementation(project(":Espeon"))
@@ -26,11 +37,23 @@ dependencies {
     
     // ImGui    
     implementation("io.github.spair:imgui-java-app:1.86.4")
+
+    // GDX
+    implementation("com.badlogicgames.gdx:gdx-backend-lwjgl3:1.11.0")
+    implementation("com.badlogicgames.gdx:gdx-platform:1.11.0:natives-desktop")
+    implementation("com.badlogicgames.gdx:gdx:1.11.0")
+        
+}
+
+javafx {
+    version = "17.0.1"
+    modules("javafx.controls", "javafx.fxml")
 }
 
 application {
     // Define the main class for the application.
     mainClass.set("pachinko.Pachinko")
+    // mainClass.set("pachinko.PachinkoFX")
 }
 
 tasks.named<Test>("test") {

@@ -3,6 +3,21 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Launch PachinGDX",
+      "request": "launch",
+      "mainClass": "pachinko.PachinGDX",
+      "projectName": "Pachinko"
+    },
+    {
+      "type": "java",
+      "name": "Launch PachinkoFX",
+      "request": "launch",
+      "mainClass": "pachinko.PachinkoFX",
+      "projectName": "Pachinko",
+      "vmArgs": "--add-modules=javafx.controls,javafx.fxml"
+    },
+    {
+      "type": "java",
       "name": "Launch Pachinko",
       "request": "launch",
       "mainClass": "pachinko.Pachinko",

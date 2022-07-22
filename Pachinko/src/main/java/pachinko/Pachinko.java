@@ -44,6 +44,12 @@ import pachinko.windows.CreatureWindow;
 import pachinko.windows.SpellModelTable;
 import pachinko.windows.SpellModelWindow;
 
+// import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 public class Pachinko extends Application {
 
     public static void main(String[] args) {
@@ -55,7 +61,7 @@ public class Pachinko extends Application {
     public static final List<Window> windows = new ArrayList<>();
 
     private Pachinko() {
-        
+        // FXMLController adsf;
     }
 
     @Override
