@@ -7,6 +7,8 @@ import com.badlogic.gdx.files.FileHandle;
 import java.io.File;
 import java.util.Arrays;
 
+import org.lwjgl.glfw.GLFW;
+
 // import com.mygdx.game.MyGdxGame;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Texture;
@@ -22,6 +24,13 @@ import imgui.ImGui;
 // import imgui.impl.ImplGL3;
 // import imgui.impl.LwjglGlfw;
 // import uno.glfw.GlfwWindow;
+import imgui.flag.ImGuiConfigFlags;
+import imgui.gl3.ImGuiImplGl3;
+import imgui.glfw.ImGuiImplGlfw;
+import pachinko.windows.ActionWindow;
+import pachinko.windows.CreatureWindow;
+import pachinko.windows.SpellModelTable;
+import pachinko.windows.SpellModelWindow;
 
 public class PachinGDX extends ApplicationAdapter {
     
@@ -33,30 +42,55 @@ public class PachinGDX extends ApplicationAdapter {
 		new Lwjgl3Application(new PachinGDX(), config);
 	}
 
-	SpriteBatch batch;
-	Texture img;
-	
-	@Override
-	public void create () {
-		batch = new SpriteBatch();
-        // System.out.println("path : " + new File("").getAbsolutePath());
-        // System.out.println("files : " + Arrays.toString(new File("").listFiles()));
-        var fh = new FileHandle(new File("Pachinko/91757405.jpg"));
-		img = new Texture(fh);
-	}
+    
+    private final ImGuiImplGlfw imGuiGlfw = new ImGuiImplGlfw();
+    private final ImGuiImplGl3 imGuiGl3 = new ImGuiImplGl3();
+    
+    private SpellModelTable table = new SpellModelTable();
+    
+    @Override
+    public void create() {
+        Lwjgl3Graphics lwjgl3Graphics = (Lwjgl3Graphics) Gdx.graphics;
+        long windowHandle = lwjgl3Graphics.getWindow().getWindowHandle();
 
-	@Override
-	public void render () {
-		ScreenUtils.clear(1, 0, 0, 1);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
-	}
-	
-	@Override
-	public void dispose () {
-		batch.dispose();
-		img.dispose();
-	}
+        ImGui.createContext();
+        ImGui.getIO().addConfigFlags(ImGuiConfigFlags.DockingEnable);
+        imGuiGlfw.init(windowHandle, true);
+        imGuiGl3.init("#version 130");
+        
+        Gdx.graphics.setWindowedMode(1600, 900);
+    }
+
+    @Override
+    public void render() {
+        Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+        imGuiGlfw.newFrame();
+        ImGui.newFrame();
+
+        renderImGui();
+
+        ImGui.render();
+        if (ImGui.getDrawData() != null) {
+            imGuiGl3.renderDrawData(ImGui.getDrawData());
+        }
+    }
+
+    private void renderImGui() {
+        // ImGui.showDemoWindow();
+        SpellModelWindow.renderSpells();
+        ActionWindow.renderActions();
+        CreatureWindow.renderCreatures();
+        table.render();
+
+        for(int i = 0; i < Pachinko.windows.size(); i++)
+            Pachinko.windows.get(i).render();
+    }
+
+    @Override
+    public void dispose() {
+        // imGuiGlfw.shutdown();
+        // ctx.shutdown();
+    }
 
 }

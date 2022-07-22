@@ -67,7 +67,6 @@ public class Pachinko extends Application {
     protected void preRun() {
         super.preRun();
         ImGui.getIO().addConfigFlags(ImGuiConfigFlags.DockingEnable);
-        // ImGui.getIO().addConfigFlags(ImGuiConfigFlags.ViewportsEnable);
         
         try {
             final ImageParser resource_01 = ImageParser.load_image(iconPath);
@@ -90,17 +89,10 @@ public class Pachinko extends Application {
 
     @Override
     public void process() {
-        // ImGui.begin("Pachinko", new ImBoolean(false)); // , ImGuiWindowFlags.MenuBar);
-        // if(ImGui.button("new aoe")) {
-        // windows.add(new AoeWindow(aoe));
-        // }
-
         SpellModelWindow.renderSpells();
         ActionWindow.renderActions();
         CreatureWindow.renderCreatures();
         table.render();
-
-        // ImGui.end();
 
         for(int i = 0; i < windows.size(); i++)
             windows.get(i).render();
