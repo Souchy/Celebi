@@ -8,7 +8,6 @@ import java.util.function.Function;
 import espeon.game.controllers.actionpipeline.NewPipeline;
 import espeon.game.controllers.actionpipeline.Node.NodeEffect;
 import espeon.game.jade.EffectModel;
-import espeon.game.jade.Mod;
 import espeon.game.jade.effects.AddStatusEffect;
 import espeon.game.jade.effects.DamageEffect;
 import espeon.game.jade.effects.moves.MoveBy;
@@ -25,6 +24,7 @@ import espeon.game.red.Entity.EntityType;
 import espeon.game.red.compiledeffects.CompiledDamage;
 import espeon.game.red.compiledeffects.CompiledEffect;
 import espeon.game.red.compiledeffects.CompiledMove;
+import espeon.game.types.Mod;
 
 public class Effects {
 
@@ -131,7 +131,7 @@ public class Effects {
         // Board board = fight.board;
         Cell cell = (Cell) entity; // Cell cell = board.get(action.effect.entityid); // action.cellid);
 
-        var aoe = e.aoe;
+        // var aoe = e.aoe;
         if(cell.creatures.size() > 0) {
             if(e.cellByCell) {
                 
@@ -151,7 +151,7 @@ public class Effects {
         Board board = fight.board;
         // Cell cell = board.get(action.effect.entityid);
 
-        var from = e.aoe;
+        // var from = e.aoe;
         return null;
     }
     public static CompiledEffect compileTeleportTo(NodeEffect action, MoveTo e) {
@@ -170,8 +170,8 @@ public class Effects {
         Fight fight = Diamonds.getFight(entity.fightid);
         Board board = fight.board;
         // Cell cell = board.get(action.effect.entityid);
-        var aoe = e.aoe;
-        var center = e.aoe.origin;
+        // var aoe = e.aoe;
+        // var center = e.aoe.origin;
         return null;
     }
     public static CompiledEffect compileTeleportToPrevious(NodeEffect action, MoveToPrevious e) {
@@ -180,7 +180,7 @@ public class Effects {
         // Board board = fight.board;
         // Cell cell = board.get(action.effect.entityid);
         Diamonds.getCreatureInstance(action.getFightId(), action.targetEntityId);
-        var aoe = e.aoe;
+        // var aoe = e.aoe;
         return null;
     }
 

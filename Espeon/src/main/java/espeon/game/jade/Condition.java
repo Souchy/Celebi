@@ -2,6 +2,8 @@ package espeon.game.jade;
 
 import java.util.List;
 
+import espeon.game.types.Mod;
+
 public abstract class Condition {
 
     public Actor actor;

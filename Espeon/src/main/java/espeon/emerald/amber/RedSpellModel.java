@@ -3,7 +3,7 @@ package espeon.emerald.amber;
 import java.util.Map;
 
 import espeon.emerald.Red;
-import espeon.game.jade.Mod;
+import espeon.game.types.Mod;
 import espeon.util.Util;
 
 public final class RedSpellModel extends RedSpace {

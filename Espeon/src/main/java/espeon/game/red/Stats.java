@@ -2,7 +2,8 @@ package espeon.game.red;
 
 import java.util.HashMap;
 import java.util.Map;
-import espeon.game.jade.Mod;
+
+import espeon.game.types.Mod;
 
 public class Stats {
     

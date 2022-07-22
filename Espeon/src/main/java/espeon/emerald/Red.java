@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import espeon.game.jade.Mod;
 import espeon.game.red.Stats;
 import espeon.game.red.Entity.EntityType;
+import espeon.game.types.Mod;
 import redis.clients.jedis.JedisPooled;
 
 /**

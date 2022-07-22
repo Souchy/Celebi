@@ -1,5 +1,7 @@
 package espeon.game.jade;
 
+import espeon.game.red.Position;
+
 public class Target {
     
     Position pos;

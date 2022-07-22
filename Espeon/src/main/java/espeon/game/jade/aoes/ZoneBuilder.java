@@ -1,7 +1,7 @@
 package espeon.game.jade.aoes;
 
-import espeon.game.jade.Position;
 import espeon.game.red.Aoe;
+import espeon.game.red.Position;
 
 public class ZoneBuilder {
     

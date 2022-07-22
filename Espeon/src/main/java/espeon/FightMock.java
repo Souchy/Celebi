@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import espeon.game.controllers.Diamonds;
 import espeon.game.controllers.Fight;
-import espeon.game.jade.Mod;
 import espeon.game.jade.SpellModel;
 import espeon.game.jade.Condition.Actor;
 import espeon.game.jade.Condition.ComparisonOperator;
@@ -14,6 +13,7 @@ import espeon.game.jade.SpellModel.SpellConditions;
 import espeon.game.jade.Statement.StatementEffect;
 import espeon.game.jade.Statement.StatementGroup;
 import espeon.game.jade.Target.TargetTypeFilter;
+import espeon.game.jade.aoes.ZoneType;
 import espeon.game.jade.effects.DamageEffect;
 import espeon.game.jade.effects.moves.MoveBy;
 import espeon.game.jade.effects.moves.Translate;
@@ -23,6 +23,8 @@ import espeon.game.red.Creature;
 import espeon.game.red.Entity;
 import espeon.game.red.Spell;
 import espeon.game.red.Stats;
+import espeon.game.types.Direction8;
+import espeon.game.types.Mod;
 
 public class FightMock {
     
@@ -145,7 +147,10 @@ public class FightMock {
                 group.children.add(se);
                 {
                     MoveBy em = Translate.by(2);
-                    em.aoe = Aoe.newLinePerpendicular(3, filter);
+                    // em.aoe = Aoe.newLinePerpendicular(3, filter);
+                    em.zone.type = ZoneType.line;
+                    em.zone.rotation = Direction8.right;
+                    em.zone.length = 3;
                     se.effect = em;
                 }
             }
@@ -154,7 +159,10 @@ public class FightMock {
                 group.childrenOtherwise.add(se);
                 {
                     MoveBy em = Translate.by(-2);
-                    em.aoe = Aoe.newLinePerpendicular(3, filter);
+                    // em.aoe = Aoe.newLinePerpendicular(3, filter);
+                    em.zone.type = ZoneType.line;
+                    em.zone.rotation = Direction8.right;
+                    em.zone.length = 3;
                     se.effect = em;
                 }
             }
@@ -166,7 +174,10 @@ public class FightMock {
             {
                 DamageEffect em = new DamageEffect();
                 em.power = 10;
-                em.aoe = Aoe.newLinePerpendicular(3, filter);
+                // em.aoe = Aoe.newLinePerpendicular(3, filter);
+                em.zone.type = ZoneType.line;
+                em.zone.rotation = Direction8.right;
+                em.zone.length = 3;
                 se.effect = em;
             }
         }

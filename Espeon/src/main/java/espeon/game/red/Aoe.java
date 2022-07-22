@@ -2,7 +2,6 @@ package espeon.game.red;
 
 import java.util.function.Consumer;
 
-import espeon.game.jade.Position;
 import espeon.game.jade.Condition.Actor;
 import espeon.game.jade.Target.TargetType;
 import espeon.game.jade.Target.TargetTypeFilter;

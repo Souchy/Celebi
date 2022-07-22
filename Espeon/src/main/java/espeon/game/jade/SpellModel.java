@@ -3,6 +3,7 @@ package espeon.game.jade;
 import java.util.List;
 
 import espeon.game.red.Aoe;
+import espeon.game.types.Mod;
 
 public class SpellModel {
     

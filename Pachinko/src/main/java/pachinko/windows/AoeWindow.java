@@ -4,10 +4,10 @@ import imgui.ImGui;
 import imgui.flag.ImGuiCol;
 import imgui.flag.ImGuiTableFlags;
 import pachinko.Window;
-import espeon.game.jade.Position;
 import espeon.game.jade.Target.TargetType;
 import espeon.game.jade.Target.TargetTypeFilter;
 import espeon.game.red.Aoe;
+import espeon.game.red.Position;
 
 public class AoeWindow implements Window {
     
