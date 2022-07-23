@@ -35,6 +35,7 @@ import com.souchy.randd.commons.tealwaters.logging.Logging;
 // import com.souchy.randd.jade.meta.User;
 
 import espeon.auth.jade.User;
+import espeon.game.jade.CreatureModel;
 import espeon.game.jade.SpellModel;
 import espeon.game.red.Action;
 
@@ -126,6 +127,9 @@ public final class Emerald {
 		return collection(User.class); // get(users, User.class);
 	}
 
+	public static MongoCollection<CreatureModel> creatures() {
+		return collection(CreatureModel.class);
+	}
 	public static MongoCollection<SpellModel> spells() {
 		return collection(SpellModel.class);
 	}

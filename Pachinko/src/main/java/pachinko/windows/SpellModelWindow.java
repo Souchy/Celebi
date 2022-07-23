@@ -3,8 +3,12 @@ package pachinko.windows;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.bson.conversions.Bson;
 import org.checkerframework.checker.units.qual.s;
 
+import com.mongodb.client.model.Filters;
+
+import espeon.emerald.Emerald;
 import espeon.emerald.amber.Amber;
 import espeon.game.types.Mod;
 import espeon.util.Util;
@@ -30,12 +34,12 @@ public class SpellModelWindow implements Window {
     public static void renderSpells() {
         ImGui.begin("Spell Models");
         
-        ImGui.inputText("New spell name##createSpell", newSpellNameBean);
-        ImGui.sameLine();
-        if(ImGui.button("Create new")) {
+        if(ImGui.button("Create new##createspellbtn")) {
             Amber.spells.create(newSpellNameBean.get());
             open(newSpellNameBean.get());
         }
+        ImGui.sameLine();
+        ImGui.inputText("New spell name##createSpell", newSpellNameBean);
         
         ImGui.newLine();
         var ids = Amber.spells.keys();
@@ -79,7 +83,7 @@ public class SpellModelWindow implements Window {
 
     @Override
     public void render() {
-        ImGui.begin("Spell Model "+id+" ##"+id);
+        ImGui.begin("Spell "+id+" ##"+id);
         
         ImGui.text("Action");
         ImGui.sameLine();
@@ -88,8 +92,7 @@ public class SpellModelWindow implements Window {
         }
         ImGui.sameLine();
         if(ImGui.button("Open")) {
-            ActionWindow.open(actionBean);
-            // Actions.windows.add(new ActionWindow(actionBean));
+            ActionWindow.open(actionBean.get());
         }
 
         ImGui.text("Range");

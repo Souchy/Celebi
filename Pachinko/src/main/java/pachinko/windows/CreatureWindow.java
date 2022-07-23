@@ -22,11 +22,11 @@ public class CreatureWindow implements Window {
     public static void renderCreatures() {
         ImGui.begin("Creature Models");
         
-        ImGui.inputText("New creature nam##createCreature", newCreatureNameBean);
-        ImGui.sameLine();
-        if(ImGui.button("Create new")) {
+        if(ImGui.button("Create new##createcreabtn")) {
             // ...
         }
+        ImGui.sameLine();
+        ImGui.inputText("New creature nam##createCreature", newCreatureNameBean);
 
         var ids = Amber.creatures.keys();
         if(ImGui.beginListBox("##creatures")) {
@@ -37,6 +37,9 @@ public class CreatureWindow implements Window {
         }
 
         ImGui.end();
+        
+        for(var w : windows.values())
+            w.render();
     }
 
     private ImString id;

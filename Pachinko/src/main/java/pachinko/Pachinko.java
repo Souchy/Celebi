@@ -16,6 +16,7 @@ import javax.imageio.ImageIO;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWImage;
 
+import espeon.emerald.Emerald;
 import espeon.emerald.amber.Amber;
 import espeon.game.jade.Target;
 import espeon.game.jade.Target.TargetType;
@@ -49,46 +50,23 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Pachinko extends Application {
+public class Pachinko extends PachinGDX {
 
     public static void main(String[] args) {
+        Emerald.init();
         launch(new Pachinko());
     }
 
-    private static final String iconPath = "C:\\Users\\robyn\\Images\\icon16.png";
-    // private Aoe aoe = new Aoe(5, 5, 0);
     public static final List<Window> windows = new ArrayList<>();
 
     private Pachinko() {
         // FXMLController adsf;
     }
 
-    @Override
-    protected void preRun() {
-        super.preRun();
-        ImGui.getIO().addConfigFlags(ImGuiConfigFlags.DockingEnable);
-        
-        try {
-            final ImageParser resource_01 = ImageParser.load_image(iconPath);
-            GLFWImage image = GLFWImage.malloc(); 
-            GLFWImage.Buffer imagebf = GLFWImage.malloc(1);
-            image.set(resource_01.get_width(), resource_01.get_heigh(), resource_01.get_image());
-            imagebf.put(0, image);
-            GLFW.glfwSetWindowIcon(handle, imagebf);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     private SpellModelTable table = new SpellModelTable();
 
     @Override
-    protected void configure(Configuration config) {
-        config.setTitle("Pachinko");
-    }
-
-    @Override
-    public void process() {
+    public void renderPachinko() {
         SpellModelWindow.renderSpells();
         ActionWindow.renderActions();
         CreatureWindow.renderCreatures();

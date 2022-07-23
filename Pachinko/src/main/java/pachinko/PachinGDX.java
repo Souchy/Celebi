@@ -35,13 +35,16 @@ import pachinko.windows.SpellModelWindow;
 public class PachinGDX extends ApplicationAdapter {
     
 	public static void main (String[] arg) {
-		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-		config.setForegroundFPS(60);
-		config.setTitle("My GDX Game");
-        config.setWindowIcon("Pachinko/91757405.jpg");
-		new Lwjgl3Application(new PachinGDX(), config);
+		launch(new PachinGDX());
 	}
 
+    public static void launch(ApplicationAdapter app) {
+		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
+		config.setForegroundFPS(60);
+		config.setTitle("Pachinko");
+        config.setWindowIcon("Pachinko/91757405.jpg");
+		new Lwjgl3Application(app, config);
+    }
     
     private final ImGuiImplGlfw imGuiGlfw = new ImGuiImplGlfw();
     private final ImGuiImplGl3 imGuiGl3 = new ImGuiImplGl3();
@@ -68,7 +71,7 @@ public class PachinGDX extends ApplicationAdapter {
         imGuiGlfw.newFrame();
         ImGui.newFrame();
 
-        renderImGui();
+        renderPachinko();
 
         ImGui.render();
         if (ImGui.getDrawData() != null) {
@@ -76,7 +79,7 @@ public class PachinGDX extends ApplicationAdapter {
         }
     }
 
-    private void renderImGui() {
+    public void renderPachinko() {
         // ImGui.showDemoWindow();
         SpellModelWindow.renderSpells();
         ActionWindow.renderActions();
