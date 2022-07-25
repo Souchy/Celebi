@@ -1,7 +1,0 @@
-[gd_scene format=3 uid="uid://b3mdw7tjy6kcu"]
-
-[node name="SpellBar" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -766.0
-offset_bottom = -436.0

@@ -137,33 +137,6 @@ public final class Emerald {
 		return collection(Action.class);
 	}
 
-	/*
-	public static MongoCollection<Deck> decks() {
-		return collection(Deck.class); // get(decks, Deck.class);
-	}
-
-	public static MongoCollection<Match> matchs() {
-		return collection(Match.class); // get(matches, Match.class);
-	}
-	public static MongoCollection<New> news() {
-		return collection(New.class); // get(news, New.class);
-	}
-//	public static MongoCollection<QueuedUser> queue_simple_unranked() {
-//		return get(queue_simple_unranked, QueuedUser.class);
-//	}
-//	public static MongoCollection<QueuedUser> queue_simple_ranked() {
-//		return get(queue_simple_ranked, QueuedUser.class);
-//	}
-	public static MongoCollection<QueueeBlind> queue_simple_blind() {
-		return collection(QueueeBlind.class); // get(queue_simple_blind, QueueeBlind.class);
-	}
-	public static MongoCollection<QueueeDraft> queue_simple_draft() {
-		return collection(QueueeDraft.class); // get(queue_simple_draft, QueueeDraft.class);
-	}
-	public static MongoCollection<Lobby> lobbies(){
-		return collection(Lobby.class); // get(lobbies, Lobby.class);
-	}
-*/
 
 	public static <T> MongoCollection<T> collection(Class<T> clazz) {
 		var fullpackag = clazz.getPackageName();
