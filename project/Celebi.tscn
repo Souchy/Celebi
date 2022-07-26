@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bc4eboq674vxi"]
+[gd_scene load_steps=6 format=3 uid="uid://bc4eboq674vxi"]
 
 [ext_resource type="PackedScene" uid="uid://cp7dt56wp7mhf" path="res://maps/map1.tscn" id="2_5tuph"]
-[ext_resource type="PackedScene" path="res://cursor.tscn" id="3_r8b5q"]
+[ext_resource type="PackedScene" uid="uid://cc7wepgw36xtp" path="res://cursor.tscn" id="3_r8b5q"]
 [ext_resource type="Script" path="res://script/cursor.gd" id="4_dadrd"]
 [ext_resource type="Script" path="res://script/CameraController.gd" id="5_f3p4t"]
+[ext_resource type="PackedScene" uid="uid://dwcwlt8c0qi6m" path="res://scenes/camera_control.tscn" id="5_u71hg"]
 
 [node name="Celebi" type="Node3D"]
 
@@ -19,3 +20,5 @@ script = ExtResource("5_f3p4t")
 [node name="Elevation" type="Node3D" parent="CameraController"]
 
 [node name="Camera3D" type="Camera3D" parent="CameraController/Elevation"]
+
+[node name="CameraControl" parent="." instance=ExtResource("5_u71hg")]
