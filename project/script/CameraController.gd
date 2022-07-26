@@ -39,10 +39,10 @@ signal camera_moved(new_location)
 #onready var tween = $Tween
 var _lock_movement: bool = false
 # zoom
-@onready var camera = $Elevation/Camera3D
+@onready var camera: Camera3D = $Elevation/Camera3D
 var zoom_direction = 0
 # rotation
-@onready var elevation = $Elevation
+@onready var elevation: Node3D = $Elevation
 var is_rotating = false
 # pan
 var is_panning = false
@@ -51,13 +51,24 @@ const RAY_LENGTH = 1000
 const GROUND_PLANE = Plane(Vector3.UP, 0)
 var _last_mouse_position = Vector2()
 
+var tween: Tween;
 
 ########################
 # OVERRIDE FUNCTIONS
 ########################
 func _ready() -> void:
-	self.connect("freeze_requested", self, "_freeze_camera")
-	self.connect("jump_requested", self, "_jump_to_position")
+	#self.connect("freeze_requested", self, "_freeze_camera")
+	#self.connect("jump_requested", self, "_jump_to_position")
+	#self.connect("", self.jump_requested, "_jump_to_position")
+	#self.jump_requested.connect()
+	#self.connect("jump_requested", self.jump_requested)
+	#self.connect("jump_requested", self._jump_to_position, [])
+	self.freeze_requested.connect(self._freeze_camera)
+	self.jump_requested.connect(self._jump_to_position)
+	tween = get_tree().create_tween();
+	#tween.tween_property(self, "rotation", Vector3(0, 2* PI, 0), 3.0)
+	tween.bind_node(self)
+
 
 
 func _process(delta: float) -> void:
@@ -108,16 +119,16 @@ func _rotate_and_elevate(delta: float) -> void:
 
 
 func _rotate(amount: float, delta: float) -> void:
-	rotation_degrees.y += rotation_speed * amount * delta
+	self.rotation.y += rotation_speed * amount * delta
 
 
 func _elevate(amount: float, delta: float) -> void:
-	var new_elevation = elevation.rotation_degrees.x
+	var new_elevation = elevation.rotation.x
 	if inverted_y:
 		new_elevation += rotation_speed * amount * delta
 	else:
 		new_elevation -= rotation_speed * amount * delta
-	elevation.rotation_degrees.x = clamp(
+	elevation.rotation.x = clamp(
 		new_elevation, -max_elevation_angle, -min_elevation_angle
 		)
 
@@ -126,12 +137,12 @@ func _zoom(delta: float) -> void:
 	if not allow_zoom or not zoom_direction:
 		return
 	var new_zoom = clamp(
-		camera.translation.z + zoom_direction * zoom_speed * delta,
+		camera.position.z + zoom_direction * zoom_speed * delta,
 		min_zoom,
 		max_zoom
 	)
 	var pointing_at = _get_ground_position()
-	camera.translation.z = new_zoom
+	camera.position.z = new_zoom
 	# pan if need to zoom to curser
 	if zoom_to_curser and pointing_at != null:
 		_realign_camera(pointing_at)
@@ -152,11 +163,11 @@ func _pan(delta: float) -> void:
 	_translate_position(-velocity)
 
 
-func _jump_to_position(locaiton: Vector3, duration: float) -> void:
+func _jump_to_position(location: Vector3, duration: float) -> void:
 	_lock_movement = true
-	locaiton.y = 0
+	location.y = 0
 	tween.interpolate_property(
-		self, "translation", translation, locaiton,
+		self, "position", position, location, # translation
 		duration, Tween.TRANS_SINE, Tween.EASE_OUT
 	)
 	tween.start()
@@ -187,8 +198,8 @@ func _realign_camera(point: Vector3) -> void:
 
 
 func _translate_position(v: Vector3) -> void:
-	translation += v
-	emit_signal("camera_moved", translation)
+	position += v # translation
+	emit_signal("camera_moved", position) # translation)
 
 
 func _get_ground_position() -> Vector3:
