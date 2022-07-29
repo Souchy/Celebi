@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://cp7dt56wp7mhf"]
+[gd_scene load_steps=12 format=3 uid="uid://cp7dt56wp7mhf"]
 
+[ext_resource type="Script" path="res://maps/map.gd" id="1_0ai0q"]
 [ext_resource type="Shader" path="res://maps/map1.gdshader" id="1_ywai2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4gnsv"]
@@ -65,7 +66,8 @@ item/2/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/2/shapes = []
 item/2/navmesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="Map1" type="Node"]
+[node name="Map1" type="Node3D"]
+script = ExtResource("1_0ai0q")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_no4ru")
