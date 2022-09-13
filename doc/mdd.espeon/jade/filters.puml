@@ -1,5 +1,5 @@
 @startuml filters
-package espeon.game.jade.filters {
+package jade.filters {
 	interface Filter {
 		+bool filter(Entity src, Entity target)
 	}

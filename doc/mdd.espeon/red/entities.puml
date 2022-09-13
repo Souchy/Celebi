@@ -6,105 +6,121 @@ skinparam groupInheritance 3
 ' skinparam pageExternalColor gray
 ' skinparam pageBorderColor black
 
-package espeon.game.jade {
-	class EffectModel {}
-	class CreatureModel {}
-	class SpellModel {}
-	class Trigger {}
+' package jade {
+' 	class EffectModel {}
+' 	class CreatureModel {}
+' 	class SpellModel {}
+' 	class Trigger {}
 
-	package filters {
-		class Filter {}
+' 	package filters {
+' 		interface Filter {}
+' 	}
+' }
+
+' Status --> Trigger
+' Creature --> CreatureModel
+' Spell::modelId --> SpellModel::id
+' CompiledEffect::sourceid --> EffectModel::id
+' Aoe --> Filter
+
+package red {
+		
+	package entities {
+		entity Entity {
+			+int fightid
+			+int id
+			+List<Status> status
+			+{abstract} EntityType type()
+		}
+		entity Creature {
+			+String ownerid
+			+int modelid
+			+Stats stats
+			+List<Integer> spells
+			+copy(int newId): Creature
+		}
+		entity Cell {
+			Map<Integer, Integer> creatures
+		}
+		Entity <|-- Creature
+		Entity <|-- Cell
 	}
-}
 
-package entities {
-	entity Entity {
-		+int fightid
+	class Stats {
+		-Map<Mod, Integer> map
+	}
+	Creature --> Stats
+
+
+	package status {
+		class Status {
+			+int id
+			+int source
+			+int spellModelSource
+
+			+MergeStrategy mergeStrategy
+			+StatusStack[] stacks
+			+int maxStacks = 0
+
+			+stacks(): int
+		}
+
+		class StatusStack {
+			+Stats stats
+			+int duration
+			+int maxDuration
+			+Trigger[] triggers
+		}
+		Status *-- StatusStack
+	}
+	Status --> Stats
+
+
+	' package effects {
+	' 	abstract CompiledEffect {
+	' 		+int sourceid
+	' 	}
+	' 	struct CompiledDamage {
+	' 		+int creatureid
+	' 		+int damage
+	' 	}
+	' 	struct CompiledMove {
+	' 		+int creatureid
+	' 		+int cellid
+	' 	}
+	' 	struct CompiledStatusEffect {
+	' 		+int entityid
+	' 		+int statusid
+	' 	}
+	' 	struct CompiledSummon {
+	' 		+int creatureid
+	' 		+int cellid
+	' 	}
+	' 	struct CompiledRebase {
+	' 	}
+	' 	' CompiledEffect <|-- CompiledDamage
+	' 	' CompiledEffect <|-- CompiledMove
+	' 	' CompiledEffect <|-- CompiledStatusEffect
+	' 	' CompiledEffect <|-- CompiledSummon
+	' 	' CompiledEffect <|-- CompiledRebase
+	' }
+
+	class Spell {
 		+int id
-		+List<Status> status
-		+{abstract} EntityType type()
+		+String modelId
+		+int turnLastCast = 0
+		+int castsThisTurn = 0
+		+Map<Integer, Integer> castsPerTargetThisTurn
 	}
-	entity Creature {
-		+String ownerid
-		+int modelid
-		+Stats stats
-		+List<Integer> spells
-		+copy(int newId): Creature
+
+	class Position {
+
 	}
-	entity Cell {
+	class Aoe {
+		-Position origin
+		-Table<Integer, Integer, Filter> table
 	}
-	Entity <|-- Creature
-	Entity <|-- Cell
+	Aoe --> Position
 }
-
-
-
-
-package status {
-	class Status {
-		+int id
-		+int source
-		+int spellModelSource
-
-		+MergeStrategy mergeStrategy
-		+StatusStack[] stacks
-		+int maxStacks = 0
-
-		+stacks(): int
-	}
-
-	class StatusStack {
-		+Stats stats
-		+int duration
-		+int maxDuration
-		+Trigger[] triggers
-	}
-	Status o-- StatusStack
-}
-
-
-package effects {
-	abstract CompiledEffect {
-		+int sourceid
-	}
-	' struct CompiledDamage {
-	' 	+int creatureid
-	' 	+int damage
-	' }
-	' struct CompiledMove {
-	' 	+int creatureid
-	' 	+int cellid
-	' }
-	' struct CompiledStatusEffect {
-	' 	+int entityid
-	' 	+int statusid
-	' }
-	' struct CompiledSummon {
-	' 	+int creatureid
-	' 	+int cellid
-	' }
-	' struct CompiledRebase {
-	' }
-	' CompiledEffect <|-- CompiledDamage
-	' CompiledEffect <|-- CompiledMove
-	' CompiledEffect <|-- CompiledStatusEffect
-	' CompiledEffect <|-- CompiledSummon
-	' CompiledEffect <|-- CompiledRebase
-}
-
-class Spell {
-	+int id
-	+String modelId
-	+int turnLastCast = 0
-	+int castsThisTurn = 0
-	+Map<Integer, Integer> castsPerTargetThisTurn
-}
-
-
-Status --> Trigger
-Creature --> CreatureModel
-Spell::modelId --> SpellModel::id
-CompiledEffect::sourceid --> EffectModel::id
-
 
 @enduml

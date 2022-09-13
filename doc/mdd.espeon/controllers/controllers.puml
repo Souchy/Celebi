@@ -1,6 +1,6 @@
 @startuml controllers
 
-package espeon.game.controllers {
+package controllers {
 	class Diamonds {}
 
 	class Fight {}

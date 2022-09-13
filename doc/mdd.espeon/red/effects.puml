@@ -26,14 +26,16 @@ package controllers {
 }
 
 package jade {
-	class Action {
+	package jade.story {
+		class Book {
 
-	}
-	Action *-- StatementEffect
-	class StatementEffect {
+		}
+		Book *-- StatementEffect
+		class StatementEffect {
 
+		}
+		Pipeline --> StatementEffect
 	}
-	Pipeline --> StatementEffect
 
 	enum EffectType {
 		move
@@ -71,73 +73,74 @@ package jade {
 	EffectModel <|-- jade.effects
 	' EffectModel --> EffectType
 	EffectType <-- EffectModel
+
+	package jade.effects {
+		struct AddStatusEffect {
+
+		}
+		struct DamageEffect {
+			+int power
+		}
+
+		struct SummonEffect {
+			+int creatureModelId
+		}
+		struct RebaseEffect {
+
+		}
+		struct MoveEffect {
+			+MoveType moveType
+		}
+	}
+
+	package jade.effects.moves {
+		class Teleport {
+			{static} +to()
+			{static} +by()
+			{static} +toPrevious()
+			{static} +symmetrically()
+			{static} +zoneTo()
+		}
+		class Translate {
+			{static} +by()
+			{static} +to()
+		}
+		struct MoveBy {}
+		struct MoveTo {}
+		struct MoveToPrevious {}
+		struct MoveSymmetrically {}
+	}
+	MoveEffect <|-- jade.effects.moves
 }
 
-package jade.effects {
-	struct AddStatusEffect {
 
-	}
-	struct DamageEffect {
-		+int power
-	}
-
-	struct SummonEffect {
-		+int creatureModelId
-	}
-	struct RebaseEffect {
-
-	}
-	struct MoveEffect {
-		+MoveType moveType
-	}
-}
-
-package jade.effects.moves {
-	class Teleport {
-		{static} +to()
-		{static} +by()
-		{static} +toPrevious()
-		{static} +symmetrically()
-		{static} +zoneTo()
-	}
-	class Translate {
-		{static} +by()
-		{static} +to()
-	}
-	struct MoveBy {}
-	struct MoveTo {}
-	struct MoveToPrevious {}
-	struct MoveSymmetrically {}
-}
-MoveEffect <|-- jade.effects.moves
 
 package red {
 	abstract CompiledEffect {
 		+int sourceid
 	}
 	Effects --> CompiledEffect
-}
-
-package red.effects {
-	struct CompiledDamage {
-		+int creatureid
-		+int damage
-	}
-	struct CompiledMove {
-		+int creatureid
-		+int cellid
-	}
-	struct CompiledStatusEffect {
-		+int entityid
-		+int statusid
-	}
-	struct CompiledSummon {
-		+int creatureid
-		+int cellid
-	}
-	struct CompiledRebase {
-		+int creatureIdSource
-		+int cellid
+	package red.effects {
+		struct CompiledDamage {
+			+int creatureid
+			+int damage
+		}
+		struct CompiledMove {
+			+int creatureid
+			+int cellid
+		}
+		struct CompiledStatusEffect {
+			+int entityid
+			+int statusid
+		}
+		struct CompiledSummon {
+			+int creatureid
+			+int cellid
+		}
+		struct CompiledRebase {
+			+int creatureIdSource
+			+int cellid
+		}
 	}
 }
 CompiledEffect <|-- red.effects

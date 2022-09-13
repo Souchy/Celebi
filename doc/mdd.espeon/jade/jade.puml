@@ -1,14 +1,19 @@
 @startuml mdd
 
-package espeon.game.jade {
+package jade {
 
-	package story {
+
+	package jade.filters {
+		interface Filter {}
+	}
+
+	package jade.story {
 		class Book {
 			+int id
 			+List<Statement> statements
 		}
 		note right: Action
-		Book o-- Statement
+		Book *-- Statement
 		class Statement {
 			+isGroup(): bool
 			+asGroup(): StatementGroup
@@ -35,7 +40,7 @@ package espeon.game.jade {
 	
 	
 
-	package spell {
+	package jade.spell {
 		class SpellModel {
 			+int actionId
 			+String id
@@ -63,7 +68,7 @@ package espeon.game.jade {
 	}
 
 	
-	package effects {
+	package jade.effects {
 		class EffectModel {
 			+Zone zone
 			
@@ -85,18 +90,17 @@ package espeon.game.jade {
 
 			{abstract} +EffectType type()
 		}
-		StatementEffect o-- EffectModel
+		StatementEffect *-- EffectModel
 
-		class AddStatusEffect {
-			good fucking luck
+		struct AddStatusEffect {
 		}
-		class DamageEffect {
+		struct DamageEffect {
 			+int power
 		}
-		class SummonEffect {
+		struct SummonEffect {
 			+int creatureModelId
 		}
-		class RebaseEffect {
+		struct RebaseEffect {
 
 		}
 
@@ -104,14 +108,17 @@ package espeon.game.jade {
 		EffectModel <|-- DamageEffect
 		EffectModel <|-- SummonEffect
 		EffectModel <|-- RebaseEffect
-		package moves {
-			
-		}
 	}
 
-	package aoes {
-		class Aoe {}
+	package jade.effects.moves {
+		
+	}
+
+	package jade.aoes {
+		' class Aoe {}
 		class Zone {}
+		class ZoneType {}
+		class ZoneBuilder {}
 	}
 
 	class Condition {
@@ -123,5 +130,7 @@ package espeon.game.jade {
 	class Trigger {
 		+int actionid
 	}
+	AddStatusEffect --> Trigger
+
 
 }

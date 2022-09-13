@@ -1,0 +1,14 @@
+@startuml mdd_full
+
+
+!include red/entities.puml
+!include controllers/controllers.puml
+!include jade/jade.puml
+!include jade/filters.puml
+
+
+
+!include red/effects.puml
+' !include jade/jade.puml
+
+@enduml
