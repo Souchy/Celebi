@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import espeon.game.controllers.Diamonds;
 import espeon.game.controllers.Fight;
+import espeon.game.jade.Action;
 import espeon.game.jade.SpellModel;
 import espeon.game.jade.Condition.Actor;
 import espeon.game.jade.Condition.ComparisonOperator;
@@ -17,7 +18,6 @@ import espeon.game.jade.aoes.ZoneType;
 import espeon.game.jade.effects.DamageEffect;
 import espeon.game.jade.effects.moves.MoveBy;
 import espeon.game.jade.effects.moves.Translate;
-import espeon.game.red.Action;
 import espeon.game.red.Aoe;
 import espeon.game.red.Creature;
 import espeon.game.red.Entity;

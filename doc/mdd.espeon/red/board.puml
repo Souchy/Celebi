@@ -1,0 +1,55 @@
+@startuml mdd
+
+package espeon.game.board {
+	entity Cell {
+		+Map<Integer, Integer> creatures
+	}
+	class Aoe {
+		+Actor anchor
+		+Position origin
+		+Table<Filter> table
+	}
+	class Position {
+		+int x, y, z
+	}
+	class Zone {
+		+ZoneType type = ZoneType.point;
+		+int targetTypeFilter = TargetType.enemy.value;
+
+		+Actor worldOrigin = Actor.target;
+		+Position worldOffset = new Position();
+		+Anchor localOrigin = Anchor.center;
+
+		+Direction8 rotation = Direction8.top;
+
+		+int length;
+	}
+	class ZoneBuilder {
+		{static} +build(Zone zone): Aoe
+		{static} -setLocalOrigin(Aoe aoe, Zone zone): void
+		' {static} +buildLine(Zone): Aoe
+	}
+	enum ZoneType {
+		point
+		line
+		cross
+		..
+		diagonal
+		xcross
+		..
+		circle
+		square
+		cone
+		star
+		..
+		circleRing
+		squareRing
+		arc
+		..
+		+build(Zone): Aoe
+	}
+}
+
+@enduml
+
+

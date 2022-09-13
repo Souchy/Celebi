@@ -17,13 +17,12 @@ public abstract class Entity {
     
     public final int fightid;
     public final int id; // = counter.get();
-
     public List<Status> status = new ArrayList<>();
-    public abstract EntityType type();
 
     public Entity(int fightid, int id) {
         this.fightid = fightid;
         this.id = id;
     }
 
+    public abstract EntityType type();
 }

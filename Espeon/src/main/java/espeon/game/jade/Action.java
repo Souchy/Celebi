@@ -1,13 +1,13 @@
-package espeon.game.red;
+package espeon.game.jade;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import espeon.game.jade.Statement;
 import espeon.util.IDGenerator;
 
 /**
  * Used in Spells and status Triggers
+ * Previously named "Action" or "Book"
  */
 public class Action {
     

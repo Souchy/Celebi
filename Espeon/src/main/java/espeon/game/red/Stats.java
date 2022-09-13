@@ -7,7 +7,7 @@ import espeon.game.types.Mod;
 
 public class Stats {
     
-    public Map<Mod, Integer> map;
+    private Map<Mod, Integer> map;
     
     public Stats() {
         map = new HashMap<>();

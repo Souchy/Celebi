@@ -1,0 +1,127 @@
+@startuml mdd
+
+package espeon.game.jade {
+
+	package story {
+		class Book {
+			+int id
+			+List<Statement> statements
+		}
+		note right: Action
+		Book o-- Statement
+		class Statement {
+			+isGroup(): bool
+			+asGroup(): StatementGroup
+			+asEffect(): EffectModel
+		}
+		class StatementGroup {
+			+Condition condition
+			+List<Statement> children
+			+List<Statement> childrenOtherwise
+		}
+		class StatementEffect {
+			+EffectModel effect
+		}
+		Statement <|-- StatementEffect
+		Statement <|-- StatementGroup
+	}
+
+	class CreatureModel {
+		+int id
+		+Stats stats
+		+List<SpellModel> spells
+		+List<Status> status
+	}
+	
+	
+
+	package spell {
+		class SpellModel {
+			+int actionId
+			+String id
+			+SpellConditions conditions
+			+List<Cost> costs
+		}
+		CreatureModel o-- SpellModel
+		' SpellModel o-- Book
+		SpellModel --> Book
+
+		struct SpellConditions {
+			+Aoe cellConditions = new Aoe(1,1)
+			+int castPerTarget = 0
+			+int castPerTurn = 0
+			+int cooldown = 0
+			+int range = 1
+		}
+		SpellModel *-- SpellConditions
+		struct Cost {
+			+Mod resource
+			+int amount
+		}
+		SpellModel *-- Cost
+
+	}
+
+	
+	package effects {
+		class EffectModel {
+			+Zone zone
+			
+			+int towerHeightMax = 1
+			+bool towerFromBottom = true
+			+bool appliesCells
+			+bool appliesCreatures
+
+			+int depthMax = 0
+			+bool appliesFlying
+			+bool appliesUnderground
+			+bool appliesWet
+			+bool appliesGrounded
+
+
+			+int height
+			+int directionUpDown
+			+int length
+
+			{abstract} +EffectType type()
+		}
+		StatementEffect o-- EffectModel
+
+		class AddStatusEffect {
+			good fucking luck
+		}
+		class DamageEffect {
+			+int power
+		}
+		class SummonEffect {
+			+int creatureModelId
+		}
+		class RebaseEffect {
+
+		}
+
+		EffectModel <|-- AddStatusEffect
+		EffectModel <|-- DamageEffect
+		EffectModel <|-- SummonEffect
+		EffectModel <|-- RebaseEffect
+		package moves {
+			
+		}
+	}
+
+	package aoes {
+		class Aoe {}
+		class Zone {}
+	}
+
+	class Condition {
+
+	}
+	StatementGroup --> Condition
+
+
+	class Trigger {
+		+int actionid
+	}
+
+}

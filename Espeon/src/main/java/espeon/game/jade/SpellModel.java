@@ -20,11 +20,11 @@ public class SpellModel {
         public int castPerTurn = 0;
         public int cooldown = 0;
         public int range = 1;
-    };
+    }
 
     public class Cost {
         public Mod resource;
         public int amount;
-    };
+    }
 
 }

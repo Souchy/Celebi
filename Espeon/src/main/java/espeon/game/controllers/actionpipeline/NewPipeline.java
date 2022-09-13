@@ -8,11 +8,11 @@ import espeon.game.controllers.Context;
 import espeon.game.controllers.Diamonds;
 import espeon.game.controllers.actionpipeline.Node.NodeEffect;
 import espeon.game.controllers.actionpipeline.Node.NodeGroup;
+import espeon.game.jade.Action;
 import espeon.game.jade.EffectModel;
 import espeon.game.jade.Statement;
 import espeon.game.jade.Statement.StatementGroup;
 import espeon.game.jade.aoes.ZoneBuilder;
-import espeon.game.red.Action;
 import espeon.game.red.Cell;
 
 

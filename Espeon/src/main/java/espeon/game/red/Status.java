@@ -13,19 +13,19 @@ public class Status {
     public MergeStrategy mergeStrategy;
     public List<Status> stacks = new ArrayList<>();
     // public Map<StatusMod, Integer> mods = new HashMap<>();
+	public int maxStacks = 0;
+
     public int stacks() {
         return stacks.size();
     }
-    public int maxStacks = 0;
 
-
-
+	
     public class StatusStack {
-        /**
-         * These apply once per stack. Stats with 10 hp and 5 stacks mean 50 hp
-         */
+		/**
+		 * each stack can have a different value. 
+		 * ex: fourberie donne 80 ou 100 int en normal/crit
+		 */
         public Stats stats; 
-        // public List<Stats> stats; // this is interesting because each stack can have a different value. ex: fourberie donne 80 ou 100 int en normal/crit
         public int duration;
         public int maxDuration;
         // triggers for the list of effects

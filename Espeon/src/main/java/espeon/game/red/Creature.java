@@ -3,6 +3,9 @@ package espeon.game.red;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Dont forget : id, fightid and statuses are in Entity
+ */
 public class Creature extends Entity {
 
     public String ownerid;
@@ -11,7 +14,6 @@ public class Creature extends Entity {
     public Stats stats;
     // public int statsid;
     public List<Integer> spells;
-    // public List<Status> status;
     
     public Creature(int fightid, int id) {
         super(fightid, id);

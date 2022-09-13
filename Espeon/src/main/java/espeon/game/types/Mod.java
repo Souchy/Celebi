@@ -2,7 +2,7 @@ package espeon.game.types;
 
 public enum Mod {
     
-    BOUND_START,
+    // BOUND_START,
     ap,
     ap_max,
     mp,
@@ -16,7 +16,8 @@ public enum Mod {
     sp_defense,
     speed,
 
-    BOUND_END;
+    // BOUND_END
+	;
 
 
     public static final String[] names;

@@ -1,0 +1,40 @@
+@startuml filters
+package espeon.game.jade.filters {
+	interface Filter {
+		+bool filter(Entity src, Entity target)
+	}
+	struct TargetFilter {
+		+bool allowAll
+		+bool allowNone
+		+TeamFilter team
+		+CreatureFilter creature
+		+CellFilter cell
+		+bool filter(Entity src, Entity target)
+	}
+
+	struct TeamFilter {
+		+bool allowAlly
+		+bool allowEnemy
+		+bool filter(Entity src, Entity target)
+	}
+
+	struct CreatureFilter {
+		+int[] creatureModelIDs
+		+int[] summonerCreatureModelIDs
+		+bool allowCorpse
+		+bool allowSummon
+		+bool allowSummonStatic
+		+bool allowPrimary
+		+bool filter(Entity src, Entity target)
+	}
+
+	struct CellFilter {
+		+bool allowEmpty
+		+bool allowOccupied
+		+bool filter(Entity src, Entity target)
+	}
+	TargetFilter *-- TeamFilter
+	TargetFilter *-- CreatureFilter
+	TargetFilter *-- CellFilter
+}
+@enduml

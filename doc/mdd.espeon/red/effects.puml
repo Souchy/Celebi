@@ -1,0 +1,145 @@
+@startuml red
+
+skinparam groupInheritance 3
+
+package controllers {
+	class Pipeline {
+
+	}
+	Pipeline --> NodeEffect
+	class NodeEffect {
+		+EffectModel effectModel
+		+int targetEntityId
+	}
+
+	class Effects {
+		{static} +compile(NewPipeline p, NodeEffect action): CompiledEffect
+		{static} +addStatus(NodeEffect action, AddStatusEffect ef): void
+		{static} +triggerStatus(Creature c): void
+		{static} +compileDamage(NodeEffect action, DamageEffect e): CompiledEffect
+		{static} +compileMove(NodeEffect action, MoveEffect e): CompiledEffect
+
+	}
+	Effects --> NodeEffect
+	' NodeEffect <-- Effects
+	Pipeline --> Effects
+}
+
+package jade {
+	class Action {
+
+	}
+	Action *-- StatementEffect
+	class StatementEffect {
+
+	}
+	Pipeline --> StatementEffect
+
+	enum EffectType {
+		move
+		damage
+		heal
+		summon
+		status
+		flee
+	}
+
+	class EffectModel {
+		+Zone zone
+
+		+int towerHeightMax = 1
+		+bool towerFromBottom = true
+		+bool appliesCells
+		+bool appliesCreatures
+
+		+int depthMax = 0
+		+bool appliesFlying
+		+bool appliesUnderground
+		+bool appliesWet
+		+bool appliesGrounded
+
+
+		+int height
+		+int directionUpDown
+		+int length
+
+		{abstract} +EffectType type()
+	}
+	NodeEffect *-- EffectModel
+
+	StatementEffect *-- EffectModel
+	EffectModel <|-- jade.effects
+	' EffectModel --> EffectType
+	EffectType <-- EffectModel
+}
+
+package jade.effects {
+	struct AddStatusEffect {
+
+	}
+	struct DamageEffect {
+		+int power
+	}
+
+	struct SummonEffect {
+		+int creatureModelId
+	}
+	struct RebaseEffect {
+
+	}
+	struct MoveEffect {
+		+MoveType moveType
+	}
+}
+
+package jade.effects.moves {
+	class Teleport {
+		{static} +to()
+		{static} +by()
+		{static} +toPrevious()
+		{static} +symmetrically()
+		{static} +zoneTo()
+	}
+	class Translate {
+		{static} +by()
+		{static} +to()
+	}
+	struct MoveBy {}
+	struct MoveTo {}
+	struct MoveToPrevious {}
+	struct MoveSymmetrically {}
+}
+MoveEffect <|-- jade.effects.moves
+
+package red {
+	abstract CompiledEffect {
+		+int sourceid
+	}
+	Effects --> CompiledEffect
+}
+
+package red.effects {
+	struct CompiledDamage {
+		+int creatureid
+		+int damage
+	}
+	struct CompiledMove {
+		+int creatureid
+		+int cellid
+	}
+	struct CompiledStatusEffect {
+		+int entityid
+		+int statusid
+	}
+	struct CompiledSummon {
+		+int creatureid
+		+int cellid
+	}
+	struct CompiledRebase {
+		+int creatureIdSource
+		+int cellid
+	}
+}
+CompiledEffect <|-- red.effects
+
+@enduml

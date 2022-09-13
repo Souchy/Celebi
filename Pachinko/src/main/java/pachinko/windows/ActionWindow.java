@@ -7,6 +7,7 @@ import com.mongodb.client.model.Filters;
 
 import espeon.emerald.Emerald;
 import espeon.emerald.amber.Amber;
+import espeon.game.jade.Action;
 import espeon.game.jade.EffectModel;
 import espeon.game.jade.Statement;
 import espeon.game.jade.Statement.StatementEffect;
@@ -19,7 +20,6 @@ import espeon.game.jade.effects.moves.MoveSymmetrically;
 import espeon.game.jade.effects.moves.MoveTo;
 import espeon.game.jade.effects.moves.MoveToPrevious;
 import espeon.game.jade.effects.moves.MoveEffect.MoveType;
-import espeon.game.red.Action;
 import imgui.ImGui;
 import imgui.type.ImString;
 import pachinko.Pachinko;

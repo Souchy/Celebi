@@ -3,8 +3,8 @@ package espeon.game.controllers;
 import java.util.HashMap;
 import java.util.Map;
 
+import espeon.game.jade.Action;
 import espeon.game.jade.SpellModel;
-import espeon.game.red.Action;
 import espeon.game.red.Creature;
 import espeon.game.red.Entity;
 import espeon.game.red.Spell;

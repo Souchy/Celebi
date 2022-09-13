@@ -1,0 +1,89 @@
+@startuml mdd
+
+package espeon.game {
+	package espeon.game.jade {
+		class SpellModel {
+			+int actionId
+			+String id
+			+SpellConditions conditions
+			+List<Cost> costs
+		}
+		class Statement {
+			
+		}
+
+		class SpellModel {
+			
+		}
+		
+		package espeon.game.jade.filters {
+			struct TargetFilter {
+				+TeamFilter team
+				+CreatureFilter creature
+				+CellFilter cell
+				+public bool check(Entity e)
+			}
+
+			struct TeamFilter {
+				+bool active
+				+bool ally
+				+bool enemy
+				+bool check(Entity e)
+			}
+
+			struct CreatureFilter {
+				+bool active
+				+int[] creatureModelIDs
+				+int[] summonerCreatureModelIDs
+				+bool corpse
+				+bool summon
+				+bool summon_static
+				+bool check(Entity e)
+			}
+
+			struct CellFilter {
+				+bool active
+				+bool empty
+				+bool check(Entity e)
+			}
+			TargetFilter *-- TeamFilter
+			TargetFilter *-- CreatureFilter
+			TargetFilter *-- CellFilter
+		}
+	}
+	
+	package espeon.game.red {
+		package espeon.game.red.entities {
+			entity Entity {
+				+int fightid
+				+int id
+				+List<Status> status
+				+{abstract} EntityType type()
+			}
+			entity Creature {
+				+Stats stats
+			}
+			entity Cell {
+			}
+			Entity <|-- Creature
+			Entity <|-- Cell
+
+
+			class Action {
+				+int id
+				+List<Statement> statements
+			}
+			class Spell {
+				+int id
+				+string modelId
+			}
+
+			package espeon.game.red.filters {
+			}
+		}
+	}
+	
+}
+
+
+

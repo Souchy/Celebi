@@ -8,8 +8,9 @@ import espeon.game.red.Status;
 public class CreatureModel {
  
     public int id;
-    public Stats stats;
-    public List<SpellModel> spells;
-    public List<Status> status;
+    // public Stats stats;
+    // public List<SpellModel> spells;
+	public List<String> spells;
+    // public List<Status> status;
 
 }

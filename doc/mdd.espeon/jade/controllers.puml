@@ -1,0 +1,34 @@
+@startuml controllers
+
+package espeon.game.controllers {
+	class Diamonds {}
+
+	class Fight {}
+	class Board {}
+	class Context {}
+
+	class Effects {}
+	class Conditions {}
+
+	package actionPipeline {
+		class NewPipeline {
+			
+		}
+		class Node {
+			+Context context
+			+int sourceid
+			+NodeGroup parent = null
+		}
+		class NodeGroup {
+			+List<Node> children
+		}
+		class NodeEffect {
+			+EffectModel effectModel
+			+int targetEntityId
+		}
+		Node <|-- NodeEffect
+		Node <|-- NodeGroup
+	}
+}
+
+@enduml
