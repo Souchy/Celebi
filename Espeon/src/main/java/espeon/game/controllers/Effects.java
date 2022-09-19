@@ -31,12 +31,13 @@ public class Effects {
 
     public static CompiledEffect compile(NewPipeline p, NodeEffect action) {
         CompiledEffect e = switch(action.effectModel.type()) {
-            case damage -> compileDamage(action, (DamageEffect) action.effectModel);
-            case flee -> null;
-            case heal -> null;
+			case damage -> compileDamage(action, (DamageEffect) action.effectModel);
             case move -> compileMove(action, (MoveEffect) action.effectModel);
-            case status -> null;
-            case summon -> null;
+			case resource -> throw new UnsupportedOperationException("Unimplemented case: " + action.effectModel.type());
+            case heal -> throw new UnsupportedOperationException("Unimplemented case: " + action.effectModel.type());
+            case status -> throw new UnsupportedOperationException("Unimplemented case: " + action.effectModel.type());
+            case summon -> throw new UnsupportedOperationException("Unimplemented case: " + action.effectModel.type());
+			case flee -> throw new UnsupportedOperationException("Unimplemented case: " + action.effectModel.type());
         };
         return e;
         // throw new IllegalArgumentException("Illegal effect type: " + action.effect.type());

@@ -15,6 +15,8 @@ public class Zone {
     
     // type
     public ZoneType type = ZoneType.point;
+    // length for lines or radius for circles/squares/cross/star/cone
+    public int length;
     // filter
     public int targetTypeFilter = TargetType.enemy.value;
 
@@ -31,8 +33,6 @@ public class Zone {
     // for lines : parallel/perpendicular
     public Direction8 rotation = Direction8.top;   // public int orientation;
 
-    // length for lines or radius for circles/squares/cross/star/cone
-    public int length;
 }
 
 

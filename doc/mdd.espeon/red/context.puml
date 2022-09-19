@@ -1,0 +1,95 @@
+@startuml
+
+
+class Context {
+	timeline // creatures list
+	stats
+	positions
+	statuses
+}
+
+
+' Book {
+' 	ApReduceEffect {
+' 		ret: 5,
+' 		children: [
+' 			Effect { }
+' 		]
+' 	}
+' }
+
+
+
+class Effect {
+	+condition: Condition
+	+aoe: Aoe
+	+filter: TargetFilter
+	+children: []
+}
+note right: Has a context for the scope of an effect and its children
+Effect o-- Effect
+Effect o-- Condition
+class Spell {
+	+Effect[] effects
+}
+note right: Has a context for the whole spell
+Spell *-- Effect
+
+
+
+
+class EffectModel {
+	+Zone zone
+	
+	+bool appliesCells
+	+bool appliesCreatures
+
+	+int depthMax
+	' +int towerHeightMax
+	' +bool towerFromBottom
+	+bool appliesFlying
+	+bool appliesUnderground
+	+bool appliesWet
+	+bool appliesGrounded
+
+
+	+int height
+	+int directionUpDown
+	+int length
+
+	{abstract} +EffectType type()
+}
+
+class Book {
+	+Statmement[] statements
+}
+note right: Has a context, sum of all that has happened during the spell up to now
+Book *-- Statement
+
+interface Statement {}
+Statement <|-- StatementGroup
+Statement <|-- StatementEffect
+
+class StatementGroup {
+	+Condition cond
+	+StatementEffect[] children
+	+StatementEffect[] childrenOtherwise
+}
+note right: Has a context of all that has happened during the group up to now
+StatementGroup *-- Condition
+StatementGroup *-- StatementEffect
+
+class StatementEffect {
+	+StatementEffect[] children
+	+EffectModel effect
+}
+note right: Has a context of all that has happened during this effect and its children up to now
+StatementEffect *-- EffectModel
+StatementEffect o-- StatementEffect
+
+
+
+
+
+
+@enduml

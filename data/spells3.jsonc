@@ -1,0 +1,93 @@
+{
+	
+    "_id": {
+        "$oid": "62b9a7728e991d82fc1568fe"
+    },
+    "name": "Fleche de repulsion",
+    "description": "Occasionne des dommages. Si la source a un haut special, réduit la défense des cibles. Si la défense des cibles est basse, pousse les cibles, sinon les attire.",
+    "costs": [
+        {
+            "resource": "ap",
+            "value": 3
+        }
+    ],
+    "castingConditions": {
+        "cooldown": 0,
+        "castPerTurn": 0,
+        "castPerTarget": 0,
+        // "aoeConditions": [
+        //     [
+        //         4
+        //     ],
+        //     [
+        //         4
+        //     ],
+        //     [
+        //         4
+        //     ]
+        // ]
+    },
+	"effects": [
+        {
+            "type": "damage",
+			"actor": "caster",
+            // "modelid": 1,
+            "power": 10
+        },
+		{
+			"type": "blank",
+			"actor": "caster",
+			"zone": {},
+			"conditions": [
+
+			],
+			"children": [
+				{
+					"type": "blank",
+					"actor": "target", // make the target of the parent effect now the source of this effect
+					"zone": {},
+					"conditions": [],
+					"childre": []
+				},
+				{
+					"type": "blank",
+					"actor": "caster",
+					"zone": {},
+					"conditions": [],
+					"childre": []
+				}
+			]
+		},
+		{
+			"type": "resource",
+			"actor": "caster",
+			// retrait 2 ap en zone
+			"mod": "ap",
+			"value": 2,
+			// zone cercle de 5 autour du caster
+			"zone": {
+				"type": "circle",
+				"length": 5,
+				"targetTypeFilter": "",
+				"worldOrigin": "source",
+				"worldOffset": {
+					"x": 0, "y": 0, "z": 0
+				},
+				"localOrigin": "center",
+				"rotation": "top"
+			},
+			// "conditions": {
+			// 	"targetTypeFilter": ""
+			// },
+			// children apply to every target in the zone (rebased)
+			"children": [
+				{
+
+				}
+			]
+		},
+		{
+			
+		}
+	]
+}

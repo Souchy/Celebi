@@ -112,13 +112,15 @@
             },
             {
                 "condition": {
-                    "type": "StatCondition",
+					"type": "StatCondition",
+					
                     "actor": "target",
+                    "children": [],
+                    "childLink": "and",
+
                     "mod": "defense",
                     "value": 3,
-                    "op": "le",
-                    "children": [],
-                    "childLink": "and"
+                    "op": "le"
                 },
                 "effect": {
                     "modelid": 2,
