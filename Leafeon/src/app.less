@@ -1,0 +1,47 @@
+nav {
+	background: #eee;
+	display: flex;
+}
+
+a {
+	padding: 10px;
+	text-decoration: none;
+	color: black;
+
+	&:hover {
+		background-color: darkgray;
+	}
+}
+
+.active {
+	background-color: lightgray;
+}
+
+app {
+	
+}
+.main {
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.main au-viewport {
+	overflow-x: hidden;
+	overflow-y: auto;
+
+	width: 100%;
+	margin-left: 10%;
+	margin-right: 10%;
+	// padding: 16px;
+}
+
+.main sidebar {
+	width: 225px;
+	//// height: 100%;
+	//// position: fixed;
+	//// overflow-y: scroll;
+	top: 0;
+	bottom: 0;
+	overflow: auto;
+}

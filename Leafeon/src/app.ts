@@ -1,7 +1,7 @@
-import { WelcomePage } from './welcome-page';
-import { AboutPage } from './asdf/about-page';
+// import { WelcomePage } from './welcome';
+// import { AboutPage } from './asdf/about-page';
 
-export class MyApp {
+export class App {
 
     // static routes = [
     //     {

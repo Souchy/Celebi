@@ -1,6 +1,6 @@
 import { invoke } from '@tauri-apps/api'
 
-export class WelcomePage {
+export class Welcome {
   public message: string = 'Welcome to Aurelia 2!';
 
 	constructor() {
