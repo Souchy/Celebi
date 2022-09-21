@@ -9,7 +9,9 @@
   "license": "UNLICENSED",
   "dependencies": {
     "@tauri-apps/api": "^1.1.0",
-    "aurelia": "latest"
+    "aurelia": "latest",
+    "bootstrap": "^5.2.1",
+    "materialize-css": "^1.0.0-rc.2"
   },
   "devDependencies": {
     "@aurelia/testing": "latest",
@@ -27,6 +29,7 @@
     "less": "^4.1.2",
     "less-loader": "^11.0.0",
     "lesshint": "^6.3.7",
+    "markdown-loader": "^8.0.0",
     "postcss": "^8.4.14",
     "postcss-loader": "^7.0.0",
     "rimraf": "^3.0.2",

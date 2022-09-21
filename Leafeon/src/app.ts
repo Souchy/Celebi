@@ -1,3 +1,6 @@
+import 'bootstrap'; // Import the Javascript
+import 'bootstrap/dist/css/bootstrap.css'; // Import the CSS
+
 // import { WelcomePage } from './welcome';
 // import { AboutPage } from './asdf/about-page';
 
@@ -33,3 +36,4 @@ export class App {
 // //   )
 // 	return
 // }
+
