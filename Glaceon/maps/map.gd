@@ -22,7 +22,10 @@ func _ready():
 	center.x = sumx / $GridMap.get_used_cells().size();
 	center.y = sumy / $GridMap.get_used_cells().size();
 	center.z = sumz / $GridMap.get_used_cells().size();
-	var worldcenter = $GridMap.map_to_world(center);
+	var local = $GridMap.map_to_local(center);
+	var global = $GridMap.to_global(local);
+	var worldcenter = global;
+	#var worldcenter = $GridMap.map_to_world(center);
 	if(worldcenter == center):
 		center = worldcenter;
 	else:

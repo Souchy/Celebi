@@ -14,6 +14,32 @@ extends Node3D
 
 @export_range (0, 100, 0.5) var maxDistanceFromOrigin: float = 20
 
+
+########################
+# PARAMS
+########################
+# movement
+#onready var tween = $Tween
+var _lock_movement: bool = false
+# zoom
+@onready var camera: Camera3D = $Elevation/Camera3D
+var zoom_direction = 0
+# rotation
+@onready var elevation: Node3D = $Elevation
+var is_rotating = false
+# pan
+var is_panning = false
+# click position
+const RAY_LENGTH = 1000
+const GROUND_PLANE = Plane(Vector3.UP, 0)
+var _last_mouse_position = Vector2()
+
+var tween: Tween;
+
+########################
+# 
+########################
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

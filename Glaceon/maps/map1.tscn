@@ -13,28 +13,24 @@ sky_material = SubResource("ProceduralSkyMaterial_4gnsv")
 
 [sub_resource type="Environment" id="Environment_no4ru"]
 background_mode = 2
-background_energy = 1.05
 sky = SubResource("Sky_0s3v7")
 ambient_light_sky_contribution = 0.74
 ambient_light_energy = 0.97
-ssao_enabled = true
-ssao_radius = 1.1
-ssao_intensity = 23.9
-ssao_power = 1.09806
-ssao_detail = 0.0
-ssao_horizon = 0.92
-ssao_sharpness = 0.0
-ssao_light_affect = 1.0
-ssao_ao_channel_affect = 1.0
+ssr_enabled = true
+ssil_radius = 13.34
+ssil_intensity = 6.88
+sdfgi_use_occlusion = true
+sdfgi_read_sky_light = false
 glow_intensity = 1.99
 glow_strength = 1.31
 glow_bloom = 0.05
+fog_light_color = Color(0.52549, 0.509804, 0.607843, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u7wng"]
 render_priority = 0
 shader = ExtResource("1_ywai2")
-shader_param/_detail = null
-shader_param/_thickness = null
+shader_parameter/_detail = null
+shader_parameter/_thickness = null
 
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_lqhw7"]
 next_pass = SubResource("ShaderMaterial_u7wng")
@@ -76,7 +72,10 @@ environment = SubResource("Environment_no4ru")
 transform = Transform3D(-0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, 0.5, -0.5, 0, 0, 0)
 light_energy = 1.46
 shadow_enabled = true
-shadow_bias = 0.149
+shadow_bias = 0.184
+shadow_normal_bias = 6.555
+shadow_opacity = 0.78
+shadow_blur = 0.0
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, 0, 4, 0)

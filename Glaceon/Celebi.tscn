@@ -11,7 +11,7 @@
 [node name="Map1" parent="." instance=ExtResource("2_5tuph")]
 
 [node name="Cursor" parent="." instance=ExtResource("3_r8b5q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.49859, 1.51993, -9.50441)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 1.5, -9.5)
 script = ExtResource("4_dadrd")
 
 [node name="CameraController" type="Node3D" parent="."]
