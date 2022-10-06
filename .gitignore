@@ -2,6 +2,8 @@ out/
 src/.vs/
 build/.cmake/
 build/
+*.vpp.lck
+*.vpp.bak*
 
 # Godot 4+ specific ignores
 .godot/
