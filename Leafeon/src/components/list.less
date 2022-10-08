@@ -1,0 +1,63 @@
+
+list {
+    margin-right: 20px;
+    // border-right: 1px solid grey;
+    // overflow: -moz-scrollbars-vertical; 
+    // height: 100%;
+    // height: 500px;
+    width: 200px; //120px;
+    position: fixed;
+    left: 10px;
+    top: 60px;
+    bottom: 50px; // 15px;
+}
+
+list .listadd {
+    text-align: center;
+}
+
+list .listitems {
+    height: 100%;
+    overflow-y: scroll;
+}
+
+list table {
+    width: 100%;
+    // overflow-y: scroll;
+    // height: 100%;
+    & tbody {
+    }
+}
+
+list .listitem {
+    height: 30px;
+    // width: 100%;
+    // width: 150px;
+    padding: 2px;
+    padding-right: 10px;
+    // border-bottom: 1px solid grey;
+
+    &:hover {
+        background-color: aliceblue;
+        cursor: pointer;
+    }
+
+    & td:first-child {
+        width: 25px;
+        // border-right: 1px grey solid;
+    }
+    & td:last-child {
+        padding-left: 10px;
+        // width: 150px;
+    }
+}
+
+
+list .selected {
+    background-color: aliceblue;
+}
+
+list input {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

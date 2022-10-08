@@ -1,0 +1,85 @@
+<h5>Data</h5>
+<table>
+    <tbody>
+        <tr>
+            <td>Name</td>
+            <td align="right">
+                <input type="text" value.bind="spell.name" change.trigger="save()" />
+            </td>
+        </tr>
+        <tr>
+            <td>Target mask</td>
+            <td align="right">
+                <input type="text" value.bind="spell.targetMask" change.trigger="save()" />
+            </td>
+        </tr>
+        <tr>
+            <td>Max cast per turn</td>
+            <td align="right">
+                <input type="text" value.bind="spell.maxCastPerTurn" change.trigger="save()" />
+            </td>
+        </tr>
+        <tr>
+            <td>Max cast per target</td>
+            <td align="right">
+                <input type="text" value.bind="spell.maxCastPerTarget" change.trigger="save()" />
+            </td>
+        </tr>
+        <tr>
+            <td>Cooldown</td>
+            <td align="right">
+                <input type="text" value.bind="spell.cooldown" change.trigger="save()" />
+            </td>
+        </tr>
+        <tr>
+            <td>Cooldown Initial</td>
+            <td align="right">
+                <input type="text" value.bind="spell.cooldownInitial" change.trigger="save()" />
+            </td>
+        </tr>
+        <tr>
+            <td>Cooldown Global</td>
+            <td align="right">
+                <input type="text" value.bind="spell.cooldownGlobal" change.trigger="save()" />
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div>
+    <h6>Costs</h6>
+    <table>
+        <tbody>
+            <!-- db.resourceTypes -->
+            <tr repeat.for="res of Object.keys(spell.costs)">
+                <td>${res}</td>
+                <td align="right">
+                    <input type="number" value.bind="spell.costs[res]" change.trigger="save()" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<h5>Assets</h5>
+<table>
+    <tbody>
+        <tr>
+            <td>Icon id</td>
+            <td align="right">
+                <input type="text" value.bind="spell.iconId" change.trigger="save()" />
+            </td>
+        </tr>
+        <tr>
+            <td>Animation id</td>
+            <td align="right">
+                <input type="text" value.bind="spell.animationId" change.trigger="save()" />
+            </td>
+        </tr>
+        <tr>
+            <td>Script id</td>
+            <td align="right">
+                <input type="text" value.bind="spell.scriptId" change.trigger="save()" />
+            </td>
+        </tr>
+    </tbody>
+</table>

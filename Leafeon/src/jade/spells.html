@@ -1,0 +1,29 @@
+<import from="./creatures"></import>
+<!-- <import from="./effects"></import> -->
+<import from="../components/list"></import>
+<import from="./spells/spelldata"></import>
+<import from="./spells/effects"></import>
+
+<!-- spell list -->
+<list name="spells" data.bind="spells"></list>
+
+<!-- spell editor -->>
+<div class="spell" if.bind="spell">
+
+    <div class="d-flex">
+        <h3>#${spell._id} ${spell.name}</h3>
+    </div>
+
+    <button click.trigger="save()" class="save">Save</button>
+    <p></p>
+
+    <div class="d-flex gap-5">
+        <!-- base data -->
+        <spelldata spell.bind="spell"></spelldata>
+
+        <!-- effects -->
+        <effects spell.bind="spell"></effects>
+    </div>
+
+
+</div>

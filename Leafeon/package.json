@@ -8,10 +8,13 @@
   },
   "license": "UNLICENSED",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.2.0",
     "@tauri-apps/api": "^1.1.0",
     "aurelia": "latest",
     "bootstrap": "^5.2.1",
-    "materialize-css": "^1.0.0-rc.2"
+    "materialize-css": "^1.0.0-rc.2",
+    "three": "^0.145.0",
+    "zangodb": "^1.0.8"
   },
   "devDependencies": {
     "@aurelia/testing": "latest",

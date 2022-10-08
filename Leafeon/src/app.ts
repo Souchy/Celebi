@@ -1,23 +1,37 @@
+import { inject } from 'aurelia';
 import 'bootstrap'; // Import the Javascript
 import 'bootstrap/dist/css/bootstrap.css'; // Import the CSS
+import { db } from './db';
 
-// import { WelcomePage } from './welcome';
+import { Welcome } from './main/welcome';
 // import { AboutPage } from './asdf/about-page';
+import { Creatures } from './jade/creatures';
+import { Spells } from './jade/spells';
 
+@inject(db)
 export class App {
 
-    // static routes = [
-    //     {
-    //         path: '/believe',
-    //         component: WelcomePage,
-    //         title: 'Home'
-    //     },
-    //     {
-    //         path: '/about',
-    //         component: AboutPage,
-    //         title: 'About'
-    //     },
-    // ];
+    static routes = [
+        {
+            path: '',
+            component: Welcome,
+            title: 'Home'
+        },
+        {
+            path: 'creatures',
+            component: Creatures,
+            title: 'Creatures'
+        },
+        {
+            path: 'spells',
+            component: Spells,
+            title: 'Spells'
+        }
+    ];
+
+    constructor(db: db) {
+        // db.connectToDatabase();
+    }
 
 }
 

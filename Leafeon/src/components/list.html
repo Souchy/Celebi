@@ -1,0 +1,29 @@
+
+
+<div class="d-flex justify-content-center gap-2">
+    <button class="listadd" click.trigger="addItem()">
+        <i class="fa-solid fa-plus"></i>
+        +
+    </button>
+    <button click.trigger="refresh()">Refresh</button>
+    <button click.trigger="delete()" class="save">-</button>
+</div>
+
+<input value.bind="filterText" placeholder="Search..."/>
+
+<div class="listitems">
+    <table class="table">
+        <tbody>
+            <th></th>
+            <th>#</th>
+            <td>Name</td>
+            <tr class="listitem ${item == selected ? 'selected' : ''}" repeat.for="item of filtered" click.trigger="selectItem(item)">
+                <td>
+                    <input type="checkbox" click.trigger="multiSelect(item)" checked.bind="multiSelected.includes(item)"/>
+                </td>
+                <td>${item._id}</td>
+                <td>${item.name}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

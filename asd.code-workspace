@@ -1,0 +1,24 @@
+{
+	"folders": [
+		{
+			"name": "DofusDB",
+			"path": "../../Git/ankama/DofusDB"
+		},
+		{
+			"name": "PyDofus",
+			"path": "../../Git/ankama/Alfred/PyDofus"
+		},
+		{
+			"name": "Celebi",
+			"path": "."
+		},
+		{
+			"name": "Leafeon",
+			"path": "Leafeon"
+		},
+		{
+			"name": "arch",
+			"path": "arch"
+		}
+	]
+}

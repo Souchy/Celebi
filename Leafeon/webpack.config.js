@@ -61,7 +61,7 @@ module.exports = function(env, { analyze }) {
     },
     devServer: {
       historyApiFallback: true,
-      open: !process.env.CI,
+      open: false, // !process.env.CI,
       port: 9000
     },
     module: {
@@ -80,7 +80,7 @@ module.exports = function(env, { analyze }) {
       ]
     },
     plugins: [
-      new HtmlWebpackPlugin({ template: 'index.html', favicon: 'favicon.ico' }),
+      new HtmlWebpackPlugin({ template: 'index.html', favicon: 'leafeon.png' }),
       new Dotenv({
         path: `./.env${production ? '' :  '.' + (process.env.NODE_ENV || 'development')}`,
       }),

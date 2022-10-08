@@ -1,0 +1,81 @@
+<!-- <import from="./conditions"></import> -->
+<import from="./condition-component"></import>
+
+<h5>Effects</h5>
+<button click.trigger="addEffect()">+</button>
+
+
+<div repeat.for="effect of spell.effects">
+    <button click.trigger="deleteEffect(effect)">-</button>
+
+    <div class="d-flex gap-3">
+        <div>
+            <h6>Effect Data</h6>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Type</td>
+                        <td align="right">
+                            <select value.bind="effect.type" change.trigger="save()">
+                                <option repeat.for="type of db.effectTypes" model.bind="type">${type}</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Data</td>
+                        <td align="right">
+                            <input type="text" value.bind="effect.data" change.trigger="save()" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Necessary to cast</td>
+                        <td align="right">
+                            <input type="checkbox" checked.bind="effect.necessaryForSpellCast"
+                                change.trigger="save()" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Target mask</td>
+                        <td align="right">
+                            <input type="text" value.bind="effect.targetMask" change.trigger="save()" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tower direction</td>
+                        <td align="right">
+                            <input type="text" value.bind="effect.towerDirection" change.trigger="save()" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tower start</td>
+                        <td align="right">
+                            <input type="text" value.bind="effect.towerStart" change.trigger="save()" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tower length</td>
+                        <td align="right">
+                            <input type="text" value.bind="effect.towerLength" change.trigger="save()" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h6>Effect Condition</h6>
+            <condition-component condition.bind="effect.condition"></condition-component>
+            <!-- effect.bind="effect" -->
+        </div>
+    </div>
+
+</div>
+
+<!-- <tr>
+        <td>Condition</td>
+        <td align="right" if.bind="effect.condition">
+            <condition-component effect.bind="effect"></condition-component>
+        </td>
+        <td align="right" if.bind="!effect.condition">
+            <button click.trigger="createCondition(effect)">+</button>
+        </td>
+    </tr> -->
