@@ -1,0 +1,62 @@
+
+<!-- depth:${getDepth()}. -->
+<div class="d-flex gap-1 condOptions">
+    <!-- Condition Type -->
+    <select value.bind="condition.type" change.trigger="save()">
+        <option repeat.for="type of db.conditionTypes" model.bind="type">${type}</option>
+    </select>
+    <select value.bind="condition.actor" change.trigger="save()">
+        <option repeat.for="type of db.conditionActorTypes" model.bind="type">${type}</option>
+    </select>
+    <!-- Link Type -->
+    <select value.bind="condition.childrenLink" change.trigger="save()">
+        <option repeat.for="type of db.conditionLinkTypes" model.bind="type">${type}</option>
+    </select>
+    <!-- Add Child -->
+    <button click.trigger="addChild()" change.trigger="save()">+child</button>
+    <!-- Delete -->
+    <button class="ms-auto" click.trigger="deleteSelf()" change.trigger="save()">-</button>
+</div>
+
+<!-- Nothing -->
+<div show.bind="condition.type == 'passthrough'">
+</div>
+
+<!-- Stats -->
+<div show.bind="condition.type == 'stat'">
+    <select value.bind="condition.data.stat" change.trigger="save()">
+        <option repeat.for="type of db.characteristicTypes" model.bind="type">${type}</option>
+    </select>
+    <select value.bind="condition.data.comparator" change.trigger="save()">
+        <option repeat.for="type of db.conditionComparatorTypes" model.bind="type">${translateComparator(type)}</option>
+    </select>
+    <input type="text" value.bind="condition.data.value" change.trigger="save()" />
+</div>
+
+<!-- State -->
+<div show.bind="condition.type == 'state'">
+    <input type="text" value.bind="condition.data.value" change.trigger="save()" />
+    <select value.bind="condition.data.state" change.trigger="save()">
+        <option repeat.for="type of db.stateTypes" model.bind="type">${type}</option>
+    </select>
+</div>
+
+<!-- Context -->
+<div show.bind="condition.type == 'context'">
+    <select value.bind="condition.contextType" change.trigger="save()">
+        <option repeat.for="type of db.contextTypes" model.bind="type">${type}</option>
+    </select>
+    <select value.bind="condition.data.contextCharac" change.trigger="save()">
+        <option repeat.for="type of db.contextCharacteristicTypes" model.bind="type">${type}</option>
+    </select>
+    <select value.bind="condition.data.comparator" change.trigger="save()">
+        <option repeat.for="type of db.conditionComparatorTypes" model.bind="type">${translateComparator(type)}</option>
+    </select>
+    <input type="text" value.bind="condition.data.value" change.trigger="save()" />
+</div>
+
+<!-- Children -->
+<!-- <span>Children</span> -->
+<div class="child" repeat.for="child of condition.children">
+    <conditioncomponent condition.bind="child" parent.bind="condition"></conditioncomponent>
+</div>

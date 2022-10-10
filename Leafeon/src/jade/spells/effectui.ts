@@ -5,29 +5,32 @@ import { Spell } from "../../../../arch/common/spell";
 import { db } from "../../db";
 
 @inject(db)
-export class Effects {
+export class EffectUI {
 
     public db: db;
 
+    // @bindable
+    // public spell: Spell;
+    // public effects: Effect[];
     @bindable
-    public spell: Spell;
+    public parent: any; // spell or effect have children
+    @bindable
+    public effect: Effect;
 
     constructor(db: db, @IEventAggregator readonly ea: IEventAggregator) {
         this.db = db;
     }
 
     public addEffect() {
-        this.spell.effects.push(new Effect());
+        this.effect.effects.push(new Effect());
         this.save();
+        console.log("effect parent: " + JSON.stringify(this.parent))
     }
+    
     public deleteEffect(effect) {
-        let index = this.spell.effects.indexOf(effect);
-        this.spell.effects.splice(index, 1);
+        let index = this.parent.effects.indexOf(effect);
+        this.parent.effects.splice(index, 1);
         this.save();
-    }
-
-    public createCondition(effect) {
-        effect.condition = new Condition();
     }
 
     public save() {

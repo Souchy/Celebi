@@ -1,11 +1,11 @@
 import { Cell } from "../common/entity";
-import { Spell } from "../common/spells";
-import { spellresult } from "./spellresult";
+import { SpellResult } from "../common/red/spellresult";
+import { Spell } from "../common/spell";
 
 // 1st-2nd class input handler
 export class ActionController {
     public selectedSpell: Spell;
-    public selectedSpellResult: spellresult;
+    public selectedSpellResult: SpellResult;
 
     // when selected a spell with shortcuts or left-click
     public selectSpell(s: Spell) {

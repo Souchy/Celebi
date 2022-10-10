@@ -2,6 +2,8 @@ import { ResourceType } from './characteristics';
 import { Effect } from './effects';
 
 export class Spell {
+    public readonly isSpell = true;
+    
     public _id: number
     public name: string = "unnamed"
     public targetMask: string = ""
@@ -25,6 +27,7 @@ export class Spell {
             this.costs[res] = 0;
         }
     }
+
 }
 
 // export class Cost {

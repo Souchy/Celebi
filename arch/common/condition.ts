@@ -1,13 +1,20 @@
 import { TargetFilter } from './target';
 import { CharacteristicType, StateType } from "./characteristics";
+import { Spell } from './spell';
+import { Effect } from './effects';
+import { ContextCharacteristicType, ContextType } from './red/context'
 
 export class Condition {
-
+    public readonly isCondition = true;
+    // condition < effect < spell 
+    public parent: any;
     public children: Condition[] = []
     public childrenLink: ConditionLinkType = ConditionLinkType.and
+
     public actor: ConditionActorType = ConditionActorType.target
+
     public type: ConditionType = ConditionType.passthrough
-    public data: ConditionData = new ConditionData()
+    public data: ConditionData = {}
 
     // Context
     public scope: string = "local"; // "spell"
@@ -20,16 +27,20 @@ export class Condition {
 }
 
 export class ConditionData {}
+
 export class ConditionDataStat extends ConditionData {
     public stat: CharacteristicType = CharacteristicType.life;
     public comparator: ConditionComparatorType = ConditionComparatorType.ge;
     public value: string = "0";
 }
+
 export class CondditionDataState extends ConditionData {
     public state: StateType = StateType.carried
     public value: string = "true"
 }
+
 export class ConditionDataContext extends ConditionData {
+    public contextType: ContextType = ContextType.fight
     public contextCharac: ContextCharacteristicType = ContextCharacteristicType.life_gained;
     public comparator: ConditionComparatorType = ConditionComparatorType.ge;
     public value: string = "0";
@@ -45,14 +56,6 @@ export enum ConditionActorType {
     targets
 }
 export const conditionActorTypes = Object.values(ConditionActorType).filter(item => isNaN(Number(item))).map(item => item as ConditionActorType)
-export enum ContextType {
-    fight,
-    round,
-    turn,
-    spell,
-    effect
-}
-export const contextTypes = Object.values(ContextType).filter(item => isNaN(Number(item))).map(item => item as ContextType)
 export enum ConditionLinkType {
     and,
     or
@@ -73,16 +76,4 @@ export enum ConditionType {
     context
 }
 export const conditionTypes = Object.values(ConditionType).filter(item => isNaN(Number(item))).map(item => item as ConditionType)
-export enum ContextCharacteristicType {
-    life_gained,
-    life_reduced,
-    ap_gained,
-    ap_reduced,
-    mp_gained,
-    mp_reduced,
-    special_gained,
-    special_reduced,
 
-    number_targets_affected,
-}
-export const contextCharacteristicTypes = Object.values(ContextCharacteristicType).filter(item => isNaN(Number(item))).map(item => item as ContextCharacteristicType)

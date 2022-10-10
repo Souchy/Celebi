@@ -66,6 +66,17 @@ export class Spells {
         this.spell = item;
     }
 
+    public addEffect() {
+        this.spell.effects.push(new Effect());
+        this.save();
+    }
+    
+    public deleteEffect(effect) {
+        let index = this.spell.effects.indexOf(effect);
+        this.spell.effects.splice(index, 1);
+        this.save();
+    }
+
     // @watch('spell')
     public save() {
         console.log("save: " + this.spell.name)

@@ -9,8 +9,8 @@ import { Creature } from "../../arch/common/entity";
 import { Spell } from "../../arch/common/spell";
 import { Effect, EffectType, effectTypes } from "../../arch/common/effects";
 import { resourceTypes, characteristicTypes, stateTypes } from "../../arch/common/characteristics";
-import { conditionActorTypes, conditionComparatorTypes, conditionLinkTypes, conditionTypes, contextCharacteristicTypes } from "../../arch/common/condition";
-
+import { conditionActorTypes, conditionComparatorTypes, conditionLinkTypes, conditionTypes } from "../../arch/common/condition";
+import { contextTypes, contextCharacteristicTypes } from "../../arch/common/red/context";
 
 export class db {
     public zdb: zango.Db; //, { people: ['age'] });
@@ -25,6 +25,7 @@ export class db {
     public conditionComparatorTypes = conditionComparatorTypes;
     public conditionLinkTypes = conditionLinkTypes;
     public characteristicTypes = characteristicTypes;
+    public contextTypes = contextTypes
     public contextCharacteristicTypes = contextCharacteristicTypes;
     public stateTypes = stateTypes;
 

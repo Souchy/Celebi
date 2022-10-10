@@ -1,17 +1,21 @@
-<!-- <import from="./conditions"></import> -->
-<import from="./condition-component"></import>
+<import from="./conditioncomponent"></import>
 
-<h5>Effects</h5>
-<button click.trigger="addEffect()">+</button>
-
-
-<div repeat.for="effect of spell.effects">
-    <button click.trigger="deleteEffect(effect)">-</button>
-
+<!-- Collapse -->
+<div class="d-flex gap-2">
+    <button type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample${effect.uid}"
+        aria-expanded="${parent.isSpell ? true : false}" aria-controls="collapseExample">
+        #${effect.uid}:${effect.type}
+    </button>
+    <button class="ms-auto" class="deleteEffect" click.trigger="deleteEffect(effect)">
+        <span>-</span>
+    </button>
+</div>
+<div id="collapseExample${effect.uid}" class="collapse ${parent.isSpell ? 'show' : ''}">
     <div class="d-flex gap-3">
-        <div>
+        <div style="height: 100%;">
             <h6>Effect Data</h6>
-            <table>
+            <!-- Effect Data -->
+            <table class="effecttable">
                 <tbody>
                     <tr>
                         <td>Type</td>
@@ -32,6 +36,12 @@
                         <td align="right">
                             <input type="checkbox" checked.bind="effect.necessaryForSpellCast"
                                 change.trigger="save()" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Visible in tooltip</td>
+                        <td align="right">
+                            <input type="checkbox" value.bind="effect.visibleInTooltip" change.trigger="save()" />
                         </td>
                     </tr>
                     <tr>
@@ -61,21 +71,19 @@
                 </tbody>
             </table>
         </div>
-        <div>
+        <!-- Conditions -->
+        <div style="width: 100%">
             <h6>Effect Condition</h6>
-            <condition-component condition.bind="effect.condition"></condition-component>
-            <!-- effect.bind="effect" -->
+            <conditioncomponent condition.bind="effect.condition" parent.bind="effect"></conditioncomponent>
         </div>
     </div>
 
+    <!-- Children -->
+    <div class="d-flex gap-3" style="width: 100%">
+        <i>Children</i>
+        <button class="addEffect" click.trigger="addEffect()">
+            <span>+</span>
+        </button>
+    </div>
+    <effectui repeat.for="child of effect.effects" effect.bind="child" parent.bind="effect"></effectui>
 </div>
-
-<!-- <tr>
-        <td>Condition</td>
-        <td align="right" if.bind="effect.condition">
-            <condition-component effect.bind="effect"></condition-component>
-        </td>
-        <td align="right" if.bind="!effect.condition">
-            <button click.trigger="createCondition(effect)">+</button>
-        </td>
-    </tr> -->

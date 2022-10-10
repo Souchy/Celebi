@@ -12,19 +12,24 @@ export enum EffectType {
 export const effectTypes = Object.values(EffectType).filter(item => isNaN(Number(item))).map(item => item as EffectType)
 
 export class Effect {
+    private static counter = 0;
+    public readonly uid: number = Effect.counter++;
+    public readonly isEffect = true;
     public type: EffectType
     public parent: any; // either an effect or spell at the root
-    public children: Effect[] = []
+    public effects: Effect[] = [] // children
 
     public data: string = ""
     public targetMask: string = ""
     public necessaryForSpellCast: boolean
-    public condition: Condition = new Condition();
+    public condition: Condition = new Condition()
 
     public towerDirection: number = 0 // 1: up, -1 down, 0 extends both ways from start
     public towerStart: number = 0 // 1: top, 0: ground, -1: underground
     public towerLength: number = 0 //  number of tower floors to travel in each direction
     
+    public visibleInTooltip: boolean = true
+
     // public appliesToState: Map<State, boolean>
     public appliesToState: {}
     
@@ -35,6 +40,18 @@ export class Effect {
     constructor() {
 
     }
+
+    // public getHashCode() {
+    //     // let str = JSON.stringify(this);
+    //     // var hash = 0;
+    //     // for (var i = 0; i < str.length; i++) {
+    //     //     var code = str.charCodeAt(i);
+    //     //     hash = ((hash<<5)-hash)+code;
+    //     //     hash = hash & hash; // Convert to 32bit integer
+    //     // }
+    //     // return hash;
+    //     return "" + this.type;
+    // }
 }
 
 
