@@ -1,15 +1,12 @@
 
 
-<div class="d-flex justify-content-center gap-2">
-    <button class="listadd" click.trigger="addItem()">
-        <i class="fa-solid fa-plus"></i>
-        +
-    </button>
-    <button click.trigger="refresh()">Refresh</button>
-    <button click.trigger="delete()" class="save">-</button>
+<div class="d-flex justify-content-center gap-2 smaller">
+    <button class="btn btn-outline-dark btnDelete" click.trigger="delete()" class="save">-</button>
+    <button class="btn btn-outline-dark btnRefresh" click.trigger="refresh()">Refresh</button>
+    <button class="btn btn-outline-dark btnAdd" click.trigger="addItem()">+</button>
 </div>
 
-<input value.bind="filterText" placeholder="Search..."/>
+<input class="smaller" value.bind="filterText" placeholder="Search..."/>
 
 <div class="listitems">
     <table class="table">

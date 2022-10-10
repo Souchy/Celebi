@@ -1,16 +1,13 @@
+<import from="../components/targetfilter"></import>
+
+<!-- Main Data -->
 <h5>Data</h5>
-<table>
+<table class="tablestriped">
     <tbody>
         <tr>
             <td>Name</td>
             <td align="right">
                 <input type="text" value.bind="spell.name" change.trigger="save()" />
-            </td>
-        </tr>
-        <tr>
-            <td>Target mask</td>
-            <td align="right">
-                <input type="text" value.bind="spell.targetMask" change.trigger="save()" />
             </td>
         </tr>
         <tr>
@@ -46,22 +43,23 @@
     </tbody>
 </table>
 
-<div>
-    <h6>Costs</h6>
-    <table>
-        <tbody>
-            <!-- db.resourceTypes -->
-            <tr repeat.for="res of Object.keys(spell.costs)">
-                <td>${res}</td>
-                <td align="right">
-                    <input type="number" value.bind="spell.costs[res]" change.trigger="save()" />
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-<h5>Assets</h5>
-<table>
+<!-- Costs -->
+<h6 style="margin-top:10px;">Costs</h6>
+<table class="tablestriped">
+    <tbody>
+        <!-- db.resourceTypes -->
+        <tr repeat.for="cost of spell.costs">
+            <td>${cost.res}</td>
+            <td align="right">
+                <input type="string" value.bind="cost.value" change.trigger="save()" />
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- Assets -->
+<h5 style="margin-top:10px;">Assets</h5>
+<table class="tablestriped">
     <tbody>
         <tr>
             <td>Icon id</td>
@@ -83,3 +81,11 @@
         </tr>
     </tbody>
 </table>
+
+<!-- Range -->
+<div>
+    
+</div>
+
+<!-- Target Filter -->
+<targetfilter style="margin-top:10px;" filter.bind="spell.filter"></targetfilter>

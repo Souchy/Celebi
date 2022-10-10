@@ -13,9 +13,9 @@
         <option repeat.for="type of db.conditionLinkTypes" model.bind="type">${type}</option>
     </select>
     <!-- Add Child -->
-    <button click.trigger="addChild()" change.trigger="save()">+child</button>
+    <button class="btn btn-outline-dark btn-small btn-circle"  click.trigger="addChild()" change.trigger="save()">+</button>
     <!-- Delete -->
-    <button class="ms-auto" click.trigger="deleteSelf()" change.trigger="save()">-</button>
+    <button class="btn btn-outline-dark btn-small ms-auto" click.trigger="deleteSelf()" change.trigger="save()">-</button>
 </div>
 
 <!-- Nothing -->

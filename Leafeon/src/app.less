@@ -1,3 +1,5 @@
+
+
 nav {
 	// background: #eee;
 	display: flex;
@@ -46,8 +48,8 @@ app {
 	overflow-y: auto;
 
 	width: 100%;
-	margin-left: 7%;
-	margin-right: 7%;
+	margin-left: 5%;
+	margin-right: 2%;
 	// padding: 16px;
 }
 
@@ -59,4 +61,30 @@ app {
 	top: 0;
 	bottom: 0;
 	overflow: auto;
+}
+
+// bootstrappy stuff
+.tablestriped > tbody > tr {
+	border-bottom: 1px #dee2e6 solid;
+}
+.tablestriped > tbody > tr:nth-of-type(odd) > * {
+	background-color: rgba(0, 0, 0, 0.02) !important; // var(--bs-table-striped-bg);
+    // color: black !important; //var(--bs-table-striped-color);
+}
+.btn {
+	font-weight: 600 !important;
+	--bs-btn-border-radius: 0 !important;
+	// padding: 7px !important;
+	
+}
+.btn-small {
+	width: 30px;
+	height: 30px;
+	padding: 0 !important;
+	& span {
+		text-align: center;
+	}
+}
+.btn-circle {
+	--bs-btn-border-radius: 2rem !important;
 }

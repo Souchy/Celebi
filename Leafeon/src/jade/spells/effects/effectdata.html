@@ -1,0 +1,14 @@
+
+
+<!-- Damage, Heal -->
+<div class="damage d-flex gap-1" if.bind="getType() == 'damage' || getType() == 'heal'">
+    <input type="string" value.bind="effect.data.value" change.trigger="save()"/>
+    <select value.bind="effect.data.element" change.trigger="save()">
+        <option repeat.for="type of db.elementTypes" model.bind="type">${type}</option>
+    </select>
+</div>
+
+<!-- Push, Pull, Dash -->
+<div class="d-flex gap-1" if.bind="getType() == 'push' || getType() == 'pull' || getType() == 'dash'">
+    <input type="string" value.bind="effect.data.value" change.trigger="save()"/>
+</div>

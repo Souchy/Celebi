@@ -4,9 +4,8 @@ import 'bootstrap/dist/css/bootstrap.css'; // Import the CSS
 import { db } from './db';
 
 import { Welcome } from './main/welcome';
-// import { AboutPage } from './asdf/about-page';
-import { Creatures } from './jade/creatures';
-import { Spells } from './jade/spells';
+import { Creatures } from './pages/creatures';
+import { Spells } from './pages/spells';
 
 @inject(db)
 export class App {

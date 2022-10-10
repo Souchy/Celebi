@@ -6,7 +6,6 @@ import { watch } from '@aurelia/runtime-html';
 import { db } from "../db";
 import { Spell } from '../../../arch/common/spell';
 import { Effect } from "../../../arch/common/effects";
-import { Condition } from "../../../arch/common/condition";
 
 @inject(db)
 export class Spells {

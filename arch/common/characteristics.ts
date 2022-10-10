@@ -28,6 +28,15 @@ export enum ResourceType {
 }
 export const resourceTypes = Object.values(ResourceType).filter(item => isNaN(Number(item))).map(item => item as ResourceType)
 
+export enum ElementType {
+    fire,
+    water,
+    air,
+    earth,
+}
+export const elementTypes = Object.values(ElementType).filter(item => isNaN(Number(item))).map(item => item as ElementType)
+
+
 export enum CharacteristicType {
     life,
     life_max,

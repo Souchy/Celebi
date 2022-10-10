@@ -1,0 +1,67 @@
+<table class="effecttable">
+    <tbody>
+        <tr>
+            <td>Size</td>
+            <td>
+                <div class="d-flex gap-1">
+                    <input type="string" value.bind="zone.size.x" style="width: 33%;" change.trigger="save()"/>
+                    <input type="string" value.bind="zone.size.y" style="width: 33%;" change.trigger="save()"/>
+                    <input type="string" value.bind="zone.size.z" style="width: 33%;" change.trigger="save()"/>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Type</td>
+            <td>
+                <select value.bind="zone.type" change.trigger="save()">
+                    <option repeat.for="type of db.zoneTypes" model.bind="type">${type}</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Offset</td>
+            <td>
+                <div class="d-flex gap-1">
+                    <input type="string" value.bind="zone.localOffset.x" style="width: 50%;" change.trigger="save()"/>
+                    <input type="string" value.bind="zone.localOffset.y" style="width: 50%;" change.trigger="save()"/>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Origin</td>
+            <td>
+                <select value.bind="zone.localOrigin" change.trigger="save()">
+                    <option repeat.for="type of db.direction9Types" model.bind="type">${type}</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Orientation</td>
+            <td>
+                <select value.bind="zone.orientation" change.trigger="save()">
+                    <option repeat.for="type of db.direction9Types" model.bind="type">${type}</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Checkers</td>
+            <td>
+                <input type="checkbox" checked.bind="zone.checkers" change.trigger="save()"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Checkers Offset</td>
+            <td>
+                <input type="string" value.bind="zone.checkersOffset" change.trigger="save()"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Checkers Size</td>
+            <td>
+                <input type="string" value.bind="zone.checkersSize" change.trigger="save()"/>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- <targetfilter filter.bind="zone.filter"></targetfilter> -->

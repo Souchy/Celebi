@@ -1,0 +1,105 @@
+<!-- spacer for spelldata ui -->
+<div style="margin-top: 10px;"></div>
+
+<!-- Collapse -->
+<button type="button" class="btn btn-outline-dark" data-bs-toggle="collapse" 
+    data-bs-target="#collapseExample${uid}" aria-expanded="false"
+    aria-controls="collapseExample">
+    <!-- <strong> -->
+        Filter
+    <!-- </strong> -->
+</button>
+
+<!--  -->
+<div id="collapseExample${uid}" class="collapse">
+    <h6>Team</h6>
+    <table class="tablestriped">
+        <tbody>
+            <tr>
+                <td>Allow ally</td>
+                <td>
+                    <input type="checkbox" checked.bind="filter.team.allowAlly" change.trigger="save()" />
+                </td>
+            </tr>
+            <tr>
+                <td>Allow enemy</td>
+                <td>
+                    <input type="checkbox" checked.bind="filter.team.allowEnemy" change.trigger="save()" />
+                </td>
+            </tr>
+            <tr>
+                <td>Allow self</td>
+                <td>
+                    <input type="checkbox" checked.bind="filter.team.allowSelf" change.trigger="save()" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h6>Cell</h6>
+    <table class="tablestriped">
+        <tbody>
+            <tr>
+                <td>Allow empty</td>
+                <td>
+                    <input type="checkbox" checked.bind="filter.cell.allowEmpty" change.trigger="save()" />
+                </td>
+            </tr>
+            <tr>
+                <td>Allow occupied</td>
+                <td>
+                    <input type="checkbox" checked.bind="filter.cell.allowOccupied" change.trigger="save()" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h6>Creature</h6>
+    <table class="tablestriped">
+        <tbody>
+            <tr>
+                <td>Allow models</td>
+                <td>
+                    <input type="text" value.bind="filter.creature.modelsAllowed" change.trigger="save()" />
+                </td>
+            </tr>
+            <tr>
+                <td>Disallow models</td>
+                <td>
+                    <input type="text" value.bind="filter.creature.modelsDisallowed" change.trigger="save()" />
+                </td>
+            </tr>
+            <tr>
+                <td>Allow models summoned by...</td>
+                <td>
+                    <input type="text" value.bind="filter.creature.modelAllowedSummonedBy" change.trigger="save()" />
+                </td>
+            </tr>
+            <tr>
+                <td>Disallow models summoned by...</td>
+                <td>
+                    <input type="text" value.bind="filter.creature.modelDisallowedSummonedBy" change.trigger="save()" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>Allow summoners</td>
+                <td>
+                    <input type="checkbox" checked.bind="filter.creature.allowSummoners" change.trigger="save()" />
+                </td>
+            </tr>
+            <tr>
+                <td>Allow self summons</td>
+                <td>
+                    <input type="checkbox" checked.bind="filter.creature.allowSelfSummons" change.trigger="save()" />
+                </td>
+            </tr>
+            <tr>
+                <td>Allow summons</td>
+                <td>
+                    <input type="checkbox" checked.bind="filter.creature.allowSummons" change.trigger="save()" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

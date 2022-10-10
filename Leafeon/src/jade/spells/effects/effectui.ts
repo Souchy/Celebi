@@ -1,17 +1,13 @@
 import { bindable, IEventAggregator, inject } from "aurelia";
-import { Condition } from "../../../../arch/common/condition";
-import { Effect } from "../../../../arch/common/effects";
-import { Spell } from "../../../../arch/common/spell";
-import { db } from "../../db";
+import { Spell } from "../../../../../arch/common/spell";
+import { Effect } from "../../../../../arch/common/effects";
+import { db } from "../../../db";
 
 @inject(db)
 export class EffectUI {
 
     public db: db;
 
-    // @bindable
-    // public spell: Spell;
-    // public effects: Effect[];
     @bindable
     public parent: any; // spell or effect have children
     @bindable
@@ -24,7 +20,7 @@ export class EffectUI {
     public addEffect() {
         this.effect.effects.push(new Effect());
         this.save();
-        console.log("effect parent: " + JSON.stringify(this.parent))
+        // console.log("effect parent: " + JSON.stringify(this.parent))
     }
     
     public deleteEffect(effect) {

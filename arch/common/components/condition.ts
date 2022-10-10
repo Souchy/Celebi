@@ -1,8 +1,8 @@
 import { TargetFilter } from './target';
-import { CharacteristicType, StateType } from "./characteristics";
-import { Spell } from './spell';
-import { Effect } from './effects';
-import { ContextCharacteristicType, ContextType } from './red/context'
+import { CharacteristicType, StateType } from "../characteristics";
+import { Spell } from '../spell';
+import { Effect } from '../effects';
+import { ContextCharacteristicType, ContextType } from '../red/context'
 
 export class Condition {
     public readonly isCondition = true;

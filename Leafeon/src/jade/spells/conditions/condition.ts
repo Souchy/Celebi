@@ -1,10 +1,8 @@
 import { bindable, IEventAggregator, inject, observable } from "aurelia";
-import { CondditionDataState, Condition, ConditionData, ConditionDataContext, ConditionDataStat, ConditionType } from "../../../../arch/common/condition";
+import { Condition as ConditionObject, ConditionData, CondditionDataState, ConditionDataContext, ConditionDataStat, ConditionType, conditionComparatorTypes } from "../../../../../arch/common/components/condition";
 import { watch } from '@aurelia/runtime-html';
-import { Effect } from "../../../../arch/common/effects";
-import { db } from "../../db";
-
-import { conditionComparatorTypes } from "../../../../arch/common/condition";
+import { Effect } from "../../../../../arch/common/effects";
+import { db } from "../../../db";
 
 @inject(db)
 export class ConditionComponent {
@@ -13,7 +11,7 @@ export class ConditionComponent {
     @bindable // either condition or effect
     public parent: any; //Condition|Effect;
     @bindable
-    public condition: Condition;
+    public condition: ConditionObject;
 
     constructor(db: db, @IEventAggregator readonly ea: IEventAggregator) {
         this.db = db;
@@ -44,7 +42,7 @@ export class ConditionComponent {
     }
 
     public addChild() {
-        let cond = new Condition();
+        let cond = new ConditionObject();
         cond.parent = this.condition;
         this.condition.children.push(cond);
         this.save();
@@ -57,7 +55,7 @@ export class ConditionComponent {
     // }
     public deleteSelf() {
         if (this.parent.isCondition) {
-            let papa = this.parent as Condition;
+            let papa = this.parent as ConditionObject;
             let index = papa.children.indexOf(this.condition);
             papa.children.splice(index, 1);
             this.save();

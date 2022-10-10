@@ -6,10 +6,10 @@ export class TeamFilter {
     public allowSelf: boolean = true
 }
 export class CreatureFilter {
-    public modelsAllowed: [] = []
-    public modelsDisallowed: [] = []
-    public modelAllowedSummonedBy: [] = []
-    public modelDisallowedSummonedBy: [] = []
+    public modelsAllowed: any[] = []
+    public modelsDisallowed: any[] = []
+    public modelAllowedSummonedBy: any[] = []
+    public modelDisallowedSummonedBy: any[] = []
 
     public allowSelfSummons: boolean = true
     public allowSummoners: boolean = true

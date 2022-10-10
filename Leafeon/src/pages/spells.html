@@ -1,13 +1,13 @@
-<import from="./creatures"></import>
+<!-- <import from="./creatures"></import> -->
 <!-- <import from="./effects"></import> -->
 <import from="../components/list"></import>
-<import from="./spells/spelldata"></import>
-<import from="./spells/effectui"></import>
+<import from="../jade/spells/spelldata"></import>
+<import from="../jade/spells/effects/effectui"></import>
 
 <!-- spell list -->
 <list name="spells" data.bind="spells"></list>
 
-<!-- spell editor -->>
+<!-- spell editor -->
 <div class="spell" if.bind="spell">
 
     <div class="d-flex">
@@ -17,14 +17,14 @@
     <!-- <button click.trigger="save()" class="save">Save</button> -->
     <p></p>
 
-    <div class="d-flex gap-5">
+    <div class="d-flex gap-3">
         <!-- base data -->
         <spelldata spell.bind="spell"></spelldata>
 
         <!-- effects -->
         <div style="width: 100%;">
             <h5>Effects</h5>
-            <button click.trigger="addEffect()">Add effect</button>
+            <button class="btn btn-outline-dark" click.trigger="addEffect()">Add effect</button>
             <!-- <effects effects.bind="spell"></effects> -->
             <effectui repeat.for="child of spell.effects" effect.bind="child" parent.bind="spell"></effectui>
         </div>

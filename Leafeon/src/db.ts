@@ -8,9 +8,10 @@ import { fs } from "@tauri-apps/api";
 import { Creature } from "../../arch/common/entity";
 import { Spell } from "../../arch/common/spell";
 import { Effect, EffectType, effectTypes } from "../../arch/common/effects";
-import { resourceTypes, characteristicTypes, stateTypes } from "../../arch/common/characteristics";
-import { conditionActorTypes, conditionComparatorTypes, conditionLinkTypes, conditionTypes } from "../../arch/common/condition";
+import { resourceTypes, characteristicTypes, stateTypes, elementTypes } from "../../arch/common/characteristics";
+import { conditionActorTypes, conditionComparatorTypes, conditionLinkTypes, conditionTypes } from "../../arch/common/components/condition";
 import { contextTypes, contextCharacteristicTypes } from "../../arch/common/red/context";
+import { direction9Types, zoneTypes } from "../../arch/common/components/zone";
 
 export class db {
     public zdb: zango.Db; //, { people: ['age'] });
@@ -19,15 +20,20 @@ export class db {
     public effects: zango.Collection;
 
     public resourceTypes = resourceTypes;
+    public elementTypes = elementTypes
+    public characteristicTypes = characteristicTypes;
+    public stateTypes = stateTypes;
+    
     public effectTypes = effectTypes;
+    public zoneTypes = zoneTypes;
+    public direction9Types = direction9Types;
+
     public conditionTypes = conditionTypes;
     public conditionActorTypes = conditionActorTypes;
     public conditionComparatorTypes = conditionComparatorTypes;
     public conditionLinkTypes = conditionLinkTypes;
-    public characteristicTypes = characteristicTypes;
     public contextTypes = contextTypes
     public contextCharacteristicTypes = contextCharacteristicTypes;
-    public stateTypes = stateTypes;
 
     constructor() {
         this.zdb = new zango.Db('leafeon', 0, { creatures: new Creature(), spells: new Spell(), effects: new Effect() });
