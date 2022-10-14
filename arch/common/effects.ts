@@ -3,6 +3,7 @@ import { Condition } from "./components/condition"
 import { TargetFilter } from "./components/target";
 import { Vector2, Vector2s, Vector3, Vector3s } from './util/util'
 import { Zone } from './components/zone'
+import { Status, StatusInstance, TriggeredEffect, TriggerType } from "./red/status";
 
 export enum EffectType {
     damage, heal,
@@ -18,20 +19,20 @@ export class Effect {
     private static counter = 0;
     public readonly uid: number;
     public readonly isEffect = true;
+    // Main
     public type: EffectType
     public parent: any; // either an effect or spell at the root
     public effects: Effect[] = [] // children
-
+    // Data
     public data: any = {}
     public zone: Zone = new Zone()
     public necessaryForSpellCast: boolean
     public visibleInTooltip: boolean = true
     public condition: Condition = new Condition()
-    
+    // Tower
     public towerDirection: number = 0 // 1: up, -1 down, 0 extends both ways from start
     public towerStart: number = 0 // 1: top, 0: ground, -1: underground
     public towerLength: number = 0 //  number of tower floors to travel in each direction
-    
     
     // public appliesToState: Map<State, boolean>
     public appliesToState: {}
@@ -55,8 +56,17 @@ export class DamageData {
     public calculate() { } // aka compile
     public parse(jsonData: string) { }
 }
-export class StatusData {
-
+export class StatusData  {
+    // public status: Status;
+    // public statusInstance: StatusInstance;
+    public spellId: number
+    // public sourceId: number
+    public effects: TriggeredEffect[] = []; //Effect[];
+    public maxStacks: number = 0 // 0 = infini
+    public maxDuration: number = 0 // 0 = infini
+    public refreshAllOnNewInstance: boolean = false
+    
+    public inst: StatusInstance;
 }
 export class SubEffet {
 

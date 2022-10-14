@@ -13,6 +13,10 @@
 			"path": "."
 		},
 		{
+			"name": "Jolteon",
+			"path": "Jolteon/Jolteon"
+		},
+		{
 			"name": "Leafeon",
 			"path": "Leafeon"
 		},
