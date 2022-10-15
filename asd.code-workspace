@@ -24,5 +24,8 @@
 			"name": "arch",
 			"path": "arch"
 		}
-	]
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "interactive"
+	}
 }

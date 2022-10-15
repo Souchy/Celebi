@@ -1,4 +1,4 @@
-# Espeon is the server
+# Espeon is the game server
 
 ## General Practice :
 
