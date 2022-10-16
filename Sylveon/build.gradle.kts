@@ -31,12 +31,45 @@ dependencies {
     implementation("org.slf4j:slf4j-simple:latest.release")
 
     // implementation("org.mongodb:mongodb-driver-reactivestreams:4.6.0")
-    implementation("org.mongodb:mongodb-driver-sync:4.6.1")
+    // implementation("org.mongodb:mongodb-driver-sync:4.6.1")
     implementation("redis.clients:jedis:4.2.0")
 
     implementation(files("../../../GitPiranha/r and d/Commons WS/Teal Net/Teal Net.jar"))   
     implementation(files("../../../GitPiranha/r and d/Commons WS/TealWaters/tealwaters.jar"))   
-    implementation(files("../../../GitPiranha/r and d/annotationprocessor.jar"))   
+    implementation(files("../../../GitPiranha/r and d/annotationprocessor.jar"))  
+
+    // --
+
+	implementation("org.json:json:20220320")
+    
+    // implementation("org.mongodb:mongodb-driver-reactivestreams:4.6.0")
+	implementation("org.mongodb:mongodb-driver-core:4.7.1")
+    implementation("org.mongodb:mongodb-driver-sync:4.7.1")
+	implementation("org.mongodb:mongodb-driver-reactivestreams:4.7.1")
+	implementation("org.mongodb:bson:4.7.1")
+
+	// jersey + netty
+	implementation("org.glassfish.jersey.connectors:jersey-netty-connector:3.1.0-M7")
+	implementation("org.glassfish.jersey.containers:jersey-container-netty-http:3.1.0-M7")
+
+	implementation("org.glassfish.jersey.inject:jersey-hk2:3.1.0-M7")
+	implementation("org.glassfish.jersey.media:jersey-media-json-binding:3.1.0-M7")
+
+	// https://mvnrepository.com/artifact/jakarta.activation/jakarta.activation-api
+	implementation("jakarta.activation:jakarta.activation-api:2.1.0")
+	
+	// https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server
+	implementation("org.eclipse.jetty:jetty-server:11.0.11")
+	implementation("org.eclipse.jetty:jetty-webapp:11.0.11")
+	implementation("org.glassfish.jersey.containers:jersey-container-jetty-http:3.1.0-M7")
+
+	// https://mvnrepository.com/artifact/com.sun.jersey/jersey-servlet
+	// implementation("com.sun.jersey:jersey-servlet:1.19.4")
+	// https://mvnrepository.com/artifact/org.glassfish.jersey.containers/jersey-container-servlet
+	implementation("org.glassfish.jersey.containers:jersey-container-servlet:3.1.0-M7") 
+
+    
+    implementation("com.google.api-client:google-api-client:1.33.0")
 }
 
 application {

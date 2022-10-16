@@ -1,0 +1,32 @@
+
+<form submit.trigger="submit()">
+    <!-- Email -->
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Username or Email</label>
+        <input type="string" class="form-control" value.bind="username">
+    </div>
+    <!-- Password -->
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" value.bind="password">
+    </div>
+    <!-- Remember me -->
+    <!-- <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div> -->
+    <!-- btn -->
+    <button type="submit" class="btn">Submit</button>
+</form>
+
+<hr>
+
+<button type="button" class="btn" click.trigger="signUp()">Sign up</button>
+<button type="button" class="btn">Sign in</button>
+
+<hr>
+
+<button type="button" class="btn">Google</button>
+<button type="button" class="btn">Microsoft</button>
+<button type="button" class="btn">Facebook</button>
+<button type="button" class="btn">Github</button>

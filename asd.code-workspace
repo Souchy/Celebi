@@ -13,16 +13,15 @@
 			"path": "."
 		},
 		{
-			"name": "Jolteon",
-			"path": "Jolteon/Jolteon"
-		},
-		{
 			"name": "Leafeon",
 			"path": "Leafeon"
 		},
 		{
 			"name": "arch",
 			"path": "arch"
+		},
+		{
+			"path": "Jolteon"
 		}
 	],
 	"settings": {

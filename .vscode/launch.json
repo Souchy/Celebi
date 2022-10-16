@@ -3,6 +3,14 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Launch Sylveon",
+      "request": "launch",
+      "mainClass": "sylveon.Sylveon",
+      "projectName": "Sylveon",
+      "cwd": "${workspaceFolder}/Sylveon",
+    },
+    {
+      "type": "java",
       "name": "Launch Pachinko",
       "request": "launch",
       "mainClass": "pachinko.Pachinko",
@@ -14,6 +22,7 @@
       "request": "launch",
       "mainClass": "espeon.Espeon",
       "projectName": "Espeon",
+      "cwd": "${workspaceFolder}/Espeon",
       "args": [
         "63",
         "6300",
