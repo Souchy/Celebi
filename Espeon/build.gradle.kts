@@ -39,6 +39,9 @@ dependencies {
     implementation(files("../../../GitPiranha/r and d/annotationprocessor.jar"))   
     
     implementation("io.github.spair:imgui-java-app:1.86.4")
+
+    implementation("com.auth0:java-jwt:4.1.0")
+    implementation("org.bouncycastle:bcprov-jdk15on:1.59")
 }
 
 application {

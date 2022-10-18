@@ -16,6 +16,20 @@ repositories {
     mavenCentral()
 }
 
+// sourceSets {
+//     espeon {
+//         java {
+//             srcDir("../Espeon/src/main/java")
+//         }
+//     }
+//     // main {
+//     //     java {
+//     //         // srcDir("../Espeon/src/main/java")
+//     //         srcDirs = ["src", "../Espeon/src/main/java"]
+//     //     }
+//     // }
+// }
+
 dependencies {
     // Use JUnit Jupiter for testing.
     testImplementation("org.junit.jupiter:junit-jupiter:5.7.2")
@@ -70,6 +84,8 @@ dependencies {
 
     
     implementation("com.google.api-client:google-api-client:1.33.0")
+    implementation("com.auth0:java-jwt:4.1.0")
+    implementation("org.bouncycastle:bcprov-jdk15on:1.59")
 }
 
 application {

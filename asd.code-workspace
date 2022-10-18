@@ -21,10 +21,17 @@
 			"path": "arch"
 		},
 		{
+			"name": "Jolteon",
 			"path": "Jolteon"
+		},
+		{
+			"name": "Sylveon",
+			"path": "Sylveon"
 		}
 	],
 	"settings": {
-		"java.configuration.updateBuildConfiguration": "interactive"
+		"java.configuration.updateBuildConfiguration": "interactive",
+		"java.dependency.packagePresentation": "hierarchical",
+		"java.dependency.syncWithFolderExplorer": true
 	}
 }

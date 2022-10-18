@@ -47,52 +47,51 @@ import espeon.game.jade.SpellModel;
  */
 public final class Emerald {
 
-
-	//private
-	static MongoClient client;
+	// private
+	private static MongoClient client;
 
 	private static final String root = "Celebi";
-	
-//	static {
-//		init();
-//	}
-	
+
+
 	public static void init() {
 		var conf = JsonConfig.read(EmeraldConf.class);
-		init(conf.ip, conf.port, conf.username, conf.password);
+		var credentials = "";
+		if (conf.username != null && !conf.username.trim().isEmpty()) {
+			credentials = conf.username + ":" + conf.password + "@";
+		}
+		var connectStr = "mongodb://" + credentials + conf.ip + ":" + conf.port;
+		init(connectStr); 
 	}
 
 	/**
-	 * Allows re-initializing Emerald with different parameters
-	 * @param ip - Default is "localhost"
-	 * @param port - Default is 27017
-	 * @param user - Default is ""
-	 * @param pass - Default is ""
+	 * Allows initializing Emerald with different parameters
 	 */
-	public static void init(String ip, int port, String user, String pass) {
-		if(client != null) client.close();
-		var credentials = "";
-		if(user != null && !user.trim().isEmpty()) credentials = user + ":" + pass + "@";
+	public static void init(String connectStr) {
+		if(connectStr == null || connectStr.isEmpty()) {
+			init(); // default config
+			return;
+		}
+		if (client != null)
+			client.close();
+
 		var registry = CodecRegistries.fromRegistries(
 				MongoClientSettings.getDefaultCodecRegistry(),
 				CodecRegistries.fromCodecs(new ZonedDateTimeCodec()),
-				CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build())
-		);
-		var connectStr = "mongodb://" + credentials + ip + ":" + port;
-		Log.info("emerald init: " + connectStr);
+				CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build()));
 		
+		Log.info("emerald init: " + connectStr);
+
 		var settings = MongoClientSettings.builder()
-			//.credential(MongoCredential.createCredential("robyn", "admin", new char[] { 'z' }))
-			.applyConnectionString(new ConnectionString(connectStr))
-			.codecRegistry(registry)
-		.build();
+				.applyConnectionString(new ConnectionString(connectStr))
+				.codecRegistry(registry)
+				.build();
 		client = MongoClients.create(settings);
 
 		Logging.streams.add(l -> {
 			try {
 				Emerald.logs().insertOne(l);
 			} catch (Exception e) {
-//				System.out.println(e);
+				// System.out.println(e);
 			}
 		});
 	}
@@ -102,27 +101,28 @@ public final class Emerald {
 		public void encode(BsonWriter writer, ZonedDateTime value, EncoderContext encoderContext) {
 			writer.writeDateTime(value.toInstant().toEpochMilli());
 		}
+
 		@Override
 		public Class<ZonedDateTime> getEncoderClass() {
 			return ZonedDateTime.class;
 		}
+
 		@Override
 		public ZonedDateTime decode(BsonReader reader, DecoderContext decoderContext) {
 			return ZonedDateTime.ofInstant(Instant.ofEpochMilli(reader.readDateTime()), ZoneId.systemDefault());
 		}
 	}
 
-
 	private static <T> MongoCollection<T> get(MongoNamespace space, Class<T> clazz) {
 		return client.getDatabase(space.db).<T>getCollection(space.collection, clazz);
 	}
 
-
-	// -------------------------------------------------------------------  meta
+	// ------------------------------------------------------------------- meta
 
 	public static MongoCollection<Log> logs() {
 		return collection(Log.class); // get(logs, Log.class);
 	}
+
 	public static MongoCollection<User> users() {
 		return collection(User.class); // get(users, User.class);
 	}
@@ -130,19 +130,20 @@ public final class Emerald {
 	public static MongoCollection<CreatureModel> creatures() {
 		return collection(CreatureModel.class);
 	}
+
 	public static MongoCollection<SpellModel> spells() {
 		return collection(SpellModel.class);
 	}
+
 	public static MongoCollection<Action> actions() {
 		return collection(Action.class);
 	}
-
 
 	public static <T> MongoCollection<T> collection(Class<T> clazz) {
 		var fullpackag = clazz.getPackageName();
 		var packag = fullpackag.substring(fullpackag.lastIndexOf('.') + 1);
 		var collection = clazz.getSimpleName();
-//		System.out.println("Emerald collection : " + root + "#" + packag);
+		// System.out.println("Emerald collection : " + root + "#" + packag);
 		return client.getDatabase(root + "#" + packag).getCollection(collection, clazz);
 	}
 

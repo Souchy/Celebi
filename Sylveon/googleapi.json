@@ -7,8 +7,9 @@
         "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
         "client_secret": "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",
         "redirect_uris": [
+            "http://localhost:9000/welcome-page",
             "http://localhost:9000",
-            "http://localhost:7000"
+            "http://localhost:7000/auth/google"
         ],
         "javascript_origins": [
             "http://localhost:9000",

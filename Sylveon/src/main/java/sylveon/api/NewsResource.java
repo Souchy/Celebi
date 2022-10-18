@@ -12,7 +12,7 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.SecurityContext;
 
 @Path("news")
-public class NewsService {
+public class NewsResource {
 
     @Context
     private HttpServletRequest httpRequest;
@@ -21,17 +21,20 @@ public class NewsService {
     public String getNews() { //SecurityContext ctx) {
         // ctx.
         // httpRequest.log
-    	System.out.println("News");
+    	System.out.println("news/");
 //    	
         return "Hi news";
     }
     
+
+    public static final String googleUrl = "https://accounts.google.com/o/oauth2/v2/auth";
     @GET
     @Path("/1")
     public Response redirect() {
+        System.out.println("news/redirect");
     	try {
-//			Response.seeOther(new URI("google")).build();
-			return Response.temporaryRedirect(new URI("https://accounts.google.com/o/oauth2/v2/auth")).build();
+			return Response.seeOther(new URI(googleUrl)).build();
+			// return Response.temporaryRedirect(new URI("https://accounts.google.com/o/oauth2/v2/auth")).build();
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 			return null;

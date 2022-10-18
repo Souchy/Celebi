@@ -22,7 +22,9 @@
 <hr>
 
 <button type="button" class="btn" click.trigger="signUp()">Sign up</button>
-<button type="button" class="btn">Sign in</button>
+<button type="button" class="btn" click.trigger="signIn()">Sign in</button>
+<!-- <a href.bind="getGoogleOAuthURL()">OAuth</a> -->
+<button type="button" class="btn" click.trigger="google()">GOOGLE</button>
 
 <hr>
 
@@ -30,3 +32,4 @@
 <button type="button" class="btn">Microsoft</button>
 <button type="button" class="btn">Facebook</button>
 <button type="button" class="btn">Github</button>
+

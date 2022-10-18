@@ -35,11 +35,56 @@ export class Auth {
     }
 
     public signUp() {
-        fetch("http://localhost:7000/news").then(async res => {
+        fetch("http://localhost:7000/news", {
+            method: "GET",
+            headers: {
+                'Authorization': "Basic " + utf8_to_b64(this.username + ":" + this.password)
+            }
+        }).then(async res => {
             const token = await res.text();
             console.log("recv token: " + token)
-            localStorage.setItem("token", token);
+            // localStorage.setItem("token", token);
         })
+    }
+    
+    public signIn() {
+        fetch("http://localhost:7000/news/1", {
+            method: "GET",
+            headers: {
+                'Authorization': "Basic " + utf8_to_b64(this.username + ":" + this.password)
+            }
+        }).then(async res => {
+            const token = await res.text();
+            console.log("recv token: " + token)
+            // localStorage.setItem("token", token);
+        })
+    }
+
+    public google() {
+        window.location.href = this.getGoogleOAuthURL();
+    }
+
+    public getGoogleOAuthURL(): string {
+        let gapi = "https://accounts.google.com/o/oauth2/v2/auth";
+        let clientid = "850322629277-c9fu1umd1dlk7tjv325u6s33g32fb0ea.apps.googleusercontent.com";
+        let options = {
+            client_id: clientid,
+            redirect_uri: "http://localhost:7000/auth/google", // redirect_uri: "http://localhost:9000/welcome-page",
+            response_type: "code",
+            scope: [
+                "https://www.googleapis.com/auth/userinfo.profile",
+                "https://www.googleapis.com/auth/userinfo.email"
+            ].join(" "),
+            access_type: "offline",
+            prompt: "select_account",
+        }
+        console.log({ options })
+        let qs = new URLSearchParams(options);
+        console.log(qs.toString())
+
+        let url = gapi + "?" + qs.toString();
+        console.log(url)
+        return url;
     }
 
 }
