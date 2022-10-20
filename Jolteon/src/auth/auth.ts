@@ -1,6 +1,8 @@
 import { HttpClient, json } from '@aurelia/fetch-client';
 import { IEventAggregator, IHttpClient } from 'aurelia';
 import { newInstanceOf } from '@aurelia/kernel';
+import { bindable, inject } from 'aurelia';
+import { IRoute, IRouter, IRouteableComponent, ReloadBehavior, Navigation, Parameters, RoutingInstruction } from '@aurelia/router';
 
 export class Auth {
 
@@ -15,6 +17,20 @@ export class Auth {
 
     constructor(@IEventAggregator readonly ea: IEventAggregator) {
     }
+
+    
+    canLoad(params: Parameters, instruction: RoutingInstruction, navigation: Navigation) {
+        
+    }
+    loading(params: Parameters, instruction: RoutingInstruction, navigation: Navigation) {
+        
+    }
+	// load(parameters: Parameters, instruction: RoutingInstruction, navigation: Navigation): void | Promise<void> {
+	// 	// console.log("breeds load route: " + JSON.stringify(navigation.instruction))
+	// 	// console.log("breeds load route: " + JSON.stringify(instruction.route.match.id))
+	// 	let basicname = instruction.route.match.id;
+	// 	// console.log("breed: " + this.breedId);
+	// }
 
 
     public submit() {

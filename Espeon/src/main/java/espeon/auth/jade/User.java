@@ -1,6 +1,7 @@
 package espeon.auth.jade;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.bson.types.ObjectId;
@@ -17,49 +18,63 @@ public class User implements BBSerializer, BBDeserializer {
 	public static final AttributeKey<User> attrkey = AttributeKey.newInstance("jade.meta.user");
 	public static final AttributeKey<Integer> triesKey = AttributeKey.newInstance("jade.meta.user.tries");
 
-	/** mongo id */
+	/**
+	 * Mongo id
+	 */
 	public ObjectId _id;
 
-	/** The authorization level of the user */
+	/**
+	 * The authorization level of the user
+	 */
 	public UserLevel authLevel = UserLevel.normal;
-	/** If the user was created here or provided by external services */
+	/**
+	 * If the user was created here or provided by external services
+	 */
 	public UserType userType;
-
-	/** The publicly shown Pseudonym */
-	public String pseudo;
-	/** The user's email */
+	/**
+	 * The date this account was created
+	 */
+	public Date creationDate = new Date();
+	/**
+	 * Everything that happened to this account
+	 */
+	public List<AccountLog> logs = new ArrayList<>();
+	/**
+	 * The user's email
+	 */
 	public String email;
 	/**
-	 * This is if the email has been verified <br>
-	 * Automatically set to true if user is provided by Google
+	 * If the email has been verified
 	 */
 	public boolean verifiedEmail;
-
-	
-	/** The user's phone number */
+	/**
+	 * The user's phone number
+	 */
 	public String phone;
-	/** This is if the phone number has been verified (2-FA) */
+	/**
+	 * If the phone number has been verified (2-FA)
+	 */
 	public boolean verifiedPhone;
 
 	/**
+	 * The publicly shown Pseudonym
+	 */
+	public String pseudo;
+	/**
 	 * The username to log in <br>
-	 * Null by default (users provided from a 3rd party like google use only an
-	 * email)
+	 * Null by default (users provided from a 3rd party like google use only an email)
 	 */
 	public String username;
 	/**
 	 * The hashed password <br>
-	 * Null by default (users provided from a 3rd party like google use only an
-	 * email)
+	 * Null by default (users provided from a 3rd party like google use only an email)
 	 */
 	public String password;
 	/**
 	 * The salt to hash the password <br>
-	 * Null by default (users provided from a 3rd party like google use only an
-	 * email)
+	 * Null by default (users provided from a 3rd party like google use only an email)
 	 */
 	public String salt;
-	
 
 	public static final String name__id = "_id";
 	public static final String name_authLevel = "authLevel";
