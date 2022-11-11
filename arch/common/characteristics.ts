@@ -3,7 +3,9 @@ export enum StateType {
     flying,
     underground,
     wet,
-    hot,
+    burning, // hot
+    grounded,
+    shocked,
 
     carrying,
     carried,

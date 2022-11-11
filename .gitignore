@@ -4,6 +4,8 @@ build/.cmake/
 build/
 *.vpp.lck
 *.vpp.bak*
+*/googleapi.json
+googleapi.json
 
 # Godot 4+ specific ignores
 .godot/

@@ -1,0 +1,19 @@
+{
+    "web": {
+        "client_id": "850322629277-c9fu1umd1dlk7tjv325u6s33g32fb0ea.apps.googleusercontent.com",
+        "project_id": "vocal-collector-300920",
+        "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+        "token_uri": "https://oauth2.googleapis.com/token",
+        "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+        "client_secret": "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",
+        "redirect_uris": [
+            "http://localhost:9000/welcome-page",
+            "http://localhost:9000",
+            "http://localhost:7000/auth/google"
+        ],
+        "javascript_origins": [
+            "http://localhost:9000",
+            "http://localhost:7000"
+        ]
+    }
+}

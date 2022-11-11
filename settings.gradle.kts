@@ -9,4 +9,4 @@
 
 rootProject.name = "Celebi"
 include("Espeon")
-include("Pachinko")
+include("Sylveon")

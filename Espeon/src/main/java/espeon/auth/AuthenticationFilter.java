@@ -36,7 +36,7 @@ public class AuthenticationFilter extends ChannelInboundHandlerAdapter { //imple
 	/**
 	 * Minimum user level to be authorized to go through.
 	 */
-	public UserLevel minLevel = UserLevel.User;
+	public UserLevel minLevel = UserLevel.normal;
 	
 	/** 
 	 * Filter messages so only channels with a User attribute can go through 
@@ -97,8 +97,8 @@ public class AuthenticationFilter extends ChannelInboundHandlerAdapter { //imple
 		// + set l'attribute dans le channel 
 		// + ajoute le channel aux users connectés
 		var user = Emerald.users().find(and(eq(User.name_username, msg.username), eq(User.name_password, msg.hashedPassword))).first();
-		Log.info("AuthenticationFilter getUser ("+msg.username+", " +msg.hashedPassword+ ") " + user + " level " + (user == null ? "null" : user.level));
-		if(user != null && user.level.ordinal() >= minLevel.ordinal()) {
+		Log.info("AuthenticationFilter getUser ("+msg.username+", " +msg.hashedPassword+ ") " + user + " level " + (user == null ? "null" : user.authLevel));
+		if(user != null && user.authLevel.ordinal() >= minLevel.ordinal()) {
 			// set the user attribute on the channel
 			ctx.channel().attr(User.attrkey).set(user);
 			// add the channel to the list
