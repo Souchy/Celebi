@@ -11,7 +11,8 @@ export enum EffectType {
     push, pull,
     teleport, swap,
     random,
-    spell, trap, glyph,
+    spell, 
+    status, trap, glyph,
 }
 export const effectTypes = Object.values(EffectType).filter(item => isNaN(Number(item))).map(item => item as EffectType)
 

@@ -1,14 +1,6 @@
 {
 	"folders": [
 		{
-			"name": "DofusDB",
-			"path": "../../Git/ankama/DofusDB"
-		},
-		{
-			"name": "PyDofus",
-			"path": "../../Git/ankama/Alfred/PyDofus"
-		},
-		{
 			"name": "Celebi",
 			"path": "."
 		},
@@ -17,16 +9,16 @@
 			"path": "Leafeon"
 		},
 		{
-			"name": "arch",
-			"path": "arch"
-		},
-		{
 			"name": "Jolteon",
 			"path": "Jolteon"
 		},
 		{
 			"name": "Sylveon",
 			"path": "Sylveon"
+		},
+		{
+			"name": "arch",
+			"path": "arch"
 		}
 	],
 	"settings": {

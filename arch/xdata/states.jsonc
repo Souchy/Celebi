@@ -1,0 +1,31 @@
+[
+    {
+        "id": 0,
+        "hint": "invisible"
+    },
+    {
+        "id": 0,
+        "hint": "unTranslatable"
+    },
+    {
+        "id": 0,
+        "hint": "unTeleportable"
+    },
+    {
+        "id": 0,
+        "hint": "unSwappableTP"
+    },
+    {
+        "id": 0,
+        "hint": "unMovable"
+    },
+    {
+        "id": 0,
+        "hint": "unCarriable"
+    },
+    {
+        "id": 0,
+        "hint": "bombWall"
+    }
+
+]

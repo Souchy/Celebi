@@ -5,3 +5,48 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Resources" type="MarginContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Life" type="Label" parent="Resources"]
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 31.0
+
+[node name="Ap" type="Label" parent="Resources"]
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 31.0
+
+[node name="Mp" type="Label" parent="Resources"]
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 31.0
+
+[node name="Characteristics" type="MarginContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Fire" type="Label" parent="Characteristics"]
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 31.0
+
+[node name="Water" type="Label" parent="Characteristics"]
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 31.0
+
+[node name="Earth" type="Label" parent="Characteristics"]
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 31.0
+
+[node name="Wind" type="Label" parent="Characteristics"]
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 31.0

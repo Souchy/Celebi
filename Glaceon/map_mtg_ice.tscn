@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://b33etdk7pqxt6"]
+
+[ext_resource type="PackedScene" uid="uid://5t7vq0p5gpxv" path="res://map_mtg_ice.blend" id="1_ogk8w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_shd4o"]
+albedo_color = Color(1, 0.478431, 0.227451, 1)
+
+[node name="map_mtg_ice" instance=ExtResource("1_ogk8w")]
+
+[node name="Camera" parent="." index="1"]
+visible = false
+
+[node name="Cube" parent="." index="4"]
+visible = false
+
+[node name="Plane" parent="." index="5"]
+visible = false
+
+[node name="Grid" parent="." index="6"]
+material_override = SubResource("StandardMaterial3D_shd4o")
