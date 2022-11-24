@@ -9,6 +9,12 @@
         aria-expanded="${parent.isSpell ? true : false}" aria-controls="collapseExample">
         #${effect.uid}: ${effect.type}
     </button>
+    <button click.delegate="moveDown()">
+        v
+    </button>
+    <button click.delegate="moveUp()">
+        ^
+    </button>
     <!-- Delete -->
     <button class="btn btn-outline-dark ms-auto deleteEffect" click.trigger="deleteEffect(effect)">
         <span>-</span>
