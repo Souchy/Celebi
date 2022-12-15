@@ -33,9 +33,20 @@ Creatures have:
 - base stats
 - chosen affinities
 - chosen spells
+- base passives
+  - Some passives can trigger when itself or another creature gets swapped in or swapped out.
+
+## Game Modes
+- Constructed 1v1 : 
+  - each player makes their team in advance
+  - then queue up with a selected team build
+- Draft 3v3: 
+  - 3 players queue up, then each chooses their character and build. 
+  - the captain chooses the 4th creature. 
+  - when a creature is swapped, the player who swapped out takes control of the new creature swapped in.
+  - there's a pick order for creatures, but you can then do customization asynchronously during other people's turn to pick.
 
 
-## Passives
 
-Some passives can trigger when itself or another creature gets swapped in or swapped out.
+
 
