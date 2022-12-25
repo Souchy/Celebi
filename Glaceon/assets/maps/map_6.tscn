@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://cebbbrw2xrd4w"]
+
+[ext_resource type="PackedScene" uid="uid://d1vqawcwyrsyi" path="res://assets/maps/map_6.glb" id="1_2ha7v"]
+[ext_resource type="Texture2D" uid="uid://cuw7vxslwr6ch" path="res://assets/maps/texture_water.png" id="2_74v2j"]
+[ext_resource type="Texture2D" uid="uid://bmt64koufewye" path="res://assets/maps/texture_ground.png" id="2_u8l4l"]
+[ext_resource type="Texture2D" uid="uid://di371rdjfs6tb" path="res://assets/maps/texture_water_normal.png" id="3_d1qoa"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lr3mk"]
+cull_mode = 1
+albedo_texture = ExtResource("2_u8l4l")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m0nod"]
+albedo_texture = ExtResource("2_74v2j")
+metallic_specular = 1.0
+roughness = 0.15
+normal_enabled = true
+normal_scale = 0.15
+normal_texture = ExtResource("3_d1qoa")
+anisotropy = 0.54
+heightmap_texture = ExtResource("3_d1qoa")
+refraction_enabled = true
+
+[node name="map_6" instance=ExtResource("1_2ha7v")]
+
+[node name="Hole004" parent="." index="1"]
+visible = false
+
+[node name="Ground" parent="." index="2"]
+material_override = SubResource("StandardMaterial3D_lr3mk")
+
+[node name="Water" parent="." index="3"]
+material_override = SubResource("StandardMaterial3D_m0nod")
+cast_shadow = 0

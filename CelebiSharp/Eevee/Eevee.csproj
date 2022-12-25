@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <PackageId>$(AssemblyName)</PackageId>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="souchy.celebi.eevee\impl\controllers\" />
+    <Folder Include="souchy.celebi.eevee\impl\creatures\" />
+    <Folder Include="souchy.celebi.eevee\impl\effects\" />
+    <Folder Include="souchy.celebi.eevee\face\creatures\" />
+    <Folder Include="souchy.celebi.eevee\face\net\amethyst\" />
+    <Folder Include="souchy.celebi.eevee\impl\net\amethyst\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+  </ItemGroup>
+
+</Project>

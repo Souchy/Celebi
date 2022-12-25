@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://4j7eex12m7i5"]
+
+[ext_resource type="PackedScene" uid="uid://dxbd6wegg5jf4" path="res://sapphire/ui/timeline.tscn" id="1_lr0wt"]
+[ext_resource type="PackedScene" uid="uid://df1gm4cjuvnn3" path="res://sapphire/ui/mainBar.tscn" id="2_bw0cr"]
+
+[node name="sapphireHud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="timeline" parent="." instance=ExtResource("1_lr0wt")]
+
+[node name="mainBar" parent="." instance=ExtResource("2_bw0cr")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+grow_vertical = 0

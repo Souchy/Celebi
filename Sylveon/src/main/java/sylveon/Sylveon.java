@@ -8,6 +8,8 @@ import java.security.interfaces.ECKey;
 import java.security.interfaces.ECPrivateKey;
 import java.security.interfaces.ECPublicKey;
 import java.security.interfaces.RSAKey;
+import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,8 +43,10 @@ public class Sylveon {
 
 	public static final String REST_URI = "http://oauth2.googleapis.com/token";
 	public static final String tokenUrl = "https://accounts.google.com/o/oauth2/token";
-	public static Client client = ClientBuilder.newClient();
+	public static final Client client = ClientBuilder.newClient();
 	public static final AbstractDataStoreFactory dataStore;
+
+
 	// espeon109
 	static {
 		try {
@@ -64,10 +68,10 @@ public class Sylveon {
 			// PemUtils.generateKeyPair("id_ecdsa", "EC", 256);
 			// Log.info("Sylveon pub: " + PemUtils.readPub("./id_ecdsa.pub", "EC"));
 			// Log.info("Sylveon priv: " + PemUtils.readPriv("./id_ecdsa", "EC"));
-			
 			// PemUtils.generateKeyPair("id_rsa", "RSA", 2048); // 3072);
 			// Log.info("Sylveon pub: " + PemUtils.readPub("./id_rsa.pub", "RSA"));
 			// Log.info("Sylveon priv: " + PemUtils.readPriv("./id_rsa", "RSA"));
+
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

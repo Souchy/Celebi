@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="PackedScene" uid="uid://ebhjvntx6n8" path="res://assets/creatures/aurelia/Aurelia.glb" id="1_qy211"]
+
+[sub_resource type="Gradient" id="Gradient_hg6pv"]
+colors = PackedColorArray(0.730469, 0.270582, 0.166391, 1, 1, 0.209045, 0.428469, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dcdxl"]
+gradient = SubResource("Gradient_hg6pv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yfbm2"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.1
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.5
+direction = Vector3(0, 1, 0)
+spread = 14.11
+initial_velocity_min = 4.0
+initial_velocity_max = 4.0
+color = Color(1, 0.309804, 0.211765, 1)
+color_initial_ramp = SubResource("GradientTexture1D_dcdxl")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nuwrl"]
+albedo_color = Color(1, 0.431373, 0.0627451, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_rqote"]
+material = SubResource("StandardMaterial3D_nuwrl")
+radius = 0.025
+height = 0.05
+radial_segments = 12
+rings = 12
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mi1sw"]
+size = Vector2(5, 5)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_yfbm2")
+draw_pass_1 = SubResource("SphereMesh_rqote")
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="Aurelia" parent="Environment" instance=ExtResource("1_qy211")]
+
+[node name="Board" type="MeshInstance3D" parent="Environment"]
+mesh = SubResource("PlaneMesh_mi1sw")
+skeleton = NodePath("../..")

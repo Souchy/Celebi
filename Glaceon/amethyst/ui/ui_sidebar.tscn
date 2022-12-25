@@ -1,0 +1,187 @@
+[gd_scene load_steps=15 format=3]
+
+[ext_resource type="PackedScene" uid="uid://d1ahdd3oum5od" path="res://amethyst/ui/ui_social.tscn" id="1_57gck"]
+[ext_resource type="Script" path="res://amethyst/ui/ui_sidebar.gd" id="1_bh8af"]
+[ext_resource type="Texture2D" uid="uid://cokgd8iaexxjl" path="res://assets/Particle04_bokashistrong_soft.png" id="2_ud4a7"]
+
+
+[sub_resource type="Gradient" id="Gradient_mqsmv"]
+offsets = PackedFloat32Array(0.00409836, 0.987705)
+colors = PackedColorArray(0.0666667, 0.0901961, 0.12549, 1, 0.196078, 0.266667, 0.372549, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lssgc"]
+gradient = SubResource("Gradient_mqsmv")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hur13"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Gradient" id="Gradient_xvvga"]
+offsets = PackedFloat32Array(0.372642, 1)
+colors = PackedColorArray(1, 0.0078125, 0.0078125, 1, 0.552941, 0, 0.00392157, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wt6kb"]
+gradient = SubResource("Gradient_xvvga")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ah3b4"]
+texture = SubResource("GradientTexture2D_wt6kb")
+region_rect = Rect2(0, 0, 64, 64)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v75qu"]
+texture = SubResource("GradientTexture2D_wt6kb")
+region_rect = Rect2(0, 0, 64, 64)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yccgo"]
+bg_color = Color(0.552941, 0, 0.00392157, 1)
+
+[sub_resource type="Gradient" id="Gradient_0bkia"]
+offsets = PackedFloat32Array(0.0141509, 1)
+colors = PackedColorArray(0.945313, 0, 0.00670416, 1, 0.96875, 0.518507, 0.166575, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bdxi1"]
+gradient = SubResource("Gradient_0bkia")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8xhgp"]
+emission_shape = 3
+emission_box_extents = Vector3(75, 1, 1)
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 0.0
+gravity = Vector3(0, -98, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+angle_min = 90.0
+angle_max = 90.0
+scale_min = 0.0
+scale_max = 0.03
+color_ramp = SubResource("GradientTexture1D_bdxi1")
+turbulence_enabled = true
+
+[node name="ui_sidebar" type="Control"]
+custom_minimum_size = Vector2i(200, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bh8af")
+
+[node name="bg" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_lssgc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TeamSelector" type="PanelContainer" parent="VBoxContainer"]
+offset_right = 1366.0
+offset_bottom = 704.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_hur13")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TeamSelector"]
+offset_right = 1366.0
+offset_bottom = 704.0
+
+[node name="Header" type="ColorRect" parent="VBoxContainer/TeamSelector/VBoxContainer"]
+custom_minimum_size = Vector2i(0, 30)
+offset_right = 1366.0
+offset_bottom = 30.0
+color = Color(0.0666667, 0.0901961, 0.12549, 1)
+
+[node name="Label" type="Label" parent="VBoxContainer/TeamSelector/VBoxContainer/Header"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Select team"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PremadeTeams" type="VBoxContainer" parent="VBoxContainer/TeamSelector/VBoxContainer"]
+offset_top = 34.0
+offset_right = 1366.0
+offset_bottom = 650.0
+size_flags_vertical = 3
+
+[node name="Selected" type="ColorRect" parent="VBoxContainer/TeamSelector/VBoxContainer"]
+custom_minimum_size = Vector2i(0, 50)
+offset_top = 654.0
+offset_right = 1366.0
+offset_bottom = 704.0
+color = Color(0.694118, 0.0470588, 1, 1)
+
+[node name="Label" type="Label" parent="VBoxContainer/TeamSelector/VBoxContainer/Selected"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_right = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "This is a selected team name"
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="ui_social" parent="VBoxContainer" instance=ExtResource("1_57gck")]
+visible = false
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_top = 354.0
+offset_right = 1366.0
+offset_bottom = 704.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+offset_top = 708.0
+offset_right = 1366.0
+offset_bottom = 768.0
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Play" type="Button" parent="VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2i(150, 40)
+offset_left = 608.0
+offset_top = 10.0
+offset_right = 758.0
+offset_bottom = 50.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxTexture_ah3b4")
+theme_override_styles/hover = SubResource("StyleBoxTexture_v75qu")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yccgo")
+keep_pressed_outside = true
+text = "Play"
+
+[node name="PlayParticles" type="GPUParticles2D" parent="VBoxContainer/MarginContainer/Play"]
+position = Vector2(75, 40)
+emitting = false
+lifetime = 0.7
+visibility_rect = Rect2(-75, -40, 150, 40)
+trail_length_secs = 0.2
+process_material = SubResource("ParticleProcessMaterial_8xhgp")
+texture = ExtResource("2_ud4a7")
+
+[connection signal="focus_exited" from="." to="." method="_on_ui_sidebar_focus_exited"]
+[connection signal="button_up" from="VBoxContainer/MarginContainer/Play" to="." method="_on_play_button_up"]
+[connection signal="mouse_entered" from="VBoxContainer/MarginContainer/Play" to="." method="_on_play_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/MarginContainer/Play" to="." method="_on_play_mouse_exited"]

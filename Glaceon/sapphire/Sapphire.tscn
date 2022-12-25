@@ -1,0 +1,81 @@
+[gd_scene load_steps=11 format=3 uid="uid://djnb4ef6y13u7"]
+
+[ext_resource type="Script" path="res://sapphire/Sapphire.cs" id="1_axpwp"]
+[ext_resource type="PackedScene" uid="uid://cebbbrw2xrd4w" path="res://assets/maps/map_6.tscn" id="2_03mdn"]
+[ext_resource type="Script" path="res://sapphire/controls/Controls.cs" id="3_1ug5b"]
+[ext_resource type="PackedScene" path="res://sapphire/controls/cursor.tscn" id="3_tnfnv"]
+[ext_resource type="PackedScene" uid="uid://cc4afi05gsoau" path="res://assets/creatures/ybot/ybot_pro_magic.tscn" id="5_w8nat"]
+[ext_resource type="PackedScene" uid="uid://jadqkhpv0vpq" path="res://sapphire/fx/test/test_turbulence_0.tscn" id="6_hpyom"]
+[ext_resource type="PackedScene" uid="uid://4j7eex12m7i5" path="res://sapphire/ui/sapphireHud.tscn" id="6_t26y6"]
+[ext_resource type="PackedScene" uid="uid://b6hrdr1t2eg0t" path="res://sapphire/fx/test/test_turbulence_line.tscn" id="7_cguo4"]
+
+[sub_resource type="Environment" id="Environment_dqre3"]
+background_color = Color(0.207843, 0.776471, 0.294118, 1)
+tonemap_mode = 3
+ssao_radius = 16.0
+ssil_radius = 0.17
+sdfgi_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_5ltxg"]
+auto_exposure_enabled = true
+dof_blur_far_enabled = true
+dof_blur_far_distance = 30.0
+
+[node name="Sapphire" type="Node3D"]
+script = ExtResource("1_axpwp")
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_dqre3")
+camera_attributes = SubResource("CameraAttributesPractical_5ltxg")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(-0.77198, -0.378418, 0.510732, 7.02427e-08, 0.803483, 0.595328, -0.635647, 0.459581, -0.620273, 0, 8, -5)
+light_color = Color(0.662745, 0.666667, 1, 1)
+shadow_enabled = true
+shadow_bias = 0.07
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 25.0
+
+[node name="Map" parent="Environment" instance=ExtResource("2_03mdn")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.01, 0)
+
+[node name="Controls" type="Node" parent="."]
+script = ExtResource("3_1ug5b")
+
+[node name="cursorBoard" parent="Controls" instance=ExtResource("3_tnfnv")]
+transform = Transform3D(1, 0, -2.98023e-08, -2.98023e-08, 1, 2.98023e-08, -2.98023e-08, 0, 1, 2, 0.01, 8)
+
+[node name="cursorWorld" parent="Controls" instance=ExtResource("3_tnfnv")]
+transform = Transform3D(1, 0, -2.98023e-08, -2.98023e-08, 1, 2.98023e-08, -2.98023e-08, 0, 1, 2, 0.01, 8)
+
+[node name="camTop" type="Camera3D" parent="Controls"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5, 0)
+projection = 1
+size = 16.0
+near = 0.001
+far = 15.0
+
+[node name="camIso" type="Camera3D" parent="Controls"]
+transform = Transform3D(0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, -5, 7, 5)
+projection = 1
+current = true
+size = 16.0
+near = 0.001
+far = 25.0
+
+[node name="Creatures" type="Node" parent="."]
+
+[node name="ybot_pro_magic" parent="Creatures" instance=ExtResource("5_w8nat")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.190326, 1)
+
+[node name="ring pfx" parent="Creatures/ybot_pro_magic" instance=ExtResource("6_hpyom")]
+
+[node name="line pfx" parent="Creatures/ybot_pro_magic" instance=ExtResource("7_cguo4")]
+
+[node name="Hud" type="Node" parent="."]
+
+[node name="sapphireHud" parent="Hud" instance=ExtResource("6_t26y6")]
+unique_name_in_owner = true

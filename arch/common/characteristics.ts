@@ -74,7 +74,7 @@ export enum CharacteristicType {
     trap_resistance,
     
     poison_affinity,
-    poison_damaage,
+    poison_damage,
     poison_resistance,
     
     global_affinity,

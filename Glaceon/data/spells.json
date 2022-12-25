@@ -1,0 +1,76 @@
+[
+
+    {
+        "name": "",
+        "properties": {
+            "costs": [],
+            "targetFilter": {},
+            "castsPerTurn": 0,
+            "castsPerTarget": 0,
+            "cooldown": 0,
+            "range": 0,
+            "rangeMin": 0,
+            "rangePattern": {}
+        },
+        "effects": [
+            {
+                "effectid": 0,
+                "values": [],
+                "zone": {
+
+                },
+                "targetFilter": {},
+                "conditions": [],
+                "triggers": [],
+                "script": "",
+                "animation": {
+                    "animationSource": "",
+                    "animationTarget": ""
+                },
+                "vfx_from_to": {
+                    "vfx": ""
+                },
+                "sfx": {
+                }
+            }
+        ]
+    },
+
+    {
+        "name": "",
+        "properties": {
+            "costs": [],
+            "targetFilter": {},
+            "castsPerTurn": 0,
+            "castsPerTarget": 0,
+            "cooldown": 0,
+            "range": 0,
+            "rangeMin": 0,
+            "rangePattern": {}
+        },
+        "effects": [
+            {
+                "effectid": 0,
+                "values": [],
+                "zone": {
+
+                },
+                "targetFilter": {},
+                "conditions": [],
+                "triggers": [],
+                "script": "",
+                "animation": {
+                    "animationSource": "",
+                    "animationTarget": ""
+                },
+                "vfx_beam": {
+                    "vfxSource": "",
+                    "vfxTarget": ""
+                },
+                "sfx": {
+                }
+            }
+        ]
+    }
+
+]

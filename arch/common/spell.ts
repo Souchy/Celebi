@@ -1,4 +1,4 @@
-import { ResourceType, resourceTypes } from './characteristics';
+                                    import { ResourceType, resourceTypes } from './characteristics';
 import { Effect } from './effects';
 import { TargetFilter } from './components/target';
 

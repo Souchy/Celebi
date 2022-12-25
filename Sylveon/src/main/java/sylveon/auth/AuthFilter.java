@@ -60,9 +60,9 @@ public class AuthFilter implements ContainerRequestFilter {
             // TODO: accept // reject(ctx);
             return;
         }
-
-        Cookie access_token = null; //ctx.getCookies().get("access_token");
-        Cookie refresh_token = null; //ctx.getCookies().get("refresh_token");
+        
+        Cookie access_token = ctx.getCookies().get("access_token");
+        Cookie refresh_token = ctx.getCookies().get("refresh_token");
 
         // if only anonymous (ex: authentication) but the client already has an access token
         // if(rolesSet.contains(UserLevel.anonymous.name()) && (access_token == null || refresh_token == null)) {
@@ -76,14 +76,13 @@ public class AuthFilter implements ContainerRequestFilter {
         }
 
         // Get User from access token?
-
-        for (var roleStr : rolesSet) {
-            var role = UserLevel.valueOf(roleStr);
-            // if(user.level.id() >= role.id())
-            // accept
-        }
+        // for (var roleStr : rolesSet) {
+        //     var role = UserLevel.valueOf(roleStr);
+        //     // if(user.level.id() >= role.id())
+        //     // accept
+        // }
         // reject(ctx); 
-        return;
+        // return;
     }
     
     private void reject(ContainerRequestContext ctx) {

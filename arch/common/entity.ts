@@ -2,7 +2,7 @@ import { Status } from "./red/status";
 import { Stats } from "./stats";
 
 export class Entity {
-    public id;
+    public _id;
     public statuses: Status[]
     public pos: Position
 }
@@ -12,6 +12,7 @@ export class Cell extends Entity {
 }
 
 export class Creature extends Entity {
+    public name: string = "unnamed";
     public stats: Stats;
     public spells: []
 }

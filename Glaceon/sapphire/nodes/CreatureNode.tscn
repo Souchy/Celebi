@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://bj8425l6mfenk"]
+
+[ext_resource type="Script" path="res://sapphire/nodes/CreatureNode.cs" id="1_36dcd"]
+[ext_resource type="PackedScene" uid="uid://gm7vw1r34g23" path="res://assets/creatures/shadow.tscn" id="2_1auck"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_acxf2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l7ljo"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_gu546"]
+material = SubResource("StandardMaterial3D_l7ljo")
+inner_radius = 0.45
+outer_radius = 0.5
+
+[node name="CreatureNode" type="Node3D"]
+script = ExtResource("1_36dcd")
+
+[node name="Model" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_acxf2")
+
+[node name="TeamIndicator" type="MeshInstance3D" parent="."]
+mesh = SubResource("TorusMesh_gu546")
+
+[node name="creature_shadow" parent="." instance=ExtResource("2_1auck")]

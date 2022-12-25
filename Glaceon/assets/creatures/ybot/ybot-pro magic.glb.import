@@ -1,0 +1,36 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://b1acxe4lprjhh"
+path="res://.godot/imported/ybot-pro magic.glb-26858e3f0fc849794f65da94279870de.scn"
+
+[deps]
+
+source_file="res://assets/creatures/ybot/ybot-pro magic.glb"
+dest_files=["res://.godot/imported/ybot-pro magic.glb-26858e3f0fc849794f65da94279870de.scn"]
+
+[params]
+
+nodes/root_type="Node3D"
+nodes/root_name="Scene Root"
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+import_script/path=""
+_subresources={
+"nodes": {
+"PATH:Armature/Skeleton3D": {
+"retarget/bone_map": Object(BoneMap,"resource_local_to_scene":false,"resource_name":"","profile":null,"bonemap":null,"script":null)
+
+}
+}
+}

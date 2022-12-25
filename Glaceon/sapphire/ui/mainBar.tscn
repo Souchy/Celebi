@@ -1,0 +1,127 @@
+[gd_scene load_steps=3 format=3 uid="uid://df1gm4cjuvnn3"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6vnml"]
+blend_mode = 1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v8i28"]
+
+[node name="MainBar" type="Control"]
+material = SubResource("CanvasItemMaterial_6vnml")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -262.0
+offset_top = -78.0
+offset_right = 262.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer2"]
+custom_minimum_size = Vector2(0, 50)
+offset_left = 21.0
+offset_top = 14.0
+offset_right = 83.0
+offset_bottom = 64.0
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_v8i28")
+
+[node name="LblHP" type="Label" parent="HBoxContainer2/PanelContainer"]
+offset_right = 62.0
+offset_bottom = 26.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.682353, 0.231373, 0.231373, 1)
+text = "750/750"
+
+[node name="LblAP" type="Label" parent="HBoxContainer2/PanelContainer"]
+offset_top = 24.0
+offset_right = 19.0
+offset_bottom = 50.0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.0470588, 0.568627, 0.717647, 1)
+text = "16"
+
+[node name="LblMP" type="Label" parent="HBoxContainer2/PanelContainer"]
+offset_left = 52.0
+offset_top = 24.0
+offset_right = 62.0
+offset_bottom = 50.0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.160784, 0.6, 0.196078, 1)
+text = "7"
+
+[node name="StatsMain" type="VBoxContainer" parent="HBoxContainer2"]
+offset_left = 87.0
+offset_right = 87.0
+offset_bottom = 78.0
+theme_override_constants/separation = 0
+
+[node name="Spells" type="HBoxContainer" parent="HBoxContainer2"]
+offset_left = 91.0
+offset_top = 15.0
+offset_right = 503.0
+offset_bottom = 63.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Button" type="Button" parent="HBoxContainer2/Spells"]
+custom_minimum_size = Vector2(48, 48)
+offset_right = 48.0
+offset_bottom = 48.0
+
+[node name="Button2" type="Button" parent="HBoxContainer2/Spells"]
+custom_minimum_size = Vector2(48, 48)
+offset_left = 52.0
+offset_right = 100.0
+offset_bottom = 48.0
+
+[node name="Button3" type="Button" parent="HBoxContainer2/Spells"]
+custom_minimum_size = Vector2(48, 48)
+offset_left = 104.0
+offset_right = 152.0
+offset_bottom = 48.0
+
+[node name="Button4" type="Button" parent="HBoxContainer2/Spells"]
+custom_minimum_size = Vector2(48, 48)
+offset_left = 156.0
+offset_right = 204.0
+offset_bottom = 48.0
+
+[node name="Button5" type="Button" parent="HBoxContainer2/Spells"]
+custom_minimum_size = Vector2(48, 48)
+offset_left = 208.0
+offset_right = 256.0
+offset_bottom = 48.0
+
+[node name="Button6" type="Button" parent="HBoxContainer2/Spells"]
+custom_minimum_size = Vector2(48, 48)
+offset_left = 260.0
+offset_right = 308.0
+offset_bottom = 48.0
+
+[node name="Button7" type="Button" parent="HBoxContainer2/Spells"]
+custom_minimum_size = Vector2(48, 48)
+offset_left = 312.0
+offset_right = 360.0
+offset_bottom = 48.0
+
+[node name="Button8" type="Button" parent="HBoxContainer2/Spells"]
+custom_minimum_size = Vector2(48, 48)
+offset_left = 364.0
+offset_right = 412.0
+offset_bottom = 48.0

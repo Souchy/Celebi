@@ -1,0 +1,41 @@
+[
+    {
+        "id": 0,
+        "model": "aurelia/aurelia",
+        "animations": {
+            "idle": "Idle",
+            "run": "Run",
+            "walk": "Walk",
+            "receiveHit": "RecieveHit",
+            "victory": "Victory",
+            "defeat": "Defeat"
+        },
+        "icon": ""
+    },
+    {
+        "id": 1,
+        "model": "ybot/ybot_pro_magic",
+        "animations": {
+            "idle": "Armature025|mixamocom|Layer0|idle",
+            "run": "Armature050|mixamocom|Layer0|run forward",
+            "walk": "Armature054|mixamocom|Layer0|walk forward hold",
+            "receiveHit": "Armature043|mixamocom|Layer0|hit from front",
+            "victory": "Victory",
+            "defeat": "Defeat"
+        },
+        "icon": ""
+    },
+    {
+        "id": 2,
+        "model": "ybot/ybot-packed",
+        "animations": {
+            "idle": "idle",
+            "run": "tpose",
+            "walk": "tpose",
+            "receiveHit": "reaction hit",
+            "victory": "victory",
+            "defeat": "defeat"
+        },
+        "icon": ""
+    }
+]

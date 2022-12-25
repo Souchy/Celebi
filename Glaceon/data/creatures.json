@@ -1,0 +1,31 @@
+[
+  {
+    "id": 0,
+    "name": "aurelia",
+    "nameId": 0,
+    "descriptionId": 0,
+    "baseStats": [],
+    "baseSpells": [],
+    "skins": [0]
+  },
+  {
+    "id": 1,
+    "name": "ybot_pro_magic",
+    "nameId": 0,
+    "descriptionId": 0,
+    "baseStats": [],
+    "baseSpells": [],
+    "skins": [1]
+  },
+  {
+    "id": 2,
+    "name": "ybot-packed",
+    "nameId": 0,
+    "descriptionId": 0,
+    "baseStats": [],
+    "baseSpells": [],
+    "skins": [2]
+  }
+
+
+]

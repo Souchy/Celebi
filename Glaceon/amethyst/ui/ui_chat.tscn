@@ -1,0 +1,90 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://amethyst/ui/ui_chat.gd" id="1_iv4iq"]
+
+
+[sub_resource type="Gradient" id="Gradient_d02m5"]
+interpolation_mode = 2
+colors = PackedColorArray(0.0980392, 0.12549, 0.188235, 1, 0.0666667, 0.0901961, 0.12549, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7rsqc"]
+gradient = SubResource("Gradient_d02m5")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6wj60"]
+texture = SubResource("GradientTexture2D_7rsqc")
+margin_left = 10.0
+margin_top = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pneos"]
+bg_color = Color(0.0666667, 0.0901961, 0.12549, 1)
+
+[node name="ui_chat" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_iv4iq")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0980392, 0.12549, 0.188235, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ChatHeader" type="ColorRect" parent="ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2i(0, 50)
+offset_right = 1366.0
+offset_bottom = 50.0
+color = Color(0.0666667, 0.0901961, 0.12549, 1)
+
+[node name="Header" type="Label" parent="ColorRect/VBoxContainer/ChatHeader"]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_right = 68.0
+grow_vertical = 2
+text = "Charles"
+vertical_alignment = 1
+
+[node name="Close" type="Button" parent="ColorRect/VBoxContainer/ChatHeader"]
+custom_minimum_size = Vector2i(50, 0)
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+text = "x"
+
+[node name="Chats" type="ScrollContainer" parent="ColorRect/VBoxContainer"]
+offset_top = 54.0
+offset_right = 1366.0
+offset_bottom = 724.0
+size_flags_vertical = 3
+
+[node name="MessageList" type="VBoxContainer" parent="ColorRect/VBoxContainer/Chats"]
+
+[node name="ChatInput" type="TextEdit" parent="ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2i(0, 40)
+offset_top = 728.0
+offset_right = 1366.0
+offset_bottom = 768.0
+theme_override_colors/font_selected_color = Color(0.188235, 0.254902, 0.356863, 1)
+theme_override_colors/selection_color = Color(0.156863, 0.211765, 0.294118, 1)
+theme_override_styles/normal = SubResource("StyleBoxTexture_6wj60")
+theme_override_styles/focus = SubResource("StyleBoxFlat_pneos")
+placeholder_text = "Type here..."
+
+[connection signal="button_up" from="ColorRect/VBoxContainer/ChatHeader/Close" to="." method="close_on_close_button_up"]

@@ -1,0 +1,112 @@
+[gd_scene load_steps=10 format=3 uid="uid://prp4q6quw4f5"]
+
+[ext_resource type="Script" path="res://sapphire/fx/fx_projectile_from_to.cs" id="1_qymv7"]
+[ext_resource type="Texture2D" uid="uid://csqg7vrcfmr83" path="res://addons/kenney_particle_pack/spark_01.png" id="2_wpk0x"]
+
+[sub_resource type="Animation" id="Animation_2nqoa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path3D/PathFollow3D/GPUParticles3D:process_material:direction")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kybbx"]
+resource_name = "pfxAnim"
+loop_mode = 1
+step = 0.05
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("Path3D/PathFollow3D/GPUParticles3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 1, 0, 0.25, 1, 1, 0, 0, 0.5, 1, 0, -1, 0, 0.75, 1, -1, 0, 0)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("Path3D/PathFollow3D/GPUParticles3D:process_material:direction")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, -1, 0), Vector3(-1, -1, 0), Vector3(-1, 1, 0), Vector3(1, 1, 0)]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Path3D/PathFollow3D:progress_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, 0, 0, 0, 0, 0.25, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0.75, 0, 0, 0, 0, 1, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_38bq2"]
+_data = {
+"RESET": SubResource("Animation_2nqoa"),
+"pfxAnim": SubResource("Animation_kybbx")
+}
+
+[sub_resource type="Curve3D" id="Curve3D_qalvi"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0, 0, -1, 0, 0, 0, -1, 0, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ch830"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_wpk0x")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q7yi5"]
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+angle_max = 360.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_j6n3d"]
+
+[node name="fx_projectile_from_to" type="Node3D"]
+script = ExtResource("1_qymv7")
+path = PackedVector3Array(0, 1, 0, 1, 0, 0, 0, -1, 0, -1, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_38bq2")
+}
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.44769)
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_qalvi")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(1.40342e-08, 0.997415, -0.0697328, 6.04151e-08, -0.0697328, -0.997415, -0.999998, 9.78503e-09, -6.12377e-08, 0.985978, -0.19586, 0)
+progress = 1.78017
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Path3D/PathFollow3D"]
+material_override = SubResource("StandardMaterial3D_ch830")
+amount = 40
+lifetime = 0.5
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_q7yi5")
+draw_pass_1 = SubResource("QuadMesh_j6n3d")

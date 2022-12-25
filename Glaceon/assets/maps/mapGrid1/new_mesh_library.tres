@@ -1,0 +1,14 @@
+[gd_resource type="MeshLibrary" load_steps=3 format=3 uid="uid://dyy2yyiryg4hp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ipmel"]
+albedo_color = Color(0.329412, 0.227451, 0.0980392, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qm8ra"]
+material = SubResource("StandardMaterial3D_ipmel")
+
+[resource]
+item/0/name = ""
+item/0/mesh = SubResource("PlaneMesh_qm8ra")
+item/0/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/0/shapes = []
+item/0/navmesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

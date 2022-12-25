@@ -1,0 +1,88 @@
+<Project Sdk="Godot.NET.Sdk/4.0.0-beta.6">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="assets\creatures\martial-artist\textures\armor_low.png" />
+    <Content Include="assets\creatures\martial-artist\textures\Shadow.png" />
+    <Content Include="assets\creatures\martial-artist\textures\Skin_alpha_low.png" />
+    <Content Include="assets\creatures\martial-artist\textures\Skin_low.png" />
+    <Content Include="assets\fire.png" />
+    <Content Include="assets\maps\texture_ground.png" />
+    <Content Include="assets\maps\texture_water.png" />
+    <Content Include="assets\maps\texture_water_normal.png" />
+    <Content Include="assets\other\tileselector.png" />
+    <Content Include="assets\Particle04_bokashistrong_soft.png" />
+    <Content Include="assets\Sans titre.png" />
+    <Content Include="assets\splash\lilia.png" />
+    <Content Include="data\creatures.json" />
+    <Content Include="data\effects.json" />
+    <Content Include="data\maps.json" />
+    <Content Include="data\spells.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="GodotSharpExtras" Version="0.4.0-beta.4" />
+    <PackageReference Include="PlayFabAllSDK" Version="1.141.221107" />
+    <PackageReference Include="SimpleInjector" Version="5.4.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CelebiSharp\Eevee\Eevee.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="amethyst\net\" />
+    <Folder Include="amethyst\ui\" />
+    <Folder Include="assets\creatures\chailai\" />
+    <Folder Include="assets\effects\" />
+    <Folder Include="assets\spells\" />
+    <Folder Include="sapphire\nodes\" />
+    <Folder Include="sapphire\scenes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\animations\locomotion-magic.res" />
+    <None Include="assets\animations\locomotion.res" />
+    <None Include="assets\animations\Mixamo BoneMap.tres" />
+    <None Include="assets\Aurelia.fbx" />
+    <None Include="assets\creatures\aurelia\Aurelia.glb" />
+    <None Include="assets\creatures\aurelia\Aurelia.glb.import" />
+    <None Include="assets\creatures\aurelia\aurelia.tscn" />
+    <None Include="assets\creatures\martial-artist\source\dd6e7fe67ccb4751a4f19052b38c8db4.fbx" />
+    <None Include="assets\creatures\martial-artist\textures\armor_low.png.import" />
+    <None Include="assets\creatures\martial-artist\textures\Shadow.png.import" />
+    <None Include="assets\creatures\martial-artist\textures\Skin_alpha_low.png.import" />
+    <None Include="assets\creatures\martial-artist\textures\Skin_low.png.import" />
+    <None Include="assets\creatures\shadow.tscn" />
+    <None Include="assets\creatures\ybot\ybot-packed.glb" />
+    <None Include="assets\creatures\ybot\ybot-packed.glb.import" />
+    <None Include="assets\creatures\ybot\ybot-packed.tscn" />
+    <None Include="assets\creatures\ybot\ybot-pro magic.glb" />
+    <None Include="assets\creatures\ybot\ybot-pro magic.glb.import" />
+    <None Include="assets\creatures\ybot\ybot_pro_magic.tscn" />
+    <None Include="assets\fire.png.import" />
+    <None Include="assets\maps\map.gd" />
+    <None Include="assets\maps\map1.gdshader" />
+    <None Include="assets\maps\map1.tscn" />
+    <None Include="assets\maps\map_6.glb" />
+    <None Include="assets\maps\map_6.glb.import" />
+    <None Include="assets\maps\map_6.tscn" />
+    <None Include="assets\maps\map_mtg_ice.glb" />
+    <None Include="assets\maps\map_mtg_ice.glb.import" />
+    <None Include="assets\maps\node_3d.tscn" />
+    <None Include="assets\maps\texture_ground.png.import" />
+    <None Include="assets\maps\texture_water.png.import" />
+    <None Include="assets\maps\texture_water_normal.png.import" />
+    <None Include="assets\map_mtg_ice.blend" />
+    <None Include="assets\map_mtg_ice.blend.import" />
+    <None Include="assets\map_mtg_ice.blend.tmp" />
+    <None Include="assets\other\tileselector.obj" />
+    <None Include="assets\other\tileselector.obj.import" />
+    <None Include="assets\other\tileselector.png.import" />
+    <None Include="assets\Particle04_bokashistrong_soft.png.import" />
+    <None Include="assets\Sans titre.png.import" />
+    <None Include="assets\splash\lilia.png.import" />
+    <None Include="assets\splash\p1bww49dtav61.webp" />
+    <None Include="assets\splash\p1bww49dtav61.webp.import" />
+    <None Include="assets\Tsukuyo.fbx" />
+    <None Include="assets\ui\new_theme.tres" />
+  </ItemGroup>
+</Project>

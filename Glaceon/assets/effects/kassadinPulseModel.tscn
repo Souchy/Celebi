@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b36lgs5rfa6ks"]
+
+[ext_resource type="ArrayMesh" uid="uid://br7tld5cy84ur" path="res://assets/effects/kassinPulseMesh.tres" id="1_ufeui"]
+
+[node name="kassadinpulse" type="Node3D"]
+
+[node name="Cylinder" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_ufeui")
+skeleton = NodePath("")
