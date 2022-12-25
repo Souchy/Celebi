@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="PackedScene" uid="uid://cw07lno3sb7y" path="res://sapphire/fx/fx_projectile_path.tscn" id="1_kc70l"]
+[ext_resource type="Texture2D" uid="uid://csqg7vrcfmr83" path="res://addons/kenney_particle_pack/spark_01.png" id="2_jcfyk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3kv5r"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_jcfyk")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rccgb"]
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+angle_max = 360.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_dg6d2"]
+
+[node name="fx_projectile_path" instance=ExtResource("1_kc70l")]
+
+[node name="PathFollow3D" parent="Path3D" index="0"]
+transform = Transform3D(-1.62648e-07, 0.0728765, 0.99719, 3.72528e-09, 0.99719, -0.0728765, -0.999998, -8.13842e-09, -1.62463e-07, 0, 1, 0)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Path3D/PathFollow3D" index="0"]
+material_override = SubResource("StandardMaterial3D_3kv5r")
+amount = 40
+lifetime = 0.5
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_rccgb")
+draw_pass_1 = SubResource("QuadMesh_dg6d2")

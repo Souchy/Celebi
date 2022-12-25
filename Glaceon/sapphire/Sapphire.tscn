@@ -1,13 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://djnb4ef6y13u7"]
+[gd_scene load_steps=8 format=3 uid="uid://djnb4ef6y13u7"]
 
 [ext_resource type="Script" path="res://sapphire/Sapphire.cs" id="1_axpwp"]
 [ext_resource type="PackedScene" uid="uid://cebbbrw2xrd4w" path="res://assets/maps/map_6.tscn" id="2_03mdn"]
 [ext_resource type="Script" path="res://sapphire/controls/Controls.cs" id="3_1ug5b"]
 [ext_resource type="PackedScene" path="res://sapphire/controls/cursor.tscn" id="3_tnfnv"]
 [ext_resource type="PackedScene" uid="uid://cc4afi05gsoau" path="res://assets/creatures/ybot/ybot_pro_magic.tscn" id="5_w8nat"]
-[ext_resource type="PackedScene" uid="uid://jadqkhpv0vpq" path="res://sapphire/fx/test/test_turbulence_0.tscn" id="6_hpyom"]
-[ext_resource type="PackedScene" uid="uid://4j7eex12m7i5" path="res://sapphire/ui/sapphireHud.tscn" id="6_t26y6"]
-[ext_resource type="PackedScene" uid="uid://b6hrdr1t2eg0t" path="res://sapphire/fx/test/test_turbulence_line.tscn" id="7_cguo4"]
 
 [sub_resource type="Environment" id="Environment_dqre3"]
 background_color = Color(0.207843, 0.776471, 0.294118, 1)
@@ -70,12 +67,3 @@ far = 25.0
 
 [node name="ybot_pro_magic" parent="Creatures" instance=ExtResource("5_w8nat")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.190326, 1)
-
-[node name="ring pfx" parent="Creatures/ybot_pro_magic" instance=ExtResource("6_hpyom")]
-
-[node name="line pfx" parent="Creatures/ybot_pro_magic" instance=ExtResource("7_cguo4")]
-
-[node name="Hud" type="Node" parent="."]
-
-[node name="sapphireHud" parent="Hud" instance=ExtResource("6_t26y6")]
-unique_name_in_owner = true

@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://cw07lno3sb7y"]
+
+[ext_resource type="Script" path="res://sapphire/fx/fx_projectile_path.cs" id="1_8d852"]
+
+[sub_resource type="Animation" id="Animation_2nqoa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path3D/PathFollow3D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_kybbx"]
+resource_name = "pfxAnim"
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path3D/PathFollow3D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.25, 0.5, 0.75, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_38bq2"]
+_data = {
+"RESET": SubResource("Animation_2nqoa"),
+"pfxAnim": SubResource("Animation_kybbx")
+}
+
+[sub_resource type="Curve3D" id="Curve3D_qalvi"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0, 0, -1, 0, 0, 0, -1, 0, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[node name="fx_projectile_path" type="Node3D"]
+script = ExtResource("1_8d852")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_38bq2")
+}
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.44769)
+visible = false
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_qalvi")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(-1.62648e-07, 0.0728765, 0.99719, 3.72528e-09, 0.99719, -0.0728765, -0.999998, -8.13843e-09, -1.62463e-07, 0, 1, 0)

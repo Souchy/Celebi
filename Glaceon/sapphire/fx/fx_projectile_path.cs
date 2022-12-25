@@ -2,7 +2,7 @@ using Godot;
 using Godot.Sharp.Extras;
 using System;
 
-public partial class fx_projectile_from_to : Node3D
+public partial class fx_projectile_path : Node3D
 {
 	//[Export]
 	//public Vector3 posFrom { get; set; }

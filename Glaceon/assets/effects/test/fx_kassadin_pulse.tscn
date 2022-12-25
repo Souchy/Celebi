@@ -1,13 +1,13 @@
 [gd_scene load_steps=18 format=3 uid="uid://250lkxfmn3x3"]
 
-[ext_resource type="Texture2D" uid="uid://cokgd8iaexxjl" path="res://assets/Particle04_bokashistrong_soft.png" id="1_xrfcj"]
-[ext_resource type="ArrayMesh" uid="uid://br7tld5cy84ur" path="res://assets/effects/kassinPulseMesh.tres" id="2_egyi5"]
+[ext_resource type="Texture2D" uid="uid://cokgd8iaexxjl" path="res://assets/Particle04_bokashistrong_soft.png" id="1_dtvjm"]
+[ext_resource type="ArrayMesh" uid="uid://br7tld5cy84ur" path="res://assets/effects/kassinPulseMesh.tres" id="2_h2ybc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dn0jw"]
 transparency = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("1_xrfcj")
+albedo_texture = ExtResource("1_dtvjm")
 billboard_mode = 3
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
@@ -96,7 +96,7 @@ color = Color(0.2, 0.141176, 1, 1)
 
 [node name="Node3D" type="Node3D"]
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+[node name="GPUParticles3DBalls" type="GPUParticles3D" parent="."]
 material_override = SubResource("StandardMaterial3D_dn0jw")
 process_material = SubResource("ParticleProcessMaterial_yw0c1")
 draw_pass_1 = SubResource("QuadMesh_5n78l")
@@ -116,8 +116,8 @@ material_override = SubResource("StandardMaterial3D_0r4eo")
 mesh = SubResource("ArrayMesh_84j4a")
 skeleton = NodePath("")
 
-[node name="GPUParticles3D3" type="GPUParticles3D" parent="."]
+[node name="GPUParticles3DPulse" type="GPUParticles3D" parent="."]
 amount = 1
 lifetime = 0.75
 process_material = SubResource("ParticleProcessMaterial_7g1fd")
-draw_pass_1 = ExtResource("2_egyi5")
+draw_pass_1 = ExtResource("2_h2ybc")
