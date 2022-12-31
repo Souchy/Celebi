@@ -1,4 +1,4 @@
-﻿using souchy.celebi.eevee.face.objects;
+﻿using souchy.celebi.eevee.face.util;
 
 namespace souchy.celebi.eevee.face.statuses
 {

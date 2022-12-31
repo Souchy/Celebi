@@ -1,5 +1,5 @@
 ﻿using souchy.celebi.eevee.face.conditions;
-using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.interfaces;
 
 namespace souchy.celebi.eevee.impl.objects

@@ -1,6 +1,4 @@
-﻿using souchy.celebi.eevee.face.objects;
-
-namespace souchy.celebi.eevee.face.util
+﻿namespace souchy.celebi.eevee.face.util
 {
     public interface IUIdGenerator
     {

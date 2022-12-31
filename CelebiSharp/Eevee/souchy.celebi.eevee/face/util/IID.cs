@@ -1,4 +1,4 @@
-﻿namespace souchy.celebi.eevee.face.objects
+﻿namespace souchy.celebi.eevee.face.util
 {
     public struct IID
     {
@@ -10,6 +10,6 @@
 
         public static implicit operator uint(IID i) => i.value;
         public static explicit operator IID(uint i) => new IID(i);
-        public static explicit operator IID(int i) => new IID((uint) i);
+        public static explicit operator IID(int i) => new IID((uint)i);
     }
 }

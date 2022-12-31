@@ -1,6 +1,6 @@
-﻿using souchy.celebi.eevee.face.objects;
-using souchy.celebi.eevee.face.stats;
+﻿using souchy.celebi.eevee.face.stats;
 using souchy.celebi.eevee.face.statuses;
+using souchy.celebi.eevee.face.util;
 
 namespace souchy.celebi.eevee.statuses
 {

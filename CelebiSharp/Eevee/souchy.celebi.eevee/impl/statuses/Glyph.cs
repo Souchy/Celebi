@@ -1,5 +1,5 @@
-﻿using souchy.celebi.eevee.face.objects;
-using souchy.celebi.eevee.face.stats;
+﻿using souchy.celebi.eevee.face.stats;
+using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.interfaces.statuses;
 
 namespace souchy.celebi.eevee.statuses

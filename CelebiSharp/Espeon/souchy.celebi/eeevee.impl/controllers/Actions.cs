@@ -1,8 +1,8 @@
 ﻿using souchy.celebi.eevee;
 using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.entity;
-using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.stats;
+using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.util.math;
 
 namespace Espeon.souchy.celebi.eeveeimpl.controllers

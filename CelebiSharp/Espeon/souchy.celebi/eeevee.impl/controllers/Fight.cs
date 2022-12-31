@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Hosting;
 using souchy.celebi.eevee.face.controllers;
-using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.util;
 using System;

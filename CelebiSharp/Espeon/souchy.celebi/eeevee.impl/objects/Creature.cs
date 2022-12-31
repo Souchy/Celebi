@@ -31,6 +31,7 @@ namespace souchy.celebi.eevee.impl.objects
         public IID entityUid { get; init; }
         public IID modelId { get; set; }
         public IID player { get; set; }
+
         public IPosition position { get; init; } = new Position();
         public List<IID> statusIds { get; init; } = new List<IID>();
         public IStats stats { get; set; }

@@ -23,7 +23,6 @@ namespace Espeon.souchy.celebi.eeevee.impl
             // TODO: 
             //foreach(var creature in jsonCreatures.AsGodotArray()) 
             //parseCreature(creature);
-
         }
 
         public void parseCreature() //TODO: Variant jsonCreature)

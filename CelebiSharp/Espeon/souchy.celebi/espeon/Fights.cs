@@ -1,5 +1,5 @@
 ﻿using souchy.celebi.eevee.face.controllers;
-using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.face.util;
 
 namespace Espeon.souchy.celebi.espeon
 {

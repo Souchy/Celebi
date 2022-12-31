@@ -1,7 +1,7 @@
 ﻿using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.conditions;
 using souchy.celebi.eevee.face.entity;
-using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
 using souchy.celebi.eevee.interfaces;
 using souchy.celebi.eevee.values;
