@@ -14,7 +14,10 @@ namespace souchy.celebi.eevee.impl.stats
 
         public int Value { 
             get {
-                return (baseFlat * increasedPercent + increasedFlat) * morePercent;
+                double step1 = 1 + baseFlat * increasedPercent / 100d;
+                double step2 = step1 + increasedFlat;
+                double step3 = 1 + step2 * morePercent / 100d;
+                return (int) step3;
             } 
             set => throw new NotImplementedException(); 
         }

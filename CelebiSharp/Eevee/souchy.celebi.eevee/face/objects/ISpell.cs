@@ -15,16 +15,17 @@ namespace souchy.celebi.eevee
 
         public List<ICost> costs { get; set; }
         public ISpellProperties properties { get; set; }
+
         public List<IID> effectIds { get; set; }
     }
 
     public interface ISpellProperties
     {
-        public IValueSingle<int> maxCastsPerTurn { get; set; }
-        public IValueSingle<int> maxCastsPerTarget { get; set; }
-        public IValueSingle<int> cooldown { get; set; }
-        public IValueSingle<int> cooldownInitial { get; set; }
-        public IValueSingle<int> cooldownGlobal { get; set; }
+        public IValue<int> maxCastsPerTurn { get; set; }
+        public IValue<int> maxCastsPerTarget { get; set; }
+        public IValue<int> cooldown { get; set; }
+        public IValue<int> cooldownInitial { get; set; }
+        public IValue<int> cooldownGlobal { get; set; }
     }
 
     public interface ICost
