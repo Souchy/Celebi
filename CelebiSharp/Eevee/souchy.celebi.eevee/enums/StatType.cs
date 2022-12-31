@@ -1,5 +1,13 @@
 ﻿namespace souchy.celebi.eevee.enums
 {
+    public enum StatValueType
+    {
+        Simple,
+        Detailed,
+        Bool,
+        Resource
+    }
+
     public enum ResourceType
     {
         Life,

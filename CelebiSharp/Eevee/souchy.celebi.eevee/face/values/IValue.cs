@@ -2,8 +2,6 @@
 {
     public interface IValue<T>
     {
-        public T get();
-
-        public void set(T val);
+        public T Value { get; set; }
     }
 }

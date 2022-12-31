@@ -24,8 +24,8 @@ namespace souchy.celebi.eevee.face.statuses
         public IID holderEntity { get; set; }
 
 
-        public IStatDetailed<int> delay { get; set; }
-        public IStatDetailed<int> duration { get; set; }
+        public IStatSimple delay { get; set; }
+        public IStatSimple duration { get; set; }
 
 
         public List<IID> effectIds { get; set; }

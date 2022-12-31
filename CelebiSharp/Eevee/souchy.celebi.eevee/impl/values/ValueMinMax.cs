@@ -15,14 +15,14 @@ namespace souchy.celebi.eevee.values
         public T min { get; set; }
         public T max { get; set; }
 
-        public (T min, T max) get()
+        public (T min, T max) Value
         {
-            return (min, max);
+            get => (min, max); 
+            set {
+                min = value.min;
+                max = value.max;
+            }
         }
-        public void set((T min, T max) val)
-        {
-            min = val.min;
-            max = val.max;
-        }
+
     }
 }

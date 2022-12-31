@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="souchy.celebi\eeevee\effects\" />
+    <Folder Include="souchy.celebi\eeevee.impl\effects\" />
     <Folder Include="souchy.celebi\espeon\face\" />
     <Folder Include="souchy.celebi\espeon\impl\" />
   </ItemGroup>

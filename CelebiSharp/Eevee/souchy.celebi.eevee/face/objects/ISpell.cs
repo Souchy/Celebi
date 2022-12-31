@@ -2,7 +2,9 @@
 using souchy.celebi.eevee.face.conditions;
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.face.values;
 using souchy.celebi.eevee.interfaces;
+using souchy.celebi.eevee.values;
 
 namespace souchy.celebi.eevee
 {
@@ -12,14 +14,17 @@ namespace souchy.celebi.eevee
         public ICondition targetFilter { get; set; }
 
         public List<ICost> costs { get; set; }
+        public ISpellProperties properties { get; set; }
         public List<IID> effectIds { get; set; }
+    }
 
-        public int maxCastsPerTurn { get; set; }
-        public int maxCastsPerTarget { get; set; }
-        public int cooldown { get; set; }
-        public int cooldownInitial { get; set; }
-        public int cooldownGlobal { get; set; }
-
+    public interface ISpellProperties
+    {
+        public IValueSingle<int> maxCastsPerTurn { get; set; }
+        public IValueSingle<int> maxCastsPerTarget { get; set; }
+        public IValueSingle<int> cooldown { get; set; }
+        public IValueSingle<int> cooldownInitial { get; set; }
+        public IValueSingle<int> cooldownGlobal { get; set; }
     }
 
     public interface ICost

@@ -33,13 +33,11 @@ namespace souchy.celebi.eevee.impl.objects
 
         public ICondition sourceCondition { get; set; }
         public ICondition targetFilter { get; set; }
+        
+        public ISpellProperties properties { get; set; }
         public List<ICost> costs { get; set; }
+
         public List<IID> effectIds { get; set; }
-        public int maxCastsPerTurn { get; set; }
-        public int maxCastsPerTarget { get; set; }
-        public int cooldown { get; set; }
-        public int cooldownInitial { get; set; }
-        public int cooldownGlobal { get; set; }
 
         public void Dispose()
         {

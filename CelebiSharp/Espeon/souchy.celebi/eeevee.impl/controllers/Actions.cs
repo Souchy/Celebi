@@ -18,7 +18,7 @@ namespace Espeon.souchy.celebi.eeveeimpl.controllers
             // check costs
             foreach (ICost cost in s.costs)
             {
-                if(source.stats.get<IStatDetailed<int>>(cost.resource).current < cost.value)
+                if(source.stats.get<IStatResource>(cost.resource).current < cost.value)
                 {
                     return;
                 }
@@ -29,7 +29,7 @@ namespace Espeon.souchy.celebi.eeveeimpl.controllers
             // spend costs
             foreach (ICost cost in s.costs)
             {
-                source.stats.get<IStatDetailed<int>>(cost.resource).current -= cost.value;
+                source.stats.get<IStatResource>(cost.resource).current -= cost.value;
             }
             // apply effects
             foreach(IID effectId in s.effectIds)

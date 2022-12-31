@@ -8,17 +8,11 @@ namespace souchy.celebi.eevee.face.objects
 {
     public interface IEffect : IEntityModeled
     {
-        /// <summary>
-        /// If the source condition doesnt match, the entire effect is not applied
-        /// </summary>
         public ICondition sourceCondition { get; set; }
-        /// <summary>
-        /// Condition for each target
-        /// </summary>
         public ICondition targetFilter { get; set; }
+
+
         public IZone zone { get; set; }
         public List<ITrigger> triggers { get; set; }
-
-
     }
 }
