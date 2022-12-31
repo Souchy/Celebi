@@ -1,5 +1,7 @@
-﻿using souchy.celebi.eevee.face.controllers;
+﻿using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.face.controllers;
 using souchy.celebi.eevee.face.entity;
+using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.stats;
 using souchy.celebi.eevee.face.statuses;
 using souchy.celebi.eevee.face.util;
@@ -12,7 +14,7 @@ namespace souchy.celebi.eevee.impl.objects
      * 
      * CreatureResource/Model : json file containing : passives, baseStats, baseSpells, skins..
      * 
-     * CreatureInstance : instance data containing : player, position, spells, statuses, stats
+     * Creature : instance data containing : player, position, spells, statuses, stats
      * 
      * CreatureNode : Sapphire node containing: script, model, shadow, teamRing, instanceData
      * 
@@ -23,19 +25,21 @@ namespace souchy.celebi.eevee.impl.objects
      */
 
 
-    public class CreatureInstance : ICreatureInstance
+    public class Creature : ICreature
     {
-        public uint entityUid { get; init; }
-        public uint modelId { get; set; }
-        public IPlayer player { get; set; }
+        public IID fightUid { get; init; }
+        public IID entityUid { get; init; }
+        public IID modelId { get; set; }
+        public IID player { get; set; }
         public IPosition position { get; init; } = new Position();
-        public List<IStatus> statuses { get; init; } = new List<IStatus>();
+        public List<IID> statusIds { get; init; } = new List<IID>();
         public IStats stats { get; set; }
-        public List<int> spellModelIds { get; set; } = new List<int>();
+        public List<IID> spellModelIds { get; set; } = new List<IID>();
+        public Dictionary<ContextType, IContext> contextsStats { get; set; } = new Dictionary<ContextType, IContext>();
 
         private readonly IUIdGenerator _uIdGenerator;
 
-        public CreatureInstance(IUIdGenerator uIdGenerator)
+        public Creature(IUIdGenerator uIdGenerator)
         {
             this._uIdGenerator = uIdGenerator;
             this.entityUid = uIdGenerator.next();

@@ -1,6 +1,6 @@
 ﻿namespace souchy.celebi.eevee.face.conditions
 {
-    public interface IStateCondition
+    public interface IStateCondition : IArrayCondition<int>
     {
     }
 }

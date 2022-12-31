@@ -13,15 +13,22 @@ namespace souchy.celebi.eevee.face.statuses
         /// <summary>
         /// That or some kind of ID that allows merging of stacks/instances
         /// </summary>
-        //public int sourceSpell { get; set; }
-        public ICreatureInstance source { get; set; }
-        public IBoardEntity holder { get; set; }
+        public IID sourceSpell { get; set; }
+        /// <summary>
+        /// Creature who applied the status
+        /// </summary>
+        public IID sourceCreature { get; set; }
+        /// <summary>
+        /// Entity on which the status is 
+        /// </summary>
+        public IID holderEntity { get; set; }
 
 
         public IStatDetailed<int> delay { get; set; }
         public IStatDetailed<int> duration { get; set; }
 
-        public List<IEffect> effects { get; set; }
+
+        public List<IID> effectIds { get; set; }
 
     }
 

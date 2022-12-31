@@ -1,4 +1,5 @@
-﻿using souchy.celebi.eevee.face.objects;
+﻿using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.statuses;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.util.math;
@@ -8,13 +9,15 @@ namespace Espeon.souchy.celebi.eeveeimpl.objects
 {
     public class Cell : ICell
     {
-        public uint entityUid { get; init; }
-        public uint modelId { get; set; }
+        public IID fightUid { get; init; }
+        public IID entityUid { get; init; }
+        public IID modelId { get; set; }
 
         public IPosition position { get; init; } = new Position();
-        public List<IStatus> statuses { get; init; } = new List<IStatus>();
+        public List<IID> statusIds { get; init; } = new List<IID>();
         public bool walkable { get; set; }
         public bool blocksLos { get; set; }
+        public Dictionary<ContextType, IContext> contextsStats { get; set; } = new Dictionary<ContextType, IContext>();
 
         private readonly IUIdGenerator _uIdGenerator;
 

@@ -10,12 +10,15 @@ namespace Espeon.souchy.celebi.eeveeimpl.controllers
     public class Actions
     {
 
-        public void castSpell(ICreatureInstance source, IPosition target, ISpell s)
+        public void castSpell(IID sourceCreature, IID spellId, IPosition target)
         {
+            ISpell s = default;
+            ICreature source = default;
+
             // check costs
             foreach (ICost cost in s.costs)
             {
-                if(source.stats.get<IStatDetailed<int>>(cost.statId).current < cost.val)
+                if(source.stats.get<IStatDetailed<int>>(cost.resource).current < cost.value)
                 {
                     return;
                 }
@@ -26,13 +29,18 @@ namespace Espeon.souchy.celebi.eeveeimpl.controllers
             // spend costs
             foreach (ICost cost in s.costs)
             {
-                source.stats.get<IStatDetailed<int>>(cost.statId).current -= cost.val;
+                source.stats.get<IStatDetailed<int>>(cost.resource).current -= cost.value;
             }
             // apply effects
-            foreach(IEffect eff in s.effects)
+            foreach(IID effectId in s.effectIds)
             {
 
             }
+
+        }
+
+        public void moveTo(IID sourceCreature, IPosition target)
+        {
 
         }
 

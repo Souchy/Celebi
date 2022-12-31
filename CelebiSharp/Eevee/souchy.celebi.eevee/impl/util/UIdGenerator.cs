@@ -1,4 +1,5 @@
-﻿using souchy.celebi.eevee.face.util;
+﻿using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.face.util;
 
 namespace souchy.celebi.eevee.impl.util
 {
@@ -7,17 +8,21 @@ namespace souchy.celebi.eevee.impl.util
         private uint counter = 0;
         private HashSet<uint> ids = new HashSet<uint>();
 
-        public uint next()
+        public IID next()
         {
+            if(int.MaxValue == ids.Count) // uint.max
+            {
+                throw new Exception("Too many IDs");
+            }
             do
             {
                 counter++;
                 if (counter == int.MaxValue) counter = 0;
             } while (ids.Contains(counter));
-            return counter;
+            return (IID) counter;
         }
 
-        public void dispose(uint i)
+        public void dispose(IID i)
         {
             ids.Remove(i);
         }

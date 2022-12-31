@@ -4,6 +4,6 @@ namespace souchy.celebi.eevee.face.entity
 {
     public interface IEntityModeled : IEntity
     {
-        public uint modelId { get; set; }
+        public IID modelId { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace souchy.celebi.eevee.face.conditions.context
 {
-    public interface IApUsedCondition
+    public interface IResourceGainedCondition : IResourceCondition
     {
     }
 }

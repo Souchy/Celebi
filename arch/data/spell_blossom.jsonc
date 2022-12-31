@@ -1,0 +1,44 @@
+{
+	
+    "_id": {
+        "$oid": "62b9a7728e991d82fc1568fe"
+    },
+    "name": "Fleche de repulsion",
+    "description": "Occasionne des dommages. Si la source a un haut special, réduit la défense des cibles. Si la défense des cibles est basse, pousse les cibles, sinon les attire.",
+    "costs": [
+        {
+            "resource": "ap",
+            "value": 3
+        }
+    ],
+    "castingConditions": {
+        "cooldown": 0,
+        "castPerTurn": 0,
+        "castPerTarget": 0
+    },
+	"effects": [
+        {
+            "effectModelId": 700,
+            "zone": {
+                "type": "infinite",
+                "size": 0,
+                "filterCondition": {
+                    "groupType": "and",
+                    "childrenGroup": []
+                },
+                "worldOrigin": "source",
+				"worldOffset": {
+					"x": 0, "y": 0, "z": 0
+				},
+				"localOrigin": "center",
+				"rotation": "top"
+            },
+            "castingCondition": {
+                "groupType": "and",
+                "childrenGroup": []
+            },
+            // "triggers": [],
+            "effectChildren": []
+        }
+	]
+}

@@ -10,9 +10,10 @@ namespace Espeon.souchy.celebi.espeon.impl.eevee.controllers
     public class Board : IBoard
     {
         #region Properties
-        public uint entityUid { get; init; }
+        public IID fightUid { get; init; }
+        public IID entityUid { get; init; }
 
-        public List<ICreatureInstance> creatures { get; init; } = new List<ICreatureInstance>();
+        public List<ICreature> creatures { get; init; } = new List<ICreature>();
         public List<ICell> cells { get; init; } = new List<ICell>();
         #endregion
 
@@ -34,14 +35,14 @@ namespace Espeon.souchy.celebi.espeon.impl.eevee.controllers
             return cells.First(c => c.position == pos);
         }
 
-        public ICreatureInstance getCreature(IPosition pos)
+        public ICreature getCreature(IPosition pos)
         {
             return creatures.First(c => c.position == pos);
         }
 
-        public List<ICreatureInstance> getCreatures(IPosition pos)
+        public List<ICreature> getCreatures(IPosition pos)
         {
-            var list = new List<ICreatureInstance>();
+            var list = new List<ICreature>();
             foreach (var c in creatures)
                 if (c.position.x == pos.x && c.position.y == pos.y)
                     list.Add(c);

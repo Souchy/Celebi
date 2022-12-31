@@ -3,10 +3,10 @@ using souchy.celebi.eevee.values;
 
 namespace souchy.celebi.eevee.face.effects
 {
-    public interface IEffectCastSpell : IEffect
+    public interface IEffectCastSubSpell : IEffect
     {
 
-        public IValue<int> spellModelId { get; set; }
+        public IValue<IID> spellModelId { get; set; }
 
     }
 }

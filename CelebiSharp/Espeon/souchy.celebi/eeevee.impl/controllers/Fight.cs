@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Hosting;
 using souchy.celebi.eevee.face.controllers;
+using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.util;
 using System;
@@ -13,7 +14,8 @@ namespace Espeon.souchy.celebi.espeon.impl.eevee.controllers
     public class Fight : IFight
     {
         #region Properties
-        public uint entityUid { get; init; }
+        public IID fightUid { get; init; }
+        public IID entityUid { get; init; }
         public IBoard board { get; init; }
         public List<IPlayer> players { get; init; } = new List<IPlayer>();
         #endregion

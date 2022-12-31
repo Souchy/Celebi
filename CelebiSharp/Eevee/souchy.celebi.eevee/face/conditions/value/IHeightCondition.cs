@@ -2,8 +2,7 @@
 
 namespace souchy.celebi.eevee.face.conditions.value
 {
-    public interface ITimeCondition
+    public interface IHeightCondition : IIntCondition
     {
-        public MomentType Type { get; set; }
     }
 }

@@ -27,13 +27,14 @@ namespace souchy.celebi.eevee.impl.objects
 
     public class Spell : ISpell
     {
-        public uint modelId { get; set; }
-        public uint entityUid { get; init; }
+        public IID fightUid { get; init; }
+        public IID modelId { get; set; }
+        public IID entityUid { get; init; }
 
-        public ITargetFilter targetFilter { get; set; }
-        public ICondition condition { get; set; }
+        public ICondition sourceCondition { get; set; }
+        public ICondition targetFilter { get; set; }
         public List<ICost> costs { get; set; }
-        public List<IEffect> effects { get; set; }
+        public List<IID> effectIds { get; set; }
         public int maxCastsPerTurn { get; set; }
         public int maxCastsPerTarget { get; set; }
         public int cooldown { get; set; }

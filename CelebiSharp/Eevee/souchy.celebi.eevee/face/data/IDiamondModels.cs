@@ -10,10 +10,10 @@ namespace souchy.celebi.eevee.face.io
         //{
         //}
 
-        public Dictionary<int, ICreatureInstance> creatures { get; init; }
-        public Dictionary<int, ISpell> spells { get; init; }
-        public Dictionary<int, IEffect> effects { get; init; }
-        public Dictionary<int, IMap> maps { get; init; }
+        public Dictionary<IID, ICreature> creatures { get; init; }
+        public Dictionary<IID, ISpell> spells { get; init; }
+        public Dictionary<IID, IEffect> effects { get; init; }
+        public Dictionary<IID, IMap> maps { get; init; }
 
 
         public void parseCreature();

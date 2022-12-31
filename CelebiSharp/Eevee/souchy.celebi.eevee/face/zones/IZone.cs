@@ -12,6 +12,7 @@ namespace souchy.celebi.eevee.face.zones
         /// </summary>
         public Vector2 localOffset { get; set; }
         /// <summary>
+        /// AKA the zone Anchor. <br>
         /// center for a circle/square
         /// center for line perpendicular
         /// bottom for line

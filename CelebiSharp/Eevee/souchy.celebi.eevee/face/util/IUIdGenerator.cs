@@ -1,11 +1,13 @@
-﻿namespace souchy.celebi.eevee.face.util
+﻿using souchy.celebi.eevee.face.objects;
+
+namespace souchy.celebi.eevee.face.util
 {
     public interface IUIdGenerator
     {
 
-        public uint next();
+        public IID next();
 
-        public void dispose(uint i);
+        public void dispose(IID i);
 
     }
 }

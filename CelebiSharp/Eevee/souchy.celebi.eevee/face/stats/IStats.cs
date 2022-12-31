@@ -1,14 +1,16 @@
-﻿namespace souchy.celebi.eevee.face.stats
+﻿using souchy.celebi.eevee.enums;
+
+namespace souchy.celebi.eevee.face.stats
 {
     public interface IStats
     {
 
-        protected Dictionary<int, IStat> stats { get; set; }
+        protected Dictionary<StatType, IStat> stats { get; set; }
 
 
-        public T get<T>(int statId) where T : IStat;
+        public T get<T>(StatType statId) where T : IStat;
 
-        public void set(int statId, IStat value);
+        public void set(StatType statId, IStat value);
 
     }
 }

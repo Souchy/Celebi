@@ -6,14 +6,14 @@ namespace souchy.celebi.eevee.face.controllers
 {
     public interface IBoard : IEntity
     {
-        public List<ICreatureInstance> creatures { get; init; }
+        public List<ICreature> creatures { get; init; }
         public List<ICell> cells { get; init; }
 
         public ICell getCell(IPosition pos);
 
-        public ICreatureInstance getCreature(IPosition pos);
+        public ICreature getCreature(IPosition pos);
 
-        public List<ICreatureInstance> getCreatures(IPosition pos);
+        public List<ICreature> getCreatures(IPosition pos);
 
         public bool hasCreature(IPosition pos);
     }
