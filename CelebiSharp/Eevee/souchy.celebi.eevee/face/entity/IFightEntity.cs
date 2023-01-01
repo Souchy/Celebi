@@ -2,8 +2,8 @@
 
 namespace souchy.celebi.eevee.face.entity
 {
-    public interface IEntity : IDisposable
+    public interface IFightEntity : IEntity
     {
-        public IID entityUid { get; init; }
+        public IID fightUid { get; init; }
     }
 }
