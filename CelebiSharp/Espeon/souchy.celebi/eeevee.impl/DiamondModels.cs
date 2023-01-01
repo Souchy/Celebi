@@ -1,6 +1,7 @@
 ﻿using souchy.celebi.eevee;
 using souchy.celebi.eevee.face.controllers;
 using souchy.celebi.eevee.face.io;
+using souchy.celebi.eevee.face.models;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.util;
