@@ -1,4 +1,6 @@
 ﻿using souchy.celebi.eevee.face.conditions;
+using souchy.celebi.eevee.face.models;
+using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.interfaces;
 
@@ -19,9 +21,6 @@ namespace souchy.celebi.eevee.impl.objects
      *      - Ending turn phase: 
      *              A can cast instant spells
      *              B can cast instant spells to counter you
-     * 
-     * 
-     * 
      */
 
 
@@ -31,13 +30,11 @@ namespace souchy.celebi.eevee.impl.objects
         public IID modelId { get; set; }
         public IID entityUid { get; init; }
 
-        public ICondition sourceCondition { get; set; }
-        public ICondition targetFilter { get; set; }
-        
-        public ISpellProperties properties { get; set; }
-        public List<ICost> costs { get; set; }
 
-        public List<IID> effectIds { get; set; }
+        public int cooldownRemaining { get; set; }
+        public int numberOfCastsThisTurn { get; set; }
+        public Dictionary<IID, int> numberOfCastPerEntityThisTurn { get; set; }
+
 
         public void Dispose()
         {

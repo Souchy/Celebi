@@ -5,11 +5,9 @@ namespace souchy.celebi.eevee.face.controllers
 {
     public interface IRedInstances
     {
-
+        public Dictionary<IID, IFight> fights { get; init; }
         public Dictionary<IID, ICreature> creatures { get; init; }
         public Dictionary<IID, ISpell> spells { get; init; }
-        public Dictionary<IID, IEffect> effects { get; init; }
-
 
 
     }

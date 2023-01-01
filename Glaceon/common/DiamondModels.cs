@@ -1,6 +1,7 @@
 ﻿using Godot;
 using souchy.celebi.eevee;
 using souchy.celebi.eevee.face.io;
+using souchy.celebi.eevee.face.models;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.util;
@@ -24,7 +25,7 @@ namespace Celebi.common
     {
 
         public Dictionary<IID, ICreature> creatures { get; init; } = new Dictionary<IID, ICreature>();
-        public Dictionary<IID, ISpell> spells { get; init; } = new Dictionary<IID, ISpell>();
+        public Dictionary<IID, ISpellModel> spells { get; init; } = new Dictionary<IID, ISpellModel>();
         public Dictionary<IID, IEffect> effects { get; init; } = new Dictionary<IID, IEffect>();
         public Dictionary<IID, IMap> maps { get; init; } = new Dictionary<IID, IMap>();
 

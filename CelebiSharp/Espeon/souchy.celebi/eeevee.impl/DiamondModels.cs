@@ -10,7 +10,7 @@ namespace Espeon.souchy.celebi.eeevee.impl
     public class DiamondModels : IDiamondModels
     {
         public Dictionary<IID, ICreature> creatures { get; init; } = new Dictionary<IID, ICreature>();
-        public Dictionary<IID, ISpell> spells { get; init; } = new Dictionary<IID, ISpell>();
+        public Dictionary<IID, ISpellModel> spells { get; init; } = new Dictionary<IID, ISpellModel>();
         public Dictionary<IID, IEffect> effects { get; init; } = new Dictionary<IID, IEffect>();
         public Dictionary<IID, IMap> maps { get; init; } = new Dictionary<IID, IMap>();
 

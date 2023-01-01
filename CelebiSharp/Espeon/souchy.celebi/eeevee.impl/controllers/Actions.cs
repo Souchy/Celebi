@@ -1,6 +1,7 @@
 ﻿using souchy.celebi.eevee;
 using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.entity;
+using souchy.celebi.eevee.face.models;
 using souchy.celebi.eevee.face.stats;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.util.math;
@@ -12,7 +13,7 @@ namespace Espeon.souchy.celebi.eeveeimpl.controllers
 
         public void castSpell(IID sourceCreature, IID spellId, IPosition target)
         {
-            ISpell s = default;
+            ISpellModel s = default;
             ICreature source = default;
 
             // check costs
