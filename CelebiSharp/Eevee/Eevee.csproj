@@ -9,9 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="souchy.celebi.eevee\impl\controllers\" />
-    <Folder Include="souchy.celebi.eevee\impl\creatures\" />
-    <Folder Include="souchy.celebi.eevee\impl\effects\" />
     <Folder Include="souchy.celebi.eevee\face\creatures\" />
     <Folder Include="souchy.celebi.eevee\face\net\amethyst\" />
     <Folder Include="souchy.celebi.eevee\impl\net\amethyst\" />

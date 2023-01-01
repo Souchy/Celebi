@@ -14,7 +14,7 @@ namespace Espeon.souchy.celebi.eeveeimpl.objects
         public IID modelId { get; set; }
 
         public IPosition position { get; init; } = new Position();
-        public List<IID> statusIds { get; init; } = new List<IID>();
+        public List<IID> statuses { get; init; } = new List<IID>();
         public bool walkable { get; set; }
         public bool blocksLos { get; set; }
         public Dictionary<ContextType, IContext> contextsStats { get; set; } = new Dictionary<ContextType, IContext>();

@@ -33,7 +33,7 @@ namespace souchy.celebi.eevee.impl.objects
         public IID player { get; set; }
 
         public IPosition position { get; init; } = new Position();
-        public List<IID> statusIds { get; init; } = new List<IID>();
+        public List<IID> statuses { get; init; } = new List<IID>();
         public IStats stats { get; set; }
         public List<IID> spellModelIds { get; set; } = new List<IID>();
         public Dictionary<ContextType, IContext> contextsStats { get; set; } = new Dictionary<ContextType, IContext>();

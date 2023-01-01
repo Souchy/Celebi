@@ -9,7 +9,7 @@ namespace souchy.celebi.eevee.face.entity
     public interface IBoardEntity : IEntityModeled
     {
         public IPosition position { get; init; }
-        public List<IID> statusIds { get; init; }
+        public List<IID> statuses { get; init; }
 
         public Dictionary<ContextType, IContext> contextsStats { get; set; }
     }
