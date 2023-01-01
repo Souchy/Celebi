@@ -18,14 +18,16 @@ namespace Espeon.souchy.celebi.espeon.impl.eevee.controllers
         #endregion
 
         #region Constants
-        private readonly IUIdGenerator _uIdGenerator;
+        //private readonly IUIdGenerator _uIdGenerator;
         #endregion
 
         #region Constructors
-        public Board(IUIdGenerator uIdGenerator)
+        public Board(IID fightUid) //IUIdGenerator uIdGenerator)
         {
-            _uIdGenerator = uIdGenerator;
-            entityUid = uIdGenerator.next();
+            this.fightUid = fightUid;
+            this.entityUid = Espeon.uIdGenerator.next();
+            //_uIdGenerator = uIdGenerator;
+            //entityUid = uIdGenerator.next();
         }
         #endregion
 
@@ -55,7 +57,7 @@ namespace Espeon.souchy.celebi.espeon.impl.eevee.controllers
         }
         public void Dispose()
         {
-            this._uIdGenerator.dispose(entityUid);
+            Espeon.uIdGenerator.dispose(entityUid); //Program.instances.fights[fightUid].ge //this._uIdGenerator.dispose(entityUid);
             this.creatures.ForEach(c => c.Dispose());
             this.cells.ForEach(c => c.Dispose());
         }

@@ -13,14 +13,13 @@ namespace Espeon.souchy.celebi.espeon.impl.eevee.controllers
     public class Fight : IFight
     {
         #region Properties
-        public IID fightUid { get; init; }
         public IID entityUid { get; init; }
         public IBoard board { get; init; }
         public List<IPlayer> players { get; init; } = new List<IPlayer>();
         #endregion
 
         #region Constants
-        private readonly IUIdGenerator uIdGenerator;
+        public readonly IUIdGenerator uIdGenerator;
         #endregion
 
         #region Constructors
@@ -28,7 +27,7 @@ namespace Espeon.souchy.celebi.espeon.impl.eevee.controllers
         {
             this.uIdGenerator = uIdGenerator;
 
-            this.board = new Board(uIdGenerator);
+            this.board = new Board(this.entityUid);
 
             this.entityUid = uIdGenerator.next();
         }

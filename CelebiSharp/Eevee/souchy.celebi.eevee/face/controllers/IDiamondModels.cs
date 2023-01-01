@@ -18,8 +18,8 @@ namespace souchy.celebi.eevee.face.io
 
 
         public Dictionary<IID, ICreatureSkin> creatureSkins { get; init; }
-        public Dictionary<IID, ISpellSkin> spellSkins { get; set; }
-        public Dictionary<IID, IEffectSkin> effectSkins { get; set; }
+        public Dictionary<IID, ISpellSkin> spellSkins { get; init; }
+        public Dictionary<IID, IEffectSkin> effectSkins { get; init; }
 
 
 
