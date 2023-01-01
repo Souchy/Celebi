@@ -3,7 +3,6 @@ using Godot;
 using SimpleInjector;
 using souchy.celebi.eevee;
 using souchy.celebi.eevee.face.util;
-using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.util;
 using System;
 using System.ComponentModel;
@@ -23,7 +22,7 @@ namespace Celebi.src
             // do registrations here
             
             container.Register<IUIdGenerator, UIdGenerator>(Lifestyle.Singleton);
-            container.Register<ICreature, Creature>(Lifestyle.Transient);
+            //container.Register<ICreature, Creature>(Lifestyle.Transient);
         }
     }
 

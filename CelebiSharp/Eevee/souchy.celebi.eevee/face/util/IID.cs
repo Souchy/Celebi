@@ -2,14 +2,14 @@
 {
     public struct IID
     {
-        public uint value { get; init; }
-        public IID(uint value)
+        public string value { get; init; }
+        public IID(string value)
         {
             this.value = value;
         }
 
-        public static implicit operator uint(IID i) => i.value;
-        public static explicit operator IID(uint i) => new IID(i);
-        public static explicit operator IID(int i) => new IID((uint)i);
+        public static implicit operator uint(IID i) => uint.Parse(i.value);
+        public static explicit operator IID(uint i) => new IID(i.ToString());
+        public static explicit operator IID(int i) => new IID(i.ToString());
     }
 }

@@ -12,6 +12,6 @@ namespace souchy.celebi.eevee
         /// </summary>
         public IID player { get; set; }
         public IStats stats { get; set; }
-        public List<IID> spellModelIds { get; set; }
+        public List<IID> spells { get; set; }
     }
 }

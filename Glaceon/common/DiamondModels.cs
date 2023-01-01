@@ -5,7 +5,7 @@ using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.util;
 using System.Collections.Generic;
-using CreatureData = souchy.celebi.eevee.impl.objects.Creature;
+//using CreatureData = souchy.celebi.eevee.impl.objects.Creature;
 
 namespace Celebi.common
 {
@@ -42,8 +42,8 @@ namespace Celebi.common
 
         public void parseCreature() //TODO: Variant jsonCreature)
         {
-            var c = new CreatureData(_uIdGenerator);
-            creatures.Add((IID) 0, c);
+            //var c = new Creature(_uIdGenerator);
+            //creatures.Add((IID) 0, c);
             
         }
 
