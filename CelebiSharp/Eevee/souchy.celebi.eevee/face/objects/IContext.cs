@@ -3,11 +3,11 @@
 namespace souchy.celebi.eevee.face.objects
 {
     /// <summary>
-    /// Context Stats for every entity (creature, cell)
+    /// Context Stats for every entity (creature, cell). Can be during a Fight, Round, Turn or Action
     /// </summary>
     public interface IContext
     {
-        //public ContextType Type { get; set; }
+        public ContextType Type { get; set; }
         public Dictionary<ResourceType, int> resourceUsed { get; set; }
         public Dictionary<ResourceType, int> resourceGained { get; set; }
         public Dictionary<ResourceType, int> resourceLost { get; set; }
