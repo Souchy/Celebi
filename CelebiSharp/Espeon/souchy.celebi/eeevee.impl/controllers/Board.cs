@@ -1,11 +1,12 @@
-﻿using souchy.celebi.eevee;
+﻿using Microsoft.Extensions.DependencyInjection;
+using souchy.celebi.eevee;
 using souchy.celebi.eevee.face.controllers;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.util.math;
 using souchy.celebi.eevee.impl.util;
 
-namespace Espeon.souchy.celebi.espeon.impl.eevee.controllers
+namespace Espeon.souchy.celebi.espeon.eevee.impl.controllers
 {
     public class Board : IBoard
     {
@@ -18,16 +19,13 @@ namespace Espeon.souchy.celebi.espeon.impl.eevee.controllers
         #endregion
 
         #region Constants
-        //private readonly IUIdGenerator _uIdGenerator;
         #endregion
 
         #region Constructors
-        public Board(IID fightUid) //IUIdGenerator uIdGenerator)
+        public Board(ScopeID scopeId)
         {
-            this.fightUid = fightUid;
-            this.entityUid = Espeon.uIdGenerator.next();
-            //_uIdGenerator = uIdGenerator;
-            //entityUid = uIdGenerator.next();
+            this.fightUid = scopeId;
+            this.entityUid = Espeon.GetUIdGenerator(fightUid).next();
         }
         #endregion
 
@@ -55,9 +53,10 @@ namespace Espeon.souchy.celebi.espeon.impl.eevee.controllers
         {
            return creatures.Any(c => c.position == pos);
         }
+
         public void Dispose()
         {
-            Espeon.uIdGenerator.dispose(entityUid); //Program.instances.fights[fightUid].ge //this._uIdGenerator.dispose(entityUid);
+            Espeon.DisposeIID(fightUid, entityUid);
             this.creatures.ForEach(c => c.Dispose());
             this.cells.ForEach(c => c.Dispose());
         }
