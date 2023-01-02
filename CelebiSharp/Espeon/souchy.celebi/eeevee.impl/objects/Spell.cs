@@ -1,10 +1,8 @@
-﻿using souchy.celebi.eevee.face.conditions;
-using souchy.celebi.eevee.face.models;
+﻿using souchy.celebi.eevee.face.controllers;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.util;
-using souchy.celebi.eevee.interfaces;
 
-namespace souchy.celebi.eevee.impl.objects
+namespace Espeon.souchy.celebi.espeon.eevee.impl.objects
 {
     /*
      * Normal Spell
@@ -27,18 +25,25 @@ namespace souchy.celebi.eevee.impl.objects
     public class Spell : ISpell
     {
         public IID fightUid { get; init; }
-        public IID modelId { get; set; }
+        public IID modelUid { get; set; }
         public IID entityUid { get; init; }
 
 
-        public int cooldownRemaining { get; set; }
-        public int numberOfCastsThisTurn { get; set; }
-        public Dictionary<IID, int> numberOfCastPerEntityThisTurn { get; set; }
+        public int chargesRemaining { get; set; } = 1;
+        public int cooldownRemaining { get; set; } = 0;
+        public int numberOfCastsThisTurn { get; set; } = 0;
+        public Dictionary<IID, int> numberOfCastPerEntityThisTurn { get; set; } = new Dictionary<IID, int>();
 
+        public Spell(ScopeID scopeId)
+        {
+            this.fightUid = scopeId;
+            this.entityUid = Espeon.GetUIdGenerator(fightUid).next();
+            Espeon.GetRequiredScoped<IRedInstances>(fightUid).spells.Add(entityUid, this);
+        }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            Espeon.DisposeIID(fightUid, entityUid);
         }
     }
 }

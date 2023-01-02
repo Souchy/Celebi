@@ -8,9 +8,6 @@ using souchy.celebi.eevee.values;
 
 namespace souchy.celebi.eevee.face.models
 {
-    /// <summary>
-    /// Spell Prototype, to be copied 
-    /// </summary>
     public interface ISpellModel : IEntity
     {
         public IID nameId { get; set; }
@@ -27,6 +24,12 @@ namespace souchy.celebi.eevee.face.models
 
     public interface ISpellProperties
     {
+        /// <summary>
+        /// Max number of charges you can keep in stock. <br></br>
+        /// Gain one charge every cooldown. <br></br>
+        /// Then you can cast all charges without cooldown.
+        /// </summary>
+        public IValue<int> maxCharges { get; set; }
         public IValue<int> maxCastsPerTurn { get; set; }
         public IValue<int> maxCastsPerTarget { get; set; }
         public IValue<int> cooldown { get; set; }

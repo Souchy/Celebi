@@ -1,6 +1,8 @@
 ﻿using Espeon.souchy.celebi.espeon;
+using Espeon.souchy.celebi.espeon.eevee.impl.controllers;
 using souchy.celebi.eevee;
 using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.face.controllers;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.stats;
 using souchy.celebi.eevee.face.util;
@@ -26,16 +28,15 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.objects
 
     public class Creature : ICreature
     {
-        private IServiceProvider services => Espeon.scopes[fightUid].ServiceProvider;
         public IID fightUid { get; init; }
         public IID entityUid { get; init; }
-        public IID modelId { get; set; }
-        public IID player { get; set; }
+        public IID modelUid { get; set; }
+        public IID playerUid { get; set; }
 
         public IPosition position { get; init; } = new Position();
-        public List<IID> statuses { get; init; } = new List<IID>();
         public IStats stats { get; set; }
         public List<IID> spells { get; set; } = new List<IID>();
+        public List<IID> statuses { get; init; } = new List<IID>();
         public Dictionary<ContextType, IContext> contextsStats { get; set; } = new Dictionary<ContextType, IContext>();
 
 
@@ -43,12 +44,17 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.objects
         {
             this.fightUid = scopeId;
             this.entityUid = Espeon.GetUIdGenerator(fightUid).next();
+            Espeon.GetRequiredScoped<IRedInstances>(fightUid).creatures.Add(entityUid, this);
             this.stats = stats;
         }
 
         public void Dispose()
         {
             Espeon.DisposeIID(fightUid, entityUid);
+            stats.Dispose();
+            statuses.Clear();
+            spells.Clear();
+            contextsStats.Clear();
         }
     }
 }

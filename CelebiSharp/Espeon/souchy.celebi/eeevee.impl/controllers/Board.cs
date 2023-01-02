@@ -1,10 +1,12 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Espeon.souchy.celebi.espeon.eevee.impl.objects;
+using Microsoft.Extensions.DependencyInjection;
 using souchy.celebi.eevee;
 using souchy.celebi.eevee.face.controllers;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.util.math;
 using souchy.celebi.eevee.impl.util;
+using System.Security.Cryptography;
 
 namespace Espeon.souchy.celebi.espeon.eevee.impl.controllers
 {
@@ -14,11 +16,11 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.controllers
         public IID fightUid { get; init; }
         public IID entityUid { get; init; }
 
-        public List<ICreature> creatures { get; init; } = new List<ICreature>();
+        public List<IID> creatureIds { get; init; } = new List<IID>();
         public List<ICell> cells { get; init; } = new List<ICell>();
-        #endregion
 
-        #region Constants
+        private readonly IRedInstances instances;
+        private IEnumerable<ICreature> Creatures => creatureIds.Select(cid => instances.creatures[cid]);
         #endregion
 
         #region Constructors
@@ -26,6 +28,7 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.controllers
         {
             this.fightUid = scopeId;
             this.entityUid = Espeon.GetUIdGenerator(fightUid).next();
+            this.instances = Espeon.GetRequiredScoped<IRedInstances>(fightUid);
         }
         #endregion
 
@@ -37,13 +40,13 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.controllers
 
         public ICreature getCreature(IPosition pos)
         {
-            return creatures.First(c => c.position == pos);
+            return Creatures.First(c => c.position == pos);
         }
 
         public List<ICreature> getCreatures(IPosition pos)
         {
             var list = new List<ICreature>();
-            foreach (var c in creatures)
+            foreach (var c in Creatures)
                 if (c.position.x == pos.x && c.position.y == pos.y)
                     list.Add(c);
             return list;
@@ -51,14 +54,15 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.controllers
 
         public bool hasCreature(IPosition pos)
         {
-           return creatures.Any(c => c.position == pos);
+            return Creatures.Any(c => c.position == pos);
         }
 
         public void Dispose()
         {
             Espeon.DisposeIID(fightUid, entityUid);
-            this.creatures.ForEach(c => c.Dispose());
             this.cells.ForEach(c => c.Dispose());
+            this.cells.Clear();
+            this.creatureIds.Clear();
         }
         #endregion
 

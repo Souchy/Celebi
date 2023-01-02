@@ -7,8 +7,16 @@ namespace souchy.celebi.eevee.impl.util.math
     public class Position : IPosition
     {
         public int x { get; set; }
-        public int y { get; set; }
         public int z { get; set; }
+        public int y { get; set; }
+
+        public Vector3 set(int x, int z, int y = 0)
+        {
+            this.x = x;
+            this.z = z;
+            this.y = y;
+            return this;
+        }
 
         public Vector3 add(Vector3 p)
         {

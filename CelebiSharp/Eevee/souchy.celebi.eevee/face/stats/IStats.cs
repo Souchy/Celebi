@@ -2,10 +2,9 @@
 
 namespace souchy.celebi.eevee.face.stats
 {
-    public interface IStats
+    public interface IStats : IDisposable
     {
-
-        protected Dictionary<StatType, IStat> stats { get; set; }
+        public Dictionary<StatType, IStat> stats { get; set; }
 
 
         public T get<T>(StatType statId) where T : IStat;

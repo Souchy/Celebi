@@ -1,4 +1,5 @@
 ﻿using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.face.entity;
 
 namespace souchy.celebi.eevee.face.conditions
 {

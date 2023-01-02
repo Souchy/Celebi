@@ -7,7 +7,7 @@ namespace souchy.celebi.eevee.statuses
     public class Glyph : IGlyph
     {
         public IID fightUid { get; init; }
-        public IID modelId { get; set; }
+        public IID modelUid { get; set; }
         public IID entityUid { get; init; }
 
         public IID sourceSpell { get; set; }

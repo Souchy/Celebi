@@ -22,7 +22,15 @@ namespace souchy.celebi.eevee.impl.stats
             }
         }
 
-        public int getMissing() => currentMax - current;
+
+        public StatResource() { }
+        public StatResource(int current, int currentMax, int initialMax)
+        {
+            this.current = current;
+            this.currentMax = currentMax;
+            this.initialMax = initialMax;
+        }
+
     }
 
 }

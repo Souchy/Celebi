@@ -19,7 +19,7 @@ namespace souchy.celebi.eevee.face.stats
         /// <summary>
         /// Computed value from (currentMax - current)
         /// </summary>
-        public int getMissing();
+        public int missing { get => currentMax - current; }
     }
 
 

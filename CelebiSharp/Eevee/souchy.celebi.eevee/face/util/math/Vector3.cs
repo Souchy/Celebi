@@ -4,12 +4,23 @@ namespace souchy.celebi.eevee.util.math
 {
     public interface Vector3
     {
-
+        /// <summary>
+        /// Board width
+        /// </summary>
         public int x { get; set; }
-        public int y { get; set; }
+        /// <summary>
+        /// Board length
+        /// </summary>
         public int z { get; set; }
+        /// <summary>
+        /// Height
+        /// </summary>
+        public int y { get; set; }
 
-        public Vector3 copy();
+        /// <summary>
+        /// Returns self for chaining
+        /// </summary>
+        public Vector3 set(int x, int z, int y = 0);
         /// <summary>
         /// Returns self for chaining
         /// </summary>
@@ -26,6 +37,10 @@ namespace souchy.celebi.eevee.util.math
         /// Returns self for chaining
         /// </summary>
         public Vector3 div(Vector3 p);
+        /// <summary>
+        /// Returns self for chaining
+        /// </summary>
+        public Vector3 copy();
 
     }
 }

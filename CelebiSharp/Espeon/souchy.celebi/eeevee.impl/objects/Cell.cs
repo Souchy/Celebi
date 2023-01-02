@@ -1,17 +1,17 @@
 ﻿using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.face.controllers;
 using souchy.celebi.eevee.face.objects;
-using souchy.celebi.eevee.face.statuses;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.util.math;
 using souchy.celebi.eevee.impl.util.math;
 
-namespace Espeon.souchy.celebi.eeveeimpl.objects
+namespace Espeon.souchy.celebi.espeon.eevee.impl.objects
 {
     public class Cell : ICell
     {
         public IID fightUid { get; init; }
         public IID entityUid { get; init; }
-        public IID modelId { get; set; }
+        public IID modelUid { get; set; }
 
         public IPosition position { get; init; } = new Position();
         public List<IID> statuses { get; init; } = new List<IID>();
@@ -19,16 +19,16 @@ namespace Espeon.souchy.celebi.eeveeimpl.objects
         public bool blocksLos { get; set; }
         public Dictionary<ContextType, IContext> contextsStats { get; set; } = new Dictionary<ContextType, IContext>();
 
-        private readonly IUIdGenerator _uIdGenerator;
-
-        public Cell(IUIdGenerator uIdGenerator)
+        public Cell(ScopeID scopeId)
         {
-            _uIdGenerator = uIdGenerator;
+            this.fightUid = scopeId;
+            this.entityUid = Espeon.GetUIdGenerator(fightUid).next();
+            Espeon.GetRequiredScoped<IBoard>(fightUid).cells.Add(this);
         }
 
         public void Dispose()
         {
-            _uIdGenerator.dispose(entityUid);
+            Espeon.DisposeIID(fightUid, entityUid);
         }
     }
 }

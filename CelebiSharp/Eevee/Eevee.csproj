@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <Folder Include="souchy.celebi.eevee\face\net\amethyst\" />
+    <Folder Include="souchy.celebi.eevee\impl\conditions\context\" />
     <Folder Include="souchy.celebi.eevee\impl\net\amethyst\" />
   </ItemGroup>
 
