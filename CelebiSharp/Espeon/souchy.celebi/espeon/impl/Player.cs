@@ -1,9 +1,6 @@
-﻿using Espeon.souchy.celebi.espeon.eevee.impl.controllers;
-using souchy.celebi.eevee;
-using souchy.celebi.eevee.face.controllers;
+﻿using souchy.celebi.eevee.face.controllers;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.util;
-using System.Numerics;
 
 namespace Espeon.souchy.celebi.espeon.impl
 {
@@ -18,13 +15,13 @@ namespace Espeon.souchy.celebi.espeon.impl
         public Player(ScopeID scopeId)
         {
             this.fightUid = scopeId;
-            this.entityUid = Espeon.GetUIdGenerator(fightUid).next();
-            Espeon.GetRequiredScoped<IFight>(scopeId).players.Add(this);
+            this.entityUid = Scopes.GetUIdGenerator(fightUid).next();
+            Scopes.GetRequiredScoped<IFight>(scopeId).players.Add(this);
         }
 
         public void Dispose()
         {
-            Espeon.DisposeIID(fightUid, entityUid);
+            Scopes.DisposeIID(fightUid, entityUid);
             creatures.Clear();
         }
     }

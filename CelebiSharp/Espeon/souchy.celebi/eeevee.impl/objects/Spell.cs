@@ -7,27 +7,25 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.objects
     /*
      * Normal Spell
      * Instant Spell
-     * 
-     * 
-     * MTG Phases: 
-     *      - Starting turn phase: 
-     *              A reset resources, 
+     *
+     *
+     * MTG Phases:
+     *      - Starting turn phase:
+     *              A reset resources,
      *              A can cast instant spells
      *              B can cast instant spells to counter you
-     *      - Normal turn: 
+     *      - Normal turn:
      *              A can cast normal spells
-     *      - Ending turn phase: 
+     *      - Ending turn phase:
      *              A can cast instant spells
      *              B can cast instant spells to counter you
      */
-
 
     public class Spell : ISpell
     {
         public IID fightUid { get; init; }
         public IID modelUid { get; set; }
         public IID entityUid { get; init; }
-
 
         public int chargesRemaining { get; set; } = 1;
         public int cooldownRemaining { get; set; } = 0;
@@ -37,13 +35,13 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.objects
         public Spell(ScopeID scopeId)
         {
             this.fightUid = scopeId;
-            this.entityUid = Espeon.GetUIdGenerator(fightUid).next();
-            Espeon.GetRequiredScoped<IRedInstances>(fightUid).spells.Add(entityUid, this);
+            this.entityUid = Scopes.GetUIdGenerator(fightUid).next();
+            Scopes.GetRequiredScoped<IRedInstances>(fightUid).spells.Add(entityUid, this);
         }
 
         public void Dispose()
         {
-            Espeon.DisposeIID(fightUid, entityUid);
+            Scopes.DisposeIID(fightUid, entityUid);
         }
     }
 }

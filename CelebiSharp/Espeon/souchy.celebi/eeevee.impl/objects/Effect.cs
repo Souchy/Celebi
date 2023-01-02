@@ -21,12 +21,12 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.objects
         public Effect(ScopeID scopeId)
         {
             this.fightUid = scopeId;
-            this.entityUid = Espeon.GetUIdGenerator(fightUid).next();
+            this.entityUid = Scopes.GetUIdGenerator(fightUid).next();
         }
 
         public void Dispose()
         {
-            Espeon.DisposeIID(fightUid, entityUid);
+            Scopes.DisposeIID(fightUid, entityUid);
         }
     }
 }

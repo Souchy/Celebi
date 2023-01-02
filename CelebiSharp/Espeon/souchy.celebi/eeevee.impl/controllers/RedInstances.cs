@@ -19,12 +19,12 @@ namespace Espeon.souchy.celebi.eeevee.impl.controllers
         public RedInstances(ScopeID scopeId)
         {
             this.fightUid = scopeId;
-            this.entityUid = Espeon.souchy.celebi.espeon.Espeon.GetUIdGenerator(scopeId).next();
+            this.entityUid = Espeon.souchy.celebi.espeon.Scopes.GetUIdGenerator(scopeId).next();
         }
 
         public void Dispose()
         {
-            Espeon.souchy.celebi.espeon.Espeon.DisposeIID(fightUid, entityUid);
+            Espeon.souchy.celebi.espeon.Scopes.DisposeIID(fightUid, entityUid);
             foreach (var c in creatures.Values) c.Dispose();
             foreach (var c in spells.Values) c.Dispose();
             foreach (var c in statuses.Values) c.Dispose();

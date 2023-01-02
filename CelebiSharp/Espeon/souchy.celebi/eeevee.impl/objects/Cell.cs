@@ -22,13 +22,13 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.objects
         public Cell(ScopeID scopeId)
         {
             this.fightUid = scopeId;
-            this.entityUid = Espeon.GetUIdGenerator(fightUid).next();
-            Espeon.GetRequiredScoped<IBoard>(fightUid).cells.Add(this);
+            this.entityUid = Scopes.GetUIdGenerator(fightUid).next();
+            Scopes.GetRequiredScoped<IBoard>(fightUid).cells.Add(this);
         }
 
         public void Dispose()
         {
-            Espeon.DisposeIID(fightUid, entityUid);
+            Scopes.DisposeIID(fightUid, entityUid);
         }
     }
 }

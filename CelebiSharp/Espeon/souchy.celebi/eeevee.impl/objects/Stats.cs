@@ -9,7 +9,7 @@ namespace Espeon.souchy.celebi.eeevee.impl.objects
 
         public T get<T>(StatType statId) where T : IStat
         {
-            return (T) stats[statId];
+            return (T)stats[statId];
         }
 
         public void set(StatType statId, IStat value)

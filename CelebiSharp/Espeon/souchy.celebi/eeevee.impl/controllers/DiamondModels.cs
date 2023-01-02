@@ -1,11 +1,9 @@
 ﻿using souchy.celebi.eevee;
-using souchy.celebi.eevee.face.controllers;
 using souchy.celebi.eevee.face.io;
 using souchy.celebi.eevee.face.models;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.skins;
 using souchy.celebi.eevee.face.util;
-using souchy.celebi.eevee.impl.util;
 
 namespace Espeon.souchy.celebi.eeevee.impl
 {
@@ -22,13 +20,12 @@ namespace Espeon.souchy.celebi.eeevee.impl
         public Dictionary<IID, ISpellSkin> spellSkins { get; init; } = new Dictionary<IID, ISpellSkin>();
         public Dictionary<IID, IEffectSkin> effectSkins { get; init; } = new Dictionary<IID, IEffectSkin>();
 
-
         public DiamondModels()
         {
             //var fileCreatures = Godot.FileAccess.Open("res://data/creatures.json", FileAccess.ModeFlags.Read);
             //var jsonCreatures = Godot.JSON.ParseString(fileCreatures.GetAsText());
-            // TODO: 
-            //foreach(var creature in jsonCreatures.AsGodotArray()) 
+            // TODO:
+            //foreach(var creature in jsonCreatures.AsGodotArray())
             //parseCreature(creature);
         }
 

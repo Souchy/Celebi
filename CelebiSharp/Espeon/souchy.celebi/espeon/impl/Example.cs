@@ -1,15 +1,9 @@
-﻿using Espeon.souchy.celebi.eeevee.impl;
-using Espeon.souchy.celebi.eeevee.impl.controllers;
-using Espeon.souchy.celebi.espeon.eevee.impl.controllers;
-using Espeon.souchy.celebi.espeon.eevee.impl.objects;
-using souchy.celebi.eevee;
+﻿using souchy.celebi.eevee;
 using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.controllers;
-using souchy.celebi.eevee.face.io;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.stats;
 using souchy.celebi.eevee.impl.stats;
-using souchy.celebi.eevee.impl.util.math;
 
 namespace Espeon.souchy.celebi.espeon.impl
 {
@@ -20,9 +14,16 @@ namespace Espeon.souchy.celebi.espeon.impl
         private readonly IFight fight;
         private readonly Random rng = new Random();
 
+        // create fight
+        // create board
+        // create players?
+        // create 6 creatures
+        // create all their spells
+        // create map instance
         public Example(IFight fight)
         {
             this.fight = fight;
+            Console.WriteLine("fight id: " + fight.entityUid);
 
             addPlayer();
             addPlayer();
@@ -32,26 +33,28 @@ namespace Espeon.souchy.celebi.espeon.impl
 
         private void addPlayer()
         {
-            var player = Espeon.GetRequiredScoped<IPlayer>(fight.entityUid);
+            var player = Scopes.GetRequiredScoped<IPlayer>(fight.entityUid);
             addCreature(player);
             addCreature(player);
         }
+
         private void addCreature(IPlayer player)
         {
             // create
-            var creature = Espeon.GetRequiredScoped<ICreature>(fight.entityUid);
-            creature.modelUid = Espeon.GetUIdGenerator(fight.entityUid).next();
+            var creature = Scopes.GetRequiredScoped<ICreature>(fight.entityUid);
+            creature.modelUid = Scopes.GetUIdGenerator(fight.entityUid).next();
             // player control
             player.creatures.Add(creature.entityUid);
-            creature.playerUid = player.entityUid; 
+            creature.playerUid = player.entityUid;
             // add to board
-            Espeon.GetRequiredScoped<IBoard>(fight.entityUid).creatureIds.Add(creature.entityUid);
+            Scopes.GetRequiredScoped<IBoard>(fight.entityUid).creatureIds.Add(creature.entityUid);
             creature.position.set(rng.Next(10), rng.Next(10));
-            // ...
+            // add stats, spells...
             addStats(creature);
             addSpell(creature);
             addSpell(creature);
         }
+
         private void addStats(ICreature creature)
         {
             creature.stats.set(StatType.Life, new StatResource());
@@ -60,17 +63,17 @@ namespace Espeon.souchy.celebi.espeon.impl
             creature.stats.get<IStatResource>(StatType.Life).initialMax = rng.Next(100, 150);
 
             creature.stats.set(StatType.Mana, new StatResource());
-            creature.stats.get<IStatResource>(StatType.Life).current = rng.Next(1, 10);
-            creature.stats.get<IStatResource>(StatType.Life).currentMax = rng.Next(10, 12);
-            creature.stats.get<IStatResource>(StatType.Life).initialMax = rng.Next(10, 12);
+            creature.stats.get<IStatResource>(StatType.Mana).current = rng.Next(1, 10);
+            creature.stats.get<IStatResource>(StatType.Mana).currentMax = rng.Next(10, 12);
+            creature.stats.get<IStatResource>(StatType.Mana).initialMax = rng.Next(10, 12);
         }
+
         private void addSpell(ICreature creature)
         {
-            var spell = Espeon.GetRequiredScoped<ISpell>(fight.entityUid);
+            var spell = Scopes.GetRequiredScoped<ISpell>(fight.entityUid);
             spell.chargesRemaining = rng.Next(1, 5);
             spell.cooldownRemaining = rng.Next(1, 5);
             creature.spells.Add(spell.entityUid);
         }
-
     }
 }

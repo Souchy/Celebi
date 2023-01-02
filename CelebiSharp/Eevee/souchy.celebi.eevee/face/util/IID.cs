@@ -8,6 +8,11 @@
             this.value = value;
         }
 
+        public override string ToString()
+        {
+            return this.value;
+        }
+
         public static implicit operator uint(IID i) => uint.Parse(i.value);
         public static explicit operator IID(uint i) => new IID(i.ToString());
         public static explicit operator IID(int i) => new IID(i.ToString());
