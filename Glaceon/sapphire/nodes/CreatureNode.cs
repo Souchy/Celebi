@@ -1,5 +1,5 @@
-using Celebi.data;
-using Celebi.src;
+using Umbreon.data;
+using Umbreon.src;
 using Godot;
 using Godot.Sharp.Extras;
 using souchy.celebi.eevee;

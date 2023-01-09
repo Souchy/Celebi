@@ -1,4 +1,4 @@
-﻿using Celebi.data;
+﻿using Umbreon.data;
 using Godot;
 using Newtonsoft.Json;
 using souchy.celebi.eevee;
@@ -12,7 +12,7 @@ using System;
 using System.Collections.Generic;
 //using CreatureData = souchy.celebi.eevee.impl.objects.Creature;
 
-namespace Celebi.common
+namespace Umbreon.common
 {
 
     public static class DiamondExtension

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System;
 using System.Threading;
 
-namespace Celebi.common
+namespace Umbreon.common
 {
     public class Celebi
     {

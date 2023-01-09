@@ -1,4 +1,4 @@
-﻿using Celebi.sapphire.ui;
+﻿using Umbreon.sapphire.ui;
 using Godot;
 using SimpleInjector;
 using souchy.celebi.eevee;
@@ -11,7 +11,7 @@ using System.Reflection;
 using Container = SimpleInjector.Container;
 //using CreatureData = souchy.celebi.eevee.impl.objects.Creature;
 
-namespace Celebi.src
+namespace Umbreon.src
 {
 
     static class Registry
@@ -20,7 +20,7 @@ namespace Celebi.src
         {
             GD.Print("DI registring");
             // do registrations here
-            
+
             container.Register<IUIdGenerator, UIdGenerator>(Lifestyle.Singleton);
             //container.Register<ICreature, Creature>(Lifestyle.Transient);
         }

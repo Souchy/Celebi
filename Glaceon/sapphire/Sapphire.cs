@@ -1,6 +1,6 @@
-using Celebi.common;
-using Celebi.data;
-using Celebi.src;
+using Umbreon.common;
+using Umbreon.data;
+using Umbreon.src;
 using Godot;
 using Godot.Sharp.Extras;
 using Newtonsoft.Json;

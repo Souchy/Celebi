@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Celebi"
+config/name="Umbreon"
 run/main_scene="res://sapphire/Sapphire.tscn"
 config/features=PackedStringArray("4.0", "C#")
 
@@ -27,7 +27,7 @@ window/size/viewport_height=768
 
 [dotnet]
 
-project/assembly_name="Celebi"
+project/assembly_name="Umbreon"
 
 [input]
 

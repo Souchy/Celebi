@@ -4,7 +4,7 @@ using souchy.celebi.eevee.face.statuses;
 using souchy.celebi.eevee.face.util;
 using System.Collections.Generic;
 
-namespace Celebi.data.resources
+namespace Umbreon.data.resources
 {
     public class CreatureModel : ICreatureModel
     {

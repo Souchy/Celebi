@@ -1,6 +1,6 @@
 ﻿using Godot;
 
-namespace Celebi.data
+namespace Umbreon.data
 {
     public class MapModelData
     {
