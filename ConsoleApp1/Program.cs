@@ -1,6 +1,6 @@
 ﻿using Celebi.common;
 
-namespace ConsoleApp1
+namespace PlayfabClientTest
 {
     internal class Program
     {

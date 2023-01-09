@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://k08b3ufw5an3"]
+
+[ext_resource type="PackedScene" uid="uid://cj5wnbe3mmnpp" path="res://GodotNodes/FightNode.tscn" id="1_830vp"]
+[ext_resource type="Script" path="res://EspeonNode.cs" id="1_dhhc6"]
+
+[node name="EspeonNode" type="Node"]
+script = ExtResource("1_dhhc6")
+
+[node name="FightNode" parent="." instance=ExtResource("1_830vp")]
+
+[node name="Network" type="Node" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Network"]
+_spawnable_scenes = PackedStringArray("res://GodotNodes/FightNode.tscn", "res://GodotNodes/BoardNode.tscn", "res://GodotNodes/PlayerNode.tscn", "res://GodotNodes/CreatureNode.tscn", "res://GodotNodes/CellNode.tscn")
+spawn_path = NodePath("../..")

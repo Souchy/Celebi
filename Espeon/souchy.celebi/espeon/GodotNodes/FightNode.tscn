@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cj5wnbe3mmnpp"]
+
+[ext_resource type="PackedScene" uid="uid://ddlk0qwtpkqbr" path="res://GodotNodes/BoardNode.tscn" id="1_kbmb1"]
+[ext_resource type="PackedScene" uid="uid://cqcu0lmtdtmam" path="res://GodotNodes/PlayerNode.tscn" id="2_56uh8"]
+
+[node name="FightNode" type="Node"]
+
+[node name="BoardNode" parent="." instance=ExtResource("1_kbmb1")]
+
+[node name="PlayersGroup" type="Node" parent="."]
+
+[node name="PlayerNode" parent="PlayersGroup" instance=ExtResource("2_56uh8")]

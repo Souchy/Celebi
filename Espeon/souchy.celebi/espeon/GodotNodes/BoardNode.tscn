@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://ddlk0qwtpkqbr"]
+
+[node name="BoardNode" type="Node"]
+
+[node name="CellsGroup" type="Node" parent="."]
+
+[node name="CreaturesGroup" type="Node" parent="."]
