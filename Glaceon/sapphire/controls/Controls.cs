@@ -178,6 +178,12 @@ public partial class Controls : Node // Node3D
     {
         this.camIso.Position = new Vector3(-5, 7, 5);
         this.camIso.Rotation = new Vector3(-45, -45, 0);
+        // this.camIso.GlobalTransform.basis.z = new Vector3(0, 1, 0);
+        // this.camIso.Basis.z = Vector3.Up;
+        // The Identity basis is equivalent to:
+        var basis = new Basis(Vector3.Right, Vector3.Up, Vector3.Back);
+        this.camIso.Basis = basis;
+
     }
     public void resetTop()
     {

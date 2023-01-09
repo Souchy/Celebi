@@ -11,12 +11,12 @@ namespace Celebi.data.resources
         public IID entityUid { get; init; }
         public IID nameId { get; set; }
         public IID descriptionId { get; set; }
+        public HashSet<IID> skins { get; init; }
 
         public IStats baseStats { get; init; }
         public HashSet<IID> baseSpells { get; init; }
         public HashSet<IID> baseStatusPassives { get; init; }
 
-        public HashSet<IID> skins { get; init; }
 
         public void Dispose()
         {

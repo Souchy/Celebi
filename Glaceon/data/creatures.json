@@ -1,31 +1,34 @@
 [
-  {
-    "id": 0,
-    "name": "aurelia",
-    "nameId": 0,
-    "descriptionId": 0,
-    "baseStats": [],
-    "baseSpells": [],
-    "skins": [0]
-  },
-  {
-    "id": 1,
-    "name": "ybot_pro_magic",
-    "nameId": 0,
-    "descriptionId": 0,
-    "baseStats": [],
-    "baseSpells": [],
-    "skins": [1]
-  },
-  {
-    "id": 2,
-    "name": "ybot-packed",
-    "nameId": 0,
-    "descriptionId": 0,
-    "baseStats": [],
-    "baseSpells": [],
-    "skins": [2]
-  }
+    {
+        "id": 0,
+        "name": "aurelia",
+        "nameId": 0,
+        "descriptionId": 0,
+        "skins": [ 0 ],
+        "baseStats": {},
+        "baseSpells": [],
+        "basePassives": []
+    },
+    {
+        "id": 1,
+        "name": "ybot_pro_magic",
+        "nameId": 0,
+        "descriptionId": 0,
+        "skins": [ 1 ],
+        "baseStats": {},
+        "baseSpells": [],
+        "basePassives": []
+    },
+    {
+        "id": 2,
+        "name": "ybot_packed",
+        "nameId": 0,
+        "descriptionId": 0,
+        "skins": [ 2 ],
+        "baseStats": {},
+        "baseSpells": [],
+        "basePassives": []
+    }
 
 
 ]

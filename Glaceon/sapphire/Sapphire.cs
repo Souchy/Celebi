@@ -1,6 +1,9 @@
+using Celebi.common;
+using Celebi.data;
 using Celebi.src;
 using Godot;
 using Godot.Sharp.Extras;
+using Newtonsoft.Json;
 using souchy.celebi.eevee;
 using System;
 using System.Security.Cryptography.X509Certificates;
@@ -20,18 +23,35 @@ public partial class Sapphire : Node3D
 
 	private PackedScene creaScene;
 
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
 	{
 		this.OnReady();
-		creaScene = GD.Load<PackedScene>("res://sapphire/nodes/Creature.tscn");
+		creaScene = GD.Load<PackedScene>("res://sapphire/nodes/CreatureNode.tscn");
 
-		createCreature("ybot/ybot_pro_magic", true, new Vector3(7, 0, 7));
+        GD.Print("startPositions: " + this.GetDiamonds().mapModelsData[0].teamStartPositions[0].Stringify());
+
+        Creatures.GetChildren().Clear();
+        var map = this.GetDiamonds().mapModelsData[0];
+        for(int team = 0; team < 2; team++)
+        {
+            GD.Print("team: " + team);
+            int i = 0;
+            foreach (var model in this.GetDiamonds().creatureModelsData)
+            {
+                createCreature(model, this.GetDiamonds().creatureSkinsData[model.skins[0]], team, true, map.teamStartPositions[team][i]);
+                i++;
+            }
+        }
+
+        /*
+        createCreature("ybot/ybot_pro_magic", true, new Vector3(7, 0, 7));
 		createCreature("aurelia/aurelia", true, new Vector3(5, 0, 7));
-
 		createCreature("ybot/ybot_packed", true, new Vector3(14, 0, 9));
 		createCreature("ybot/ybot_pro_magic", true, new Vector3(12, 0, 11));
 		createCreature("aurelia/aurelia", true, new Vector3(14, 0, 11));
+        */
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -39,12 +59,13 @@ public partial class Sapphire : Node3D
 	{
 	}
 
-	public void createCreature(string name, bool spawnOnBoard, Vector3 pos)
+	public void createCreature(CreatureModelData model, CreatureSkinData skin, int team, bool spawnOnBoard, Vector3 pos)
 	{
+        GD.Print("create pos: " + pos);
 		var crea = creaScene.Instantiate<CreatureNode>();
-		crea.Name = name;
-		crea.Position = pos.toGodot();
-		crea.init(name);
+		crea.Name = model.name; // name
+        crea.Position = pos; //.toGodot();
+		crea.init(skin, team);
 		Creatures.AddChild(crea);
 	}
 

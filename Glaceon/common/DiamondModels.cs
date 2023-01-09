@@ -1,4 +1,6 @@
-﻿using Godot;
+﻿using Celebi.data;
+using Godot;
+using Newtonsoft.Json;
 using souchy.celebi.eevee;
 using souchy.celebi.eevee.face.io;
 using souchy.celebi.eevee.face.models;
@@ -36,18 +38,29 @@ namespace Celebi.common
         public Dictionary<IID, ISpellSkin> spellSkins { get; init; } = new Dictionary<IID, ISpellSkin>();
         public Dictionary<IID, IEffectSkin> effectSkins { get; init; } = new Dictionary<IID, IEffectSkin>();
 
+
+        public CreatureModelData[] creatureModelsData;
+        public CreatureSkinData[] creatureSkinsData;
+        public MapModelData[] mapModelsData;
+
         public DiamondModels()
         {
-            var fileCreatures = Godot.FileAccess.Open("res://data/creatures.json", FileAccess.ModeFlags.Read);
-            var jsonCreatures = Godot.JSON.ParseString(fileCreatures.GetAsText());
+            //var fileCreatures = Godot.FileAccess.Open("res://data/creatures.json", Godot.FileAccess.ModeFlags.Read);
+            //var jsonCreatures = Godot.JSON.ParseString(fileCreatures.GetAsText());
             // TODO: 
             //foreach(var creature in jsonCreatures.AsGodotArray()) 
-                //parseCreature(creature);
+            //parseCreature(creature);
+            parseData();
         }
 
         public void parseData()
         {
-            throw new NotImplementedException();
+            var creatureModelsText = Godot.FileAccess.Open("res://data/creatures.json", Godot.FileAccess.ModeFlags.Read).GetAsText();
+            creatureModelsData = JsonConvert.DeserializeObject<CreatureModelData[]>(creatureModelsText);
+            var creatureSkinsText = Godot.FileAccess.Open("res://data/skins.json", Godot.FileAccess.ModeFlags.Read).GetAsText();
+            creatureSkinsData = JsonConvert.DeserializeObject<CreatureSkinData[]>(creatureSkinsText);
+            var mapModelsDataText = Godot.FileAccess.Open("res://data/maps.json", Godot.FileAccess.ModeFlags.Read).GetAsText();
+            mapModelsData = JsonConvert.DeserializeObject<MapModelData[]>(mapModelsDataText);
         }
 
     }

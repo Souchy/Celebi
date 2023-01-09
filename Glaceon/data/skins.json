@@ -2,6 +2,8 @@
     {
         "id": 0,
         "model": "aurelia/aurelia",
+        "meshName": "Masterbody",
+        "colorMaterials": [1, 4],
         "animations": {
             "idle": "Idle",
             "run": "Run",
@@ -15,6 +17,8 @@
     {
         "id": 1,
         "model": "ybot/ybot_pro_magic",
+        "meshName": "Alpha_Surface",
+        "colorMaterials": [0],
         "animations": {
             "idle": "Armature025|mixamocom|Layer0|idle",
             "run": "Armature050|mixamocom|Layer0|run forward",
@@ -27,7 +31,9 @@
     },
     {
         "id": 2,
-        "model": "ybot/ybot-packed",
+        "model": "ybot/ybot_packed",
+        "meshName": "Alpha_Surface",
+        "colorMaterials": [0],
         "animations": {
             "idle": "idle",
             "run": "tpose",
