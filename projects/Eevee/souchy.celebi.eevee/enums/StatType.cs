@@ -14,7 +14,14 @@
         Mana,
         Movement,
         Rage,
-        Summons
+        Summons,
+
+        // TODO ResourceMax
+        LifeMax,
+        ManaMax,
+        MovementMax,
+        RageMax,
+        SummonsMax,
     }
 
     public enum ElementType
@@ -32,6 +39,13 @@
         Movement,
         Rage,
         Summons,
+
+        // TODO ResourceMax
+        LifeMax,
+        ManaMax,
+        MovementMax,
+        RageMax,
+        SummonsMax,
 
         Range,
         Speed,

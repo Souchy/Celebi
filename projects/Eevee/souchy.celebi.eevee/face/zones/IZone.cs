@@ -8,23 +8,28 @@ namespace souchy.celebi.eevee.face.zones
     public interface IZone
     {
         /// <summary>
+        /// World origin: source or target of the spelleffect  <br></br>
+        /// aka the zone Anchor in the world
+        /// </summary>
+        public ActorType worldOrigin { get; set; }
+        /// <summary>
         /// offset from cast cell to local origin in the direction of the orientation
         /// </summary>
-        public Vector2 localOffset { get; set; }
+        public Vector2 worldOffset { get; set; }
         /// <summary>
-        /// AKA the zone Anchor. <br>
-        /// center for a circle/square
-        /// center for line perpendicular
-        /// bottom for line
+        /// AKA the zone Anchor local to the aoe. <br></br>
+        /// center for a circle/square <br></br>
+        /// center for line perpendicular <br></br>
+        /// bottom for line <br></br>
         /// top for line from source
         /// </summary>
         public Direction9Type localOrigin { get; set; }
         /// <summary>
         /// Rotation of the zone around the localOrigin
         /// </summary>
-        public Direction9Type orientation { get; set; }
+        public Direction9Type rotation { get; set; }
         /// <summary>
-        /// This overrides a size variable like length/radius to make them equal to 
+        /// This overrides a size variable like length/radius to make them equal to .distance(target,source)
         /// </summary>
         public bool extendFromSource { get; set; }
         /// <summary>
