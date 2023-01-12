@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" load_steps=6 format=3 uid="uid://dr3x8q63udrrr"]
+
+[ext_resource type="Texture2D" uid="uid://fbuhda52xigg" path="res://assets/creatures/flora/Hedge_001_SD/Hedge_001_BaseColor.jpg" id="1_hyjnn"]
+[ext_resource type="Texture2D" uid="uid://vehj8fblpffv" path="res://assets/creatures/flora/Hedge_001_SD/Hedge_001_AmbientOcclusion.jpg" id="2_x4rbq"]
+[ext_resource type="Texture2D" uid="uid://b1f1lifxamgp4" path="res://assets/creatures/flora/Hedge_001_SD/Hedge_001_Height.png" id="3_i7b4h"]
+[ext_resource type="Texture2D" uid="uid://ch3q1r1wnbgfj" path="res://assets/creatures/flora/Hedge_001_SD/Hedge_001_Normal.jpg" id="4_hmju4"]
+[ext_resource type="Texture2D" uid="uid://coj4elk7vh88e" path="res://assets/creatures/flora/Hedge_001_SD/Hedge_001_Roughness.jpg" id="5_ob0g2"]
+
+[resource]
+albedo_texture = ExtResource("1_hyjnn")
+roughness_texture = ExtResource("5_ob0g2")
+normal_enabled = true
+normal_texture = ExtResource("4_hmju4")
+ao_enabled = true
+ao_texture = ExtResource("2_x4rbq")
+heightmap_enabled = true
+heightmap_texture = ExtResource("3_i7b4h")
