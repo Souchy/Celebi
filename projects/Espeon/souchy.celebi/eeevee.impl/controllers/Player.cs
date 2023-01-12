@@ -1,8 +1,9 @@
-﻿using souchy.celebi.eevee.face.controllers;
+﻿using Espeon.souchy.celebi.espeon;
+using souchy.celebi.eevee.face.controllers;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.util;
 
-namespace Espeon.souchy.celebi.espeon.impl
+namespace Espeon.souchy.celebi.eeevee.impl.controllers
 {
     public class Player : IPlayer
     {
@@ -14,8 +15,8 @@ namespace Espeon.souchy.celebi.espeon.impl
 
         public Player(ScopeID scopeId)
         {
-            this.fightUid = scopeId;
-            this.entityUid = Scopes.GetUIdGenerator(fightUid).next();
+            fightUid = scopeId;
+            entityUid = Scopes.GetUIdGenerator(fightUid).next();
             Scopes.GetRequiredScoped<IFight>(scopeId).players.Add(this);
         }
 

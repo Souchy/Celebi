@@ -10,7 +10,7 @@ namespace PlayfabClientTest
 
             //new Celebi();
             //Celebi.common.Celebi.main(null);
-            var c = new PlayfabClient();
+            var c = new Umbreon.common.PlayfabClientTest();
             c.thing();
 
 

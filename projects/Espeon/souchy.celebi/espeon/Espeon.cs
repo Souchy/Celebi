@@ -3,7 +3,6 @@ using Espeon.souchy.celebi.eeevee.impl.controllers;
 using Espeon.souchy.celebi.eeevee.impl.objects;
 using Espeon.souchy.celebi.espeon.eevee.impl.controllers;
 using Espeon.souchy.celebi.espeon.eevee.impl.objects;
-using Espeon.souchy.celebi.espeon.impl;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using souchy.celebi.eevee;

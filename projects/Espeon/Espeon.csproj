@@ -9,7 +9,7 @@
     <Folder Include="souchy.celebi\eeevee.impl\effects\" />
     <Folder Include="souchy.celebi\eeevee.impl\conditions\" />
     <Folder Include="souchy.celebi\eeevee.impl\skins\" />
-    <Folder Include="souchy.celebi\espeon\face\" />
+    <Folder Include="souchy.celebi\espeon\interfaces\net\" />
   </ItemGroup>
   
   <ItemGroup>

@@ -8,7 +8,7 @@ using System.Linq;
 namespace Umbreon.common
 {
 
-    public class PlayfabClient
+    public class PlayfabClientTest
     {
         private static bool _running = true;
 

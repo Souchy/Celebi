@@ -33,7 +33,7 @@ namespace Espeon.souchy.celebi.espeon
         }
 
         [RPC(MultiplayerAPI.RPCMode.AnyPeer)]
-        public void getFightData()
+        public void getFightData(IID fightID)
         {
             int clientId = this.Multiplayer.GetRemoteSenderId();
         }

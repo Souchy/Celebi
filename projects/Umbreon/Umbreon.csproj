@@ -32,7 +32,6 @@
     <ProjectReference Include="..\Eevee\Eevee.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="amethyst\net\" />
     <Folder Include="amethyst\ui\" />
     <Folder Include="assets\creatures\chailai\" />
     <Folder Include="assets\effects\" />
