@@ -1,6 +1,6 @@
-[gd_scene load_steps=22 format=3 uid="uid://rkn077np3mpf"]
+[gd_scene load_steps=22 format=3]
 
-[ext_resource type="Texture2D" uid="uid://bmt64koufewye" path="res://assets/maps/texture_ground.png" id="1_f5lgy"]
+[ext_resource type="Texture2D" uid="uid://bmt64koufewye" path="res://assets/maps/mapDofus6/texture_ground.png" id="1_f5lgy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_aasjf"]
 sky_top_color = Color(0.54902, 0.34902, 0.215686, 1)

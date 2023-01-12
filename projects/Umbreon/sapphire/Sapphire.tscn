@@ -1,11 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://djnb4ef6y13u7"]
+[gd_scene load_steps=12 format=3 uid="uid://70xwfuyjqk5k"]
 
 [ext_resource type="Script" path="res://sapphire/Sapphire.cs" id="1_axpwp"]
-[ext_resource type="PackedScene" uid="uid://cebbbrw2xrd4w" path="res://assets/maps/map_6.tscn" id="2_03mdn"]
+[ext_resource type="PackedScene" uid="uid://cj17xap1x2dhg" path="res://assets/maps/mapDofus6/map6_toonwater.tscn" id="2_cj6ch"]
+[ext_resource type="PackedScene" uid="uid://bxel5q1htlcm4" path="res://assets/maps/mapDofus6/map_6.tscn" id="2_kls1v"]
 [ext_resource type="Script" path="res://sapphire/controls/Controls.cs" id="3_1ug5b"]
 [ext_resource type="PackedScene" path="res://sapphire/controls/cursor.tscn" id="3_tnfnv"]
-[ext_resource type="PackedScene" uid="uid://cc4afi05gsoau" path="res://assets/creatures/ybot/ybot_pro_magic.tscn" id="6_f64jx"]
+[ext_resource type="PackedScene" uid="uid://btnc3cc0avyqg" path="res://assets/maps/celebi/map_celebi.tscn" id="4_3dy4y"]
+[ext_resource type="PackedScene" uid="uid://ba4siyb7odwxq" path="res://assets/creatures/makima/makima3.tscn" id="6_8on86"]
 [ext_resource type="PackedScene" uid="uid://4j7eex12m7i5" path="res://sapphire/ui/sapphireHud.tscn" id="8_aehap"]
+[ext_resource type="PackedScene" uid="uid://bmbllwohsgppj" path="res://assets/creatures/agni/agni.tscn" id="8_mkduh"]
 
 [sub_resource type="Environment" id="Environment_dqre3"]
 background_color = Color(0.207843, 0.776471, 0.294118, 1)
@@ -13,13 +16,11 @@ tonemap_mode = 3
 ssr_enabled = true
 ssao_enabled = true
 ssao_radius = 16.0
-ssil_enabled = true
 ssil_radius = 0.17
 sdfgi_enabled = true
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_5ltxg"]
 auto_exposure_enabled = true
-dof_blur_far_enabled = true
 dof_blur_far_distance = 30.0
 
 [node name="Sapphire" type="Node3D"]
@@ -41,9 +42,13 @@ shadow_opacity = 0.55
 directional_shadow_blend_splits = true
 directional_shadow_max_distance = 25.0
 
-[node name="Map" parent="Environment" instance=ExtResource("2_03mdn")]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.01, 0)
+[node name="Node3D" parent="Environment" instance=ExtResource("2_cj6ch")]
+visible = false
+
+[node name="Map" parent="Environment" instance=ExtResource("2_kls1v")]
+visible = false
+
+[node name="MapCelebi" parent="Environment" instance=ExtResource("4_3dy4y")]
 
 [node name="Controls" type="Node" parent="."]
 script = ExtResource("3_1ug5b")
@@ -74,5 +79,8 @@ unique_name_in_owner = true
 
 [node name="Creatures" type="Node" parent="."]
 
-[node name="ybot_pro_magic" parent="Creatures" instance=ExtResource("6_f64jx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.97349, 0, 1.87087)
+[node name="makima" parent="Creatures" instance=ExtResource("6_8on86")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 1)
+
+[node name="ybot_packed" parent="Creatures" instance=ExtResource("8_mkduh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.67085, 0, 1.39378)

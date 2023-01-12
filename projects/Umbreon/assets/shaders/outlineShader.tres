@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bfg2j82qigmtm"]
+
+[resource]
+resource_name = "Alpha_Body_MAT"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.343355, 0.681155, 0.749665, 1)
+roughness = 0.808292

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://d816no248v60"
-path="res://.godot/imported/Tsukuyo.fbx-d1dc1bb5b4938ccfd87f458568f250ba.scn"
+uid="uid://gk45tg0fna13"
+path="res://.godot/imported/Aurelia.fbx-8d73db1a776826d82634f34acfbbb8e2.scn"
 
 [deps]
 
-source_file="res://assets/Tsukuyo.fbx"
-dest_files=["res://.godot/imported/Tsukuyo.fbx-d1dc1bb5b4938ccfd87f458568f250ba.scn"]
+source_file="res://assets/creatures/aurelia/Aurelia.fbx"
+dest_files=["res://.godot/imported/Aurelia.fbx-8d73db1a776826d82634f34acfbbb8e2.scn"]
 
 [params]
 
