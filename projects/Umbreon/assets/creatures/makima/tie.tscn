@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://bsbsjfmga857w"]
+
+[ext_resource type="Material" uid="uid://kk2gyv2q8rlk" path="res://assets/creatures/makima/tieMat.tres" id="1_xjefv"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_5edkc"]
+material = ExtResource("1_xjefv")
+inner_radius = 5.0
+outer_radius = 5.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_klmfs"]
+material = ExtResource("1_xjefv")
+size = Vector3(2, 15, 0.1)
+subdivide_width = 1
+subdivide_height = 3
+subdivide_depth = 1
+
+[sub_resource type="PrismMesh" id="PrismMesh_ekg1w"]
+material = ExtResource("1_xjefv")
+size = Vector3(2, 1, 0.1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_cydd0"]
+material = ExtResource("1_xjefv")
+size = Vector3(3, 2, 0.3)
+
+[node name="Tie" type="SoftBody3D"]
+transform = Transform3D(1, -7.0747e-12, 1.89566e-12, 3.63315e-11, 0.965926, -0.258819, 0, 0.258819, 0.965926, 1.11022e-16, 1.69518, -4.94438)
+mesh = SubResource("TorusMesh_5edkc")
+collision_layer = 2
+collision_mask = 2
+
+[node name="MiddleRect" type="SoftBody3D" parent="."]
+transform = Transform3D(1, 6.50521e-18, 2.60209e-18, 0, 0.642788, 0.766045, 0, -0.766045, 0.642788, -5.74939e-11, -5.12779, 11.192)
+mesh = SubResource("BoxMesh_klmfs")
+skeleton = NodePath("../..")
+total_mass = 1.01
+
+[node name="Bottom" type="SoftBody3D" parent="MiddleRect"]
+transform = Transform3D(-1, 8.74155e-08, 0, -8.73864e-08, -1, 0, 0, 0, 1, -5.85942e-11, -8, 0)
+mesh = SubResource("PrismMesh_ekg1w")
+
+[node name="TopThing" type="SoftBody3D" parent="MiddleRect"]
+transform = Transform3D(-1, 8.74155e-08, 0, -8.73864e-08, -1, 0, 0, 0, 1, 5.1853e-11, 7.07961, 0)
+mesh = SubResource("PrismMesh_cydd0")
