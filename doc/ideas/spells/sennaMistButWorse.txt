@@ -1,0 +1,12 @@
+
+
+
+
+Effects: 
+
+    SetModelSkin: set generic ghoul skin to all allied creatures
+    SetStatusVisibility: hide all allies status bar 
+
+    SwapTeleport: randomly swap each allied creatures positions
+
+
