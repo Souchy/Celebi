@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://di371rdjfs6tb"
-path.s3tc="res://.godot/imported/texture_water_normal.png-20e4b9f8251a2131396dc12613d97ddd.s3tc.ctex"
-path.etc2="res://.godot/imported/texture_water_normal.png-20e4b9f8251a2131396dc12613d97ddd.etc2.ctex"
+path.s3tc="res://.godot/imported/texture_water_normal.png-b2cf435fbaa60c456ddeebd760b4b476.s3tc.ctex"
+path.etc2="res://.godot/imported/texture_water_normal.png-b2cf435fbaa60c456ddeebd760b4b476.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc", "etc2"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/maps/texture_water_normal.png"
-dest_files=["res://.godot/imported/texture_water_normal.png-20e4b9f8251a2131396dc12613d97ddd.s3tc.ctex", "res://.godot/imported/texture_water_normal.png-20e4b9f8251a2131396dc12613d97ddd.etc2.ctex"]
+source_file="res://assets/maps/mapDofus6/texture_water_normal.png"
+dest_files=["res://.godot/imported/texture_water_normal.png-b2cf435fbaa60c456ddeebd760b4b476.s3tc.ctex", "res://.godot/imported/texture_water_normal.png-b2cf435fbaa60c456ddeebd760b4b476.etc2.ctex"]
 
 [params]
 

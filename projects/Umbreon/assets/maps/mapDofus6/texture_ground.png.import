@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bmt64koufewye"
-path.s3tc="res://.godot/imported/texture_ground.png-3016c76f566066eb10daedbb8e640bfd.s3tc.ctex"
-path.etc2="res://.godot/imported/texture_ground.png-3016c76f566066eb10daedbb8e640bfd.etc2.ctex"
+path.s3tc="res://.godot/imported/texture_ground.png-67b661112fc9cf49c3aac3417c663b7c.s3tc.ctex"
+path.etc2="res://.godot/imported/texture_ground.png-67b661112fc9cf49c3aac3417c663b7c.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc", "etc2"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/maps/texture_ground.png"
-dest_files=["res://.godot/imported/texture_ground.png-3016c76f566066eb10daedbb8e640bfd.s3tc.ctex", "res://.godot/imported/texture_ground.png-3016c76f566066eb10daedbb8e640bfd.etc2.ctex"]
+source_file="res://assets/maps/mapDofus6/texture_ground.png"
+dest_files=["res://.godot/imported/texture_ground.png-67b661112fc9cf49c3aac3417c663b7c.s3tc.ctex", "res://.godot/imported/texture_ground.png-67b661112fc9cf49c3aac3417c663b7c.etc2.ctex"]
 
 [params]
 

@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://btnc3cc0avyqg"]
+
+[ext_resource type="ArrayMesh" uid="uid://bep5sieb0d03o" path="res://assets/maps/celebi/celebi1.obj" id="1_f8r8w"]
+[ext_resource type="Texture2D" uid="uid://beg54m5eiknhv" path="res://assets/materials/Ice_002_SD/Ice_002_SD/Ice_002_COLOR.jpg" id="1_h7v20"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_837ld"]
+
+[sub_resource type="Sky" id="Sky_q7xpx"]
+sky_material = SubResource("PhysicalSkyMaterial_837ld")
+
+[sub_resource type="Environment" id="Environment_bdtha"]
+background_mode = 3
+background_canvas_max_layer = 1
+sky = SubResource("Sky_q7xpx")
+tonemap_mode = 2
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_gjgas"]
+diffuse_texture = ExtResource("1_h7v20")
+
+[node name="MapCelebi" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bdtha")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = ExtResource("1_f8r8w")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+offset_right = 1351.0
+offset_bottom = 1234.0
+texture = SubResource("CanvasTexture_gjgas")
+
+[node name="SubViewport" type="SubViewport" parent="."]

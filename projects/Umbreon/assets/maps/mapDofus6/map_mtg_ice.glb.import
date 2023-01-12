@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://c08j3cnbi03vi"
-path="res://.godot/imported/map_mtg_ice.glb-b8201b61f2b306e6690248bcc6632115.scn"
+path="res://.godot/imported/map_mtg_ice.glb-a1e75c9ad033ee3c6ea114a2b960f23b.scn"
 
 [deps]
 
-source_file="res://assets/maps/map_mtg_ice.glb"
-dest_files=["res://.godot/imported/map_mtg_ice.glb-b8201b61f2b306e6690248bcc6632115.scn"]
+source_file="res://assets/maps/mapDofus6/map_mtg_ice.glb"
+dest_files=["res://.godot/imported/map_mtg_ice.glb-a1e75c9ad033ee3c6ea114a2b960f23b.scn"]
 
 [params]
 
@@ -25,5 +25,6 @@ meshes/lightmap_texel_size=0.2
 skins/use_named_skins=true
 animation/import=true
 animation/fps=30
+animation/trimming=false
 import_script/path=""
 _subresources={}

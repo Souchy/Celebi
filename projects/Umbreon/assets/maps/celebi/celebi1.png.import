@@ -2,9 +2,9 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cuw7vxslwr6ch"
-path.s3tc="res://.godot/imported/texture_water.png-c9402a6094fcb1e85fe94fae7fc3954e.s3tc.ctex"
-path.etc2="res://.godot/imported/texture_water.png-c9402a6094fcb1e85fe94fae7fc3954e.etc2.ctex"
+uid="uid://c1pav62oxp3g7"
+path.s3tc="res://.godot/imported/celebi1.png-0a560cd837ea13e7e19dd5b06b09a750.s3tc.ctex"
+path.etc2="res://.godot/imported/celebi1.png-0a560cd837ea13e7e19dd5b06b09a750.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc", "etc2"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/maps/texture_water.png"
-dest_files=["res://.godot/imported/texture_water.png-c9402a6094fcb1e85fe94fae7fc3954e.s3tc.ctex", "res://.godot/imported/texture_water.png-c9402a6094fcb1e85fe94fae7fc3954e.etc2.ctex"]
+source_file="res://assets/maps/celebi/celebi1.png"
+dest_files=["res://.godot/imported/celebi1.png-0a560cd837ea13e7e19dd5b06b09a750.s3tc.ctex", "res://.godot/imported/celebi1.png-0a560cd837ea13e7e19dd5b06b09a750.etc2.ctex"]
 
 [params]
 

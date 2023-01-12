@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cj3kqqupasyde"]
+
+[ext_resource type="PackedScene" uid="uid://cnmf8wukmum3t" path="res://assets/maps/mapDofus6/map_mtg_ice.blend" id="1_r1yn5"]
+[ext_resource type="Material" uid="uid://2sg5ecju7350" path="res://assets/creatures/agni/agniMat.tres" id="2_6bal8"]
+
+[node name="map_mtg_ice" instance=ExtResource("1_r1yn5")]
+
+[node name="Light" parent="." index="0"]
+visible = false
+
+[node name="Grid" parent="." index="3"]
+material_override = ExtResource("2_6bal8")
+
+[node name="Plane001" parent="." index="4"]
+material_override = ExtResource("2_6bal8")
