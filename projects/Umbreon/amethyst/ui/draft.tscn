@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://1cx2k31ty5cr"]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Theme" uid="uid://xfu2p73erfer" path="res://assets/ui/new_theme.tres" id="1_33t18"]
 [ext_resource type="Script" path="res://amethyst/ui/Draft.cs" id="1_np5ju"]
-[ext_resource type="Texture2D" uid="uid://bp227afmrogtr" path="res://assets/fire.png" id="3_v1sxp"]
+[ext_resource type="Texture2D" uid="uid://bp227afmrogtr" path="res://assets/other/fire.png" id="3_v1sxp"]
 
 [sub_resource type="Gradient" id="Gradient_olfpw"]
 colors = PackedColorArray(0.0392157, 0.0666667, 0.113725, 1, 0.34902, 0.572549, 1, 1)

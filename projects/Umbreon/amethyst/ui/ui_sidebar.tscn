@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://d1ahdd3oum5od" path="res://amethyst/ui/ui_social.tscn" id="1_57gck"]
 [ext_resource type="Script" path="res://amethyst/ui/ui_sidebar.gd" id="1_bh8af"]
-[ext_resource type="Texture2D" uid="uid://cokgd8iaexxjl" path="res://assets/Particle04_bokashistrong_soft.png" id="2_ud4a7"]
+[ext_resource type="Texture2D" uid="uid://cokgd8iaexxjl" path="res://assets/effects/Particle04_bokashistrong_soft.png" id="2_ud4a7"]
 
 
 [sub_resource type="Gradient" id="Gradient_mqsmv"]
