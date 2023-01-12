@@ -1,0 +1,230 @@
+{
+    "sheets": [
+        {
+            "name": "Basic",
+            "description": "description of what the sheet is",
+            "displayColumn": "id",
+            "guid": "ee768b13-3883-448e-a2fa-41a5cac3bd63",
+            "columns": [
+                {
+                    "typeStr": "text",
+                    "guid": "ddd032eb-0f7b-4b71-b1cc-e778c4085619",
+                    "name": "name",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                },
+                {
+                    "typeStr": "text",
+                    "guid": "4aeff96b-3b8b-4dfc-ada4-774f61d74a88",
+                    "name": "description",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                },
+                {
+                    "typeStr": "text",
+                    "guid": "5dacf571-84a7-4f52-9397-d16cd82b58c8",
+                    "name": "type",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                }
+            ],
+            "lines": [
+                {
+                    "guid": "2c68dc17-9702-475a-af03-cb368162d286",
+                    "id": "0",
+                    "name": "initialCooldown",
+                    "description": "",
+                    "type": "int"
+                },
+                {
+                    "guid": "b810bbd7-3da6-4f81-9c37-467bb0005100",
+                    "id": "1",
+                    "name": "cooldown",
+                    "description": "",
+                    "type": "int"
+                },
+                {
+                    "guid": "3a17bd52-96eb-4fed-b1a5-11d1e7ffd65e",
+                    "id": "2",
+                    "name": "castPerTurn",
+                    "description": "",
+                    "type": "int"
+                },
+                {
+                    "guid": "ec6132e8-4bde-419b-8c69-cdf2279f4ba9",
+                    "id": "3",
+                    "name": "castPerTarget",
+                    "description": "",
+                    "type": "int"
+                },
+                {
+                    "guid": "06c9ffb6-6c2d-4e55-b54a-2c7468600811",
+                    "id": "4",
+                    "name": "costs",
+                    "description": "",
+                    "type": "map<ResourceType, int>"
+                },
+                {
+                    "guid": "ce153a5a-cf7a-4288-a9f4-11e672cbbf67",
+                    "id": "5",
+                    "name": "effects",
+                    "description": "",
+                    "type": "list<>"
+                },
+                {
+                    "guid": "1fda9c23-e335-47d6-8e13-c039903b2a02",
+                    "id": "6",
+                    "name": "needsLos",
+                    "description": "",
+                    "type": "bool"
+                },
+                {
+                    "guid": "ac7baab1-9f69-4bde-83a0-d53ff15f78db",
+                    "id": "7",
+                    "name": "",
+                    "description": "",
+                    "type": ""
+                }
+            ],
+            "hidden": false,
+            "isProps": false,
+            "configurable": {
+                "name": "text",
+                "description": "text",
+                "displayColumn": "columnSelect@name",
+                "columnSelect@name@displayColumn": {
+                    "allowedTypes": [
+                        "int",
+                        "float",
+                        "text",
+                        "longtext"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Context",
+            "description": "description of what the sheet is",
+            "displayColumn": "id",
+            "guid": "b95e386e-603e-411b-803d-05b3e7665185",
+            "columns": [
+                {
+                    "typeStr": "text",
+                    "guid": "ec6af5ce-497d-4d59-b3cf-ea9fe348e48f",
+                    "name": "name",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                },
+                {
+                    "typeStr": "text",
+                    "guid": "c1862bbc-8737-41fc-8c54-56c928dfd33c",
+                    "name": "description",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                },
+                {
+                    "typeStr": "text",
+                    "guid": "a3cf1f7c-8820-45d0-b4f1-e577c96f8fab",
+                    "name": "type",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                }
+            ],
+            "lines": [
+                {
+                    "guid": "76745636-7c1a-4d1e-b181-1c88c0223a29",
+                    "id": "0",
+                    "name": "currentCooldown",
+                    "description": "",
+                    "type": "int"
+                },
+                {
+                    "guid": "4df3c337-a19f-4251-910b-0fb26a797d11",
+                    "id": "1",
+                    "name": "castsThisTurn",
+                    "description": "",
+                    "type": "int"
+                },
+                {
+                    "guid": "f506388e-25c8-4328-b81e-2d3b87d09e83",
+                    "id": "2",
+                    "name": "castsPerTarget",
+                    "description": "",
+                    "type": "map<IID, int>"
+                },
+                {
+                    "guid": "00029504-1f59-47be-970e-60c359df1eeb",
+                    "id": "3",
+                    "name": "",
+                    "description": "",
+                    "type": ""
+                },
+                {
+                    "guid": "9566ac63-d4cc-4639-a7b1-b7a2f1d0b569",
+                    "id": "4",
+                    "name": "",
+                    "description": "",
+                    "type": ""
+                },
+                {
+                    "guid": "e983d20e-8ec2-4da0-9348-478bd0a36e06",
+                    "id": "5",
+                    "name": "",
+                    "description": "",
+                    "type": ""
+                }
+            ],
+            "hidden": false,
+            "isProps": false,
+            "configurable": {
+                "name": "text",
+                "description": "text",
+                "displayColumn": "columnSelect@name",
+                "columnSelect@name@displayColumn": {
+                    "allowedTypes": [
+                        "int",
+                        "float",
+                        "text",
+                        "longtext"
+                    ]
+                }
+            }
+        }
+    ]
+}

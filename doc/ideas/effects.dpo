@@ -1,0 +1,770 @@
+{
+    "sheets": [
+        {
+            "name": "Basic",
+            "description": "description of what the sheet is",
+            "displayColumn": "id",
+            "guid": "56c2de35-fc81-4ee5-a7ec-4acd16e3133c",
+            "columns": [
+                {
+                    "typeStr": "text",
+                    "guid": "593ed4b2-f31a-4a59-95e4-a700bc9ab342",
+                    "name": "name",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                },
+                {
+                    "typeStr": "text",
+                    "guid": "1432d735-874e-4567-9df3-2be19870aadd",
+                    "name": "description",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                }
+            ],
+            "lines": [
+                {
+                    "guid": "d8ac0581-608a-4086-8274-9dedc8828e5f",
+                    "id": "0",
+                    "name": "",
+                    "description": ""
+                }
+            ],
+            "hidden": false,
+            "isProps": false,
+            "configurable": {
+                "name": "text",
+                "description": "text",
+                "displayColumn": "columnSelect@name",
+                "columnSelect@name@displayColumn": {
+                    "allowedTypes": [
+                        "int",
+                        "float",
+                        "text",
+                        "longtext"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "EffectsForCreatureProps",
+            "description": "description of what the sheet is",
+            "displayColumn": "guid",
+            "guid": "a468cfef-05b2-436d-a39f-0d49a86dbe22",
+            "columns": [
+                {
+                    "typeStr": "text",
+                    "guid": "e68c29ba-7a19-4260-858b-6218924e237d",
+                    "name": "name",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                },
+                {
+                    "typeStr": "text",
+                    "guid": "35913c8e-920b-427a-93fa-635f1933b1dc",
+                    "name": "desc",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                },
+                {
+                    "typeStr": "text",
+                    "guid": "7e654f02-05b2-4868-b3d6-45303269afd8",
+                    "name": "values",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                },
+                {
+                    "typeStr": "bool",
+                    "guid": "6df8c6d1-d757-444a-99e8-563a706d6970",
+                    "description": "bool field",
+                    "name": "CanBeDuration",
+                    "defaultValue": true,
+                    "iconName": "newBool",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "bool"
+                    }
+                }
+            ],
+            "lines": [
+                {
+                    "guid": "44a540f2-0330-4d83-9231-32821f356aad",
+                    "id": "0",
+                    "name": "SetModelSkinEffect",
+                    "desc": "Set the creature's model and skin visually for enemies. Can use a value stored in the context",
+                    "values": "string model; string skin;",
+                    "CanBeDuration": true
+                },
+                {
+                    "guid": "d379bc0c-7921-4ebd-999d-e98664ee64bc",
+                    "id": "1",
+                    "name": "SetStatusesVisibilityEffect",
+                    "desc": "Enemies won't be able to see the creature's status bar",
+                    "values": "bool visible",
+                    "CanBeDuration": true
+                },
+                {
+                    "guid": "2082ed35-5a16-4543-aa65-55af450044bc",
+                    "id": "2",
+                    "name": "SetModelVisibilityEffect",
+                    "desc": "(in)visible model for the enemy",
+                    "values": "bool visible",
+                    "CanBeDuration": true
+                },
+                {
+                    "guid": "8b78b7ed-25d0-4c5a-b7c6-c3c09cdd27ec",
+                    "id": "3",
+                    "name": "GetModelSkinEffect",
+                    "desc": "Copy the target's model and skin and store it in the spell context",
+                    "values": "",
+                    "CanBeDuration": true
+                },
+                {
+                    "guid": "8c3e24e6-639d-48c4-b51f-105490648b71",
+                    "id": "4",
+                    "name": "MimickCreature",
+                    "desc": "Visually copy a target creature's model, skin and status list ",
+                    "values": "",
+                    "CanBeDuration": true
+                },
+                {
+                    "guid": "d90e75f6-4f7b-477a-82ea-95f11c8f3f51",
+                    "id": "5",
+                    "name": "AddSpell",
+                    "desc": "Add a spell to the creature.spell list",
+                    "values": "",
+                    "CanBeDuration": true
+                },
+                {
+                    "guid": "06c62116-b7b7-45a6-a5c2-5644c60552ce",
+                    "id": "6",
+                    "name": "DisableSpell",
+                    "desc": "Disable a spell from a creature.spell list",
+                    "values": "int spellid",
+                    "CanBeDuration": true
+                },
+                {
+                    "guid": "71cbc5cc-12e5-481d-abcb-4cc586ed0fc5",
+                    "id": "8",
+                    "name": "StealSpell",
+                    "desc": "Disable enemy spell + Add it to yourself",
+                    "values": "int spellid",
+                    "CanBeDuration": true
+                },
+                {
+                    "guid": "8a1ca930-0ba0-4288-a0c6-32938d23ed33",
+                    "id": "9",
+                    "name": "CopyCreature",
+                    "desc": "Functionally copy a creature (stats, spells, etc)",
+                    "values": "",
+                    "CanBeDuration": true
+                },
+                {
+                    "guid": "9f6f9b0c-e7cf-4e72-97e9-25af5df5e4ad",
+                    "id": "10",
+                    "name": "",
+                    "desc": "",
+                    "values": "",
+                    "CanBeDuration": false
+                },
+                {
+                    "guid": "a18b72f4-d4df-4c87-a49e-53962b4bbf42",
+                    "id": "12",
+                    "name": "Dig",
+                    "desc": "Go underground to avoid aerial attacks",
+                    "values": "int height",
+                    "CanBeDuration": true
+                },
+                {
+                    "guid": "6bdd1472-2096-4033-b654-3cc9f5149376",
+                    "id": "13",
+                    "name": "Fly / Land",
+                    "desc": "Go in the air to avoid terrain attacks",
+                    "values": "int height",
+                    "CanBeDuration": true
+                },
+                {
+                    "guid": "04902a90-2101-4bb3-a858-b6365b8dbf01",
+                    "id": "14",
+                    "name": "",
+                    "desc": "",
+                    "values": "",
+                    "CanBeDuration": true
+                }
+            ],
+            "hidden": false,
+            "isProps": false,
+            "configurable": {
+                "name": "text",
+                "description": "text",
+                "displayColumn": "columnSelect@name",
+                "columnSelect@name@displayColumn": {
+                    "allowedTypes": [
+                        "int",
+                        "float",
+                        "text",
+                        "longtext"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "BasicResourceEffects",
+            "description": "description of what the sheet is",
+            "displayColumn": "id",
+            "guid": "8907ccc1-6231-42fe-9567-a53c6b7d61c3",
+            "columns": [
+                {
+                    "typeStr": "text",
+                    "guid": "da500e49-4268-413d-8378-4a0a44547a67",
+                    "name": "name",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                },
+                {
+                    "typeStr": "text",
+                    "guid": "cc6a6b6f-1b21-4fdd-9f38-c029185dbfe2",
+                    "name": "description",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                },
+                {
+                    "typeStr": "text",
+                    "guid": "e9081a93-274d-4533-b277-c39374c14dfd",
+                    "name": "values",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                },
+                {
+                    "typeStr": "bool",
+                    "guid": "46842b8e-ded2-4566-8a54-ffee351e178a",
+                    "description": "bool field",
+                    "name": "canBeDuration",
+                    "defaultValue": true,
+                    "iconName": "newBool",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "bool"
+                    }
+                }
+            ],
+            "lines": [
+                {
+                    "guid": "eb5e7f53-8cae-4fc5-b8a4-7dad0a0e7697",
+                    "id": "0",
+                    "name": "IncreaseResource",
+                    "description": "",
+                    "values": "ActorType actor; int value; ",
+                    "canBeDuration": true
+                },
+                {
+                    "guid": "56b00e23-b1e7-4299-850c-a6912967e652",
+                    "id": "1",
+                    "name": "StealResource",
+                    "description": "",
+                    "values": "ActorType actor; int value; ",
+                    "canBeDuration": true
+                },
+                {
+                    "guid": "a691dbdd-b125-46ac-93f7-b949af5998f6",
+                    "id": "2",
+                    "name": "ReduceResource",
+                    "description": "",
+                    "values": "ActorType actor; int value; ",
+                    "canBeDuration": true
+                },
+                {
+                    "guid": "3cb32a1c-7bd8-467b-9853-e6f1f6070e0f",
+                    "id": "3",
+                    "name": "",
+                    "description": "",
+                    "values": "",
+                    "canBeDuration": true
+                },
+                {
+                    "guid": "a8194902-6cb0-4687-a5b9-1bfba82a90ad",
+                    "id": "4",
+                    "name": "",
+                    "description": "",
+                    "values": "",
+                    "canBeDuration": true
+                },
+                {
+                    "guid": "e6c2f16d-0e03-4a12-a9ee-b5499df9227c",
+                    "id": "5",
+                    "name": "",
+                    "description": "",
+                    "values": "",
+                    "canBeDuration": true
+                }
+            ],
+            "hidden": false,
+            "isProps": false,
+            "configurable": {
+                "name": "text",
+                "description": "text",
+                "displayColumn": "columnSelect@name",
+                "columnSelect@name@displayColumn": {
+                    "allowedTypes": [
+                        "int",
+                        "float",
+                        "text",
+                        "longtext"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "BasicMoveEffects",
+            "description": "description of what the sheet is",
+            "displayColumn": "id",
+            "guid": "1ea63672-41dd-47fd-8607-50947deebb71",
+            "columns": [
+                {
+                    "typeStr": "text",
+                    "guid": "9f39436c-3446-49ae-83c0-06835ad461ef",
+                    "name": "name",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                },
+                {
+                    "typeStr": "text",
+                    "guid": "4fdacbd8-a88b-47cc-9cbc-ea36abf73183",
+                    "name": "description",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                },
+                {
+                    "typeStr": "text",
+                    "guid": "3648b33d-9515-48b5-8b04-d85e6bdeb996",
+                    "name": "values",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                }
+            ],
+            "lines": [
+                {
+                    "guid": "e4164e67-81c0-4e00-a2d3-e378dce08f82",
+                    "id": "0",
+                    "name": "translateTo",
+                    "description": "",
+                    "values": "ActorType actor; int value; "
+                },
+                {
+                    "guid": "f5550458-cc77-4dbf-950a-cfce077a70e4",
+                    "id": "1",
+                    "name": "translateBy",
+                    "description": "",
+                    "values": "ActorType actor; int value; "
+                },
+                {
+                    "guid": "b6ba44ae-1108-476d-ac90-4668c9163cd0",
+                    "id": "2",
+                    "name": "teleportTo",
+                    "description": "",
+                    "values": ""
+                },
+                {
+                    "guid": "0cb5fd61-3e70-4e05-9cfe-2bccab86dcd4",
+                    "id": "3",
+                    "name": "teleportBy",
+                    "description": "",
+                    "values": ""
+                },
+                {
+                    "guid": "68fd3c8f-d692-43ff-b598-c4ee4db27c92",
+                    "id": "4",
+                    "name": "swapWithTarget",
+                    "description": "teleport both targets",
+                    "values": ""
+                },
+                {
+                    "guid": "b2e06fec-63d2-4d2a-bdba-ab4ab0c2de4b",
+                    "id": "5",
+                    "name": "teleportSymmetricalAround",
+                    "description": "",
+                    "values": "ActorType actor; int value; "
+                },
+                {
+                    "guid": "3662bf40-1ccb-48a0-8a97-c0f4a8e1c2d7",
+                    "id": "6",
+                    "name": "",
+                    "description": "",
+                    "values": ""
+                },
+                {
+                    "guid": "7e505b9b-9b55-42e2-b35a-6c38fba40697",
+                    "id": "7",
+                    "name": "",
+                    "description": "",
+                    "values": ""
+                },
+                {
+                    "guid": "b6174097-64f4-4b3f-8292-af802e56e739",
+                    "id": "8",
+                    "name": "",
+                    "description": "",
+                    "values": ""
+                },
+                {
+                    "guid": "e743241b-343e-45c3-94c9-ca08d8c5e3de",
+                    "id": "9",
+                    "name": "",
+                    "description": "",
+                    "values": ""
+                },
+                {
+                    "guid": "af9072d3-c1fd-4170-99c1-4002f5aac80b",
+                    "id": "10",
+                    "name": "",
+                    "description": "",
+                    "values": ""
+                }
+            ],
+            "hidden": false,
+            "isProps": false,
+            "configurable": {
+                "name": "text",
+                "description": "text",
+                "displayColumn": "columnSelect@name",
+                "columnSelect@name@displayColumn": {
+                    "allowedTypes": [
+                        "int",
+                        "float",
+                        "text",
+                        "longtext"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "EffectsForSpellProps",
+            "description": "description of what the sheet is",
+            "displayColumn": "id",
+            "guid": "33ab19e2-a9e1-4b6d-bcab-b848dd4b8369",
+            "columns": [
+                {
+                    "typeStr": "text",
+                    "guid": "65761a62-0356-41cd-a5b0-46877a633c58",
+                    "name": "name",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                },
+                {
+                    "typeStr": "text",
+                    "guid": "99cbdc3c-2885-4066-9e39-87395a0df704",
+                    "name": "description",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                },
+                {
+                    "typeStr": "text",
+                    "guid": "03a24e67-19d3-4893-90fa-5b8d4fc71dd5",
+                    "name": "values",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                }
+            ],
+            "lines": [
+                {
+                    "guid": "d03126da-fc1c-41bc-94d1-bb5212cc8640",
+                    "id": "0",
+                    "name": "AddSpellCooldown",
+                    "description": "Ccan be positive/negative. If not spell specified, then all spells in the creature's list",
+                    "values": "int spellId; "
+                },
+                {
+                    "guid": "723fe044-e986-4208-9cc5-d068adc9a524",
+                    "id": "1",
+                    "name": "AddSpellDamage",
+                    "description": "Can be positive/negative. If not spell specified, then all spells in the creature's list",
+                    "values": "int spellId; map<AffinityType, intValue>"
+                },
+                {
+                    "guid": "d0f413fe-4e53-497d-82ce-f4f93bb1350a",
+                    "id": "2",
+                    "name": "AddSpellRange",
+                    "description": "Can be positive/negative. If not spell specified, then all spells in the creature's list",
+                    "values": "int spellId; int value"
+                },
+                {
+                    "guid": "0e82ee65-b342-4306-a3f0-4ce2ce0e1a09",
+                    "id": "3",
+                    "name": "AddEffectZone",
+                    "description": "",
+                    "values": ""
+                },
+                {
+                    "guid": "b56537df-3c4e-4da2-9ecb-d5af9bc470e0",
+                    "id": "4",
+                    "name": "SetEffectZone",
+                    "description": "",
+                    "values": ""
+                },
+                {
+                    "guid": "049fcd39-d4ca-4cba-b7a7-14edf2abcbb4",
+                    "id": "5",
+                    "name": "",
+                    "description": "",
+                    "values": ""
+                },
+                {
+                    "guid": "3671e490-0a15-44d3-a645-7eeb9e724a65",
+                    "id": "6",
+                    "name": "",
+                    "description": "",
+                    "values": ""
+                }
+            ],
+            "hidden": false,
+            "isProps": false,
+            "configurable": {
+                "name": "text",
+                "description": "text",
+                "displayColumn": "columnSelect@name",
+                "columnSelect@name@displayColumn": {
+                    "allowedTypes": [
+                        "int",
+                        "float",
+                        "text",
+                        "longtext"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Crazy shit",
+            "description": "description of what the sheet is",
+            "displayColumn": "id",
+            "guid": "65cb5490-103d-4ddd-9779-4898d462cd71",
+            "columns": [
+                {
+                    "typeStr": "text",
+                    "guid": "bd88a401-7885-46b3-b194-fe996a238a46",
+                    "name": "name",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                },
+                {
+                    "typeStr": "text",
+                    "guid": "146cba0d-471a-4f54-80f4-abbdd4f9bf05",
+                    "name": "description",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                },
+                {
+                    "typeStr": "text",
+                    "guid": "a25b368e-e661-43c1-a429-1a4d2789bb1c",
+                    "name": "values",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                },
+                {
+                    "typeStr": "bool",
+                    "guid": "af750709-9a00-4ead-aa41-9846403c374f",
+                    "description": "bool field",
+                    "name": "CanBeDuration",
+                    "defaultValue": true,
+                    "iconName": "newBool",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "bool"
+                    }
+                }
+            ],
+            "lines": [
+                {
+                    "guid": "73d6524c-3adb-4aa2-86ac-cbf870917f1a",
+                    "id": "0",
+                    "name": "AddBlock",
+                    "description": "Create a box that blocks movement+los",
+                    "values": "int height = 1",
+                    "CanBeDuration": true
+                },
+                {
+                    "guid": "8e583eac-c8e5-4f72-b44a-6ef8aece7b20",
+                    "id": "1",
+                    "name": "RemoveBlock",
+                    "description": "Remove a box that blocks movement+los",
+                    "values": "int height = 1",
+                    "CanBeDuration": true
+                },
+                {
+                    "guid": "6ec1b31a-eb18-4021-8a58-9e3df1c520d1",
+                    "id": "2",
+                    "name": "SwapOut",
+                    "description": "Remove a creature from the board. Choose what creature to swap in its place.",
+                    "values": "",
+                    "CanBeDuration": true
+                },
+                {
+                    "guid": "df659bec-9b45-43af-87eb-0e8e9060298d",
+                    "id": "3",
+                    "name": "Fear (SwapOut target)",
+                    "description": "Force an enemy creature to swapout",
+                    "values": "",
+                    "CanBeDuration": true
+                },
+                {
+                    "guid": "0de29966-51fc-49f2-99cc-897a1c0ad819",
+                    "id": "4",
+                    "name": "StoreValue",
+                    "description": "Get a value, store it in context and name it. Then any effect in the context (sibling or child) can use this value by name.",
+                    "values": "string name, string propertyPath?",
+                    "CanBeDuration": true
+                },
+                {
+                    "guid": "9df4f0a0-f312-4001-927a-7386ed718afe",
+                    "id": "5",
+                    "name": "CastSubSpell",
+                    "description": "Make the target or source entity cast another spell",
+                    "values": "ActorType actor; int spellId; ",
+                    "CanBeDuration": true
+                },
+                {
+                    "guid": "110d7acb-44be-46b3-96a8-761d2a519748",
+                    "id": "6",
+                    "name": "",
+                    "description": "",
+                    "values": "",
+                    "CanBeDuration": true
+                },
+                {
+                    "guid": "7ad11034-3806-400d-8572-412d3bb2af88",
+                    "id": "7",
+                    "name": "",
+                    "description": "",
+                    "values": "",
+                    "CanBeDuration": true
+                },
+                {
+                    "guid": "8b71b32c-a38f-4d56-adf5-fe336ad62f84",
+                    "id": "8",
+                    "name": "",
+                    "description": "",
+                    "values": "",
+                    "CanBeDuration": true
+                }
+            ],
+            "hidden": false,
+            "isProps": false,
+            "configurable": {
+                "name": "text",
+                "description": "text",
+                "displayColumn": "columnSelect@name",
+                "columnSelect@name@displayColumn": {
+                    "allowedTypes": [
+                        "int",
+                        "float",
+                        "text",
+                        "longtext"
+                    ]
+                }
+            }
+        }
+    ]
+}

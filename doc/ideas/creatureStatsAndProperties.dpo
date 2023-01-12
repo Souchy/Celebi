@@ -1,0 +1,382 @@
+{
+    "sheets": [
+        {
+            "name": "Resources",
+            "description": "description of what the sheet is",
+            "displayColumn": "id",
+            "guid": "5d59250d-c4ef-4f75-bc89-cfda919bb6bb",
+            "columns": [
+                {
+                    "typeStr": "text",
+                    "guid": "0d546804-e749-44c2-a800-93f215b7ea9a",
+                    "name": "name",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                }
+            ],
+            "lines": [
+                {
+                    "guid": "d0679b09-1835-4c6a-bc6e-633daa4de916",
+                    "id": "0",
+                    "name": "Life"
+                },
+                {
+                    "guid": "d620f424-2dad-4393-9791-f316331ce53b",
+                    "id": "1",
+                    "name": "LifeMax"
+                },
+                {
+                    "guid": "427c0f2f-c274-4070-89c8-cf5a56509af8",
+                    "id": "2",
+                    "name": "Mana"
+                },
+                {
+                    "guid": "9a2919b1-c8c3-4339-a9b4-6fac599702c7",
+                    "id": "3",
+                    "name": "ManaMax"
+                },
+                {
+                    "guid": "f142a650-f0cd-4d40-af43-064982a0c266",
+                    "id": "4",
+                    "name": "Movement"
+                },
+                {
+                    "guid": "7ef4171d-a394-418e-9dbf-cd122ecf4b9c",
+                    "id": "5",
+                    "name": "MovementMax"
+                },
+                {
+                    "guid": "3ddd3bee-28fb-40a6-a5c0-157363a1aa92",
+                    "id": "6",
+                    "name": "Summon"
+                },
+                {
+                    "guid": "bfdfe71e-d1bd-4cf5-905d-f13f01d9c668",
+                    "id": "7",
+                    "name": "SummonMax"
+                }
+            ],
+            "hidden": false,
+            "isProps": false,
+            "configurable": {
+                "name": "text",
+                "description": "text",
+                "displayColumn": "columnSelect@name",
+                "columnSelect@name@displayColumn": {
+                    "allowedTypes": [
+                        "int",
+                        "float",
+                        "text",
+                        "longtext"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Affinities",
+            "description": "description of what the sheet is",
+            "displayColumn": "id",
+            "guid": "ef6186e9-898a-49a9-a153-7d38b8a172f5",
+            "columns": [
+                {
+                    "typeStr": "text",
+                    "guid": "e68bed7f-07e8-486e-85e1-9542e529a6fe",
+                    "name": "name",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                }
+            ],
+            "lines": [
+                {
+                    "guid": "9b936fad-8934-4e78-8952-2abadad0ae21",
+                    "id": "0",
+                    "name": "Fire"
+                },
+                {
+                    "guid": "ba61ac7c-c839-424a-811d-d6344b9c3b90",
+                    "id": "1",
+                    "name": "Water"
+                },
+                {
+                    "guid": "ff98b091-bef2-45af-8274-d19ec9fabf38",
+                    "id": "2",
+                    "name": "Earth"
+                },
+                {
+                    "guid": "23fd35fd-6929-4943-8807-716318c0779e",
+                    "id": "3",
+                    "name": "Air"
+                }
+            ],
+            "hidden": false,
+            "isProps": false,
+            "configurable": {
+                "name": "text",
+                "description": "text",
+                "displayColumn": "columnSelect@name",
+                "columnSelect@name@displayColumn": {
+                    "allowedTypes": [
+                        "int",
+                        "float",
+                        "text",
+                        "longtext"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "SpecialStats",
+            "description": "description of what the sheet is",
+            "displayColumn": "id",
+            "guid": "b966171e-8ca4-4a74-b61c-3b2c86bcc24e",
+            "columns": [
+                {
+                    "typeStr": "text",
+                    "guid": "85a29e83-844f-4775-8c26-66ffd51c2a50",
+                    "name": "name",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                },
+                {
+                    "typeStr": "text",
+                    "guid": "d06e25ec-31b7-4b40-b23c-55aca1017604",
+                    "name": "type",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                },
+                {
+                    "typeStr": "text",
+                    "guid": "a17953a4-8775-48b8-a9cf-dd3ed1e7343d",
+                    "name": "description",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                }
+            ],
+            "lines": [
+                {
+                    "guid": "01f93a01-41a9-44aa-a40f-84c9570f8df8",
+                    "id": "0",
+                    "name": "ModelVisibility",
+                    "type": "bool",
+                    "description": ""
+                },
+                {
+                    "guid": "bf8c4fbe-f407-4ba7-b3c2-32063734b85d",
+                    "id": "1",
+                    "name": "StatusVisibility",
+                    "type": "bool",
+                    "description": ""
+                },
+                {
+                    "guid": "d8aee125-48f2-4c70-b802-b0998609a5f5",
+                    "id": "2",
+                    "name": "pos_x",
+                    "type": "int",
+                    "description": ""
+                },
+                {
+                    "guid": "c41655f6-9f24-4a37-88a4-96c7953bffa2",
+                    "id": "3",
+                    "name": "pos_y",
+                    "type": "int",
+                    "description": ""
+                },
+                {
+                    "guid": "6a83954a-7768-4eb4-9151-b7364e3607b3",
+                    "id": "4",
+                    "name": "pos_z",
+                    "type": "int",
+                    "description": ""
+                },
+                {
+                    "guid": "d9e294f4-bb32-4ba8-a0ca-347a52eb4cba",
+                    "id": "5",
+                    "name": "CurrentModel",
+                    "type": "string",
+                    "description": ""
+                },
+                {
+                    "guid": "049a5258-d493-4356-ab1c-e5565f7ab572",
+                    "id": "6",
+                    "name": "CurrentSkin",
+                    "type": "string",
+                    "description": ""
+                },
+                {
+                    "guid": "d2522ead-5db3-4014-a5f5-6248c3e8b1a4",
+                    "id": "7",
+                    "name": "OriginalModel",
+                    "type": "string",
+                    "description": ""
+                },
+                {
+                    "guid": "47848216-1a1b-4f3b-a1c0-84d7590b7903",
+                    "id": "8",
+                    "name": "OriginalSkin",
+                    "type": "string",
+                    "description": ""
+                },
+                {
+                    "guid": "4e61fa3f-30a1-47db-a84c-aa1dba1e5b8c",
+                    "id": "9",
+                    "name": "MimickedCreatureID",
+                    "type": "IID",
+                    "description": "Visually copy a creature (model, skin, status visual)"
+                },
+                {
+                    "guid": "5986b30a-db6c-409e-a36c-6e4313f2f5e4",
+                    "id": "10",
+                    "name": "CopiedCreatureID",
+                    "type": "IID",
+                    "description": "Functionally a creature (+stats, spells, statuses...)"
+                },
+                {
+                    "guid": "b935c92b-254d-4a53-87cd-a51e6ed8ba5f",
+                    "id": "11",
+                    "name": "context",
+                    "type": "",
+                    "description": ""
+                },
+                {
+                    "guid": "3a601287-8ca8-41b0-88e0-04a6f5c851bb",
+                    "id": "12",
+                    "name": "",
+                    "type": "",
+                    "description": ""
+                }
+            ],
+            "hidden": false,
+            "isProps": false,
+            "configurable": {
+                "name": "text",
+                "description": "text",
+                "displayColumn": "columnSelect@name",
+                "columnSelect@name@displayColumn": {
+                    "allowedTypes": [
+                        "int",
+                        "float",
+                        "text",
+                        "longtext"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "MainProperties",
+            "description": "description of what the sheet is",
+            "displayColumn": "id",
+            "guid": "1134737b-7c1d-4755-ac0f-84851c61dd99",
+            "columns": [
+                {
+                    "typeStr": "text",
+                    "guid": "616a5a65-791d-4dd8-b2d5-f9dc8727984d",
+                    "name": "name",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                },
+                {
+                    "typeStr": "text",
+                    "guid": "8e551cfc-9e0c-4d5c-a2c5-3d5d29be51ed",
+                    "name": "type",
+                    "description": "",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                }
+            ],
+            "lines": [
+                {
+                    "guid": "df22e13e-1fd9-4981-8a28-ca5fb9ac3626",
+                    "id": "0",
+                    "name": "originalSpells",
+                    "type": "list<iid>"
+                },
+                {
+                    "guid": "6798ee4e-fb66-4f88-be65-d03a332782dc",
+                    "id": "1",
+                    "name": "currentSpells",
+                    "type": "list<iid>"
+                },
+                {
+                    "guid": "77f7d583-533e-4c70-95d7-29393706a468",
+                    "id": "2",
+                    "name": "resources",
+                    "type": "map<ResourceType, DetailedResourceStat>"
+                },
+                {
+                    "guid": "1910c899-0f90-41e7-bbf5-3a40415b2625",
+                    "id": "3",
+                    "name": "affinities",
+                    "type": "map<AffinityType, DetailedAffinityStat>"
+                },
+                {
+                    "guid": "6c65c733-57f6-4d7c-8824-68579d7948e0",
+                    "id": "4",
+                    "name": "statuses",
+                    "type": "list<iid>"
+                },
+                {
+                    "guid": "506f903e-1fd5-4b40-879a-9d9bf06e42fe",
+                    "id": "5",
+                    "name": "",
+                    "type": ""
+                }
+            ],
+            "hidden": false,
+            "isProps": false,
+            "configurable": {
+                "name": "text",
+                "description": "text",
+                "displayColumn": "columnSelect@name",
+                "columnSelect@name@displayColumn": {
+                    "allowedTypes": [
+                        "int",
+                        "float",
+                        "text",
+                        "longtext"
+                    ]
+                }
+            }
+        }
+    ]
+}
