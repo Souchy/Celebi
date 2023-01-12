@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://b6hrdr1t2eg0t"]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="Texture2D" uid="uid://cokgd8iaexxjl" path="res://assets/Particle04_bokashistrong_soft.png" id="1_dkk2v"]
+[ext_resource type="Texture2D" uid="uid://cokgd8iaexxjl" path="res://assets/effects/Particle04_bokashistrong_soft.png" id="1_dkk2v"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cutn4"]
 transparency = 1

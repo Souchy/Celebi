@@ -1,6 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://250lkxfmn3x3"]
+[gd_scene load_steps=18 format=3]
 
-[ext_resource type="Texture2D" uid="uid://cokgd8iaexxjl" path="res://assets/Particle04_bokashistrong_soft.png" id="1_dtvjm"]
+[ext_resource type="Texture2D" uid="uid://cokgd8iaexxjl" path="res://assets/effects/Particle04_bokashistrong_soft.png" id="1_dtvjm"]
 [ext_resource type="ArrayMesh" uid="uid://br7tld5cy84ur" path="res://assets/effects/kassinPulseMesh.tres" id="2_h2ybc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dn0jw"]
