@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d2unn3r8est6i"
-path="res://.godot/imported/Water_Droplets_001_ambientOcclusion.jpg-2028feb851c2b3769bd4a7140f24dbb4.ctex"
+path="res://.godot/imported/Water_Droplets_001_ambientOcclusion.jpg-333b5dc695e3b5bc84ac373de3cf98b2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/materials/Water_Droplets_001_SD-20230111T231912Z-001/Water_Droplets_001_SD/Water_Droplets_001_ambientOcclusion.jpg"
-dest_files=["res://.godot/imported/Water_Droplets_001_ambientOcclusion.jpg-2028feb851c2b3769bd4a7140f24dbb4.ctex"]
+source_file="res://assets/materials/Water_Droplets_001_SD/Water_Droplets_001_ambientOcclusion.jpg"
+dest_files=["res://.godot/imported/Water_Droplets_001_ambientOcclusion.jpg-333b5dc695e3b5bc84ac373de3cf98b2.ctex"]
 
 [params]
 

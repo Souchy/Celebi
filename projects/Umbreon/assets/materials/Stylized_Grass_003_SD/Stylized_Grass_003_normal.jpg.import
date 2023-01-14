@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://mojuc22n0nee"
-path="res://.godot/imported/Stylized_Grass_003_normal.jpg-20f1a2c4bda63e9d35b72504e30cf632.ctex"
+path="res://.godot/imported/Stylized_Grass_003_normal.jpg-568b7063ce27e03e28eca143ece02ac5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/materials/Stylized_Grass_003_SD-20230111T232437Z-001/Stylized_Grass_003_SD/Stylized_Grass_003_normal.jpg"
-dest_files=["res://.godot/imported/Stylized_Grass_003_normal.jpg-20f1a2c4bda63e9d35b72504e30cf632.ctex"]
+source_file="res://assets/materials/Stylized_Grass_003_SD/Stylized_Grass_003_normal.jpg"
+dest_files=["res://.godot/imported/Stylized_Grass_003_normal.jpg-568b7063ce27e03e28eca143ece02ac5.ctex"]
 
 [params]
 

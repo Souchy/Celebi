@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bl2w6iyf0e3f7"
-path="res://.godot/imported/Concrete_Blocks_011_ambientOcclusion.jpg-d89a514e0cb8ca62b81fcafd616c1296.ctex"
+path="res://.godot/imported/Concrete_Blocks_011_ambientOcclusion.jpg-3222f51b72ef12906a56cd02e5d5326f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/materials/Concrete_Blocks_011_SD-20230111T232143Z-001/Concrete_Blocks_011_SD/Concrete_Blocks_011_ambientOcclusion.jpg"
-dest_files=["res://.godot/imported/Concrete_Blocks_011_ambientOcclusion.jpg-d89a514e0cb8ca62b81fcafd616c1296.ctex"]
+source_file="res://assets/materials/Concrete_Blocks_011_SD/Concrete_Blocks_011_ambientOcclusion.jpg"
+dest_files=["res://.godot/imported/Concrete_Blocks_011_ambientOcclusion.jpg-3222f51b72ef12906a56cd02e5d5326f.ctex"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cfpqvgyrt14gu"
-path="res://.godot/imported/Concrete_019_BaseColor.jpg-aa4ea2888f5cecb1e4ac3b9a48be1ccf.ctex"
+path="res://.godot/imported/Concrete_019_BaseColor.jpg-b8302bae34b132f21f4b7116b1e2715e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/materials/Concrete_019_SD-20230111T232139Z-001/Concrete_019_SD/Concrete_019_BaseColor.jpg"
-dest_files=["res://.godot/imported/Concrete_019_BaseColor.jpg-aa4ea2888f5cecb1e4ac3b9a48be1ccf.ctex"]
+source_file="res://assets/materials/Concrete_019_SD/Concrete_019_BaseColor.jpg"
+dest_files=["res://.godot/imported/Concrete_019_BaseColor.jpg-b8302bae34b132f21f4b7116b1e2715e.ctex"]
 
 [params]
 

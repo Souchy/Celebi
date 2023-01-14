@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dj6pnkjpbyjlu"
-path="res://.godot/imported/Water_002_COLOR.jpg-2c6b3318c72376dc50e31b4d759a11b6.ctex"
+path="res://.godot/imported/Water_002_COLOR.jpg-9c0a27c7b406a85422585724ca995e64.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/materials/Water_002_SD-20230111T231834Z-001/Water_002_SD/Water_002_COLOR.jpg"
-dest_files=["res://.godot/imported/Water_002_COLOR.jpg-2c6b3318c72376dc50e31b4d759a11b6.ctex"]
+source_file="res://assets/materials/Water_002_SD/Water_002_COLOR.jpg"
+dest_files=["res://.godot/imported/Water_002_COLOR.jpg-9c0a27c7b406a85422585724ca995e64.ctex"]
 
 [params]
 

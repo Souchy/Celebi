@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dmcrsf4ufpl8u"
-path="res://.godot/imported/Water_Droplets_001_height.png-14ff27b30d87fb3f3a19fda25b2ffa4c.ctex"
+path="res://.godot/imported/Water_Droplets_001_height.png-2911a3cabcff780b58863a68c0428b5e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/materials/Water_Droplets_001_SD-20230111T231912Z-001/Water_Droplets_001_SD/Water_Droplets_001_height.png"
-dest_files=["res://.godot/imported/Water_Droplets_001_height.png-14ff27b30d87fb3f3a19fda25b2ffa4c.ctex"]
+source_file="res://assets/materials/Water_Droplets_001_SD/Water_Droplets_001_height.png"
+dest_files=["res://.godot/imported/Water_Droplets_001_height.png-2911a3cabcff780b58863a68c0428b5e.ctex"]
 
 [params]
 

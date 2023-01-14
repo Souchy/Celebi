@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cxpokqib32t25"
-path="res://.godot/imported/Water_001_NORM.jpg-9986d8a3bfbea434d1e79cc65d9bb664.ctex"
+path="res://.godot/imported/Water_001_NORM.jpg-07bed3a7b4cdc551908bf2e4670a3984.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/materials/Water_001_SD/Water_001_SD/Water_001_NORM.jpg"
-dest_files=["res://.godot/imported/Water_001_NORM.jpg-9986d8a3bfbea434d1e79cc65d9bb664.ctex"]
+source_file="res://assets/materials/Water_001_SD/Water_001_NORM.jpg"
+dest_files=["res://.godot/imported/Water_001_NORM.jpg-07bed3a7b4cdc551908bf2e4670a3984.ctex"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dac5fm8sy1vdd"
-path="res://.godot/imported/Water_Droplets_001_mask.jpg-df4f3ee7d79a6da59cfcad05b02e9251.ctex"
+path="res://.godot/imported/Water_Droplets_001_mask.jpg-b26bfef84e1d6cabd58e4d6c924d4030.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/materials/Water_Droplets_001_SD-20230111T231912Z-001/Water_Droplets_001_SD/Water_Droplets_001_mask.jpg"
-dest_files=["res://.godot/imported/Water_Droplets_001_mask.jpg-df4f3ee7d79a6da59cfcad05b02e9251.ctex"]
+source_file="res://assets/materials/Water_Droplets_001_SD/Water_Droplets_001_mask.jpg"
+dest_files=["res://.godot/imported/Water_Droplets_001_mask.jpg-b26bfef84e1d6cabd58e4d6c924d4030.ctex"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bofblhgit83q4"
-path="res://.godot/imported/Foliage_Lilypads_001_Roughness.jpg-9c080869200b08b1c96c4740d57a3f6c.ctex"
+path="res://.godot/imported/Foliage_Lilypads_001_Roughness.jpg-ba2beedbdceb47d08eb4faed7c523e6f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/materials/Foliage_Lilypads_001_SD-20230111T232032Z-001/Foliage_Lilypads_001_SD/Foliage_Lilypads_001_Roughness.jpg"
-dest_files=["res://.godot/imported/Foliage_Lilypads_001_Roughness.jpg-9c080869200b08b1c96c4740d57a3f6c.ctex"]
+source_file="res://assets/materials/Foliage_Lilypads_001_SD/Foliage_Lilypads_001_Roughness.jpg"
+dest_files=["res://.godot/imported/Foliage_Lilypads_001_Roughness.jpg-ba2beedbdceb47d08eb4faed7c523e6f.ctex"]
 
 [params]
 

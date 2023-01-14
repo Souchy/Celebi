@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://drw21escry2me"
-path="res://.godot/imported/Foliage_Lilypads_001_BaseColor.jpg-e7e1206d24a707ca21e23dda64a4fc7f.ctex"
+path="res://.godot/imported/Foliage_Lilypads_001_BaseColor.jpg-3b326e999432984a2a78395580eec103.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/materials/Foliage_Lilypads_001_SD-20230111T232032Z-001/Foliage_Lilypads_001_SD/Foliage_Lilypads_001_BaseColor.jpg"
-dest_files=["res://.godot/imported/Foliage_Lilypads_001_BaseColor.jpg-e7e1206d24a707ca21e23dda64a4fc7f.ctex"]
+source_file="res://assets/materials/Foliage_Lilypads_001_SD/Foliage_Lilypads_001_BaseColor.jpg"
+dest_files=["res://.godot/imported/Foliage_Lilypads_001_BaseColor.jpg-3b326e999432984a2a78395580eec103.ctex"]
 
 [params]
 

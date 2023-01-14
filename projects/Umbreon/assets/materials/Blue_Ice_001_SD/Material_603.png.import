@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bmiy8dad7da8x"
-path="res://.godot/imported/Material_603.png-a201f3ae73042d988d5d2a5ba01b8efa.ctex"
+path="res://.godot/imported/Material_603.png-49c59b3291eb1c7c634c492ad61386af.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/materials/Blue_Ice_001_SD-20230111T232323Z-001/Blue_Ice_001_SD/Material_603.png"
-dest_files=["res://.godot/imported/Material_603.png-a201f3ae73042d988d5d2a5ba01b8efa.ctex"]
+source_file="res://assets/materials/Blue_Ice_001_SD/Material_603.png"
+dest_files=["res://.godot/imported/Material_603.png-49c59b3291eb1c7c634c492ad61386af.ctex"]
 
 [params]
 
