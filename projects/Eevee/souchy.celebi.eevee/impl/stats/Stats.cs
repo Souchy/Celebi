@@ -1,7 +1,7 @@
 ﻿using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.stats;
 
-namespace Espeon.souchy.celebi.eeevee.impl.objects
+namespace souchy.celebi.eevee.impl.stats
 {
     public class Stats : IStats
     {
