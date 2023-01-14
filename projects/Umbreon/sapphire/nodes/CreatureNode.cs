@@ -19,6 +19,9 @@ public partial class CreatureNode : Node3D
     [Export]
     public Color color = new Color(0, 0, 0);
 
+    [Export]
+    public Creature Creature { get; set; }
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {

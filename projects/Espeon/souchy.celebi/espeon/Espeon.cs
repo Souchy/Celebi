@@ -1,6 +1,5 @@
 ﻿using Espeon.souchy.celebi.eeevee.impl;
 using Espeon.souchy.celebi.eeevee.impl.controllers;
-using Espeon.souchy.celebi.eeevee.impl.objects;
 using Espeon.souchy.celebi.espeon.eevee.impl.controllers;
 using Espeon.souchy.celebi.espeon.eevee.impl.objects;
 using Microsoft.Extensions.DependencyInjection;

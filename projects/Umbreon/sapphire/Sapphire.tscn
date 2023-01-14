@@ -50,6 +50,10 @@ visible = false
 
 [node name="MapCelebi" parent="Environment" instance=ExtResource("4_3dy4y")]
 
+[node name="ColorRect" type="ColorRect" parent="Environment"]
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="Controls" type="Node" parent="."]
 script = ExtResource("3_1ug5b")
 

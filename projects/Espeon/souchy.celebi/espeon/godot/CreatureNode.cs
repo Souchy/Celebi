@@ -6,6 +6,7 @@ namespace Espeon.souchy.celebi.espeon.godot
 {
     public partial class CreatureNode : Node
     {
+        [Export]
         public Creature Creature { get; set; }
     }
 }
