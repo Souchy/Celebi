@@ -1,7 +1,7 @@
 import { watch } from "@aurelia/runtime-html";
 import { bindable, IEventAggregator, inject } from "aurelia";
-import { Zone as ZoneData } from "../../../../arch/common/components/zone";
-import { Effect } from "../../../../arch/common/effects";
+import { Zone as ZoneData } from "../../../../../arch/common/components/zone";
+import { Effect } from "../../../../../arch/common/effects";
 import { db } from "../../db";
 
 @inject(db)

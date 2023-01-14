@@ -1,6 +1,6 @@
 // import { ObjectId } from "mongodb";
 import * as dotenv from "dotenv";
-import { Creature } from '../../../arch/common/entity';
+import { Creature } from '../../../../arch/common/entity';
 import { IEventAggregator, inject } from "aurelia";
 import { db } from "../db";
 

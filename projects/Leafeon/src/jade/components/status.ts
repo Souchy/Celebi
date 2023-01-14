@@ -1,6 +1,6 @@
 import { bindable, IEventAggregator, inject } from "aurelia";
 import { db } from "../../db";
-import { Status as StatusObject, StatusInstance } from "../../../../arch/common/red/status";
+import { Status as StatusObject, StatusInstance } from "../../../../../arch/common/red/status";
 
 
 @inject(db)

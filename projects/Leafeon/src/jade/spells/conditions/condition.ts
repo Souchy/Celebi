@@ -1,7 +1,7 @@
 import { bindable, IEventAggregator, inject, observable } from "aurelia";
-import { Condition as ConditionObject, ConditionData, CondditionDataState, ConditionDataContext, ConditionDataStat, ConditionType, conditionComparatorTypes } from "../../../../../arch/common/components/condition";
+import { Condition as ConditionObject, ConditionData, CondditionDataState, ConditionDataContext, ConditionDataStat, ConditionType, conditionComparatorTypes } from "../../../../../../arch/common/components/condition";
 import { watch } from '@aurelia/runtime-html';
-import { Effect } from "../../../../../arch/common/effects";
+import { Effect } from "../../../../../../arch/common/effects";
 import { db } from "../../../db";
 
 @inject(db)

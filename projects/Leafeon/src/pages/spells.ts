@@ -4,8 +4,8 @@ import { IEventAggregator, inject } from "aurelia";
 import { loadavg } from "os";
 import { watch } from '@aurelia/runtime-html';
 import { db } from "../db";
-import { Spell } from '../../../arch/common/spell';
-import { Effect } from "../../../arch/common/effects";
+import { Spell } from '../../../../arch/common/spell';
+import { Effect } from "../../../../arch/common/effects";
 
 @inject(db)
 export class Spells {

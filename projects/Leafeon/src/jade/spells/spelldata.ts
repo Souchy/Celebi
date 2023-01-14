@@ -1,5 +1,5 @@
 import { bindable, IEventAggregator } from "aurelia";
-import { Spell } from "../../../../arch/common/spell";
+import { Spell } from "../../../../../arch/common/spell";
 
 export class SpellData {
     @bindable

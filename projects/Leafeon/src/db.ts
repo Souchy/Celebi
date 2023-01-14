@@ -5,13 +5,13 @@ import { DI, Registration } from 'aurelia';
 import { HttpClient } from '@aurelia/fetch-client';
 import { fs } from "@tauri-apps/api";
 
-import { Creature } from "../../arch/common/entity";
-import { Spell } from "../../arch/common/spell";
-import { Effect, EffectType, effectTypes } from "../../arch/common/effects";
-import { resourceTypes, characteristicTypes, stateTypes, elementTypes } from "../../arch/common/characteristics";
-import { conditionActorTypes, conditionComparatorTypes, conditionLinkTypes, conditionTypes } from "../../arch/common/components/condition";
-import { contextTypes, contextCharacteristicTypes } from "../../arch/common/red/context";
-import { direction9Types, zoneTypes } from "../../arch/common/components/zone";
+import { Creature } from "../../../arch/common/entity";
+import { Spell } from "../../../arch/common/spell";
+import { Effect, EffectType, effectTypes } from "../../../arch/common/effects";
+import { resourceTypes, characteristicTypes, stateTypes, elementTypes } from "../../../arch/common/characteristics";
+import { conditionActorTypes, conditionComparatorTypes, conditionLinkTypes, conditionTypes } from "../../../arch/common/components/condition";
+import { contextTypes, contextCharacteristicTypes } from "../../../arch/common/red/context";
+import { direction9Types, zoneTypes } from "../../../arch/common/components/zone";
 
 export class db {
     public zdb: zango.Db; //, { people: ['age'] });

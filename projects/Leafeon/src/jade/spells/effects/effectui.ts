@@ -1,6 +1,6 @@
 import { bindable, IEventAggregator, inject } from "aurelia";
-import { Spell } from "../../../../../arch/common/spell";
-import { Effect } from "../../../../../arch/common/effects";
+import { Spell } from "../../../../../../arch/common/spell";
+import { Effect } from "../../../../../../arch/common/effects";
 import { db } from "../../../db";
 
 @inject(db)
