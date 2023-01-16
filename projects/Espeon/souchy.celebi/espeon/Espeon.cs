@@ -12,6 +12,7 @@ using souchy.celebi.eevee.face.stats;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.util;
 using Microsoft.AspNetCore.Hosting;
+using souchy.celebi.eevee.impl.stats;
 
 namespace Espeon.souchy.celebi.espeon
 {
@@ -38,7 +39,7 @@ namespace Espeon.souchy.celebi.espeon
 
         public Espeon()
         {
-            new PlayfabServer();
+            //new PlayfabServer();
         }
 
         public static void init(string[] args, Action<IServiceCollection> configureDelegate)

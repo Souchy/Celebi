@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://cptlo7076rvpm"]
+
+[node name="ResourceListItem" type="Control"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 150.0
+offset_bottom = 150.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Image" type="ColorRect" parent="VBoxContainer"]
+unique_name_in_owner = true
+offset_right = 150.0
+offset_bottom = 120.0
+size_flags_vertical = 3
+color = Color(1, 0.00392157, 0.227451, 1)
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+offset_top = 124.0
+offset_right = 150.0
+offset_bottom = 150.0
+text = "NameOfMyResource"
+text_overrun_behavior = 1

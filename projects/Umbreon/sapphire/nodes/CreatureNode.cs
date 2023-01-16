@@ -5,6 +5,7 @@ using Godot.Sharp.Extras;
 using souchy.celebi.eevee;
 using System;
 using System.Xml.Linq;
+using Umbreon.eevee.impl.objects;
 
 public partial class CreatureNode : Node3D
 {
@@ -19,7 +20,7 @@ public partial class CreatureNode : Node3D
     [Export]
     public Color color = new Color(0, 0, 0);
 
-    [Export]
+    //[Export]
     public Creature Creature { get; set; }
 
     // Called when the node enters the scene tree for the first time.
