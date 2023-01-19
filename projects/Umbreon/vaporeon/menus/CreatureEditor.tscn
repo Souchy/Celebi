@@ -1,7 +1,47 @@
-[gd_scene format=3 uid="uid://d3lr0i3pe0162"]
+[gd_scene load_steps=2 format=3 uid="uid://d3lr0i3pe0162"]
+
+[ext_resource type="PackedScene" uid="uid://bknkdq6d6d6s2" path="res://vaporeon/common/StatsEditor.tscn" id="1_vih3n"]
 
 [node name="CreatureEditor" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NameInput" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 91.0
+offset_right = 245.0
+offset_bottom = 138.0
+placeholder_text = "Name"
+
+[node name="DescriptionInput" type="LineEdit" parent="."]
+layout_mode = 1
+offset_left = 76.0
+offset_top = 91.0
+offset_right = 245.0
+offset_bottom = 138.0
+placeholder_text = "Name"
+
+[node name="StatsEditor" parent="." instance=ExtResource("1_vih3n")]
+layout_mode = 1
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Spells" type="FlowContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Passives" type="FlowContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Skins" type="FlowContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

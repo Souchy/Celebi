@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bknkdq6d6d6s2"]
+
+[node name="StatsEditor" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Toolbar" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Content" type="GridContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
