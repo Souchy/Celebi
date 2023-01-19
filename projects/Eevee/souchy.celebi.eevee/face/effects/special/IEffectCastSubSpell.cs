@@ -3,8 +3,11 @@ using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.values;
 
-namespace souchy.celebi.eevee.face.effects
+namespace souchy.celebi.eevee.face.effects.special
 {
+    /// <summary>
+    /// Cast a sub spell and you can change the caster and its origin
+    /// </summary>
     public interface IEffectCastSubSpell : IEffect
     {
         public IValue<IID> spellModelId { get; set; }

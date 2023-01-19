@@ -2,7 +2,7 @@
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.values;
 
-namespace souchy.celebi.eevee.face.effects
+namespace souchy.celebi.eevee.face.effects.status
 {
     public interface IEffectAddStatus : IEffect
     {
