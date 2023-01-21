@@ -11,6 +11,6 @@ namespace souchy.celebi.eevee.face.entity
         public IPosition position { get; init; }
         public List<IID> statuses { get; init; }
 
-        public Dictionary<ContextType, IContext> contextsStats { get; set; }
+        public Dictionary<ContextType, IContext> contexts { get; set; }
     }
 }

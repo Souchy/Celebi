@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Eevee\Eevee.csproj" />
+    <ProjectReference Include="..\..\Umbreon\Umbreon.csproj" />
   </ItemGroup>
 
 </Project>

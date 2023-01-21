@@ -15,6 +15,7 @@ namespace souchy.celebi.eevee.face.objects
         public Dictionary<string, object> valuesStored { get; set; }
 
         public Dictionary<ResourceType, int> resourceUsed { get; set; }
+        /*
         public Dictionary<ResourceType, int> resourceGained { get; set; }
         public Dictionary<ResourceType, int> resourceLost { get; set; }
         public Dictionary<ResourceType, int> resourceIncreased { get; set; } // Given
@@ -24,12 +25,17 @@ namespace souchy.celebi.eevee.face.objects
         public Dictionary<ElementType, int> damageReceived { get; set; }
         public Dictionary<ElementType, int> healingDone { get; set; }
         public Dictionary<ElementType, int> healingReceived { get; set; }
+        */
 
         public List<SpellCastHistory> spellsCast { get; set; }
         public List<CellMovedHistory> cellsMoved { get; set; }
-        // ?
-        //public List<EffectHistory> effectModelsCast { get; set; }
-        //public List<EffectHistory> effectInstancesCast { get; set; } 
+
+        // ? effect history instead of dictionaries of damageDone, etc, just <EffectType, List<CompiledEffect>> ?
+        /// <summary>
+        /// List of effects related to this creature. <br></br>
+        /// Can be the source of the target, it's in the CompiledEffect
+        /// </summary>
+        public Dictionary<Type, List<ICompiledEffect>> compiledEffects { get; set; }
     }
 
     public class SpellCastHistory
@@ -37,35 +43,12 @@ namespace souchy.celebi.eevee.face.objects
         public IID spellID { get; set; }
         public IID cellID { get; set; }
         // ?
-        //public List<ICompiledEffect> compiledEffects { get; set; } 
+        //public List<ICompiledEffect> compiledEffects { get; set; }
     }
     public class CellMovedHistory
     {
         public IID cellID { get; set; }
         public MoveType moveType { get; set; }
     }
-
-    // ?
-    /*
-    public class EffectHistory
-    {
-        public IID spellID { get; set; }
-        public IID effectID { get; set; }
-        /// <summary>
-        /// number of times it is present in spell casts
-        /// </summary>
-        public int numberOfCasts { get; set; }
-        /// <summary>
-        /// total = number of cast * number of targets every cast
-        /// (can be the same targets multiple times)
-        /// </summary>
-        public int numberOfApplications { get; set; }
-        public int numberOfDifferentTargets { get; set; }
-        /// <summary>
-        /// ex: how many ap reduced total...
-        /// </summary>
-        public int valueOutputed { get; set; }
-    }
-    */
 
 }

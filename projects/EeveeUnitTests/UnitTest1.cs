@@ -12,4 +12,14 @@ namespace EeveeUnitTests
     public class UnitTest1
     {
 
+        public UnitTest1()
+        {
+
+            //new Creature
+
+        }
+
+
+
+    }
 }

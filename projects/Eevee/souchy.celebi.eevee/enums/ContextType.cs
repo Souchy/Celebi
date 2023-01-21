@@ -6,6 +6,6 @@
         Round, // current round
         Turn, // current turn
         Action, // aka a spell or a move
-        //Effect // current effect (a context for each effect and their children might be too much)
+        Effect // current effect (a context for each effect and their children might be too much)
     }
 }

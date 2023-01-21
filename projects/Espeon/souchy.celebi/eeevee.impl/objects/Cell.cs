@@ -17,7 +17,7 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.objects
         public List<IID> statuses { get; init; } = new List<IID>();
         public bool walkable { get; set; }
         public bool blocksLos { get; set; }
-        public Dictionary<ContextType, IContext> contextsStats { get; set; } = new Dictionary<ContextType, IContext>();
+        public Dictionary<ContextType, IContext> contexts { get; set; } = new Dictionary<ContextType, IContext>();
 
         public Cell(ScopeID scopeId)
         {

@@ -33,7 +33,7 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.objects
         public IStats stats { get; set; }
         public List<IID> spells { get; set; } = new List<IID>();
         public List<IID> statuses { get; init; } = new List<IID>();
-        public Dictionary<ContextType, IContext> contextsStats { get; set; } = new Dictionary<ContextType, IContext>();
+        public Dictionary<ContextType, IContext> contexts { get; set; } = new Dictionary<ContextType, IContext>();
 
         public Creature(ScopeID scopeId, IStats stats)
         {
@@ -49,7 +49,7 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.objects
             stats.Dispose();
             statuses.Clear();
             spells.Clear();
-            contextsStats.Clear();
+            contexts.Clear();
         }
     }
 }

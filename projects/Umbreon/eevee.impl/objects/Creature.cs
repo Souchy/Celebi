@@ -15,7 +15,7 @@ namespace Umbreon.eevee.impl.objects
         public List<IID> spells { get; set; }
         public IPosition position { get; init; }
         public List<IID> statuses { get; init; }
-        public Dictionary<ContextType, IContext> contextsStats { get; set; }
+        public Dictionary<ContextType, IContext> contexts { get; set; }
         public IID modelUid { get; set; }
         public IID fightUid { get; init; }
         public IID entityUid { get; init; }
