@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://cfwf0h3828u44"]
 
-[node name="ConditionEditor" type="Control"]
-layout_mode = 3
+[node name="ConditionEditor" type="PanelContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

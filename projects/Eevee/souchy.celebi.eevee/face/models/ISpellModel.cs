@@ -16,7 +16,8 @@ namespace souchy.celebi.eevee.face.models
         public ICondition sourceCondition { get; set; }
         public ICondition targetFilter { get; set; }
 
-        public List<ICost> costs { get; set; }
+        //public List<ICost> costs { get; set; }
+        public Dictionary<ResourceType, int> costs { get; set; }
         public ISpellProperties properties { get; set; }
 
         public HashSet<IID> effectIds { get; set; }
@@ -35,6 +36,13 @@ namespace souchy.celebi.eevee.face.models
         public IValue<int> cooldown { get; set; }
         public IValue<int> cooldownInitial { get; set; }
         public IValue<int> cooldownGlobal { get; set; }
+
+        public IValue<int> minRange { get; set; }
+        public IValue<int> maxRange { get; set; }
+        public IValue<bool> castInDiagonal { get; set; }
+        public IValue<bool> castInLine { get; set; }
+
+        public IValue<bool> needLos { get; set; }
     }
 
     public interface ICost
