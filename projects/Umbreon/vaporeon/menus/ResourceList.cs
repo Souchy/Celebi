@@ -28,6 +28,10 @@ public partial class ResourceList : Control
     [NodePath]
     public HFlowContainer Container { get; set; }
 
+    [NodePath("Toolbar/Search")]
+    public LineEdit Search { get; set; }
+    
+
     private PackedScene listItemScene = GD.Load<PackedScene>("res://vaporeon/menus/ResourceListItem.tscn");
 
 
@@ -81,6 +85,25 @@ public partial class ResourceList : Control
     public override void _Process(double delta)
 	{
 	
+    }
+
+    public void onSearchChanged()
+    {
+        // debounce(actualSearch)
+    }
+    public void onClearSearchClick()
+    {
+
+    }
+    public void onCreateClick()
+    {
+        // var x = new type()
+        // diamonds.add(x) // -> this saves it in json or mongo
+        // 
+    }
+    public void onDeleteClick()
+    {
+        // delete selected resource
     }
 
 

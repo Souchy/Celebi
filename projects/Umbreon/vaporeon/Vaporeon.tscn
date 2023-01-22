@@ -16,7 +16,6 @@ grow_vertical = 2
 script = ExtResource("1_l8sev")
 
 [node name="TabContainer" type="TabContainer" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -25,24 +24,19 @@ grow_vertical = 2
 theme_override_constants/side_margin = 0
 
 [node name="CreaturesList" parent="TabContainer" instance=ExtResource("2_0fywc")]
-layout_mode = 2
+offset_top = 31.0
 
 [node name="SpellsList" parent="TabContainer" instance=ExtResource("2_0fywc")]
 visible = false
-layout_mode = 2
 
 [node name="EffectsList" parent="TabContainer" instance=ExtResource("2_0fywc")]
 visible = false
-layout_mode = 2
 
 [node name="CreatureEditor" parent="TabContainer" instance=ExtResource("3_24mfm")]
 visible = false
-layout_mode = 2
 
 [node name="SpellEditor" parent="TabContainer" instance=ExtResource("4_f87af")]
 visible = false
-layout_mode = 2
 
 [node name="EffectEditor" parent="TabContainer" instance=ExtResource("5_yclvk")]
 visible = false
-layout_mode = 2
