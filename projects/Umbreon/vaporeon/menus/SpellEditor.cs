@@ -37,8 +37,8 @@ public partial class SpellEditor : Control
             var lbl = new Label();
             lbl.Text = Enum.GetName(typeof(ResourceType), res);
             var edit = new SpinBox();
-            edit.Value = spell.costs[res];
-            edit.ValueChanged += (value) => spell.costs[res] = (int) value;
+            //edit.Value = spell.costs[res];
+            //edit.ValueChanged += (value) => spell.costs[res] = (int) value;
             CostsGrid.AddChild(lbl);
             CostsGrid.AddChild(edit);
         }

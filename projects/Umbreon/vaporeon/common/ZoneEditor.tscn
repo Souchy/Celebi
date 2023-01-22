@@ -6,3 +6,110 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+
+[node name="ZoneLbl" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 183.0
+offset_top = 103.0
+offset_right = 328.0
+offset_bottom = 126.0
+text = "Zone"
+
+[node name="ZonesTree" type="Tree" parent="Control"]
+layout_mode = 0
+offset_left = 149.0
+offset_top = 141.0
+offset_right = 415.0
+offset_bottom = 442.0
+
+[node name="ParametersLbl" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 523.0
+offset_top = 100.0
+offset_right = 563.0
+offset_bottom = 123.0
+text = "Parameters"
+
+[node name="CopyBtn" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 726.0
+offset_top = 98.0
+offset_right = 780.0
+offset_bottom = 129.0
+text = "Copy"
+
+[node name="GridContainer" type="GridContainer" parent="Control"]
+layout_mode = 0
+offset_left = 477.0
+offset_top = 137.0
+offset_right = 806.0
+offset_bottom = 425.0
+columns = 2
+
+[node name="ZoneTypeLbl" type="Label" parent="Control/GridContainer"]
+layout_mode = 2
+text = "Zone Type"
+
+[node name="ZoneType" type="OptionButton" parent="Control/GridContainer"]
+layout_mode = 2
+item_count = 4
+popup/item_0/text = "Point"
+popup/item_0/id = 0
+popup/item_1/text = "Line"
+popup/item_1/id = 1
+popup/item_2/text = "Circle"
+popup/item_2/id = 2
+popup/item_3/text = "Square"
+popup/item_3/id = 3
+
+[node name="WorldOriginLbl" type="Label" parent="Control/GridContainer"]
+layout_mode = 2
+text = "World Origin Actor"
+
+[node name="OptionButton" type="OptionButton" parent="Control/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+item_count = 2
+selected = 0
+popup/item_0/text = "Source"
+popup/item_0/id = 0
+popup/item_1/text = "Target"
+popup/item_1/id = 1
+
+[node name="WorldOffsetLbl" type="Label" parent="Control/GridContainer"]
+layout_mode = 2
+text = "World Offset"
+
+[node name="WorldOffsetVector" type="HBoxContainer" parent="Control/GridContainer"]
+layout_mode = 2
+
+[node name="x" type="SpinBox" parent="Control/GridContainer/WorldOffsetVector"]
+layout_mode = 2
+
+[node name="z" type="SpinBox" parent="Control/GridContainer/WorldOffsetVector"]
+layout_mode = 2
+
+[node name="LocalOriginLbl" type="Label" parent="Control/GridContainer"]
+layout_mode = 2
+text = "Local Origin"
+
+[node name="LocalOrigin" type="OptionButton" parent="Control/GridContainer"]
+layout_mode = 2
+
+[node name="RotationLbl" type="Label" parent="Control/GridContainer"]
+layout_mode = 2
+text = "Rotation"
+
+[node name="Rotation" type="OptionButton" parent="Control/GridContainer"]
+layout_mode = 2
+
+[node name="ExtendFromSourceLbl" type="Label" parent="Control/GridContainer"]
+layout_mode = 2
+text = "Extend From Source"
+
+[node name="ExtendFromSource" type="CheckBox" parent="Control/GridContainer"]
+layout_mode = 2

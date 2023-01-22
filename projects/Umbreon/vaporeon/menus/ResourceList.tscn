@@ -24,18 +24,17 @@ script = ExtResource("1_lifcy")
 resourceType = "ISpell"
 
 [node name="Toolbar" type="HBoxContainer" parent="."]
-layout_mode = 0
 offset_right = 455.0
 offset_bottom = 53.0
 
 [node name="Search" type="LineEdit" parent="Toolbar"]
 custom_minimum_size = Vector2(400, 0)
-layout_mode = 2
+offset_right = 400.0
+offset_bottom = 53.0
 placeholder_text = "Search...."
 
 [node name="ClearSearchBtn" type="Button" parent="Toolbar/Search"]
 custom_minimum_size = Vector2(30, 0)
-layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
@@ -54,17 +53,20 @@ text = "x"
 
 [node name="CreateBtn" type="Button" parent="Toolbar"]
 custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
+offset_left = 404.0
+offset_right = 504.0
+offset_bottom = 53.0
 text = "Create
 "
 
 [node name="DeleteBtn" type="Button" parent="Toolbar"]
 custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
+offset_left = 508.0
+offset_right = 608.0
+offset_bottom = 53.0
 text = "Delete"
 
 [node name="ItemList" type="ItemList" parent="."]
-layout_mode = 0
 offset_left = 1552.0
 offset_top = 393.0
 offset_right = 1970.0
@@ -74,7 +76,6 @@ item_0/text = "asdf"
 item_1/text = "xzcv"
 
 [node name="TypeList" type="ItemList" parent="."]
-layout_mode = 0
 offset_left = 1499.0
 offset_top = 208.0
 offset_right = 1936.0
@@ -82,7 +83,6 @@ offset_bottom = 263.0
 max_columns = 3
 
 [node name="Container" type="HFlowContainer" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -91,15 +91,17 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ResourceListItem" parent="Container" instance=ExtResource("2_450rl")]
-layout_mode = 2
 
 [node name="ResourceListItem2" parent="Container" instance=ExtResource("2_450rl")]
-layout_mode = 2
+offset_left = 154.0
+offset_right = 304.0
 
 [node name="ResourceListItem3" parent="Container" instance=ExtResource("2_450rl")]
-layout_mode = 2
+offset_left = 308.0
+offset_right = 458.0
 
 [node name="ResourceListItem4" parent="Container" instance=ExtResource("2_450rl")]
-layout_mode = 2
+offset_left = 462.0
+offset_right = 612.0
 
 [connection signal="item_selected" from="TypeList" to="." method="_on_type_list_item_selected"]
