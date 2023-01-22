@@ -1,11 +1,14 @@
 ﻿using souchy.celebi.eevee.face.stats;
 using souchy.celebi.eevee.face.statuses;
 using souchy.celebi.eevee.face.util;
+using static souchy.celebi.eevee.face.entity.IEntity;
 
 namespace souchy.celebi.eevee.statuses
 {
     public class Status : IStatus
     {
+
+        public event OnChanged Changed;
         public IID fightUid { get; init; }
         public IID modelUid { get; set; }
         public IID entityUid { get; init; }

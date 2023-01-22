@@ -50,4 +50,3 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest
         }
     }
 }
-}

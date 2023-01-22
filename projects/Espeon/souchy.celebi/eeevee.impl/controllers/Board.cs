@@ -3,6 +3,7 @@ using souchy.celebi.eevee.face.controllers;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.util.math;
+using static souchy.celebi.eevee.face.entity.IEntity;
 
 namespace Espeon.souchy.celebi.espeon.eevee.impl.controllers
 {
@@ -10,6 +11,7 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.controllers
     {
         #region Properties
 
+        public event OnChanged Changed;
         public IID fightUid { get; init; }
         public IID entityUid { get; init; }
 

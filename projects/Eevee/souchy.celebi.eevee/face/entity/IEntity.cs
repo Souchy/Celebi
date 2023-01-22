@@ -1,5 +1,4 @@
-﻿using Godot;
-using souchy.celebi.eevee.face.util;
+﻿using souchy.celebi.eevee.face.util;
 
 namespace souchy.celebi.eevee.face.entity
 {
@@ -17,16 +16,6 @@ namespace souchy.celebi.eevee.face.entity
         public delegate void OnChanged(object entity, string propertyPath, object oldValue);
 
         public event OnChanged Changed;
-        //{ 
-            //add
-            //{
-                
-            //}
-            //remove
-            //{
-
-            //}
-        //}
 
         //
         // Summary:

@@ -6,6 +6,7 @@ using souchy.celebi.eevee.face.stats;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.util.math;
 using souchy.celebi.eevee.impl.util.math;
+using static souchy.celebi.eevee.face.entity.IEntity;
 
 namespace Espeon.souchy.celebi.espeon.eevee.impl.objects
 {
@@ -23,6 +24,7 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.objects
 
     public class Creature : ICreature
     {
+        public event OnChanged Changed;
         public IID fightUid { get; init; }
         public IID entityUid { get; init; }
         public IID modelUid { get; set; }

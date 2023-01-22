@@ -4,11 +4,13 @@ using souchy.celebi.eevee.face.controllers;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.statuses;
 using souchy.celebi.eevee.face.util;
+using static souchy.celebi.eevee.face.entity.IEntity;
 
 namespace Espeon.souchy.celebi.eeevee.impl.controllers
 {
     public class RedInstances : IRedInstances
     {
+        public event OnChanged Changed;
         public IID fightUid { get; init; }
         public IID entityUid { get; init; }
 

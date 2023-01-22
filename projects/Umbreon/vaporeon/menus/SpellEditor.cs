@@ -25,7 +25,6 @@ public partial class SpellEditor : Control
 
 
 
-
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -38,8 +37,8 @@ public partial class SpellEditor : Control
             var lbl = new Label();
             lbl.Text = Enum.GetName(typeof(ResourceType), res);
             var edit = new SpinBox();
-            //edit.Value = spell.costs[res];
-            //edit.ValueChanged += (value) => spell.costs[res] = (int) value;
+            edit.Value = spell.costs[res];
+            edit.ValueChanged += (value) => spell.costs[res] = (int) value;
             CostsGrid.AddChild(lbl);
             CostsGrid.AddChild(edit);
         }
@@ -48,12 +47,7 @@ public partial class SpellEditor : Control
         PropertiesComponent.GenerateGrid(PropertiesGrid, spellPropertiesType, spell.properties);
 
     }
-
-    private void CostChanged(double value)
-    {
-
-    }
-
+    
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)

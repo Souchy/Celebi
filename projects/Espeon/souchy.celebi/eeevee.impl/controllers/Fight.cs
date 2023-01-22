@@ -1,5 +1,6 @@
 ﻿using souchy.celebi.eevee.face.controllers;
 using souchy.celebi.eevee.face.util;
+using static souchy.celebi.eevee.face.entity.IEntity;
 
 namespace Espeon.souchy.celebi.espeon.eevee.impl.controllers
 {
@@ -7,6 +8,7 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.controllers
     {
         #region Properties
 
+        public event OnChanged Changed;
         public IID entityUid { get; init; }
         public IBoard board { get; init; }
         public List<IPlayer> players { get; init; } = new List<IPlayer>();

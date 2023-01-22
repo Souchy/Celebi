@@ -1,6 +1,7 @@
 ﻿using souchy.celebi.eevee.face.controllers;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.util;
+using static souchy.celebi.eevee.face.entity.IEntity;
 
 namespace Espeon.souchy.celebi.espeon.eevee.impl.objects
 {
@@ -23,6 +24,7 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.objects
 
     public class Spell : ISpell
     {
+        public event OnChanged Changed;
         public IID fightUid { get; init; }
         public IID modelUid { get; set; }
         public IID entityUid { get; init; }
