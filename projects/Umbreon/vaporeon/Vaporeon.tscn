@@ -22,15 +22,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/side_margin = 0
 
-[node name="Creatures" parent="TabContainer" instance=ExtResource("2_0fywc")]
+[node name="CreaturesList" parent="TabContainer" instance=ExtResource("2_0fywc")]
 layout_mode = 2
 
-[node name="Spells" parent="TabContainer" instance=ExtResource("2_0fywc")]
+[node name="SpellsList" parent="TabContainer" instance=ExtResource("2_0fywc")]
 visible = false
 layout_mode = 2
 
-[node name="Effects" parent="TabContainer" instance=ExtResource("2_0fywc")]
+[node name="EffectsList" parent="TabContainer" instance=ExtResource("2_0fywc")]
 visible = false
 layout_mode = 2
 
