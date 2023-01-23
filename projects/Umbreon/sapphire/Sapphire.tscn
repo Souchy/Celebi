@@ -63,22 +63,28 @@ transform = Transform3D(1, 0, -2.98023e-08, -2.98023e-08, 1, 2.98023e-08, -2.980
 [node name="cursorWorld" parent="Controls" instance=ExtResource("3_tnfnv")]
 transform = Transform3D(1, 0, -2.98023e-08, -2.98023e-08, 1, 2.98023e-08, -2.98023e-08, 0, 1, 2, 0.01, 8)
 
-[node name="camTop" type="Camera3D" parent="Controls"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5, 0)
-projection = 1
-size = 16.0
-near = 0.001
-far = 15.0
+[node name="CamRotY" type="Node3D" parent="Controls"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)
 
-[node name="camIso" type="Camera3D" parent="Controls"]
-transform = Transform3D(0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, -5, 7, 5)
+[node name="CamRotX" type="Node3D" parent="Controls/CamRotY"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+
+[node name="camIso" type="Camera3D" parent="Controls/CamRotY/CamRotX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 projection = 1
 current = true
-size = 16.0
+size = 15.0
 near = 0.001
 far = 25.0
 
-[node name="sapphireHud" parent="Controls" instance=ExtResource("8_aehap")]
+[node name="camTop" type="Camera3D" parent="Controls/CamRotY"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)
+projection = 1
+size = 20.0
+near = 0.001
+far = 15.0
+
+[node name="sapphireHud" parent="." instance=ExtResource("8_aehap")]
 unique_name_in_owner = true
 
 [node name="Creatures" type="Node" parent="."]
