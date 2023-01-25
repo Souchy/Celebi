@@ -13,9 +13,13 @@ namespace souchy.celebi.eevee.face.entity
         //      ex path in spellmodel: "properties.cooldown"
 
         //[Signal]
-        public delegate void OnChanged(object entity, string propertyPath, object oldValue);
-
+        /// <summary>
+        /// If add to a Dictionary: newValue = object and oldValue = dictionary
+        /// If remove from a Dictionary: newValue = dictionary and oldValue = object
+        /// </summary>
+        public delegate void OnChanged(Type propertyType, string propertyPath, object newValue, object oldValue);
         public event OnChanged Changed;
+        public void TriggerChanged(Type propertyType, string propertyPath, object newValue, object oldValue); // => Changed(propertyType, propertyPath, newValue, oldValue);
 
         //
         // Summary:

@@ -70,5 +70,20 @@ namespace souchy.celebi.eevee.impl.util.math
             throw new NotImplementedException();
         }
 
+        public Vector3 setAt(int index, int value)
+        {
+            switch(index)
+            {
+                case 0:
+                    x = value; break;
+                case 1: z = value;
+                    break;
+                case 2: y = value;
+                    break;
+                default:
+                    throw new Exception("Position.setAt() index not supported: " + index);
+            }
+            return this;
+        }
     }
 }

@@ -17,6 +17,7 @@ namespace souchy.celebi.eevee.util.math
         /// </summary>
         public int y { get; set; }
 
+
         /// <summary>
         /// Returns self for chaining
         /// </summary>
@@ -37,6 +38,13 @@ namespace souchy.celebi.eevee.util.math
         /// Returns self for chaining
         /// </summary>
         public Vector3 div(Vector3 p);
+        /// <summary>
+        /// Returns self for chaining
+        /// </summary>
+        /// <param name="index">0, 1, 2 for x, z, y</param>
+        /// <param name="value">value to set</param>
+        /// <returns></returns>
+        public Vector3 setAt(int index, int value);
         /// <summary>
         /// Returns self for chaining
         /// </summary>

@@ -10,6 +10,8 @@ using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.util;
 using System;
 using System.Collections.Generic;
+using souchy.celebi.eevee.face.entity;
+using static souchy.celebi.eevee.face.entity.IEntity;
 //using CreatureData = souchy.celebi.eevee.impl.objects.Creature;
 
 namespace Umbreon.common
@@ -17,10 +19,10 @@ namespace Umbreon.common
 
     public static class DiamondExtension
     {
-        public static DiamondModels GetDiamonds(this Node node)
+        public static IDiamondModels GetDiamonds(this Node node)
         {
             var nodePath = "/root/DiamondModels";
-            var diamonds = node.GetNode<DiamondModels>(nodePath);
+            var diamonds = node.GetNode<IDiamondModels>(nodePath);
             return diamonds;
         }
     }
@@ -37,11 +39,15 @@ namespace Umbreon.common
         public Dictionary<IID, ICreatureSkin> creatureSkins { get; init; } = new Dictionary<IID, ICreatureSkin>();
         public Dictionary<IID, ISpellSkin> spellSkins { get; init; } = new Dictionary<IID, ISpellSkin>();
         public Dictionary<IID, IEffectSkin> effectSkins { get; init; } = new Dictionary<IID, IEffectSkin>();
+        public Dictionary<IID, string> i18n { get; set; } = new Dictionary<IID, string>();
+        public IID entityUid { get => throw new NotImplementedException(); init => throw new NotImplementedException(); }
 
+        public event IEntity.OnChanged Changed;
 
         public CreatureModelData[] creatureModelsData;
         public CreatureSkinData[] creatureSkinsData;
         public MapModelData[] mapModelsData;
+
 
         public DiamondModels()
         {
@@ -50,8 +56,12 @@ namespace Umbreon.common
             // TODO: 
             //foreach(var creature in jsonCreatures.AsGodotArray()) 
             //parseCreature(creature);
+
             parseData();
         }
+
+        public void TriggerChanged(Type propertyType, string propertyPath, object newValue, object oldValue)
+            => Changed?.Invoke(propertyType, propertyPath, newValue, oldValue);
 
         public void parseData()
         {

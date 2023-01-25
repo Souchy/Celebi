@@ -19,6 +19,7 @@ namespace Espeon.souchy.celebi.eeevee.impl
         public Dictionary<IID, ICreatureSkin> creatureSkins { get; init; } = new Dictionary<IID, ICreatureSkin>();
         public Dictionary<IID, ISpellSkin> spellSkins { get; init; } = new Dictionary<IID, ISpellSkin>();
         public Dictionary<IID, IEffectSkin> effectSkins { get; init; } = new Dictionary<IID, IEffectSkin>();
+        public Dictionary<IID, string> i18n { get; set; }
 
         public DiamondModels()
         {

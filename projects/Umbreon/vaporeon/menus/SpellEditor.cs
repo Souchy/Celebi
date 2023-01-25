@@ -4,6 +4,8 @@ using System;
 using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.models;
 using Umbreon.vaporeon.common;
+using Umbreon.common;
+using souchy.celebi.eevee.face.objects;
 
 public partial class SpellEditor : Control
 {
@@ -11,7 +13,7 @@ public partial class SpellEditor : Control
     public readonly Type spellModelType = typeof(ISpellModel);
     public readonly Type spellPropertiesType = typeof(ISpellProperties);
     // 
-    public ISpellModel spell;
+    public ISpellModel spell { get => this.GetVaporeon().CurrentSpellModel; }
 
 
     [NodePath]
@@ -21,8 +23,14 @@ public partial class SpellEditor : Control
     [NodePath("./CostsBox/CostsGrid")]
     public GridContainer CostsGrid { get; set; }
     [NodePath("./PropertiesBox/PropertiesGrid")]
-    public GridContainer PropertiesGrid {get; set;}
+    public GridContainer PropertiesGrid { get; set; }
 
+    [NodePath]
+    public SmallResourceTree EffectsTree { get; set; }
+    [NodePath]
+    public SmallResourceTree SourceConditionsTree { get; set; }
+    [NodePath]
+    public SmallResourceTree TargetConditionsTree { get; set; }
 
 
     // Called when the node enters the scene tree for the first time.
@@ -30,27 +38,46 @@ public partial class SpellEditor : Control
     {
         this.OnReady();
 
-		// StatType
-		// CostsGrid.AddChild();
-        foreach(ResourceType res in Enum.GetValues(typeof(ResourceType)))
+        // StatType
+        // CostsGrid.AddChild();
+
+        update();
+
+    }
+
+    public void update()
+    {
+        if (spell == null) return;
+        // props
+        PropertiesGrid.QueueFreeChildren();
+        PropertiesComponent.GenerateGrid(PropertiesGrid, spellPropertiesType, spell.properties);
+        // costs
+        foreach (ResourceType res in Enum.GetValues(typeof(ResourceType)))
         {
             var lbl = new Label();
             lbl.Text = Enum.GetName(typeof(ResourceType), res);
             var edit = new SpinBox();
-            //edit.Value = spell.costs[res];
-            //edit.ValueChanged += (value) => spell.costs[res] = (int) value;
+            edit.Value = spell.costs[res];
+            edit.ValueChanged += (value) => spell.costs[res] = (int) value;
             CostsGrid.AddChild(lbl);
             CostsGrid.AddChild(edit);
         }
-
-        PropertiesGrid.QueueFreeChildren();
-        PropertiesComponent.GenerateGrid(PropertiesGrid, spellPropertiesType, spell.properties);
-
+        // effects
+        foreach(var effectId in spell.effectIds)
+        {
+            IEffect effect = this.GetDiamonds().effects[effectId];
+            IEffectModel effectModel = this.GetDiamonds().effectModels[effect.modelUid];
+            Label lbl = new Label();
+            lbl.Text = effect.entityUid + ": " + this.GetDiamonds().i18n[effectModel.nameId];
+            lbl.SetMeta("id", (string) effectId);
+            lbl.SetMeta("type", nameof(IEffect));
+            EffectsTree.AddChild(lbl);
+        }
     }
     
-
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(double delta)
+    public void onZoneTypeSelected()
     {
+                                    
     }
+
 }

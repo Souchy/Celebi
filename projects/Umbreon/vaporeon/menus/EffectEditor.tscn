@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bjxqjy57p0c0b"]
+[gd_scene load_steps=3 format=3 uid="uid://bjxqjy57p0c0b"]
 
 [ext_resource type="PackedScene" uid="uid://vuf3b0bqetfr" path="res://vaporeon/common/EffectList.tscn" id="1_r3fwy"]
-[ext_resource type="PackedScene" uid="uid://c5pro78vguufj" path="res://vaporeon/common/ZoneEditor.tscn" id="1_yqvqp"]
-[ext_resource type="PackedScene" uid="uid://cfwf0h3828u44" path="res://vaporeon/common/ConditionEditor.tscn" id="2_57vic"]
+[ext_resource type="PackedScene" uid="uid://jbttqy4in4s2" path="res://vaporeon/menus/SmallResourceTree.tscn" id="3_ylmo8"]
 
 [node name="EffectEditor" type="Control"]
 layout_mode = 3
@@ -47,48 +46,52 @@ offset_bottom = 471.0
 
 [node name="ParametersTitle" type="Label" parent="ParametersBox"]
 offset_right = 292.0
-offset_bottom = 26.0
+offset_bottom = 22.0
 text = "Parameters"
 horizontal_alignment = 1
 
 [node name="ParametersGrid" type="GridContainer" parent="ParametersBox"]
-offset_top = 30.0
+offset_top = 26.0
 offset_right = 292.0
-offset_bottom = 61.0
+offset_bottom = 53.0
 columns = 2
 
 [node name="Label" type="Label" parent="ParametersBox/ParametersGrid"]
 offset_top = 2.0
-offset_right = 143.0
-offset_bottom = 28.0
+offset_right = 118.0
+offset_bottom = 24.0
 text = "a kinda long name"
 
 [node name="LineEdit" type="LineEdit" parent="ParametersBox/ParametersGrid"]
-offset_left = 147.0
-offset_right = 214.0
-offset_bottom = 31.0
+offset_left = 122.0
+offset_right = 186.0
+offset_bottom = 27.0
 placeholder_text = "value"
 
-[node name="ZoneEditor" parent="." instance=ExtResource("1_yqvqp")]
-offset_left = 780.0
-offset_top = 371.0
-offset_right = -56.0
-offset_bottom = -60.0
-
-[node name="TargetConditions" parent="." instance=ExtResource("2_57vic")]
-offset_left = 439.0
-offset_top = 36.0
-offset_right = -630.0
-offset_bottom = -514.0
-
-[node name="SourceConditions" parent="." instance=ExtResource("2_57vic")]
-offset_left = 886.0
+[node name="SourceConditionsTree" parent="." instance=ExtResource("3_ylmo8")]
+offset_left = 442.0
 offset_top = 31.0
-offset_right = -138.0
-offset_bottom = -520.0
+offset_right = -712.0
+offset_bottom = -512.0
+Title = "Source Conditions"
 
-[node name="TriggerConditions" parent="." instance=ExtResource("2_57vic")]
-offset_left = 444.0
-offset_top = 444.0
-offset_right = -632.0
-offset_bottom = -113.0
+[node name="TargetConditionsTree" parent="." instance=ExtResource("3_ylmo8")]
+offset_left = 719.0
+offset_top = 36.0
+offset_right = -435.0
+offset_bottom = -507.0
+Title = "Target Conditions"
+
+[node name="TriggerConditionsTree" parent="." instance=ExtResource("3_ylmo8")]
+offset_left = 990.0
+offset_top = 40.0
+offset_right = -164.0
+offset_bottom = -503.0
+Title = "Trigger Conditions"
+
+[node name="ZoneTree" parent="." instance=ExtResource("3_ylmo8")]
+offset_left = 679.0
+offset_top = 489.0
+offset_right = -475.0
+offset_bottom = -54.0
+Title = "Zone"

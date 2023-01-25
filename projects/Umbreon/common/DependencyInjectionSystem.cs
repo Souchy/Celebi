@@ -37,6 +37,7 @@ namespace Umbreon.src
             base._EnterTree();
             container = new Container();
             Registry.Register(container);
+            GD.Print("DI registered");
         }
         public object Resolve(Type type)
         {
@@ -52,11 +53,14 @@ namespace Umbreon.src
             var dis = node.GetNode<DependencyInjectionSystem>(disPath);
             var at = typeof(InjectAttribute);
             var fields = node.GetType()
-                .GetRuntimeFields()
+                .GetProperties()
+                //.GetRuntimeFields()
                 .Where(f => f.GetCustomAttributes(at, true).Any());
+            GD.Print("DI Inject in " + node.Name + ", fields: " + string.Join(", ", fields.Select(f => f.Name)));
             foreach (var field in fields)
             {
-                var obj = dis.Resolve(field.FieldType);
+                var obj = dis.Resolve(field.PropertyType); //.FieldType);
+                GD.Print("DI resolved: " + field.Name + " = " + obj + ", in " + node.Name);
                 try
                 {
                     field.SetValue(node, obj);
@@ -65,7 +69,7 @@ namespace Umbreon.src
                 {
                     GD.PrintErr($"Error converting value " +
                         $"{obj} ({obj.GetType()})" +
-                        $" to {field.FieldType}");
+                        $" to {field.PropertyType}");
                     throw;
                 }
             }

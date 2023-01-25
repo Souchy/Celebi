@@ -19,7 +19,6 @@ namespace souchy.celebi.eevee.face.models
         //public List<ICost> costs { get; set; }
         public Dictionary<ResourceType, int> costs { get; set; }
         public ISpellProperties properties { get; set; }
-
         public HashSet<IID> effectIds { get; set; }
     }
 

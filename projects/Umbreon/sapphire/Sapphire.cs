@@ -30,17 +30,18 @@ public partial class Sapphire : Node3D
 		this.OnReady();
 		creaScene = GD.Load<PackedScene>("res://sapphire/nodes/CreatureNode.tscn");
 
-        GD.Print("startPositions: " + this.GetDiamonds().mapModelsData[0].teamStartPositions[0].Stringify());
+        DiamondModels diamonds = (DiamondModels) this.GetDiamonds();
+        GD.Print("startPositions: " + diamonds.mapModelsData[0].teamStartPositions[0].Stringify());
 
         Creatures.GetChildren().Clear();
-        var map = this.GetDiamonds().mapModelsData[0];
+        var map = diamonds.mapModelsData[0];
         for(int team = 0; team < 2; team++)
         {
             GD.Print("team: " + team);
             int i = 0;
-            foreach (var model in this.GetDiamonds().creatureModelsData)
+            foreach (var model in diamonds.creatureModelsData)
             {
-                createCreature(model, this.GetDiamonds().creatureSkinsData[model.skins[0]], team, true, map.teamStartPositions[team][i]);
+                createCreature(model, diamonds.creatureSkinsData[model.skins[0]], team, true, map.teamStartPositions[team][i]);
                 i++;
             }
         }

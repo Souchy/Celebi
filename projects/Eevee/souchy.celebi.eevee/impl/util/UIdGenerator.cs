@@ -4,8 +4,8 @@ namespace souchy.celebi.eevee.impl.util
 {
     public class UIdGenerator : IUIdGenerator
     {
-        private uint counter = 0;
-        private HashSet<uint> ids = new HashSet<uint>();
+        private int counter = 0;
+        private HashSet<int> ids = new HashSet<int>();
 
         public IID next()
         {

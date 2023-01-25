@@ -26,5 +26,8 @@ namespace souchy.celebi.eevee.statuses
         {
             throw new NotImplementedException();
         }
+
+        public void TriggerChanged(Type propertyType, string propertyPath, object newValue, object oldValue)
+            => Changed(propertyType, propertyPath, newValue, oldValue);
     }
 }

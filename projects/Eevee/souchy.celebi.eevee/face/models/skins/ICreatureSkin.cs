@@ -13,5 +13,9 @@ namespace souchy.celebi.eevee.face.skins
 
         public Dictionary<IID, IID> spellSkins { get; set; }
         public Dictionary<IID, IID> effectSkins { get; set; }
+
+
+
+
     }
 }

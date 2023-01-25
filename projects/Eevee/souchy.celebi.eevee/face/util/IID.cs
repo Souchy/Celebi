@@ -17,9 +17,8 @@
         public static implicit operator string(IID iid) => iid.value;
         public static explicit operator IID(string str) => new IID(str);
 
-
-        public static implicit operator uint(IID i) => uint.Parse(i.value);
-        public static explicit operator IID(uint i) => new IID(i.ToString());
+        // int conversion is only for UidGenerator. MongoIDs wouldn't go through this
+        public static implicit operator int(IID i) => int.Parse(i.value);
         public static explicit operator IID(int i) => new IID(i.ToString());
 
     }

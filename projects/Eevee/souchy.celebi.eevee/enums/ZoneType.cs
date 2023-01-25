@@ -3,7 +3,7 @@
     public enum IZoneType
     {
         point,
-        multi, // multi zones in one
+        //multi, // multi zones in one
 
         line,
 
@@ -21,7 +21,7 @@
     {
         // star = square + 2 lines + 2 diagonals
         public readonly ZoneType point = new ZoneType("P");
-        public readonly ZoneType multi = new ZoneType("M");
+        //public readonly ZoneType multi = new ZoneType("M");
         public readonly ZoneType line = new ZoneType("L");
         public readonly ZoneType circle = new ZoneType("C");
         public readonly ZoneType cone = new ZoneType("V");

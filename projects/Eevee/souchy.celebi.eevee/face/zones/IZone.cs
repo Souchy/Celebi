@@ -8,6 +8,17 @@ namespace souchy.celebi.eevee.face.zones
     public interface IZone
     {
         /// <summary>
+        /// 1) lengthMin
+        /// 2) lengthMax
+        /// 3) % opening (ex 25% remove the line at the bottom, 50% cuts it in half to make a half-circle)
+        /// </summary>
+        public IValue<Vector3> size { get; set; }
+        /// <summary>
+        /// If we substract this zone from its parent and siblings
+        /// </summary>
+        public bool negative { get; set; }
+
+        /// <summary>
         /// World origin: source or target of the spelleffect  <br></br>
         /// aka the zone Anchor in the world
         /// </summary>
@@ -30,19 +41,24 @@ namespace souchy.celebi.eevee.face.zones
         public Direction9Type rotation { get; set; }
         /// <summary>
         /// This overrides a size variable like length/radius to make them equal to .distance(target,source)
+        /// The index given is the {1,2,3} value overriden in the vector.
         /// </summary>
-        public bool extendFromSource { get; set; }
+        public int sizeIndexExtendFromSource { get; set; }
         /// <summary>
         /// Get the cells touched by this area at target point
         /// </summary>
         public IArea getArea(IPosition targetCell);
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<IZone> children { get; set; }
     }
 
-    public interface ZoneMulti : IZone
-    {
-        public List<IZone> zones { get; set; }
-    }
+    //public interface ZoneMulti : IZone
+    //{
+    //}
 
+    /*
     public interface ZonePoint : IZone
     {
 
@@ -56,13 +72,13 @@ namespace souchy.celebi.eevee.face.zones
     {
         public IValue<int> radiusMin { set; get; }
         public IValue<int> radiusMax { set; get; }
-        public IValue<int> angle { set; get; }
+        public IValue<int> completionAngle { set; get; }
     }
     public interface ZoneSquare : IZone
     {
         public IValue<int> radiusMin { set; get; }
         public IValue<int> radiusMax { set; get; }
-        public IValue<int> angle { set; get; }
+        public IValue<int> completionAngle { set; get; }
     }
     public interface ZoneCone : IZone
     {
@@ -76,5 +92,6 @@ namespace souchy.celebi.eevee.face.zones
         public IValue<int> lengthMax { set; get; }
         public IValue<int> width { set; get; }
     }
+    */
 
 }
