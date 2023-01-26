@@ -1,5 +1,5 @@
 ﻿using Godot;
-using souchy.celebi.eevee.values;
+using souchy.celebi.eevee.face.values;
 using System.Reflection;
 using Timer = Godot.Timer;
 

@@ -1,6 +1,4 @@
 ﻿using souchy.celebi.eevee.face.util.math;
-using souchy.celebi.eevee.interfaces;
-using souchy.celebi.eevee.util.math;
 
 namespace souchy.celebi.eevee.impl.util.math
 {

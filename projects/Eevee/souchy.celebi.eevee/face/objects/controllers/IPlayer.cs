@@ -2,7 +2,7 @@
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.util;
 
-namespace souchy.celebi.eevee.face.controllers
+namespace souchy.celebi.eevee.face.objects.controllers
 {
     public interface IPlayer : IFightEntity
     {

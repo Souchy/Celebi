@@ -1,9 +1,8 @@
-﻿namespace souchy.celebi.eevee.face.objects
+﻿
+namespace souchy.celebi.eevee.face.objects
 {
     public interface ITeam
     {
-
         public string name { get; set; }
-
     }
 }

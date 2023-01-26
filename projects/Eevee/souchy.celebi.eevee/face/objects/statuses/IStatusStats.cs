@@ -1,6 +1,6 @@
-﻿using souchy.celebi.eevee.face.stats;
+﻿using souchy.celebi.eevee.face.objects.stats;
 
-namespace souchy.celebi.eevee.face.statuses
+namespace souchy.celebi.eevee.face.objects.statuses
 {
     public interface IStatusStats : IStatus
     {

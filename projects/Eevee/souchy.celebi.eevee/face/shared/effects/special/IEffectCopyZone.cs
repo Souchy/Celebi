@@ -1,6 +1,6 @@
 ﻿using souchy.celebi.eevee.face.objects;
 
-namespace souchy.celebi.eevee.face.effects.special
+namespace souchy.celebi.eevee.face.shared.effects.special
 {
     /// <summary>
     /// Every child of this effect will use the same zone as this one's.

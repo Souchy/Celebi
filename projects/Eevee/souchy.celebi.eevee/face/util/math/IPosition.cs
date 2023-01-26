@@ -1,5 +1,4 @@
-﻿using souchy.celebi.eevee.util.math;
-
+﻿
 namespace souchy.celebi.eevee.face.util.math
 {
     public interface IPosition : Vector3

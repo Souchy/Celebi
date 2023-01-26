@@ -1,7 +1,7 @@
 ﻿using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.entity;
 
-namespace souchy.celebi.eevee.face.conditions
+namespace souchy.celebi.eevee.face.shared.conditions
 {
 
     public enum ConditionGroupType

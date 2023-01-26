@@ -1,7 +1,7 @@
 ﻿using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.entity;
 
-namespace souchy.celebi.eevee.face.stats
+namespace souchy.celebi.eevee.face.objects.stats
 {
     public interface IStats : IEntity
     {

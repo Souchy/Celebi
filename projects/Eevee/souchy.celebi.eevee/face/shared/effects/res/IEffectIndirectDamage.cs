@@ -1,6 +1,6 @@
 ﻿using souchy.celebi.eevee.face.objects;
 
-namespace souchy.celebi.eevee.face.effects.res
+namespace souchy.celebi.eevee.face.shared.effects.res
 {
     public interface IEffectIndirectDamage : IEffect
     {

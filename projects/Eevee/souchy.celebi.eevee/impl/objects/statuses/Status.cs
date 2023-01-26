@@ -1,5 +1,5 @@
-﻿using souchy.celebi.eevee.face.stats;
-using souchy.celebi.eevee.face.statuses;
+﻿using souchy.celebi.eevee.face.objects.stats;
+using souchy.celebi.eevee.face.objects.statuses;
 using souchy.celebi.eevee.face.util;
 using static souchy.celebi.eevee.face.entity.IEntity;
 

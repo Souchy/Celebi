@@ -1,5 +1,5 @@
 ﻿using souchy.celebi.eevee.enums;
-using souchy.celebi.eevee.face.stats;
+using souchy.celebi.eevee.face.objects.stats;
 
 namespace souchy.celebi.eevee.impl.stats
 {

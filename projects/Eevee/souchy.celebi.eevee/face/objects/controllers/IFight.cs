@@ -1,11 +1,9 @@
 ﻿using souchy.celebi.eevee.face.entity;
-using souchy.celebi.eevee.face.objects;
-using souchy.celebi.eevee.face.objects.controllers;
-using souchy.celebi.eevee.face.stats;
-using souchy.celebi.eevee.face.statuses;
+using souchy.celebi.eevee.face.objects.stats;
+using souchy.celebi.eevee.face.objects.statuses;
 using souchy.celebi.eevee.face.util;
 
-namespace souchy.celebi.eevee.face.controllers
+namespace souchy.celebi.eevee.face.objects.controllers
 {
     /// <summary>
     /// ----------------- PREVIOUSLY RedInstances ----------------------

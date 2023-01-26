@@ -1,16 +1,16 @@
 ﻿using Umbreon.data;
 using Godot;
 using Newtonsoft.Json;
-using souchy.celebi.eevee;
-using souchy.celebi.eevee.face.models;
 using souchy.celebi.eevee.face.objects;
-using souchy.celebi.eevee.face.skins;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.util;
 using System;
 using System.Collections.Generic;
 using souchy.celebi.eevee.face.entity;
 using static souchy.celebi.eevee.face.entity.IEntity;
+using souchy.celebi.eevee.face.shared.models.skins;
+using souchy.celebi.eevee.face.shared.models;
+using souchy.celebi.eevee.face.shared;
 //using CreatureData = souchy.celebi.eevee.impl.objects.Creature;
 
 namespace Umbreon.common
@@ -28,19 +28,21 @@ namespace Umbreon.common
 
     public partial class DiamondModels : Node, IDiamondModels
     {
-        public Dictionary<IID, ICreature> creatures { get; init; } = new Dictionary<IID, ICreature>();
+        //public Dictionary<IID, ICreature> creatures { get; init; } = new Dictionary<IID, ICreature>();
         public Dictionary<IID, ISpellModel> spells { get; init; } = new Dictionary<IID, ISpellModel>();
         public Dictionary<IID, IEffect> effects { get; init; } = new Dictionary<IID, IEffect>();
         public Dictionary<IID, IMap> maps { get; init; } = new Dictionary<IID, IMap>();
         public Dictionary<IID, ICreatureModel> creatureModels { get; init; } = new Dictionary<IID, ICreatureModel>();
         public Dictionary<IID, ISpellModel> spellModels { get; init; } = new Dictionary<IID, ISpellModel>();
         public Dictionary<IID, IEffectModel> effectModels { get; init; } = new Dictionary<IID, IEffectModel>();
+
         public Dictionary<IID, ICreatureSkin> creatureSkins { get; init; } = new Dictionary<IID, ICreatureSkin>();
         public Dictionary<IID, ISpellSkin> spellSkins { get; init; } = new Dictionary<IID, ISpellSkin>();
         public Dictionary<IID, IEffectSkin> effectSkins { get; init; } = new Dictionary<IID, IEffectSkin>();
-        public Dictionary<IID, string> i18n { get; set; } = new Dictionary<IID, string>();
-        public IID entityUid { get => throw new NotImplementedException(); init => throw new NotImplementedException(); }
 
+        public Dictionary<IID, string> i18n { get; set; } = new Dictionary<IID, string>();
+
+        public IID entityUid { get => throw new NotImplementedException(); init => throw new NotImplementedException(); }
         public event IEntity.OnChanged Changed;
 
         public CreatureModelData[] creatureModelsData;

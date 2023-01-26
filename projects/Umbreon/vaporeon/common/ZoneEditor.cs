@@ -1,7 +1,7 @@
 using Godot;
 using Godot.Sharp.Extras;
 using souchy.celebi.eevee.enums;
-using souchy.celebi.eevee.face.zones;
+using souchy.celebi.eevee.face.shared.zones;
 using System;
 
 public partial class ZoneEditor : PanelContainer

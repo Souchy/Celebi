@@ -1,9 +1,9 @@
 ﻿using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.util;
-using souchy.celebi.eevee.values;
+using souchy.celebi.eevee.face.values;
 
-namespace souchy.celebi.eevee.face.effects.special
+namespace souchy.celebi.eevee.face.shared.effects.special
 {
     /// <summary>
     /// Cast a sub spell and you can change the caster and its origin

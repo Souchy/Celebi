@@ -1,4 +1,4 @@
-﻿using souchy.celebi.eevee.face.stats;
+﻿using souchy.celebi.eevee.face.objects.stats;
 
 namespace Umbreon.data
 {

@@ -1,7 +1,8 @@
 ﻿using souchy.celebi.eevee.face.conditions;
 using souchy.celebi.eevee.face.entity;
-using souchy.celebi.eevee.face.triggers;
-using souchy.celebi.eevee.face.zones;
+using souchy.celebi.eevee.face.shared.conditions;
+using souchy.celebi.eevee.face.shared.triggers;
+using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.interfaces;
 
 namespace souchy.celebi.eevee.face.objects

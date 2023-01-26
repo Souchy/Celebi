@@ -1,4 +1,4 @@
-﻿namespace souchy.celebi.eevee.util.math
+﻿namespace souchy.celebi.eevee.face.util.math
 {
     public interface Vector2
     {

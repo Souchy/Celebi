@@ -1,10 +1,11 @@
 ﻿using souchy.celebi.eevee.face.objects;
 using Newtonsoft.Json;
 using souchy.celebi.eevee.face.util;
-using souchy.celebi.eevee.face.skins;
 using souchy.celebi.eevee.face.entity;
+using souchy.celebi.eevee.face.shared.models;
+using souchy.celebi.eevee.face.shared.models.skins;
 
-namespace souchy.celebi.eevee.face.models
+namespace souchy.celebi.eevee.face.shared
 {
     public interface IDiamondModels : IEntity
     {

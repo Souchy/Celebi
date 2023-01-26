@@ -1,6 +1,4 @@
-﻿using souchy.celebi.eevee.face.models;
-using souchy.celebi.eevee.face.stats;
-using souchy.celebi.eevee.face.statuses;
+﻿using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.stats;
 using System.Collections.Generic;
@@ -16,7 +14,7 @@ namespace Umbreon.data.resources
         public IID descriptionId { get; set; }
         public HashSet<IID> skins { get; init; } = new HashSet<IID>();
 
-        public IStats baseStats { get; init; } = new Stats();
+        public IID baseStats { get; init; }
         public HashSet<IID> baseSpells { get; init; } = new HashSet<IID>();
         public HashSet<IID> baseStatusPassives { get; init; } = new HashSet<IID>();
 

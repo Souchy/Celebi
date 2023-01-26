@@ -1,9 +1,8 @@
 ﻿using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.util.math;
-using souchy.celebi.eevee.util.math;
-using souchy.celebi.eevee.values;
+using souchy.celebi.eevee.face.values;
 
-namespace souchy.celebi.eevee.face.zones
+namespace souchy.celebi.eevee.face.shared.zones
 {
     public interface IZone
     {

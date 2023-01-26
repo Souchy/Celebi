@@ -1,6 +1,6 @@
 ﻿using souchy.celebi.eevee.face.util;
 
-namespace souchy.celebi.eevee.face.effects.compiledeffects
+namespace souchy.celebi.eevee.face.objects.compiledeffects
 {
     public interface ICompiledEffect
     {

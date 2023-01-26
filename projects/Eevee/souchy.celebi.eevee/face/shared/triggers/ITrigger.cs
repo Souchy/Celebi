@@ -1,9 +1,7 @@
 ﻿using souchy.celebi.eevee.enums;
-using souchy.celebi.eevee.face.conditions;
-using souchy.celebi.eevee.face.entity;
-using souchy.celebi.eevee.interfaces;
+using souchy.celebi.eevee.face.shared.conditions;
 
-namespace souchy.celebi.eevee.face.triggers
+namespace souchy.celebi.eevee.face.shared.triggers
 {
     public interface ITrigger
     {

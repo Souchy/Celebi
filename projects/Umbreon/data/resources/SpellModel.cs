@@ -1,7 +1,7 @@
 ﻿using souchy.celebi.eevee.enums;
-using souchy.celebi.eevee.face.conditions;
 using souchy.celebi.eevee.face.entity;
-using souchy.celebi.eevee.face.models;
+using souchy.celebi.eevee.face.shared.conditions;
+using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 
 namespace Umbreon.data.resources

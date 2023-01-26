@@ -1,9 +1,7 @@
-﻿using souchy.celebi.eevee.face.controllers;
-using souchy.celebi.eevee.face.entity;
-using souchy.celebi.eevee.face.stats;
+﻿using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.util;
 
-namespace souchy.celebi.eevee
+namespace souchy.celebi.eevee.face.objects
 {
     public interface ICreature : IBoardEntity
     {

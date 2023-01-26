@@ -1,6 +1,5 @@
-﻿using souchy.celebi.eevee.face.statuses;
-
-namespace souchy.celebi.eevee.interfaces.statuses
+﻿
+namespace souchy.celebi.eevee.face.objects.statuses
 {
     public interface IGlyph : ICellStatus
     {

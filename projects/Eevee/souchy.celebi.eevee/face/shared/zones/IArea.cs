@@ -1,7 +1,7 @@
 ﻿using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.interfaces;
 
-namespace souchy.celebi.eevee.face.zones
+namespace souchy.celebi.eevee.face.shared.zones
 {
     public interface IArea
     {

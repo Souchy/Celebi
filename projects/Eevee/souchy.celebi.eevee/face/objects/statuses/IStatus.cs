@@ -1,8 +1,8 @@
 ﻿using souchy.celebi.eevee.face.entity;
-using souchy.celebi.eevee.face.stats;
+using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.util;
 
-namespace souchy.celebi.eevee.face.statuses
+namespace souchy.celebi.eevee.face.objects.statuses
 {
     /// <summary>
     /// Each status instance is 1 stack

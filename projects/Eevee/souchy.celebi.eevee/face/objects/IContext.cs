@@ -1,5 +1,5 @@
 ﻿using souchy.celebi.eevee.enums;
-using souchy.celebi.eevee.face.effects.compiledeffects;
+using souchy.celebi.eevee.face.objects.compiledeffects;
 using souchy.celebi.eevee.face.util;
 
 namespace souchy.celebi.eevee.face.objects

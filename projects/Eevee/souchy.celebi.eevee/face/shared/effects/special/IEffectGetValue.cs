@@ -1,6 +1,6 @@
 ﻿using souchy.celebi.eevee.face.objects;
 
-namespace souchy.celebi.eevee.face.effects.special
+namespace souchy.celebi.eevee.face.shared.effects.special
 {
     /// <summary>
     /// Get a value from the targets of this effect.

@@ -1,7 +1,7 @@
 ﻿using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.util;
 
-namespace souchy.celebi.eevee.face.skins
+namespace souchy.celebi.eevee.face.shared.models.skins
 {
     public interface ICreatureSkin : IEntity
     {

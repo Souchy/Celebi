@@ -1,6 +1,6 @@
 ﻿using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.conditions;
-using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.face.shared.conditions;
 
 namespace souchy.celebi.eevee.impl.conditions
 {

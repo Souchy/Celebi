@@ -2,10 +2,10 @@ using Godot;
 using Godot.Sharp.Extras;
 using System;
 using souchy.celebi.eevee.enums;
-using souchy.celebi.eevee.face.models;
 using Umbreon.vaporeon.common;
 using Umbreon.common;
 using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.face.shared.models;
 
 public partial class SpellEditor : Control
 {
