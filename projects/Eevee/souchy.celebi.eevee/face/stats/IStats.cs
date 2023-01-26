@@ -1,8 +1,9 @@
 ﻿using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.face.entity;
 
 namespace souchy.celebi.eevee.face.stats
 {
-    public interface IStats : IDisposable
+    public interface IStats : IEntity
     {
         public Dictionary<StatType, IStat> stats { get; set; }
 

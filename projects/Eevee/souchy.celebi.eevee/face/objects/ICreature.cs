@@ -15,7 +15,7 @@ namespace souchy.celebi.eevee
         /// Current owner of the creature
         /// </summary>
         public IID currentOwnerUid { get; set; }
-        public IStats stats { get; set; }
+        public IID stats { get; set; }
         public List<IID> spells { get; set; }
     }
 }

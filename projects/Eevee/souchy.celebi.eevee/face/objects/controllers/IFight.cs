@@ -1,6 +1,7 @@
 ﻿using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.controllers;
+using souchy.celebi.eevee.face.stats;
 using souchy.celebi.eevee.face.statuses;
 using souchy.celebi.eevee.face.util;
 
@@ -24,5 +25,6 @@ namespace souchy.celebi.eevee.face.controllers
         public Dictionary<IID, ISpell> spells { get; init; }
         public Dictionary<IID, IStatus> statuses { get; init; }
         public Dictionary<IID, ICell> cells { get; init; }
+        public Dictionary<IID, IStats> stats { get; init; }
     }
 }
