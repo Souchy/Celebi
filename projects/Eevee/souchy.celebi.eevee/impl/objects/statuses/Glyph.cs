@@ -7,7 +7,7 @@ namespace souchy.celebi.eevee.statuses
 {
     public class Glyph : IGlyph
     {
-        public event OnChanged Changed;
+        //public event OnChanged Changed;
         public IID fightUid { get; init; }
         public IID modelUid { get; set; }
         public IID entityUid { get; init; }
@@ -27,7 +27,7 @@ namespace souchy.celebi.eevee.statuses
             throw new NotImplementedException();
         }
 
-        public void TriggerChanged(Type propertyType, string propertyPath, object newValue, object oldValue)
-            => Changed(propertyType, propertyPath, newValue, oldValue);
+        //public void TriggerChanged(Type propertyType, string propertyPath, object newValue, object oldValue)
+        //    => Changed(propertyType, propertyPath, newValue, oldValue);
     }
 }

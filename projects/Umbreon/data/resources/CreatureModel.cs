@@ -8,7 +8,6 @@ namespace Umbreon.data.resources
 {
     public class CreatureModel : ICreatureModel
     {
-        public event OnChanged Changed;
         public IID entityUid { get; init; }
         public IID nameId { get; set; }
         public IID descriptionId { get; set; }
@@ -33,7 +32,5 @@ namespace Umbreon.data.resources
         {
         }
 
-        public void TriggerChanged(Type propertyType, string propertyPath, object newValue, object oldValue)
-            => Changed(propertyType, propertyPath, newValue, oldValue);
     }
 }

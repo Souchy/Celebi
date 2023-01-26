@@ -7,10 +7,9 @@ namespace souchy.celebi.eevee.impl.stats
 {
     public class Stats : IStats
     {
-        public Dictionary<StatType, IStat> stats { get; set; } = new Dictionary<StatType, IStat>();
         public IID entityUid { get; init; }
+        public Dictionary<StatType, IStat> stats { get; set; } = new Dictionary<StatType, IStat>();
 
-        public event IEntity.OnChanged Changed;
 
         public T get<T>(StatType statId) where T : IStat
         {
@@ -27,9 +26,5 @@ namespace souchy.celebi.eevee.impl.stats
             stats.Clear();
         }
 
-        public void TriggerChanged(Type propertyType, string propertyPath, object newValue, object oldValue)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

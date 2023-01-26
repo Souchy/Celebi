@@ -13,7 +13,6 @@ namespace Umbreon.data.resources
         public IID targetAnimation { get; set; }
         public IID behaviourScript { get; set; }
 
-        public event IEntity.OnChanged Changed;
 
         public SpellSkin() { }
         public SpellSkin(IUIdGenerator uIdGenerator)
@@ -26,7 +25,5 @@ namespace Umbreon.data.resources
             throw new NotImplementedException();
         }
 
-        public void TriggerChanged(Type propertyType, string propertyPath, object newValue, object oldValue)
-            => Changed(propertyType, propertyPath, newValue, oldValue);
     }
 }

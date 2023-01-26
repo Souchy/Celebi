@@ -8,7 +8,7 @@ namespace souchy.celebi.eevee.impl.objects
 {
     public class Cell : ICell
     {
-        public event OnChanged Changed;
+        //public event OnChanged Changed;
         public IID entityUid { get; init; }
         public IID modelUid { get; set; }
         public IID fightUid { get; init; }
@@ -23,7 +23,7 @@ namespace souchy.celebi.eevee.impl.objects
             throw new NotImplementedException();
         }
 
-        public void TriggerChanged(Type propertyType, string propertyPath, object newValue, object oldValue)
-            => Changed(propertyType, propertyPath, newValue, oldValue);
+        //public void TriggerChanged(Type propertyType, string propertyPath, object newValue, object oldValue)
+        //    => Changed(propertyType, propertyPath, newValue, oldValue);
     }
 }

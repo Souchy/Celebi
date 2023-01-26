@@ -43,7 +43,6 @@ namespace Umbreon.common
         public Dictionary<IID, string> i18n { get; set; } = new Dictionary<IID, string>();
 
         public IID entityUid { get => throw new NotImplementedException(); init => throw new NotImplementedException(); }
-        public event IEntity.OnChanged Changed;
 
         public CreatureModelData[] creatureModelsData;
         public CreatureSkinData[] creatureSkinsData;
@@ -61,8 +60,6 @@ namespace Umbreon.common
             parseData();
         }
 
-        public void TriggerChanged(Type propertyType, string propertyPath, object newValue, object oldValue)
-            => Changed?.Invoke(propertyType, propertyPath, newValue, oldValue);
 
         public void parseData()
         {

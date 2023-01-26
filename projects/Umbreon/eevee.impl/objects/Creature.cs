@@ -9,7 +9,6 @@ namespace Umbreon.eevee.impl.objects
 {
     public class Creature : ICreature
     {
-        public event OnChanged Changed;
         public IID originalOwnerUid { get; set; }
         public IID currentOwnerUid { get; set; }
         public IID stats { get; set; }
@@ -25,7 +24,5 @@ namespace Umbreon.eevee.impl.objects
         {
             throw new NotImplementedException();
         }
-        public void TriggerChanged(Type propertyType, string propertyPath, object newValue, object oldValue)
-            => Changed(propertyType, propertyPath, newValue, oldValue);
     }
 }

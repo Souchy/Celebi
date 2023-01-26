@@ -7,8 +7,6 @@ namespace souchy.celebi.eevee.interfaces.statuses
 {
     public class Trap : ITrap
     {
-
-        public event OnChanged Changed;
         public IID fightUid { get; init; }
         public IID modelUid { get; set; }
         public IID entityUid { get; init; }
@@ -28,7 +26,5 @@ namespace souchy.celebi.eevee.interfaces.statuses
             throw new NotImplementedException();
         }
 
-        public void TriggerChanged(Type propertyType, string propertyPath, object newValue, object oldValue)
-            => Changed(propertyType, propertyPath, newValue, oldValue);
     }
 }

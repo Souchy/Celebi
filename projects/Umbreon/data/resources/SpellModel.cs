@@ -18,8 +18,6 @@ namespace Umbreon.data.resources
         public ICondition targetFilter { get; set; }
         public HashSet<IID> effectIds { get; set; }
 
-        public event IEntity.OnChanged Changed;
-
         public SpellModel()
         {
         }
@@ -34,7 +32,5 @@ namespace Umbreon.data.resources
         {
         }
 
-        public void TriggerChanged(Type propertyType, string propertyPath, object newValue, object oldValue)
-            => Changed(propertyType, propertyPath, newValue, oldValue);
     }
 }

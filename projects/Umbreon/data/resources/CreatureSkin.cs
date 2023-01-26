@@ -17,7 +17,6 @@ namespace Umbreon.data.resources
         public Dictionary<IID, IID> spellSkins { get; set; }
         public Dictionary<IID, IID> effectSkins { get; set; } // FIXME This should go inside ISpellSkin
 
-        public event IEntity.OnChanged Changed;
 
         public CreatureSkin()
         {
@@ -30,8 +29,6 @@ namespace Umbreon.data.resources
         }
 
 
-        public void TriggerChanged(Type propertyType, string propertyPath, object newValue, object oldValue)
-            => Changed(propertyType, propertyPath, newValue, oldValue);
 
         public void Dispose()
         {
