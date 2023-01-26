@@ -1,5 +1,4 @@
 ﻿using souchy.celebi.eevee.face.objects;
-using Newtonsoft.Json;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.shared.models;
@@ -14,7 +13,12 @@ namespace souchy.celebi.eevee.face.shared
 
         public Dictionary<IID, ICreatureModel> creatureModels { get; init; }
         public Dictionary<IID, ISpellModel> spellModels { get; init; }
+        public Dictionary<IID, IStatusModel> statusModels { get; init; }
         public Dictionary<IID, IEffectModel> effectModels { get; init; }
+        /// <summary>
+        /// 
+        /// /////////"Model/Static" effects for spells and static statuses (like passives, as opposed to variable things like fourberie)
+        /// </summary>
         public Dictionary<IID, IEffect> effects { get; init; }
 
 

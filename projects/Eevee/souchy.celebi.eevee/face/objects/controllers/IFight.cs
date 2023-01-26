@@ -24,5 +24,11 @@ namespace souchy.celebi.eevee.face.objects.controllers
         public Dictionary<IID, IStatus> statuses { get; init; }
         public Dictionary<IID, ICell> cells { get; init; }
         public Dictionary<IID, IStats> stats { get; init; }
+
+        /// <summary>
+        /// Status effects
+        /// ////////Instanced Effects for variable statuses like fourberie as opposed to static statuses like passives 
+        /// </summary>
+        public Dictionary<IID, IEffect> effects { get; init; }
     }
 }

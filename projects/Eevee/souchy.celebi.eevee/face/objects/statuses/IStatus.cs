@@ -7,6 +7,7 @@ namespace souchy.celebi.eevee.face.objects.statuses
     /// <summary>
     /// Each status instance is 1 stack
     /// The client can just visually "merge" them on the UI ?
+    /// Use the model id to stack the instances
     /// </summary>
     public interface IStatus : IEntityModeled
     {
