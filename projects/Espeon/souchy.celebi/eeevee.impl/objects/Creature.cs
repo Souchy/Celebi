@@ -41,7 +41,7 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.objects
         {
             this.fightUid = scopeId;
             this.entityUid = Scopes.GetUIdGenerator(fightUid).next();
-            Scopes.GetRequiredScoped<IRedInstances>(fightUid).creatures.Add(entityUid, this);
+            Scopes.GetRequiredScoped<IFight>(fightUid).creatures.Add(entityUid, this);
             this.stats = stats;
         }
 

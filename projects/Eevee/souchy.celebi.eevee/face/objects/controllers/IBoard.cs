@@ -1,9 +1,8 @@
 ﻿using souchy.celebi.eevee.face.entity;
-using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.util.math;
 
-namespace souchy.celebi.eevee.face.controllers
+namespace souchy.celebi.eevee.face.objects.controllers
 {
     public interface IBoard : IFightEntity
     {
@@ -15,14 +14,15 @@ namespace souchy.celebi.eevee.face.controllers
         /// <summary>
         /// List of cells on the board
         /// </summary>
-        public List<ICell> cells { get; init; }
+        public List<IID> cells { get; init; }
 
-        public ICell getCell(IPosition pos);
 
-        public ICreature getCreature(IPosition pos);
+        // Board will be just a normal data object like the others.
+        // Make something else for functions
 
-        public List<ICreature> getCreatures(IPosition pos);
-
-        public bool hasCreature(IPosition pos);
+        //public ICell getCell(IPosition pos);
+        //public ICreature getCreature(IPosition pos);
+        //public List<ICreature> getCreatures(IPosition pos);
+        //public bool hasCreature(IPosition pos);
     }
 }

@@ -8,7 +8,7 @@ using static souchy.celebi.eevee.face.entity.IEntity;
 
 namespace Espeon.souchy.celebi.eeevee.impl.controllers
 {
-    public class RedInstances : IRedInstances
+    public class RedInstances : IFight
     {
         public event OnChanged Changed;
         public IID fightUid { get; init; }

@@ -1,11 +1,10 @@
 ﻿using souchy.celebi.eevee.face.objects;
 using Newtonsoft.Json;
 using souchy.celebi.eevee.face.util;
-using souchy.celebi.eevee.face.models;
 using souchy.celebi.eevee.face.skins;
 using souchy.celebi.eevee.face.entity;
 
-namespace souchy.celebi.eevee.face.io
+namespace souchy.celebi.eevee.face.models
 {
     public interface IDiamondModels : IEntity
     {
@@ -21,7 +20,9 @@ namespace souchy.celebi.eevee.face.io
         public Dictionary<IID, ICreatureSkin> creatureSkins { get; init; }
         public Dictionary<IID, ISpellSkin> spellSkins { get; init; }
         public Dictionary<IID, IEffectSkin> effectSkins { get; init; }
-
+        /// <summary>
+        /// load 1 language at a time
+        /// </summary>
         public Dictionary<IID, string> i18n { get; set; }
 
         public void parseData();

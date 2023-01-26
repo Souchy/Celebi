@@ -2,6 +2,7 @@
 using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.controllers;
 using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.stats;
 using souchy.celebi.eevee.impl.stats;
 

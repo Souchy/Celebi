@@ -2,7 +2,6 @@
 using Godot;
 using Newtonsoft.Json;
 using souchy.celebi.eevee;
-using souchy.celebi.eevee.face.io;
 using souchy.celebi.eevee.face.models;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.skins;

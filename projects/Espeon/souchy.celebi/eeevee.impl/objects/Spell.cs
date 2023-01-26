@@ -38,7 +38,7 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.objects
         {
             this.fightUid = scopeId;
             this.entityUid = Scopes.GetUIdGenerator(fightUid).next();
-            Scopes.GetRequiredScoped<IRedInstances>(fightUid).spells.Add(entityUid, this);
+            Scopes.GetRequiredScoped<IFight>(fightUid).spells.Add(entityUid, this);
         }
 
         public void Dispose()

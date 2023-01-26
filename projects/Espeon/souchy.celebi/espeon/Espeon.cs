@@ -6,13 +6,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using souchy.celebi.eevee;
 using souchy.celebi.eevee.face.controllers;
-using souchy.celebi.eevee.face.io;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.stats;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.util;
 using Microsoft.AspNetCore.Hosting;
 using souchy.celebi.eevee.impl.stats;
+using souchy.celebi.eevee.face.models;
+using souchy.celebi.eevee.face.objects.controllers;
 
 namespace Espeon.souchy.celebi.espeon
 {
@@ -55,7 +56,7 @@ namespace Espeon.souchy.celebi.espeon
             services.AddScoped<ScopeID, ScopeID>();
 
             services.AddScoped<IUIdGenerator, UIdGenerator>();
-            services.AddScoped<IRedInstances, RedInstances>();
+            services.AddScoped<IFight, RedInstances>();
             services.AddScoped<IFight, Fight>();
             services.AddScoped<IBoard, Board>();
 

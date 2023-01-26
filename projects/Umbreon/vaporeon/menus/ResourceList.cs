@@ -2,7 +2,6 @@ using Godot;
 using Godot.Sharp.Extras;
 using souchy.celebi.eevee;
 using souchy.celebi.eevee.face.entity;
-using souchy.celebi.eevee.face.io;
 using souchy.celebi.eevee.face.models;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.skins;

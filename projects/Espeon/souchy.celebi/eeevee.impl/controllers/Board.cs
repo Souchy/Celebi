@@ -1,6 +1,7 @@
 ﻿using souchy.celebi.eevee;
 using souchy.celebi.eevee.face.controllers;
 using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.util.math;
 using static souchy.celebi.eevee.face.entity.IEntity;
@@ -16,10 +17,10 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.controllers
         public IID entityUid { get; init; }
 
         public List<IID> creatureIds { get; init; } = new List<IID>();
-        public List<ICell> cells { get; init; } = new List<ICell>();
+        public List<IID> cells { get; init; } = new List<IID>();
 
-        private readonly IRedInstances instances;
-        private IEnumerable<ICreature> Creatures => creatureIds.Select(cid => instances.creatures[cid]);
+        //private readonly IFight instances;
+        //private IEnumerable<ICreature> Creatures => creatureIds.Select(cid => instances.creatures[cid]);
 
         #endregion Properties
 
@@ -29,11 +30,21 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.controllers
         {
             this.fightUid = scopeId;
             this.entityUid = Scopes.GetUIdGenerator(fightUid).next();
-            this.instances = Scopes.GetRequiredScoped<IRedInstances>(fightUid);
+            //this.instances = Scopes.GetRequiredScoped<IFight>(fightUid);
+        }
+
+        public void TriggerChanged(Type propertyType, string propertyPath, object newValue, object oldValue)
+            => Changed?.Invoke(propertyType, propertyPath, newValue, oldValue);
+
+        public void Dispose()
+        {
+            // nothing to dispose? 
+            throw new NotImplementedException();
         }
 
         #endregion Constructors
 
+        /*
         #region Public Methods
 
         public ICell getCell(IPosition pos)
@@ -69,5 +80,6 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.controllers
         }
 
         #endregion Public Methods
+        */
     }
 }
