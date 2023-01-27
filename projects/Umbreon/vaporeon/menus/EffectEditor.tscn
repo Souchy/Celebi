@@ -12,6 +12,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="EffectID" type="Label" parent="."]
+layout_mode = 0
 offset_left = 40.0
 offset_top = 18.0
 offset_right = 101.0
@@ -19,6 +20,7 @@ offset_bottom = 44.0
 text = "EffectID"
 
 [node name="ModelID" type="LineEdit" parent="."]
+layout_mode = 0
 offset_left = 133.0
 offset_top = 16.0
 offset_right = 332.0
@@ -26,6 +28,7 @@ offset_bottom = 50.0
 placeholder_text = "ModelID"
 
 [node name="Description" type="TextEdit" parent="."]
+layout_mode = 0
 offset_left = 41.0
 offset_top = 67.0
 offset_right = 333.0
@@ -33,65 +36,89 @@ offset_bottom = 170.0
 placeholder_text = "Description"
 
 [node name="ChildrenList" parent="." instance=ExtResource("1_r3fwy")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
 offset_left = 36.0
 offset_top = 565.0
 offset_right = -1035.0
 offset_bottom = -81.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="ParametersBox" type="VBoxContainer" parent="."]
+layout_mode = 0
 offset_left = 42.0
 offset_top = 236.0
 offset_right = 334.0
 offset_bottom = 471.0
 
 [node name="ParametersTitle" type="Label" parent="ParametersBox"]
-offset_right = 292.0
-offset_bottom = 22.0
+layout_mode = 2
 text = "Parameters"
 horizontal_alignment = 1
 
 [node name="ParametersGrid" type="GridContainer" parent="ParametersBox"]
-offset_top = 26.0
-offset_right = 292.0
-offset_bottom = 53.0
+layout_mode = 2
 columns = 2
 
 [node name="Label" type="Label" parent="ParametersBox/ParametersGrid"]
-offset_top = 2.0
-offset_right = 118.0
-offset_bottom = 24.0
+layout_mode = 2
 text = "a kinda long name"
 
 [node name="LineEdit" type="LineEdit" parent="ParametersBox/ParametersGrid"]
-offset_left = 122.0
-offset_right = 186.0
-offset_bottom = 27.0
+layout_mode = 2
 placeholder_text = "value"
 
 [node name="SourceConditionsTree" parent="." instance=ExtResource("3_ylmo8")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
 offset_left = 442.0
 offset_top = 31.0
 offset_right = -712.0
 offset_bottom = -512.0
+grow_horizontal = 1
+grow_vertical = 1
 Title = "Source Conditions"
 
 [node name="TargetConditionsTree" parent="." instance=ExtResource("3_ylmo8")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
 offset_left = 719.0
 offset_top = 36.0
 offset_right = -435.0
 offset_bottom = -507.0
+grow_horizontal = 1
+grow_vertical = 1
 Title = "Target Conditions"
 
 [node name="TriggerConditionsTree" parent="." instance=ExtResource("3_ylmo8")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
 offset_left = 990.0
 offset_top = 40.0
 offset_right = -164.0
 offset_bottom = -503.0
+grow_horizontal = 1
+grow_vertical = 1
 Title = "Trigger Conditions"
 
 [node name="ZoneTree" parent="." instance=ExtResource("3_ylmo8")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
 offset_left = 679.0
 offset_top = 489.0
 offset_right = -475.0
 offset_bottom = -54.0
+grow_horizontal = 1
+grow_vertical = 1
 Title = "Zone"

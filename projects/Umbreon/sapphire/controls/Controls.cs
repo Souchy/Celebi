@@ -64,7 +64,7 @@ public partial class Controls : Node // Node3D
             var mouseWorldDelta = currentMousePos - this.lastCursorPositionWorld;
 
             //this.cam.LookAtFromPosition(from, ToolAttribute, up);
-            var thing = (cam.GlobalTransform.basis.z * mouseWorldDelta.z + cam.GlobalTransform.basis.x * mouseWorldDelta.x);
+            var thing = (cam.GlobalTransform.Basis.Z * mouseWorldDelta.Z + cam.GlobalTransform.Basis.X * mouseWorldDelta.X);
             this.cam.Position += -thing;
 
             lastCursorPositionWorld = getCursorPosToWorld();
@@ -105,11 +105,11 @@ public partial class Controls : Node // Node3D
         // Rotate 45
         if (@event.IsActionPressed("rotate45Right")) this.cam.Rotate(Vector3.Up, 45);
         if (@event.IsActionPressed("rotate45Left")) this.cam.Rotate(Vector3.Up, -45);
-        if (@event.IsActionPressed("rotate45Up")) this.cam.Rotate(cam.GlobalTransform.basis.x, 45);
-        if (@event.IsActionPressed("rotate45Down")) this.cam.Rotate(cam.GlobalTransform.basis.x, -45);
+        if (@event.IsActionPressed("rotate45Up")) this.cam.Rotate(cam.GlobalTransform.Basis.X, 45);
+        if (@event.IsActionPressed("rotate45Down")) this.cam.Rotate(cam.GlobalTransform.Basis.X, -45);
 
 
-        //var dir = this.cam.GlobalTransform.basis;
+        //var dir = this.cam.GlobalTransform.Basis;
         //var pos = this.cam.Position;
         //var rot = this.cam.Rotation;
         //translation = Vector3.Zero;
@@ -158,7 +158,7 @@ public partial class Controls : Node // Node3D
         //var ray = origin + normal * RAY_LENGTH; // to_ray
         //var pos = GROUND_PLANE.IntersectRay(origin, ray);
         //return pos;
-        var distance = (floorHeight - origin.y) / normal.y;
+        var distance = (floorHeight - origin.Y) / normal.Y;
         var v = normal * distance + origin;
         return v;
     }
@@ -167,7 +167,7 @@ public partial class Controls : Node // Node3D
     {
         var pos = getCursorPosToWorld();
         //if (!pos.HasValue) return null;
-        var posBoard = new Vector3(pos.x, 0, pos.z);
+        var posBoard = new Vector3(pos.X, 0, pos.Z);
         posBoard = posBoard.Round();
         //GD.Print("word " + pos?.x + " -> " + posBoard);
         //GD.Print(string.Format("world: [{0:F2}, {1:F2}], board: [{2:F2}, {3:F2}]", pos?.x, pos?.z, posBoard.x, posBoard.z));
@@ -178,7 +178,7 @@ public partial class Controls : Node // Node3D
     {
         this.camIso.Position = new Vector3(-5, 7, 5);
         this.camIso.Rotation = new Vector3(-45, -45, 0);
-        // this.camIso.GlobalTransform.basis.z = new Vector3(0, 1, 0);
+        // this.camIso.GlobalTransform.Basis.z = new Vector3(0, 1, 0);
         // this.camIso.Basis.z = Vector3.Up;
         // The Identity basis is equivalent to:
         var basis = new Basis(Vector3.Right, Vector3.Up, Vector3.Back);

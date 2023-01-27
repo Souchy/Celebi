@@ -11,47 +11,34 @@ grow_vertical = 2
 script = ExtResource("1_t57jh")
 
 [node name="TitleLbl" type="Label" parent="."]
-offset_right = 1366.0
-offset_bottom = 24.0
+layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "Title"
 horizontal_alignment = 1
 
 [node name="Buttons" type="HBoxContainer" parent="."]
-offset_top = 28.0
-offset_right = 1366.0
-offset_bottom = 55.0
+layout_mode = 2
 theme_override_constants/separation = 50
 alignment = 1
 
 [node name="AddBtn" type="Button" parent="Buttons"]
-offset_left = 523.0
-offset_right = 558.0
-offset_bottom = 27.0
+layout_mode = 2
 text = "Add"
 
 [node name="CopyBtn" type="Button" parent="Buttons"]
-offset_left = 608.0
-offset_right = 651.0
-offset_bottom = 27.0
+layout_mode = 2
 text = "Copy"
 
 [node name="PasteBtn" type="Button" parent="Buttons"]
-offset_left = 701.0
-offset_right = 743.0
-offset_bottom = 27.0
+layout_mode = 2
 text = "Paste"
 
 [node name="DeleteBtn" type="Button" parent="Buttons"]
-offset_left = 793.0
-offset_right = 843.0
-offset_bottom = 27.0
+layout_mode = 2
 text = "Delete"
 
 [node name="Tree" type="Tree" parent="."]
-offset_top = 59.0
-offset_right = 1366.0
-offset_bottom = 768.0
+layout_mode = 2
 size_flags_vertical = 3
 allow_rmb_select = true
 
@@ -61,6 +48,5 @@ allow_rmb_select = true
 [connection signal="pressed" from="Buttons/CopyBtn" to="." method="onCopyBtnClick"]
 [connection signal="pressed" from="Buttons/PasteBtn" to="." method="onPasteBtnClick"]
 [connection signal="pressed" from="Buttons/DeleteBtn" to="." method="onDeleteBtnClick"]
-[connection signal="item_double_clicked" from="Tree" to="." method="onTreeItemDoubleClick"]
 [connection signal="item_mouse_selected" from="Tree" to="." method="onTreeItemMouseSelected"]
 [connection signal="item_selected" from="Tree" to="." method="onTreeItemSelected"]

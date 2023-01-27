@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://lt5egbdlx5rn"]
+[gd_scene load_steps=4 format=3 uid="uid://d67o3f2t7nuo"]
 
 [ext_resource type="Script" path="res://vaporeon/menus/SpellEditor.cs" id="1_30wwd"]
 [ext_resource type="PackedScene" uid="uid://c5pro78vguufj" path="res://vaporeon/common/ZoneEditor.tscn" id="3_2sys8"]
@@ -14,6 +14,7 @@ grow_vertical = 2
 script = ExtResource("1_30wwd")
 
 [node name="ModelID" type="LineEdit" parent="."]
+layout_mode = 0
 offset_left = 35.0
 offset_top = 18.0
 offset_right = 119.0
@@ -21,6 +22,7 @@ offset_bottom = 49.0
 placeholder_text = "ModelID"
 
 [node name="Name" type="LineEdit" parent="."]
+layout_mode = 0
 offset_left = 128.0
 offset_top = 18.0
 offset_right = 256.0
@@ -28,6 +30,7 @@ offset_bottom = 49.0
 placeholder_text = "Name"
 
 [node name="Description" type="TextEdit" parent="."]
+layout_mode = 0
 offset_left = 36.0
 offset_top = 68.0
 offset_right = 325.0
@@ -35,165 +38,118 @@ offset_bottom = 269.0
 placeholder_text = "Description"
 
 [node name="PropertiesBox" type="VBoxContainer" parent="."]
+layout_mode = 0
 offset_left = 35.0
 offset_top = 300.0
 offset_right = 280.0
 offset_bottom = 667.0
 
 [node name="PropertiesLbl" type="Label" parent="PropertiesBox"]
-offset_right = 245.0
-offset_bottom = 22.0
+layout_mode = 2
 text = "Properties"
 horizontal_alignment = 1
 
 [node name="PropertiesGrid" type="GridContainer" parent="PropertiesBox"]
-offset_top = 26.0
-offset_right = 245.0
-offset_bottom = 292.0
+layout_mode = 2
 columns = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="CooldownLbl" type="Label" parent="PropertiesBox/PropertiesGrid"]
-offset_top = 2.0
-offset_right = 122.0
-offset_bottom = 24.0
+layout_mode = 2
 text = "Cooldown"
 
 [node name="Cooldown" type="LineEdit" parent="PropertiesBox/PropertiesGrid"]
 custom_minimum_size = Vector2(100, 0)
-offset_left = 126.0
-offset_right = 226.0
-offset_bottom = 27.0
+layout_mode = 2
 placeholder_text = "0"
 
 [node name="MaxChargesLbl" type="Label" parent="PropertiesBox/PropertiesGrid"]
-offset_top = 33.0
-offset_right = 122.0
-offset_bottom = 55.0
+layout_mode = 2
 text = "Max Charges"
 
 [node name="MaxCharges" type="LineEdit" parent="PropertiesBox/PropertiesGrid"]
 custom_minimum_size = Vector2(100, 0)
-offset_left = 126.0
-offset_top = 31.0
-offset_right = 226.0
-offset_bottom = 58.0
+layout_mode = 2
 placeholder_text = "0"
 
 [node name="CastPerTurnLbl" type="Label" parent="PropertiesBox/PropertiesGrid"]
-offset_top = 64.0
-offset_right = 122.0
-offset_bottom = 86.0
+layout_mode = 2
 text = "Cast Per Turn"
 
 [node name="CastPerTurn" type="LineEdit" parent="PropertiesBox/PropertiesGrid"]
 custom_minimum_size = Vector2(100, 0)
-offset_left = 126.0
-offset_top = 62.0
-offset_right = 226.0
-offset_bottom = 89.0
+layout_mode = 2
 placeholder_text = "0"
 
 [node name="CastPerTargetLbl" type="Label" parent="PropertiesBox/PropertiesGrid"]
-offset_top = 95.0
-offset_right = 122.0
-offset_bottom = 117.0
+layout_mode = 2
 text = "Casts Per Target"
 
 [node name="CastPerTarget" type="LineEdit" parent="PropertiesBox/PropertiesGrid"]
 custom_minimum_size = Vector2(100, 0)
-offset_left = 126.0
-offset_top = 93.0
-offset_right = 226.0
-offset_bottom = 120.0
+layout_mode = 2
 placeholder_text = "0"
 
 [node name="RangeMinLbl" type="Label" parent="PropertiesBox/PropertiesGrid"]
-offset_top = 126.0
-offset_right = 122.0
-offset_bottom = 148.0
+layout_mode = 2
 text = "Range Min"
 
 [node name="RangeMin" type="LineEdit" parent="PropertiesBox/PropertiesGrid"]
 custom_minimum_size = Vector2(100, 0)
-offset_left = 126.0
-offset_top = 124.0
-offset_right = 226.0
-offset_bottom = 151.0
+layout_mode = 2
 placeholder_text = "0"
 
 [node name="RangeMaxLbl" type="Label" parent="PropertiesBox/PropertiesGrid"]
-offset_top = 157.0
-offset_right = 122.0
-offset_bottom = 179.0
+layout_mode = 2
 text = "Range Max"
 
 [node name="RangeMax" type="LineEdit" parent="PropertiesBox/PropertiesGrid"]
 custom_minimum_size = Vector2(100, 0)
-offset_left = 126.0
-offset_top = 155.0
-offset_right = 226.0
-offset_bottom = 182.0
+layout_mode = 2
 placeholder_text = "0"
 
 [node name="CastInLineLbl" type="Label" parent="PropertiesBox/PropertiesGrid"]
-offset_top = 187.0
-offset_right = 122.0
-offset_bottom = 209.0
+layout_mode = 2
 text = "Cast In Line
 "
 
 [node name="CastInLine" type="CheckBox" parent="PropertiesBox/PropertiesGrid"]
-offset_left = 126.0
-offset_top = 186.0
-offset_right = 226.0
-offset_bottom = 210.0
+layout_mode = 2
 
 [node name="CastInDiagonalLbl" type="Label" parent="PropertiesBox/PropertiesGrid"]
-offset_top = 215.0
-offset_right = 122.0
-offset_bottom = 237.0
+layout_mode = 2
 text = "Cast In Diagonal"
 
 [node name="CastInDiagonal" type="CheckBox" parent="PropertiesBox/PropertiesGrid"]
-offset_left = 126.0
-offset_top = 214.0
-offset_right = 226.0
-offset_bottom = 238.0
+layout_mode = 2
 
 [node name="NeedLosLbl" type="Label" parent="PropertiesBox/PropertiesGrid"]
-offset_top = 243.0
-offset_right = 122.0
-offset_bottom = 265.0
+layout_mode = 2
 text = "Need Line of Sight
 "
 
 [node name="NeedLos" type="CheckBox" parent="PropertiesBox/PropertiesGrid"]
-offset_left = 126.0
-offset_top = 242.0
-offset_right = 226.0
-offset_bottom = 266.0
+layout_mode = 2
 button_pressed = true
 
 [node name="CostsBox" type="VBoxContainer" parent="."]
+layout_mode = 0
 offset_left = 607.0
 offset_top = 300.0
 offset_right = 746.0
 offset_bottom = 561.0
 
 [node name="CostsLbl" type="Label" parent="CostsBox"]
-offset_right = 139.0
-offset_bottom = 22.0
+layout_mode = 2
 text = "Costs"
 horizontal_alignment = 1
 
 [node name="CostsGrid" type="GridContainer" parent="CostsBox"]
-offset_top = 26.0
-offset_right = 139.0
-offset_bottom = 26.0
+layout_mode = 2
 columns = 2
 
 [node name="RangeZoneMinEditor" parent="." instance=ExtResource("3_2sys8")]
+layout_mode = 0
 offset_left = 630.0
 offset_top = 489.0
 offset_right = 947.0
@@ -201,6 +157,7 @@ offset_bottom = 731.0
 Title = "Range Min"
 
 [node name="RangeZoneMaxEditor" parent="." instance=ExtResource("3_2sys8")]
+layout_mode = 0
 offset_left = 986.0
 offset_top = 489.0
 offset_right = 1303.0
@@ -210,20 +167,38 @@ Title = "Range Max"
 [node name="Timer" type="Timer" parent="."]
 
 [node name="EffectsTree" parent="." instance=ExtResource("5_tmavo")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
 offset_left = 325.0
 offset_top = 421.0
 offset_right = -835.0
 offset_bottom = -42.0
+grow_horizontal = 1
+grow_vertical = 1
 Title = "Effects"
 
 [node name="SourceConditionsTree" parent="." instance=ExtResource("5_tmavo")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
 offset_left = 725.0
 offset_right = -372.0
 offset_bottom = -508.0
+grow_horizontal = 1
+grow_vertical = 1
 Title = "Source Conditions"
 
 [node name="TargetConditionsTree" parent="." instance=ExtResource("5_tmavo")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
 offset_left = 1051.0
 offset_right = -46.0
 offset_bottom = -508.0
+grow_horizontal = 1
+grow_vertical = 1
 Title = "Target Conditions"

@@ -18,18 +18,18 @@ namespace souchy.celebi.eevee.face.objects.controllers
     {
         public ITimeline timeline { get; set; }
         public IBoard board { get; set; }
-        public Dictionary<IID, IPlayer> players { get; set; }
-        public Dictionary<IID, ICreature> creatures { get; init; }
-        public Dictionary<IID, ISpell> spells { get; init; }
-        public Dictionary<IID, IStatus> statuses { get; init; }
-        public Dictionary<IID, ICell> cells { get; init; }
-        public Dictionary<IID, IStats> stats { get; init; }
+        public IEntityDictionary<IID, IPlayer> players { get; init; }
+        public IEntityDictionary<IID, ICreature> creatures { get; init; }
+        public IEntityDictionary<IID, ISpell> spells { get; init; }
+        public IEntityDictionary<IID, IStatus> statuses { get; init; }
+        public IEntityDictionary<IID, ICell> cells { get; init; }
+        public IEntityDictionary<IID, IStats> stats { get; init; }
 
         /// <summary>
         /// Status effects
         /// ////////Instanced Effects for variable statuses like fourberie as opposed to static statuses like passives 
         /// </summary>
-        public Dictionary<IID, IEffect> effects { get; init; }
+        public IEntityDictionary<IID, IEffect> effects { get; init; }
 
     }
 }

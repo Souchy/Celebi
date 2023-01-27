@@ -1,6 +1,7 @@
-﻿using souchy.celebi.eevee.face.controllers;
-using souchy.celebi.eevee.face.objects;
+﻿using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.impl;
 using static souchy.celebi.eevee.face.entity.IEntity;
 
 namespace Espeon.souchy.celebi.espeon.eevee.impl.objects
@@ -24,10 +25,9 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.objects
 
     public class Spell : ISpell
     {
-        public event OnChanged Changed;
+        public IID entityUid { get; init; } = Eevee.RegisterIID();
         public IID fightUid { get; init; }
         public IID modelUid { get; set; }
-        public IID entityUid { get; init; }
 
         public int chargesRemaining { get; set; } = 1;
         public int cooldownRemaining { get; set; } = 0;
@@ -37,13 +37,15 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.objects
         public Spell(ScopeID scopeId)
         {
             this.fightUid = scopeId;
-            this.entityUid = Scopes.GetUIdGenerator(fightUid).next();
-            Scopes.GetRequiredScoped<IFight>(fightUid).spells.Add(entityUid, this);
+            //this.entityUid = Scopes.GetUIdGenerator(fightUid).next();
+            //Scopes.GetRequiredScoped<IFight>(fightUid).spells.Add(entityUid, this);
+            this.GetFight().spells.Add(entityUid, this);
         }
 
         public void Dispose()
         {
-            Scopes.DisposeIID(fightUid, entityUid);
+            Eevee.DisposeIID(this);
+            //Scopes.DisposeIID(fightUid, entityUid);
         }
     }
 }

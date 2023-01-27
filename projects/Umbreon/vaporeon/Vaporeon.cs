@@ -21,8 +21,8 @@ public static class VaporeonExtensions
 public partial class Vaporeon : Control
 {
     #region Vaporeon Properties
-    [Inject]
-    public IUIdGenerator uIdGenerator { get; set; }
+    //[Inject]
+    //public IUIdGenerator uIdGenerator { get; set; }
     /// <summary>
     /// Object in memory to copy/paste
     /// </summary>

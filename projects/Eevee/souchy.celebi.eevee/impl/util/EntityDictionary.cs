@@ -1,8 +1,9 @@
-﻿using souchy.celebi.eevee.face.util;
+﻿using souchy.celebi.eevee.face.entity;
+using souchy.celebi.eevee.face.util;
 
 namespace souchy.celebi.eevee.impl.util
 {
-    public class EntityDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IEntityDictionary<TKey, TValue>
+    public class EntityDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IEntityDictionary<TKey, TValue> //where TValue : IEntity
     {
         public IID entityUid { get; init; } = Eevee.RegisterIID();
 
@@ -36,20 +37,32 @@ namespace souchy.celebi.eevee.impl.util
             } finally
             {
                 this.GetEventBus().publish(nameof(Remove), this, key, val); // this.GetType().Name + 
+                if (val is IDisposable dis)
+                    dis.Dispose();
             }
         }
 
-        public void Remove(Predicate<KeyValuePair<TKey, TValue>> predicate)
+        public void Remove(Predicate<TValue> predicate)
         {
-            var toRemove = this.Where(p => predicate(p)).ToList();
+            var toRemove = this.Where(p => predicate(p.Value)).ToList();
             foreach(var rem in toRemove)
             {
                 this.Remove(rem.Key);
             }
         }
 
+        public void ForEach(Action<TValue> action)
+        {
+            foreach (var v in Values)
+                action(v);
+        }
+
         public void Dispose()
         {
+            //foreach (var val in Values)
+            //    if(val is IDisposable dis)
+            //        dis.Dispose();
+            Remove(v => true);
             this.Clear();
             Eevee.DisposeIID(this);
         }

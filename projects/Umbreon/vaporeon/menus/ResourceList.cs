@@ -9,8 +9,10 @@ using souchy.celebi.eevee.face.shared.models.skins;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
+using souchy.celebi.eevee.impl.util;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Umbreon.common;
 using Umbreon.data.resources;
 using Umbreon.eevee.impl.objects;
@@ -84,31 +86,29 @@ public partial class ResourceList : Control
             child.QueueFree();
         }
 
-
         if (this.resourceType == ResourceListType.ICreatureModel)
         {
             util = new CreatureListUtil(this);
+            Eevee.models.creatureModels.GetEventBus().subscribe(util);
+            //Eevee.models.creatureSkins.GetEventBus().subscribe(util);
         }
         if (this.resourceType == ResourceListType.ISpellModel)
         {
             util = new SpellListUtil(this);
+            Eevee.models.spellModels.GetEventBus().subscribe(util);
+            //Eevee.models.spellSkins.GetEventBus().subscribe(util);
             // fill list
         }
         if (this.resourceType == ResourceListType.IEffect)
         {
             util = new EffectListUtil(this);
+            Eevee.models.effects.GetEventBus().subscribe(util);
+            //Eevee.models.effectSkins.GetEventBus().subscribe(util);
         }
 
         //this.GetDiamonds().Changed += util.onDiamondsChanged;
         this.CreateBtn.Pressed += util.onCreateBtn;
-        //this.DeleteBtn.Pressed += util.onRemoveBtn;
-        //this.CreateBtn.Pressed += CreateBtn_Pressed;
-        //this.CreateBtn.Connect(nameof(CreateBtn.Pressed), onCreateBtn);
-    }
-
-    private void CreateBtn_Pressed()
-    {
-        GD.Print("ResourceList_OnCreateBtn");
+        this.DeleteBtn.Pressed += util.onRemoveBtn;
     }
 
 
@@ -173,19 +173,43 @@ public interface IListUtil
 {
     public ResourceList list { get; init; }
     public void fillList();
-    public void onDiamondsChanged(Type propertyType, string propertyPath, object newValue, object oldValue);
     public void onCreateBtn();
     public void onRemoveBtn();
+    //public void onDiamondsChanged(Type propertyType, string propertyPath, object newValue, object oldValue);
 }
+
+public interface IListUtilGeneric<T> : IListUtil
+{
+    public void createChildNode(T model);
+
+    [Subscribe(nameof(IEntityDictionary<IID, T>.Add))]
+    public void onDiamondAdd(IEntityDictionary<IID, T> dic, IID id, T model)
+    {
+        createChildNode(model);
+    }
+    [Subscribe(nameof(IEntityDictionary<IID, T>.Remove))]
+    public void onDiamondRemove(IEntityDictionary<IID, T> dic, IID id, T model)
+    {
+        list.removeChild(id);
+    }
+    [Subscribe(nameof(IEntityDictionary<IID, T>.Set))]
+    public void onDiamondSet(IEntityDictionary<IID, T> dic, IID id, T model)
+    {
+        list.removeChild(id);
+        createChildNode(model);
+    }
+}
+
 
 public static class fuck
 {
     public static Color Random(this Color color)
     {
         var rnd = new Random();
-        color.r = rnd.NextSingle();
-        color.g = rnd.NextSingle();
-        color.b = rnd.NextSingle();
+        color.R = rnd.NextSingle();
+        color.G = rnd.NextSingle();
+        color.B = rnd.NextSingle();
+        color.A = 1;
         return color;
     }
     public static void Remove<TKey, TValue>(this IDictionary<TKey, TValue> dict,
@@ -199,7 +223,7 @@ public static class fuck
     }
 } 
 
-public class CreatureListUtil : IListUtil
+public class CreatureListUtil : IListUtilGeneric<ICreatureModel>
 {
     public ResourceList list { get; init; }
     public CreatureListUtil(ResourceList list) => this.list = list;
@@ -208,55 +232,51 @@ public class CreatureListUtil : IListUtil
         foreach (ICreatureModel creature in Eevee.models.creatureModels.Values)
             createChildNode(creature);
     }
-    public void createChildNode(ICreatureModel creature)
+    public void createChildNode(ICreatureModel creatureModel)
     {
-        //var skin = list.GetDiamonds().creatureSkins.Values.Where(skin => skin.modelUid.value == spell.entityUid.value).First();
-        var skin = Eevee.models.creatureSkins.Get(creature.skins.First());
-        var icon = skin.icon;
-        var name = Eevee.models.i18n.Get(creature.nameId);
-        var desc = Eevee.models.i18n.Get(creature.descriptionId);
-        list.addChild(name, new Color().Random(), creature.entityUid);
-    }
-    public void onDiamondsChanged(Type propertyType, string propertyPath, object newValue, object oldValue)
-    {
-        if (newValue != null && newValue is ICreatureModel creatureAdd)
-            createChildNode(creatureAdd);
-        else
-        if (oldValue != null && oldValue is ICreatureModel creatureRemove)
-            list.removeChild(creatureRemove.entityUid);
+        //var skin = Eevee.models.creatureSkins.Get(creatureModel.skins.First());
+        //var icon = skin.icon;
+        var name = Eevee.models.i18n.Get(creatureModel.nameId);
+        var desc = Eevee.models.i18n.Get(creatureModel.descriptionId);
+        list.addChild(name, new Color().Random(), creatureModel.entityUid);
     }
     public void onCreateBtn()
     {
-        var gen = list.GetVaporeon().uIdGenerator;
-        var creatureModel = new CreatureModel(list.GetVaporeon().uIdGenerator);
-        var creatureSkin = new CreatureSkin(list.GetVaporeon().uIdGenerator);
+        var creatureSkin = new CreatureSkin(Eevee.uIdGenerator); 
+        var creatureModel = new CreatureModel(Eevee.uIdGenerator);
         creatureModel.skins.Add(creatureSkin.entityUid);
-        Eevee.models.creatureSkins.Add(creatureSkin.entityUid, creatureSkin);
-        Eevee.models.creatureModels.Add(creatureModel.entityUid, creatureModel);
-        Eevee.models.i18n.Add(creatureModel.nameId, "Name for: " + creatureModel.entityUid);
-        Eevee.models.i18n.Add(creatureModel.descriptionId, "Desc for: " + creatureModel.entityUid);
+
         Eevee.models.i18n.Add(creatureSkin.nameId, "Name for: " + creatureSkin.entityUid);
         Eevee.models.i18n.Add(creatureSkin.descriptionId, "Desc for: " + creatureSkin.entityUid);
-        //list.GetDiamonds().TriggerChanged(typeof(ICreatureSkin), nameof(IDiamondModels.creatureSkins), creatureSkin, list.GetDiamonds().creatureSkins);
-        //list.GetDiamonds().TriggerChanged(typeof(ICreatureModel), nameof(IDiamondModels.creatureModels), creatureModel, list.GetDiamonds().creatureModels);
+        Eevee.models.creatureSkins.Add(creatureSkin.entityUid, creatureSkin);
+
+        Eevee.models.i18n.Add(creatureModel.nameId, "Name for: " + creatureModel.entityUid);
+        Eevee.models.i18n.Add(creatureModel.descriptionId, "Desc for: " + creatureModel.entityUid);
+        Eevee.models.creatureModels.Add(creatureModel.entityUid, creatureModel);
     }
     public void onRemoveBtn()
     {
         Node node = list.Container.GetChildren().First(c => c.GetMeta("selected").AsBool() == true);
-        //ICreatureModel creature = (ICreatureModel) (object) node.GetMeta("object");
         IID id = (IID) node.GetMeta("object").AsString();
         var creature = Eevee.models.creatureModels.Get(id);
         Eevee.models.creatureModels.Remove(creature.entityUid);
         // dont delete the skins, keep them for later use and
         // TODO add new tabs to vaporeon for skins
-        //list.GetDiamonds().creatureSkins.Remove(s => s.modelUid.value == spell.entityUid.value);
-        //list.GetDiamonds().TriggerChanged(typeof(ICreatureSkin), nameof(IDiamondModels.creatureSkins), list.GetDiamonds().creatureSkins, skin);
-        //list.GetDiamonds().TriggerChanged(typeof(ICreatureModel), nameof(IDiamondModels.creatureModels), list.GetDiamonds().creatureModels, creature);
     }
+
+    //this.GetEventBus().publish(nameof(Set), this, key, value);
+    //public void onDiamondsChanged(Type propertyType, string propertyPath, object newValue, object oldValue)
+    //{
+    //    if (newValue != null && newValue is ICreatureModel creatureAdd)
+    //        createChildNode(creatureAdd);
+    //    else
+    //    if (oldValue != null && oldValue is ICreatureModel creatureRemove)
+    //        list.removeChild(creatureRemove.entityUid);
+    //}
 }
 
 
-public class SpellListUtil : IListUtil
+public class SpellListUtil : IListUtilGeneric<ISpellModel>
 {
     public ResourceList list { get; init; }
     public SpellListUtil(ResourceList list) => this.list = list;
@@ -275,33 +295,31 @@ public class SpellListUtil : IListUtil
         var desc = Eevee.models.i18n.Get(spell.descriptionId);
         list.addChild(name, new Color().Random(), spell.entityUid);
     }
-    public void onDiamondsChanged(Type propertyType, string propertyPath, object newValue, object oldValue)
-    {
-        if (propertyPath != nameof(DiamondModels.spellModels)) return;
-        if(newValue != null && newValue is ISpellModel spellAdd)
-        {
-            createChildNode(spellAdd);
-        } 
-        else
-        if (oldValue != null && oldValue is ISpellModel spellRemove)
-        {
-            Node node = list.Container.GetChildren()
-                .First(c => spellRemove == (ISpellModel) (object) c.GetMeta("object"));
-            list.Container.RemoveChild(node);
-            node.QueueFree();
-        }
-    }
+    //public void onDiamondsChanged(Type propertyType, string propertyPath, object newValue, object oldValue)
+    //{
+    //    if (propertyPath != nameof(DiamondModels.spellModels)) return;
+    //    if(newValue != null && newValue is ISpellModel spellAdd)
+    //    {
+    //        createChildNode(spellAdd);
+    //    } 
+    //    else
+    //    if (oldValue != null && oldValue is ISpellModel spellRemove)
+    //    {
+    //        Node node = list.Container.GetChildren()
+    //            .First(c => spellRemove == (ISpellModel) (object) c.GetMeta("object"));
+    //        list.Container.RemoveChild(node);
+    //        node.QueueFree();
+    //    }
+    //}
     public void onCreateBtn()
     {
-        var spellmodel = new SpellModel(list.GetVaporeon().uIdGenerator);
-        var spellskin = new SpellSkin(list.GetVaporeon().uIdGenerator);
+        var spellmodel = new SpellModel(Eevee.uIdGenerator); //);
+        var spellskin = new SpellSkin(Eevee.uIdGenerator);
         spellskin.spellModelUid = spellmodel.entityUid;
-        Eevee.models.spellModels.Add(spellmodel.entityUid, spellmodel);
-        Eevee.models.spellSkins.Add(spellskin.entityUid, spellskin);
         Eevee.models.i18n.Add(spellmodel.nameId, "Name for: " + spellmodel.entityUid);
         Eevee.models.i18n.Add(spellmodel.descriptionId, "Desc for: " + spellmodel.entityUid);
-        //list.GetDiamonds().TriggerChanged(typeof(ISpellModel), nameof(IDiamondModels.spellModels), spellmodel, list.GetDiamonds().spellModels);
-        //list.GetDiamonds().TriggerChanged(typeof(ISpellSkin), nameof(IDiamondModels.spellSkins), spellskin, list.GetDiamonds().spellSkins);
+        Eevee.models.spellSkins.Add(spellskin.entityUid, spellskin);
+        Eevee.models.spellModels.Add(spellmodel.entityUid, spellmodel);
     }
     public void onRemoveBtn()
     {
@@ -310,14 +328,12 @@ public class SpellListUtil : IListUtil
         IID id = (IID) node.GetMeta("object").AsString();
         var spell = Eevee.models.spellModels.Get(id);
         Eevee.models.spellModels.Remove(spell.entityUid);
-        Eevee.models.spellSkins.Remove(s => s.Value.spellModelUid.value == spell.entityUid.value);
-        //list.GetDiamonds().TriggerChanged(typeof(ISpellModel), nameof(IDiamondModels.spellModels), list.GetDiamonds().spellModels, spell);
-        //list.GetDiamonds().TriggerChanged(typeof(ISpellSkin), nameof(IDiamondModels.spellSkins), list.GetDiamonds().spellSkins, spell);
+        Eevee.models.spellSkins.Remove(s => s.spellModelUid.value == spell.entityUid.value);
     }
 }
 
 
-public class EffectListUtil : IListUtil
+public class EffectListUtil : IListUtilGeneric<IEffect>
 {
     public ResourceList list { get; init; }
     public EffectListUtil(ResourceList list)
@@ -339,14 +355,14 @@ public class EffectListUtil : IListUtil
         var desc = Eevee.models.i18n.Get(model.descriptionId);
         list.addChild(name, new Color().Random(), effect.entityUid);
     }
-    public void onDiamondsChanged(Type propertyType, string propertyPath, object newValue, object oldValue)
-    {
-        if (newValue != null && newValue is IEffect effectAdd)
-            createChildNode(effectAdd);
-        else
-        if (oldValue != null && oldValue is IEffect effectRemove)
-            list.removeChild(effectRemove.entityUid);
-    }
+    //public void onDiamondsChanged(Type propertyType, string propertyPath, object newValue, object oldValue)
+    //{
+    //    if (newValue != null && newValue is IEffect effectAdd)
+    //        createChildNode(effectAdd);
+    //    else
+    //    if (oldValue != null && oldValue is IEffect effectRemove)
+    //        list.removeChild(effectRemove.entityUid);
+    //}
     public void onCreateBtn()
     {
         list.CreatePopupMenu.Show();
@@ -354,9 +370,8 @@ public class EffectListUtil : IListUtil
     private void EffectPopup_IndexPressed(long index)
     {
         Type effectType = Vaporeon.effectTypes[(int) index];
-        IEffect effect = (IEffect) Activator.CreateInstance(effectType, list.GetVaporeon().uIdGenerator);
+        IEffect effect = (IEffect) Activator.CreateInstance(effectType, Eevee.uIdGenerator);
         Eevee.models.effects.Add(effect.entityUid, effect);
-        //list.GetDiamonds().TriggerChanged(typeof(IEffect), nameof(IDiamondModels.effects), effect, list.GetDiamonds().effects);
     }
     public void onRemoveBtn()
     {
@@ -364,6 +379,5 @@ public class EffectListUtil : IListUtil
         IID id = (IID) node.GetMeta("object").AsString();
         var effect = Eevee.models.effects.Get(id);
         Eevee.models.effects.Remove(effect.entityUid);
-        //list.GetDiamonds().TriggerChanged(typeof(IEffect), nameof(IDiamondModels.effects), list.GetDiamonds().effects, effect);
     }
 }

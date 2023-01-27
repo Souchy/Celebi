@@ -1,9 +1,8 @@
 ﻿using souchy.celebi.eevee;
 using souchy.celebi.eevee.enums;
-using souchy.celebi.eevee.face.controllers;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.controllers;
-using souchy.celebi.eevee.face.stats;
+using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.impl.stats;
 
 namespace Espeon.souchy.celebi.espeon
@@ -58,15 +57,16 @@ namespace Espeon.souchy.celebi.espeon
 
         private void addStats(ICreature creature)
         {
-            creature.stats.set(StatType.Life, new StatResource());
-            creature.stats.get<IStatResource>(StatType.Life).current = rng.Next(1, 90);
-            creature.stats.get<IStatResource>(StatType.Life).currentMax = rng.Next(100, 150);
-            creature.stats.get<IStatResource>(StatType.Life).initialMax = rng.Next(100, 150);
+            var stats = fight.stats.Get(creature.stats);
+            stats.set(StatType.Life, new StatResource());
+            stats.get<IStatResource>(StatType.Life).current = rng.Next(1, 90);
+            stats.get<IStatResource>(StatType.Life).currentMax = rng.Next(100, 150);
+            stats.get<IStatResource>(StatType.Life).initialMax = rng.Next(100, 150);
 
-            creature.stats.set(StatType.Mana, new StatResource());
-            creature.stats.get<IStatResource>(StatType.Mana).current = rng.Next(1, 10);
-            creature.stats.get<IStatResource>(StatType.Mana).currentMax = rng.Next(10, 12);
-            creature.stats.get<IStatResource>(StatType.Mana).initialMax = rng.Next(10, 12);
+            stats.set(StatType.Mana, new StatResource());
+            stats.get<IStatResource>(StatType.Mana).current = rng.Next(1, 10);
+            stats.get<IStatResource>(StatType.Mana).currentMax = rng.Next(10, 12);
+            stats.get<IStatResource>(StatType.Mana).initialMax = rng.Next(10, 12);
         }
 
         private void addSpell(ICreature creature)

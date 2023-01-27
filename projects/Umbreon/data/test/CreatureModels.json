@@ -1,0 +1,44 @@
+{
+  "15": {
+    "entityUid": {
+      "value": "15"
+    },
+    "nameId": {
+      "value": "16"
+    },
+    "descriptionId": {
+      "value": "17"
+    },
+    "skins": [
+      {
+        "value": "12"
+      }
+    ],
+    "baseStats": {
+      "value": null
+    },
+    "baseSpells": [],
+    "baseStatusPassives": []
+  },
+  "21": {
+    "entityUid": {
+      "value": "21"
+    },
+    "nameId": {
+      "value": "22"
+    },
+    "descriptionId": {
+      "value": "23"
+    },
+    "skins": [
+      {
+        "value": "18"
+      }
+    ],
+    "baseStats": {
+      "value": null
+    },
+    "baseSpells": [],
+    "baseStatusPassives": []
+  }
+}

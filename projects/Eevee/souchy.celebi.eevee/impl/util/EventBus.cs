@@ -31,7 +31,7 @@ namespace souchy.celebi.eevee.impl.util
      * Solution:
      * 
      * - Have 1 EventBus per Entity 
-     * - Store buses in Dictionary<IID, EventBus> buses; in IFight
+     * - Store buses in Dictionary<IID, EventBus> buses; in Eevee ~~IFight~~
      * - Can sub to specific entities or the whole fight entity
      * - 
      * 
@@ -66,24 +66,27 @@ namespace souchy.celebi.eevee.impl.util
         public MethodInfo method;
 
         public string path;
-        public Type? eventParameterType;
         public List<Type> eventParameterTypes = new List<Type>();
     }
 
     public class EventBus : IEventBus
     {
-        private List<Subscription> subs { get; set; } = new List<Subscription>();
+        public List<Subscription> subs { get; set; } = new List<Subscription>();
 
         public void subscribe(object subscriber, params string[] methodNames)
         {
             lock (subs)
             {
-                var type = subscriber.GetType();
                 var at = typeof(SubscribeAttribute);
-                var methods = subscriber.GetType()
-                    .GetMethods()
-                    .Where(m => methodNames.Length == 0 || methodNames.Contains(m.Name))
-                    .Where(f => f.GetCustomAttributes(at, true).Any());
+                var stype = subscriber.GetType();
+                var types = stype.GetInterfaces().ToList();
+                types.Add(stype);
+
+                var methods = types.SelectMany(t => t
+                        .GetMethods()
+                        .Where(m => methodNames.Length == 0 || methodNames.Contains(m.Name))
+                        .Where(f => f.GetCustomAttributes(at, true).Any()))
+                            .Distinct();
                 foreach (var m in methods)
                 {
                     var @params = m.GetParameters();
@@ -97,6 +100,7 @@ namespace souchy.celebi.eevee.impl.util
 
                     subs.Add(sub);
                 }
+
             }
         }
 

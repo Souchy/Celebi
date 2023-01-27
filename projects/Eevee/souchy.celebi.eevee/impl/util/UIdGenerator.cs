@@ -9,21 +9,27 @@ namespace souchy.celebi.eevee.impl.util
 
         public IID next()
         {
-            if(int.MaxValue == ids.Count) // uint.max
+            lock(this)
             {
-                throw new Exception("Too many IDs");
+                if(int.MaxValue == ids.Count) // uint.max
+                {
+                    throw new Exception("Too many IDs");
+                }
+                do
+                {
+                    counter++;
+                    if (counter == int.MaxValue) counter = 0;
+                } while (ids.Contains(counter));
+                return (IID) counter;
             }
-            do
-            {
-                counter++;
-                if (counter == int.MaxValue) counter = 0;
-            } while (ids.Contains(counter));
-            return (IID) counter;
         }
 
         public void dispose(IID i)
         {
-            ids.Remove(i);
+            lock(this)
+            {
+                ids.Remove(i);
+            }
         }
 
     }

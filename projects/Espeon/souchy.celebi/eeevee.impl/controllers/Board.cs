@@ -1,9 +1,9 @@
 ﻿using souchy.celebi.eevee;
-using souchy.celebi.eevee.face.controllers;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.util.math;
+using souchy.celebi.eevee.impl;
 using static souchy.celebi.eevee.face.entity.IEntity;
 
 namespace Espeon.souchy.celebi.espeon.eevee.impl.controllers
@@ -11,10 +11,8 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.controllers
     public class Board : IBoard
     {
         #region Properties
-
-        public event OnChanged Changed;
+        public IID entityUid { get; init; } = Eevee.RegisterIID();
         public IID fightUid { get; init; }
-        public IID entityUid { get; init; }
 
         public List<IID> creatureIds { get; init; } = new List<IID>();
         public List<IID> cells { get; init; } = new List<IID>();
@@ -29,17 +27,17 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.controllers
         public Board(ScopeID scopeId)
         {
             this.fightUid = scopeId;
-            this.entityUid = Scopes.GetUIdGenerator(fightUid).next();
+            this.GetFight().board = this;
+            //this.entityUid = Scopes.GetUIdGenerator(fightUid).next();
             //this.instances = Scopes.GetRequiredScoped<IFight>(fightUid);
         }
 
-        public void TriggerChanged(Type propertyType, string propertyPath, object newValue, object oldValue)
-            => Changed?.Invoke(propertyType, propertyPath, newValue, oldValue);
-
         public void Dispose()
         {
+            this.GetFight().board = null;
+            Eevee.DisposeIID(this);
             // nothing to dispose? 
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         #endregion Constructors

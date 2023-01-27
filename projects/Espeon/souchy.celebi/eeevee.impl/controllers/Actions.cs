@@ -1,6 +1,6 @@
 ﻿using souchy.celebi.eevee;
-using souchy.celebi.eevee.face.models;
-using souchy.celebi.eevee.face.stats;
+using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.util.math;
 

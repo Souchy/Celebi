@@ -14,7 +14,7 @@ public partial class fx_projectile_path : Node3D
 	public Vector3[] path { get; set; }
 
 	[NodePath]
-	public GPUParticles3D GPUParticles3D { get; set; }
+	public GpuParticles3D GPUParticles3D { get; set; }
 	[NodePath]
 	public AnimationPlayer AnimationPlayer { get; set; }
 	[NodePath]
@@ -41,7 +41,7 @@ public partial class fx_projectile_path : Node3D
         //var anim = new Animation();
         var anim = AnimationPlayer.GetAnimation("pfxAnim");
 		anim.LoopMode = Animation.LoopModeEnum.Linear;
-		int posTrackId = anim.AddTrack(Animation.TrackType.Position3d);
+		int posTrackId = anim.AddTrack(Animation.TrackType.Position3D);
 		anim.TrackSetPath(posTrackId, nameof(GPUParticles3D));
         int speedTrackId = anim.AddTrack(Animation.TrackType.Value);
         anim.TrackSetPath(speedTrackId, nameof(GPUParticles3D));

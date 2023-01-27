@@ -1,5 +1,5 @@
-﻿using souchy.celebi.eevee.face.controllers;
-using souchy.celebi.eevee.face.entity;
+﻿using souchy.celebi.eevee.face.entity;
+using souchy.celebi.eevee.face.objects.controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +11,11 @@ namespace Espeon.souchy.celebi.espeon.extensions
     public static class IFightEntityExtensions
     {
 
-        public static IFight GetFight(this IFightEntity entity)
-        {
-            //this.instances = Scopes.GetRequiredScoped<IFight>(fightUid);
-            return Scopes.GetRequiredScoped<IFight>(entity.fightUid);
-        }
+        //public static IFight GetFight(this IFightEntity entity)
+        //{
+        //    //this.instances = Scopes.GetRequiredScoped<IFight>(fightUid);
+        //    return Scopes.GetRequiredScoped<IFight>(entity.fightUid);
+        //}
 
     }
 }

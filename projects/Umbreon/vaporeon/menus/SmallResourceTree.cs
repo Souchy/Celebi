@@ -81,7 +81,7 @@ public partial class SmallResourceTree : VBoxContainer
         if (mouseButton == (int) MouseButton.Right)
         {
             GD.Print("Click TreeItemSelected Right");
-            PopupMenu.Position = new Vector2i((int) pos.x, (int) pos.y);
+            PopupMenu.Position = (Vector2I) pos; // new Vector2I((int) pos.X, (int) pos.Y);
             PopupMenu.Show();
         }
     }

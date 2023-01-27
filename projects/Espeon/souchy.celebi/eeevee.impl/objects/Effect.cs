@@ -1,15 +1,15 @@
 ﻿using souchy.celebi.eevee.face.conditions;
 using souchy.celebi.eevee.face.objects;
-using souchy.celebi.eevee.face.triggers;
+using souchy.celebi.eevee.face.shared.conditions;
+using souchy.celebi.eevee.face.shared.triggers;
+using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
-using souchy.celebi.eevee.face.zones;
 using static souchy.celebi.eevee.face.entity.IEntity;
 
 namespace Espeon.souchy.celebi.espeon.eevee.impl.objects
 {
     public class Effect : IEffect
     {
-        public event OnChanged Changed;
         public IID fightUid { get; init; }
         public IID modelUid { get; set; }
         public IID entityUid { get; init; }

@@ -27,7 +27,7 @@ namespace souchy.celebi.eevee.impl
         //public static IDiamondModels models { get => singleton._models; }
         public static IUIdGenerator uIdGenerator { get; } = new UIdGenerator();
         public static Dictionary<IID, IEventBus> eventBuses { get; } = new Dictionary<IID, IEventBus>(); // eventbus for each entity
-        public static Dictionary<IID, IFight> fights { get; } = new Dictionary<IID, IFight>();
+        public static IEntityDictionary<IID, IFight> fights { get; } = new EntityDictionary<IID, IFight>();
         public static IDiamondModels models { get; } = new DiamondModels();
         #endregion
 
@@ -40,9 +40,11 @@ namespace souchy.celebi.eevee.impl
         }
         public static void DisposeIID(IEntity e)
         {
-            eventBuses.Remove(e.entityUid);
             if (e is IFight)
                 fights.Remove(e.entityUid);
+            //eventBuses[e.entityUid].Dispose();
+            eventBuses.Remove(e.entityUid); // disposes automatically
+
             uIdGenerator.dispose(e.entityUid);
         }
         #endregion
@@ -51,7 +53,7 @@ namespace souchy.celebi.eevee.impl
     public static class EeveeExtensions
     {
         #region Extensions
-        public static IFight GetFight(this IFightEntity e) => Eevee.fights[e.fightUid];
+        public static IFight GetFight(this IFightEntity e) => Eevee.fights.Get(e.fightUid);
         public static IEventBus GetEventBus(this IEntity e) => Eevee.eventBuses[e.entityUid];
         #endregion
     }

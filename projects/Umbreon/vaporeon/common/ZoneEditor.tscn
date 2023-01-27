@@ -16,10 +16,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_4mkv3")
 script = ExtResource("1_rv3jo")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-offset_left = 3.0
-offset_top = 3.0
-offset_right = 1363.0
-offset_bottom = 765.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/margin_left = 5
@@ -28,65 +25,45 @@ theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-offset_left = 5.0
-offset_top = 5.0
-offset_right = 1355.0
-offset_bottom = 757.0
+layout_mode = 2
 
 [node name="Titlebar" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-offset_right = 1350.0
-offset_bottom = 22.0
+layout_mode = 2
 theme_override_constants/separation = 25
 alignment = 1
 
 [node name="ZoneEditorLbl" type="Label" parent="MarginContainer/VBoxContainer/Titlebar"]
-offset_left = 586.0
-offset_right = 667.0
-offset_bottom = 22.0
+layout_mode = 2
 text = "Zone Editor:"
 
 [node name="ZoneNameLbl" type="Label" parent="MarginContainer/VBoxContainer/Titlebar"]
-offset_left = 692.0
-offset_right = 764.0
-offset_bottom = 22.0
+layout_mode = 2
 text = "ZoneName"
 
 [node name="Toolbar" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-offset_top = 26.0
-offset_right = 1350.0
-offset_bottom = 53.0
+layout_mode = 2
 theme_override_constants/separation = 25
 alignment = 1
 
 [node name="PreviewBtn" type="Button" parent="MarginContainer/VBoxContainer/Toolbar"]
-offset_left = 610.0
-offset_right = 671.0
-offset_bottom = 27.0
+layout_mode = 2
 text = "Preview"
 
 [node name="CopyBtn" type="Button" parent="MarginContainer/VBoxContainer/Toolbar"]
-offset_left = 696.0
-offset_right = 739.0
-offset_bottom = 27.0
+layout_mode = 2
 text = "Copy"
 
 [node name="ParametersGrid" type="GridContainer" parent="MarginContainer/VBoxContainer"]
-offset_top = 57.0
-offset_right = 1350.0
-offset_bottom = 752.0
+layout_mode = 2
 size_flags_vertical = 3
 columns = 2
 
 [node name="ZoneTypeLbl" type="Label" parent="MarginContainer/VBoxContainer/ParametersGrid"]
-offset_top = 2.0
-offset_right = 179.0
-offset_bottom = 24.0
+layout_mode = 2
 text = "Zone Type"
 
 [node name="ZoneType" type="OptionButton" parent="MarginContainer/VBoxContainer/ParametersGrid"]
-offset_left = 183.0
-offset_right = 431.0
-offset_bottom = 27.0
+layout_mode = 2
 item_count = 4
 popup/item_0/text = "Point"
 popup/item_0/id = 0
@@ -98,47 +75,32 @@ popup/item_3/text = "Square"
 popup/item_3/id = 3
 
 [node name="Size" type="Label" parent="MarginContainer/VBoxContainer/ParametersGrid"]
-offset_top = 33.0
-offset_right = 179.0
-offset_bottom = 55.0
+layout_mode = 2
 text = "Size"
 
 [node name="SizeVector" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ParametersGrid"]
-offset_left = 183.0
-offset_top = 31.0
-offset_right = 431.0
-offset_bottom = 58.0
+layout_mode = 2
 
 [node name="vectA" type="SpinBox" parent="MarginContainer/VBoxContainer/ParametersGrid/SizeVector"]
-offset_right = 80.0
-offset_bottom = 27.0
+layout_mode = 2
 rounded = true
 prefix = "Min"
 custom_arrow_step = 1.0
 
 [node name="vectB" type="SpinBox" parent="MarginContainer/VBoxContainer/ParametersGrid/SizeVector"]
-offset_left = 84.0
-offset_right = 164.0
-offset_bottom = 27.0
+layout_mode = 2
 prefix = "Max"
 
 [node name="vectC" type="SpinBox" parent="MarginContainer/VBoxContainer/ParametersGrid/SizeVector"]
-offset_left = 168.0
-offset_right = 248.0
-offset_bottom = 27.0
+layout_mode = 2
 prefix = "Angle"
 
 [node name="WorldOriginLbl" type="Label" parent="MarginContainer/VBoxContainer/ParametersGrid"]
-offset_top = 64.0
-offset_right = 179.0
-offset_bottom = 86.0
+layout_mode = 2
 text = "World Origin Actor"
 
 [node name="OptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/ParametersGrid"]
-offset_left = 263.0
-offset_top = 62.0
-offset_right = 351.0
-offset_bottom = 89.0
+layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 item_count = 2
@@ -149,61 +111,38 @@ popup/item_1/text = "Target"
 popup/item_1/id = 1
 
 [node name="WorldOffsetLbl" type="Label" parent="MarginContainer/VBoxContainer/ParametersGrid"]
-offset_top = 95.0
-offset_right = 179.0
-offset_bottom = 117.0
+layout_mode = 2
 text = "World Offset"
 
 [node name="WorldOffsetVector" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ParametersGrid"]
-offset_left = 183.0
-offset_top = 93.0
-offset_right = 431.0
-offset_bottom = 120.0
+layout_mode = 2
 
 [node name="x" type="SpinBox" parent="MarginContainer/VBoxContainer/ParametersGrid/WorldOffsetVector"]
-offset_right = 80.0
-offset_bottom = 27.0
+layout_mode = 2
 
 [node name="z" type="SpinBox" parent="MarginContainer/VBoxContainer/ParametersGrid/WorldOffsetVector"]
-offset_left = 84.0
-offset_right = 164.0
-offset_bottom = 27.0
+layout_mode = 2
 
 [node name="LocalOriginLbl" type="Label" parent="MarginContainer/VBoxContainer/ParametersGrid"]
-offset_top = 124.0
-offset_right = 179.0
-offset_bottom = 146.0
+layout_mode = 2
 text = "Local Origin"
 
 [node name="LocalOriginBtn" type="OptionButton" parent="MarginContainer/VBoxContainer/ParametersGrid"]
-offset_left = 183.0
-offset_top = 124.0
-offset_right = 431.0
-offset_bottom = 146.0
+layout_mode = 2
 
 [node name="RotationLbl" type="Label" parent="MarginContainer/VBoxContainer/ParametersGrid"]
-offset_top = 150.0
-offset_right = 179.0
-offset_bottom = 172.0
+layout_mode = 2
 text = "Rotation"
 
 [node name="RotationBtn" type="OptionButton" parent="MarginContainer/VBoxContainer/ParametersGrid"]
-offset_left = 183.0
-offset_top = 150.0
-offset_right = 431.0
-offset_bottom = 172.0
+layout_mode = 2
 
 [node name="ExtendFromSourceLbl" type="Label" parent="MarginContainer/VBoxContainer/ParametersGrid"]
-offset_top = 178.0
-offset_right = 179.0
-offset_bottom = 200.0
+layout_mode = 2
 text = "Extend Vector From Source"
 
 [node name="ExtendFromSourceBtn" type="OptionButton" parent="MarginContainer/VBoxContainer/ParametersGrid"]
-offset_left = 183.0
-offset_top = 176.0
-offset_right = 431.0
-offset_bottom = 203.0
+layout_mode = 2
 item_count = 3
 popup/item_0/text = "0"
 popup/item_0/id = 0
@@ -213,15 +152,10 @@ popup/item_2/text = "2"
 popup/item_2/id = 2
 
 [node name="NegativeLbl" type="Label" parent="MarginContainer/VBoxContainer/ParametersGrid"]
-offset_top = 208.0
-offset_right = 179.0
-offset_bottom = 230.0
+layout_mode = 2
 text = "Negative"
 
 [node name="Negative" type="CheckBox" parent="MarginContainer/VBoxContainer/ParametersGrid"]
-offset_left = 183.0
-offset_top = 207.0
-offset_right = 431.0
-offset_bottom = 231.0
+layout_mode = 2
 
 [connection signal="item_selected" from="MarginContainer/VBoxContainer/ParametersGrid/ZoneType" to="." method="onZoneTypeSelected"]

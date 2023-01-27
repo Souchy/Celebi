@@ -1,6 +1,7 @@
 ﻿using Espeon.souchy.celebi.eeevee.impl;
 using Moq;
-using souchy.celebi.eevee.face.models;
+using souchy.celebi.eevee.face.shared;
+using souchy.celebi.eevee.impl;
 
 namespace EeveeUnitTests.souchy.celebi.eevee.unittest.controllers
 {
