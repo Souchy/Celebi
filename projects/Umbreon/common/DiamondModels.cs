@@ -42,7 +42,8 @@ namespace Umbreon.common
 
         public Dictionary<IID, string> i18n { get; set; } = new Dictionary<IID, string>();
 
-        public IID entityUid { get => throw new NotImplementedException(); init => throw new NotImplementedException(); }
+        public IID entityUid { get; init; }
+        public Dictionary<IID, IStatusModel> statusModels { get; init; }
 
         public CreatureModelData[] creatureModelsData;
         public CreatureSkinData[] creatureSkinsData;
@@ -72,4 +73,6 @@ namespace Umbreon.common
         }
 
     }
+
+
 }

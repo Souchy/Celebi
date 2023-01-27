@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using souchy.celebi.eevee;
 using System;
 using System.Security.Cryptography.X509Certificates;
+using souchy.celebi.eevee.impl;
 
 public partial class Sapphire : Node3D
 {
@@ -30,7 +31,8 @@ public partial class Sapphire : Node3D
 		this.OnReady();
 		creaScene = GD.Load<PackedScene>("res://sapphire/nodes/CreatureNode.tscn");
 
-        DiamondModels diamonds = (DiamondModels) this.GetDiamonds();
+        DiamondParser diamonds = this.GetDiamondsParser();
+        //DiamondModels diamonds = Eevee.models;
         GD.Print("startPositions: " + diamonds.mapModelsData[0].teamStartPositions[0].Stringify());
 
         Creatures.GetChildren().Clear();

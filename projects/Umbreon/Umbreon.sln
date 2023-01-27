@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlayfabClientTest", "..\Con
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eevee", "..\Eevee\Eevee.csproj", "{BD79AD64-2B16-46AE-8320-020D445649CF}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UmbreonUnitTests", "..\tests\UmbreonUnitTests\UmbreonUnitTests.csproj", "{C5CC2900-B5EC-4AE6-BC74-F5C2994E9546}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,12 +45,21 @@ Global
 		{BD79AD64-2B16-46AE-8320-020D445649CF}.ExportRelease|Any CPU.Build.0 = Release|Any CPU
 		{BD79AD64-2B16-46AE-8320-020D445649CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD79AD64-2B16-46AE-8320-020D445649CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5CC2900-B5EC-4AE6-BC74-F5C2994E9546}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5CC2900-B5EC-4AE6-BC74-F5C2994E9546}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5CC2900-B5EC-4AE6-BC74-F5C2994E9546}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5CC2900-B5EC-4AE6-BC74-F5C2994E9546}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
+		{C5CC2900-B5EC-4AE6-BC74-F5C2994E9546}.ExportRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{C5CC2900-B5EC-4AE6-BC74-F5C2994E9546}.ExportRelease|Any CPU.Build.0 = Release|Any CPU
+		{C5CC2900-B5EC-4AE6-BC74-F5C2994E9546}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5CC2900-B5EC-4AE6-BC74-F5C2994E9546}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{92667538-B86B-4247-BBF0-4BA89B82A66C} = {819E6095-BCC0-419E-BE09-1B4F37FBACDC}
+		{C5CC2900-B5EC-4AE6-BC74-F5C2994E9546} = {819E6095-BCC0-419E-BE09-1B4F37FBACDC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {690C5C76-8699-4A85-9806-266D492A75E6}

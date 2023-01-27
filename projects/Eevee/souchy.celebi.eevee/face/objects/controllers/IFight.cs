@@ -30,5 +30,6 @@ namespace souchy.celebi.eevee.face.objects.controllers
         /// ////////Instanced Effects for variable statuses like fourberie as opposed to static statuses like passives 
         /// </summary>
         public Dictionary<IID, IEffect> effects { get; init; }
+
     }
 }

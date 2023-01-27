@@ -1,5 +1,5 @@
 ﻿using Moq;
-using souchy.celebi.eevee.face.models;
+using souchy.celebi.eevee.face.shared;
 
 namespace EeveeUnitTests.souchy.celebi.eevee.unittest.controllers
 {

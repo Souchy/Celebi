@@ -6,6 +6,7 @@ using Umbreon.vaporeon.common;
 using Umbreon.common;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.shared.models;
+using souchy.celebi.eevee.impl;
 
 public partial class SpellEditor : Control
 {
@@ -65,10 +66,10 @@ public partial class SpellEditor : Control
         // effects
         foreach(var effectId in spell.effectIds)
         {
-            IEffect effect = this.GetDiamonds().effects[effectId];
-            IEffectModel effectModel = this.GetDiamonds().effectModels[effect.modelUid];
+            IEffect effect = Eevee.models.effects.Get(effectId);
+            IEffectModel effectModel = Eevee.models.effectModels.Get(effect.modelUid);
             Label lbl = new Label();
-            lbl.Text = effect.entityUid + ": " + this.GetDiamonds().i18n[effectModel.nameId];
+            lbl.Text = effect.entityUid + ": " + Eevee.models.i18n.Get(effectModel.nameId);
             lbl.SetMeta("id", (string) effectId);
             lbl.SetMeta("type", nameof(IEffect));
             EffectsTree.AddChild(lbl);

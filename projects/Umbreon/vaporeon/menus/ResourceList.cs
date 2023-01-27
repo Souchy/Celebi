@@ -7,6 +7,7 @@ using souchy.celebi.eevee.face.shared;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.shared.models.skins;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
 using System;
 using System.Collections.Generic;
@@ -98,7 +99,7 @@ public partial class ResourceList : Control
             util = new EffectListUtil(this);
         }
 
-        this.GetDiamonds().Changed += util.onDiamondsChanged;
+        //this.GetDiamonds().Changed += util.onDiamondsChanged;
         this.CreateBtn.Pressed += util.onCreateBtn;
         //this.DeleteBtn.Pressed += util.onRemoveBtn;
         //this.CreateBtn.Pressed += CreateBtn_Pressed;
@@ -204,16 +205,16 @@ public class CreatureListUtil : IListUtil
     public CreatureListUtil(ResourceList list) => this.list = list;
     public void fillList()
     {
-        foreach (ICreatureModel creature in list.GetDiamonds().creatureModels.Values)
+        foreach (ICreatureModel creature in Eevee.models.creatureModels.Values)
             createChildNode(creature);
     }
     public void createChildNode(ICreatureModel creature)
     {
         //var skin = list.GetDiamonds().creatureSkins.Values.Where(skin => skin.modelUid.value == spell.entityUid.value).First();
-        var skin = list.GetDiamonds().creatureSkins[creature.skins.First()];
+        var skin = Eevee.models.creatureSkins.Get(creature.skins.First());
         var icon = skin.icon;
-        var name = list.GetDiamonds().i18n[creature.nameId];
-        var desc = list.GetDiamonds().i18n[creature.descriptionId];
+        var name = Eevee.models.i18n.Get(creature.nameId);
+        var desc = Eevee.models.i18n.Get(creature.descriptionId);
         list.addChild(name, new Color().Random(), creature.entityUid);
     }
     public void onDiamondsChanged(Type propertyType, string propertyPath, object newValue, object oldValue)
@@ -230,27 +231,27 @@ public class CreatureListUtil : IListUtil
         var creatureModel = new CreatureModel(list.GetVaporeon().uIdGenerator);
         var creatureSkin = new CreatureSkin(list.GetVaporeon().uIdGenerator);
         creatureModel.skins.Add(creatureSkin.entityUid);
-        list.GetDiamonds().creatureSkins.Add(creatureSkin.entityUid, creatureSkin);
-        list.GetDiamonds().creatureModels.Add(creatureModel.entityUid, creatureModel);
-        list.GetDiamonds().i18n.Add(creatureModel.nameId, "Name for: " + creatureModel.entityUid);
-        list.GetDiamonds().i18n.Add(creatureModel.descriptionId, "Desc for: " + creatureModel.entityUid);
-        list.GetDiamonds().i18n.Add(creatureSkin.nameId, "Name for: " + creatureSkin.entityUid);
-        list.GetDiamonds().i18n.Add(creatureSkin.descriptionId, "Desc for: " + creatureSkin.entityUid);
-        list.GetDiamonds().TriggerChanged(typeof(ICreatureSkin), nameof(IDiamondModels.creatureSkins), creatureSkin, list.GetDiamonds().creatureSkins);
-        list.GetDiamonds().TriggerChanged(typeof(ICreatureModel), nameof(IDiamondModels.creatureModels), creatureModel, list.GetDiamonds().creatureModels);
+        Eevee.models.creatureSkins.Add(creatureSkin.entityUid, creatureSkin);
+        Eevee.models.creatureModels.Add(creatureModel.entityUid, creatureModel);
+        Eevee.models.i18n.Add(creatureModel.nameId, "Name for: " + creatureModel.entityUid);
+        Eevee.models.i18n.Add(creatureModel.descriptionId, "Desc for: " + creatureModel.entityUid);
+        Eevee.models.i18n.Add(creatureSkin.nameId, "Name for: " + creatureSkin.entityUid);
+        Eevee.models.i18n.Add(creatureSkin.descriptionId, "Desc for: " + creatureSkin.entityUid);
+        //list.GetDiamonds().TriggerChanged(typeof(ICreatureSkin), nameof(IDiamondModels.creatureSkins), creatureSkin, list.GetDiamonds().creatureSkins);
+        //list.GetDiamonds().TriggerChanged(typeof(ICreatureModel), nameof(IDiamondModels.creatureModels), creatureModel, list.GetDiamonds().creatureModels);
     }
     public void onRemoveBtn()
     {
         Node node = list.Container.GetChildren().First(c => c.GetMeta("selected").AsBool() == true);
         //ICreatureModel creature = (ICreatureModel) (object) node.GetMeta("object");
         IID id = (IID) node.GetMeta("object").AsString();
-        var creature = list.GetDiamonds().creatureModels[id];
-        list.GetDiamonds().creatureModels.Remove(creature.entityUid);
+        var creature = Eevee.models.creatureModels.Get(id);
+        Eevee.models.creatureModels.Remove(creature.entityUid);
         // dont delete the skins, keep them for later use and
         // TODO add new tabs to vaporeon for skins
         //list.GetDiamonds().creatureSkins.Remove(s => s.modelUid.value == spell.entityUid.value);
         //list.GetDiamonds().TriggerChanged(typeof(ICreatureSkin), nameof(IDiamondModels.creatureSkins), list.GetDiamonds().creatureSkins, skin);
-        list.GetDiamonds().TriggerChanged(typeof(ICreatureModel), nameof(IDiamondModels.creatureModels), list.GetDiamonds().creatureModels, creature);
+        //list.GetDiamonds().TriggerChanged(typeof(ICreatureModel), nameof(IDiamondModels.creatureModels), list.GetDiamonds().creatureModels, creature);
     }
 }
 
@@ -261,16 +262,17 @@ public class SpellListUtil : IListUtil
     public SpellListUtil(ResourceList list) => this.list = list;
     public void fillList()
     {
-        foreach (ISpellModel spell in list.GetDiamonds().spellModels.Values)
+        foreach (ISpellModel spell in Eevee.models.spellModels.Values)
             createChildNode(spell);
     }
     public void createChildNode(ISpellModel spell)
     {
+        //new Dictionary<IID, int>().Values
         // get the first skin for that spell
-        var skin = list.GetDiamonds().spellSkins.Values.Where(skin => skin.spellModelUid.value == spell.entityUid.value).First();
+        var skin = Eevee.models.spellSkins.Values.Where(skin => skin.spellModelUid.value == spell.entityUid.value).First();
         var icon = skin.icon;
-        var name = list.GetDiamonds().i18n[spell.nameId];
-        var desc = list.GetDiamonds().i18n[spell.descriptionId];
+        var name = Eevee.models.i18n.Get(spell.nameId);
+        var desc = Eevee.models.i18n.Get(spell.descriptionId);
         list.addChild(name, new Color().Random(), spell.entityUid);
     }
     public void onDiamondsChanged(Type propertyType, string propertyPath, object newValue, object oldValue)
@@ -294,23 +296,23 @@ public class SpellListUtil : IListUtil
         var spellmodel = new SpellModel(list.GetVaporeon().uIdGenerator);
         var spellskin = new SpellSkin(list.GetVaporeon().uIdGenerator);
         spellskin.spellModelUid = spellmodel.entityUid;
-        list.GetDiamonds().spellModels.Add(spellmodel.entityUid, spellmodel);
-        list.GetDiamonds().spellSkins.Add(spellskin.entityUid, spellskin);
-        list.GetDiamonds().i18n.Add(spellmodel.nameId, "Name for: " + spellmodel.entityUid);
-        list.GetDiamonds().i18n.Add(spellmodel.descriptionId, "Desc for: " + spellmodel.entityUid);
-        list.GetDiamonds().TriggerChanged(typeof(ISpellModel), nameof(IDiamondModels.spellModels), spellmodel, list.GetDiamonds().spellModels);
-        list.GetDiamonds().TriggerChanged(typeof(ISpellSkin), nameof(IDiamondModels.spellSkins), spellskin, list.GetDiamonds().spellSkins);
+        Eevee.models.spellModels.Add(spellmodel.entityUid, spellmodel);
+        Eevee.models.spellSkins.Add(spellskin.entityUid, spellskin);
+        Eevee.models.i18n.Add(spellmodel.nameId, "Name for: " + spellmodel.entityUid);
+        Eevee.models.i18n.Add(spellmodel.descriptionId, "Desc for: " + spellmodel.entityUid);
+        //list.GetDiamonds().TriggerChanged(typeof(ISpellModel), nameof(IDiamondModels.spellModels), spellmodel, list.GetDiamonds().spellModels);
+        //list.GetDiamonds().TriggerChanged(typeof(ISpellSkin), nameof(IDiamondModels.spellSkins), spellskin, list.GetDiamonds().spellSkins);
     }
     public void onRemoveBtn()
     {
         Node node = list.Container.GetChildren().First(c => c.GetMeta("selected").AsBool() == true);
         //ISpellModel spell = (ISpellModel) (object) node.GetMeta("object");
         IID id = (IID) node.GetMeta("object").AsString();
-        var spell = list.GetDiamonds().spellModels[id];
-        list.GetDiamonds().spellModels.Remove(spell.entityUid);
-        list.GetDiamonds().spellSkins.Remove(s => s.spellModelUid.value == spell.entityUid.value);
-        list.GetDiamonds().TriggerChanged(typeof(ISpellModel), nameof(IDiamondModels.spellModels), list.GetDiamonds().spellModels, spell);
-        list.GetDiamonds().TriggerChanged(typeof(ISpellSkin), nameof(IDiamondModels.spellSkins), list.GetDiamonds().spellSkins, spell);
+        var spell = Eevee.models.spellModels.Get(id);
+        Eevee.models.spellModels.Remove(spell.entityUid);
+        Eevee.models.spellSkins.Remove(s => s.Value.spellModelUid.value == spell.entityUid.value);
+        //list.GetDiamonds().TriggerChanged(typeof(ISpellModel), nameof(IDiamondModels.spellModels), list.GetDiamonds().spellModels, spell);
+        //list.GetDiamonds().TriggerChanged(typeof(ISpellSkin), nameof(IDiamondModels.spellSkins), list.GetDiamonds().spellSkins, spell);
     }
 }
 
@@ -327,14 +329,14 @@ public class EffectListUtil : IListUtil
     }
     public void fillList()
     {
-        foreach (IEffect effect in list.GetDiamonds().effects.Values)
+        foreach (IEffect effect in Eevee.models.effects.Values)
             createChildNode(effect);
     }
     public void createChildNode(IEffect effect)
     {
-        IEffectModel model = list.GetDiamonds().effectModels[effect.modelUid];
-        var name = list.GetDiamonds().i18n[model.nameId];
-        var desc = list.GetDiamonds().i18n[model.descriptionId];
+        IEffectModel model = Eevee.models.effectModels.Get(effect.modelUid);
+        var name = Eevee.models.i18n.Get(model.nameId);
+        var desc = Eevee.models.i18n.Get(model.descriptionId);
         list.addChild(name, new Color().Random(), effect.entityUid);
     }
     public void onDiamondsChanged(Type propertyType, string propertyPath, object newValue, object oldValue)
@@ -353,15 +355,15 @@ public class EffectListUtil : IListUtil
     {
         Type effectType = Vaporeon.effectTypes[(int) index];
         IEffect effect = (IEffect) Activator.CreateInstance(effectType, list.GetVaporeon().uIdGenerator);
-        list.GetDiamonds().effects.Add(effect.entityUid, effect);
-        list.GetDiamonds().TriggerChanged(typeof(IEffect), nameof(IDiamondModels.effects), effect, list.GetDiamonds().effects);
+        Eevee.models.effects.Add(effect.entityUid, effect);
+        //list.GetDiamonds().TriggerChanged(typeof(IEffect), nameof(IDiamondModels.effects), effect, list.GetDiamonds().effects);
     }
     public void onRemoveBtn()
     {
         Node node = list.Container.GetChildren().First(c => c.GetMeta("selected").AsBool() == true);
         IID id = (IID) node.GetMeta("object").AsString();
-        var effect = list.GetDiamonds().effects[id];
-        list.GetDiamonds().effects.Remove(effect.entityUid);
-        list.GetDiamonds().TriggerChanged(typeof(IEffect), nameof(IDiamondModels.effects), list.GetDiamonds().effects, effect);
+        var effect = Eevee.models.effects.Get(id);
+        Eevee.models.effects.Remove(effect.entityUid);
+        //list.GetDiamonds().TriggerChanged(typeof(IEffect), nameof(IDiamondModels.effects), list.GetDiamonds().effects, effect);
     }
 }
