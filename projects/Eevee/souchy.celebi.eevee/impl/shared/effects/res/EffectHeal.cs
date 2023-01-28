@@ -27,7 +27,6 @@ namespace souchy.celebi.eevee.face.shared.effects.res
             var targetStats = creaTarget.GetStats();
             var dist = creaSource.position.distanceManhattan(creaTarget.position);
 
-
             // apply affinities + resistances
             IStatSimple aff = sourceStats.get<IStatSimple>(element.Value.GetAffinity());
             IStatSimple affh = sourceStats.get<IStatSimple>(StatType.HealAffinity);
