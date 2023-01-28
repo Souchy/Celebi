@@ -1,10 +1,10 @@
-﻿using souchy.celebi.eevee.face.shared.conditions;
-using souchy.celebi.eevee.face.shared.effects;
+﻿using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.shared.triggers;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
 
-namespace souchy.celebi.eevee.impl.shared.effects
+namespace souchy.celebi.eevee.impl.objects
 {
     public class Effect : IEffect
     {

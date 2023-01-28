@@ -1,5 +1,5 @@
 ﻿using souchy.celebi.eevee.face.objects;
-using souchy.celebi.eevee.impl.shared.effects;
+using souchy.celebi.eevee.impl.objects;
 
 namespace souchy.celebi.eevee.face.shared.effects.res
 {

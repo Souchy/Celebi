@@ -3,7 +3,7 @@ using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.shared.models.skins;
 using souchy.celebi.eevee.impl.util;
-using souchy.celebi.eevee.face.shared.effects;
+using souchy.celebi.eevee.face.objects;
 
 namespace souchy.celebi.eevee.face.shared
 {

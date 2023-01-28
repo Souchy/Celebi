@@ -1,5 +1,5 @@
-﻿using souchy.celebi.eevee.face.shared;
-using souchy.celebi.eevee.face.shared.effects;
+﻿using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.face.shared;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.shared.models.skins;
 using souchy.celebi.eevee.face.util;

@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Hosting;
 using souchy.celebi.eevee.impl.stats;
 using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.objects.stats;
-using souchy.celebi.eevee.face.shared.effects;
 
 namespace Espeon.souchy.celebi.espeon
 {

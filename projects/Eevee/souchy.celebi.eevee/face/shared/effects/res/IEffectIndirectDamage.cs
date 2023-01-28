@@ -1,4 +1,6 @@
-﻿namespace souchy.celebi.eevee.face.shared.effects.res
+﻿using souchy.celebi.eevee.face.objects;
+
+namespace souchy.celebi.eevee.face.shared.effects.res
 {
     public interface IEffectIndirectDamage : IEffect
     {
