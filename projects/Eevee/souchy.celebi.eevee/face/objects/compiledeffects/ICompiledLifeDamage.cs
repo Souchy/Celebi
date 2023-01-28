@@ -5,7 +5,7 @@
     /// There can be different effects that hit mana instead.
     /// When compiled, it's just a value of life to remove
     /// </summary>
-    public interface ICompiledDamage
+    public interface ICompiledLifeDamage : ICompiledEffect
     {
         /// <summary>
         /// Amount of life lost

@@ -49,7 +49,7 @@ namespace souchy.celebi.eevee.impl.util.math
 
         public int distanceManhattan(IPosition p)
         {
-            return Math.Abs(p.x - x) + Math.Abs(p.y - y);
+            return Math.Abs(p.x - x) + Math.Abs(p.y - y) + Math.Abs(p.z - z); 
         }
 
 
@@ -63,6 +63,13 @@ namespace souchy.celebi.eevee.impl.util.math
             };
         }
 
+        public Vector3 abs() {
+            x = Math.Abs(x);
+            y = Math.Abs(y);
+            z = Math.Abs(z);
+            return this;
+        }
+
         public List<IPosition> pathTo(IPosition target)
         {
             throw new NotImplementedException();
@@ -73,7 +80,8 @@ namespace souchy.celebi.eevee.impl.util.math
             switch(index)
             {
                 case 0:
-                    x = value; break;
+                    x = value; 
+                    break;
                 case 1: z = value;
                     break;
                 case 2: y = value;

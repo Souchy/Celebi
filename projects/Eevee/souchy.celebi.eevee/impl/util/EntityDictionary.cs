@@ -11,7 +11,10 @@ namespace souchy.celebi.eevee.impl.util
 
         public TValue Get(TKey key)
         {
-            return this[key];
+            if (ContainsKey(key))
+                return this[key];
+            else 
+                return default;
         }
 
         public void Set(TKey key, TValue value)

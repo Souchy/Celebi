@@ -5,12 +5,10 @@ namespace souchy.celebi.eevee.impl.stats
 {
     public class StatDetailed : IStatDetailed
     {
-        public int baseFlat { get; set; }
-        public int increasedPercent { get; set; }
-        public int increasedFlat { get; set; }
-        public int morePercent { get; set; }
-
-        public StatValueType type => StatValueType.Detailed;
+        public int baseFlat { get; init; }
+        public int increasedPercent { get; init; }
+        public int increasedFlat { get; init; }
+        public int morePercent { get; init; }
 
         public int Value { 
             get {
@@ -18,8 +16,19 @@ namespace souchy.celebi.eevee.impl.stats
                 double step2 = step1 + increasedFlat;
                 double step3 = 1 + step2 * morePercent / 100d;
                 return (int) step3;
-            } 
-            set => throw new NotImplementedException(); 
+            }
+            init { }
         }
+
+        public StatDetailed() { }
+        public StatDetailed(int baseFlat, int increasedPercent, int increasedFlat, int morePercent)
+        {
+            this.baseFlat = baseFlat;
+            this.increasedPercent = increasedPercent;
+            this.increasedFlat = increasedFlat;
+            this.morePercent = morePercent;
+        }
+
+        public IStat copy() => new StatDetailed(baseFlat, increasedPercent, increasedFlat, morePercent);
     }
 }

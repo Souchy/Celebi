@@ -1,7 +1,10 @@
-﻿namespace souchy.celebi.eevee.face.values
+﻿using Newtonsoft.Json.Linq;
+
+namespace souchy.celebi.eevee.face.values
 {
     public interface IValue<T>
     {
-        public T Value { get; set; }
+        public T Value { get; init; }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using souchy.celebi.eevee.face.util;
+﻿using souchy.celebi.eevee.face.objects.controllers;
+using souchy.celebi.eevee.face.util;
 
 namespace souchy.celebi.eevee.face.objects.compiledeffects
 {
@@ -10,5 +11,9 @@ namespace souchy.celebi.eevee.face.objects.compiledeffects
         public IID spellID { get; set; }
         public IID effectModelID { get; set; }
         public IID effectInstanceID { get; set; }
+
+
+        public void apply(IFight fight);
+
     }
 }

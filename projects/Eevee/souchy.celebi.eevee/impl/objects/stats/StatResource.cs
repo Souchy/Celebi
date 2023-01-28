@@ -7,21 +7,21 @@ namespace souchy.celebi.eevee.impl.stats
 {
     public class StatResource : IStatResource
     {
-        public StatValueType type => StatValueType.Resource;
+        //public StatValueType valueType => StatValueType.Resource;
 
-        public int current { get; set; }
-        public int currentMax { get; set; }
-        public int initialMax { get; set; }
+        public int current { get; init; }
+        public int currentMax { get; init; }
+        public int initialMax { get; init; }
 
         public (int current, int currentMax, int initialMax) Value { 
-            get => (current, currentMax, initialMax); 
-            set {
+            get => (current, currentMax, initialMax);
+            init
+            {
                 this.current = value.current;
                 this.currentMax = value.currentMax;
                 this.initialMax = value.initialMax;
             }
         }
-
 
         public StatResource() { }
         public StatResource(int current, int currentMax, int initialMax)
@@ -30,6 +30,8 @@ namespace souchy.celebi.eevee.impl.stats
             this.currentMax = currentMax;
             this.initialMax = initialMax;
         }
+
+        public IStat copy() => new StatResource(current, currentMax, initialMax);
 
     }
 

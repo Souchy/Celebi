@@ -6,9 +6,14 @@ namespace souchy.celebi.eevee.impl.stats
 {
     public class StatSimple : IStatSimple
     {
-        public StatValueType type => StatValueType.Simple;
+        //public StatValueType valueType => StatValueType.Simple;
 
-        public int Value { get; set; }
+        public int Value { get; init; }
+
+        public StatSimple() { }
+        public StatSimple(int value) { Value = value; }
+
+        public IStat copy() => new StatSimple(Value);
+
     }
-
 }

@@ -5,9 +5,12 @@ namespace souchy.celebi.eevee.face.objects.stats
 {
     public interface IStat
     {
-        public StatValueType type { get; }
+        //public StatValueType valueType { get; }
         //public int get();
         //public int set(int value);
+
+        public IStat copy();
+
     }
 
 }

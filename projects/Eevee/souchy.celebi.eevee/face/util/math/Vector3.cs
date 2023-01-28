@@ -49,6 +49,9 @@ namespace souchy.celebi.eevee.face.util.math
         /// Returns self for chaining
         /// </summary>
         public Vector3 copy();
-
+        /// <summary>
+        /// Returns self 
+        /// </summary>
+        public Vector3 abs();
     }
 }

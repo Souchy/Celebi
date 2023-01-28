@@ -12,13 +12,14 @@ namespace souchy.celebi.eevee.values
             this.max = max;
         }
 
-        public T min { get; set; }
-        public T max { get; set; }
+        public T min { get; init; }
+        public T max { get; init; }
 
         public (T min, T max) Value
         {
-            get => (min, max); 
-            set {
+            get => (min, max);
+            init
+            {
                 min = value.min;
                 max = value.max;
             }

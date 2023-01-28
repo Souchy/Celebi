@@ -5,8 +5,13 @@ namespace souchy.celebi.eevee.impl.stats
 {
     public class StatBool : IStatBool
     {
-        public StatValueType type => StatValueType.Bool;
+        //public StatValueType valueType => StatValueType.Bool;
 
-        public bool Value { get; set; }
+        public bool Value { get; init; }
+
+        public StatBool() { }
+        public StatBool(bool value) { Value = value; }
+
+        public IStat copy() => new StatBool(Value);
     }
 }

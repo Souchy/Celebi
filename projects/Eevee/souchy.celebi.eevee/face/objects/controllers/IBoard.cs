@@ -1,6 +1,7 @@
 ﻿using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.util.math;
+using souchy.celebi.eevee.impl;
 
 namespace souchy.celebi.eevee.face.objects.controllers
 {
@@ -24,5 +25,16 @@ namespace souchy.celebi.eevee.face.objects.controllers
         //public ICreature getCreature(IPosition pos);
         //public List<ICreature> getCreatures(IPosition pos);
         //public bool hasCreature(IPosition pos);
+
+        public ICreature? getCreatureOnCell(IID targetCell)
+        {
+            var cell = this.GetFight().cells.Get(targetCell);
+            ICreature? crea = this.GetFight().creatures.Values
+                    .Where(c => c.position == cell.position)
+                    .Where(c => creatureIds.Contains(c.entityUid))
+                    .FirstOrDefault();
+            return crea;
+        }
+
     }
 }

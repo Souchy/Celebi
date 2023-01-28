@@ -17,6 +17,28 @@
         Earth,
     }
 
+    public static class ElementExtensions
+    {
+        public static StatType GetAffinity(this ElementType type) =>
+            type switch
+            {
+                ElementType.Fire => StatType.FireAffinity,
+                ElementType.Water => StatType.WaterAffinity,
+                ElementType.Air => StatType.AirAffinity,
+                ElementType.Earth => StatType.EarthAffinity,
+                _ => throw new Exception()
+            };
+        public static StatType GetResistance(this ElementType type) =>
+            type switch
+            {
+                ElementType.Fire => StatType.FireResistance,
+                ElementType.Water => StatType.WaterResistance,
+                ElementType.Air => StatType.AirResistance,
+                ElementType.Earth => StatType.EarthResistance,
+                _ => throw new Exception()
+            };
+    }
+
     public enum StatType
     {
         #region Resources & Limits & Regens
@@ -53,7 +75,7 @@
         EarthResistance,
 
         // others
-        GlobalAffinity,
+        GlobalDamageAffinity,
         MeleeAffinity,
         DistanceAffinity,
         HealAffinity,
@@ -61,7 +83,7 @@
         GlyphAffinity,
         PoisonAffinity,
 
-        GlobalResistance,
+        GlobalDamageResistance,
         MeleeResistance,
         DistanceResistance,
         HealResistance,
