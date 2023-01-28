@@ -4,7 +4,7 @@ using souchy.celebi.eevee.face.util;
 
 namespace souchy.celebi.eevee.face.shared.models
 {
-    public interface ICreatureCustomization : IEntityModeled
+    public interface ICreatureCustomization : IEntityModeled, IFightEntity
     {
         public IStats chosenStats { get; init; }
         public List<IID> chosenSpellModels { get; init; }

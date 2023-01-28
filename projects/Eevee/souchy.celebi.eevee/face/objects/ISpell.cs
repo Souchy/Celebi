@@ -3,7 +3,7 @@ using souchy.celebi.eevee.face.util;
 
 namespace souchy.celebi.eevee.face.objects
 {
-    public interface ISpell : IEntityModeled
+    public interface ISpell : IEntityModeled, IFightEntity
     {
         public int chargesRemaining { get; set; }
         public int cooldownRemaining { get; set; }

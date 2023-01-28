@@ -2,7 +2,7 @@
 
 namespace souchy.celebi.eevee.face.entity
 {
-    public interface IEntityModeled : IFightEntity
+    public interface IEntityModeled : IEntity
     {
         public IID modelUid { get; set; }
     }

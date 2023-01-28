@@ -5,7 +5,7 @@ using souchy.celebi.eevee.face.util.math;
 
 namespace souchy.celebi.eevee.face.entity
 {
-    public interface IBoardEntity : IEntityModeled
+    public interface IBoardEntity : IEntityModeled, IFightEntity
     {
         public IPosition position { get; init; }
         public List<IID> statuses { get; init; }
