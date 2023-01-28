@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://35oashnx0jbv"]
+[gd_scene load_steps=9 format=3 uid="uid://35oashnx0jbv"]
 
 [ext_resource type="Script" path="res://vaporeon/menus/ResourceList.cs" id="1_lifcy"]
 [ext_resource type="PackedScene" uid="uid://bo4pqgpejlnxk" path="res://vaporeon/menus/ResourceListItem.tscn" id="2_450rl"]
@@ -13,26 +13,36 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_noe7t"]
 
-[node name="ResourceList" type="Control"]
-layout_mode = 3
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3rw3i"]
+
+[node name="ResourceList" type="MarginContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
 script = ExtResource("1_lifcy")
 
-[node name="Toolbar" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 455.0
-offset_bottom = 53.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 5
 
-[node name="Search" type="LineEdit" parent="Toolbar"]
+[node name="Toolbar" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Search" type="LineEdit" parent="VBoxContainer/Toolbar"]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 placeholder_text = "Search...."
+caret_blink = true
+caret_blink_interval = 0.5
 
-[node name="ClearSearchBtn" type="Button" parent="Toolbar/Search"]
+[node name="ClearSearchBtn" type="Button" parent="VBoxContainer/Toolbar/Search"]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 1
 anchors_preset = 11
@@ -51,38 +61,38 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_b1b2t")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_noe7t")
 text = "x"
 
-[node name="CreateBtn" type="Button" parent="Toolbar"]
+[node name="CreateBtn" type="Button" parent="VBoxContainer/Toolbar"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Create
 "
 
-[node name="CreatePopupMenu" type="PopupMenu" parent="Toolbar"]
+[node name="CreatePopupMenu" type="PopupMenu" parent="VBoxContainer/Toolbar"]
 
-[node name="DeleteBtn" type="Button" parent="Toolbar"]
+[node name="DeleteBtn" type="Button" parent="VBoxContainer/Toolbar"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Delete"
 
-[node name="Container" type="HFlowContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 59.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_3rw3i")
+
+[node name="Container" type="HFlowContainer" parent="VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/h_separation = -1
 theme_override_constants/v_separation = -1
 
-[node name="ResourceListItem" parent="Container" instance=ExtResource("2_450rl")]
+[node name="ResourceListItem" parent="VBoxContainer/ScrollContainer/Container" instance=ExtResource("2_450rl")]
 layout_mode = 2
 
-[node name="ResourceListItem2" parent="Container" instance=ExtResource("2_450rl")]
+[node name="ResourceListItem2" parent="VBoxContainer/ScrollContainer/Container" instance=ExtResource("2_450rl")]
 layout_mode = 2
 
-[node name="ResourceListItem3" parent="Container" instance=ExtResource("2_450rl")]
+[node name="ResourceListItem3" parent="VBoxContainer/ScrollContainer/Container" instance=ExtResource("2_450rl")]
 layout_mode = 2
 
-[node name="ResourceListItem4" parent="Container" instance=ExtResource("2_450rl")]
+[node name="ResourceListItem4" parent="VBoxContainer/ScrollContainer/Container" instance=ExtResource("2_450rl")]
 layout_mode = 2

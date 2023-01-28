@@ -45,25 +45,28 @@ public partial class ResourceList : Control
     //public Type selectedType;
     public Control selectedItem { get; set; }
     public PackedScene listItemScene = GD.Load<PackedScene>("res://vaporeon/menus/ResourceListItem.tscn");
+    public StyleBoxFlat ResourceListItemNormal = (StyleBoxFlat) GD.Load("res://vaporeon/themes/ResourceListItemNormal.tres");
+    public StyleBoxFlat ResourceListItemHover = (StyleBoxFlat) GD.Load("res://vaporeon/themes/ResourceListItemHover.tres");
+    public StyleBoxFlat ResourceListItemSelected = (StyleBoxFlat) GD.Load("res://vaporeon/themes/ResourceListItemSelected.tres");
     public Color ColorSelected { get; } = new Color(1, 1, 1, 150f/255f);
     public Color ColorUnselected { get; } = new Color(0, 0, 0, 1);
     #endregion
 
     #region Nodes
-    [NodePath]
+    [NodePath("VBoxContainer/ScrollContainer/Container")]
     public HFlowContainer Container { get; set; }
     #endregion
 
     #region Toolbar Properties
-    [NodePath("Toolbar/Search")]
+    [NodePath("VBoxContainer/Toolbar/Search")]
     public LineEdit Search { get; set; }
-    [NodePath("Toolbar/Search/ClearSearchBtn")]
+    [NodePath("VBoxContainer/Toolbar/Search/ClearSearchBtn")]
     public Button ClearSearchBtn { get; set; }
-    [NodePath("Toolbar/CreateBtn")]
+    [NodePath("VBoxContainer/Toolbar/CreateBtn")]
     public Button CreateBtn { get; set; }
-    [NodePath("Toolbar/DeleteBtn")]
+    [NodePath("VBoxContainer/Toolbar/DeleteBtn")]
     public Button DeleteBtn { get; set; }
-    [NodePath("Toolbar/CreatePopupMenu")]
+    [NodePath("VBoxContainer/Toolbar/CreatePopupMenu")]
     public PopupMenu CreatePopupMenu { get; set; }
     #endregion
 
@@ -126,39 +129,28 @@ public partial class ResourceList : Control
         GD.Print("?????????????????????? " + index);
     }
 
-    public void select(InputEvent ev, Control item)
-    {
-        if (ev is not InputEventMouseButton)
-            return;
-        InputEventMouseButton eventMouse = (InputEventMouseButton) ev;
-        if (eventMouse.Pressed && eventMouse.ButtonIndex == MouseButton.Left)
-        {
-            foreach (var child in Container.GetChildren())
-            {
-                var childpanel = (PanelContainer) child.GetNode("PanelContainer");
-                childpanel.Theme.SetColor("shadow_color", "theme_override_styles/panel", ColorUnselected);
-                child.SetMeta("selected", false);
-            }
-            selectedItem = item;
-            var panel = (PanelContainer) selectedItem.GetNode("PanelContainer");
-            panel.Theme.SetColor("shadow_color", "theme_override_styles/panel", ColorSelected);
-            selectedItem.SetMeta("selected", true);
-        }
-    }
 
     public void addChild(string name, Color col, IID meta)
     {
         // create new square with the icon, name and description
-        var item = listItemScene.Instantiate();
-        var image = (ColorRect) item.GetNode("%Image");
+        var item = (Control) listItemScene.Instantiate();
+        var image = (ColorRect) item.GetNode("PanelContainer/VBoxContainer/Image");
         image.Color = col;
-        var lbl = (Label) item.GetNode("%Label");
+        var lbl = (Label) item.GetNode("PanelContainer/VBoxContainer/Label");
         lbl.Text = name.ToString();
-
         //item.Name = spell.entityUid.value;
         item.SetMeta("object", meta.value);
+
+        //item.MouseFilter = MouseFilterEnum.;
+        item.GuiInput += (e) => onMouseClickItem(e, item); // idk but this doesnt work
+        item.MouseEntered += () => onMouseEnterItem(item);
+        item.MouseExited += () => onMouseExitItem(item);
+        //image.GuiInput += (e) => select(e, item);
+        //lbl.GuiInput += (e) => select(e, item);
         Container.AddChild(item);
     }
+
+
     public void removeChild(IID id)
     {
         Node node = Container.GetChildren().First(c => c.GetMeta("object").AsString() == id.value);
@@ -166,6 +158,46 @@ public partial class ResourceList : Control
         node.QueueFree();
     }
 
+    private StyleBoxFlat styleNormal = null;
+    private StyleBoxFlat styleHover = null;
+
+    private void onMouseEnterItem(Control item)
+    {
+        if (item == selectedItem) return;
+        var panel = (PanelContainer) item.GetNode("PanelContainer");
+        panel.Set("theme_override_styles/panel", ResourceListItemHover);
+    }
+    private void onMouseExitItem(Control item)
+    {
+        if (item == selectedItem) return;
+        var panel = (PanelContainer) item.GetNode("PanelContainer");
+        // copy theme and tween it
+        var style = ResourceListItemHover.Duplicate(true);
+        panel.Set("theme_override_styles/panel", style);
+        Tween t = panel.CreateTween();
+        t.Finished += () =>
+        {
+            if (style == (StyleBoxFlat) panel.Get("theme_override_styles/panel"))
+                panel.Set("theme_override_styles/panel", ResourceListItemNormal);
+        };
+        t.TweenProperty(style, "shadow_color", ResourceListItemNormal.ShadowColor, 0.25f);
+    }
+    public void onMouseClickItem(InputEvent ev, Control item)
+    {
+        if (ev is InputEventMouseButton eventMouse && eventMouse.Pressed && eventMouse.ButtonIndex == MouseButton.Left && selectedItem != item)
+        {
+            // remove previous selected
+            if(selectedItem != null)
+            {
+                var selectedPanel = (PanelContainer) selectedItem.GetNode("PanelContainer");
+                selectedPanel.Set("theme_override_styles/panel", ResourceListItemNormal);
+            }
+            // select new
+            selectedItem = item;
+            var panel = (PanelContainer) selectedItem.GetNode("PanelContainer");
+            panel.Set("theme_override_styles/panel", ResourceListItemSelected);
+        }
+    }
 }
 
 
@@ -175,7 +207,6 @@ public interface IListUtil
     public void fillList();
     public void onCreateBtn();
     public void onRemoveBtn();
-    //public void onDiamondsChanged(Type propertyType, string propertyPath, object newValue, object oldValue);
 }
 
 public interface IListUtilGeneric<T> : IListUtil
@@ -256,23 +287,14 @@ public class CreatureListUtil : IListUtilGeneric<ICreatureModel>
     }
     public void onRemoveBtn()
     {
-        Node node = list.Container.GetChildren().First(c => c.GetMeta("selected").AsBool() == true);
-        IID id = (IID) node.GetMeta("object").AsString();
+        if (list.selectedItem == null) return;
+        IID id = (IID) list.selectedItem.GetMeta("object").AsString();
+        list.selectedItem = null;
         var creature = Eevee.models.creatureModels.Get(id);
         Eevee.models.creatureModels.Remove(creature.entityUid);
         // dont delete the skins, keep them for later use and
         // TODO add new tabs to vaporeon for skins
     }
-
-    //this.GetEventBus().publish(nameof(Set), this, key, value);
-    //public void onDiamondsChanged(Type propertyType, string propertyPath, object newValue, object oldValue)
-    //{
-    //    if (newValue != null && newValue is ICreatureModel creatureAdd)
-    //        createChildNode(creatureAdd);
-    //    else
-    //    if (oldValue != null && oldValue is ICreatureModel creatureRemove)
-    //        list.removeChild(creatureRemove.entityUid);
-    //}
 }
 
 
@@ -295,22 +317,6 @@ public class SpellListUtil : IListUtilGeneric<ISpellModel>
         var desc = Eevee.models.i18n.Get(spell.descriptionId);
         list.addChild(name, new Color().Random(), spell.entityUid);
     }
-    //public void onDiamondsChanged(Type propertyType, string propertyPath, object newValue, object oldValue)
-    //{
-    //    if (propertyPath != nameof(DiamondModels.spellModels)) return;
-    //    if(newValue != null && newValue is ISpellModel spellAdd)
-    //    {
-    //        createChildNode(spellAdd);
-    //    } 
-    //    else
-    //    if (oldValue != null && oldValue is ISpellModel spellRemove)
-    //    {
-    //        Node node = list.Container.GetChildren()
-    //            .First(c => spellRemove == (ISpellModel) (object) c.GetMeta("object"));
-    //        list.Container.RemoveChild(node);
-    //        node.QueueFree();
-    //    }
-    //}
     public void onCreateBtn()
     {
         var spellmodel = new SpellModel(Eevee.uIdGenerator); //);
@@ -323,9 +329,9 @@ public class SpellListUtil : IListUtilGeneric<ISpellModel>
     }
     public void onRemoveBtn()
     {
-        Node node = list.Container.GetChildren().First(c => c.GetMeta("selected").AsBool() == true);
-        //ISpellModel spell = (ISpellModel) (object) node.GetMeta("object");
-        IID id = (IID) node.GetMeta("object").AsString();
+        if (list.selectedItem == null) return;
+        IID id = (IID) list.selectedItem.GetMeta("object").AsString();
+        list.selectedItem = null;
         var spell = Eevee.models.spellModels.Get(id);
         Eevee.models.spellModels.Remove(spell.entityUid);
         Eevee.models.spellSkins.Remove(s => s.spellModelUid.value == spell.entityUid.value);
@@ -355,14 +361,6 @@ public class EffectListUtil : IListUtilGeneric<IEffect>
         var desc = Eevee.models.i18n.Get(model.descriptionId);
         list.addChild(name, new Color().Random(), effect.entityUid);
     }
-    //public void onDiamondsChanged(Type propertyType, string propertyPath, object newValue, object oldValue)
-    //{
-    //    if (newValue != null && newValue is IEffect effectAdd)
-    //        createChildNode(effectAdd);
-    //    else
-    //    if (oldValue != null && oldValue is IEffect effectRemove)
-    //        list.removeChild(effectRemove.entityUid);
-    //}
     public void onCreateBtn()
     {
         list.CreatePopupMenu.Show();
@@ -375,8 +373,11 @@ public class EffectListUtil : IListUtilGeneric<IEffect>
     }
     public void onRemoveBtn()
     {
-        Node node = list.Container.GetChildren().First(c => c.GetMeta("selected").AsBool() == true);
-        IID id = (IID) node.GetMeta("object").AsString();
+        //Node node = list.Container.GetChildren().First(c => c.GetMeta("selected").AsBool() == true);
+        //IID id = (IID) node.GetMeta("object").AsString();
+        if (list.selectedItem == null) return;
+        IID id = (IID) list.selectedItem.GetMeta("object").AsString();
+        list.selectedItem = null;
         var effect = Eevee.models.effects.Get(id);
         Eevee.models.effects.Remove(effect.entityUid);
     }

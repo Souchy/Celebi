@@ -1,0 +1,11 @@
+[gd_resource type="StyleBoxFlat" format=3 uid="uid://htrg5v6llfdg"]
+
+[resource]
+draw_center = false
+border_color = Color(0.537255, 0.313726, 0.8, 0)
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+shadow_color = Color(1, 0.698039, 0, 0.784314)
+shadow_size = 3
