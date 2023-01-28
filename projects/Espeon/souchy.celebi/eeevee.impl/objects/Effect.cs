@@ -1,6 +1,6 @@
 ﻿using souchy.celebi.eevee.face.conditions;
-using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.shared.conditions;
+using souchy.celebi.eevee.face.shared.effects;
 using souchy.celebi.eevee.face.shared.triggers;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;

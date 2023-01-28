@@ -4,9 +4,9 @@ using System;
 using souchy.celebi.eevee.enums;
 using Umbreon.vaporeon.common;
 using Umbreon.common;
-using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.impl;
+using souchy.celebi.eevee.face.shared.effects;
 
 public partial class SpellEditor : Control
 {

@@ -1,6 +1,7 @@
 ﻿using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.objects.statuses;
+using souchy.celebi.eevee.face.shared.effects;
 using souchy.celebi.eevee.face.util;
 
 namespace souchy.celebi.eevee.face.objects.controllers

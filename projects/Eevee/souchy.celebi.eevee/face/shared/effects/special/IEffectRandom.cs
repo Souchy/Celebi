@@ -1,6 +1,4 @@
-﻿using souchy.celebi.eevee.face.objects;
-
-namespace souchy.celebi.eevee.face.shared.effects.special
+﻿namespace souchy.celebi.eevee.face.shared.effects.special
 {
     /// <summary>
     /// Apply a random effect from its children

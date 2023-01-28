@@ -1,6 +1,6 @@
 using Godot;
 using Godot.Sharp.Extras;
-using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.face.shared.effects;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 using System;

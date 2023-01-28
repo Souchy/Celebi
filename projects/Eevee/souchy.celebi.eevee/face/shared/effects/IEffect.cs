@@ -1,11 +1,14 @@
 ﻿using souchy.celebi.eevee.face.conditions;
 using souchy.celebi.eevee.face.entity;
+using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.face.objects.compiledeffects;
 using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.shared.triggers;
 using souchy.celebi.eevee.face.shared.zones;
+using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.interfaces;
 
-namespace souchy.celebi.eevee.face.objects
+namespace souchy.celebi.eevee.face.shared.effects
 {
     public interface IEffect : IEntityModeled
     {
@@ -15,5 +18,7 @@ namespace souchy.celebi.eevee.face.objects
 
         public IZone zone { get; set; }
         public List<ITrigger> triggers { get; set; }
+
+
     }
 }
