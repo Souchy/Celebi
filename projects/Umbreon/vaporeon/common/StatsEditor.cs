@@ -9,23 +9,23 @@ using Umbreon.vaporeon.common;
 
 public partial class StatsEditor : MarginContainer
 {
+    //public IStats stats = Stats.Create();
+    public IStats stats { get => this.GetVaporeon().CurrentCreatureModel.GetBaseStats(); }
 
     #region Nodes
-
     [NodePath("VBoxContainer/HBoxContainer/Add")]
     public Button BtnAdd { get; set; }
     [NodePath("VBoxContainer/HBoxContainer/Remove")]
     public Button BtnRemove { get; set; }
-
     [NodePath("VBoxContainer/StatsContainer")]
     public GridContainer StatsContainer { get; set; }
     #endregion
 
-    public IStats stats = Stats.Create();
-
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
+        this.OnReady();
+
         BtnAdd.ButtonUp += BtnAdd_ButtonUp;
 	}
 

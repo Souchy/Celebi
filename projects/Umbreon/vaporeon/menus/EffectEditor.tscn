@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bjxqjy57p0c0b"]
+[gd_scene load_steps=3 format=3 uid="uid://bjxqjy57p0c0b"]
 
 [ext_resource type="Script" path="res://vaporeon/menus/EffectEditor.cs" id="1_f8vfk"]
-[ext_resource type="PackedScene" uid="uid://vuf3b0bqetfr" path="res://vaporeon/common/EffectList.tscn" id="1_r3fwy"]
-[ext_resource type="PackedScene" uid="uid://jbttqy4in4s2" path="res://vaporeon/menus/SmallResourceTree.tscn" id="3_ylmo8"]
+[ext_resource type="PackedScene" uid="uid://wayevqts6fkt" path="res://vaporeon/menus/SmallResourceTree.tscn" id="3_ylmo8"]
 
 [node name="EffectEditor" type="Control"]
 layout_mode = 3
@@ -19,7 +18,7 @@ offset_left = 40.0
 offset_top = 18.0
 offset_right = 101.0
 offset_bottom = 44.0
-text = "EffectID"
+text = "#EffectID"
 
 [node name="ModelID" type="LineEdit" parent="."]
 layout_mode = 0
@@ -27,34 +26,22 @@ offset_left = 133.0
 offset_top = 16.0
 offset_right = 332.0
 offset_bottom = 50.0
-placeholder_text = "ModelID"
+placeholder_text = "#ModelID"
 
 [node name="Description" type="TextEdit" parent="."]
 layout_mode = 0
 offset_left = 41.0
 offset_top = 67.0
 offset_right = 333.0
-offset_bottom = 170.0
+offset_bottom = 114.0
 placeholder_text = "Description"
-
-[node name="ChildrenList" parent="." instance=ExtResource("1_r3fwy")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 36.0
-offset_top = 565.0
-offset_right = -1035.0
-offset_bottom = -81.0
-grow_horizontal = 1
-grow_vertical = 1
 
 [node name="ParametersBox" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 42.0
-offset_top = 236.0
-offset_right = 334.0
-offset_bottom = 471.0
+offset_top = 136.0
+offset_right = 322.0
+offset_bottom = 319.0
 
 [node name="ParametersTitle" type="Label" parent="ParametersBox"]
 layout_mode = 2
@@ -73,54 +60,37 @@ text = "a kinda long name"
 layout_mode = 2
 placeholder_text = "value"
 
-[node name="SourceConditionsTree" parent="." instance=ExtResource("3_ylmo8")]
+[node name="EffectChildrenTree" parent="." instance=ExtResource("3_ylmo8")]
+layout_mode = 1
+offset_left = 46.0
+offset_top = 298.0
+offset_right = -396.0
+offset_bottom = -19.0
+Title = "Effect Children"
+
+[node name="ScrollContainerSmallResourceTrees" type="ScrollContainer" parent="."]
 layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 442.0
-offset_top = 31.0
-offset_right = -712.0
-offset_bottom = -512.0
-grow_horizontal = 1
-grow_vertical = 1
+offset_left = 408.0
+offset_top = 19.0
+offset_right = 675.0
+offset_bottom = 471.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainerSmallResourceTrees"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SourceConditionsTree" parent="ScrollContainerSmallResourceTrees/VBoxContainer" instance=ExtResource("3_ylmo8")]
+layout_mode = 2
 Title = "Source Conditions"
 
-[node name="TargetConditionsTree" parent="." instance=ExtResource("3_ylmo8")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 719.0
-offset_top = 36.0
-offset_right = -435.0
-offset_bottom = -507.0
-grow_horizontal = 1
-grow_vertical = 1
+[node name="TargetConditionsTree" parent="ScrollContainerSmallResourceTrees/VBoxContainer" instance=ExtResource("3_ylmo8")]
+layout_mode = 2
 Title = "Target Conditions"
 
-[node name="TriggerConditionsTree" parent="." instance=ExtResource("3_ylmo8")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 990.0
-offset_top = 40.0
-offset_right = -164.0
-offset_bottom = -503.0
-grow_horizontal = 1
-grow_vertical = 1
+[node name="TriggerConditionsTree" parent="ScrollContainerSmallResourceTrees/VBoxContainer" instance=ExtResource("3_ylmo8")]
+layout_mode = 2
 Title = "Trigger Conditions"
 
-[node name="ZoneTree" parent="." instance=ExtResource("3_ylmo8")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 679.0
-offset_top = 489.0
-offset_right = -475.0
-offset_bottom = -54.0
-grow_horizontal = 1
-grow_vertical = 1
+[node name="ZoneTree" parent="ScrollContainerSmallResourceTrees/VBoxContainer" instance=ExtResource("3_ylmo8")]
+layout_mode = 2
 Title = "Zone"

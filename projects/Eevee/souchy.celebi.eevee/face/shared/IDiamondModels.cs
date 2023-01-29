@@ -4,6 +4,7 @@ using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.shared.models.skins;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.face.objects.stats;
 
 namespace souchy.celebi.eevee.face.shared
 {
@@ -12,6 +13,7 @@ namespace souchy.celebi.eevee.face.shared
         public IEntityDictionary<IID, IMap> maps { get; init; }
 
         public IEntityDictionary<IID, ICreatureModel> creatureModels { get; init; }
+        public IEntityDictionary<IID, IStats> stats { get; init; }
         public IEntityDictionary<IID, ISpellModel> spellModels { get; init; }
         public IEntityDictionary<IID, IStatusModel> statusModels { get; init; }
         public IEntityDictionary<IID, IEffectModel> effectModels { get; init; }

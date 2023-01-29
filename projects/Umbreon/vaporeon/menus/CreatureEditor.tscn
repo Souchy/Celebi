@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://d3lr0i3pe0162"]
+[gd_scene load_steps=4 format=3 uid="uid://d3lr0i3pe0162"]
 
-[ext_resource type="PackedScene" uid="uid://bknkdq6d6d6s2" path="res://vaporeon/common/StatsEditor.tscn" id="1_vih3n"]
+[ext_resource type="Script" path="res://vaporeon/menus/CreatureEditor.cs" id="1_hggn1"]
+[ext_resource type="PackedScene" uid="uid://dwsqq6cb7f1g6" path="res://vaporeon/common/StatsEditor.tscn" id="1_vih3n"]
+[ext_resource type="PackedScene" uid="uid://wayevqts6fkt" path="res://vaporeon/menus/SmallResourceTree.tscn" id="2_s6hy0"]
 
 [node name="CreatureEditor" type="Control"]
 layout_mode = 3
@@ -9,39 +11,60 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_hggn1")
+
+[node name="EntityID" type="Label" parent="."]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 11.0
+offset_right = 80.0
+offset_bottom = 41.0
+text = "#EntityID"
+vertical_alignment = 1
 
 [node name="NameInput" type="LineEdit" parent="."]
 layout_mode = 0
-offset_left = 76.0
-offset_top = 91.0
-offset_right = 245.0
-offset_bottom = 138.0
-placeholder_text = "Name"
+offset_left = 15.0
+offset_top = 52.0
+offset_right = 224.0
+offset_bottom = 110.0
+placeholder_text = "Description"
 
 [node name="DescriptionInput" type="LineEdit" parent="."]
 layout_mode = 1
-offset_left = 76.0
-offset_top = 91.0
-offset_right = 245.0
-offset_bottom = 138.0
+offset_left = 102.0
+offset_top = 11.0
+offset_right = 224.0
+offset_bottom = 41.0
 placeholder_text = "Name"
 
 [node name="StatsEditor" parent="." instance=ExtResource("1_vih3n")]
 layout_mode = 1
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 315.0
+offset_top = 16.0
+offset_right = -45.0
+offset_bottom = -328.0
 
-[node name="Spells" type="FlowContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Spells" parent="." instance=ExtResource("2_s6hy0")]
+layout_mode = 1
+offset_left = 15.0
+offset_top = 137.0
+offset_right = -455.0
+offset_bottom = -232.0
+Title = "Spells"
 
-[node name="Passives" type="FlowContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Passives" parent="." instance=ExtResource("2_s6hy0")]
+layout_mode = 1
+offset_left = 19.0
+offset_top = 287.0
+offset_right = -451.0
+offset_bottom = -42.0
+Title = "Passives"
 
-[node name="Skins" type="FlowContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Skins" parent="." instance=ExtResource("2_s6hy0")]
+layout_mode = 1
+offset_left = 380.0
+offset_top = 291.0
+offset_right = -90.0
+offset_bottom = -42.0
+Title = "Skins"

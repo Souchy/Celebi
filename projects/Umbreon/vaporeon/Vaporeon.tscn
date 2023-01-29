@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://d0lye4qeio3ht"]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://vaporeon/Vaporeon.cs" id="1_l8sev"]
-[ext_resource type="PackedScene" uid="uid://35oashnx0jbv" path="res://vaporeon/menus/ResourceList.tscn" id="2_0fywc"]
+[ext_resource type="PackedScene" path="res://vaporeon/menus/ResourceList.tscn" id="2_0fywc"]
 [ext_resource type="PackedScene" uid="uid://d3lr0i3pe0162" path="res://vaporeon/menus/CreatureEditor.tscn" id="3_24mfm"]
 [ext_resource type="PackedScene" uid="uid://d67o3f2t7nuo" path="res://vaporeon/menus/SpellEditor.tscn" id="4_f87af"]
 [ext_resource type="PackedScene" uid="uid://bjxqjy57p0c0b" path="res://vaporeon/menus/EffectEditor.tscn" id="5_yclvk"]

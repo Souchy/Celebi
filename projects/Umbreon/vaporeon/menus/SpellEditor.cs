@@ -11,28 +11,24 @@ using souchy.celebi.eevee.face.objects;
 public partial class SpellEditor : Control
 {
 
-    public readonly Type spellModelType = typeof(ISpellModel);
-    public readonly Type spellPropertiesType = typeof(ISpellProperties);
-    // 
     public ISpellModel spell { get => this.GetVaporeon().CurrentSpellModel; }
 
-
+    #region Nodes
     [NodePath]
     public LineEdit ModelID { get; set; }
     [NodePath]
     public LineEdit Name { get; set; }
-    [NodePath("./CostsBox/CostsGrid")]
+    [NodePath("CostsBox/ScrollContainer/CostsGrid")]
     public GridContainer CostsGrid { get; set; }
-    [NodePath("./PropertiesBox/PropertiesGrid")]
+    [NodePath("PropertiesBox/ScrollContainer/PropertiesGrid")]
     public GridContainer PropertiesGrid { get; set; }
-
     [NodePath]
     public SmallResourceTree EffectsTree { get; set; }
     [NodePath]
     public SmallResourceTree SourceConditionsTree { get; set; }
     [NodePath]
     public SmallResourceTree TargetConditionsTree { get; set; }
-
+    #endregion
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -43,7 +39,6 @@ public partial class SpellEditor : Control
         // CostsGrid.AddChild();
 
         update();
-
     }
 
     public void update()

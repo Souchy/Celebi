@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://35oashnx0jbv"]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://vaporeon/menus/ResourceList.cs" id="1_lifcy"]
 [ext_resource type="PackedScene" uid="uid://bo4pqgpejlnxk" path="res://vaporeon/menus/ResourceListItem.tscn" id="2_450rl"]

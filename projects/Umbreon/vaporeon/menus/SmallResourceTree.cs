@@ -3,20 +3,23 @@ using Godot.Sharp.Extras;
 using System;
 using System.Reflection;
 
+public enum PopupAction
+{
+    Add,
+    Remove,
+    Copy,
+    Paste
+}
+
 public partial class SmallResourceTree : VBoxContainer
 {
 
-    private enum PopupAction
-    {
-        Add,
-        Remove,
-        Copy,
-        Paste
-    }
+    private object selected { get; set; }
 
     [Export]
     public string Title { get; set; }
 
+    #region Nodes
     [NodePath]
     public Label TitleLbl { get; set; }
     [NodePath("Buttons/AddBtn")]
@@ -27,8 +30,8 @@ public partial class SmallResourceTree : VBoxContainer
     public Tree Tree { get; set; }
     [NodePath]
     public PopupMenu PopupMenu { get; set; }
+    #endregion
 
-    private object selected { get; set; }
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()

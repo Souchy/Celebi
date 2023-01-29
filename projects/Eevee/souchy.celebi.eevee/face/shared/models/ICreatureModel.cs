@@ -1,6 +1,7 @@
 ﻿using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.impl;
 
 namespace souchy.celebi.eevee.face.shared.models
 {
@@ -14,5 +15,9 @@ namespace souchy.celebi.eevee.face.shared.models
         public HashSet<IID> baseStatusPassives { get; init; }
 
         public HashSet<IID> skins { get; init; }
+
+
+        public IStats GetBaseStats() => Eevee.models.stats.Get(baseStats);
+
     }
 }

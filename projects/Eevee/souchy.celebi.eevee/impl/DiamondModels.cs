@@ -1,4 +1,6 @@
-﻿using souchy.celebi.eevee.face.objects;
+﻿
+using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.shared.models.skins;
@@ -9,9 +11,9 @@ namespace souchy.celebi.eevee.impl
 {
     public class DiamondModels : IDiamondModels
     {
-        //public IID entityUid { get; init; }
         public IEntityDictionary<IID, IMap> maps { get; init; } = new EntityDictionary<IID, IMap>();
         public IEntityDictionary<IID, ICreatureModel> creatureModels { get; init; } = new EntityDictionary<IID, ICreatureModel>();
+        public IEntityDictionary<IID, IStats> stats { get; init; } = new EntityDictionary<IID, IStats>();
         public IEntityDictionary<IID, ISpellModel> spellModels { get; init; } = new EntityDictionary<IID, ISpellModel>();
         public IEntityDictionary<IID, IStatusModel> statusModels { get; init; } = new EntityDictionary<IID, IStatusModel>();
         public IEntityDictionary<IID, IEffectModel> effectModels { get; init; } = new EntityDictionary<IID, IEffectModel>();
@@ -21,15 +23,11 @@ namespace souchy.celebi.eevee.impl
         public IEntityDictionary<IID, IEffectSkin> effectSkins { get; init; } = new EntityDictionary<IID, IEffectSkin>();
         public IEntityDictionary<IID, string> i18n { get; init; } = new EntityDictionary<IID, string>();
 
-        //public DiamondModels()
-        //{
-        //    entityUid = Eevee.RegisterIID();
-        //}
-
         public void Dispose()
         {
             maps.Dispose();
             creatureModels.Dispose();
+            stats.Dispose();
             spellModels.Dispose();
             statusModels.Dispose();
             effectModels.Dispose();
@@ -38,7 +36,6 @@ namespace souchy.celebi.eevee.impl
             spellSkins.Dispose();
             effectSkins.Dispose();
             i18n.Dispose();
-            //Eevee.DisposeIID(this);
         }
     }
 }
