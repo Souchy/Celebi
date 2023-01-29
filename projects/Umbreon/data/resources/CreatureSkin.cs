@@ -8,7 +8,7 @@ namespace Umbreon.data.resources
 {
     public class CreatureSkin : ICreatureSkin
     {
-        public IID entityUid { get; init; }
+        public IID entityUid { get; set; }
         public IID nameId { get; set; }
         public IID descriptionId { get; set; }
 
@@ -19,19 +19,13 @@ namespace Umbreon.data.resources
         public Dictionary<IID, IID> effectSkins { get; set; } // FIXME This should go inside ISpellSkin
 
 
-        public CreatureSkin()
+        public CreatureSkin() { }
+        public CreatureSkin(IID id) => entityUid = id;
+        public static ICreatureSkin Create() => new CreatureSkin(Eevee.RegisterIID())
         {
-        }
-        public static CreatureSkin Create()
-        {
-            return new CreatureSkin()
-            {
-                entityUid = Eevee.RegisterIID(),
-                nameId = Eevee.RegisterIID(),
-                descriptionId = Eevee.RegisterIID(),
-            };
-
-        }
+            nameId = Eevee.RegisterIID(),
+            descriptionId = Eevee.RegisterIID(),
+        };
 
         public void Dispose()
         {

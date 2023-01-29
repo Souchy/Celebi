@@ -10,13 +10,17 @@ namespace souchy.celebi.eevee.impl.objects
 {
     public abstract class Effect : IEffect
     {
-        public IID entityUid { get; init; } = Eevee.RegisterIID();
+        public IID entityUid { get; set; } //= Eevee.RegisterIID();
         public IID modelUid { get; set; }
-        public IID fightUid { get; init; }
+        public IID fightUid { get; set; }
         public ICondition sourceCondition { get; set; }
         public ICondition targetFilter { get; set; }
         public IZone zone { get; set; }
         public List<ITrigger> triggers { get; set; }
+
+
+        public Effect() { }
+        public Effect(IID id) => entityUid = id;
 
         public abstract ICompiledEffect compile(IFight fight, IID source, IID targetCell);
 

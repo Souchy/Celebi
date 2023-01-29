@@ -37,7 +37,7 @@ namespace PlayfabClientTest
     {
         public int Id { get; set; }
         public static string asdf = "";
-        public IID entityUid { get; init; } = Eevee.RegisterIID();
+        public IID entityUid { get; set; } = Eevee.RegisterIID();
         public IStats stats = new Stats();
         public Breed()
         {

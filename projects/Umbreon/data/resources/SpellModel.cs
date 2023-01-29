@@ -9,7 +9,7 @@ namespace Umbreon.data.resources
 {
     public class SpellModel : ISpellModel
     {
-        public IID entityUid { get; init; }
+        public IID entityUid { get; set; }
         public IID nameId { get; set; }
         public IID descriptionId { get; set; }
 
@@ -19,19 +19,14 @@ namespace Umbreon.data.resources
         public ICondition targetFilter { get; set; }
         public HashSet<IID> effectIds { get; set; }
 
-        public SpellModel()
+        public SpellModel() { }
+        public SpellModel(IID id) => entityUid = id;
+        public static ISpellModel Create() => new SpellModel(Eevee.RegisterIID())
         {
-        }
+            nameId = Eevee.RegisterIID(),
+            descriptionId = Eevee.RegisterIID(),
+        };
 
-        public static SpellModel Create()
-        {
-            return new SpellModel()
-            {
-                entityUid = Eevee.RegisterIID(), //uIdGenerator.next(),
-                nameId = Eevee.RegisterIID(), //uIdGenerator.next(),
-                descriptionId = Eevee.RegisterIID(), //uIdGenerator.next(),
-            };
-        }
 
         public void Dispose()
         {

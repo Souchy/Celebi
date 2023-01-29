@@ -5,6 +5,7 @@ using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
+using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.objects.compiledeffects;
 using souchy.celebi.eevee.impl.stats;
@@ -16,7 +17,12 @@ namespace souchy.celebi.eevee.face.shared.effects.res
     public class EffectHeal : Effect, IEffectHeal
     {
         public IValue<ElementType> element { get; set; }
-        public IValue<int> Value { get; set; } 
+        public IValue<int> Value { get; set; }
+
+
+        public EffectHeal() { }
+        public EffectHeal(IID id) : base(id) { }
+        public static IEffectHeal Create() => new EffectHeal(Eevee.RegisterIID());
 
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)
         {

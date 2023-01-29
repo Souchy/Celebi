@@ -5,9 +5,9 @@ namespace souchy.celebi.eevee.face.entity
 {
     public interface IEntity : IDisposable
     {
-        public IID entityUid { get; init; }
+        public IID entityUid { get; set; }
 
-        //public IEventBus getEventBus() => Eevee.eventBuses[entityUid];
+        //public IEventBus GetEventBus() => Eevee.eventBuses[entityUid];
 
     }
 }

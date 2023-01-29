@@ -7,7 +7,7 @@ namespace Umbreon.data.resources
 {
     public class SpellSkin : ISpellSkin
     {
-        public IID entityUid { get; init; }
+        public IID entityUid { get; set; }
         public IID spellModelUid { get; set; }
         public IID icon { get; set; }
         public IID sourceAnimation { get; set; }
@@ -16,13 +16,8 @@ namespace Umbreon.data.resources
 
 
         public SpellSkin() { }
-        public static SpellSkin Create()
-        {
-            return new SpellSkin()
-            {
-                entityUid = Eevee.RegisterIID()
-            };
-        }
+        public SpellSkin(IID id) => entityUid = id;
+        public static ISpellSkin Create() => new SpellSkin(Eevee.RegisterIID());
 
         public void Dispose()
         {

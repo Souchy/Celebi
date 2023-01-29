@@ -6,7 +6,7 @@ namespace UmbreonUnitTests
 {
     public class TestEntity : IEntity
     {
-        public IID entityUid { get; init; } = Eevee.RegisterIID();
+        public IID entityUid { get; set; } = Eevee.RegisterIID();
 
         public void Dispose()
         {

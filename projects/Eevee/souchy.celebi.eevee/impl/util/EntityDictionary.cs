@@ -1,17 +1,23 @@
 ﻿using souchy.celebi.eevee.face.entity;
+using souchy.celebi.eevee.face.objects.statuses;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.statuses;
 
 namespace souchy.celebi.eevee.impl.util
 {
     public class EntityDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IEntityDictionary<TKey, TValue> //where TValue : IEntity
     {
-        public IID entityUid { get; init; } = Eevee.RegisterIID();
+        public IID entityUid { get; set; } // = Eevee.RegisterIID();
 
         IEnumerable<TValue> IEntityDictionary<TKey, TValue>.Values => Values;
-
         IEnumerable<TKey> IEntityDictionary<TKey, TValue>.Keys => Keys;
-
         public IEnumerable<KeyValuePair<TKey, TValue>> Pairs => this;
+
+
+        public EntityDictionary() { }
+        public EntityDictionary(IID id) => entityUid = id;
+        public static IEntityDictionary<T, K> Create<T, K>() => new EntityDictionary<T, K>(Eevee.RegisterIID());
+
 
         public TValue Get(TKey key)
         {
