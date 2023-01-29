@@ -13,20 +13,31 @@ namespace souchy.celebi.eevee.impl.stats
 
 
         public Stats() { }
-        private Stats(IID id) => entityUid = id;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        //[Obsolete("Use the Create() function if you're not doing reflection", false)]
+        public Stats(IID id) => entityUid = id;
         public static IStats Create() => new Stats(Eevee.RegisterIID());
 
 
+        public IStat get(StatType statId)
+        {
+            return stats.Get(statId);
+        }
         public T get<T>(StatType statId) where T : IStat
         {
             return (T) stats.Get(statId);
         }
-
         public void set(StatType statId, IStat value)
         {
             stats.Set(statId, value);
-            // nameof(Stats) + nameof(set) + 
             this.GetEventBus().publish(Enum.GetName(statId), this, value);
+        }
+        public bool has(StatType statId)
+        {
+            return stats.Get(statId) != null;
         }
 
 

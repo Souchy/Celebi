@@ -86,7 +86,7 @@ namespace souchy.celebi.eevee.impl.util
                         .GetMethods()
                         .Where(m => methodNames.Length == 0 || methodNames.Contains(m.Name))
                         .Where(f => f.GetCustomAttributes(at, true).Any()))
-                            .Distinct();
+                        .Distinct();
                 foreach (var m in methods)
                 {
                     var @params = m.GetParameters();

@@ -9,9 +9,10 @@ namespace souchy.celebi.eevee.face.objects.stats
         public IEntityDictionary<StatType, IStat> stats { get; init; }
 
 
+        public IStat get(StatType statId);
         public T get<T>(StatType statId) where T : IStat;
-
         public void set(StatType statId, IStat value);
+        public bool has(StatType statId);
 
     }
 }

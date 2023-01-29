@@ -71,6 +71,19 @@ namespace souchy.celebi.eevee.impl.util
             }
         }
 
+        public void Clear()
+        {
+            foreach (var k in Keys.ToList())
+                Remove(k);
+            //ForEach((k, v) =>
+            //{
+            //    this.GetEventBus().publish(nameof(Remove), this, k, v);
+            //    if (v is IDisposable dis)
+            //        dis.Dispose();
+            //});
+            //base.Clear();
+        }
+
         public void ForEach(Action<TValue> action)
         {
             foreach (var v in Values)
