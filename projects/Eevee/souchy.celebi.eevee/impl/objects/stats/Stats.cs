@@ -13,12 +13,7 @@ namespace souchy.celebi.eevee.impl.stats
 
 
         public Stats() { }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        //[Obsolete("Use the Create() function if you're not doing reflection", false)]
-        public Stats(IID id) => entityUid = id;
+        private Stats(IID id) => entityUid = id;
         public static IStats Create() => new Stats(Eevee.RegisterIID());
 
 

@@ -26,7 +26,7 @@ namespace Umbreon.eevee.impl.objects
 
 
         public Creature() { }
-        public Creature(IID id) => entityUid = id;
+        private Creature(IID id) => entityUid = id;
         public static ICreature Create() => new Creature(Eevee.RegisterIID());
 
         public void Dispose()

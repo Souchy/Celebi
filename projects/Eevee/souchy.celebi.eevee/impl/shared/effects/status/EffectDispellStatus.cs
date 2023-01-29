@@ -18,7 +18,7 @@ namespace souchy.celebi.eevee.face.shared.effects.status
 
 
         public EffectDispellStatus() { }
-        public EffectDispellStatus(IID id) : base(id) { }
+        private EffectDispellStatus(IID id) : base(id) { }
         public static IEffectDispellStatus Create() => new EffectDispellStatus(Eevee.RegisterIID());
 
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)

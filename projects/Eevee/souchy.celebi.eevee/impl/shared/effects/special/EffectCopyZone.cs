@@ -23,7 +23,7 @@ namespace souchy.celebi.eevee.face.shared.effects.special
         //      and you can reuse them in your children
 
         public EffectCopyZone() { }
-        public EffectCopyZone(IID id) : base(id) { }
+        private EffectCopyZone(IID id) : base(id) { }
         public static IEffectCopyZone Create() => new EffectCopyZone(Eevee.RegisterIID());
 
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)

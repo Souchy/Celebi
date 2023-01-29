@@ -19,7 +19,7 @@ namespace souchy.celebi.eevee.face.shared.effects.res
 
 
         public EffectAddStat() { }
-        public EffectAddStat(IID id) : base(id) { }
+        private EffectAddStat(IID id) : base(id) { }
         public static IEffectAddStat Create() => new EffectAddStat(Eevee.RegisterIID());
 
 

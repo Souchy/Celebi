@@ -16,7 +16,7 @@ namespace Umbreon.data.resources
 
 
         public SpellSkin() { }
-        public SpellSkin(IID id) => entityUid = id;
+        private SpellSkin(IID id) => entityUid = id;
         public static ISpellSkin Create() => new SpellSkin(Eevee.RegisterIID());
 
         public void Dispose()

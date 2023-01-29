@@ -20,7 +20,7 @@ namespace Umbreon.data.resources
         public HashSet<IID> effectIds { get; set; }
 
         public SpellModel() { }
-        public SpellModel(IID id) => entityUid = id;
+        private SpellModel(IID id) => entityUid = id;
         public static ISpellModel Create() => new SpellModel(Eevee.RegisterIID())
         {
             nameId = Eevee.RegisterIID(),

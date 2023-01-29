@@ -12,7 +12,7 @@ namespace souchy.celebi.eevee.face.shared.effects.spell
     {
 
         public EffectChangeSpellRangeZone() { }
-        public EffectChangeSpellRangeZone(IID id) : base(id) { }
+        private EffectChangeSpellRangeZone(IID id) : base(id) { }
         public static IEffectChangeSpellRangeZone Create() => new EffectChangeSpellRangeZone(Eevee.RegisterIID());
 
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)

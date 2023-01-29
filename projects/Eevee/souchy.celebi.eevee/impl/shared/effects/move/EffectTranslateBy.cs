@@ -14,7 +14,7 @@ namespace souchy.celebi.eevee.face.shared.effects.move
         public IValue<IPosition> delta { get; set; }
 
         public EffectTranslateBy() { }
-        public EffectTranslateBy(IID id) : base(id) { }
+        private EffectTranslateBy(IID id) : base(id) { }
         public static IEffectTranslateBy Create() => new EffectTranslateBy(Eevee.RegisterIID());
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)
         {
@@ -27,7 +27,7 @@ namespace souchy.celebi.eevee.face.shared.effects.move
         public IValue<IPosition> delta { get; set; }
 
         public EffectPullBy() { }
-        public EffectPullBy(IID id) : base(id) { }
+        private EffectPullBy(IID id) : base(id) { }
         public static IEffectPullBy Create() => new EffectPullBy(Eevee.RegisterIID());
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)
         {
@@ -39,7 +39,7 @@ namespace souchy.celebi.eevee.face.shared.effects.move
         public IValue<IPosition> delta { get; set; }
 
         public EffectPushBy() { }
-        public EffectPushBy(IID id) : base(id) { }
+        private EffectPushBy(IID id) : base(id) { }
         public static IEffectPushBy Create() => new EffectPushBy(Eevee.RegisterIID());
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)
         {
@@ -51,7 +51,7 @@ namespace souchy.celebi.eevee.face.shared.effects.move
         public IValue<IPosition> delta { get; set; }
 
         public EffectDashBy() { }
-        public EffectDashBy(IID id) : base(id) { }
+        private EffectDashBy(IID id) : base(id) { }
         public static IEffectDashBy Create() => new EffectDashBy(Eevee.RegisterIID());
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)
         {
@@ -63,7 +63,7 @@ namespace souchy.celebi.eevee.face.shared.effects.move
         public IValue<IPosition> delta { get; set; }
 
         public EffectDashAwayBy() { }
-        public EffectDashAwayBy(IID id) : base(id) { }
+        private EffectDashAwayBy(IID id) : base(id) { }
         public static IEffectDashAwayBy Create() => new EffectDashAwayBy(Eevee.RegisterIID());
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)
         {

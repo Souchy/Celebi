@@ -20,7 +20,7 @@ namespace Umbreon.data.resources
 
 
         public CreatureSkin() { }
-        public CreatureSkin(IID id) => entityUid = id;
+        private CreatureSkin(IID id) => entityUid = id;
         public static ICreatureSkin Create() => new CreatureSkin(Eevee.RegisterIID())
         {
             nameId = Eevee.RegisterIID(),

@@ -21,7 +21,7 @@ namespace souchy.celebi.eevee.face.shared.effects.res
 
 
         public EffectHeal() { }
-        public EffectHeal(IID id) : base(id) { }
+        private EffectHeal(IID id) : base(id) { }
         public static IEffectHeal Create() => new EffectHeal(Eevee.RegisterIID());
 
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)

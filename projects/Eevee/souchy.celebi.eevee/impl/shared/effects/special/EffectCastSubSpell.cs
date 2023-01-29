@@ -27,7 +27,7 @@ namespace souchy.celebi.eevee.face.shared.effects.special
 
 
         public EffectCastSubSpell() { }
-        public EffectCastSubSpell(IID id) : base(id) { }
+        private EffectCastSubSpell(IID id) : base(id) { }
         public static IEffectCastSubSpell Create() => new EffectCastSubSpell(Eevee.RegisterIID());
 
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)

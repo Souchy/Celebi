@@ -12,8 +12,10 @@ namespace souchy.celebi.eevee.face.shared.effects.move
     public class EffectTeleportTo : Effect, IEffectTeleportTo
     {
         public IValue<IPosition> position { get; set; }
+
+
         public EffectTeleportTo() { }
-        public EffectTeleportTo(IID id) => entityUid = id;
+        private EffectTeleportTo(IID id) => entityUid = id;
         public static IEffectTeleportTo Create() => new EffectTeleportTo(Eevee.RegisterIID());
 
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)

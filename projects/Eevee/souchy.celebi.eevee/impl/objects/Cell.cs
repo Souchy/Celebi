@@ -19,7 +19,7 @@ namespace souchy.celebi.eevee.impl.objects
         public Dictionary<ContextType, IContext> contexts { get; set; }
 
         public Cell() { }
-        public Cell(IID id) => this.entityUid = id;
+        private Cell(IID id) => this.entityUid = id;
         public static ICell Create() => new Cell(Eevee.RegisterIID());
 
         public void Dispose()

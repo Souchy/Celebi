@@ -15,7 +15,7 @@ namespace souchy.celebi.eevee.face.shared.effects.move
 
 
         public EffectTranslateTo() { }
-        public EffectTranslateTo(IID id) : base(id) { }
+        private EffectTranslateTo(IID id) : base(id) { }
         public static IEffectTranslateTo Create() => new EffectTranslateTo(Eevee.RegisterIID());
 
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)

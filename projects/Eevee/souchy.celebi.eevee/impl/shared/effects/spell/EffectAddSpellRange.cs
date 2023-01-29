@@ -11,7 +11,7 @@ namespace souchy.celebi.eevee.face.shared.effects.spell
     {
 
         public EffectAddSpellRange() { }
-        public EffectAddSpellRange(IID id) : base(id) { }
+        private EffectAddSpellRange(IID id) : base(id) { }
         public static IEffectAddSpellRange Create() => new EffectAddSpellRange(Eevee.RegisterIID());
 
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)

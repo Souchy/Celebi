@@ -20,7 +20,7 @@ namespace souchy.celebi.eevee.impl.objects
 
 
         public Effect() { }
-        public Effect(IID id) => entityUid = id;
+        protected Effect(IID id) => entityUid = id;
 
         public abstract ICompiledEffect compile(IFight fight, IID source, IID targetCell);
 

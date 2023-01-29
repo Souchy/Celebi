@@ -19,7 +19,7 @@ namespace souchy.celebi.eevee.face.shared.effects.res
 
 
         public EffectDirectDamage() { }
-        public EffectDirectDamage(IID id) : base(id) { }
+        private EffectDirectDamage(IID id) : base(id) { }
         public static IEffectDirectDamage Create() => new EffectDirectDamage(Eevee.RegisterIID());
 
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)
