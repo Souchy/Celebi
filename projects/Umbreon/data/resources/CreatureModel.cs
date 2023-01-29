@@ -21,6 +21,7 @@ namespace Umbreon.data.resources
         {
         }
 
+        // TODO fix CreatureModel ctor + make a method like Creature.create() that will generate new IDs
         public CreatureModel(IUIdGenerator uIdGenerator)
         {
             entityUid = uIdGenerator.next();

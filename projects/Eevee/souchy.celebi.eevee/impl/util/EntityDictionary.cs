@@ -9,6 +9,10 @@ namespace souchy.celebi.eevee.impl.util
 
         IEnumerable<TValue> IEntityDictionary<TKey, TValue>.Values => Values;
 
+        IEnumerable<TKey> IEntityDictionary<TKey, TValue>.Keys => Keys;
+
+        public IEnumerable<KeyValuePair<TKey, TValue>> Pairs => this;
+
         public TValue Get(TKey key)
         {
             if (ContainsKey(key))
@@ -27,6 +31,13 @@ namespace souchy.celebi.eevee.impl.util
         {
             base.Add(key, value);
             this.GetEventBus().publish(nameof(Add), this, key, value); // this.GetType().Name + 
+        }
+        public void AddAll(IEntityDictionary<TKey, TValue> dictionary)
+        {
+            foreach(var pair in dictionary.Pairs)
+            {
+                Add(pair.Key, pair.Value);
+            }
         }
 
         public bool Remove(TKey key)
@@ -58,6 +69,12 @@ namespace souchy.celebi.eevee.impl.util
         {
             foreach (var v in Values)
                 action(v);
+        }
+
+        public void ForEach(Action<TKey, TValue> action)
+        {
+            foreach(var pair in this)
+                action(pair.Key, pair.Value);
         }
 
         public void Dispose()

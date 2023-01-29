@@ -1,6 +1,7 @@
 ﻿using Godot;
 using Newtonsoft.Json;
 using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.util;
@@ -30,12 +31,13 @@ namespace Umbreon.common
 
         public override void _Ready()
         {
+            parseData();
+            // FIXME Autosave for Vaporeon only
             Eevee.models.creatureModels.GetEventBus().subscribe(this);
             Eevee.models.spellModels.GetEventBus().subscribe(this);
             Eevee.models.statusModels.GetEventBus().subscribe(this);
             Eevee.models.effects.GetEventBus().subscribe(this); // , nameof(onAddModel), nameof(onSetModel), nameof(onRemoveModel));
             Eevee.models.i18n.GetEventBus().subscribe(this, nameof(onAddI18n), nameof(onSetI18n), nameof(onRemoveI18n));
-            parseData();
         }
 
         public void parseData()
@@ -46,27 +48,54 @@ namespace Umbreon.common
             creatureSkinsData = JsonConvert.DeserializeObject<CreatureSkinData[]>(creatureSkinsText);
             var mapModelsDataText = Godot.FileAccess.Open("res://data/maps.json", Godot.FileAccess.ModeFlags.Read).GetAsText();
             mapModelsData = JsonConvert.DeserializeObject<MapModelData[]>(mapModelsDataText);
+
+
+            //var tgas = Godot.FileAccess.Open("res://data/test/{fileName}.json", Godot.FileAccess.ModeFlags.Read).GetAsText();
+            //var asd = JsonConvert.DeserializeObject<IEntityDictionary<IID, ICreatureModel>>(tgas);
+
+            var creatureModels = load(Eevee.models.creatureModels);
+            creatureModels.ForEach((k, v) => Eevee.RegisterIID(k));
+            Eevee.models.creatureModels.AddAll(creatureModels);
+
+            var spellModels = load(Eevee.models.spellModels);
+            spellModels.ForEach((k, v) => Eevee.RegisterIID(k));
+            Eevee.models.spellModels.AddAll(spellModels);
+
+            var effects = load(Eevee.models.effects);
+            effects.ForEach((k, v) => Eevee.RegisterIID(k));
+            Eevee.models.effects.AddAll(effects);
+
+            var statusModels = load(Eevee.models.statusModels);
+            statusModels.ForEach((k, v) => Eevee.RegisterIID(k));
+            Eevee.models.statusModels.AddAll(statusModels);
+
+            var i18n = loadI18n();
+            i18n.ForEach((k, v) => Eevee.RegisterIID(k));
+            Eevee.models.i18n.AddAll(i18n);
         }
 
         #region Diamond Models saver
         [Subscribe(nameof(IEntityDictionary<IID, IID>.Add))]
-        public void onAddModel(object dic, IID id, object obj) => save(dic, obj.GetType().Name + "s");
+        public void onAddModel(object dic, IID id, object obj) => save(dic, getNameDic(obj));
         [Subscribe(nameof(IEntityDictionary<IID, IID>.Set))]
-        public void onSetModel(object dic, IID id, object obj) => save(dic, obj.GetType().Name + "s");
+        public void onSetModel(object dic, IID id, object obj) => save(dic, getNameDic(obj));
         [Subscribe(nameof(IEntityDictionary<IID, IID>.Remove))]
-        public void onRemoveModel(object dic, IID id, object obj) => save(dic, obj.GetType().Name + "s");
+        public void onRemoveModel(object dic, IID id, object obj) => save(dic, getNameDic(obj));
         #endregion
 
         #region I18n saver
         [Subscribe(nameof(IEntityDictionary<IID, IID>.Add))]
-        public void onAddI18n(object dic, IID id, string obj) => save(dic, "i18n_" + Enum.GetName(i18nType));
+        public void onAddI18n(object dic, IID id, string obj) => save(dic, getNameI18n(i18nType));
         [Subscribe(nameof(IEntityDictionary<IID, IID>.Set))]
-        public void onSetI18n(object dic, IID id, string obj) => save(dic, "i18n_" + Enum.GetName(i18nType));
+        public void onSetI18n(object dic, IID id, string obj) => save(dic, getNameI18n(i18nType));
         [Subscribe(nameof(IEntityDictionary<IID, IID>.Remove))]
-        public void onRemoveI18n(object dic, IID id, string obj) => save(dic, "i18n_" + Enum.GetName(i18nType));
+        public void onRemoveI18n(object dic, IID id, string obj) => save(dic, getNameI18n(i18nType));
         #endregion
 
-        #region Save
+
+        #region Save/Load
+        private string getNameI18n(I18NType type) => "i18n_" + Enum.GetName(i18nType);
+        private string getNameDic(object obj) => obj.GetType().Name + "s";
         public void save(object dic, string fileName)
         {
             //var type = obj.GetType();
@@ -74,6 +103,20 @@ namespace Umbreon.common
             var file = Godot.FileAccess.Open($"res://data/test/{fileName}.json", Godot.FileAccess.ModeFlags.Write);
             file.StoreString(str);
             file.Flush();
+        }
+        public IEntityDictionary<IID, string> loadI18n()
+        {
+            string fileName = getNameI18n(this.i18nType);
+            var json = Godot.FileAccess.Open($"res://data/test/{fileName}.json", Godot.FileAccess.ModeFlags.Read).GetAsText();
+            var data = JsonConvert.DeserializeObject<IEntityDictionary<IID, string>>(json);
+            return data;
+        }
+        public T load<T>(T dic)
+        {
+            string fileName = getNameDic(dic);
+            var json = Godot.FileAccess.Open($"res://data/test/{fileName}.json", Godot.FileAccess.ModeFlags.Read).GetAsText();
+            var data = JsonConvert.DeserializeObject<T>(json);
+            return data;
         }
         #endregion
 

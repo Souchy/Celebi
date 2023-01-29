@@ -15,12 +15,27 @@ namespace souchy.celebi.eevee.impl.util
                 {
                     throw new Exception("Too many IDs");
                 }
-                do
+                while (ids.Contains(counter))
                 {
                     counter++;
                     if (counter == int.MaxValue) counter = 0;
-                } while (ids.Contains(counter));
+                }
+                ids.Add(counter);
                 return (IID) counter;
+            }
+        }
+
+        public bool take(IID id)
+        {
+            lock(this)
+            {
+                if (ids.Add(id))
+                {
+                    counter = id + 1;
+                    return true;
+                }
+                else
+                    return false;
             }
         }
 

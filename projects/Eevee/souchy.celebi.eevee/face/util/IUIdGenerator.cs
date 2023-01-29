@@ -3,6 +3,7 @@
     public interface IUIdGenerator
     {
         public IID next();
-        public void dispose(IID i);
+        public bool take(IID id);
+        public void dispose(IID id);
     }
 }

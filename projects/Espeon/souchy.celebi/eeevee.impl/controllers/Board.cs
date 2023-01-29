@@ -10,19 +10,11 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.controllers
 {
     public class Board : IBoard
     {
-        #region Properties
         public IID entityUid { get; init; } = Eevee.RegisterIID();
         public IID fightUid { get; init; }
 
         public List<IID> creatureIds { get; init; } = new List<IID>();
         public List<IID> cells { get; init; } = new List<IID>();
-
-        //private readonly IFight instances;
-        //private IEnumerable<ICreature> Creatures => creatureIds.Select(cid => instances.creatures[cid]);
-
-        #endregion Properties
-
-        #region Constructors
 
         public Board(ScopeID scopeId)
         {
@@ -39,8 +31,6 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.controllers
             // nothing to dispose? 
             //throw new NotImplementedException();
         }
-
-        #endregion Constructors
 
         /*
         #region Public Methods

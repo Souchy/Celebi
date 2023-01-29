@@ -1,4 +1,25 @@
 {
+  "100": {
+    "entityUid": {
+      "value": "100"
+    },
+    "nameId": {
+      "value": "101"
+    },
+    "descriptionId": {
+      "value": "102"
+    },
+    "skins": [
+      {
+        "value": "103"
+      }
+    ],
+    "baseStats": {
+      "value": null
+    },
+    "baseSpells": [],
+    "baseStatusPassives": []
+  },
   "15": {
     "entityUid": {
       "value": "15"

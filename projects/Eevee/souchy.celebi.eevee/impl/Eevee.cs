@@ -1,8 +1,10 @@
-﻿using souchy.celebi.eevee.face.entity;
+﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.shared;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.util;
+using System.Linq;
 
 namespace souchy.celebi.eevee.impl
 {
@@ -11,20 +13,8 @@ namespace souchy.celebi.eevee.impl
     /// </summary>
     public static class Eevee
     {
-        //private static readonly Eevee singleton = new Eevee();
-        //private Eevee() { }
-        #region Backing fields
-        //private readonly IUIdGenerator _uIdGenerator = new UIdGenerator();
-        //private readonly Dictionary<IID, IEventBus> _eventBuses = new Dictionary<IID, IEventBus>(); // eventbus for each entity
-        //private readonly Dictionary<IID, IFight> _fights = new Dictionary<IID, IFight>();
-        //private readonly IDiamondModels _models = new DiamondModels();
-        #endregion
 
         #region Properties
-        //public static IUIdGenerator uIdGenerator { get => singleton._uIdGenerator; }
-        //public static Dictionary<IID, IEventBus> eventBuses { get => singleton._eventBuses; }
-        //public static Dictionary<IID, IFight> fights { get => singleton._fights; }
-        //public static IDiamondModels models { get => singleton._models; }
         public static IUIdGenerator uIdGenerator { get; } = new UIdGenerator();
         public static Dictionary<IID, IEventBus> eventBuses { get; } = new Dictionary<IID, IEventBus>(); // eventbus for each entity
         public static IEntityDictionary<IID, IFight> fights { get; } = new EntityDictionary<IID, IFight>();
@@ -35,16 +25,21 @@ namespace souchy.celebi.eevee.impl
         public static IID RegisterIID()
         {
             var id = uIdGenerator.next();
-            eventBuses.Add(id, new EventBus());
+            RegisterIID(id);
             return id;
+        }
+        public static IEventBus RegisterIID(IID id)
+        {
+            uIdGenerator.take(id);
+            if (!eventBuses.ContainsKey(id))
+                eventBuses.Add(id, new EventBus());
+            return eventBuses[id];
         }
         public static void DisposeIID(IEntity e)
         {
             if (e is IFight)
                 fights.Remove(e.entityUid);
-            //eventBuses[e.entityUid].Dispose();
             eventBuses.Remove(e.entityUid); // disposes automatically
-
             uIdGenerator.dispose(e.entityUid);
         }
         #endregion
