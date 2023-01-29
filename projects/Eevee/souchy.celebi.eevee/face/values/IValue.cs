@@ -4,7 +4,7 @@ namespace souchy.celebi.eevee.face.values
 {
     public interface IValue<T>
     {
-        public T Value { get; init; }
+        public T value { get; init; }
 
     }
 }

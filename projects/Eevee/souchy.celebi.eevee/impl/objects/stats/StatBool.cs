@@ -7,11 +7,11 @@ namespace souchy.celebi.eevee.impl.stats
     {
         //public StatValueType valueType => StatValueType.Bool;
 
-        public bool Value { get; init; }
+        public bool value { get; init; }
 
         public StatBool() { }
-        public StatBool(bool value) { Value = value; }
+        public StatBool(bool value) { this.value = value; }
 
-        public IStat copy() => new StatBool(Value);
+        public IStat copy() => new StatBool(value);
     }
 }

@@ -52,14 +52,14 @@ namespace PlayfabClientTest
         public void onLifeChanged(IStats stats, IStat stat)
         {
             var simple = (StatSimple) stat;
-            Console.WriteLine($"Received event stat: {simple.Value}");
+            Console.WriteLine($"Received event stat: {simple.value}");
         }
 
         public void throwEvent()
         {
             stats.set(StatType.Life, new StatSimple()
             {
-                Value = 5
+                value = 5
             });
             //this.GetEventBus().publish(nameof(StatType.Life), stats, );
         }

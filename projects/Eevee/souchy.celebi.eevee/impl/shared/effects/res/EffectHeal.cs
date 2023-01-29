@@ -28,7 +28,7 @@ namespace souchy.celebi.eevee.face.shared.effects.res
             var dist = creaSource.position.distanceManhattan(creaTarget.position);
 
             // apply affinities + resistances
-            IStatSimple aff = sourceStats.get<IStatSimple>(element.Value.GetAffinity());
+            IStatSimple aff = sourceStats.get<IStatSimple>(element.value.GetAffinity());
             IStatSimple affh = sourceStats.get<IStatSimple>(StatType.HealAffinity);
             IStatSimple affdist;
 
@@ -41,17 +41,17 @@ namespace souchy.celebi.eevee.face.shared.effects.res
             else
                 affdist = sourceStats.get<IStatSimple>(StatType.MeleeAffinity);
 
-            var heal = Value.Value;
+            var heal = Value.value;
 
-            heal *= (100 + aff.Value) / 100;
-            heal *= (100 + affh.Value) / 100;
-            heal *= (100 + affdist.Value) / 100;
+            heal *= (100 + aff.value) / 100;
+            heal *= (100 + affh.value) / 100;
+            heal *= (100 + affdist.value) / 100;
             
-            heal *= (100 - resh.Value) / 100;
+            heal *= (100 - resh.value) / 100;
 
 
             IStatSimple currentLife = targetStats.get<IStatSimple>(StatType.Life);
-            var newLife = new StatSimple(currentLife.Value + heal);
+            var newLife = new StatSimple(currentLife.value + heal);
             var compiled = new CompiledEffectStat(StatType.Life, newLife);
             return compiled;
         }

@@ -10,7 +10,7 @@ namespace souchy.celebi.eevee.impl.stats
         public int increasedFlat { get; init; }
         public int morePercent { get; init; }
 
-        public int Value { 
+        public int value { 
             get {
                 double step1 = 1 + baseFlat * increasedPercent / 100d;
                 double step2 = step1 + increasedFlat;

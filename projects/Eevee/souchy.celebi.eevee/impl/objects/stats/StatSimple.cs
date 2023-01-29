@@ -8,12 +8,12 @@ namespace souchy.celebi.eevee.impl.stats
     {
         //public StatValueType valueType => StatValueType.Simple;
 
-        public int Value { get; init; }
+        public int value { get; init; }
 
         public StatSimple() { }
-        public StatSimple(int value) { Value = value; }
+        public StatSimple(int value) { this.value = value; }
 
-        public IStat copy() => new StatSimple(Value);
+        public IStat copy() => new StatSimple(value);
 
     }
 }

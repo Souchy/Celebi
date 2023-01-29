@@ -13,7 +13,7 @@ namespace souchy.celebi.eevee.impl.stats
         public int currentMax { get; init; }
         public int initialMax { get; init; }
 
-        public (int current, int currentMax, int initialMax) Value { 
+        public (int current, int currentMax, int initialMax) value { 
             get => (current, currentMax, initialMax);
             init
             {

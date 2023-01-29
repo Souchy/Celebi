@@ -27,11 +27,11 @@ namespace souchy.celebi.eevee.face.shared.effects.res
             var dist = creaSource.position.distanceManhattan(creaTarget.position);
 
             // apply affinities + resistances
-            IStatSimple aff = sourceStats.get<IStatSimple>(element.Value.GetAffinity());
+            IStatSimple aff = sourceStats.get<IStatSimple>(element.value.GetAffinity());
             IStatSimple affg = sourceStats.get<IStatSimple>(StatType.GlobalDamageAffinity);
             IStatSimple affdist;
 
-            IStatSimple res = targetStats.get<IStatSimple>(element.Value.GetResistance());
+            IStatSimple res = targetStats.get<IStatSimple>(element.value.GetResistance());
             IStatSimple resg = targetStats.get<IStatSimple>(StatType.GlobalDamageResistance);
             IStatSimple resdist;
 
@@ -48,15 +48,15 @@ namespace souchy.celebi.eevee.face.shared.effects.res
                 resdist = targetStats.get<IStatSimple>(StatType.MeleeResistance);
             }
 
-            var damage = this.Value.Value; 
+            var damage = this.Value.value; 
 
-            damage *= (100 + aff.Value) / 100;
-            damage *= (100 + affg.Value) / 100;
-            damage *= (100 + affdist.Value) / 100;
+            damage *= (100 + aff.value) / 100;
+            damage *= (100 + affg.value) / 100;
+            damage *= (100 + affdist.value) / 100;
 
-            damage *= (100 - res.Value) / 100;
-            damage *= (100 - resg.Value) / 100;
-            damage *= (100 - resdist.Value) / 100;
+            damage *= (100 - res.value) / 100;
+            damage *= (100 - resg.value) / 100;
+            damage *= (100 - resdist.value) / 100;
 
             var compiled = new CompiledDamage(damage);
             return compiled;

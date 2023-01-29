@@ -1,5 +1,6 @@
 ﻿using Godot;
 using souchy.celebi.eevee.face.values;
+using souchy.celebi.eevee.impl.values;
 using System.Reflection;
 using Timer = Godot.Timer;
 
@@ -63,16 +64,16 @@ namespace Umbreon.vaporeon.common
         public static Control GeneratePropValueInt(PropertyInfo prop, object obj)
         {
             var edit = new SpinBox();
-            edit.Value = ((IValue<int>) prop.GetValue(obj)).Value;
-            edit.ValueChanged += (val) => ((IValue<int>) prop.GetValue(obj)).Value = (int) val;
+            edit.Value = ((IValue<int>) prop.GetValue(obj)).value;
+            edit.ValueChanged += (val) => prop.SetValue(obj, new Value<int>((int) val)); //((IValue<int>) prop.GetValue(obj)).Value = (int) val;
             edit.ValueChanged += (val) => debounce(VaporeonSignals.save, () => edit.EmitSignal(VaporeonSignals.save));
             return edit;
         }
         public static Control GeneratePropValueBool(PropertyInfo prop, object obj)
         {
             var edit = new CheckBox();
-            edit.ButtonPressed = ((IValue<bool>) prop.GetValue(obj)).Value;
-            edit.Toggled += (val) => ((IValue<bool>) prop.GetValue(obj)).Value = val;
+            edit.ButtonPressed = ((IValue<bool>) prop.GetValue(obj)).value;
+            edit.Toggled += (val) => prop.SetValue(obj, new Value<bool>(val)); //((IValue<bool>) prop.GetValue(obj)).Value = val;
             edit.Toggled += (val) => debounce(VaporeonSignals.save, () => edit.EmitSignal(VaporeonSignals.save));
             return edit;
         }

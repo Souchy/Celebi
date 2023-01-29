@@ -15,7 +15,7 @@ namespace souchy.celebi.eevee.values
         public T min { get; init; }
         public T max { get; init; }
 
-        public (T min, T max) Value
+        public (T min, T max) value
         {
             get => (min, max);
             init
