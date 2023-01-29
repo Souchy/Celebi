@@ -1,4 +1,6 @@
 ﻿using Godot;
+using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.values;
 using souchy.celebi.eevee.impl.values;
 using System.Reflection;
@@ -8,30 +10,33 @@ namespace Umbreon.vaporeon.common
 {
     public static class PropertiesComponent
     {
-        private static Dictionary<Type, Func<PropertyInfo, object, Control>> dic = new();
+        private static Dictionary<Type, Func<PropertyInfo, object, Control>> editorFactory = new();
         private static Dictionary<string, Timer> timers = new();
 
 
         static PropertiesComponent()
         {
-            dic[typeof(string)] = GeneratePropString;
-            dic[typeof(int)] = GeneratePropInt;
-            dic[typeof(IValue<int>)] = GeneratePropValueInt;
-            dic[typeof(IValue<bool>)] = GeneratePropValueBool;
+            editorFactory[typeof(string)] = GeneratePropString;
+            editorFactory[typeof(int)] = GeneratePropInt;
+            editorFactory[typeof(IValue<int>)] = GeneratePropValueInt;
+            editorFactory[typeof(IValue<bool>)] = GeneratePropValueBool;
         }
 
-        public static void GenerateGrid(GridContainer container, Type type, object obj)
+        public static GridContainer GenerateGrid(object obj, GridContainer container = null)
         {
-            foreach (var prop in type.GetProperties())
+            if (container == null)
+                container = new GridContainer();
+            foreach (var prop in obj.GetType().GetProperties())
             {
                 var lbl = new Label();
                 lbl.Text = prop.Name;
 
-                var edit = dic[prop.PropertyType](prop, obj);
+                var edit = editorFactory[prop.PropertyType](prop, obj);
 
                 container.AddChild(lbl);
                 container.AddChild(edit);
             }
+            return container;
         }
 
         public static void debounce(string id, Action action)
@@ -76,6 +81,26 @@ namespace Umbreon.vaporeon.common
             edit.Toggled += (val) => prop.SetValue(obj, new Value<bool>(val)); //((IValue<bool>) prop.GetValue(obj)).Value = val;
             edit.Toggled += (val) => debounce(VaporeonSignals.save, () => edit.EmitSignal(VaporeonSignals.save));
             return edit;
+        }
+
+
+
+        public static void GenerateStat(GridContainer container, StatType statType)
+        {
+            Label lb = new Label();
+            lb.Text = Enum.GetName(statType);
+            IStat stat = statType.Create();
+
+            Button btn = new Button();
+            btn.ButtonUp += () =>
+            {
+                var pop = new PopupPanel();
+                var grid = GenerateGrid(stat);
+                //grid.anchor
+                pop.AddChild(grid);
+                pop.Show();
+                container.AddChild(pop);
+            };
         }
 
     }

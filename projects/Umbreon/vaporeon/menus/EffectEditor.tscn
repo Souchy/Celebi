@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bjxqjy57p0c0b"]
+[gd_scene load_steps=4 format=3 uid="uid://bjxqjy57p0c0b"]
 
+[ext_resource type="Script" path="res://vaporeon/menus/EffectEditor.cs" id="1_f8vfk"]
 [ext_resource type="PackedScene" uid="uid://vuf3b0bqetfr" path="res://vaporeon/common/EffectList.tscn" id="1_r3fwy"]
 [ext_resource type="PackedScene" uid="uid://jbttqy4in4s2" path="res://vaporeon/menus/SmallResourceTree.tscn" id="3_ylmo8"]
 
@@ -10,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_f8vfk")
 
 [node name="EffectID" type="Label" parent="."]
 layout_mode = 0

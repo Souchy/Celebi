@@ -1,17 +1,40 @@
-[gd_scene format=3 uid="uid://bknkdq6d6d6s2"]
+[gd_scene load_steps=2 format=3 uid="uid://dwsqq6cb7f1g6"]
 
-[node name="StatsEditor" type="VBoxContainer"]
+[ext_resource type="Script" path="res://vaporeon/common/StatsEditor.cs" id="1_tjsw1"]
+
+[node name="StatsEditor" type="MarginContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+script = ExtResource("1_tjsw1")
 
-[node name="Toolbar" type="HBoxContainer" parent="."]
-custom_minimum_size = Vector2(0, 50)
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="Content" type="GridContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+alignment = 1
+
+[node name="Add" type="Button" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Add"
+
+[node name="PopupMenu" type="PopupMenu" parent="VBoxContainer/HBoxContainer/Add"]
+
+[node name="Remove" type="Button" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Remove"
+
+[node name="StatsContainer" type="GridContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 columns = 2

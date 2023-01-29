@@ -51,7 +51,7 @@ public partial class SpellEditor : Control
         if (spell == null) return;
         // props
         PropertiesGrid.QueueFreeChildren();
-        PropertiesComponent.GenerateGrid(PropertiesGrid, spellPropertiesType, spell.properties);
+        PropertiesComponent.GenerateGrid(spell.properties, PropertiesGrid);
         // costs
         foreach (ResourceType res in Enum.GetValues(typeof(ResourceType)))
         {
