@@ -1,6 +1,7 @@
 ﻿using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.shared.models.skins;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.impl;
 using System.Collections.Generic;
 
 namespace Umbreon.data.resources
@@ -21,14 +22,16 @@ namespace Umbreon.data.resources
         public CreatureSkin()
         {
         }
-        public CreatureSkin(IUIdGenerator uIdGenerator)
+        public static CreatureSkin Create()
         {
-            this.entityUid = uIdGenerator.next();
-            this.nameId = uIdGenerator.next();
-            this.descriptionId = uIdGenerator.next();
+            return new CreatureSkin()
+            {
+                entityUid = Eevee.RegisterIID(),
+                nameId = Eevee.RegisterIID(),
+                descriptionId = Eevee.RegisterIID(),
+            };
+
         }
-
-
 
         public void Dispose()
         {

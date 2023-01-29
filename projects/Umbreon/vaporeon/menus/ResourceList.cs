@@ -273,8 +273,8 @@ public class CreatureListUtil : IListUtilGeneric<ICreatureModel>
     }
     public void onCreateBtn()
     {
-        var creatureSkin = new CreatureSkin(Eevee.uIdGenerator); 
-        var creatureModel = new CreatureModel(Eevee.uIdGenerator);
+        var creatureSkin = CreatureSkin.Create(); 
+        var creatureModel = CreatureModel.Create();
         creatureModel.skins.Add(creatureSkin.entityUid);
 
         Eevee.models.i18n.Add(creatureSkin.nameId, "Name for: " + creatureSkin.entityUid);
@@ -309,7 +309,6 @@ public class SpellListUtil : IListUtilGeneric<ISpellModel>
     }
     public void createChildNode(ISpellModel spell)
     {
-        //new Dictionary<IID, int>().Values
         // get the first skin for that spell
         var skin = Eevee.models.spellSkins.Values.Where(skin => skin.spellModelUid.value == spell.entityUid.value).First();
         var icon = skin.icon;
@@ -319,8 +318,8 @@ public class SpellListUtil : IListUtilGeneric<ISpellModel>
     }
     public void onCreateBtn()
     {
-        var spellmodel = new SpellModel(Eevee.uIdGenerator); //);
-        var spellskin = new SpellSkin(Eevee.uIdGenerator);
+        var spellmodel = SpellModel.Create();
+        var spellskin = SpellSkin.Create();
         spellskin.spellModelUid = spellmodel.entityUid;
         Eevee.models.i18n.Add(spellmodel.nameId, "Name for: " + spellmodel.entityUid);
         Eevee.models.i18n.Add(spellmodel.descriptionId, "Desc for: " + spellmodel.entityUid);
@@ -368,7 +367,8 @@ public class EffectListUtil : IListUtilGeneric<IEffect>
     private void EffectPopup_IndexPressed(long index)
     {
         Type effectType = Vaporeon.effectTypes[(int) index];
-        IEffect effect = (IEffect) Activator.CreateInstance(effectType, Eevee.uIdGenerator);
+        IEffect effect = (IEffect) Activator.CreateInstance(effectType); //, Eevee.uIdGenerator);
+        effect.entityUid = Eevee.RegisterIID();
         Eevee.models.effects.Add(effect.entityUid, effect);
     }
     public void onRemoveBtn()

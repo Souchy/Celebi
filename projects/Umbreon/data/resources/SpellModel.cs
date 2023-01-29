@@ -3,6 +3,7 @@ using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.impl;
 
 namespace Umbreon.data.resources
 {
@@ -21,11 +22,15 @@ namespace Umbreon.data.resources
         public SpellModel()
         {
         }
-        public SpellModel(IUIdGenerator uIdGenerator)
+
+        public static SpellModel Create()
         {
-            entityUid = uIdGenerator.next();
-            nameId = uIdGenerator.next();
-            descriptionId = uIdGenerator.next();
+            return new SpellModel()
+            {
+                entityUid = Eevee.RegisterIID(), //uIdGenerator.next(),
+                nameId = Eevee.RegisterIID(), //uIdGenerator.next(),
+                descriptionId = Eevee.RegisterIID(), //uIdGenerator.next(),
+            };
         }
 
         public void Dispose()

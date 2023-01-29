@@ -1,6 +1,7 @@
 ﻿using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.shared.models.skins;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.impl;
 
 namespace Umbreon.data.resources
 {
@@ -15,9 +16,12 @@ namespace Umbreon.data.resources
 
 
         public SpellSkin() { }
-        public SpellSkin(IUIdGenerator uIdGenerator)
+        public static SpellSkin Create()
         {
-            entityUid = uIdGenerator.next();
+            return new SpellSkin()
+            {
+                entityUid = Eevee.RegisterIID()
+            };
         }
 
         public void Dispose()

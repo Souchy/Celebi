@@ -1,6 +1,8 @@
 ﻿using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.stats;
+using souchy.celebi.eevee.impl.util;
 using System.Collections.Generic;
 using static souchy.celebi.eevee.face.entity.IEntity;
 
@@ -20,13 +22,14 @@ namespace Umbreon.data.resources
         public CreatureModel()
         {
         }
-
-        // TODO fix CreatureModel ctor + make a method like Creature.create() that will generate new IDs
-        public CreatureModel(IUIdGenerator uIdGenerator)
+        public static CreatureModel Create()
         {
-            entityUid = uIdGenerator.next();
-            nameId = uIdGenerator.next();
-            descriptionId = uIdGenerator.next();
+            return new CreatureModel()
+            {
+                entityUid = Eevee.RegisterIID(), 
+                nameId = Eevee.RegisterIID(),
+                descriptionId = Eevee.RegisterIID(), 
+            };
         }
 
         public void Dispose()
