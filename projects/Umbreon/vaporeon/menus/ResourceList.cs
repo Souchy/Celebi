@@ -9,6 +9,7 @@ using souchy.celebi.eevee.face.shared.models.skins;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
+using souchy.celebi.eevee.impl.shared.effects;
 using souchy.celebi.eevee.impl.util;
 using System;
 using System.Collections.Generic;
@@ -184,10 +185,28 @@ public partial class ResourceList : Control
     }
     public void onMouseClickItem(InputEvent ev, Control item)
     {
-        if (ev is InputEventMouseButton eventMouse && eventMouse.Pressed && eventMouse.ButtonIndex == MouseButton.Left && selectedItem != item)
+        if (ev is InputEventMouseButton eventMouse && eventMouse.Pressed) // && selectedItem != item)
         {
+            if (eventMouse.ButtonIndex == MouseButton.Right)
+            {
+                var pop = new PopupMenu();
+                pop.AddItem("Edit");
+                pop.AddItem("Copy");
+                pop.IndexPressed += (index) =>
+                {
+                    if (index == 0) util.edit();
+                    if (index == 1) util.copy();
+                };
+                pop.Show();
+                this.AddChild(pop);
+            }
+            if (eventMouse.ButtonIndex != MouseButton.Left)
+                return;
+
+            if(selectedItem == item)
+                util.edit();
             // remove previous selected
-            if(selectedItem != null)
+            if (selectedItem != null)
             {
                 var selectedPanel = (PanelContainer) selectedItem.GetNode("PanelContainer");
                 selectedPanel.Set("theme_override_styles/panel", ResourceListItemNormal);
@@ -207,10 +226,13 @@ public interface IListUtil
     public void fillList();
     public void onCreateBtn();
     public void onRemoveBtn();
+    public void edit();
+    public void copy();
 }
 
 public interface IListUtilGeneric<T> : IListUtil
 {
+    public T getSelectedItem();
     public void createChildNode(T model);
 
     [Subscribe(nameof(IEntityDictionary<IID, T>.Add))]
@@ -289,12 +311,20 @@ public class CreatureListUtil : IListUtilGeneric<ICreatureModel>
     {
         if (list.selectedItem == null) return;
         IID id = (IID) list.selectedItem.GetMeta("object").AsString();
-        list.selectedItem = null;
         var creature = Eevee.models.creatureModels.Get(id);
         Eevee.models.creatureModels.Remove(creature.entityUid);
         // dont delete the skins, keep them for later use and
         // TODO add new tabs to vaporeon for skins
+        list.selectedItem = null;
+        //list.GetVaporeon().CurrentCreatureModel = null;
     }
+    public ICreatureModel getSelectedItem()
+    {
+        IID id = (IID) list.selectedItem.GetMeta("object").AsString();
+        return Eevee.models.creatureModels.Get(id);
+    }
+    public void edit() => list.GetVaporeon().CurrentCreatureModel = getSelectedItem();
+    public void copy() => list.GetVaporeon().CurrentObjectCopied = getSelectedItem();
 }
 
 
@@ -335,6 +365,13 @@ public class SpellListUtil : IListUtilGeneric<ISpellModel>
         Eevee.models.spellModels.Remove(spell.entityUid);
         Eevee.models.spellSkins.Remove(s => s.spellModelUid.value == spell.entityUid.value);
     }
+    public ISpellModel getSelectedItem()
+    {
+        IID id = (IID) list.selectedItem.GetMeta("object").AsString();
+        return Eevee.models.spellModels.Get(id);
+    }
+    public void edit() => list.GetVaporeon().CurrentSpellModel = getSelectedItem();
+    public void copy() => list.GetVaporeon().CurrentObjectCopied = getSelectedItem();
 }
 
 
@@ -367,8 +404,10 @@ public class EffectListUtil : IListUtilGeneric<IEffect>
     private void EffectPopup_IndexPressed(long index)
     {
         Type effectType = Vaporeon.effectTypes[(int) index];
-        IEffect effect = (IEffect) Activator.CreateInstance(effectType); //, Eevee.uIdGenerator);
-        effect.entityUid = Eevee.RegisterIID();
+        //IEffect effect = (IEffect) Activator.CreateInstance(effectType, Eevee.RegisterIID()); //, Eevee.uIdGenerator);
+        var createMethod = effectType.GetMethod(nameof(EffectBase.Create), BindingFlags.Static);
+        IEffect effect = (IEffect) createMethod.Invoke(null, new object[] { Eevee.RegisterIID() });
+
         Eevee.models.effects.Add(effect.entityUid, effect);
     }
     public void onRemoveBtn()
@@ -381,4 +420,11 @@ public class EffectListUtil : IListUtilGeneric<IEffect>
         var effect = Eevee.models.effects.Get(id);
         Eevee.models.effects.Remove(effect.entityUid);
     }
+    public IEffect getSelectedItem()
+    {
+        IID id = (IID) list.selectedItem.GetMeta("object").AsString();
+        return Eevee.models.effects.Get(id);
+    }
+    public void edit() => list.GetVaporeon().CurrentEffect = getSelectedItem();
+    public void copy() => list.GetVaporeon().CurrentObjectCopied = getSelectedItem();
 }
