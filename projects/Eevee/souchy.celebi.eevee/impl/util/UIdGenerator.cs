@@ -2,6 +2,20 @@
 
 namespace souchy.celebi.eevee.impl.util
 {
+    public enum IDClassType
+    {
+        ICreatureModel,
+        ISpellModel,
+        IStatusModel,
+        IEffectModel,
+        IEffect,
+        ICreatureSkin,
+        ISpellSkin,
+        IEffectSkin,
+        String, //i18n,
+
+        IFightEntity,
+    }
     public class UIdGenerator : IUIdGenerator
     {
         private int counter = 0;

@@ -2,15 +2,18 @@ using Godot;
 using Godot.Sharp.Extras;
 using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.objects.stats;
+using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.stats;
+using souchy.celebi.eevee.impl.util;
 using System;
 using Umbreon.vaporeon.common;
 
 public partial class StatsEditor : MarginContainer
 {
+    
+    public IStats stats { get => this.GetVaporeon().CurrentCreatureModel.GetBaseStats(); } 
     //public IStats stats = Stats.Create();
-    public IStats stats { get => this.GetVaporeon().CurrentCreatureModel.GetBaseStats(); }
 
     #region Nodes
     [NodePath("VBoxContainer/HBoxContainer/Add")]
@@ -25,9 +28,18 @@ public partial class StatsEditor : MarginContainer
     public override void _Ready()
 	{
         this.OnReady();
+        this.GetVaporeon().bus.subscribe(this);
 
         BtnAdd.ButtonUp += BtnAdd_ButtonUp;
 	}
+
+    [Subscribe(nameof(Vaporeon.CurrentCreatureModel))]
+    public void onModelChange(ICreatureModel model)
+    {
+        StatsContainer.QueueFreeChildren();
+        foreach (var st in model.GetBaseStats().stats.Keys)
+            PropertiesComponent.GenerateStat(StatsContainer, st);
+    }
 
     private void BtnAdd_ButtonUp()
     {

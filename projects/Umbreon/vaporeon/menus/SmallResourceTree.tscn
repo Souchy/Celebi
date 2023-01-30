@@ -44,9 +44,5 @@ allow_rmb_select = true
 
 [node name="PopupMenu" type="PopupMenu" parent="."]
 
-[connection signal="pressed" from="Buttons/AddBtn" to="." method="onAddBtnClick"]
-[connection signal="pressed" from="Buttons/CopyBtn" to="." method="onCopyBtnClick"]
-[connection signal="pressed" from="Buttons/PasteBtn" to="." method="onPasteBtnClick"]
-[connection signal="pressed" from="Buttons/DeleteBtn" to="." method="onDeleteBtnClick"]
 [connection signal="item_mouse_selected" from="Tree" to="." method="onTreeItemMouseSelected"]
 [connection signal="item_selected" from="Tree" to="." method="onTreeItemSelected"]

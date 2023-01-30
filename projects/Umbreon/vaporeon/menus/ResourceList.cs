@@ -140,7 +140,7 @@ public partial class ResourceList : Control
         var lbl = (Label) item.GetNode("PanelContainer/VBoxContainer/Label");
         lbl.Text = name.ToString();
         //item.Name = spell.entityUid.value;
-        item.SetMeta("object", meta.value);
+        item.SetMeta("object", meta.ToString());
 
         //item.MouseFilter = MouseFilterEnum.;
         item.GuiInput += (e) => onMouseClickItem(e, item); // idk but this doesnt work
@@ -154,7 +154,7 @@ public partial class ResourceList : Control
 
     public void removeChild(IID id)
     {
-        Node node = Container.GetChildren().First(c => c.GetMeta("object").AsString() == id.value);
+        Node node = Container.GetChildren().First(c => c.GetMeta("object").AsString() == id);
         Container.RemoveChild(node);
         node.QueueFree();
     }
@@ -340,7 +340,7 @@ public class SpellListUtil : IListUtilGeneric<ISpellModel>
     public void createChildNode(ISpellModel spell)
     {
         // get the first skin for that spell
-        var skin = Eevee.models.spellSkins.Values.Where(skin => skin.spellModelUid.value == spell.entityUid.value).First();
+        var skin = Eevee.models.spellSkins.Values.Where(skin => skin.spellModelUid == spell.entityUid).First();
         var icon = skin.icon;
         var name = Eevee.models.i18n.Get(spell.nameId);
         var desc = Eevee.models.i18n.Get(spell.descriptionId);
@@ -363,7 +363,7 @@ public class SpellListUtil : IListUtilGeneric<ISpellModel>
         list.selectedItem = null;
         var spell = Eevee.models.spellModels.Get(id);
         Eevee.models.spellModels.Remove(spell.entityUid);
-        Eevee.models.spellSkins.Remove(s => s.spellModelUid.value == spell.entityUid.value);
+        Eevee.models.spellSkins.Remove(s => s.spellModelUid == spell.entityUid);
     }
     public ISpellModel getSelectedItem()
     {

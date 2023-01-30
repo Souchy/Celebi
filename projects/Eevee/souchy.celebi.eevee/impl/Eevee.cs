@@ -15,7 +15,7 @@ namespace souchy.celebi.eevee.impl
     {
 
         #region Properties
-        public static IUIdGenerator uIdGenerator { get; } = new UIdGenerator();
+        private static IUIdGenerator uIdGenerator { get; } = new UIdGenerator();
         public static Dictionary<IID, IEventBus> eventBuses { get; } = new Dictionary<IID, IEventBus>(); // eventbus for each entity
         public static IEntityDictionary<IID, IFight> fights { get; } = new EntityDictionary<IID, IFight>();
         public static IDiamondModels models { get; } = new DiamondModels();

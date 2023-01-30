@@ -5,6 +5,7 @@ namespace souchy.celebi.eevee.face.util
     public interface IEventBus : IDisposable // : IEntity
     {
 
+        //public void subscribe<T>(string path, Action<T> action);
         public void subscribe(object subscriber, params string[] methodNames);
         public void unsubscribe(object subscriber, params string[] methodNames);
         public void publish(string path = "", params object[] param);

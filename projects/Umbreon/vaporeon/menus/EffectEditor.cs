@@ -1,6 +1,8 @@
 using Godot;
 using Godot.Sharp.Extras;
 using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.face.shared.models;
+using souchy.celebi.eevee.impl.util;
 using System;
 
 public partial class EffectEditor : Control
@@ -23,9 +25,12 @@ public partial class EffectEditor : Control
     public override void _Ready()
 	{
         this.OnReady();
-
-
 	}
+
+    [Subscribe(nameof(Vaporeon.CurrentEffect))]
+    public void onModelChange(IEffect model)
+    {
+    }
 
 
 }

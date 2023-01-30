@@ -16,7 +16,7 @@ namespace souchy.celebi.eevee.impl.util
 
         public EntityDictionary() { }
         private EntityDictionary(IID id) => entityUid = id;
-        public static IEntityDictionary<T, K> Create<T, K>() => new EntityDictionary<T, K>(Eevee.RegisterIID());
+        public static IEntityDictionary<TKey, TValue> Create() => new EntityDictionary<TKey, TValue>(Eevee.RegisterIID());
 
 
         public TValue Get(TKey key)

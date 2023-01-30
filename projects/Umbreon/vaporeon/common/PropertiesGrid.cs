@@ -85,11 +85,13 @@ namespace Umbreon.vaporeon.common
 
 
 
-        public static void GenerateStat(GridContainer container, StatType statType)
+        public static void GenerateStat(GridContainer container, StatType statType, IStat stat = null)
         {
             Label lb = new Label();
             lb.Text = Enum.GetName(statType);
-            IStat stat = statType.Create();
+            //IStat stat = statType.Create();
+            if (stat == null)
+                stat = statType.Create();
 
             Button btn = new Button();
             btn.ButtonUp += () =>

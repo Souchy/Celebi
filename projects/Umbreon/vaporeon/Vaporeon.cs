@@ -3,6 +3,7 @@ using Godot.Sharp.Extras;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.impl.util;
 using System;
 using Umbreon.common;
 using Umbreon.data.resources;
@@ -21,22 +22,50 @@ public static class VaporeonExtensions
 public partial class Vaporeon : Control
 {
     #region Vaporeon Properties
-    //[Inject]
-    //public IUIdGenerator uIdGenerator { get; set; }
+    public IEventBus bus = new EventBus();
     /// <summary>
     /// Object in memory to copy/paste
     /// </summary>
     public object CurrentObjectCopied { get; set; }
+    public static readonly List<Type> effectTypes = AppDomain.CurrentDomain.GetAssemblies()
+        .SelectMany(s => s.GetTypes())
+        .Where(p => typeof(IEffect).IsAssignableFrom(p))
+        .ToList();
+
     #endregion
 
-    #region Vaporeon Tabs
-    /// <summary>
-    /// Current Creature Editor Tab
-    /// </summary>
-    public ICreatureModel CurrentCreatureModel { get; set; }
-    public ISpellModel CurrentSpellModel { get; set; }
-    public IEffect CurrentEffect { get; set; }
+    #region Vaporeon Editor Tabs
+    private ICreatureModel _creatureModel;
+    private ISpellModel _spellModel;
+    private IEffect _effect;
+    public ICreatureModel CurrentCreatureModel { 
+        get => _creatureModel; 
+        set {
+            _creatureModel = value;
+            bus.publish(nameof(CurrentCreatureModel), CurrentCreatureModel);
+        } 
+    }
+    public ISpellModel CurrentSpellModel
+    {
+        get => _spellModel;
+        set
+        {
+            _spellModel = value;
+            bus.publish(nameof(CurrentSpellModel), CurrentSpellModel);
+        }
+    }
+    public IEffect CurrentEffect
+    {
+        get => _effect;
+        set
+        {
+            _effect = value;
+            bus.publish(nameof(CurrentEffect), CurrentEffect);
+        }
+    }
+    #endregion
 
+    #region Vaporeon List Tabs
     [NodePath("TabContainer/CreaturesList")]
     public ResourceList CreaturesList { get; set; }
     [NodePath("TabContainer/SpellsList")]
@@ -45,10 +74,6 @@ public partial class Vaporeon : Control
     public ResourceList EffectsList { get; set; }
     #endregion
 
-    public static readonly List<Type> effectTypes = AppDomain.CurrentDomain.GetAssemblies()
-        .SelectMany(s => s.GetTypes())
-        .Where(p => typeof(IEffect).IsAssignableFrom(p))
-        .ToList();
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()

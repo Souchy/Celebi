@@ -19,13 +19,20 @@ public partial class SmallResourceTree : VBoxContainer
     [Export]
     public string Title { get; set; }
 
-    #region Nodes
-    [NodePath]
-    public Label TitleLbl { get; set; }
+    #region Toolbar
     [NodePath("Buttons/AddBtn")]
     public Button AddBtn { get; set; }
     [NodePath("Buttons/DeleteBtn")]
     public Button DeleteBtn { get; set; }
+    [NodePath("Buttons/CopyBtn")]
+    public Button CopyBtn { get; set; }
+    [NodePath("Buttons/PasteBtn")]
+    public Button PasteBtn { get; set; }
+    #endregion
+
+    #region Nodes
+    [NodePath]
+    public Label TitleLbl { get; set; }
     [NodePath]
     public Tree Tree { get; set; }
     [NodePath]
@@ -38,11 +45,11 @@ public partial class SmallResourceTree : VBoxContainer
 	{
         this.OnReady();
         this.TitleLbl.Text = Title;
-        for(int i = 0; i < 30; i++)
-        {
-            TreeItem item = this.Tree.CreateItem();
-            item.SetText(0, "some text");
-        }
+        //for(int i = 0; i < 30; i++)
+        //{
+        //    TreeItem item = this.Tree.CreateItem();
+        //    item.SetText(0, "some text");
+        //}
         //item.AddButton(1, tooltipText: "some button");
 
         PopupMenu.IndexPressed += PopupMenu_IndexPressed;
@@ -50,25 +57,31 @@ public partial class SmallResourceTree : VBoxContainer
         {
             PopupMenu.AddItem(action);
         }
+
+
     }
 
-    public void onAddBtnClick()
-    {
-        //GD.Print("Click Add");
+    public event Action onAddBtnClick { 
+        add => this.AddBtn.Pressed += value;
+        remove => this.AddBtn.Pressed -= value;
     }
-    public void onCopyBtnClick()
+    public event Action onRemoveBtnClick
     {
-        //GD.Print("Click Copy");
+        add => this.AddBtn.Pressed += value;
+        remove => this.AddBtn.Pressed -= value;
     }
-    public void onPasteBtnClick()
+    public event Action onCopyBtnClick
     {
-        //GD.Print("Click Paste");
+        add => this.CopyBtn.Pressed += value;
+        remove => this.CopyBtn.Pressed -= value;
     }
-    public void onDeleteBtnClick()
+    public event Action onPasteBtnClick
     {
-        //GD.Print("Click Delete");
+        add => this.PasteBtn.Pressed += value;
+        remove => this.PasteBtn.Pressed -= value;
     }
 
+    /*
     public void onTreeItemDoubleClick()
     {
         GD.Print("Click Double");
@@ -77,6 +90,7 @@ public partial class SmallResourceTree : VBoxContainer
     {
         //GD.Print("Selected: " + Tree.GetSelected().GetText(0));
     }
+    */
 
     public void onTreeItemMouseSelected(Vector2 pos, int mouseButton)
     {

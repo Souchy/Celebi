@@ -15,7 +15,7 @@ namespace PlayfabClientTest
         {
             Console.WriteLine("Hello, World!");
 
-            var asd = Eevee.uIdGenerator;
+            //var asd = Eevee.uIdGenerator;
             var breed = new Breed();
             breed.throwEvent();
             //string txt = nameof(breed.Id);

@@ -6,6 +6,7 @@ using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.util;
 using Umbreon.data;
+using FileAccess = Godot.FileAccess;
 
 namespace Umbreon.common
 {
@@ -42,11 +43,11 @@ namespace Umbreon.common
 
         public void parseData()
         {
-            var creatureModelsText = Godot.FileAccess.Open("res://data/creatures.json", Godot.FileAccess.ModeFlags.Read).GetAsText();
+            var creatureModelsText = FileAccess.Open("res://data/creatures.json", FileAccess.ModeFlags.Read).GetAsText();
             creatureModelsData = JsonConvert.DeserializeObject<CreatureModelData[]>(creatureModelsText);
-            var creatureSkinsText = Godot.FileAccess.Open("res://data/skins.json", Godot.FileAccess.ModeFlags.Read).GetAsText();
+            var creatureSkinsText = FileAccess.Open("res://data/skins.json", FileAccess.ModeFlags.Read).GetAsText();
             creatureSkinsData = JsonConvert.DeserializeObject<CreatureSkinData[]>(creatureSkinsText);
-            var mapModelsDataText = Godot.FileAccess.Open("res://data/maps.json", Godot.FileAccess.ModeFlags.Read).GetAsText();
+            var mapModelsDataText = FileAccess.Open("res://data/maps.json", FileAccess.ModeFlags.Read).GetAsText();
             mapModelsData = JsonConvert.DeserializeObject<MapModelData[]>(mapModelsDataText);
 
 
@@ -98,24 +99,27 @@ namespace Umbreon.common
         private string getNameDic(object obj) => obj.GetType().Name + "s";
         public void save(object dic, string fileName)
         {
-            //var type = obj.GetType();
             var str = JsonConvert.SerializeObject(dic, Formatting.Indented);
-            var file = Godot.FileAccess.Open($"res://data/test/{fileName}.json", Godot.FileAccess.ModeFlags.Write);
+            var file = FileAccess.Open($"res://data/test/{fileName}.json", FileAccess.ModeFlags.Write);
             file.StoreString(str);
             file.Flush();
         }
         public IEntityDictionary<IID, string> loadI18n()
         {
-            string fileName = getNameI18n(this.i18nType);
-            var json = Godot.FileAccess.Open($"res://data/test/{fileName}.json", Godot.FileAccess.ModeFlags.Read).GetAsText();
+            string fileName = $"res://data/test/{getNameI18n(this.i18nType)}.json";
+            var file = FileAccess.Open(fileName, FileAccess.ModeFlags.ReadWrite);
+            var json = file.GetAsText();
             var data = JsonConvert.DeserializeObject<IEntityDictionary<IID, string>>(json);
             return data;
         }
-        public T load<T>(T dic)
+        public IEntityDictionary<IID, V> load<V>(IEntityDictionary<IID, V> dic)
         {
-            string fileName = getNameDic(dic);
-            var json = Godot.FileAccess.Open($"res://data/test/{fileName}.json", Godot.FileAccess.ModeFlags.Read).GetAsText();
-            var data = JsonConvert.DeserializeObject<T>(json);
+            string fileName = $"res://data/test/{typeof(V).Name.Substring(1)}s.json";
+            var file = FileAccess.Open(fileName, FileAccess.ModeFlags.ReadWrite);
+            var json = file.GetAsText();
+            var data = JsonConvert.DeserializeObject<IEntityDictionary<IID, V>>(json);
+            GD.Print($"Parser.load: {fileName} = {data}");
+
             return data;
         }
         #endregion

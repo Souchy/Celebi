@@ -7,6 +7,7 @@ using Umbreon.common;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.impl.util;
 
 public partial class SpellEditor : Control
 {
@@ -37,7 +38,12 @@ public partial class SpellEditor : Control
 
         // StatType
         // CostsGrid.AddChild();
+        update();
+    }
 
+    [Subscribe(nameof(Vaporeon.CurrentSpellModel))]
+    public void onModelChange(ISpellModel model)
+    {
         update();
     }
 
