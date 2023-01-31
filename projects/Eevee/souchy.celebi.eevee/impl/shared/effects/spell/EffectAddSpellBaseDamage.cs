@@ -10,9 +10,9 @@ namespace souchy.celebi.eevee.face.shared.effects.spell
     public class EffectAddSpellBaseDamage : Effect, IEffectAddSpellBaseDamage
     {
 
-        public EffectAddSpellBaseDamage() { }
+        private EffectAddSpellBaseDamage() { }
         private EffectAddSpellBaseDamage(IID id) : base(id) { }
-        public static IEffectAddSpellBaseDamage Create() => new EffectAddSpellBaseDamage(Eevee.RegisterIID());
+        public static IEffectAddSpellBaseDamage Create() => new EffectAddSpellBaseDamage(Eevee.RegisterIID<IEffect>());
 
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)
         {

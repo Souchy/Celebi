@@ -14,9 +14,9 @@ namespace souchy.celebi.eevee.face.shared.effects.move
         public IValue<IPosition> center { get; set; }
 
 
-        public EffectTeleportSymmetrically() { }
+        private EffectTeleportSymmetrically() { }
         private EffectTeleportSymmetrically(IID id) : base(id) { }
-        public static IEffectTeleportSymmetrically Create() => new EffectTeleportSymmetrically(Eevee.RegisterIID());
+        public static IEffectTeleportSymmetrically Create() => new EffectTeleportSymmetrically(Eevee.RegisterIID<IEffect>());
 
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)
         {

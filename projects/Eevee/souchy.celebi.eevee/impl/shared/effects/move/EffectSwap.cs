@@ -10,9 +10,9 @@ namespace souchy.celebi.eevee.face.shared.effects.move
     public class EffectSwap : Effect, IEffectSwap
     {
 
-        public EffectSwap() { }
+        private EffectSwap() { }
         private EffectSwap(IID id) : base(id) { }
-        public static IEffectSwap Create() => new EffectSwap(Eevee.RegisterIID());
+        public static IEffectSwap Create() => new EffectSwap(Eevee.RegisterIID<IEffect>());
 
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)
         {

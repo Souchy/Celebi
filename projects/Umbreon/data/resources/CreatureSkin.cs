@@ -19,16 +19,19 @@ namespace Umbreon.data.resources
         public Dictionary<IID, IID> effectSkins { get; set; } // FIXME This should go inside ISpellSkin
 
 
-        public CreatureSkin() { }
-        private CreatureSkin(IID id) => entityUid = id;
-        public static ICreatureSkin Create() => new CreatureSkin(Eevee.RegisterIID())
+        private CreatureSkin() { }
+        public static ICreatureSkin Create() => new CreatureSkin()
         {
-            nameId = Eevee.RegisterIID(),
-            descriptionId = Eevee.RegisterIID(),
+            entityUid = Eevee.RegisterIID<ICreatureSkin>(),
+            nameId = Eevee.RegisterIID<string>(),
+            descriptionId = Eevee.RegisterIID<string>(),
         };
 
         public void Dispose()
         {
+            Eevee.DisposeIID<ICreatureSkin>(entityUid);
+            Eevee.DisposeIID<string>(nameId);
+            Eevee.DisposeIID<string>(descriptionId);
             throw new NotImplementedException();
         }
 

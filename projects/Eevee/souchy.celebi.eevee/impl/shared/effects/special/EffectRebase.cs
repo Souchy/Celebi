@@ -14,9 +14,9 @@ namespace souchy.celebi.eevee.face.shared.effects.special
     public class EffectRebase : Effect, IEffectRebase
     {
 
-        public EffectRebase() { }
+        private EffectRebase() { }
         private EffectRebase(IID id) => entityUid = id;
-        public static IEffectRebase Create() => new EffectRebase(Eevee.RegisterIID());
+        public static IEffectRebase Create() => new EffectRebase(Eevee.RegisterIID<IEffect>());
 
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)
         {

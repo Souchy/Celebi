@@ -1,4 +1,5 @@
-﻿using souchy.celebi.eevee.face.objects.stats;
+﻿using souchy.celebi.eevee.face.entity;
+using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.objects.statuses;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
@@ -11,11 +12,11 @@ namespace souchy.celebi.eevee.interfaces.statuses
     {
         public List<IID> cellIds { get; set; }
 
-        public Trap() { }
+        private Trap() { }
         private Trap(IID id) => entityUid = id;
-        public static ITrap Create() => new Trap(Eevee.RegisterIID());
+        public static new ITrap Create() => new Trap(Eevee.RegisterIID<ITrap>());
 
-        public void Dispose()
+        public new void Dispose()
         {
             base.Dispose();
             throw new NotImplementedException();

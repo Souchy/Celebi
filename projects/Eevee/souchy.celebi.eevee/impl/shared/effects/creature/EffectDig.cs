@@ -13,9 +13,9 @@ namespace souchy.celebi.eevee.face.shared.effects.creature
     {
         public IValue<int> depth { get; set; }
 
-        public EffectDig() { }
+        private EffectDig() { }
         private EffectDig(IID id) : base(id) { }
-        public static IEffectDig Create() => new EffectDig(Eevee.RegisterIID());
+        public static IEffectDig Create() => new EffectDig(Eevee.RegisterIID<IEffect>());
 
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)
         {

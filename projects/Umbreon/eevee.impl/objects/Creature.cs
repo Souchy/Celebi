@@ -1,5 +1,6 @@
 ﻿using souchy.celebi.eevee;
 using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
@@ -25,12 +26,13 @@ namespace Umbreon.eevee.impl.objects
         public Dictionary<ContextType, IContext> contexts { get; set; }
 
 
-        public Creature() { }
+        private Creature() { }
         private Creature(IID id) => entityUid = id;
-        public static ICreature Create() => new Creature(Eevee.RegisterIID());
+        public static ICreature Create() => new Creature(Eevee.RegisterIID<ICreature>());
 
         public void Dispose()
         {
+            Eevee.DisposeIID<ICreature>(entityUid);
             throw new NotImplementedException();
         }
     }

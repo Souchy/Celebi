@@ -38,9 +38,9 @@ namespace souchy.celebi.eevee.face.shared.effects.special
         public bool boolAnyTarget { get; set; }
 
 
-        public EffectGetValue() { }
+        private EffectGetValue() { }
         private EffectGetValue(IID id) : base(id) { }
-        public static IEffectGetValue Create() => new EffectGetValue(Eevee.RegisterIID());
+        public static IEffectGetValue Create() => new EffectGetValue(Eevee.RegisterIID<IEffect>());
 
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)
         {

@@ -22,9 +22,9 @@ namespace souchy.celebi.eevee.face.shared.effects.special
         //      so if you effect P already has a bunch of targets, they will be listed in the context
         //      and you can reuse them in your children
 
-        public EffectCopyZone() { }
+        private EffectCopyZone() { }
         private EffectCopyZone(IID id) : base(id) { }
-        public static IEffectCopyZone Create() => new EffectCopyZone(Eevee.RegisterIID());
+        public static IEffectCopyZone Create() => new EffectCopyZone(Eevee.RegisterIID<IEffect>());
 
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)
         {

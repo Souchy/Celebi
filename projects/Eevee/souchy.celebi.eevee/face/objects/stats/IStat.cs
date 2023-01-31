@@ -7,7 +7,7 @@ namespace souchy.celebi.eevee.face.objects.stats
     public interface IStat : IEntity
     {
 
-        public StatType StatType { get; init; }
+        public StatType statId { get; init; }
         //public StatValueType valueType { get; }
         //public int get();
         //public int set(int value);

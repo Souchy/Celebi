@@ -8,13 +8,13 @@ namespace souchy.celebi.eevee.impl.stats
 {
     public class Stats : IStats
     {
-        public IID entityUid { get; set; } //= Eevee.RegisterIID();
-        public IEntityDictionary<StatType, IStat> stats { get; init; } = new EntityDictionary<StatType, IStat>();
+        public IID entityUid { get; set; } 
+        public IEntityDictionary<StatType, IStat> stats { get; init; } = EntityDictionary<StatType, IStat>.Create();
 
 
         public Stats() { }
         private Stats(IID id) => entityUid = id;
-        public static IStats Create() => new Stats(Eevee.RegisterIID());
+        public static IStats Create() => new Stats(Eevee.RegisterIID<IStats>());
 
 
         public IStat get(StatType statId)
@@ -25,10 +25,10 @@ namespace souchy.celebi.eevee.impl.stats
         {
             return (T) stats.Get(statId);
         }
-        public void Add(StatType statId, IStat value)
+        public void Add(IStat value) // StatType statId, 
         {
-            stats.Add(statId, value);
-            this.GetEventBus().publish(Enum.GetName(statId), this, value);
+            stats.Add(value.statId, value);
+            this.GetEntityBus().publish(Enum.GetName(value.statId), this, value);
         }
         public bool has(StatType statId)
         {
@@ -39,7 +39,7 @@ namespace souchy.celebi.eevee.impl.stats
         public void Dispose()
         {
             stats.Clear();
-            Eevee.DisposeIID(this);
+            Eevee.DisposeIID<IStats>(entityUid);
         }
 
     }

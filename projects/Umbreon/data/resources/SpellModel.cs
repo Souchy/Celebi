@@ -20,16 +20,31 @@ namespace Umbreon.data.resources
         public HashSet<IID> effectIds { get; set; }
 
         public SpellModel() { }
-        private SpellModel(IID id) => entityUid = id;
-        public static ISpellModel Create() => new SpellModel(Eevee.RegisterIID())
-        {
-            nameId = Eevee.RegisterIID(),
-            descriptionId = Eevee.RegisterIID(),
+        //private SpellModel(IID id) => entityUid = id;
+        public static ISpellModel Create() => new SpellModel() //Eevee.RegisterIID())
+        {              
+            //entityUid = Eevee.RegisterIID(),  
+            //modelUid = Eevee.RegisterModel<ISpellModel>()   // type id
+            entityUid = Eevee.RegisterIID<ISpellModel>(),
+
+            nameId = Eevee.RegisterIID<string>(),         // string type id (we want continuity in i18n ids)
+            descriptionId = Eevee.RegisterIID<string>(), 
+
+            // Eevee.RegisterIID(),
+            //Eevee.RegisterIID(this),
+            //Eevee.RegisterIID(nameId),
+            //Eevee.RegisterType(this)
+            //Eevee.RegisterString()
         };
 
 
         public void Dispose()
         {
+            //Eevee.DisposeIID(this);
+
+            Eevee.DisposeIID<ISpellModel>(entityUid);
+            Eevee.DisposeIID<string>(nameId);
+            Eevee.DisposeIID<string>(descriptionId);
         }
 
     }

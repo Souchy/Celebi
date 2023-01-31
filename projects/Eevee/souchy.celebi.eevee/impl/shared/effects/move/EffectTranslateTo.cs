@@ -14,9 +14,9 @@ namespace souchy.celebi.eevee.face.shared.effects.move
         public IValue<IPosition> position { get; set; }
 
 
-        public EffectTranslateTo() { }
+        private EffectTranslateTo() { }
         private EffectTranslateTo(IID id) : base(id) { }
-        public static IEffectTranslateTo Create() => new EffectTranslateTo(Eevee.RegisterIID());
+        public static IEffectTranslateTo Create() => new EffectTranslateTo(Eevee.RegisterIID<IEffect>());
 
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)
         {

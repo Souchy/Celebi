@@ -257,10 +257,10 @@ namespace souchy.celebi.eevee.enums
         public static IStat Create(this StatValueType valueType, StatType st) =>
             valueType switch
             {
-                StatValueType.Simple => new StatSimple(st),
-                StatValueType.Detailed => new StatDetailed(st),
-                StatValueType.Bool => new StatBool(st),
-                StatValueType.Resource => new StatResource(st),
+                StatValueType.Simple => StatSimple.Create(st), //new StatSimple(st),
+                StatValueType.Detailed => StatDetailed.Create(st), //new StatDetailed(st),
+                StatValueType.Bool => StatBool.Create(st), //new StatBool(st),
+                StatValueType.Resource => StatResource.Create(st), //new StatResource(st),
                 _ => throw new Exception()
             };
     }

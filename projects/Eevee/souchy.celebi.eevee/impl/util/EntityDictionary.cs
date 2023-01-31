@@ -14,9 +14,9 @@ namespace souchy.celebi.eevee.impl.util
         public IEnumerable<KeyValuePair<TKey, TValue>> Pairs => this;
 
 
-        public EntityDictionary() { }
+        private EntityDictionary() { }
         private EntityDictionary(IID id) => entityUid = id;
-        public static IEntityDictionary<TKey, TValue> Create() => new EntityDictionary<TKey, TValue>(Eevee.RegisterIID());
+        public static IEntityDictionary<TKey, TValue> Create() => new EntityDictionary<TKey, TValue>(Eevee.RegisterIID<IEntityDictionary<TKey, TValue>>());
 
 
         public TValue Get(TKey key)
@@ -30,23 +30,21 @@ namespace souchy.celebi.eevee.impl.util
         public void Set(TKey key, TValue value)
         {
             this[key] = value;
-            this.GetEventBus().publish(nameof(Set), this, key, value); // this.GetType().Name + 
+            this.GetEntityBus().publish(nameof(Set), this, key, value);
         }
 
-        public void Add(TKey key, TValue value)
+        public new void Add(TKey key, TValue value)
         {
             base.Add(key, value);
-            this.GetEventBus().publish(nameof(Add), this, key, value); // this.GetType().Name + 
+            this.GetEntityBus().publish(nameof(Add), this, key, value); 
         }
         public void AddAll(IEntityDictionary<TKey, TValue> dictionary)
         {
             foreach(var pair in dictionary.Pairs)
-            {
                 Add(pair.Key, pair.Value);
-            }
         }
 
-        public bool Remove(TKey key)
+        public new bool Remove(TKey key)
         {
             TValue? val;
             base.TryGetValue(key, out val);
@@ -56,7 +54,7 @@ namespace souchy.celebi.eevee.impl.util
                 return result;
             } finally
             {
-                this.GetEventBus().publish(nameof(Remove), this, key, val); // this.GetType().Name + 
+                this.GetEntityBus().publish(nameof(Remove), this, key, val); // this.GetType().Name + 
                 if (val is IDisposable dis)
                     dis.Dispose();
             }
@@ -71,7 +69,7 @@ namespace souchy.celebi.eevee.impl.util
             }
         }
 
-        public void Clear()
+        public new void Clear()
         {
             foreach (var k in Keys.ToList())
                 Remove(k);
@@ -103,7 +101,7 @@ namespace souchy.celebi.eevee.impl.util
             //        dis.Dispose();
             Remove(v => true);
             this.Clear();
-            Eevee.DisposeIID(this);
+            Eevee.DisposeIID<IEntityDictionary<TKey, TValue>>(entityUid);
         }
 
     }

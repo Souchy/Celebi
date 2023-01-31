@@ -1,4 +1,5 @@
 ﻿using souchy.celebi.eevee.face.conditions;
+using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.compiledeffects;
 using souchy.celebi.eevee.face.objects.controllers;
@@ -17,9 +18,9 @@ namespace souchy.celebi.eevee.face.shared.effects.status
         public IValue<int> dispellTurns { get; set; }
 
 
-        public EffectDispellStatus() { }
+        private EffectDispellStatus() { }
         private EffectDispellStatus(IID id) : base(id) { }
-        public static IEffectDispellStatus Create() => new EffectDispellStatus(Eevee.RegisterIID());
+        public static IEffectDispellStatus Create() => new EffectDispellStatus(Eevee.RegisterIID<IEffect>());
 
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)
         {

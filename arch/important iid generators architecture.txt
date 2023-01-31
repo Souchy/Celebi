@@ -1,4 +1,7 @@
 
+JSON initialization for ids -> eventbuses 
+JSONConvert IIDs to string
+
 Actually Vaporeon environment is a little different from the game client/server
 	- Game doesn't need eventbuses on models nor strings
 	- So maybe we do Vaporeon environment in addition to Eevee for all of this

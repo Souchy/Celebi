@@ -6,11 +6,11 @@ namespace UmbreonUnitTests
 {
     public class TestEntity : IEntity
     {
-        public IID entityUid { get; set; } = Eevee.RegisterIID();
+        public IID entityUid { get; set; } = Eevee.RegisterIID<IEntity>();
 
         public void Dispose()
         {
-            Eevee.DisposeIID(this);
+            Eevee.DisposeIID<IEntity>(entityUid);
         }
     }
 }

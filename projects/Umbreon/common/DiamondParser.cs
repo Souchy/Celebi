@@ -1,12 +1,15 @@
 ﻿using Godot;
 using Newtonsoft.Json;
 using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.face.entity;
+using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.util;
 using Umbreon.data;
 using FileAccess = Godot.FileAccess;
+
 
 namespace Umbreon.common
 {
@@ -34,11 +37,11 @@ namespace Umbreon.common
         {
             parseData();
             // FIXME Autosave for Vaporeon only
-            Eevee.models.creatureModels.GetEventBus().subscribe(this);
-            Eevee.models.spellModels.GetEventBus().subscribe(this);
-            Eevee.models.statusModels.GetEventBus().subscribe(this);
-            Eevee.models.effects.GetEventBus().subscribe(this); // , nameof(onAddModel), nameof(onSetModel), nameof(onRemoveModel));
-            Eevee.models.i18n.GetEventBus().subscribe(this, nameof(onAddI18n), nameof(onSetI18n), nameof(onRemoveI18n));
+            Eevee.models.creatureModels.GetEntityBus().subscribe(this);
+            Eevee.models.spellModels.GetEntityBus().subscribe(this);
+            Eevee.models.statusModels.GetEntityBus().subscribe(this);
+            Eevee.models.effects.GetEntityBus().subscribe(this); // , nameof(onAddModel), nameof(onSetModel), nameof(onRemoveModel));
+            Eevee.models.i18n.GetEntityBus().subscribe(this, nameof(onAddI18n), nameof(onSetI18n), nameof(onRemoveI18n));
         }
 
         public void parseData()
@@ -51,27 +54,25 @@ namespace Umbreon.common
             mapModelsData = JsonConvert.DeserializeObject<MapModelData[]>(mapModelsDataText);
 
 
-            //var tgas = Godot.FileAccess.Open("res://data/test/{fileName}.json", Godot.FileAccess.ModeFlags.Read).GetAsText();
-            //var asd = JsonConvert.DeserializeObject<IEntityDictionary<IID, ICreatureModel>>(tgas);
-
+            // Load and register entities
             var creatureModels = load(Eevee.models.creatureModels);
-            creatureModels.ForEach((k, v) => Eevee.RegisterIID(k));
+            creatureModels.ForEach((k, v) => Eevee.RegisterIID<ICreatureModel>(k));
             Eevee.models.creatureModels.AddAll(creatureModels);
 
             var spellModels = load(Eevee.models.spellModels);
-            spellModels.ForEach((k, v) => Eevee.RegisterIID(k));
+            spellModels.ForEach((k, v) => Eevee.RegisterIID<ISpellModel>(k));
             Eevee.models.spellModels.AddAll(spellModels);
 
             var effects = load(Eevee.models.effects);
-            effects.ForEach((k, v) => Eevee.RegisterIID(k));
+            effects.ForEach((k, v) => Eevee.RegisterIID<IEffect>(k));
             Eevee.models.effects.AddAll(effects);
 
             var statusModels = load(Eevee.models.statusModels);
-            statusModels.ForEach((k, v) => Eevee.RegisterIID(k));
+            statusModels.ForEach((k, v) => Eevee.RegisterIID<IStatusModel>(k));
             Eevee.models.statusModels.AddAll(statusModels);
 
             var i18n = loadI18n();
-            i18n.ForEach((k, v) => Eevee.RegisterIID(k));
+            i18n.ForEach((k, v) => Eevee.RegisterIID<string>(k));
             Eevee.models.i18n.AddAll(i18n);
         }
 

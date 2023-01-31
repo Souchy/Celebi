@@ -38,7 +38,7 @@ public partial class CreatureEditor : Control
         this.OnReady();
         this.GetVaporeon().bus.subscribe(this);
 
-        Eevee.models.i18n.GetEventBus().subscribe(this, nameof(onNameChanged));
+        Eevee.models.i18n.GetEntityBus().subscribe(this, nameof(onNameChanged));
 
         Spells.onAddBtnClick += Spells_onAddBtnClick;
         //this.creature.GetEventBus().subscribe(Spells); //.baseSpells.sub

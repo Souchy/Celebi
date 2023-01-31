@@ -1,4 +1,5 @@
 ﻿using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.shared.effects.spell;
 using souchy.celebi.eevee.face.util;
@@ -18,12 +19,13 @@ namespace souchy.celebi.eevee.impl.objects
         public List<IID> statuses { get; init; }
         public Dictionary<ContextType, IContext> contexts { get; set; }
 
-        public Cell() { }
+        private Cell() { }
         private Cell(IID id) => this.entityUid = id;
-        public static ICell Create() => new Cell(Eevee.RegisterIID());
+        public static ICell Create() => new Cell(Eevee.RegisterIID<ICell>());
 
         public void Dispose()
         {
+            Eevee.DisposeIID<ICell>(entityUid);
             throw new NotImplementedException();
         }
 

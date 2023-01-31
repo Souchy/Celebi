@@ -14,9 +14,9 @@ namespace souchy.celebi.eevee.face.shared.effects.creature
         public IValue<int> height { get; set; }
 
 
-        public EffectFly() { }
+        private EffectFly() { }
         private EffectFly(IID id) : base(id) { }
-        public static IEffectFly Create() => new EffectFly(Eevee.RegisterIID());
+        public static IEffectFly Create() => new EffectFly(Eevee.RegisterIID<IEffect>());
 
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)
         {

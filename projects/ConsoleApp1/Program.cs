@@ -37,14 +37,14 @@ namespace PlayfabClientTest
     {
         public int Id { get; set; }
         public static string asdf = "";
-        public IID entityUid { get; set; } = Eevee.RegisterIID();
+        public IID entityUid { get; set; } = Eevee.RegisterIID<string>();
         public IStats stats = new Stats();
         public Breed()
         {
             //stats.GetEventBus().subscribe(this); // register All
-            stats.GetEventBus().subscribe(this, "onLifeChanged", "onLifeChanged"); // register specific methods
-            stats.GetEventBus().subscribe(this, "onLifeChanged", "onLifeChanged"); // registers only once per subscribe(), but can be registered twice if subscribe() twice
-            stats.GetEventBus().unsubscribe(this); // unsubscribes all subscriptions even if registered multiple times
+            stats.GetEntityBus().subscribe(this, "onLifeChanged", "onLifeChanged"); // register specific methods
+            stats.GetEntityBus().subscribe(this, "onLifeChanged", "onLifeChanged"); // registers only once per subscribe(), but can be registered twice if subscribe() twice
+            stats.GetEntityBus().unsubscribe(this); // unsubscribes all subscriptions even if registered multiple times
         }
 
 
@@ -57,14 +57,15 @@ namespace PlayfabClientTest
 
         public void throwEvent()
         {
-            stats.set(StatType.Life, new StatSimple()
-            {
-                value = 5
-            });
+            stats.Add(StatSimple.Create(StatType.Life, 5));
+            //stats.Add(new StatSimple(StatType.Life)
+            //{
+            //    value = 5
+            //});
             //this.GetEventBus().publish(nameof(StatType.Life), stats, );
         }
 
-        public void Dispose() => Eevee.DisposeIID(this);
+        public void Dispose() => Eevee.DisposeIID<IEntity>(entityUid);
     }
 
 }

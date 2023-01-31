@@ -10,6 +10,11 @@ using souchy.celebi.eevee.interfaces;
 
 namespace souchy.celebi.eevee.face.objects
 {
+
+    /// <summary>
+    /// En fait faut juste traiter les effets préprogrammés dans les spells/status comme des instances
+    /// au même titre que des nouvelles instances pour les status on runtime
+    /// </summary>
     public interface IEffect : IEntityModeled, IFightEntity
     {
         public ICondition sourceCondition { get; set; }

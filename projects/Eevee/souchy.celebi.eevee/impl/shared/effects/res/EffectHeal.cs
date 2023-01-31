@@ -20,9 +20,10 @@ namespace souchy.celebi.eevee.face.shared.effects.res
         public IValue<int> Value { get; set; }
 
 
-        public EffectHeal() { }
+        private EffectHeal() { }
         private EffectHeal(IID id) : base(id) { }
-        public static IEffectHeal Create() => new EffectHeal(Eevee.RegisterIID());
+        public static IEffectHeal Create() => new EffectHeal(Eevee.RegisterIID<IEffect>());
+
 
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)
         {
@@ -57,7 +58,8 @@ namespace souchy.celebi.eevee.face.shared.effects.res
 
 
             IStatSimple currentLife = targetStats.get<IStatSimple>(StatType.Life);
-            var newLife = new StatSimple(currentLife.value + heal);
+            IStatSimple newLife = (IStatSimple) currentLife.copy(); // new StatSimple(StatType.Life, currentLife.value + heal);
+            newLife.value += heal;
             var compiled = new CompiledEffectStat(StatType.Life, newLife);
             return compiled;
         }

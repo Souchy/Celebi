@@ -1,4 +1,6 @@
-﻿using souchy.celebi.eevee.face.objects.compiledeffects;
+﻿using souchy.celebi.eevee.face.entity;
+using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.face.objects.compiledeffects;
 using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.shared.effects;
 using souchy.celebi.eevee.face.shared.effects.spell;
@@ -15,9 +17,9 @@ namespace souchy.celebi.eevee.impl.shared.effects
     public class EffectBase : Effect, IEffectBase
     {
 
-        public EffectBase() { }
+        private EffectBase() { }
         private EffectBase(IID id) : base(id) { }
-        public static IEffectBase Create() => new EffectBase(Eevee.RegisterIID());
+        public static IEffectBase Create() => new EffectBase(Eevee.RegisterIID<IEffect>());
 
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)
         {

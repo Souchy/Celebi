@@ -1,4 +1,5 @@
-﻿using souchy.celebi.eevee.face.objects;
+﻿using souchy.celebi.eevee.face.entity;
+using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.stats;
@@ -20,13 +21,14 @@ namespace souchy.celebi.eevee.impl.objects
         public int numberOfCastsThisTurn { get; set; }
         public Dictionary<IID, int> numberOfCastPerEntityThisTurn { get; set; }
 
-        public Spell() { }
+        private Spell() { }
         // TODO should take fight id surely
         private Spell(IID id)  => entityUid = id;
-        public static ISpell Create() => new Spell(Eevee.RegisterIID());
+        public static ISpell Create() => new Spell(Eevee.RegisterIID<ISpell>());
 
         public void Dispose()
         {
+            Eevee.DisposeIID<ISpell>(entityUid);
             throw new NotImplementedException();
         }
     }

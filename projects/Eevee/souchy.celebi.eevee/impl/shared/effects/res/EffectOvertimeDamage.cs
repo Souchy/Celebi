@@ -11,9 +11,9 @@ namespace souchy.celebi.eevee.face.shared.effects.res
     public class EffectOvertimeDamage : Effect, IEffectOvertimeDamage
     {
 
-        public EffectOvertimeDamage() { }
+        private EffectOvertimeDamage() { }
         private EffectOvertimeDamage(IID id) : base(id) { }
-        public static IEffectOvertimeDamage Create() => new EffectOvertimeDamage(Eevee.RegisterIID());
+        public static IEffectOvertimeDamage Create() => new EffectOvertimeDamage(Eevee.RegisterIID<IEffect>());
 
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)
         {

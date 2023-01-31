@@ -9,7 +9,7 @@ namespace souchy.celebi.eevee.impl.values
 {
     public class Value<T> : IValue<T>
     {
-        public T value { get; init; }
+        public T value { get; set; }
 
         public Value(T v)
         {

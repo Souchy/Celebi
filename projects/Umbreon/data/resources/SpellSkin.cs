@@ -15,12 +15,13 @@ namespace Umbreon.data.resources
         public IID behaviourScript { get; set; }
 
 
-        public SpellSkin() { }
+        private SpellSkin() { }
         private SpellSkin(IID id) => entityUid = id;
-        public static ISpellSkin Create() => new SpellSkin(Eevee.RegisterIID());
+        public static ISpellSkin Create() => new SpellSkin(Eevee.RegisterIID<ISpellSkin>());
 
         public void Dispose()
         {
+            Eevee.DisposeIID<ISpellSkin>(entityUid);
             throw new NotImplementedException();
         }
 

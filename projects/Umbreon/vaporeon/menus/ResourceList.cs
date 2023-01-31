@@ -93,20 +93,20 @@ public partial class ResourceList : Control
         if (this.resourceType == ResourceListType.ICreatureModel)
         {
             util = new CreatureListUtil(this);
-            Eevee.models.creatureModels.GetEventBus().subscribe(util);
+            Eevee.models.creatureModels.GetEntityBus().subscribe(util);
             //Eevee.models.creatureSkins.GetEventBus().subscribe(util);
         }
         if (this.resourceType == ResourceListType.ISpellModel)
         {
             util = new SpellListUtil(this);
-            Eevee.models.spellModels.GetEventBus().subscribe(util);
+            Eevee.models.spellModels.GetEntityBus().subscribe(util);
             //Eevee.models.spellSkins.GetEventBus().subscribe(util);
             // fill list
         }
         if (this.resourceType == ResourceListType.IEffect)
         {
             util = new EffectListUtil(this);
-            Eevee.models.effects.GetEventBus().subscribe(util);
+            Eevee.models.effects.GetEntityBus().subscribe(util);
             //Eevee.models.effectSkins.GetEventBus().subscribe(util);
         }
 
@@ -406,7 +406,7 @@ public class EffectListUtil : IListUtilGeneric<IEffect>
         Type effectType = Vaporeon.effectTypes[(int) index];
         //IEffect effect = (IEffect) Activator.CreateInstance(effectType, Eevee.RegisterIID()); //, Eevee.uIdGenerator);
         var createMethod = effectType.GetMethod(nameof(EffectBase.Create), BindingFlags.Static);
-        IEffect effect = (IEffect) createMethod.Invoke(null, new object[] { Eevee.RegisterIID() });
+        IEffect effect = (IEffect) createMethod.Invoke(null, new object[0]); //, new object[] { Eevee.RegisterIID() });
 
         Eevee.models.effects.Add(effect.entityUid, effect);
     }

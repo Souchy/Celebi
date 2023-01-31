@@ -19,13 +19,14 @@ namespace souchy.celebi.eevee.impl.objects
         public List<ITrigger> triggers { get; set; }
 
 
-        public Effect() { }
+        protected Effect() { }
         protected Effect(IID id) => entityUid = id;
 
         public abstract ICompiledEffect compile(IFight fight, IID source, IID targetCell);
 
         public void Dispose()
         {
+            Eevee.DisposeIID<IEffect>(entityUid);
             throw new NotImplementedException();
         }
     }

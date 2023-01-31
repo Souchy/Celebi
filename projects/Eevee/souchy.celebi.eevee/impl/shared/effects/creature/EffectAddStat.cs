@@ -18,9 +18,9 @@ namespace souchy.celebi.eevee.face.shared.effects.res
         public IStat stat { get; set; }
 
 
-        public EffectAddStat() { }
+        private EffectAddStat() { }
         private EffectAddStat(IID id) : base(id) { }
-        public static IEffectAddStat Create() => new EffectAddStat(Eevee.RegisterIID());
+        public static IEffectAddStat Create() => new EffectAddStat(Eevee.RegisterIID<IEffect>());
 
 
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)

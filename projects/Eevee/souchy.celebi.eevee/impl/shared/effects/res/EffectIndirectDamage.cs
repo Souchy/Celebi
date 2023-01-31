@@ -10,9 +10,9 @@ namespace souchy.celebi.eevee.face.shared.effects.res
     public class EffectIndirectDamage : Effect, IEffectIndirectDamage
     {
 
-        public EffectIndirectDamage() { }
+        private EffectIndirectDamage() { }
         private EffectIndirectDamage(IID id) => entityUid = id;
-        public static IEffectIndirectDamage Create() => new EffectIndirectDamage(Eevee.RegisterIID());
+        public static IEffectIndirectDamage Create() => new EffectIndirectDamage(Eevee.RegisterIID<IEffect>());
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)
         {
             throw new NotImplementedException();
