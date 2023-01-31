@@ -1,0 +1,58 @@
+
+Actually Vaporeon environment is a little different from the game client/server
+	- Game doesn't need eventbuses on models nor strings
+	- So maybe we do Vaporeon environment in addition to Eevee for all of this
+		- Dictionary<Type, Dictionary<IID, EventBus>> buses
+		- types: ICreatureModel, string...
+		- id = register(object) -> t = object.getType()    	or register<t>
+		- register(object, id)      				or register<t>(id)
+		- dispose(object, id)       				or dispose<t>(id)
+		- getbus(this, id)          				or getbus<t>(id)???
+
+So do a list of things we want to observe/update in Eevee vs in Vaporeon
+Eevee (all strings and entities under the same IdGenerator) :
+	- ICreature.Stats.x
+		- if we want to sub directly to the IStat objects
+		  we could assign the stat name to the Stat object in the Create method:
+			- StatType.Life.Create(): new StatResource(life)
+			- then we wouldn't have to create new Stat objects everytime we want to change a value
+			- so value {} can be set; instead of init;
+			- IStat just needs to be an IEntity to have an event bus and we're good
+	- IFightEntity.statusList
+		- IStatus { durationRemaining }
+	- ICreature.spellsList
+		- ISpell { charges, cooldown.. }
+
+Vaporeon (all models under different IdGenerators) :
+	- ICreatureModel, ISpellModel, IEffect
+
+
+
+
+ID per class type:
+	- creaturemodel ids go 1,2,3,4, same for spellmodels 1,2,3,4 etc
+	- need a IdGenerator chain for each type
+	- can use string ids
+	- fightEntities can all be jumbled together
+	- static IUidGenerator creatureModelUidGen = new UidGenerator(IDClassType.ICreatureModel)
+	- need to use a prefix of some sort in the ids to differentiate IEntities for each class type
+		- i.e. geteventbus(id) can't use "1" for creature and "1" for spell"
+		- so, for example could do "c1" for creature and "s1" for spell
+		- also can't rely on entity classes for logic because of i18n strings 
+		- could have generic Eevee.RegisterIID<T>()
+		- like RegisterIID<IEffect>, RegisterIID<ICreatureModel>
+		- or extension method: IDClassType.ICreatureModel.RegisterIID();
+
+
+
+IValue<T> {
+	public T value { get; set; }
+}
+
+le problème avec value.set c'est qu'on peut pas envoyer d'event pcq IStat n'est pas une Entity
+
+
+
+
+
+

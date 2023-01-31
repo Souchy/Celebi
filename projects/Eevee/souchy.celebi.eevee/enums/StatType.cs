@@ -253,14 +253,14 @@ namespace souchy.celebi.eevee.enums
         public static StatType GetStatType(this StateType stat) => 
             (StatType) Enum.Parse(typeof(StatType), Enum.GetName(stat));
         public static IStat Create(this StatType type) =>
-            type.GetProperties().valueType.Create();
-        public static IStat Create(this StatValueType type) =>
-            type switch
+            type.GetProperties().valueType.Create(type);
+        public static IStat Create(this StatValueType valueType, StatType st) =>
+            valueType switch
             {
-                StatValueType.Simple => new StatSimple(),
-                StatValueType.Detailed => new StatDetailed(),
-                StatValueType.Bool => new StatBool(),
-                StatValueType.Resource => new StatResource(),
+                StatValueType.Simple => new StatSimple(st),
+                StatValueType.Detailed => new StatDetailed(st),
+                StatValueType.Bool => new StatBool(st),
+                StatValueType.Resource => new StatResource(st),
                 _ => throw new Exception()
             };
     }

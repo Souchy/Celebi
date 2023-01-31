@@ -1,5 +1,6 @@
 ﻿using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.objects.stats;
+using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
 using System.Reflection.Metadata.Ecma335;
 
@@ -7,15 +8,16 @@ namespace souchy.celebi.eevee.impl.stats
 {
     public class StatResource : IStatResource
     {
-        //public StatValueType valueType => StatValueType.Resource;
+        public IID entityUid { get; set; }
+        public StatType StatType { get; init; }
 
-        public int current { get; init; }
-        public int currentMax { get; init; }
-        public int initialMax { get; init; }
+        public int current { get; set; } // init
+        public int currentMax { get; set; } // init
+        public int initialMax { get; set; } // init
 
         public (int current, int currentMax, int initialMax) value { 
             get => (current, currentMax, initialMax);
-            init
+            set //init
             {
                 this.current = value.current;
                 this.currentMax = value.currentMax;
@@ -23,16 +25,22 @@ namespace souchy.celebi.eevee.impl.stats
             }
         }
 
-        public StatResource() { }
-        public StatResource(int current, int currentMax, int initialMax)
+
+        public StatResource(StatType st) => this.StatType = st;
+        public StatResource(StatType st, int current, int currentMax, int initialMax) : this(st)
         {
             this.current = current;
             this.currentMax = currentMax;
             this.initialMax = initialMax;
         }
 
-        public IStat copy() => new StatResource(current, currentMax, initialMax);
+        public IStat copy() => new StatResource(StatType, current, currentMax, initialMax);
 
+        public void Dispose()
+        {
+            Eevee.DisposeIID(this);
+            throw new NotImplementedException();
+        }
     }
 
 }

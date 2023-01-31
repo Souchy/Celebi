@@ -7,15 +7,15 @@ namespace souchy.celebi.eevee.face.objects.stats
         /// <summary>
         /// Current value
         /// </summary>
-        public int current { get; init; }
+        public int current { get; set; }
         /// <summary>
         /// Current Max in the state of the fight, could be modified (+buffs, -erosion...)
         /// </summary>
-        public int currentMax { get; init; }
+        public int currentMax { get; set; }
         /// <summary>
         /// Initial Max at the start of the fight
         /// </summary>
-        public int initialMax { get; init; }
+        public int initialMax { get; set; }
         /// <summary>
         /// Computed value from (currentMax - current)
         /// </summary>

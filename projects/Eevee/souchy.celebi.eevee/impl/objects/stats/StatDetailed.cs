@@ -1,10 +1,15 @@
 ﻿using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.objects.stats;
+using souchy.celebi.eevee.face.util;
 
 namespace souchy.celebi.eevee.impl.stats
 {
     public class StatDetailed : IStatDetailed
     {
+        public StatType StatType { get; init; }
+        public IID entityUid { get; set; }
+
+
         public int baseFlat { get; init; }
         public int increasedPercent { get; init; }
         public int increasedFlat { get; init; }
@@ -17,11 +22,12 @@ namespace souchy.celebi.eevee.impl.stats
                 double step3 = 1 + step2 * morePercent / 100d;
                 return (int) step3;
             }
-            init { }
+            set { }
         }
 
-        public StatDetailed() { }
-        public StatDetailed(int baseFlat, int increasedPercent, int increasedFlat, int morePercent)
+
+        public StatDetailed(StatType st) => this.StatType = st;
+        public StatDetailed(StatType st, int baseFlat, int increasedPercent, int increasedFlat, int morePercent) : this(st)
         {
             this.baseFlat = baseFlat;
             this.increasedPercent = increasedPercent;
@@ -29,6 +35,11 @@ namespace souchy.celebi.eevee.impl.stats
             this.morePercent = morePercent;
         }
 
-        public IStat copy() => new StatDetailed(baseFlat, increasedPercent, increasedFlat, morePercent);
+        public IStat copy() => new StatDetailed(StatType, baseFlat, increasedPercent, increasedFlat, morePercent);
+
+        public void Dispose()
+        {
+            Eevee.DisposeIID(this);
+        }
     }
 }

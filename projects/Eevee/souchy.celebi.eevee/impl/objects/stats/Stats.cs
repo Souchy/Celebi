@@ -25,9 +25,9 @@ namespace souchy.celebi.eevee.impl.stats
         {
             return (T) stats.Get(statId);
         }
-        public void set(StatType statId, IStat value)
+        public void Add(StatType statId, IStat value)
         {
-            stats.Set(statId, value);
+            stats.Add(statId, value);
             this.GetEventBus().publish(Enum.GetName(statId), this, value);
         }
         public bool has(StatType statId)
