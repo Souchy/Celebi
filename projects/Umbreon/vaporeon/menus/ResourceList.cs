@@ -9,6 +9,7 @@ using souchy.celebi.eevee.face.shared.models.skins;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
+using souchy.celebi.eevee.impl.shared;
 using souchy.celebi.eevee.impl.shared.effects;
 using souchy.celebi.eevee.impl.util;
 using System;
@@ -285,13 +286,11 @@ public class CreatureListUtil : IListUtilGeneric<ICreatureModel>
         foreach (ICreatureModel creature in Eevee.models.creatureModels.Values)
             createChildNode(creature);
     }
-    public void createChildNode(ICreatureModel creatureModel)
+    public void createChildNode(ICreatureModel model)
     {
-        //var skin = Eevee.models.creatureSkins.Get(creatureModel.skins.First());
-        //var icon = skin.icon;
-        var name = Eevee.models.i18n.Get(creatureModel.nameId);
-        var desc = Eevee.models.i18n.Get(creatureModel.descriptionId);
-        list.addChild(name, new Color().Random(), creatureModel.entityUid);
+        var name = model.GetName();
+        var desc = model.GetDescription();
+        list.addChild(name.ToString(), new Color().Random(), model.entityUid);
     }
     public void onCreateBtn()
     {
@@ -299,12 +298,17 @@ public class CreatureListUtil : IListUtilGeneric<ICreatureModel>
         var creatureModel = CreatureModel.Create();
         creatureModel.skins.Add(creatureSkin.entityUid);
 
-        Eevee.models.i18n.Add(creatureSkin.nameId, "Name for: " + creatureSkin.entityUid);
-        Eevee.models.i18n.Add(creatureSkin.descriptionId, "Desc for: " + creatureSkin.entityUid);
-        Eevee.models.creatureSkins.Add(creatureSkin.entityUid, creatureSkin);
+        var name = StringEntity.Create("Name for: " + creatureSkin.entityUid);
+        creatureModel.nameId = name.entityUid;
+        creatureSkin.nameId = name.entityUid;
+        Eevee.models.i18n.Add(creatureSkin.nameId, name);
 
-        Eevee.models.i18n.Add(creatureModel.nameId, "Name for: " + creatureModel.entityUid);
-        Eevee.models.i18n.Add(creatureModel.descriptionId, "Desc for: " + creatureModel.entityUid);
+        var desc = StringEntity.Create("Desc for: " + creatureSkin.entityUid);
+        creatureModel.descriptionId = desc.entityUid;
+        creatureSkin.descriptionId = desc.entityUid;
+        Eevee.models.i18n.Add(creatureSkin.descriptionId, desc);
+
+        Eevee.models.creatureSkins.Add(creatureSkin.entityUid, creatureSkin);
         Eevee.models.creatureModels.Add(creatureModel.entityUid, creatureModel);
     }
     public void onRemoveBtn()
@@ -337,22 +341,29 @@ public class SpellListUtil : IListUtilGeneric<ISpellModel>
         foreach (ISpellModel spell in Eevee.models.spellModels.Values)
             createChildNode(spell);
     }
-    public void createChildNode(ISpellModel spell)
+    public void createChildNode(ISpellModel model)
     {
         // get the first skin for that spell
-        var skin = Eevee.models.spellSkins.Values.Where(skin => skin.spellModelUid == spell.entityUid).First();
+        var skin = Eevee.models.spellSkins.Values.Where(skin => skin.spellModelUid == model.entityUid).First();
         var icon = skin.icon;
-        var name = Eevee.models.i18n.Get(spell.nameId);
-        var desc = Eevee.models.i18n.Get(spell.descriptionId);
-        list.addChild(name, new Color().Random(), spell.entityUid);
+        var name = model.GetName(); //Eevee.models.i18n.Get(spell.nameId);
+        var desc = model.GetDescription(); //Eevee.models.i18n.Get(spell.descriptionId);
+        list.addChild(name.ToString(), new Color().Random(), model.entityUid);
     }
     public void onCreateBtn()
     {
         var spellmodel = SpellModel.Create();
-        var spellskin = SpellSkin.Create();
+        var spellskin = SpellSkin.Create(); // base skin
         spellskin.spellModelUid = spellmodel.entityUid;
-        Eevee.models.i18n.Add(spellmodel.nameId, "Name for: " + spellmodel.entityUid);
-        Eevee.models.i18n.Add(spellmodel.descriptionId, "Desc for: " + spellmodel.entityUid);
+
+        var name = StringEntity.Create("Name for: " + spellmodel.entityUid);
+        spellmodel.nameId = name.entityUid;
+        Eevee.models.i18n.Add(spellmodel.nameId, name);
+
+        var desc = StringEntity.Create("Desc for: " + spellmodel.entityUid);
+        spellmodel.descriptionId = desc.entityUid;
+        Eevee.models.i18n.Add(spellmodel.descriptionId, desc);
+
         Eevee.models.spellSkins.Add(spellskin.entityUid, spellskin);
         Eevee.models.spellModels.Add(spellmodel.entityUid, spellmodel);
     }
@@ -393,9 +404,9 @@ public class EffectListUtil : IListUtilGeneric<IEffect>
     public void createChildNode(IEffect effect)
     {
         IEffectModel model = Eevee.models.effectModels.Get(effect.modelUid);
-        var name = Eevee.models.i18n.Get(model.nameId);
-        var desc = Eevee.models.i18n.Get(model.descriptionId);
-        list.addChild(name, new Color().Random(), effect.entityUid);
+        var name = model.GetName(); 
+        var desc = model.GetDescription(); 
+        list.addChild(name.ToString(), new Color().Random(), effect.entityUid);
     }
     public void onCreateBtn()
     {
@@ -404,16 +415,15 @@ public class EffectListUtil : IListUtilGeneric<IEffect>
     private void EffectPopup_IndexPressed(long index)
     {
         Type effectType = Vaporeon.effectTypes[(int) index];
-        //IEffect effect = (IEffect) Activator.CreateInstance(effectType, Eevee.RegisterIID()); //, Eevee.uIdGenerator);
         var createMethod = effectType.GetMethod(nameof(EffectBase.Create), BindingFlags.Static);
-        IEffect effect = (IEffect) createMethod.Invoke(null, new object[0]); //, new object[] { Eevee.RegisterIID() });
+        IEffect effect = (IEffect) createMethod.Invoke(null, new object[0]);
+
+        //TODO IEffectSkin skin;
 
         Eevee.models.effects.Add(effect.entityUid, effect);
     }
     public void onRemoveBtn()
     {
-        //Node node = list.Container.GetChildren().First(c => c.GetMeta("selected").AsBool() == true);
-        //IID id = (IID) node.GetMeta("object").AsString();
         if (list.selectedItem == null) return;
         IID id = (IID) list.selectedItem.GetMeta("object").AsString();
         list.selectedItem = null;

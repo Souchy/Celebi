@@ -18,9 +18,10 @@ namespace souchy.celebi.eevee.impl.shared
         }
 
         private StringEntity() { }
-        public static StringEntity Create() => new StringEntity()
+        public static StringEntity Create(string val = "") => new StringEntity()
         {
-            entityUid = Eevee.RegisterIID<IStringEntity>()
+            entityUid = Eevee.RegisterIID<IStringEntity>(),
+            value = val
         };
 
         public void Dispose()
