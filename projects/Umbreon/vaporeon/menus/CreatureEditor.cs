@@ -60,11 +60,8 @@ public partial class CreatureEditor : Control
         var c = new Label();
         c.SetMeta("id", spell.entityUid.ToString());
         c.SetMeta("nameid", spell.nameId.ToString());
-        c.Text = Eevee.models.i18n.Get(spell.nameId);
-        //Eevee.models.i18n.GetEventBus().subscribe("set", ((EntityDictionary<IID, string> i18n, IID key, string val) args) => {
-        //    if(args.key.value == spell.nameId)
-        //        c.Text = Eevee.models.i18n.Get(spell.nameId);
-        //});
+        c.Text = spell.GetName().ToString(); //Eevee.models.i18n.Get(spell.nameId);
+
         Spells.Tree.AddChild(c);
     }
 
@@ -77,7 +74,7 @@ public partial class CreatureEditor : Control
                         .FirstOrDefault(n => n.HasMeta("nameid") &&  n.GetMeta("nameid").AsString() == key);
         if (child == null) return;
         var lbl = (Label) child.GetNode("Label");
-        lbl.Text = Eevee.models.i18n.Get(key);
+        lbl.Text = Eevee.models.i18n.Get(key).ToString();
     }
 
 }

@@ -3,6 +3,7 @@ using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
+using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.util;
 
 namespace souchy.celebi.eevee.face.shared.models
@@ -19,6 +20,9 @@ namespace souchy.celebi.eevee.face.shared.models
         public Dictionary<ResourceType, int> costs { get; set; }
         public ISpellProperties properties { get; set; }
         public HashSet<IID> effectIds { get; set; }
+
+        public IStringEntity GetName() => Eevee.models.i18n.Get(nameId);
+        public IStringEntity GetDescription() => Eevee.models.i18n.Get(descriptionId);
     }
 
     public interface ISpellProperties

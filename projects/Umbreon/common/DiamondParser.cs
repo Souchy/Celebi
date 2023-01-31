@@ -72,7 +72,7 @@ namespace Umbreon.common
             Eevee.models.statusModels.AddAll(statusModels);
 
             var i18n = loadI18n();
-            i18n.ForEach((k, v) => Eevee.RegisterIID<string>(k));
+            i18n.ForEach((k, v) => Eevee.RegisterIID<IStringEntity>(k));
             Eevee.models.i18n.AddAll(i18n);
         }
 
@@ -105,12 +105,12 @@ namespace Umbreon.common
             file.StoreString(str);
             file.Flush();
         }
-        public IEntityDictionary<IID, string> loadI18n()
+        public IEntityDictionary<IID, IStringEntity> loadI18n()
         {
             string fileName = $"res://data/test/{getNameI18n(this.i18nType)}.json";
             var file = FileAccess.Open(fileName, FileAccess.ModeFlags.ReadWrite);
             var json = file.GetAsText();
-            var data = JsonConvert.DeserializeObject<IEntityDictionary<IID, string>>(json);
+            var data = JsonConvert.DeserializeObject<IEntityDictionary<IID, IStringEntity>>(json);
             return data;
         }
         public IEntityDictionary<IID, V> load<V>(IEntityDictionary<IID, V> dic)

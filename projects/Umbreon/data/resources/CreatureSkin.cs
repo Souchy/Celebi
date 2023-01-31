@@ -15,7 +15,9 @@ namespace Umbreon.data.resources
         public IID meshModel { get; set; }
         public IID icon { get; set; }
         public IID animations { get; set; }
+        // <spellModelid, spellSkinId>
         public Dictionary<IID, IID> spellSkins { get; set; }
+        // <effectId, effectSkinId>
         public Dictionary<IID, IID> effectSkins { get; set; } // FIXME This should go inside ISpellSkin
 
 
@@ -23,16 +25,11 @@ namespace Umbreon.data.resources
         public static ICreatureSkin Create() => new CreatureSkin()
         {
             entityUid = Eevee.RegisterIID<ICreatureSkin>(),
-            nameId = Eevee.RegisterIID<string>(),
-            descriptionId = Eevee.RegisterIID<string>(),
         };
 
         public void Dispose()
         {
             Eevee.DisposeIID<ICreatureSkin>(entityUid);
-            Eevee.DisposeIID<string>(nameId);
-            Eevee.DisposeIID<string>(descriptionId);
-            throw new NotImplementedException();
         }
 
     }

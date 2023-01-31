@@ -1,5 +1,6 @@
 ﻿using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.impl;
 
 namespace souchy.celebi.eevee.face.shared.models.skins
 {
@@ -15,6 +16,8 @@ namespace souchy.celebi.eevee.face.shared.models.skins
         public Dictionary<IID, IID> effectSkins { get; set; }
 
 
+        public IStringEntity GetName() => Eevee.models.i18n.Get(nameId);
+        public IStringEntity GetDescription() => Eevee.models.i18n.Get(descriptionId);
 
 
     }

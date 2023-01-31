@@ -19,17 +19,17 @@ namespace Umbreon.data.resources
         public HashSet<IID> baseSpells { get; init; } = new HashSet<IID>();
         public HashSet<IID> baseStatusPassives { get; init; } = new HashSet<IID>();
 
-        public CreatureModel() { }
+        private CreatureModel() { }
         //private CreatureModel(IID id) => entityUid = id;
         public static ICreatureModel Create() => new CreatureModel() //Eevee.RegisterIID())
         {
             entityUid = Eevee.RegisterIID<ICreatureModel>(),
-            nameId = Eevee.RegisterIID<string>(),
-            descriptionId = Eevee.RegisterIID<string>(),
         };
+
 
         public void Dispose()
         {
+            Eevee.DisposeIID<ICreatureModel>(entityUid);
         }
 
     }

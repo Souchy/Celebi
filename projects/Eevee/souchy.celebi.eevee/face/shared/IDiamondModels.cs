@@ -30,7 +30,7 @@ namespace souchy.celebi.eevee.face.shared
         /// <summary>
         /// load 1 language at a time
         /// </summary>
-        public IEntityDictionary<IID, string> i18n { get; init; }
+        public IEntityDictionary<IID, IStringEntity> i18n { get; init; }
 
 
     }

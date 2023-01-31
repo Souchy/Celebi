@@ -68,9 +68,14 @@ namespace souchy.celebi.eevee.impl.util
             generators[idType].dispose(id);
         }
         /// <summary>
-        /// mostly used for i18n strings since they're not entities, they dont have a type to latch to
+        /// wont be used anymore since now we have IStringEntity so we can do:
+        ///     Eevee.i18n[creatureModel.nameid].GetEntityBus();
+        /// and simplify :
+        ///     CreatureModel.GetName() => Eevee.i18n[creatureModel.nameid];
+        /// 
+        /// //////mostly used for i18n strings since they're not entities, they dont have a type to latch to
         /// </summary>
-        public static EventBus GetEventBus<T>(this IID id)
+        private static EventBus GetEventBus<T>(this IID id)
         {
             var idType = getType(typeof(T));
             return eventBuses[idType][id];
@@ -80,13 +85,6 @@ namespace souchy.celebi.eevee.impl.util
             var t = getType(e.GetType());
             if (eventBuses[t].ContainsKey(e.entityUid))
                 return eventBuses[t][e.entityUid];
-            //foreach(var modelType in modelTypes)
-            //    if (modelType.IsAssignableFrom(e.GetType()) && eventBuses[modelType].ContainsKey(e.entityUid))
-            //        return eventBuses[modelType][e.entityUid];
-
-            //return eventBuses[typeof(IEntity)][e.entityUid];
-            //if (eventBuses[typeof(IEntity)].ContainsKey(e.entityUid))
-            //    return eventBuses[typeof(IEntity)][e.entityUid];
             throw new Exception("You made a mistake in type or method called. Maybe call iid.GetEventBus<T>()");
         }
     }

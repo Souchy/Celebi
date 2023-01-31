@@ -21,7 +21,7 @@ namespace souchy.celebi.eevee.impl
         public IEntityDictionary<IID, ICreatureSkin> creatureSkins { get; init; } = EntityDictionary<IID, ICreatureSkin>.Create();
         public IEntityDictionary<IID, ISpellSkin> spellSkins { get; init; } = EntityDictionary<IID, ISpellSkin>.Create();
         public IEntityDictionary<IID, IEffectSkin> effectSkins { get; init; } = EntityDictionary<IID, IEffectSkin>.Create();
-        public IEntityDictionary<IID, string> i18n { get; init; } = EntityDictionary<IID, string>.Create();
+        public IEntityDictionary<IID, IStringEntity> i18n { get; init; } = EntityDictionary<IID, IStringEntity>.Create();
 
         public void Dispose()
         {

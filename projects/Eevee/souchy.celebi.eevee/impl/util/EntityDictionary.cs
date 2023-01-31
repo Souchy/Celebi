@@ -52,9 +52,10 @@ namespace souchy.celebi.eevee.impl.util
             {
                 var result = base.Remove(key);
                 return result;
-            } finally
+            } 
+            finally
             {
-                this.GetEntityBus().publish(nameof(Remove), this, key, val); // this.GetType().Name + 
+                this.GetEntityBus().publish(nameof(Remove), this, key, val);
                 if (val is IDisposable dis)
                     dis.Dispose();
             }
@@ -64,21 +65,13 @@ namespace souchy.celebi.eevee.impl.util
         {
             var toRemove = this.Where(p => predicate(p.Value)).ToList();
             foreach(var rem in toRemove)
-            {
                 this.Remove(rem.Key);
-            }
         }
 
         public new void Clear()
         {
             foreach (var k in Keys.ToList())
                 Remove(k);
-            //ForEach((k, v) =>
-            //{
-            //    this.GetEventBus().publish(nameof(Remove), this, k, v);
-            //    if (v is IDisposable dis)
-            //        dis.Dispose();
-            //});
             //base.Clear();
         }
 
@@ -96,10 +89,6 @@ namespace souchy.celebi.eevee.impl.util
 
         public void Dispose()
         {
-            //foreach (var val in Values)
-            //    if(val is IDisposable dis)
-            //        dis.Dispose();
-            Remove(v => true);
             this.Clear();
             Eevee.DisposeIID<IEntityDictionary<TKey, TValue>>(entityUid);
         }

@@ -17,6 +17,8 @@ namespace souchy.celebi.eevee.face.shared.models
         public HashSet<IID> skins { get; init; }
 
 
+        public IStringEntity GetName() => Eevee.models.i18n.Get(nameId);
+        public IStringEntity GetDescription() => Eevee.models.i18n.Get(descriptionId);
         public IStats GetBaseStats() => Eevee.models.stats.Get(baseStats);
 
     }
