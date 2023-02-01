@@ -31,13 +31,6 @@ namespace souchy.celebi.eevee.impl.util
         };
         private static Dictionary<Type, IUIdGenerator> generators = new(); 
         private static Dictionary<Type, Dictionary<IID, EventBus>> eventBuses = new(); 
-        private static Type getType(Type objType)
-        {
-            foreach (var modelType in modelTypes)
-                if (modelType.IsAssignableFrom(objType))
-                    return modelType;
-            throw new Exception("Unknown id type");
-        }
         static UidExtensions()
         {
             foreach (var modelType in modelTypes)
@@ -46,9 +39,20 @@ namespace souchy.celebi.eevee.impl.util
                 eventBuses[modelType] = new();
             }
         }
+        private static Type getType(Type objType)
+        {
+            foreach (var modelType in modelTypes)
+                if (modelType.IsAssignableFrom(objType))
+                    return modelType;
+            throw new Exception("Unknown id type");
+        }
         public static IID RegisterIID<T>() 
         {
             var idType = getType(typeof(T));
+            return RegisterIID(idType);
+        }
+        private static IID RegisterIID(Type idType)
+        {
             var id = generators[idType].next();
             eventBuses[idType].Add(id, new EventBus());
             return id;
@@ -63,29 +67,17 @@ namespace souchy.celebi.eevee.impl.util
         public static void DisposeIID<T>(IID id)
         {
             var idType = getType(typeof(T));
-            id.GetEventBus<T>().Dispose();
+            eventBuses[idType][id].Dispose();
             eventBuses[idType].Remove(id);
             generators[idType].dispose(id);
-        }
-        /// <summary>
-        /// wont be used anymore since now we have IStringEntity so we can do:
-        ///     Eevee.i18n[creatureModel.nameid].GetEntityBus();
-        /// and simplify :
-        ///     CreatureModel.GetName() => Eevee.i18n[creatureModel.nameid];
-        /// 
-        /// //////mostly used for i18n strings since they're not entities, they dont have a type to latch to
-        /// </summary>
-        private static IEventBus GetEventBus<T>(this IID id)
-        {
-            var idType = getType(typeof(T));
-            return eventBuses[idType][id];
         }
         public static IEventBus GetEntityBus(this IEntity e)
         {
             var t = getType(e.GetType());
             if (eventBuses[t].ContainsKey(e.entityUid))
                 return eventBuses[t][e.entityUid];
-            throw new Exception("You made a mistake in type or method called. Maybe call iid.GetEventBus<T>()");
+            return null; // when NewtonsoftJson deserializes objects, it sets properties which calls the event bus before the entities' id are registered
+            //throw new Exception("You made a mistake in type or method called. Maybe call iid.GetEventBus<T>()");
         }
     }
 

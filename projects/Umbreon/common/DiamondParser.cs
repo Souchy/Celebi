@@ -6,6 +6,7 @@ using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
+using souchy.celebi.eevee.impl.shared;
 using souchy.celebi.eevee.impl.util;
 using Umbreon.common.util;
 using Umbreon.data;
@@ -65,6 +66,7 @@ namespace Umbreon.common
 
 
             // Load and register entities
+            //var i18n = load<StringEntity>(EntityDictionary<IID, StringEntity>.Create(), getNameI18n(i18nType));  //loadI18n();
             var i18n = load(Eevee.models.i18n, getNameI18n(i18nType));  //loadI18n();
             var creatureModels = load(Eevee.models.creatureModels);
             var spellModels = load(Eevee.models.spellModels);
@@ -114,8 +116,8 @@ namespace Umbreon.common
             if(file == null)
                 GD.Print($"Parser.load null: {filepath}");
             var json = file.GetAsText();
-            var data = JsonConvert.DeserializeObject<IEntityDictionary<IID, V>>(json, jsonSettings);
-            GD.Print($"Parser.load: {filepath} = {data}");
+            var data = JsonConvert.DeserializeObject<EntityDictionary<IID, V>>(json, jsonSettings);
+            GD.Print($"Parser.load: {filepath} = {data.Count} pairs");
 
             // restore entity ids from keys
             if (typeof(IEntity).IsAssignableFrom(typeof(V)))

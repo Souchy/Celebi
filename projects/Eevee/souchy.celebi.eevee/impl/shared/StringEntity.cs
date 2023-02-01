@@ -15,7 +15,7 @@ namespace souchy.celebi.eevee.impl.shared
             set
             {
                 _value = value;
-                this.GetEntityBus()?.publish("", this);
+                this.GetEntityBus()?.publish(this);
             }
         }
 

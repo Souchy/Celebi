@@ -52,7 +52,7 @@ namespace souchy.celebi.eevee.impl.util
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
     public class SubscribeAttribute : Attribute {
-        public string path;
+        public string path = "";
         public SubscribeAttribute() { }
         public SubscribeAttribute(string path)
         {
@@ -65,7 +65,7 @@ namespace souchy.celebi.eevee.impl.util
         public object subscriber;
         public MethodInfo method;
 
-        public string path;
+        public string path = "";
         public List<Type> eventParameterTypes = new List<Type>();
     }
 
@@ -100,7 +100,6 @@ namespace souchy.celebi.eevee.impl.util
 
                     subs.Add(sub);
                 }
-
             }
         }
 
@@ -112,6 +111,7 @@ namespace souchy.celebi.eevee.impl.util
             }
         }
 
+        public void publish(params object[] param) => publish("", param);
         public void publish(string path = "", params object[] param)
         {
             lock (subs)
