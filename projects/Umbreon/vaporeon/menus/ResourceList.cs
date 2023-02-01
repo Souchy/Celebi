@@ -111,6 +111,8 @@ public partial class ResourceList : Control
             //Eevee.models.effectSkins.GetEventBus().subscribe(util);
         }
 
+        util.fillList();
+
         //this.GetDiamonds().Changed += util.onDiamondsChanged;
         this.CreateBtn.Pressed += util.onCreateBtn;
         this.DeleteBtn.Pressed += util.onRemoveBtn;
@@ -139,7 +141,7 @@ public partial class ResourceList : Control
         var image = (ColorRect) item.GetNode("PanelContainer/VBoxContainer/Image");
         image.Color = col;
         var lbl = (Label) item.GetNode("PanelContainer/VBoxContainer/Label");
-        lbl.Text = name.ToString();
+        lbl.Text = name; //.ToString();
         //item.Name = spell.entityUid.value;
         item.SetMeta("object", meta.ToString());
 
@@ -239,16 +241,19 @@ public interface IListUtilGeneric<T> : IListUtil
     [Subscribe(nameof(IEntityDictionary<IID, T>.Add))]
     public void onDiamondAdd(IEntityDictionary<IID, T> dic, IID id, T model)
     {
+        GD.Print($"ResList.onDiamondAdd: {model}");
         createChildNode(model);
     }
     [Subscribe(nameof(IEntityDictionary<IID, T>.Remove))]
     public void onDiamondRemove(IEntityDictionary<IID, T> dic, IID id, T model)
     {
+        GD.Print($"ResList.onDiamondRemove: {model}");
         list.removeChild(id);
     }
     [Subscribe(nameof(IEntityDictionary<IID, T>.Set))]
     public void onDiamondSet(IEntityDictionary<IID, T> dic, IID id, T model)
     {
+        GD.Print($"ResList.onDiamondSet: {model}");
         list.removeChild(id);
         createChildNode(model);
     }
@@ -288,9 +293,9 @@ public class CreatureListUtil : IListUtilGeneric<ICreatureModel>
     }
     public void createChildNode(ICreatureModel model)
     {
-        var name = model.GetName();
+        var name = model.GetName()?.ToString() ?? "uid " + model.entityUid.ToString();
         var desc = model.GetDescription();
-        list.addChild(name.ToString(), new Color().Random(), model.entityUid);
+        list.addChild(name, new Color().Random(), model.entityUid);
     }
     public void onCreateBtn()
     {
@@ -346,9 +351,10 @@ public class SpellListUtil : IListUtilGeneric<ISpellModel>
         // get the first skin for that spell
         var skin = Eevee.models.spellSkins.Values.Where(skin => skin.spellModelUid == model.entityUid).First();
         var icon = skin.icon;
-        var name = model.GetName(); //Eevee.models.i18n.Get(spell.nameId);
+        var name = model.GetName()?.ToString() ?? "uid " + model.entityUid.ToString();
+        //var name = model.GetName(); //Eevee.models.i18n.Get(spell.nameId);
         var desc = model.GetDescription(); //Eevee.models.i18n.Get(spell.descriptionId);
-        list.addChild(name.ToString(), new Color().Random(), model.entityUid);
+        list.addChild(name, new Color().Random(), model.entityUid);
     }
     public void onCreateBtn()
     {
@@ -404,9 +410,10 @@ public class EffectListUtil : IListUtilGeneric<IEffect>
     public void createChildNode(IEffect effect)
     {
         IEffectModel model = Eevee.models.effectModels.Get(effect.modelUid);
-        var name = model.GetName(); 
+        var name = model.GetName()?.ToString() ?? "uid " + model.entityUid.ToString();
+        //var name = model.GetName(); 
         var desc = model.GetDescription(); 
-        list.addChild(name.ToString(), new Color().Random(), effect.entityUid);
+        list.addChild(name, new Color().Random(), effect.entityUid);
     }
     public void onCreateBtn()
     {

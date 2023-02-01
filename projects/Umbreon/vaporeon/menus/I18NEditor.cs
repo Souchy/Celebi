@@ -9,7 +9,7 @@ using System;
 public partial class I18NEditor : Control
 {
 
-    [NodePath]
+    [NodePath("ScrollContainer/GridContainer")]
     public GridContainer Grid { get; set; }
 
 
@@ -22,42 +22,51 @@ public partial class I18NEditor : Control
         Eevee.models.i18n.ForEach((k, v) => onI18nAdd(Eevee.models.i18n, k, v));
     }
 
-    private (Label lbl, LineEdit edit) find(IID key)
+    private (Label lbl, LineEdit edit, Button btn) find(IID key)
     {
         if (!Grid.HasNode("l" + key.ToString()))
-            return (null, null);
+            return (null, null, null);
         if (!Grid.HasNode("e" + key.ToString()))
             throw new Exception("if e is null, then l should have been null before."); //return (null, null);
         return (
             (Label) Grid.GetNode("l" + key.ToString()),
-            (LineEdit) Grid.GetNode("e" + key.ToString())
+            (LineEdit) Grid.GetNode("e" + key.ToString()),
+            (Button) Grid.GetNode("b" + key.ToString())
         );
     }
 
     [Subscribe("Add")]
     public void onI18nAdd(object dic, IID key, IStringEntity value)
     {
+        var btnRemove = new Button();
+        btnRemove.Name = "b" + key.ToString();
+        btnRemove.Text = "-";
+        btnRemove.Pressed += () => Eevee.models.i18n.Remove(key); //onI18nRemove(dic, key, value);
+        Grid.AddChild(btnRemove);
+
         var lbl = new Label();
-        lbl.Text = key.ToString();
         lbl.Name = "l" + key.ToString();
+        lbl.Text = key.ToString();
         lbl.CustomMinimumSize = new Vector2(50, 0);
-        lbl.HorizontalAlignment = HorizontalAlignment.Fill;
+        //lbl.HorizontalAlignment = HorizontalAlignment.Fill;
         Grid.AddChild(lbl);
+
         var edit = new LineEdit();
-        edit.Text = value.ToString();
         edit.Name = "e" + key.ToString();
-        edit.TextChanged += (txt) => value.value = txt; //Eevee.models.i18n.Set(key, StringEntity.Create(txt));
+        edit.Text = value.ToString();
+        edit.TextChanged += (txt) => value.value = txt; 
         edit.CaretBlink = true;
-        //edit.ExpandToTextLength = true;
+        edit.ExpandToTextLength = true;
         edit.SizeFlagsHorizontal = SizeFlags.ExpandFill;
         Grid.AddChild(edit);
+
         value.GetEntityBus().subscribe(this, nameof(onChange));
     }
     [Subscribe("Set")]
     public void onI18nSet(object dic, IID key, IStringEntity value)
     {
         var group = find(key);
-        if(group != (null, null))
+        if(group != (null, null, null))
         {
             group.edit.Text = value.ToString();
             group.edit.TextChanged += (txt) => value.value = txt;
@@ -72,14 +81,18 @@ public partial class I18NEditor : Control
     public void onI18nRemove(object dic, IID key, IStringEntity value)
     {
         value.GetEntityBus().unsubscribe(this);
+        var group = find(key);
+        Grid.RemoveChild(group.lbl);
+        Grid.RemoveChild(group.edit);
+        Grid.RemoveChild(group.btn);
     }
 
     [Subscribe]
     public void onChange(IStringEntity entity)
     {
-        GD.Print($"StringEntity [{entity.entityUid}] set value: {entity.value}");
+        //GD.Print($"StringEntity [{entity.entityUid}] set value: {entity.value}");
         var group = find(entity.entityUid);
-        if(group != (null, null))
+        if(group != (null, null, null))
         {
             int col = group.edit.CaretColumn;
             group.edit.Text = entity.ToString();

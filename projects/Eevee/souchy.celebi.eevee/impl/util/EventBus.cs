@@ -52,11 +52,12 @@ namespace souchy.celebi.eevee.impl.util
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
     public class SubscribeAttribute : Attribute {
-        public string path = "";
+        public string[] paths = { "" };
         public SubscribeAttribute() { }
-        public SubscribeAttribute(string path)
+        public SubscribeAttribute(params string[] paths)
         {
-            this.path = path;
+            if(paths != null && paths.Length > 0)
+                this.paths = paths;
         }
     }
 
@@ -91,14 +92,16 @@ namespace souchy.celebi.eevee.impl.util
                 {
                     var @params = m.GetParameters();
                     var attr = (SubscribeAttribute) m.GetCustomAttribute(at, true);
+                    foreach(var path in attr.paths)
+                    {
+                        var sub = new Subscription();
+                        sub.subscriber = subscriber;
+                        sub.method = m;
+                        sub.path = path; // attr.path;
+                        sub.eventParameterTypes = @params.Select(p => p.ParameterType).ToList();
 
-                    var sub = new Subscription();
-                    sub.subscriber = subscriber;
-                    sub.method = m;
-                    sub.path = attr.path;
-                    sub.eventParameterTypes = @params.Select(p => p.ParameterType).ToList();
-
-                    subs.Add(sub);
+                        subs.Add(sub);
+                    }
                 }
             }
         }
