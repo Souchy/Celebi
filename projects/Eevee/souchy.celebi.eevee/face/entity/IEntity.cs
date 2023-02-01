@@ -1,4 +1,5 @@
-﻿using souchy.celebi.eevee.face.util;
+﻿using Newtonsoft.Json;
+using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 
 namespace souchy.celebi.eevee.face.entity

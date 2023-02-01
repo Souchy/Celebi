@@ -22,7 +22,7 @@ namespace souchy.celebi.eevee.impl.util
             // skins
             typeof(ICreatureSkin), typeof(ISpellSkin), typeof(IEffectSkin),
             // other
-            typeof(string),
+            typeof(IStringEntity), //typeof(string),
             typeof(IEffect), // need a separate idgenerator to json save instances in spellmodels & statusmodels
              // TODO those idk yet
             typeof(ICondition), typeof(ITrigger), typeof(IZone),
@@ -75,12 +75,12 @@ namespace souchy.celebi.eevee.impl.util
         /// 
         /// //////mostly used for i18n strings since they're not entities, they dont have a type to latch to
         /// </summary>
-        private static EventBus GetEventBus<T>(this IID id)
+        private static IEventBus GetEventBus<T>(this IID id)
         {
             var idType = getType(typeof(T));
             return eventBuses[idType][id];
         }
-        public static EventBus GetEntityBus(this IEntity e)
+        public static IEventBus GetEntityBus(this IEntity e)
         {
             var t = getType(e.GetType());
             if (eventBuses[t].ContainsKey(e.entityUid))
@@ -92,7 +92,7 @@ namespace souchy.celebi.eevee.impl.util
 
     public class UIdGenerator : IUIdGenerator
     {
-        private int counter = 0;
+        private int counter = 1;
         private HashSet<int> ids = new HashSet<int>();
 
         public IID next()

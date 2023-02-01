@@ -7,6 +7,7 @@ using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.util;
+using Umbreon.common.util;
 using Umbreon.data;
 using FileAccess = Godot.FileAccess;
 
@@ -33,6 +34,15 @@ namespace Umbreon.common
 
         public I18NType i18nType { get; set; } = I18NType.fr;
 
+        
+        private readonly JsonSerializerSettings jsonSettings = new JsonSerializerSettings()
+        {
+            TypeNameHandling = TypeNameHandling.Auto,
+            Formatting = Formatting.Indented,
+            ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
+            Converters = new List<JsonConverter> { new IIDJsonConverter() }
+        };
+
         public override void _Ready()
         {
             parseData();
@@ -55,28 +65,14 @@ namespace Umbreon.common
 
 
             // Load and register entities
+            var i18n = load(Eevee.models.i18n, getNameI18n(i18nType));  //loadI18n();
             var creatureModels = load(Eevee.models.creatureModels);
-            creatureModels.ForEach((k, v) => Eevee.RegisterIID<ICreatureModel>(k));
-            Eevee.models.creatureModels.AddAll(creatureModels);
-
             var spellModels = load(Eevee.models.spellModels);
-            spellModels.ForEach((k, v) => Eevee.RegisterIID<ISpellModel>(k));
-            Eevee.models.spellModels.AddAll(spellModels);
-
             var effects = load(Eevee.models.effects);
-            effects.ForEach((k, v) => Eevee.RegisterIID<IEffect>(k));
-            Eevee.models.effects.AddAll(effects);
-
             var statusModels = load(Eevee.models.statusModels);
-            statusModels.ForEach((k, v) => Eevee.RegisterIID<IStatusModel>(k));
-            Eevee.models.statusModels.AddAll(statusModels);
-
-            var i18n = loadI18n();
-            i18n.ForEach((k, v) => Eevee.RegisterIID<IStringEntity>(k));
-            Eevee.models.i18n.AddAll(i18n);
         }
 
-        #region Diamond Models saver
+        #region Diamond Models Saver on event handler
         [Subscribe(nameof(IEntityDictionary<IID, IID>.Add))]
         public void onAddModel(object dic, IID id, object obj) => save(dic, getNameDic(obj));
         [Subscribe(nameof(IEntityDictionary<IID, IID>.Set))]
@@ -85,13 +81,13 @@ namespace Umbreon.common
         public void onRemoveModel(object dic, IID id, object obj) => save(dic, getNameDic(obj));
         #endregion
 
-        #region I18n saver
+        #region I18n Saver on event handler
         [Subscribe(nameof(IEntityDictionary<IID, IID>.Add))]
-        public void onAddI18n(object dic, IID id, string obj) => save(dic, getNameI18n(i18nType));
+        public void onAddI18n(object dic, IID id, IStringEntity obj) => save(dic, getNameI18n(i18nType));
         [Subscribe(nameof(IEntityDictionary<IID, IID>.Set))]
-        public void onSetI18n(object dic, IID id, string obj) => save(dic, getNameI18n(i18nType));
+        public void onSetI18n(object dic, IID id, IStringEntity obj) => save(dic, getNameI18n(i18nType));
         [Subscribe(nameof(IEntityDictionary<IID, IID>.Remove))]
-        public void onRemoveI18n(object dic, IID id, string obj) => save(dic, getNameI18n(i18nType));
+        public void onRemoveI18n(object dic, IID id, IStringEntity obj) => save(dic, getNameI18n(i18nType));
         #endregion
 
 
@@ -100,26 +96,34 @@ namespace Umbreon.common
         private string getNameDic(object obj) => obj.GetType().Name + "s";
         public void save(object dic, string fileName)
         {
-            var str = JsonConvert.SerializeObject(dic, Formatting.Indented);
-            var file = FileAccess.Open($"res://data/test/{fileName}.json", FileAccess.ModeFlags.Write);
+            GD.Print($"Parser.save: {fileName} = {dic}");
+            var str = JsonConvert.SerializeObject(dic, jsonSettings);
+            using FileAccess file = FileAccess.Open($"res://data/test/{fileName}.json", FileAccess.ModeFlags.Write);
             file.StoreString(str);
             file.Flush();
         }
-        public IEntityDictionary<IID, IStringEntity> loadI18n()
+        public IEntityDictionary<IID, V> load<V>(IEntityDictionary<IID, V> dic, string filename = "")
         {
-            string fileName = $"res://data/test/{getNameI18n(this.i18nType)}.json";
-            var file = FileAccess.Open(fileName, FileAccess.ModeFlags.ReadWrite);
+            if (filename == "")
+                filename = typeof(V).Name.Substring(1) + "s";
+            string filepath = $"res://data/test/{filename}.json";
+            if (!FileAccess.FileExists(filepath))
+                return null;
+
+            using FileAccess file = FileAccess.Open(filepath, FileAccess.ModeFlags.Read);
+            if(file == null)
+                GD.Print($"Parser.load null: {filepath}");
             var json = file.GetAsText();
-            var data = JsonConvert.DeserializeObject<IEntityDictionary<IID, IStringEntity>>(json);
-            return data;
-        }
-        public IEntityDictionary<IID, V> load<V>(IEntityDictionary<IID, V> dic)
-        {
-            string fileName = $"res://data/test/{typeof(V).Name.Substring(1)}s.json";
-            var file = FileAccess.Open(fileName, FileAccess.ModeFlags.ReadWrite);
-            var json = file.GetAsText();
-            var data = JsonConvert.DeserializeObject<IEntityDictionary<IID, V>>(json);
-            GD.Print($"Parser.load: {fileName} = {data}");
+            var data = JsonConvert.DeserializeObject<IEntityDictionary<IID, V>>(json, jsonSettings);
+            GD.Print($"Parser.load: {filepath} = {data}");
+
+            // restore entity ids from keys
+            if (typeof(IEntity).IsAssignableFrom(typeof(V)))
+                data.ForEach((k, v) => ((IEntity) v).entityUid = k);
+            // register IDs to buses
+            data.ForEach((k, v) => Eevee.RegisterIID<V>(k));
+            // add all data to Eevee.models dic
+            dic.AddAll(data);
 
             return data;
         }

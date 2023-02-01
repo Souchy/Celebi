@@ -358,11 +358,11 @@ public class SpellListUtil : IListUtilGeneric<ISpellModel>
 
         var name = StringEntity.Create("Name for: " + spellmodel.entityUid);
         spellmodel.nameId = name.entityUid;
-        Eevee.models.i18n.Add(spellmodel.nameId, name);
+        Eevee.models.i18n.Add(name.entityUid, name);
 
         var desc = StringEntity.Create("Desc for: " + spellmodel.entityUid);
         spellmodel.descriptionId = desc.entityUid;
-        Eevee.models.i18n.Add(spellmodel.descriptionId, desc);
+        Eevee.models.i18n.Add(desc.entityUid, desc);
 
         Eevee.models.spellSkins.Add(spellskin.entityUid, spellskin);
         Eevee.models.spellModels.Add(spellmodel.entityUid, spellmodel);

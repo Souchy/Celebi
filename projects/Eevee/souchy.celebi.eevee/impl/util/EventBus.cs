@@ -71,7 +71,7 @@ namespace souchy.celebi.eevee.impl.util
 
     public class EventBus : IEventBus
     {
-        public List<Subscription> subs { get; set; } = new List<Subscription>();
+        private List<Subscription> subs { get; set; } = new List<Subscription>();
 
         public void subscribe(object subscriber, params string[] methodNames)
         {
