@@ -1,0 +1,26 @@
+{
+  "1": {
+    "$type": "Umbreon.data.resources.CreatureModel, Umbreon",
+    "entityUid": "1",
+    "nameId": "1",
+    "descriptionId": "2",
+    "skins": [
+      "1"
+    ],
+    "baseStats": "1",
+    "baseSpells": [],
+    "baseStatusPassives": []
+  },
+  "2": {
+    "$type": "Umbreon.data.resources.CreatureModel, Umbreon",
+    "entityUid": "2",
+    "nameId": "3",
+    "descriptionId": "4",
+    "skins": [
+      "2"
+    ],
+    "baseStats": "2",
+    "baseSpells": [],
+    "baseStatusPassives": []
+  }
+}

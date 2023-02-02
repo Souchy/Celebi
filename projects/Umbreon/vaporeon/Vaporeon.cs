@@ -3,11 +3,14 @@ using Godot.Sharp.Extras;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.util;
 using System;
 using Umbreon.common;
 using Umbreon.data.resources;
+using Umbreon.eevee.impl.objects;
 using Umbreon.src;
+using Umbreon.vaporeon;
 
 public static class VaporeonExtensions
 {
@@ -22,7 +25,7 @@ public static class VaporeonExtensions
 public partial class Vaporeon : Control
 {
     #region Vaporeon Properties
-    public IEventBus bus = new EventBus();
+    public readonly IEventBus bus = new EventBus();
     /// <summary>
     /// Object in memory to copy/paste
     /// </summary>
@@ -77,9 +80,11 @@ public partial class Vaporeon : Control
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
-	{
+    {
         this.OnReady();
         this.Inject();
+
+        bus.subscribe(this.GetDiamondsParser());
     }
 
 }

@@ -9,5 +9,16 @@
     "animations": null,
     "spellSkins": null,
     "effectSkins": null
+  },
+  "2": {
+    "$type": "Umbreon.data.resources.CreatureSkin, Umbreon",
+    "entityUid": "2",
+    "nameId": "3",
+    "descriptionId": "4",
+    "meshModel": null,
+    "icon": null,
+    "animations": null,
+    "spellSkins": null,
+    "effectSkins": null
   }
 }

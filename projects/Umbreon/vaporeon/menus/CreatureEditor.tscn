@@ -13,6 +13,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hggn1")
 
+[node name="BtnSave" type="Button" parent="."]
+layout_mode = 0
+offset_left = 249.0
+offset_top = 11.0
+offset_right = 289.0
+offset_bottom = 38.0
+text = "Save"
+
 [node name="EntityID" type="Label" parent="."]
 layout_mode = 0
 offset_left = 15.0

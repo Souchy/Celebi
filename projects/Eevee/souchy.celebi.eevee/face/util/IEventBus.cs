@@ -4,6 +4,10 @@ namespace souchy.celebi.eevee.face.util
 {
     public interface IEventBus : IDisposable // : IEntity
     {
+        /// <summary>
+        /// Event path to save an entity
+        /// </summary>
+        public const string save = "save";
 
         //public void subscribe<T>(string path, Action<T> action);
         public void subscribe(object subscriber, params string[] methodNames);

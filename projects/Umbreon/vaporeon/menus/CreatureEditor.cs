@@ -8,6 +8,7 @@ using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.util;
 using System;
 using Umbreon.data.resources;
+using Umbreon.vaporeon;
 
 public partial class CreatureEditor : Control
 {
@@ -19,9 +20,9 @@ public partial class CreatureEditor : Control
     [NodePath]
     public Label EntityID { get; set; }
     [NodePath]
-    public LineEdit NameInput { get; set; }
+    public LineEdit NameEdit { get; set; }
     [NodePath]
-    public LineEdit DescriptionInput { get; set; }
+    public LineEdit DescriptionEdit { get; set; }
     [NodePath]
     public StatsEditor StatsEditor { get; set; }
     [NodePath]
@@ -30,6 +31,8 @@ public partial class CreatureEditor : Control
     public SmallResourceTree Passives { get; set; }
     [NodePath]
     public SmallResourceTree Skins { get; set; }
+    [NodePath]
+    public Button BtnSave { get; set; }
     #endregion
 
     // Called when the node enters the scene tree for the first time.
@@ -38,10 +41,22 @@ public partial class CreatureEditor : Control
         this.OnReady();
         this.GetVaporeon().bus.subscribe(this);
 
+        //creature?.GetEntityBus().subscribe(this);
+        //creature.GetBaseStats().GetEntityBus().subscribe(this);
         Eevee.models.i18n.GetEntityBus().subscribe(this, nameof(onNameChanged));
 
+        BtnSave.ButtonUp += BtnSave_ButtonUp;
         Spells.onAddBtnClick += Spells_onAddBtnClick;
         //this.creature.GetEventBus().subscribe(Spells); //.baseSpells.sub
+    }
+
+    private void BtnSave_ButtonUp()
+    {
+        creature.GetEntityBus().publish(IEventBus.save, creature);
+        creature.GetBaseStats().GetEntityBus().publish(IEventBus.save, creature.GetBaseStats());
+        // VaporeonSignals.save
+        //Vaporeon.bus.publish(IEventBus.save, creature);
+        //Vaporeon.bus.publish(IEventBus.save, creature.GetBaseStats());
     }
 
 
@@ -49,6 +64,9 @@ public partial class CreatureEditor : Control
     public void onModelChange(ICreatureModel model)
     {
         // load everything into ui
+        creature?.GetEntityBus().subscribe(this);
+        this.NameEdit.Text = model.GetName().ToString();
+        this.DescriptionEdit.Text = model.GetDescription().ToString();
     }
 
     private void Spells_onAddBtnClick()

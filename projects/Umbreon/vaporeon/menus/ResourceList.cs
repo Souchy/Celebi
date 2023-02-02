@@ -11,6 +11,7 @@ using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.shared;
 using souchy.celebi.eevee.impl.shared.effects;
+using souchy.celebi.eevee.impl.stats;
 using souchy.celebi.eevee.impl.util;
 using System;
 using System.Collections.Generic;
@@ -312,6 +313,10 @@ public class CreatureListUtil : IListUtilGeneric<ICreatureModel>
         creatureModel.descriptionId = desc.entityUid;
         creatureSkin.descriptionId = desc.entityUid;
         Eevee.models.i18n.Add(creatureSkin.descriptionId, desc);
+
+        var stats = Stats.Create();
+        creatureModel.baseStats = stats.entityUid;
+        Eevee.models.stats.Add(stats.entityUid, stats);
 
         Eevee.models.creatureSkins.Add(creatureSkin.entityUid, creatureSkin);
         Eevee.models.creatureModels.Add(creatureModel.entityUid, creatureModel);

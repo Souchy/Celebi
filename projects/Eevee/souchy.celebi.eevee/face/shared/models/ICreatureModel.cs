@@ -10,7 +10,7 @@ namespace souchy.celebi.eevee.face.shared.models
         public IID nameId { get; set; }
         public IID descriptionId { get; set; }
 
-        public IID baseStats { get; init; }
+        public IID baseStats { get; set; }
         public HashSet<IID> baseSpells { get; init; }
         public HashSet<IID> baseStatusPassives { get; init; }
 

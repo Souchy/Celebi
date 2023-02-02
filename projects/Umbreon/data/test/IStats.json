@@ -1,0 +1,28 @@
+{
+  "1": {
+    "$type": "souchy.celebi.eevee.impl.stats.Stats, Eevee",
+    "entityUid": "1",
+    "stats": {
+      "$type": "souchy.celebi.eevee.impl.util.EntityDictionary`2[[souchy.celebi.eevee.enums.StatType, Eevee],[souchy.celebi.eevee.face.objects.stats.IStat, Eevee]], Eevee"
+    }
+  },
+  "2": {
+    "$type": "souchy.celebi.eevee.impl.stats.Stats, Eevee",
+    "entityUid": "2",
+    "stats": {
+      "$type": "souchy.celebi.eevee.impl.util.EntityDictionary`2[[souchy.celebi.eevee.enums.StatType, Eevee],[souchy.celebi.eevee.face.objects.stats.IStat, Eevee]], Eevee",
+      "WaterAffinity": {
+        "$type": "souchy.celebi.eevee.impl.stats.StatSimple, Eevee",
+        "entityUid": "1",
+        "statId": 10,
+        "value": 7
+      },
+      "WaterResistance": {
+        "$type": "souchy.celebi.eevee.impl.stats.StatSimple, Eevee",
+        "entityUid": "1",
+        "statId": 14,
+        "value": 2
+      }
+    }
+  }
+}

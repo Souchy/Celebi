@@ -1,6 +1,7 @@
 ﻿using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.shared.models.skins;
@@ -24,6 +25,7 @@ namespace souchy.celebi.eevee.impl.util
             // other
             typeof(IStringEntity), //typeof(string),
             typeof(IEffect), // need a separate idgenerator to json save instances in spellmodels & statusmodels
+            typeof(IStats), typeof(IStat),
              // TODO those idk yet
             typeof(ICondition), typeof(ITrigger), typeof(IZone),
             // LAST ONE for things like fight entities (creature, spell, stats, etc)
