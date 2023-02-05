@@ -110,6 +110,11 @@ namespace Umbreon.common
             load(Eevee.models.effectModels);
             load(Eevee.models.effects);
             load(Eevee.models.maps);
+
+            // Register individual stats
+            foreach (var v in Eevee.models.stats.Values)
+                foreach (var s in v.Values)
+                    Eevee.RegisterIID<IStat>(s.entityUid);
         }
 
 

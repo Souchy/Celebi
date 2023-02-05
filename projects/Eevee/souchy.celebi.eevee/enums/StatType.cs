@@ -9,12 +9,13 @@ using System.Reflection;
 namespace souchy.celebi.eevee.enums
 {
 
+    #region Util
     [AttributeUsage(AttributeTargets.Field)]
     public class StatTypePropertiesAttribute : Attribute //, INamedExtendedEnumAttribute
     {
-        public StatValueType valueType;
-        public StatCategory category;
-        public ElementType element;
+        public readonly StatValueType valueType;
+        public readonly StatCategory category;
+        public readonly ElementType element;
         public StatTypePropertiesAttribute(StatValueType valueType, StatCategory category, ElementType element = Water)
         {
             this.valueType = valueType;
@@ -22,7 +23,6 @@ namespace souchy.celebi.eevee.enums
             this.element = element;
         }
     }
-
     public enum StatValueType
     {
         Simple,
@@ -30,7 +30,6 @@ namespace souchy.celebi.eevee.enums
         Bool,
         Resource
     }
-
     public enum StatCategory
     {
         Resource,
@@ -39,7 +38,6 @@ namespace souchy.celebi.eevee.enums
         State,
         Other
     }
-
     public enum ElementType
     {
         Water,
@@ -47,6 +45,7 @@ namespace souchy.celebi.eevee.enums
         Earth,
         Air,
     }
+    #endregion
 
     public enum StatType
     {
@@ -182,6 +181,7 @@ namespace souchy.celebi.eevee.enums
         #endregion
     }
 
+    #region Sub types
     public enum ResourceType
     {
         [StatTypeProperties(StatValueType.Resource, StatCategory.Resource)]
@@ -232,6 +232,7 @@ namespace souchy.celebi.eevee.enums
 
         Pacifist
     }
+    #endregion
 
     public static class StatTypeExtensions
     {

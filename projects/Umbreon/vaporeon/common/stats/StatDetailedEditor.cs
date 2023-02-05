@@ -27,12 +27,12 @@ public partial class StatDetailedEditor : CenterContainer, EditorInitiator<IStat
         MorePerc.ValueChanged += (val) => stat.morePercent = (int) val;
     }
 
-    public void init(IStatDetailed stat)
+    public void init(IStatDetailed s)
     {
-        stat?.GetEntityBus().unsubscribe(this);
-        this.stat = stat;
-        stat.GetEntityBus().subscribe(this);
-        onStatChanged(stat);
+        this.stat?.GetEntityBus().unsubscribe(this);
+        this.stat = s;
+        this.stat.GetEntityBus().subscribe(this);
+        onStatChanged(this.stat);
     }
 
     [Subscribe]

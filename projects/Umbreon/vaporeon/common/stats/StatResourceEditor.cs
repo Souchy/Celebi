@@ -25,12 +25,12 @@ public partial class StatResourceEditor : CenterContainer, EditorInitiator<IStat
         InitialMax.ValueChanged += (val) => stat.initialMax = (int) val;
     }
 
-    public void init(IStatResource stat)
+    public void init(IStatResource s)
     {
-        stat?.GetEntityBus().unsubscribe(this);
-        this.stat = stat;
-        stat.GetEntityBus().subscribe(this);
-        onStatChanged(stat);
+        this.stat?.GetEntityBus().unsubscribe(this);
+        this.stat = s;
+        this.stat.GetEntityBus().subscribe(this);
+        onStatChanged(this.stat);
     }
 
     [Subscribe]

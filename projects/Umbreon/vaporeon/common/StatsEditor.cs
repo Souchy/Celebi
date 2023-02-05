@@ -10,20 +10,19 @@ using souchy.celebi.eevee.impl.util;
 using System;
 using Umbreon.vaporeon.common;
 
-public partial class StatsEditor : MarginContainer
+public partial class StatsEditor : Panel
 {
     
-    //public IStats stats { get => this.GetVaporeon().CurrentCreatureModel?.GetBaseStats(); } 
-    //public IStats stats = Stats.Create();
-    private IStats stats { get; set; }
+    private IStats _stats { get; set; }
 
-    #region Nodes
-    [NodePath("VBoxContainer/HBoxContainer/Add")]
-    public Button BtnAdd { get; set; }
-    [NodePath("VBoxContainer/HBoxContainer/Remove")]
-    public Button BtnRemove { get; set; }
-    [NodePath("VBoxContainer/ScrollContainer/StatsContainer")]
-    public GridContainer StatsContainer { get; set; }
+
+    private Dictionary<StatCategory, GridContainer> containers;
+    #region Nodes 
+    [NodePath] public GridContainer ResourceContainer { get; set; }
+    [NodePath] public GridContainer AffinityContainer { get; set; }
+    [NodePath] public GridContainer ResistanceContainer { get; set; }
+    [NodePath] public GridContainer StateContainer { get; set; }
+    [NodePath] public GridContainer OtherContainer { get; set; }
     #endregion
 
     #region Init
@@ -33,36 +32,76 @@ public partial class StatsEditor : MarginContainer
         this.OnReady();
         this.GetVaporeon().bus.subscribe(this);
 
-        BtnAdd.ButtonUp += BtnAdd_ButtonUp;
-	}
+        containers = new() {
+            { StatCategory.Resource, ResourceContainer }, 
+            { StatCategory.Affinity, AffinityContainer }, 
+            { StatCategory.Resistance, ResistanceContainer }, 
+            { StatCategory.State, StateContainer }, 
+            { StatCategory.Other, OtherContainer },
+        };
+
+        //BtnAdd.ButtonUp += BtnAdd_ButtonUp;
+    }
     public void init(IStats stats)
     {
-        stats.stats.GetEntityBus().subscribe(this);
-        StatsContainer.QueueFreeChildren();
-        stats.stats.ForEach((k, v) => 
-            PropertiesComponent.GenerateStat(StatsContainer, k, v)
-        );
+        _stats?.GetEntityBus().unsubscribe(this);
+
+        _stats = stats;
+
+        _stats.GetEntityBus().subscribe(this);
+        //StatsContainer.QueueFreeChildren();
+        foreach (var container in containers.Values)
+            container.QueueFreeChildren();
+
+        var asdf = Enum.GetValues<StatType>().Where(st => !_stats.Has(st));
+        //GD.Print($"asdf: { string.Join(", ", asdf.Select(e => Enum.GetName(e))) }");
+
+        // add missing stats just in case
+        foreach (var statType in Enum.GetValues<StatType>().Where(st => !_stats.Has(st)))
+        {
+            var stat = statType.Create();
+            //GD.Print($"Want to add {Enum.GetName(statType)} = {stat.statId}, has: {_stats.Has(statType)}");
+            _stats.Add(stat);
+        }
+
+        foreach(var category in Enum.GetValues<StatCategory>())
+        {
+            var sts = Enum.GetValues<StatType>().Where(st => st.GetProperties().category == category);
+            foreach(var st in sts)
+            {
+                var stat = _stats.Get(st);
+                //GD.Print($"foreach st: {st} = {stat} at {stat.entityUid} with bus {stat.GetEntityBus()}");
+                PropertiesComponent.GenerateStat(containers[category], st, stat);
+            }
+        }
+        //stats.stats.ForEach((k, v) => 
+        //    PropertiesComponent.GenerateStat(StatsContainer, k, v)
+        //);
     }
     #endregion
 
 
     #region Diamond Handlers
-    [Subscribe("Add", "Set")]
-    public void onStatAddSet(IEntityDictionary<StatType, IStat> dic, StatType key, IStat value)
-    {
-        PropertiesComponent.GenerateStat(StatsContainer, key, value);
-    }
-    [Subscribe("Remove")]
-    public void onStatRemove(IEntityDictionary<StatType, IStat> dic, StatType key, IStat value)
-    {
-        StatsContainer.GetNode("lbl:" + Enum.GetName(key)).QueueFree();
-        StatsContainer.GetNode(Enum.GetName(key)).QueueFree();
-    }
+    //[Subscribe("Add", "Set")]
+    //public void onStatAddSet(IEntityDictionary<StatType, IStat> dic, StatType key, IStat value)
+    //{
+    //    var cat = key.GetProperties().category;
+    //    var container = containers[cat];
+    //    PropertiesComponent.GenerateStat(container, key, value);
+    //}
+    //[Subscribe("Remove")]
+    //public void onStatRemove(IEntityDictionary<StatType, IStat> dic, StatType key, IStat value)
+    //{
+    //    var cat = key.GetProperties().category;
+    //    var container = containers[cat];
+    //    container.GetNode("lbl:" + Enum.GetName(key)).QueueFree();
+    //    container.GetNode(Enum.GetName(key)).QueueFree();
+    //}
     [Subscribe]
-    public void onStatChange(StatType type, IStat stat)
+    public void onStatChange(IStat stat)
     {
-        GD.Print($"StatsEditor.onStatChange: {type} = {stat}");
-        stats.GetEntityBus().publish(IEventBus.save, stats);
+        GD.Print($"StatsEditor.onStatChange: {stat.statId} = {stat}");
+        _stats.GetEntityBus().publish(IEventBus.save, _stats);
     }
     #endregion
 
@@ -70,9 +109,12 @@ public partial class StatsEditor : MarginContainer
     #region GUI Handlers
     private void BtnAdd_ButtonUp()
     {
+        if (true) return;
         var pop = new PopupMenu();
+        //pop.Position
+        pop.InitialPosition = Window.WindowInitialPosition.Absolute;
         // list stats that we dont already have
-        foreach (var statType in Enum.GetValues<StatType>().Where(st => !stats.has(st)))
+        foreach (var statType in Enum.GetValues<StatType>().Where(st => !_stats.Has(st)))
             pop.AddItem(Enum.GetName(statType));
         // on choose
         pop.IndexPressed += (index) =>
@@ -80,7 +122,7 @@ public partial class StatsEditor : MarginContainer
             var st = Enum.GetValues<StatType>()[(int) index];
             var stat = st.Create();
             stat.GetEntityBus().subscribe(this);
-            stats.add(stat);
+            _stats.Add(stat);
             //PropertiesComponent.GenerateStat(StatsContainer, st);
         };
         pop.Show();

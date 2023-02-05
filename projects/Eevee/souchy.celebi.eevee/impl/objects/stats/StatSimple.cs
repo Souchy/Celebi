@@ -27,9 +27,9 @@ namespace souchy.celebi.eevee.impl.stats
         public static StatSimple Create(StatType st, int value = 0)
             => new StatSimple() //st, value)
             {
-                entityUid = Eevee.RegisterIID<IStatSimple>(),
                 statId = st,
                 value = value,
+                entityUid = Eevee.RegisterIID<IStatSimple>(),
             };
 
         public IStat copy() => Create(statId, value); //new StatSimple(StatType, value);

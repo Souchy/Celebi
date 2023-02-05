@@ -52,6 +52,14 @@ public partial class CreatureEditor : Control, EditorInitiator<ICreatureModel>
         //Spells.onAddBtnClick += Spells_onAddBtnClick;
         //this.creature.GetEventBus().subscribe(Spells); //.baseSpells.sub
     }
+    private void BtnSave_ButtonUp()
+    {
+        creature.GetEntityBus().publish(IEventBus.save, creature);
+        creature.GetBaseStats().GetEntityBus().publish(IEventBus.save, creature.GetBaseStats());
+        // VaporeonSignals.save
+        //Vaporeon.bus.publish(IEventBus.save, creature);
+        //Vaporeon.bus.publish(IEventBus.save, creature.GetBaseStats());
+    }
     public void init(ICreatureModel model)
     {
         unload();
@@ -79,7 +87,7 @@ public partial class CreatureEditor : Control, EditorInitiator<ICreatureModel>
         this.BtnAddSpell.ButtonUp += () =>
         {
             this.GetVaporeon().SpellsList.selectorForControl = this;
-            this.GetVaporeon().TabContainer.CurrentTab = 1;
+            this.GetVaporeon().TabContainer.CurrentTab = 2;
         };
         // Spells
         foreach(var s in creature.baseSpells.Select(s => Eevee.models.spellModels.Get(s)))
@@ -95,14 +103,6 @@ public partial class CreatureEditor : Control, EditorInitiator<ICreatureModel>
 
 
     #region Main bar
-    private void BtnSave_ButtonUp()
-    {
-        creature.GetEntityBus().publish(IEventBus.save, creature);
-        creature.GetBaseStats().GetEntityBus().publish(IEventBus.save, creature.GetBaseStats());
-        // VaporeonSignals.save
-        //Vaporeon.bus.publish(IEventBus.save, creature);
-        //Vaporeon.bus.publish(IEventBus.save, creature.GetBaseStats());
-    }
     [Subscribe]
     public void onNameChanged(IStringEntity str)
     {
@@ -119,33 +119,6 @@ public partial class CreatureEditor : Control, EditorInitiator<ICreatureModel>
     }
     #endregion
 
-
-    private HBoxContainer createRow(IID id, string label, Action onEdit, Action onDelete)
-    {
-        var box = new HBoxContainer();
-        box.SetMeta(VaporeonUtil.metaIID, id.ToString());
-
-        var btnEdit = new Button();
-        btnEdit.Text = "~";
-        btnEdit.ButtonUp += onEdit;
-
-        var btnRemove = new Button();
-        btnRemove.Text = "-";
-        btnRemove.ButtonUp += //onDelete;
-        () =>
-        {
-            onDelete();
-            box.QueueFree(); // need to do this here until we have an EntityHashSet / EntityList
-        };
-
-        var lbl = new Label();
-        lbl.Text = label;
-
-        box.AddChild(btnEdit);
-        box.AddChild(lbl);
-        box.AddChild(btnRemove);
-        return box;
-    }
 
     #region Spells
     [Subscribe(VaporeonSignals.select)]
@@ -200,6 +173,32 @@ public partial class CreatureEditor : Control, EditorInitiator<ICreatureModel>
     }
     #endregion
 
+    private HBoxContainer createRow(IID id, string label, Action onEdit, Action onDelete)
+    {
+        var box = new HBoxContainer();
+        box.SetMeta(VaporeonUtil.metaIID, id.ToString());
+
+        var btnEdit = new Button();
+        btnEdit.Text = "~";
+        btnEdit.ButtonUp += onEdit;
+
+        var btnRemove = new Button();
+        btnRemove.Text = "-";
+        btnRemove.ButtonUp += //onDelete;
+        () =>
+        {
+            onDelete();
+            box.QueueFree(); // need to do this here until we have an EntityHashSet / EntityList
+        };
+
+        var lbl = new Label();
+        lbl.Text = label;
+
+        box.AddChild(btnEdit);
+        box.AddChild(lbl);
+        box.AddChild(btnRemove);
+        return box;
+    }
 
 
 }

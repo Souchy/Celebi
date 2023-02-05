@@ -5,7 +5,7 @@ using souchy.celebi.eevee.statuses;
 
 namespace souchy.celebi.eevee.impl.util
 {
-    public class EntityDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IEntityDictionary<TKey, TValue> //where TValue : IEntity
+    public class EntityDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IEntityDictionary<TKey, TValue> where TValue : IEntity
     {
         public IID entityUid { get; set; } // = Eevee.RegisterIID();
 
@@ -14,8 +14,8 @@ namespace souchy.celebi.eevee.impl.util
         public IEnumerable<KeyValuePair<TKey, TValue>> Pairs => this;
 
 
-        private EntityDictionary() { }
-        private EntityDictionary(IID id) => entityUid = id;
+        protected EntityDictionary() { }
+        protected EntityDictionary(IID id) => entityUid = id;
         public static IEntityDictionary<TKey, TValue> Create() => new EntityDictionary<TKey, TValue>(Eevee.RegisterIID<IEntityDictionary<TKey, TValue>>());
 
 
@@ -25,6 +25,11 @@ namespace souchy.celebi.eevee.impl.util
                 return this[key];
             else 
                 return default;
+        }
+
+        public bool Has(TKey key)
+        {
+            return this.ContainsKey(key);
         }
 
         public void Set(TKey key, TValue value)

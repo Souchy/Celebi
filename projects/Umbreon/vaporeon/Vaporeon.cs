@@ -131,12 +131,13 @@ public partial class Vaporeon : Control
     private void newWindow(Control root)
     {
         var wd = new Window();
-        //wd.GuiEmbedSubwindows = false;
+        wd.GuiEmbedSubwindows = false;
         wd.InitialPosition = Window.WindowInitialPosition.CenterMainWindowScreen;
         wd.Title = root.Name;
         wd.Size = this.GetWindow().Size;
         wd.AddChild(root);
         this.AddChild(wd);
+        wd.CloseRequested += () => wd.QueueFree();
         wd.Show();
     }
     #endregion

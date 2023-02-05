@@ -21,12 +21,12 @@ public partial class StatSimpleEditor : CenterContainer, EditorInitiator<IStatSi
         Value.ValueChanged += (val) => stat.value = (int) val;
     }
 
-    public void init(IStatSimple stat)
+    public void init(IStatSimple s)
     {
-        stat?.GetEntityBus()?.unsubscribe(this);
-        this.stat = stat;
-        stat.GetEntityBus().subscribe(this);
-        onStatChanged(stat);
+        this.stat?.GetEntityBus().unsubscribe(this);
+        this.stat = s;
+        this.stat.GetEntityBus().subscribe(this);
+        onStatChanged(this.stat);
     }
 
     [Subscribe]

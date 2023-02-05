@@ -4,16 +4,9 @@ using souchy.celebi.eevee.face.util;
 
 namespace souchy.celebi.eevee.face.objects.stats
 {
-    public interface IStats : IEntity
+    public interface IStats : IEntity, IEntityDictionary<StatType, IStat>
     {
-        public IEntityDictionary<StatType, IStat> stats { get; init; }
-
-
-        public IStat get(StatType statId);
-        public T get<T>(StatType statId) where T : IStat;
-        //public void Add(StatType statId, IStat value);
-        public void add(IStat value);
-        public bool has(StatType statId);
-
+        public T Get<T>(StatType statId) where T : IStat;
+        public void Add(IStat value);
     }
 }

@@ -23,7 +23,7 @@ namespace souchy.celebi.eevee.impl.stats
 
         private StatBool() { }
         public static StatBool Create(StatType st, bool value = false)
-            => new StatBool() //st, value)
+            => new StatBool()
             {
                 statId = st,
                 value = value,

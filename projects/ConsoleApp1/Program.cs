@@ -38,7 +38,7 @@ namespace PlayfabClientTest
         public int Id { get; set; }
         public static string asdf = "";
         public IID entityUid { get; set; } = Eevee.RegisterIID<string>();
-        public IStats stats = new Stats();
+        public IStats stats = Stats.Create(); //new Stats();
         public Breed()
         {
             //stats.GetEventBus().subscribe(this); // register All
@@ -57,12 +57,7 @@ namespace PlayfabClientTest
 
         public void throwEvent()
         {
-            stats.add(StatSimple.Create(StatType.Life, 5));
-            //stats.Add(new StatSimple(StatType.Life)
-            //{
-            //    value = 5
-            //});
-            //this.GetEventBus().publish(nameof(StatType.Life), stats, );
+            stats.Add(StatSimple.Create(StatType.Life, 5));
         }
 
         public void Dispose() => Eevee.DisposeIID<IEntity>(entityUid);

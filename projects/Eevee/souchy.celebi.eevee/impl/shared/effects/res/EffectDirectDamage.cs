@@ -34,25 +34,25 @@ namespace souchy.celebi.eevee.face.shared.effects.res
             var dist = creaSource.position.distanceManhattan(creaTarget.position);
 
             // apply affinities + resistances
-            IStatSimple aff = sourceStats.get<IStatSimple>(element.value.GetAffinity());
-            IStatSimple affg = sourceStats.get<IStatSimple>(StatType.GlobalDamageAffinity);
+            IStatSimple aff = sourceStats.Get<IStatSimple>(element.value.GetAffinity());
+            IStatSimple affg = sourceStats.Get<IStatSimple>(StatType.GlobalDamageAffinity);
             IStatSimple affdist;
 
-            IStatSimple res = targetStats.get<IStatSimple>(element.value.GetResistance());
-            IStatSimple resg = targetStats.get<IStatSimple>(StatType.GlobalDamageResistance);
+            IStatSimple res = targetStats.Get<IStatSimple>(element.value.GetResistance());
+            IStatSimple resg = targetStats.Get<IStatSimple>(StatType.GlobalDamageResistance);
             IStatSimple resdist;
 
             // distance
             if (dist > 1)
             {
-                affdist = sourceStats.get<IStatSimple>(StatType.DistanceAffinity);
-                resdist = targetStats.get<IStatSimple>(StatType.DistanceResistance);
+                affdist = sourceStats.Get<IStatSimple>(StatType.DistanceAffinity);
+                resdist = targetStats.Get<IStatSimple>(StatType.DistanceResistance);
             } 
             // melee
             else
             {
-                affdist = sourceStats.get<IStatSimple>(StatType.MeleeAffinity);
-                resdist = targetStats.get<IStatSimple>(StatType.MeleeResistance);
+                affdist = sourceStats.Get<IStatSimple>(StatType.MeleeAffinity);
+                resdist = targetStats.Get<IStatSimple>(StatType.MeleeResistance);
             }
 
             var damage = this.Value.value; 

@@ -8,6 +8,8 @@ namespace souchy.celebi.eevee.face.util
         public IEnumerable<TKey> Keys { get; }
         public IEnumerable<TValue> Values { get; }
         public IEnumerable<KeyValuePair<TKey, TValue>> Pairs { get; }
+
+        public bool Has(TKey key);
         public TValue Get(TKey key);
         public void Add(TKey key, TValue value);
         public void AddAll(IEntityDictionary<TKey, TValue> dictionary);

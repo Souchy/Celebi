@@ -23,8 +23,8 @@ namespace souchy.celebi.eevee.impl.util
             // skins
             typeof(ICreatureSkin), typeof(ISpellSkin), typeof(IEffectSkin),
             // other
-            typeof(IStringEntity), //typeof(string),
-            typeof(IEffect), // need a separate idgenerator to json save instances in spellmodels & statusmodels
+            typeof(IStringEntity), 
+            typeof(IEffect), 
             typeof(IStats), typeof(IStat),
              // TODO those idk yet
             typeof(ICondition), typeof(ITrigger), typeof(IZone),

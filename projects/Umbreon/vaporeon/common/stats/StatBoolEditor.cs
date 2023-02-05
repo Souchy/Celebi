@@ -22,12 +22,12 @@ public partial class StatBoolEditor : CenterContainer, EditorInitiator<IStatBool
         Value.ButtonUp += () => stat.value = !stat.value;
 	}
 
-    public void init(IStatBool stat)
+    public void init(IStatBool s)
     {
-        stat?.GetEntityBus().unsubscribe(this);
-        this.stat = stat;
-        stat.GetEntityBus().subscribe(this);
-        onStatChanged(stat);
+        this.stat?.GetEntityBus().unsubscribe(this);
+        this.stat = s;
+        this.stat.GetEntityBus().subscribe(this);
+        onStatChanged(this.stat);
     }
 
     [Subscribe]

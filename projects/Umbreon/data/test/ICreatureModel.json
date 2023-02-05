@@ -10,48 +10,5 @@
     "baseStats": "1",
     "baseSpells": [],
     "baseStatusPassives": []
-  },
-  "2": {
-    "$type": "Umbreon.data.resources.CreatureModel, Umbreon",
-    "entityUid": "2",
-    "nameId": "3",
-    "descriptionId": "4",
-    "skins": [
-      "2"
-    ],
-    "baseStats": "2",
-    "baseSpells": [
-      "6",
-      "1",
-      "7",
-      "8",
-      "9",
-      "10"
-    ],
-    "baseStatusPassives": []
-  },
-  "3": {
-    "$type": "Umbreon.data.resources.CreatureModel, Umbreon",
-    "entityUid": "3",
-    "nameId": "9",
-    "descriptionId": "10",
-    "skins": [
-      "3"
-    ],
-    "baseStats": "3",
-    "baseSpells": [],
-    "baseStatusPassives": []
-  },
-  "4": {
-    "$type": "Umbreon.data.resources.CreatureModel, Umbreon",
-    "entityUid": "4",
-    "nameId": "11",
-    "descriptionId": "12",
-    "skins": [
-      "4"
-    ],
-    "baseStats": "4",
-    "baseSpells": [],
-    "baseStatusPassives": []
   }
 }

@@ -52,6 +52,7 @@ namespace souchy.celebi.eevee.impl.stats
         private StatResource() { }
         public static StatResource Create(StatType st, int current = 0, int currentMax = 0, int initialMax = 0) => new StatResource()
         {
+            statId = st,
             current = current,
             currentMax = currentMax,
             initialMax = initialMax,

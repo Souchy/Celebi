@@ -12,10 +12,10 @@ namespace souchy.celebi.eevee.impl.util
         private static Dictionary<string, (Timer timer, Action action)> timers = new();
 
         /// <summary>
-        /// Debounce with a default timer of 3 seconds
+        /// Debounce with a default timer of 500ms
         /// </summary>
         public static void debounce(string path, Action action) 
-            => debounce(path, 3 * 1000, action);
+            => debounce(path, 500, action);
 
         /// <summary>
         /// Debounce
