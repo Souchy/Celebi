@@ -1,213 +1,215 @@
-[gd_scene load_steps=4 format=3 uid="uid://d67o3f2t7nuo"]
+[gd_scene load_steps=5 format=3 uid="uid://d67o3f2t7nuo"]
 
 [ext_resource type="Script" path="res://vaporeon/menus/SpellEditor.cs" id="1_30wwd"]
+[ext_resource type="Theme" uid="uid://ntm47kc1cyv" path="res://vaporeon/themes/Vaporeon.tres" id="1_ta1tr"]
 [ext_resource type="PackedScene" uid="uid://c5pro78vguufj" path="res://vaporeon/common/ZoneEditor.tscn" id="3_2sys8"]
-[ext_resource type="PackedScene" uid="uid://wayevqts6fkt" path="res://vaporeon/menus/SmallResourceTree.tscn" id="5_tmavo"]
+[ext_resource type="PackedScene" uid="uid://c7ytdebf8oyv0" path="res://vaporeon/components/SmallResourceTree.tscn" id="5_tmavo"]
 
-[node name="SpellModelEditor" type="Control"]
-layout_mode = 3
+[node name="SpellModelEditor" type="MarginContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_ta1tr")
 script = ExtResource("1_30wwd")
 
-[node name="ModelID" type="LineEdit" parent="."]
-layout_mode = 0
-offset_left = 35.0
-offset_top = 18.0
-offset_right = 119.0
-offset_bottom = 49.0
-placeholder_text = "ModelID"
-
-[node name="Name" type="LineEdit" parent="."]
-layout_mode = 0
-offset_left = 128.0
-offset_top = 18.0
-offset_right = 256.0
-offset_bottom = 49.0
-placeholder_text = "Name"
-
-[node name="Description" type="TextEdit" parent="."]
-layout_mode = 0
-offset_left = 36.0
-offset_top = 68.0
-offset_right = 325.0
-offset_bottom = 176.0
-placeholder_text = "Description"
-
-[node name="PropertiesBox" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 35.0
-offset_top = 184.0
-offset_right = 280.0
-offset_bottom = 484.0
-
-[node name="PropertiesLbl" type="Label" parent="PropertiesBox"]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "Properties"
-horizontal_alignment = 1
+theme_override_constants/separation = 10
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PropertiesBox"]
+[node name="Main" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="BtnSave" type="Button" parent="VBoxContainer/Main"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+text = "Save"
+
+[node name="EntityID" type="Label" parent="VBoxContainer/Main"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "#EntityID"
+vertical_alignment = 1
+
+[node name="NameEdit" type="LineEdit" parent="VBoxContainer/Main"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+placeholder_text = "Name"
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="DescriptionEdit" type="LineEdit" parent="VBoxContainer/Main"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Description"
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 10
 
-[node name="PropertiesGrid" type="GridContainer" parent="PropertiesBox/ScrollContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
-columns = 2
-metadata/_edit_use_anchors_ = true
+size_flags_horizontal = 3
 
-[node name="CooldownLbl" type="Label" parent="PropertiesBox/ScrollContainer/PropertiesGrid"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer"]
 layout_mode = 2
-text = "Cooldown"
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Cooldown" type="LineEdit" parent="PropertiesBox/ScrollContainer/PropertiesGrid"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-placeholder_text = "0"
-
-[node name="MaxChargesLbl" type="Label" parent="PropertiesBox/ScrollContainer/PropertiesGrid"]
-layout_mode = 2
-text = "Max Charges"
-
-[node name="MaxCharges" type="LineEdit" parent="PropertiesBox/ScrollContainer/PropertiesGrid"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-placeholder_text = "0"
-
-[node name="CastPerTurnLbl" type="Label" parent="PropertiesBox/ScrollContainer/PropertiesGrid"]
-layout_mode = 2
-text = "Cast Per Turn"
-
-[node name="CastPerTurn" type="LineEdit" parent="PropertiesBox/ScrollContainer/PropertiesGrid"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-placeholder_text = "0"
-
-[node name="CastPerTargetLbl" type="Label" parent="PropertiesBox/ScrollContainer/PropertiesGrid"]
-layout_mode = 2
-text = "Casts Per Target"
-
-[node name="CastPerTarget" type="LineEdit" parent="PropertiesBox/ScrollContainer/PropertiesGrid"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-placeholder_text = "0"
-
-[node name="RangeMinLbl" type="Label" parent="PropertiesBox/ScrollContainer/PropertiesGrid"]
-layout_mode = 2
-text = "Range Min"
-
-[node name="RangeMin" type="LineEdit" parent="PropertiesBox/ScrollContainer/PropertiesGrid"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-placeholder_text = "0"
-
-[node name="RangeMaxLbl" type="Label" parent="PropertiesBox/ScrollContainer/PropertiesGrid"]
-layout_mode = 2
-text = "Range Max"
-
-[node name="RangeMax" type="LineEdit" parent="PropertiesBox/ScrollContainer/PropertiesGrid"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-placeholder_text = "0"
-
-[node name="CastInLineLbl" type="Label" parent="PropertiesBox/ScrollContainer/PropertiesGrid"]
-layout_mode = 2
-text = "Cast In Line
-"
-
-[node name="CastInLine" type="CheckBox" parent="PropertiesBox/ScrollContainer/PropertiesGrid"]
-layout_mode = 2
-
-[node name="CastInDiagonalLbl" type="Label" parent="PropertiesBox/ScrollContainer/PropertiesGrid"]
-layout_mode = 2
-text = "Cast In Diagonal"
-
-[node name="CastInDiagonal" type="CheckBox" parent="PropertiesBox/ScrollContainer/PropertiesGrid"]
-layout_mode = 2
-
-[node name="NeedLosLbl" type="Label" parent="PropertiesBox/ScrollContainer/PropertiesGrid"]
-layout_mode = 2
-text = "Need Line of Sight
-"
-
-[node name="NeedLos" type="CheckBox" parent="PropertiesBox/ScrollContainer/PropertiesGrid"]
-layout_mode = 2
-button_pressed = true
-
-[node name="CostsBox" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 380.0
-offset_top = 18.0
-offset_right = 614.0
-offset_bottom = 113.0
-
-[node name="CostsLbl" type="Label" parent="CostsBox"]
+[node name="CostsLbl" type="Label" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "Costs"
 horizontal_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CostsBox"]
-layout_mode = 2
-
-[node name="CostsGrid" type="GridContainer" parent="CostsBox/ScrollContainer"]
+[node name="CostsGrid" type="GridContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 columns = 2
 
-[node name="RangeZoneMinEditor" parent="." instance=ExtResource("3_2sys8")]
-layout_mode = 0
-offset_left = 764.0
-offset_top = 46.0
-offset_right = 1211.0
-offset_bottom = 350.0
-Title = "Range Min"
+[node name="PropertiesLbl" type="Label" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Properties"
+horizontal_alignment = 1
 
-[node name="RangeZoneMaxEditor" parent="." instance=ExtResource("3_2sys8")]
-layout_mode = 0
-offset_left = 764.0
-offset_top = 412.0
-offset_right = 1211.0
-offset_bottom = 716.0
-Title = "Range Max"
+[node name="PropertiesGrid" type="GridContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 2
+metadata/_edit_use_anchors_ = true
 
-[node name="EffectsTree" parent="." instance=ExtResource("5_tmavo")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 380.0
-offset_top = 326.0
-offset_right = 610.0
-offset_bottom = 385.0
-grow_horizontal = 1
-grow_vertical = 1
+[node name="CooldownLbl" type="Label" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PropertiesGrid"]
+layout_mode = 2
+text = "Cooldown"
+
+[node name="Cooldown" type="LineEdit" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PropertiesGrid"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+placeholder_text = "0"
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="MaxChargesLbl" type="Label" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PropertiesGrid"]
+layout_mode = 2
+text = "Max Charges"
+
+[node name="MaxCharges" type="LineEdit" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PropertiesGrid"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+placeholder_text = "0"
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="CastPerTurnLbl" type="Label" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PropertiesGrid"]
+layout_mode = 2
+text = "Cast Per Turn"
+
+[node name="CastPerTurn" type="LineEdit" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PropertiesGrid"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+placeholder_text = "0"
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="CastPerTargetLbl" type="Label" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PropertiesGrid"]
+layout_mode = 2
+text = "Casts Per Target"
+
+[node name="CastPerTarget" type="LineEdit" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PropertiesGrid"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+placeholder_text = "0"
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="RangeMinLbl" type="Label" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PropertiesGrid"]
+layout_mode = 2
+text = "Range Min"
+
+[node name="RangeMin" type="LineEdit" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PropertiesGrid"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+placeholder_text = "0"
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="RangeMaxLbl" type="Label" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PropertiesGrid"]
+layout_mode = 2
+text = "Range Max"
+
+[node name="RangeMax" type="LineEdit" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PropertiesGrid"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+placeholder_text = "0"
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="CastInLineLbl" type="Label" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PropertiesGrid"]
+layout_mode = 2
+text = "Cast In Line
+"
+
+[node name="CastInLine" type="CheckBox" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PropertiesGrid"]
+layout_mode = 2
+
+[node name="CastInDiagonalLbl" type="Label" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PropertiesGrid"]
+layout_mode = 2
+text = "Cast In Diagonal"
+
+[node name="CastInDiagonal" type="CheckBox" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PropertiesGrid"]
+layout_mode = 2
+
+[node name="NeedLosLbl" type="Label" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PropertiesGrid"]
+layout_mode = 2
+text = "Need Line of Sight
+"
+
+[node name="NeedLos" type="CheckBox" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PropertiesGrid"]
+layout_mode = 2
+button_pressed = true
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EffectsTree" parent="VBoxContainer/HBoxContainer/ScrollContainer2/VBoxContainer" instance=ExtResource("5_tmavo")]
+layout_mode = 2
 Title = "Effects"
 
-[node name="SourceConditionsTree" parent="." instance=ExtResource("5_tmavo")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 384.0
-offset_top = 113.0
-offset_right = 614.0
-offset_bottom = 172.0
-grow_horizontal = 1
-grow_vertical = 1
+[node name="SourceConditionsTree" parent="VBoxContainer/HBoxContainer/ScrollContainer2/VBoxContainer" instance=ExtResource("5_tmavo")]
+layout_mode = 2
 Title = "Source Conditions"
 
-[node name="TargetConditionsTree" parent="." instance=ExtResource("5_tmavo")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 380.0
-offset_top = 206.0
-offset_right = 610.0
-offset_bottom = 265.0
-grow_horizontal = 1
-grow_vertical = 1
+[node name="TargetConditionsTree" parent="VBoxContainer/HBoxContainer/ScrollContainer2/VBoxContainer" instance=ExtResource("5_tmavo")]
+layout_mode = 2
 Title = "Target Conditions"
+
+[node name="ScrollContainer3" type="ScrollContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer3"]
+layout_mode = 2
+
+[node name="RangeZoneMinEditor" parent="VBoxContainer/HBoxContainer/ScrollContainer3/VBoxContainer" instance=ExtResource("3_2sys8")]
+layout_mode = 2
+Title = "Range Min"
+
+[node name="RangeZoneMaxEditor" parent="VBoxContainer/HBoxContainer/ScrollContainer3/VBoxContainer" instance=ExtResource("3_2sys8")]
+layout_mode = 2
+Title = "Range Max"

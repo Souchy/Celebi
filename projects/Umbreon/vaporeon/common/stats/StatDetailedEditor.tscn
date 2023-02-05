@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://exlpavypr2ch"]
+[gd_scene load_steps=2 format=3 uid="uid://exlpavypr2ch"]
+
+[ext_resource type="Script" path="res://vaporeon/common/stats/StatDetailedEditor.cs" id="1_iq7s6"]
 
 [node name="StatDetailedEditor" type="CenterContainer"]
 anchors_preset = 15
@@ -6,10 +8,31 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_iq7s6")
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
-columns = 2
 
-[node name="Label" type="Label" parent="GridContainer"]
+[node name="BaseFlat" type="SpinBox" parent="HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
+tooltip_text = "Base Flat"
+prefix = "B"
+
+[node name="IncPerc" type="SpinBox" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Increased Percent"
+prefix = "%"
+
+[node name="IncFlat" type="SpinBox" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Increased Flat"
+prefix = "F"
+
+[node name="MorePerc" type="SpinBox" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "More Percent"
+prefix = "M"

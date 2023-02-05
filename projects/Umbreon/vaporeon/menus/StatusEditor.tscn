@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgkkcmf8w34gj"]
+
+[ext_resource type="Theme" uid="uid://ntm47kc1cyv" path="res://vaporeon/themes/Vaporeon.tres" id="1_pr2ke"]
+[ext_resource type="Script" path="res://vaporeon/menus/StatusEditor.cs" id="2_mnxp2"]
+
+[node name="StatusEditor" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_pr2ke")
+script = ExtResource("2_mnxp2")

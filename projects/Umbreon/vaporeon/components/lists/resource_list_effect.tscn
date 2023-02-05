@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://bc4wx2lp0fvni"]
+
+[ext_resource type="PackedScene" uid="uid://cq776x4yclm8j" path="res://vaporeon/components/ResourceList.tscn" id="1_ktx60"]
+[ext_resource type="Script" path="res://vaporeon/components/lists/resource_list_effect.cs" id="2_qxgky"]
+
+[node name="ResourceListEffect" instance=ExtResource("1_ktx60")]
+script = ExtResource("2_qxgky")

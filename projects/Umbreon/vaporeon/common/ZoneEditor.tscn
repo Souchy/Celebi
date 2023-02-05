@@ -1,68 +1,59 @@
 [gd_scene load_steps=3 format=3 uid="uid://c5pro78vguufj"]
 
+[ext_resource type="Theme" uid="uid://ntm47kc1cyv" path="res://vaporeon/themes/Vaporeon.tres" id="1_ay8c8"]
 [ext_resource type="Script" path="res://vaporeon/common/ZoneEditor.cs" id="1_rv3jo"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4mkv3"]
-draw_center = false
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-
-[node name="ZoneEditor" type="PanelContainer"]
-offset_right = 1366.0
-offset_bottom = 768.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_4mkv3")
+[node name="ZoneEditor" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ay8c8")
 script = ExtResource("1_rv3jo")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="Titlebar" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Titlebar" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 25
 alignment = 1
 
-[node name="ZoneEditorLbl" type="Label" parent="MarginContainer/VBoxContainer/Titlebar"]
+[node name="ZoneEditorLbl" type="Label" parent="VBoxContainer/Titlebar"]
 layout_mode = 2
-text = "Zone Editor:"
+text = "Zone Editor"
 
-[node name="ZoneNameLbl" type="Label" parent="MarginContainer/VBoxContainer/Titlebar"]
+[node name="Toolbar" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-text = "ZoneName"
-
-[node name="Toolbar" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 25
 alignment = 1
 
-[node name="PreviewBtn" type="Button" parent="MarginContainer/VBoxContainer/Toolbar"]
+[node name="NameEdit" type="LineEdit" parent="VBoxContainer/Toolbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+placeholder_text = "Name"
+
+[node name="PreviewBtn" type="Button" parent="VBoxContainer/Toolbar"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Preview"
 
-[node name="CopyBtn" type="Button" parent="MarginContainer/VBoxContainer/Toolbar"]
+[node name="CopyBtn" type="Button" parent="VBoxContainer/Toolbar"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Copy"
 
-[node name="ParametersGrid" type="GridContainer" parent="MarginContainer/VBoxContainer"]
+[node name="ParametersGrid" type="GridContainer" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
 columns = 2
 
-[node name="ZoneTypeLbl" type="Label" parent="MarginContainer/VBoxContainer/ParametersGrid"]
+[node name="ZoneTypeLbl" type="Label" parent="VBoxContainer/ParametersGrid"]
 layout_mode = 2
 text = "Zone Type"
 
-[node name="ZoneType" type="OptionButton" parent="MarginContainer/VBoxContainer/ParametersGrid"]
+[node name="ZoneType" type="OptionButton" parent="VBoxContainer/ParametersGrid"]
+unique_name_in_owner = true
 layout_mode = 2
 item_count = 4
 popup/item_0/text = "Point"
@@ -74,32 +65,37 @@ popup/item_2/id = 2
 popup/item_3/text = "Square"
 popup/item_3/id = 3
 
-[node name="Size" type="Label" parent="MarginContainer/VBoxContainer/ParametersGrid"]
+[node name="Size" type="Label" parent="VBoxContainer/ParametersGrid"]
 layout_mode = 2
 text = "Size"
 
-[node name="SizeVector" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ParametersGrid"]
+[node name="SizeVector" type="HBoxContainer" parent="VBoxContainer/ParametersGrid"]
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="vectA" type="SpinBox" parent="MarginContainer/VBoxContainer/ParametersGrid/SizeVector"]
+[node name="SizeVectorI0" type="SpinBox" parent="VBoxContainer/ParametersGrid/SizeVector"]
+unique_name_in_owner = true
 layout_mode = 2
 rounded = true
 prefix = "Min"
 custom_arrow_step = 1.0
 
-[node name="vectB" type="SpinBox" parent="MarginContainer/VBoxContainer/ParametersGrid/SizeVector"]
+[node name="SizeVectorI1" type="SpinBox" parent="VBoxContainer/ParametersGrid/SizeVector"]
+unique_name_in_owner = true
 layout_mode = 2
 prefix = "Max"
 
-[node name="vectC" type="SpinBox" parent="MarginContainer/VBoxContainer/ParametersGrid/SizeVector"]
+[node name="SizeVectorI2" type="SpinBox" parent="VBoxContainer/ParametersGrid/SizeVector"]
+unique_name_in_owner = true
 layout_mode = 2
-prefix = "Angle"
+prefix = "°"
 
-[node name="WorldOriginLbl" type="Label" parent="MarginContainer/VBoxContainer/ParametersGrid"]
+[node name="WorldOriginLbl" type="Label" parent="VBoxContainer/ParametersGrid"]
 layout_mode = 2
 text = "World Origin Actor"
 
-[node name="OptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/ParametersGrid"]
+[node name="WorldOriginActor" type="OptionButton" parent="VBoxContainer/ParametersGrid"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -110,38 +106,49 @@ popup/item_0/id = 0
 popup/item_1/text = "Target"
 popup/item_1/id = 1
 
-[node name="WorldOffsetLbl" type="Label" parent="MarginContainer/VBoxContainer/ParametersGrid"]
+[node name="WorldOffsetLbl" type="Label" parent="VBoxContainer/ParametersGrid"]
 layout_mode = 2
 text = "World Offset"
 
-[node name="WorldOffsetVector" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ParametersGrid"]
+[node name="WorldOffsetVector" type="HBoxContainer" parent="VBoxContainer/ParametersGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="WorldOffsetVectorX" type="SpinBox" parent="VBoxContainer/ParametersGrid/WorldOffsetVector"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="x" type="SpinBox" parent="MarginContainer/VBoxContainer/ParametersGrid/WorldOffsetVector"]
+[node name="WorldOffsetVectorZ" type="SpinBox" parent="VBoxContainer/ParametersGrid/WorldOffsetVector"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="z" type="SpinBox" parent="MarginContainer/VBoxContainer/ParametersGrid/WorldOffsetVector"]
-layout_mode = 2
-
-[node name="LocalOriginLbl" type="Label" parent="MarginContainer/VBoxContainer/ParametersGrid"]
+[node name="LocalOriginLbl" type="Label" parent="VBoxContainer/ParametersGrid"]
 layout_mode = 2
 text = "Local Origin"
 
-[node name="LocalOriginBtn" type="OptionButton" parent="MarginContainer/VBoxContainer/ParametersGrid"]
+[node name="LocalOriginBtn" type="OptionButton" parent="VBoxContainer/ParametersGrid"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="RotationLbl" type="Label" parent="MarginContainer/VBoxContainer/ParametersGrid"]
+[node name="RotationLbl" type="Label" parent="VBoxContainer/ParametersGrid"]
 layout_mode = 2
 text = "Rotation"
 
-[node name="RotationBtn" type="OptionButton" parent="MarginContainer/VBoxContainer/ParametersGrid"]
+[node name="RotationBtn" type="OptionButton" parent="VBoxContainer/ParametersGrid"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ExtendFromSourceLbl" type="Label" parent="MarginContainer/VBoxContainer/ParametersGrid"]
+[node name="ExtendFromSourceLbl" type="Label" parent="VBoxContainer/ParametersGrid"]
 layout_mode = 2
-text = "Extend Vector From Source"
+tooltip_text = "Can be Vector[0], Vector[1], Vector[2].
+This component will then extend from source. 0 = lengthMin, 1 = lengthMax, 2 = %opening"
+mouse_filter = 1
+text = "Extend Vector
+component (index) 
+From Source"
 
-[node name="ExtendFromSourceBtn" type="OptionButton" parent="MarginContainer/VBoxContainer/ParametersGrid"]
+[node name="ExtendFromSourceBtn" type="OptionButton" parent="VBoxContainer/ParametersGrid"]
+unique_name_in_owner = true
 layout_mode = 2
 item_count = 3
 popup/item_0/text = "0"
@@ -151,11 +158,40 @@ popup/item_1/id = 1
 popup/item_2/text = "2"
 popup/item_2/id = 2
 
-[node name="NegativeLbl" type="Label" parent="MarginContainer/VBoxContainer/ParametersGrid"]
+[node name="NegativeLbl" type="Label" parent="VBoxContainer/ParametersGrid"]
 layout_mode = 2
-text = "Negative"
+text = "Negative
+(Substract)"
 
-[node name="Negative" type="CheckBox" parent="MarginContainer/VBoxContainer/ParametersGrid"]
+[node name="NegativeBtn" type="CheckBox" parent="VBoxContainer/ParametersGrid"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[connection signal="item_selected" from="MarginContainer/VBoxContainer/ParametersGrid/ZoneType" to="." method="onZoneTypeSelected"]
+[node name="ChildrenLbl" type="Label" parent="VBoxContainer/ParametersGrid"]
+layout_mode = 2
+text = "Children"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ParametersGrid"]
+layout_mode = 2
+
+[node name="BtnAddChild" type="Button" parent="VBoxContainer/ParametersGrid/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Add"
+
+[node name="BtnRemoveChild" type="Button" parent="VBoxContainer/ParametersGrid/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Remove"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ChildrenList" type="ItemList" parent="VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

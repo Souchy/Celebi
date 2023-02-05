@@ -91,41 +91,29 @@ namespace Umbreon.vaporeon.common
             return edit;
         }
 
-
-
-        public static void GenerateStat(GridContainer container, StatType statType, IStat stat = null)
+        public static void GenerateStat(GridContainer container, StatType statType, IStat stat) 
         {
             Label lbl = new Label();
             lbl.Name = "lbl:" + Enum.GetName(statType);
             lbl.Text = Enum.GetName(statType);
-            //IStat stat = statType.Create();
             if (stat == null)
                 stat = statType.Create();
             container.AddChild(lbl);
 
-            Button btn = new Button();
-            btn.Name = "btn:" + Enum.GetName(statType);
-            btn.Text = "Edit";
-            btn.CustomMinimumSize = new Vector2(50, 30);
-            btn.ButtonUp += () =>
-            {
-                var grid = GenerateGrid(stat);
+            var editor = Vaporeon.instanceEditor(stat);
+            editor.Name = Enum.GetName(statType);
+            container.AddChild(editor);
 
-                //var pop = new PopupPanel();
-                //pop.AddChild(grid);
-                //pop.PopupCenteredClamped();
-                //pop.Show();
-                //container.AddChild(pop);
-
-                var wd = new Window();
-                wd.AddChild(grid);
-                container.AddChild(wd);
-                wd.PopupCenteredClamped(new Vector2I(200, 100));
-                wd.CloseRequested += () => wd.QueueFree();
-                wd.Show();
-            };
-            container.AddChild(btn);
+            if (stat is IStatSimple)
+                ((EditorInitiator<IStatSimple>) editor).init((IStatSimple) stat);
+            if (stat is IStatBool)
+                ((EditorInitiator<IStatBool>) editor).init((IStatBool) stat);
+            if (stat is IStatDetailed)
+                ((EditorInitiator<IStatDetailed>) editor).init((IStatDetailed) stat);
+            if (stat is IStatResource)
+                ((EditorInitiator<IStatResource>) editor).init((IStatResource) stat);
         }
+
 
     }
 }

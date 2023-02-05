@@ -1,96 +1,117 @@
-[gd_scene load_steps=3 format=3 uid="uid://bjxqjy57p0c0b"]
+[gd_scene load_steps=5 format=3 uid="uid://bjxqjy57p0c0b"]
 
 [ext_resource type="Script" path="res://vaporeon/menus/EffectEditor.cs" id="1_f8vfk"]
-[ext_resource type="PackedScene" uid="uid://wayevqts6fkt" path="res://vaporeon/menus/SmallResourceTree.tscn" id="3_ylmo8"]
+[ext_resource type="Theme" uid="uid://ntm47kc1cyv" path="res://vaporeon/themes/Vaporeon.tres" id="1_x2lar"]
+[ext_resource type="PackedScene" uid="uid://c7ytdebf8oyv0" path="res://vaporeon/components/SmallResourceTree.tscn" id="3_ylmo8"]
+[ext_resource type="PackedScene" uid="uid://c5pro78vguufj" path="res://vaporeon/common/ZoneEditor.tscn" id="4_3f3o7"]
 
-[node name="EffectEditor" type="Control"]
-layout_mode = 3
+[node name="EffectEditor" type="MarginContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_x2lar")
 script = ExtResource("1_f8vfk")
 
-[node name="EffectID" type="Label" parent="."]
-layout_mode = 0
-offset_left = 40.0
-offset_top = 18.0
-offset_right = 101.0
-offset_bottom = 44.0
-text = "#EffectID"
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
 
-[node name="ModelID" type="LineEdit" parent="."]
-layout_mode = 0
-offset_left = 133.0
-offset_top = 16.0
-offset_right = 332.0
-offset_bottom = 50.0
-placeholder_text = "#ModelID"
+[node name="Main" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
 
-[node name="Description" type="TextEdit" parent="."]
-layout_mode = 0
-offset_left = 41.0
-offset_top = 67.0
-offset_right = 333.0
-offset_bottom = 114.0
+[node name="BtnSave" type="Button" parent="VBoxContainer/Main"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+text = "Save"
+
+[node name="EntityID" type="Label" parent="VBoxContainer/Main"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "#EntityID"
+vertical_alignment = 1
+
+[node name="NameEdit" type="LineEdit" parent="VBoxContainer/Main"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+placeholder_text = "Name"
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="DescriptionEdit" type="LineEdit" parent="VBoxContainer/Main"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
 placeholder_text = "Description"
+caret_blink = true
+caret_blink_interval = 0.5
 
-[node name="ParametersBox" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 42.0
-offset_top = 136.0
-offset_right = 322.0
-offset_bottom = 319.0
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 
-[node name="ParametersTitle" type="Label" parent="ParametersBox"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ParametersBox" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ParametersTitle" type="Label" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer/ParametersBox"]
 layout_mode = 2
 text = "Parameters"
 horizontal_alignment = 1
 
-[node name="ParametersGrid" type="GridContainer" parent="ParametersBox"]
+[node name="ParametersGrid" type="GridContainer" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer/ParametersBox"]
+unique_name_in_owner = true
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="ParametersBox/ParametersGrid"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer/ParametersBox/ParametersGrid"]
 layout_mode = 2
 text = "a kinda long name"
 
-[node name="LineEdit" type="LineEdit" parent="ParametersBox/ParametersGrid"]
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer/ParametersBox/ParametersGrid"]
 layout_mode = 2
 placeholder_text = "value"
+caret_blink = true
+caret_blink_interval = 0.5
 
-[node name="EffectChildrenTree" parent="." instance=ExtResource("3_ylmo8")]
-layout_mode = 1
-offset_left = 46.0
-offset_top = 298.0
-offset_right = -396.0
-offset_bottom = -19.0
+[node name="ZoneEditor" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer" instance=ExtResource("4_3f3o7")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="EffectChildrenTree" parent="VBoxContainer/HBoxContainer2" instance=ExtResource("3_ylmo8")]
+layout_mode = 2
+size_flags_horizontal = 3
 Title = "Effect Children"
 
-[node name="ScrollContainerSmallResourceTrees" type="ScrollContainer" parent="."]
-layout_mode = 0
-offset_left = 408.0
-offset_top = 19.0
-offset_right = 675.0
-offset_bottom = 471.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainerSmallResourceTrees"]
+[node name="ScrollContainerSmallResourceTrees" type="ScrollContainer" parent="VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SourceConditionsTree" parent="ScrollContainerSmallResourceTrees/VBoxContainer" instance=ExtResource("3_ylmo8")]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/ScrollContainerSmallResourceTrees"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SourceConditionsTree" parent="VBoxContainer/HBoxContainer2/ScrollContainerSmallResourceTrees/VBoxContainer" instance=ExtResource("3_ylmo8")]
 layout_mode = 2
 Title = "Source Conditions"
 
-[node name="TargetConditionsTree" parent="ScrollContainerSmallResourceTrees/VBoxContainer" instance=ExtResource("3_ylmo8")]
+[node name="TargetConditionsTree" parent="VBoxContainer/HBoxContainer2/ScrollContainerSmallResourceTrees/VBoxContainer" instance=ExtResource("3_ylmo8")]
 layout_mode = 2
 Title = "Target Conditions"
 
-[node name="TriggerConditionsTree" parent="ScrollContainerSmallResourceTrees/VBoxContainer" instance=ExtResource("3_ylmo8")]
+[node name="TriggerConditionsTree" parent="VBoxContainer/HBoxContainer2/ScrollContainerSmallResourceTrees/VBoxContainer" instance=ExtResource("3_ylmo8")]
 layout_mode = 2
 Title = "Trigger Conditions"
-
-[node name="ZoneTree" parent="ScrollContainerSmallResourceTrees/VBoxContainer" instance=ExtResource("3_ylmo8")]
-layout_mode = 2
-Title = "Zone"

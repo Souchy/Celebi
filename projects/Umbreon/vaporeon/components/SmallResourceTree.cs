@@ -19,6 +19,8 @@ public partial class SmallResourceTree : VBoxContainer
     [Export]
     public string Title { get; set; }
 
+    public PackedScene menuScene = GD.Load<PackedScene>("res://vaporeon/components/ResourceOptionsMenu.tscn");
+
     #region Toolbar
     [NodePath("Buttons/AddBtn")]
     public Button AddBtn { get; set; }
@@ -33,7 +35,7 @@ public partial class SmallResourceTree : VBoxContainer
     #region Nodes
     [NodePath]
     public Label TitleLbl { get; set; }
-    [NodePath]
+    [NodePath("ScrollContainer/Tree")]
     public Tree Tree { get; set; }
     [NodePath]
     public PopupMenu PopupMenu { get; set; }
@@ -60,6 +62,7 @@ public partial class SmallResourceTree : VBoxContainer
 
 
     }
+
 
     public event Action onAddBtnClick { 
         add => this.AddBtn.Pressed += value;

@@ -18,7 +18,7 @@ namespace souchy.celebi.eevee.impl.stats
             {
                 _baseFlat = value;
                 this.GetEntityBus()?.publish(Enum.GetName(statId), this);
-                this.GetEntityBus()?.publish(statId, this);
+                this.GetEntityBus()?.publish(this);
             }
         }
         public int increasedPercent { get => _increasedPercent; 
@@ -26,7 +26,7 @@ namespace souchy.celebi.eevee.impl.stats
             {
                 _increasedPercent = value;
                 this.GetEntityBus()?.publish(Enum.GetName(statId), this);
-                this.GetEntityBus()?.publish(statId, this);
+                this.GetEntityBus()?.publish(this);
             }
         }
         public int increasedFlat { get => _increasedFlat; 
@@ -34,7 +34,7 @@ namespace souchy.celebi.eevee.impl.stats
             {
                 _increasedFlat = value;
                 this.GetEntityBus()?.publish(Enum.GetName(statId), this);
-                this.GetEntityBus()?.publish(statId, this);
+                this.GetEntityBus()?.publish(this);
             }
         }
         public int morePercent { get => _morePercent;
@@ -42,7 +42,7 @@ namespace souchy.celebi.eevee.impl.stats
             {
                 _morePercent = value;
                 this.GetEntityBus()?.publish(Enum.GetName(statId), this);
-                this.GetEntityBus()?.publish(statId, this);
+                this.GetEntityBus()?.publish(this);
             }
         }
 

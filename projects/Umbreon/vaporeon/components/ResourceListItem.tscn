@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bo4pqgpejlnxk"]
+[gd_scene load_steps=3 format=3 uid="uid://bo4pqgpejlnxk"]
 
+[ext_resource type="Theme" uid="uid://ntm47kc1cyv" path="res://vaporeon/themes/Vaporeon.tres" id="1_26jpe"]
 [ext_resource type="StyleBox" uid="uid://uy1k6m72i373" path="res://vaporeon/themes/ResourceListItemNormal.tres" id="1_aevyt"]
 
 [node name="ResourceListItem" type="MarginContainer"]
@@ -8,6 +9,7 @@ offset_right = 160.0
 offset_bottom = 160.0
 mouse_filter = 0
 mouse_default_cursor_shape = 2
+theme = ExtResource("1_26jpe")
 theme_override_constants/margin_left = 7
 theme_override_constants/margin_top = 7
 theme_override_constants/margin_right = 7
@@ -20,6 +22,7 @@ theme_override_styles/panel = ExtResource("1_aevyt")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
+theme_override_constants/separation = 4
 
 [node name="Image" type="ColorRect" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2

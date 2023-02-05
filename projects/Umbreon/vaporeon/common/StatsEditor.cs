@@ -13,8 +13,9 @@ using Umbreon.vaporeon.common;
 public partial class StatsEditor : MarginContainer
 {
     
-    public IStats stats { get => this.GetVaporeon().CurrentCreatureModel?.GetBaseStats(); } 
+    //public IStats stats { get => this.GetVaporeon().CurrentCreatureModel?.GetBaseStats(); } 
     //public IStats stats = Stats.Create();
+    private IStats stats { get; set; }
 
     #region Nodes
     [NodePath("VBoxContainer/HBoxContainer/Add")]
@@ -25,26 +26,27 @@ public partial class StatsEditor : MarginContainer
     public GridContainer StatsContainer { get; set; }
     #endregion
 
+    #region Init
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
         this.OnReady();
         this.GetVaporeon().bus.subscribe(this);
-        stats?.stats.GetEntityBus().subscribe(this);
 
         BtnAdd.ButtonUp += BtnAdd_ButtonUp;
 	}
-
-
-    [Subscribe(nameof(Vaporeon.CurrentCreatureModel))]
-    public void onModelChange(ICreatureModel model)
+    public void init(IStats stats)
     {
         stats.stats.GetEntityBus().subscribe(this);
         StatsContainer.QueueFreeChildren();
-        model.GetBaseStats().stats.ForEach((k, v) => 
+        stats.stats.ForEach((k, v) => 
             PropertiesComponent.GenerateStat(StatsContainer, k, v)
         );
     }
+    #endregion
+
+
+    #region Diamond Handlers
     [Subscribe("Add", "Set")]
     public void onStatAddSet(IEntityDictionary<StatType, IStat> dic, StatType key, IStat value)
     {
@@ -54,9 +56,18 @@ public partial class StatsEditor : MarginContainer
     public void onStatRemove(IEntityDictionary<StatType, IStat> dic, StatType key, IStat value)
     {
         StatsContainer.GetNode("lbl:" + Enum.GetName(key)).QueueFree();
-        StatsContainer.GetNode("btn:" + Enum.GetName(key)).QueueFree();
+        StatsContainer.GetNode(Enum.GetName(key)).QueueFree();
     }
+    [Subscribe]
+    public void onStatChange(StatType type, IStat stat)
+    {
+        GD.Print($"StatsEditor.onStatChange: {type} = {stat}");
+        stats.GetEntityBus().publish(IEventBus.save, stats);
+    }
+    #endregion
 
+
+    #region GUI Handlers
     private void BtnAdd_ButtonUp()
     {
         var pop = new PopupMenu();
@@ -69,20 +80,12 @@ public partial class StatsEditor : MarginContainer
             var st = Enum.GetValues<StatType>()[(int) index];
             var stat = st.Create();
             stat.GetEntityBus().subscribe(this);
-            stats.Add(stat);
+            stats.add(stat);
             //PropertiesComponent.GenerateStat(StatsContainer, st);
         };
         pop.Show();
         this.AddChild(pop);
     }
-    
-
-    [Subscribe]
-    public void onStatChange(StatType type, IStat stat)
-    {
-        GD.Print($"StatsEditor.onStatChange: {type} = {stat}");
-        stats.GetEntityBus().publish(IEventBus.save, stats);
-    }
-
+    #endregion
 
 }

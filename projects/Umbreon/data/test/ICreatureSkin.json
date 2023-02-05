@@ -20,5 +20,27 @@
     "animations": null,
     "spellSkins": null,
     "effectSkins": null
+  },
+  "3": {
+    "$type": "Umbreon.data.resources.CreatureSkin, Umbreon",
+    "entityUid": "3",
+    "nameId": "9",
+    "descriptionId": "10",
+    "meshModel": null,
+    "icon": null,
+    "animations": null,
+    "spellSkins": null,
+    "effectSkins": null
+  },
+  "4": {
+    "$type": "Umbreon.data.resources.CreatureSkin, Umbreon",
+    "entityUid": "4",
+    "nameId": "11",
+    "descriptionId": "12",
+    "meshModel": null,
+    "icon": null,
+    "animations": null,
+    "spellSkins": null,
+    "effectSkins": null
   }
 }

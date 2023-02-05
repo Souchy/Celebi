@@ -57,7 +57,7 @@ namespace PlayfabClientTest
 
         public void throwEvent()
         {
-            stats.Add(StatSimple.Create(StatType.Life, 5));
+            stats.add(StatSimple.Create(StatType.Life, 5));
             //stats.Add(new StatSimple(StatType.Life)
             //{
             //    value = 5

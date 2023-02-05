@@ -1,9 +1,32 @@
-[gd_scene format=3 uid="uid://cg13s8pyjbfu6"]
+[gd_scene load_steps=2 format=3 uid="uid://cg13s8pyjbfu6"]
 
-[node name="StatResourceEditor" type="Control"]
-layout_mode = 3
+[ext_resource type="Script" path="res://vaporeon/common/stats/StatResourceEditor.cs" id="1_dtv5r"]
+
+[node name="StatResourceEditor" type="CenterContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_dtv5r")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="CurrentValue" type="SpinBox" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Current Value"
+prefix = "C"
+
+[node name="CurrentMax" type="SpinBox" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Current Max"
+prefix = "M"
+
+[node name="InitialMax" type="SpinBox" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Initial Max"
+prefix = "I"

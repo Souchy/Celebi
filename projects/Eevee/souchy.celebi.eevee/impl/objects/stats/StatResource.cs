@@ -17,7 +17,7 @@ namespace souchy.celebi.eevee.impl.stats
             {
                 _current = value;
                 this.GetEntityBus()?.publish(Enum.GetName(statId), this);
-                this.GetEntityBus()?.publish(statId, this);
+                this.GetEntityBus()?.publish(this);
             }
         }
         public int currentMax { get => _currentMax;
@@ -25,7 +25,7 @@ namespace souchy.celebi.eevee.impl.stats
             {
                 _currentMax = value;
                 this.GetEntityBus()?.publish(Enum.GetName(statId), this);
-                this.GetEntityBus()?.publish(statId, this);
+                this.GetEntityBus()?.publish(this);
             }
         }
         public int initialMax { get => _initialMax;
@@ -33,7 +33,7 @@ namespace souchy.celebi.eevee.impl.stats
             {
                 _initialMax = value;
                 this.GetEntityBus()?.publish(Enum.GetName(statId), this);
-                this.GetEntityBus()?.publish(statId, this);
+                this.GetEntityBus()?.publish(this);
             }
         }
 
@@ -45,7 +45,7 @@ namespace souchy.celebi.eevee.impl.stats
                 this._currentMax = value.currentMax;
                 this._initialMax = value.initialMax;
                 this.GetEntityBus()?.publish(Enum.GetName(statId), this);
-                this.GetEntityBus()?.publish(statId, this);
+                this.GetEntityBus()?.publish(this);
             }
         }
 

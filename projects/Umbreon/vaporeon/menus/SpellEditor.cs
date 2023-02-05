@@ -12,43 +12,45 @@ using souchy.celebi.eevee.impl.util;
 public partial class SpellEditor : Control
 {
 
-    public ISpellModel spell { get => this.GetVaporeon().CurrentSpellModel; }
+    //public ISpellModel spell { get => this.GetVaporeon().CurrentSpellModel; }
+    private ISpellModel spell { get; set; }
+
+
+    #region Nodes - Main bar 
+    [NodePath] public Button BtnSave { get; set; }
+    [NodePath] public Label EntityID { get; set; }
+    [NodePath] public LineEdit NameEdit { get; set; }
+    [NodePath] public LineEdit DescriptionEdit { get; set; }
+    #endregion
 
     #region Nodes
-    [NodePath]
-    public LineEdit ModelID { get; set; }
-    [NodePath]
-    public LineEdit Name { get; set; }
-    [NodePath("CostsBox/ScrollContainer/CostsGrid")]
-    public GridContainer CostsGrid { get; set; }
-    [NodePath("PropertiesBox/ScrollContainer/PropertiesGrid")]
-    public GridContainer PropertiesGrid { get; set; }
-    [NodePath]
-    public SmallResourceTree EffectsTree { get; set; }
-    [NodePath]
-    public SmallResourceTree SourceConditionsTree { get; set; }
-    [NodePath]
-    public SmallResourceTree TargetConditionsTree { get; set; }
+    [NodePath] public GridContainer CostsGrid { get; set; }
+    [NodePath] public GridContainer PropertiesGrid { get; set; }
+    [NodePath] public SmallResourceTree EffectsTree { get; set; }
+    [NodePath] public SmallResourceTree SourceConditionsTree { get; set; }
+    [NodePath] public SmallResourceTree TargetConditionsTree { get; set; }
     #endregion
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         this.OnReady();
-
-        // StatType
-        // CostsGrid.AddChild();
-        update();
     }
 
-    [Subscribe(nameof(Vaporeon.CurrentSpellModel))]
-    public void onModelChange(ISpellModel model)
+    public void init(ISpellModel spell)
     {
-        update();
+        unload();
+        this.spell = spell;
+        load();
     }
 
-    public void update()
+    private void unload()
     {
+        if (spell == null) return;
+    }
+    private void load()
+    {
+
         if (spell == null) return;
         // props
         PropertiesGrid.QueueFreeChildren();
@@ -76,10 +78,7 @@ public partial class SpellEditor : Control
             EffectsTree.AddChild(lbl);
         }
     }
-    
-    public void onZoneTypeSelected()
-    {
-                                    
-    }
+
+
 
 }

@@ -1,9 +1,17 @@
-[gd_scene format=3 uid="uid://chpm5i1vxhvf4"]
+[gd_scene load_steps=2 format=3 uid="uid://chpm5i1vxhvf4"]
 
-[node name="SimpleStatEditor" type="Control"]
-layout_mode = 3
+[ext_resource type="Script" path="res://vaporeon/common/stats/StatSimpleEditor.cs" id="1_r1apw"]
+
+[node name="SimpleStatEditor" type="CenterContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_r1apw")
+
+[node name="Value" type="SpinBox" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Value"
+prefix = "V"

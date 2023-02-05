@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3l2lwqlecp72"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vf3n"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.215686, 0.215686, 0.215686, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+shadow_size = 3
+
+[node name="ResourceOptionsMenu" type="PopupMenu"]
+size = Vector2i(100, 150)
+visible = true
+always_on_top = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_5vf3n")
+item_count = 4
+item_0/text = "Add child"
+item_0/id = 0
+item_1/text = "Remove"
+item_1/id = 1
+item_2/text = "Copy"
+item_2/id = 2
+item_3/text = "Paste"
+item_3/id = 3

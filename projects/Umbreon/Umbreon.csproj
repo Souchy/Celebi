@@ -5,6 +5,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="vaporeon\creature\**" />
+    <EmbeddedResource Remove="vaporeon\creature\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Remove="common\DiamondModels.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -43,7 +47,6 @@
     <Folder Include="sapphire\scenes\" />
     <Folder Include="vaporeon\common\stats\" />
     <Folder Include="vaporeon\components\" />
-    <Folder Include="vaporeon\creature\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\animations\locomotion-magic.res" />

@@ -12,7 +12,7 @@ namespace souchy.celebi.eevee.face.objects.stats
         public IStat get(StatType statId);
         public T get<T>(StatType statId) where T : IStat;
         //public void Add(StatType statId, IStat value);
-        public void Add(IStat value);
+        public void add(IStat value);
         public bool has(StatType statId);
 
     }

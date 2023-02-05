@@ -1,78 +1,157 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3lr0i3pe0162"]
+[gd_scene load_steps=5 format=3 uid="uid://d3lr0i3pe0162"]
 
 [ext_resource type="Script" path="res://vaporeon/menus/CreatureEditor.cs" id="1_hggn1"]
 [ext_resource type="PackedScene" uid="uid://dwsqq6cb7f1g6" path="res://vaporeon/common/StatsEditor.tscn" id="1_vih3n"]
-[ext_resource type="PackedScene" uid="uid://wayevqts6fkt" path="res://vaporeon/menus/SmallResourceTree.tscn" id="2_s6hy0"]
+[ext_resource type="Theme" uid="uid://ntm47kc1cyv" path="res://vaporeon/themes/Vaporeon.tres" id="2_4n2a3"]
 
-[node name="CreatureEditor" type="Control"]
-layout_mode = 3
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_adm2v"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+shadow_size = 3
+
+[node name="CreatureEditor" type="MarginContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_4n2a3")
 script = ExtResource("1_hggn1")
 
-[node name="BtnSave" type="Button" parent="."]
-layout_mode = 0
-offset_left = 249.0
-offset_top = 11.0
-offset_right = 289.0
-offset_bottom = 38.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Main" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="BtnSave" type="Button" parent="VBoxContainer/Main"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("2_4n2a3")
 text = "Save"
 
-[node name="EntityID" type="Label" parent="."]
-layout_mode = 0
-offset_left = 15.0
-offset_top = 11.0
-offset_right = 80.0
-offset_bottom = 41.0
+[node name="EntityID" type="Label" parent="VBoxContainer/Main"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
 text = "#EntityID"
 vertical_alignment = 1
 
-[node name="NameInput" type="LineEdit" parent="."]
-layout_mode = 0
-offset_left = 15.0
-offset_top = 52.0
-offset_right = 224.0
-offset_bottom = 110.0
-placeholder_text = "Description"
-
-[node name="DescriptionInput" type="LineEdit" parent="."]
-layout_mode = 1
-offset_left = 102.0
-offset_top = 11.0
-offset_right = 224.0
-offset_bottom = 41.0
+[node name="NameEdit" type="LineEdit" parent="VBoxContainer/Main"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
 placeholder_text = "Name"
+caret_blink = true
+caret_blink_interval = 0.5
 
-[node name="StatsEditor" parent="." instance=ExtResource("1_vih3n")]
-layout_mode = 1
-offset_left = 315.0
-offset_top = 16.0
-offset_right = -45.0
-offset_bottom = -328.0
+[node name="DescriptionEdit" type="LineEdit" parent="VBoxContainer/Main"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Description"
+caret_blink = true
+caret_blink_interval = 0.5
 
-[node name="Spells" parent="." instance=ExtResource("2_s6hy0")]
-layout_mode = 1
-offset_left = 15.0
-offset_top = 137.0
-offset_right = -455.0
-offset_bottom = -232.0
-Title = "Spells"
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+alignment = 1
 
-[node name="Passives" parent="." instance=ExtResource("2_s6hy0")]
-layout_mode = 1
-offset_left = 19.0
-offset_top = 287.0
-offset_right = -451.0
-offset_bottom = -42.0
-Title = "Passives"
+[node name="StatsEditor" parent="VBoxContainer/HBoxContainer2" instance=ExtResource("1_vih3n")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="Skins" parent="." instance=ExtResource("2_s6hy0")]
+[node name="SpellsPanel" type="Panel" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_adm2v")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/SpellsPanel"]
 layout_mode = 1
-offset_left = 380.0
-offset_top = 291.0
-offset_right = -90.0
-offset_bottom = -42.0
-Title = "Skins"
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2/SpellsPanel/VBoxContainer"]
+layout_mode = 2
+text = "Base Spells"
+horizontal_alignment = 1
+
+[node name="BtnAddSpell" type="Button" parent="VBoxContainer/HBoxContainer2/SpellsPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Add"
+
+[node name="SpellsList" type="VFlowContainer" parent="VBoxContainer/HBoxContainer2/SpellsPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PassivesPanel" type="Panel" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_adm2v")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/PassivesPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2/PassivesPanel/VBoxContainer"]
+layout_mode = 2
+text = "Base Passives"
+horizontal_alignment = 1
+
+[node name="BtnAddPassive" type="Button" parent="VBoxContainer/HBoxContainer2/PassivesPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Add"
+
+[node name="PassivesList" type="VFlowContainer" parent="VBoxContainer/HBoxContainer2/PassivesPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SkinsPanel" type="Panel" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_adm2v")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/SkinsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2/SkinsPanel/VBoxContainer"]
+layout_mode = 2
+text = "Skins"
+horizontal_alignment = 1
+
+[node name="BtnAddSkin" type="Button" parent="VBoxContainer/HBoxContainer2/SkinsPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Add"
+
+[node name="SkinsList" type="VFlowContainer" parent="VBoxContainer/HBoxContainer2/SkinsPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3

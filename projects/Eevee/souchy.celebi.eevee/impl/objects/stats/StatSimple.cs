@@ -19,7 +19,7 @@ namespace souchy.celebi.eevee.impl.stats
             {
                 _value = value;
                 this.GetEntityBus()?.publish(Enum.GetName(statId), this);
-                this.GetEntityBus()?.publish(statId, this);
+                this.GetEntityBus()?.publish(this);
             }
         }
 

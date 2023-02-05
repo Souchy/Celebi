@@ -18,7 +18,9 @@ namespace souchy.celebi.eevee.face.shared.models
 
         //public List<ICost> costs { get; set; }
         public Dictionary<ResourceType, int> costs { get; set; }
+        //
         public ISpellProperties properties { get; set; }
+        //
         public HashSet<IID> effectIds { get; set; }
 
         public IStringEntity GetName() => Eevee.models.i18n.Get(nameId);
@@ -35,15 +37,16 @@ namespace souchy.celebi.eevee.face.shared.models
         public IValue<int> maxCharges { get; set; }
         public IValue<int> maxCastsPerTurn { get; set; }
         public IValue<int> maxCastsPerTarget { get; set; }
-        public IValue<int> cooldown { get; set; }
+        // cooldowns
         public IValue<int> cooldownInitial { get; set; }
         public IValue<int> cooldownGlobal { get; set; }
-
+        public IValue<int> cooldown { get; set; }
+        // range
         public IValue<int> minRange { get; set; }
         public IValue<int> maxRange { get; set; }
         public IValue<bool> castInDiagonal { get; set; }
         public IValue<bool> castInLine { get; set; }
-
+        // los
         public IValue<bool> needLos { get; set; }
     }
 

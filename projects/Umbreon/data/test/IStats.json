@@ -15,14 +15,59 @@
         "$type": "souchy.celebi.eevee.impl.stats.StatSimple, Eevee",
         "entityUid": "1",
         "statId": 10,
-        "value": 7
+        "value": 8
       },
       "WaterResistance": {
         "$type": "souchy.celebi.eevee.impl.stats.StatSimple, Eevee",
         "entityUid": "1",
         "statId": 14,
         "value": 2
+      },
+      "Life": {
+        "$type": "souchy.celebi.eevee.impl.stats.StatResource, Eevee",
+        "entityUid": "1",
+        "statId": 0,
+        "current": 86,
+        "currentMax": 100,
+        "initialMax": 100,
+        "value": {
+          "Item1": 86,
+          "Item2": 100,
+          "Item3": 100
+        }
+      },
+      "ManaRegen": {
+        "$type": "souchy.celebi.eevee.impl.stats.StatSimple, Eevee",
+        "entityUid": "2",
+        "statId": 6,
+        "value": 0
+      },
+      "LifeRegen": {
+        "$type": "souchy.celebi.eevee.impl.stats.StatSimple, Eevee",
+        "entityUid": "7",
+        "statId": 5,
+        "value": 0
+      },
+      "MovementRegen": {
+        "$type": "souchy.celebi.eevee.impl.stats.StatSimple, Eevee",
+        "entityUid": "8",
+        "statId": 7,
+        "value": 0
       }
+    }
+  },
+  "3": {
+    "$type": "souchy.celebi.eevee.impl.stats.Stats, Eevee",
+    "entityUid": "3",
+    "stats": {
+      "$type": "souchy.celebi.eevee.impl.util.EntityDictionary`2[[souchy.celebi.eevee.enums.StatType, Eevee],[souchy.celebi.eevee.face.objects.stats.IStat, Eevee]], Eevee"
+    }
+  },
+  "4": {
+    "$type": "souchy.celebi.eevee.impl.stats.Stats, Eevee",
+    "entityUid": "4",
+    "stats": {
+      "$type": "souchy.celebi.eevee.impl.util.EntityDictionary`2[[souchy.celebi.eevee.enums.StatType, Eevee],[souchy.celebi.eevee.face.objects.stats.IStat, Eevee]], Eevee"
     }
   }
 }
