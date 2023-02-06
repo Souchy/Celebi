@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Sharp.Extras;
 using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.shared.effects;
 using souchy.celebi.eevee.impl.util;
@@ -10,12 +11,13 @@ using Umbreon.vaporeon.common;
 public partial class EffectMini : PanelContainer
 {
 
-    public const string EffectOrderEvent = "order";
 
-    private IEffect effect { get; set; }
-    private IEffect parent { get; set; }
-
+    public IEffect effect { get; private set; }
+    public IEffect parent { get; private set; }
+    
     #region Btns
+    [NodePath] public Label LblID { get; set; }
+    [NodePath] public Label LblChildCount { get; set; }
     [NodePath] public Button BtnHide { get; set; }
     [NodePath] public Button BtnMoveUp { get; set; }
     [NodePath] public OptionButton BtnType { get; set; }
@@ -45,7 +47,7 @@ public partial class EffectMini : PanelContainer
         BtnType.ItemSelected += onClickSelectEffectType;
         BtnEdit.ButtonUp += onClickEdit;
         BtnAddChild.ButtonUp += onClickAddChild;
-        BtnRemove.ButtonUp += onClickRemove;
+        BtnRemove.ButtonUp += onClickDeleteThis;
     }
 
     #region Init
@@ -59,8 +61,9 @@ public partial class EffectMini : PanelContainer
     private void unload()
     {
         // unsub this
-        effect.GetEntityBus().unsubscribe(this);
+        effect?.GetEntityBus().unsubscribe(this);
         parent?.GetEntityBus().unsubscribe(this);
+        effect?.children.GetEntityBus().unsubscribe(this);
         //
         this.Values.QueueFreeChildren();
     }
@@ -71,6 +74,10 @@ public partial class EffectMini : PanelContainer
         // sub this
         effect.GetEntityBus().subscribe(this);
         parent?.GetEntityBus().subscribe(this);
+        effect.children.GetEntityBus().subscribe(this);
+        //
+        this.LblID.Text = effect.entityUid;
+        this.LblChildCount.Text = $"({effect.children.Values.Count})";
         // select type
         var indexType = VaporeonUtil.effectTypes.IndexOf(effect.GetType());
         BtnType.Select(indexType);
@@ -79,13 +86,18 @@ public partial class EffectMini : PanelContainer
         // zone
         ZoneEditorMini.init(effect.zone);
         // dis/enable buttons
-        var i = parent.children.Values.IndexOf(effect.entityUid);
-        BtnMoveUp.Disabled = (i == 0);
-        BtnMoveUp.Disabled = (parent == null);
+        var i = parent?.children.Values.IndexOf(effect.entityUid);
+        BtnMoveUp.Disabled = (parent == null || i == 0);
         // create children
-
+        foreach(var c in effect.GetChildren())
+        {
+            var mini = Vaporeon.instanceScene<EffectMini>(); // new EffectMini();
+            this.Children.AddChild(mini);
+            mini.init(c, effect);
+        }
     }
     #endregion
+
 
     #region GUI Handlers
     private void onClickHide()
@@ -96,7 +108,6 @@ public partial class EffectMini : PanelContainer
     private void onClickMoveUp()
     {
         parent.children.Move(effect.entityUid, -1);
-        parent.GetEntityBus().publish(EffectOrderEvent);
     }
     private void onClickEdit() => this.GetVaporeon().openEditor(effect);
     private void onClickSelectEffectType(long index)
@@ -116,23 +127,52 @@ public partial class EffectMini : PanelContainer
         var newEffect = EffectBase.Create();
         Eevee.models.effects.Add(newEffect.entityUid, newEffect);
         this.effect.children.Add(newEffect.entityUid);
-
     }
-    private void onClickRemove()
+    private void onClickDeleteThis()
     {
-        Eevee.models.effects.Remove(effect.entityUid);
+        bool removed = Eevee.models.effects.Remove(effect.entityUid);
+        //GD.Print($"Click Delete on {effect.entityUid} = {removed}");
         if(parent != null)
         {
-            parent.children.Remove(effect.entityUid);
+            bool removedInParent = parent.children.Remove(effect.entityUid);
+            GD.Print($"Click Delete from parent {effect.entityUid} = {removedInParent}");
         }
     }
     #endregion
 
     #region Diamond Handlers
-    [Subscribe(EffectOrderEvent)]
-    public void onOrderChanged()
+    [Subscribe(EntityList<IID>.EventAdd)]
+    public void onAddEffectChild(IID ei)
     {
-
+        this.LblChildCount.Text = $"({effect.children.Values.Count})";
+        var e = Eevee.models.effects.Get(ei);
+        var mini = Vaporeon.instanceScene<EffectMini>(); // packedScene.Instantiate<EffectMini>(); // new EffectMini();
+        GD.Print($"add child scene: {mini} with e: {e}");
+        this.Children.AddChild(mini);
+        mini.init(e, effect);
+    }
+    [Subscribe(EntityList<IID>.EventRemove)]
+    public void onRemoveEffectChild(IID ei)
+    {
+        GD.Print($"On Remove {ei}");
+        this.LblChildCount.Text = $"({effect.children.Values.Count})";
+        var node = this.Children.GetChildren<EffectMini>().FirstOrDefault(m => m.effect.entityUid == ei);
+        if(node != null) 
+            this.Children.RemoveChild(node);
+    }
+    [Subscribe(EntityList<IID>.EventMove)]
+    public void onMoveEffectChild(IID ei, int indexPrevious, int indexNow)
+    {
+        var node = this.Children.GetChild(indexPrevious);
+        this.Children.MoveChild(node, indexNow);
+        // dis/enable buttons
+        for (int i = 0; i < effect.children.Values.Count; i++)
+        {
+           var c = (EffectMini) Children.GetChild(i);
+           c.BtnMoveUp.Disabled = i == 0;
+        }
+        //var i = parent?.children.Values.IndexOf(effect.entityUid);
+        //BtnMoveUp.Disabled = (parent == null || i == 0);
     }
     #endregion
 

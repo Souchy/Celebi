@@ -27,12 +27,13 @@ namespace souchy.celebi.eevee.impl.objects
         protected Effect() { }
         protected Effect(IID id) => entityUid = id;
 
+
         public abstract ICompiledEffect compile(IFight fight, IID source, IID targetCell);
+
 
         public void Dispose()
         {
             Eevee.DisposeIID<IEffect>(entityUid);
-            throw new NotImplementedException();
         }
     }
 }

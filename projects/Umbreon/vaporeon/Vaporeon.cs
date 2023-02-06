@@ -1,3 +1,4 @@
+
 using Godot;
 using Godot.Sharp.Extras;
 using souchy.celebi.eevee.face.entity;
@@ -72,12 +73,8 @@ public partial class Vaporeon : Control
     [NodePath] public Button BtnEffectSkins { get; set; }
     #endregion
 
-    // Called when the node enters the scene tree for the first time.
-    public override void _Ready()
+    static Vaporeon()
     {
-        this.OnReady();
-        this.Inject();
-        
         SceneTypes.Add(typeof(ICreatureModel), GD.Load<PackedScene>("res://vaporeon/menus/CreatureEditor.tscn"));
         SceneTypes.Add(typeof(ISpellModel), GD.Load<PackedScene>("res://vaporeon/menus/SpellEditor.tscn"));
         SceneTypes.Add(typeof(IEffect), GD.Load<PackedScene>("res://vaporeon/menus/EffectEditor.tscn"));
@@ -87,6 +84,14 @@ public partial class Vaporeon : Control
         SceneTypes.Add(typeof(IStatDetailed), GD.Load<PackedScene>("res://vaporeon/common/stats/StatDetailedEditor.tscn"));
         SceneTypes.Add(typeof(IStatResource), GD.Load<PackedScene>("res://vaporeon/common/stats/StatResourceEditor.tscn"));
         SceneTypes.Add(typeof(IStatSimple), GD.Load<PackedScene>("res://vaporeon/common/stats/StatSimpleEditor.tscn"));
+        SceneTypes.Add(typeof(EffectMini), GD.Load<PackedScene>("res://vaporeon/common/EffectMini.tscn"));
+    }
+
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
+    {
+        this.OnReady();
+        this.Inject();
 
         bus.subscribe(this.GetDiamondsParser());
 
@@ -125,15 +130,14 @@ public partial class Vaporeon : Control
     {
         if (model == null) return null;
         foreach(var t in SceneTypes.Keys)
-        {
             if(t.IsAssignableFrom(model.GetType()))
-            {
-                //var types = model.GetType().GetInterfaces();
-                //var type = types.First();
                 return SceneTypes[t].Instantiate();
-            }
-        }
         return null;
+    }
+    public static T instanceScene<T>() where T : Node
+    {
+        GD.Print($"instanceScene <{typeof(T)}> in {SceneTypes.Last()}");
+        return SceneTypes[typeof(T)].Instantiate<T>();
     }
     public void openEditor<T>(T model)
     {

@@ -6,6 +6,7 @@ using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.shared.triggers;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.interfaces;
 
 namespace souchy.celebi.eevee.face.objects
@@ -37,6 +38,9 @@ namespace souchy.celebi.eevee.face.objects
 
 
         public ICompiledEffect compile(IFight fight, IID source, IID targetCell); // IActionContext context);
+
+
+        public IEnumerable<IEffect> GetChildren() => children.Values.Select(i => Eevee.models.effects.Get(i));
 
     }
 }

@@ -16,6 +16,11 @@ namespace souchy.celebi.eevee.impl.util
 
     public class EntityList<T> : List<T>, IEntityList<T> //where T : IEntity
     {
+
+        public const string EventAdd = nameof(Add);
+        public const string EventRemove = nameof(Remove);
+        public const string EventMove = nameof(Move);
+
         [JsonIgnore]
         public IID entityUid { get; set; } = Eevee.RegisterIID<IEntity>();
         [JsonIgnore]
@@ -35,7 +40,7 @@ namespace souchy.celebi.eevee.impl.util
                 throw new ArgumentException($"Duplicate element: {t}.");
             }
             base.Add(t);
-            this.GetEntityBus().publish(nameof(Add), t);
+            this.GetEntityBus().publish(EventAdd, t);
         }
 
         public new bool Remove(T t)
@@ -43,7 +48,7 @@ namespace souchy.celebi.eevee.impl.util
             bool removed = base.Remove(t);
             if (removed)
             {
-                this.GetEntityBus().publish(nameof(Remove), t);
+                this.GetEntityBus().publish(EventRemove, t);
                 if (t is IDisposable dis)
                     dis.Dispose();
             }
@@ -67,7 +72,7 @@ namespace souchy.celebi.eevee.impl.util
             if (removed)
             {
                 base.Insert(index0 + indexDelta, t);
-                this.GetEntityBus().publish(nameof(Move), t, indexDelta);
+                this.GetEntityBus().publish(EventMove, t, index0, index0 + indexDelta);
             }
             else
             {
