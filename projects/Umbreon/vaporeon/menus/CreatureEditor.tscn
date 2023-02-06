@@ -1,59 +1,57 @@
-[gd_scene load_steps=5 format=3 uid="uid://d3lr0i3pe0162"]
+[gd_scene load_steps=6 format=3 uid="uid://30p2ewm0t6rv"]
 
 [ext_resource type="Script" path="res://vaporeon/menus/CreatureEditor.cs" id="1_hggn1"]
-[ext_resource type="PackedScene" uid="uid://dwsqq6cb7f1g6" path="res://vaporeon/common/StatsEditor.tscn" id="1_vih3n"]
-[ext_resource type="Theme" uid="uid://ntm47kc1cyv" path="res://vaporeon/themes/Vaporeon.tres" id="2_4n2a3"]
+[ext_resource type="PackedScene" path="res://vaporeon/common/StatsEditor.tscn" id="1_vih3n"]
+[ext_resource type="Theme" uid="uid://bnrv7qp6ltiwn" path="res://vaporeon/themes/Vaporeon.tres" id="2_4n2a3"]
+[ext_resource type="StyleBox" uid="uid://dutxepo71lhgw" path="res://vaporeon/themes/windowBg.tres" id="2_abt84"]
+[ext_resource type="StyleBox" uid="uid://iptaoq0rc1pi" path="res://vaporeon/themes/panelDark.tres" id="4_78pmx"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_adm2v"]
-bg_color = Color(1, 1, 1, 0)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0, 0, 0, 1)
-shadow_size = 3
-
-[node name="CreatureEditor" type="MarginContainer"]
+[node name="CreatureEditor" type="PanelContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_4n2a3")
+theme_override_styles/panel = ExtResource("2_abt84")
 script = ExtResource("1_hggn1")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Main" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Main" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="BtnSave" type="Button" parent="VBoxContainer/Main"]
+[node name="BtnSave" type="Button" parent="MarginContainer/VBoxContainer/Main"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme = ExtResource("2_4n2a3")
 text = "Save"
 
-[node name="EntityID" type="Label" parent="VBoxContainer/Main"]
+[node name="EntityID" type="Label" parent="MarginContainer/VBoxContainer/Main"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 text = "#EntityID"
+horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="NameEdit" type="LineEdit" parent="VBoxContainer/Main"]
+[node name="NameEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/Main"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 placeholder_text = "Name"
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="DescriptionEdit" type="LineEdit" parent="VBoxContainer/Main"]
+[node name="DescriptionEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/Main"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -61,24 +59,24 @@ placeholder_text = "Description"
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="StatsEditor" parent="VBoxContainer/HBoxContainer2" instance=ExtResource("1_vih3n")]
+[node name="StatsEditor" parent="MarginContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("1_vih3n")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(450, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SpellsPanel" type="Panel" parent="VBoxContainer/HBoxContainer2"]
+[node name="SpellsPanel" type="Panel" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_adm2v")
+theme_override_styles/panel = ExtResource("4_78pmx")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/SpellsPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/SpellsPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -86,27 +84,27 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2/SpellsPanel/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/SpellsPanel/VBoxContainer"]
 layout_mode = 2
 text = "Base Spells"
 horizontal_alignment = 1
 
-[node name="BtnAddSpell" type="Button" parent="VBoxContainer/HBoxContainer2/SpellsPanel/VBoxContainer"]
+[node name="BtnAddSpell" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/SpellsPanel/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Add"
 
-[node name="SpellsList" type="VFlowContainer" parent="VBoxContainer/HBoxContainer2/SpellsPanel/VBoxContainer"]
+[node name="SpellsList" type="VFlowContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/SpellsPanel/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="PassivesPanel" type="Panel" parent="VBoxContainer/HBoxContainer2"]
+[node name="PassivesPanel" type="Panel" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_adm2v")
+theme_override_styles/panel = ExtResource("4_78pmx")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/PassivesPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/PassivesPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -114,27 +112,27 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2/PassivesPanel/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/PassivesPanel/VBoxContainer"]
 layout_mode = 2
 text = "Base Passives"
 horizontal_alignment = 1
 
-[node name="BtnAddPassive" type="Button" parent="VBoxContainer/HBoxContainer2/PassivesPanel/VBoxContainer"]
+[node name="BtnAddPassive" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/PassivesPanel/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Add"
 
-[node name="PassivesList" type="VFlowContainer" parent="VBoxContainer/HBoxContainer2/PassivesPanel/VBoxContainer"]
+[node name="PassivesList" type="VFlowContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/PassivesPanel/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="SkinsPanel" type="Panel" parent="VBoxContainer/HBoxContainer2"]
+[node name="SkinsPanel" type="Panel" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_adm2v")
+theme_override_styles/panel = ExtResource("4_78pmx")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/SkinsPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/SkinsPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -142,17 +140,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2/SkinsPanel/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/SkinsPanel/VBoxContainer"]
 layout_mode = 2
 text = "Skins"
 horizontal_alignment = 1
 
-[node name="BtnAddSkin" type="Button" parent="VBoxContainer/HBoxContainer2/SkinsPanel/VBoxContainer"]
+[node name="BtnAddSkin" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/SkinsPanel/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Add"
 
-[node name="SkinsList" type="VFlowContainer" parent="VBoxContainer/HBoxContainer2/SkinsPanel/VBoxContainer"]
+[node name="SkinsList" type="VFlowContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/SkinsPanel/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3

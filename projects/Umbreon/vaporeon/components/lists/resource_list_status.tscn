@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://481b8ivk3no8"]
+
+[ext_resource type="PackedScene" uid="uid://cq776x4yclm8j" path="res://vaporeon/components/ResourceList.tscn" id="1_byie1"]
+[ext_resource type="Script" path="res://vaporeon/components/lists/resource_list_status.cs" id="2_5lqi0"]
+
+[node name="ResourceListStatus" instance=ExtResource("1_byie1")]
+script = ExtResource("2_5lqi0")

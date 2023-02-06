@@ -9,7 +9,6 @@ using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.util;
 using System;
-using Umbreon.data.resources;
 using Umbreon.vaporeon;
 using Umbreon.vaporeon.common;
 
@@ -44,15 +43,23 @@ public partial class CreatureEditor : Control, EditorInitiator<ICreatureModel>
         GD.Print("CreatureEditor ready");
         this.GetVaporeon().bus.subscribe(this);
 
+
         //creature?.GetEntityBus().subscribe(this);
         //creature.GetBaseStats().GetEntityBus().subscribe(this);
         //Eevee.models.i18n.GetEntityBus().subscribe(this, nameof(onNameChanged));
+        NameEdit.TextChanged += (txt) => creature.GetName().value = txt;
+        DescriptionEdit.TextChanged += (txt) => creature.GetDescription().value = txt;
 
-        BtnSave.ButtonUp += BtnSave_ButtonUp;
+        BtnSave.ButtonUp += onClickBtnSave;
+        BtnAddSpell.ButtonUp += onClickBtnAddSpell;
+        BtnAddSkin.ButtonUp += onClickBtnAddSkin;
+        BtnAddPassive.ButtonUp += onClickBtnAddPassive;
         //Spells.onAddBtnClick += Spells_onAddBtnClick;
         //this.creature.GetEventBus().subscribe(Spells); //.baseSpells.sub
     }
-    private void BtnSave_ButtonUp()
+
+
+    private void onClickBtnSave()
     {
         creature.GetEntityBus().publish(IEventBus.save, creature);
         creature.GetBaseStats().GetEntityBus().publish(IEventBus.save, creature.GetBaseStats());
@@ -70,12 +77,16 @@ public partial class CreatureEditor : Control, EditorInitiator<ICreatureModel>
     private void unload()
     {
         if (creature == null) return;
+        creature.GetEntityBus().unsubscribe(this.GetVaporeon());
+        creature.GetBaseStats().GetEntityBus().unsubscribe(this.GetVaporeon());
         creature.GetEntityBus().unsubscribe(this);
         creature.GetName().GetEntityBus().unsubscribe(this);
         creature.GetDescription().GetEntityBus().unsubscribe(this);
     }
     private void load()
     {
+        creature.GetEntityBus().subscribe(this.GetVaporeon());
+        creature.GetBaseStats().GetEntityBus().subscribe(this.GetVaporeon());
         creature.GetEntityBus().subscribe(this);
         creature.GetName().GetEntityBus().subscribe(this, nameof(onNameChanged));
         creature.GetDescription().GetEntityBus().subscribe(this, nameof(onDescChanged));
@@ -84,11 +95,6 @@ public partial class CreatureEditor : Control, EditorInitiator<ICreatureModel>
         this.NameEdit.Text = creature.GetName().ToString();
         this.DescriptionEdit.Text = creature.GetDescription().ToString();
 
-        this.BtnAddSpell.ButtonUp += () =>
-        {
-            this.GetVaporeon().SpellsList.selectorForControl = this;
-            this.GetVaporeon().TabContainer.CurrentTab = 2;
-        };
         // Spells
         foreach(var s in creature.baseSpells.Select(s => Eevee.models.spellModels.Get(s)))
             addSpellToList(s);
@@ -99,6 +105,7 @@ public partial class CreatureEditor : Control, EditorInitiator<ICreatureModel>
         foreach (var s in creature.skins.Select(s => Eevee.models.creatureSkins.Get(s)))
             addSkinToList(s);
     }
+
     #endregion
 
 
@@ -121,6 +128,14 @@ public partial class CreatureEditor : Control, EditorInitiator<ICreatureModel>
 
 
     #region Spells
+    private void onClickBtnAddSpell()
+    {
+        this.GetVaporeon().SpellsList.selectorForControl = this;
+        this.GetVaporeon().TabContainer.CurrentTab = (int) VaporeonTab.Spells;
+        this.GetVaporeon().GetWindow().GrabFocus();
+        //this.GetVaporeon().GetWindow().AlwaysOnTop = true;
+        //this.GetVaporeon().GetWindow().AlwaysOnTop = false;
+    }
     [Subscribe(VaporeonSignals.select)]
     public void onAddSelectSpell(Control selector, ISpellModel model)
     {
@@ -140,6 +155,12 @@ public partial class CreatureEditor : Control, EditorInitiator<ICreatureModel>
     #endregion
 
     #region Passives
+    private void onClickBtnAddPassive()
+    {
+        this.GetVaporeon().StatusList.selectorForControl = this;
+        this.GetVaporeon().TabContainer.CurrentTab = (int) VaporeonTab.Status;
+        this.GetVaporeon().GetWindow().GrabFocus();
+    }
     [Subscribe(VaporeonSignals.select)]
     public void onAddSelectStatus(Control selector, IStatusModel model)
     {
@@ -159,6 +180,12 @@ public partial class CreatureEditor : Control, EditorInitiator<ICreatureModel>
     #endregion
 
     #region Skins
+    private void onClickBtnAddSkin()
+    {
+        this.GetVaporeon().CreatureSkinsList.selectorForControl = this;
+        this.GetVaporeon().TabContainer.CurrentTab = (int) VaporeonTab.CreatureSkins;
+        this.GetVaporeon().GetWindow().GrabFocus();
+    }
     [Subscribe(VaporeonSignals.select)]
     public void onAddSelectSkin(Control selector, ICreatureSkin model)
     {
@@ -179,11 +206,11 @@ public partial class CreatureEditor : Control, EditorInitiator<ICreatureModel>
         box.SetMeta(VaporeonUtil.metaIID, id.ToString());
 
         var btnEdit = new Button();
-        btnEdit.Text = "~";
+        btnEdit.Text = "Edit";
         btnEdit.ButtonUp += onEdit;
 
         var btnRemove = new Button();
-        btnRemove.Text = "-";
+        btnRemove.Text = "Remove";
         btnRemove.ButtonUp += //onDelete;
         () =>
         {

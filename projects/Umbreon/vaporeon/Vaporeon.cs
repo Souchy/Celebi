@@ -1,18 +1,14 @@
 using Godot;
 using Godot.Sharp.Extras;
+using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
-using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.util;
-using System;
 using Umbreon.common;
-using Umbreon.data.resources;
-using Umbreon.eevee.impl.objects;
 using Umbreon.src;
-using Umbreon.vaporeon;
 using Umbreon.vaporeon.common;
 
 public static class VaporeonExtensions
@@ -23,6 +19,18 @@ public static class VaporeonExtensions
         var vaporeon = node.GetNode<Vaporeon>(nodePath);
         return vaporeon;
     }
+}
+
+public enum VaporeonTab
+{
+    I18n,
+    Creatures,
+    Spells,
+    Effects,
+    Status,
+    CreatureSkins,
+    SpellSkins,
+    EffectSkins
 }
 
 public partial class Vaporeon : Control
@@ -46,9 +54,11 @@ public partial class Vaporeon : Control
     [NodePath] public resource_list_creature CreaturesList { get; set; }
     [NodePath] public resource_list_spell SpellsList { get; set; }
     [NodePath] public resource_list_effect EffectsList { get; set; }
-    //[NodePath] public resource_list_creature CreatureSkinsList { get; set; }
-    //[NodePath] public resource_list_spell SpellSkinsList { get; set; }
-    //[NodePath] public resource_list_effect EffectSkinsList { get; set; }
+    // todo
+    [NodePath] public resource_list_status StatusList { get; set; }
+    [NodePath] public resource_list_creature_skin CreatureSkinsList { get; set; }
+    [NodePath] public resource_list_spell_skin SpellSkinsList { get; set; }
+    [NodePath] public resource_list_effect_skin EffectSkinsList { get; set; }
     #endregion
 
     #region Tab Buttons
@@ -56,6 +66,7 @@ public partial class Vaporeon : Control
     [NodePath] public Button BtnCreatures { get; set; }
     [NodePath] public Button BtnSpells { get; set; }
     [NodePath] public Button BtnEffects { get; set; }
+    [NodePath] public Button BtnStatus { get; set; }
     [NodePath] public Button BtnCreatureSkins { get; set; }
     [NodePath] public Button BtnSpellSkins { get; set; }
     [NodePath] public Button BtnEffectSkins { get; set; }
@@ -79,25 +90,34 @@ public partial class Vaporeon : Control
         bus.subscribe(this.GetDiamondsParser());
 
         TabContainer.TabChanged += TabContainer_TabChanged;
-        TabContainer.CurrentTab = 1;
+        TabContainer.CurrentTab = (int) VaporeonTab.Creatures;
 
-
-        BtnI18N.ButtonUp +=         () => TabContainer.CurrentTab = 0;
-        BtnCreatures.ButtonUp +=    () => TabContainer.CurrentTab = 1;
-        BtnSpells.ButtonUp +=       () => TabContainer.CurrentTab = 2;
-        BtnEffects.ButtonUp +=      () => TabContainer.CurrentTab = 3;
-        BtnCreatureSkins.ButtonUp +=() => TabContainer.CurrentTab = 4;
-        BtnSpellSkins.ButtonUp +=   () => TabContainer.CurrentTab = 5;
-        BtnEffectSkins.ButtonUp +=  () => TabContainer.CurrentTab = 6;
+        GD.Print($"CurrentTab: {TabContainer.CurrentTab}, supposed to be 1 = {(int) VaporeonTab.Creatures}");
+        BtnI18N.ButtonUp +=         () => TabContainer.CurrentTab = (int) VaporeonTab.I18n;
+        BtnCreatures.ButtonUp +=    () => TabContainer.CurrentTab = (int) VaporeonTab.Creatures;
+        BtnSpells.ButtonUp +=       () => TabContainer.CurrentTab = (int) VaporeonTab.Spells;
+        BtnEffects.ButtonUp +=      () => TabContainer.CurrentTab = (int) VaporeonTab.Effects;
+        BtnStatus.ButtonUp +=       () => TabContainer.CurrentTab = (int) VaporeonTab.Status;
+        BtnCreatureSkins.ButtonUp +=() => TabContainer.CurrentTab = (int) VaporeonTab.CreatureSkins;
+        BtnSpellSkins.ButtonUp +=   () => TabContainer.CurrentTab = (int) VaporeonTab.SpellSkins;
+        BtnEffectSkins.ButtonUp +=  () => TabContainer.CurrentTab = (int) VaporeonTab.EffectSkins;
 
     }
 
     private void TabContainer_TabChanged(long tab)
     {
-        if (tab != 0) CreaturesList.selectorForControl = null;
-        if (tab != 1) SpellsList.selectorForControl = null;
-        if (tab != 2) EffectsList.selectorForControl = null;
+        if (tab != (int) VaporeonTab.Creatures) 
+            CreaturesList.selectorForControl = null;
+        if (tab != (int) VaporeonTab.Spells) 
+            SpellsList.selectorForControl = null;
+        if (tab != (int) VaporeonTab.Effects) 
+            EffectsList.selectorForControl = null;
     }
+
+    #region Save handler
+    [Subscribe("", IEventBus.save)]
+    public void onSave(IEntity e) => this.GetDiamondsParser().onSave(e);
+    #endregion
 
     #region Open Editors
     public static Node instanceEditor(object model)
@@ -136,8 +156,8 @@ public partial class Vaporeon : Control
         wd.Title = root.Name;
         wd.Size = this.GetWindow().Size;
         wd.AddChild(root);
-        this.AddChild(wd);
         wd.CloseRequested += () => wd.QueueFree();
+        this.AddChild(wd);
         wd.Show();
     }
     #endregion

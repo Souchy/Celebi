@@ -3,7 +3,7 @@ using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.stats;
 
-namespace Umbreon.data.resources
+namespace souchy.celebi.eevee.impl.shared
 {
     public class CreatureModel : ICreatureModel
     {

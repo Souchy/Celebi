@@ -4,7 +4,7 @@ using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 using System.Collections.Generic;
 
-namespace Umbreon.data.resources
+namespace souchy.celebi.eevee.impl.shared
 {
     public class CreatureSkin : ICreatureSkin
     {

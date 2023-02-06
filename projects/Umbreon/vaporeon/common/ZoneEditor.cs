@@ -4,7 +4,7 @@ using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.shared.zones;
 using System;
 
-public partial class ZoneEditor : PanelContainer
+public partial class ZoneEditor : Control
 {
     //[Export]
     private IZone zone { get; set; }
@@ -24,8 +24,8 @@ public partial class ZoneEditor : PanelContainer
     [NodePath] public SpinBox SizeVectorI1 { get; set; }
     [NodePath] public SpinBox SizeVectorI2 { get; set; }
     [NodePath] public OptionButton WorldOriginActor { get; set; }
-    [NodePath] public SpinBox WorldOffsetX { get; set; }
-    [NodePath] public SpinBox WorldOffsetZ { get; set; }
+    [NodePath] public SpinBox WorldOffsetVectorX { get; set; }
+    [NodePath] public SpinBox WorldOffsetVectorZ { get; set; }
     [NodePath] public OptionButton LocalOriginBtn { get; set; }
     [NodePath] public OptionButton RotationBtn { get; set; }
     [NodePath] public OptionButton ExtendFromSourceBtn { get; set; }

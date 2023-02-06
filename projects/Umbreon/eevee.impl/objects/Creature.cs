@@ -6,8 +6,6 @@ using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.util.math;
 using souchy.celebi.eevee.impl;
-using Umbreon.data.resources;
-using static souchy.celebi.eevee.face.entity.IEntity;
 
 namespace Umbreon.eevee.impl.objects
 {

@@ -1,17 +1,21 @@
-[gd_scene load_steps=11 format=3 uid="uid://c5p8op80fabsx"]
+[gd_scene load_steps=16 format=3 uid="uid://c5p8op80fabsx"]
 
 [ext_resource type="Script" path="res://vaporeon/Vaporeon.cs" id="1_l8sev"]
 [ext_resource type="PackedScene" uid="uid://bgyfqvcx4rm5f" path="res://vaporeon/components/lists/resource_list_creature.tscn" id="2_180g0"]
-[ext_resource type="Theme" uid="uid://ntm47kc1cyv" path="res://vaporeon/themes/Vaporeon.tres" id="2_qmwud"]
+[ext_resource type="StyleBox" uid="uid://dutxepo71lhgw" path="res://vaporeon/themes/windowBg.tres" id="2_jp4ms"]
+[ext_resource type="Theme" uid="uid://bnrv7qp6ltiwn" path="res://vaporeon/themes/Vaporeon.tres" id="2_qmwud"]
 [ext_resource type="PackedScene" uid="uid://dhpr6hti7q38k" path="res://vaporeon/components/lists/resource_list_spell.tscn" id="3_60frc"]
 [ext_resource type="PackedScene" uid="uid://fahbt7wckjrf" path="res://vaporeon/menus/I18NEditor.tscn" id="4_80tsn"]
 [ext_resource type="PackedScene" uid="uid://bc4wx2lp0fvni" path="res://vaporeon/components/lists/resource_list_effect.tscn" id="4_qwhic"]
+[ext_resource type="PackedScene" uid="uid://481b8ivk3no8" path="res://vaporeon/components/lists/resource_list_status.tscn" id="7_ovsub"]
+[ext_resource type="PackedScene" uid="uid://cuvkd60x4lts1" path="res://vaporeon/components/lists/resource_list_creature_skin.tscn" id="8_2xjm0"]
+[ext_resource type="PackedScene" uid="uid://dy6rco2d4elly" path="res://vaporeon/components/lists/resource_list_spell_skin.tscn" id="9_033fw"]
+[ext_resource type="PackedScene" uid="uid://mqudhoxgtl53" path="res://vaporeon/components/lists/resource_list_effect_skin.tscn" id="10_72j04"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2uv3g"]
+content_margin_bottom = 0.0
 bg_color = Color(0, 0, 0, 0)
-border_width_bottom = 1
 border_color = Color(0.231373, 0.788235, 0.8, 1)
-expand_margin_bottom = 2.0
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_heuoi"]
 resource_name = "VaporeonTabButtons"
@@ -30,33 +34,38 @@ content_margin_right = 5.0
 content_margin_bottom = 5.0
 bg_color = Color(0.109804, 0.109804, 0.109804, 1)
 
-[node name="Vaporeon" type="MarginContainer"]
+[node name="Vaporeon" type="Panel"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_qmwud")
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+theme_override_styles/panel = ExtResource("2_jp4ms")
 script = ExtResource("1_l8sev")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Panel" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Panel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2uv3g")
 
-[node name="Tabs" type="HBoxContainer" parent="VBoxContainer/PanelContainer"]
+[node name="Tabs" type="HBoxContainer" parent="Panel/VBoxContainer/PanelContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="BtnI18N" type="Button" parent="VBoxContainer/PanelContainer/Tabs"]
+[node name="BtnI18N" type="Button" parent="Panel/VBoxContainer/PanelContainer/Tabs"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 30)
 layout_mode = 2
@@ -66,24 +75,24 @@ toggle_mode = true
 button_group = SubResource("ButtonGroup_heuoi")
 text = "I18N"
 
-[node name="VSeparator" type="VSeparator" parent="VBoxContainer/PanelContainer/Tabs"]
+[node name="VSeparator" type="VSeparator" parent="Panel/VBoxContainer/PanelContainer/Tabs"]
 layout_mode = 2
 
-[node name="Models" type="VBoxContainer" parent="VBoxContainer/PanelContainer/Tabs"]
+[node name="Models" type="VBoxContainer" parent="Panel/VBoxContainer/PanelContainer/Tabs"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/Tabs/Models"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/PanelContainer/Tabs/Models"]
 layout_mode = 2
 
-[node name="LblModels" type="Label" parent="VBoxContainer/PanelContainer/Tabs/Models/HBoxContainer"]
+[node name="LblModels" type="Label" parent="Panel/VBoxContainer/PanelContainer/Tabs/Models/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Models"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BtnCreatures" type="Button" parent="VBoxContainer/PanelContainer/Tabs/Models/HBoxContainer"]
+[node name="BtnCreatures" type="Button" parent="Panel/VBoxContainer/PanelContainer/Tabs/Models/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 50)
 layout_mode = 2
@@ -94,7 +103,7 @@ button_pressed = true
 button_group = SubResource("ButtonGroup_heuoi")
 text = "Creatures"
 
-[node name="BtnSpells" type="Button" parent="VBoxContainer/PanelContainer/Tabs/Models/HBoxContainer"]
+[node name="BtnSpells" type="Button" parent="Panel/VBoxContainer/PanelContainer/Tabs/Models/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 40)
 layout_mode = 2
@@ -104,7 +113,7 @@ toggle_mode = true
 button_group = SubResource("ButtonGroup_heuoi")
 text = "Spells"
 
-[node name="BtnEffects" type="Button" parent="VBoxContainer/PanelContainer/Tabs/Models/HBoxContainer"]
+[node name="BtnEffects" type="Button" parent="Panel/VBoxContainer/PanelContainer/Tabs/Models/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 40)
 layout_mode = 2
@@ -114,56 +123,63 @@ toggle_mode = true
 button_group = SubResource("ButtonGroup_heuoi")
 text = "Effects"
 
-[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/PanelContainer/Tabs"]
+[node name="BtnStatus" type="Button" parent="Panel/VBoxContainer/PanelContainer/Tabs/Models/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_qmwud")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_heuoi")
+text = "Status"
+
+[node name="VSeparator2" type="VSeparator" parent="Panel/VBoxContainer/PanelContainer/Tabs"]
 layout_mode = 2
 
-[node name="Skins" type="VBoxContainer" parent="VBoxContainer/PanelContainer/Tabs"]
+[node name="Skins" type="VBoxContainer" parent="Panel/VBoxContainer/PanelContainer/Tabs"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/Tabs/Skins"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/PanelContainer/Tabs/Skins"]
 layout_mode = 2
 
-[node name="LblSkins" type="Label" parent="VBoxContainer/PanelContainer/Tabs/Skins/HBoxContainer"]
+[node name="LblSkins" type="Label" parent="Panel/VBoxContainer/PanelContainer/Tabs/Skins/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Skins"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BtnCreatureSkins" type="Button" parent="VBoxContainer/PanelContainer/Tabs/Skins/HBoxContainer"]
+[node name="BtnCreatureSkins" type="Button" parent="Panel/VBoxContainer/PanelContainer/Tabs/Skins/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 50)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme = ExtResource("2_qmwud")
-disabled = true
 toggle_mode = true
 button_group = SubResource("ButtonGroup_heuoi")
 text = "Creatures"
 
-[node name="BtnSpellSkins" type="Button" parent="VBoxContainer/PanelContainer/Tabs/Skins/HBoxContainer"]
+[node name="BtnSpellSkins" type="Button" parent="Panel/VBoxContainer/PanelContainer/Tabs/Skins/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 40)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme = ExtResource("2_qmwud")
-disabled = true
 toggle_mode = true
 button_group = SubResource("ButtonGroup_heuoi")
 text = "Spells"
 
-[node name="BtnEffectSkins" type="Button" parent="VBoxContainer/PanelContainer/Tabs/Skins/HBoxContainer"]
+[node name="BtnEffectSkins" type="Button" parent="Panel/VBoxContainer/PanelContainer/Tabs/Skins/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 40)
 layout_mode = 2
 mouse_default_cursor_shape = 2
-disabled = true
 toggle_mode = true
 button_group = SubResource("ButtonGroup_heuoi")
 text = "Effects"
 
-[node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
+[node name="TabContainer" type="TabContainer" parent="Panel/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -173,36 +189,41 @@ theme_override_styles/tab_selected = SubResource("StyleBoxFlat_dh6vb")
 theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_m2uh2")
 tabs_visible = false
 
-[node name="I18N" parent="VBoxContainer/TabContainer" instance=ExtResource("4_80tsn")]
+[node name="I18N" parent="Panel/VBoxContainer/TabContainer" instance=ExtResource("4_80tsn")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CreaturesList" parent="Panel/VBoxContainer/TabContainer" instance=ExtResource("2_180g0")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="CreaturesList" parent="VBoxContainer/TabContainer" instance=ExtResource("2_180g0")]
-unique_name_in_owner = true
-layout_mode = 2
-theme = null
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="SpellsList" parent="VBoxContainer/TabContainer" instance=ExtResource("3_60frc")]
+[node name="SpellsList" parent="Panel/VBoxContainer/TabContainer" instance=ExtResource("3_60frc")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-theme = null
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
 
-[node name="EffectsList" parent="VBoxContainer/TabContainer" instance=ExtResource("4_qwhic")]
+[node name="EffectsList" parent="Panel/VBoxContainer/TabContainer" instance=ExtResource("4_qwhic")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-theme = null
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
+
+[node name="StatusList" parent="Panel/VBoxContainer/TabContainer" instance=ExtResource("7_ovsub")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="CreatureSkinsList" parent="Panel/VBoxContainer/TabContainer" instance=ExtResource("8_2xjm0")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="SpellSkinsList" parent="Panel/VBoxContainer/TabContainer" instance=ExtResource("9_033fw")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="EffectSkinsList" parent="Panel/VBoxContainer/TabContainer" instance=ExtResource("10_72j04")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2

@@ -17,16 +17,25 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Current Value"
+max_value = 10000.0
+rounded = true
 prefix = "C"
+select_all_on_focus = true
 
 [node name="CurrentMax" type="SpinBox" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Current Max"
+max_value = 10000.0
+rounded = true
 prefix = "M"
+select_all_on_focus = true
 
 [node name="InitialMax" type="SpinBox" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Initial Max"
+max_value = 10000.0
+rounded = true
 prefix = "I"
+select_all_on_focus = true

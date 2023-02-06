@@ -14,4 +14,7 @@ script = ExtResource("1_r1apw")
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Value"
+max_value = 10000.0
+rounded = true
 prefix = "V"
+select_all_on_focus = true

@@ -17,22 +17,34 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Base Flat"
+max_value = 10000.0
+rounded = true
 prefix = "B"
+select_all_on_focus = true
 
 [node name="IncPerc" type="SpinBox" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Increased Percent"
+max_value = 10000.0
+rounded = true
 prefix = "%"
+select_all_on_focus = true
 
 [node name="IncFlat" type="SpinBox" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Increased Flat"
+max_value = 10000.0
+rounded = true
 prefix = "F"
+select_all_on_focus = true
 
 [node name="MorePerc" type="SpinBox" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "More Percent"
+max_value = 10000.0
+rounded = true
 prefix = "M"
+select_all_on_focus = true

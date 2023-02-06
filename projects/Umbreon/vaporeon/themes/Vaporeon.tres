@@ -1,10 +1,13 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://ntm47kc1cyv"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://bnrv7qp6ltiwn"]
 
 [ext_resource type="StyleBox" uid="uid://e74f2cv84vnf" path="res://vaporeon/themes/btnPressed.tres" id="1_dslvo"]
-[ext_resource type="StyleBox" uid="uid://7w68w81vf85g" path="res://vaporeon/btnNormal.tres" id="2_snoie"]
+[ext_resource type="StyleBox" uid="uid://7w68w81vf85g" path="res://vaporeon/themes/btnNormal.tres" id="2_ssm8x"]
 [ext_resource type="StyleBox" uid="uid://b4y6oyjyixxci" path="res://vaporeon/themes/panelBox.tres" id="3_vdocs"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bfaa5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rsm1b"]
+bg_color = Color(0.92549, 0.92549, 0.92549, 1)
 
 [resource]
 Button/colors/font_color = Color(0.101961, 0.827451, 0.917647, 1)
@@ -13,13 +16,23 @@ Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 Button/colors/font_pressed_color = Color(0, 0, 0, 1)
 Button/styles/focus = SubResource("StyleBoxEmpty_bfaa5")
 Button/styles/hover = ExtResource("1_dslvo")
-Button/styles/normal = ExtResource("2_snoie")
+Button/styles/normal = ExtResource("2_ssm8x")
 Button/styles/pressed = ExtResource("1_dslvo")
+ColorDark1/colors/accent = Color(0.0117647, 0.854902, 0.772549, 1)
+ColorDark1/colors/accent2 = Color(0.733333, 0.52549, 0.988235, 1)
+ColorDark1/colors/bg0 = Color(0.0705882, 0.0705882, 0.0705882, 1)
+ColorDark1/colors/bg1 = Color(0.129412, 0.129412, 0.129412, 1)
+ColorDark1/colors/front0 = Color(0, 0, 0, 1)
+ColorDark1/colors/front1 = Color(0, 0, 0, 1)
+ColorDark1/colors/shadow = Color(0, 0, 0, 1)
+ColorDark1/colors/surface = Color(0, 0, 0, 1)
 FlowContainer/constants/h_separation = 4
 FlowContainer/constants/v_separation = 4
+GridContainer/constants/h_separation = 15
+GridContainer/constants/v_separation = 0
 HBoxContainer/constants/separation = 10
 LineEdit/colors/caret_color = Color(0.101961, 0.827451, 0.917647, 1)
-LineEdit/styles/normal = ExtResource("2_snoie")
+LineEdit/styles/normal = ExtResource("2_ssm8x")
 MarginContainer/constants/margin_bottom = 10
 MarginContainer/constants/margin_left = 10
 MarginContainer/constants/margin_right = 10
@@ -27,3 +40,4 @@ MarginContainer/constants/margin_top = 10
 Panel/styles/panel = ExtResource("3_vdocs")
 TabContainer/styles/panel = ExtResource("3_vdocs")
 VBoxContainer/constants/separation = 10
+Window/styles/embedded_border = SubResource("StyleBoxFlat_rsm1b")

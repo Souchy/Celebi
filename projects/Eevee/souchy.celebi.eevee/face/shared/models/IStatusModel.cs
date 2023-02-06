@@ -8,7 +8,6 @@ namespace souchy.celebi.eevee.face.shared.models
     {
         public IStatSimple delay { get; set; }
         public IStatSimple duration { get; set; }
-
         public List<IID> effectIds { get; set; }
 
     }

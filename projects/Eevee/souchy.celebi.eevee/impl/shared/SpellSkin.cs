@@ -3,7 +3,7 @@ using souchy.celebi.eevee.face.shared.models.skins;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 
-namespace Umbreon.data.resources
+namespace souchy.celebi.eevee.impl.shared
 {
     public class SpellSkin : ISpellSkin
     {

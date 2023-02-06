@@ -2,6 +2,7 @@
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.stats;
+using souchy.celebi.eevee.face.objects.statuses;
 using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.shared.models.skins;
@@ -25,7 +26,7 @@ namespace souchy.celebi.eevee.impl.util
             // other
             typeof(IStringEntity), 
             typeof(IEffect), 
-            typeof(IStats), typeof(IStat),
+            typeof(IStats), typeof(IStat), typeof(IStatus),
              // TODO those idk yet
             typeof(ICondition), typeof(ITrigger), typeof(IZone),
             // LAST ONE for things like fight entities (creature, spell, stats, etc)

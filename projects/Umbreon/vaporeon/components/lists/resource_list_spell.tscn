@@ -5,3 +5,23 @@
 
 [node name="ResourceListSpell" instance=ExtResource("1_7flcm")]
 script = ExtResource("2_6be0v")
+
+[node name="CheckWater" type="CheckBox" parent="VBoxContainer/Toolbar" index="3"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Water"
+
+[node name="CheckFire" type="CheckBox" parent="VBoxContainer/Toolbar" index="4"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Fire"
+
+[node name="CheckEarth" type="CheckBox" parent="VBoxContainer/Toolbar" index="5"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Earth"
+
+[node name="CheckAir" type="CheckBox" parent="VBoxContainer/Toolbar" index="6"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Air"

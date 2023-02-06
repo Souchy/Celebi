@@ -10,10 +10,8 @@ namespace souchy.celebi.eevee.statuses
 
 
         private Glyph() { }
-        public static new IGlyph Create() => new Glyph()
-        {
-            entityUid = Eevee.RegisterIID<IGlyph>()
-        };
+        private Glyph(IID id) : base(id) { }
+        public static new IGlyph Create() => new Glyph(Eevee.RegisterIID<IGlyph>());
 
         public new void Dispose()
         {

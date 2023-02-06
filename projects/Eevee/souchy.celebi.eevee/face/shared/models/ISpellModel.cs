@@ -16,11 +16,8 @@ namespace souchy.celebi.eevee.face.shared.models
         public ICondition sourceCondition { get; set; }
         public ICondition targetFilter { get; set; }
 
-        //public List<ICost> costs { get; set; }
         public Dictionary<ResourceType, int> costs { get; set; }
-        //
         public ISpellProperties properties { get; set; }
-        //
         public HashSet<IID> effectIds { get; set; }
 
         public IStringEntity GetName() => Eevee.models.i18n.Get(nameId);

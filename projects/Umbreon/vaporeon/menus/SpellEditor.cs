@@ -9,7 +9,7 @@ using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.impl.util;
 
-public partial class SpellEditor : Control
+public partial class SpellEditor : Control, EditorInitiator<ISpellModel>
 {
 
     //public ISpellModel spell { get => this.GetVaporeon().CurrentSpellModel; }

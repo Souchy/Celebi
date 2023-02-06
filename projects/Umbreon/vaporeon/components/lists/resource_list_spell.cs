@@ -1,22 +1,49 @@
 using Godot;
+using Godot.Sharp.Extras;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.shared;
 using souchy.celebi.eevee.impl.util;
-using Umbreon.data.resources;
 using Umbreon.vaporeon;
 
 public partial class resource_list_spell : ResourceList
 {
 
+    #region Nodes
+    [NodePath] public CheckBox CheckWater { get; set; }
+    [NodePath] public CheckBox CheckFire { get; set; }
+    [NodePath] public CheckBox CheckEarth { get; set; }
+    [NodePath] public CheckBox CheckAir { get; set; }
+    #endregion
 
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
 	{
         base._Ready();
         Eevee.models.spellModels.GetEntityBus().subscribe(this);
+
+        CheckWater.Toggled += CheckWater_Toggled;
+        CheckFire.Toggled += CheckFire_Toggled;
+        CheckEarth.Toggled += CheckEarth_Toggled;
+        CheckAir.Toggled += CheckAir_Toggled;
     }
+
+    #region GUI Handlers
+    private void CheckAir_Toggled(bool buttonPressed)
+    {
+    }
+    private void CheckEarth_Toggled(bool buttonPressed)
+    {
+    }
+    private void CheckFire_Toggled(bool buttonPressed)
+    {
+    }
+    private void CheckWater_Toggled(bool buttonPressed)
+    {
+    }
+    #endregion
 
     #region Functions
     public ISpellModel getSelectedItem() => Eevee.models.spellModels.Get(getSelectedItemID());
@@ -61,8 +88,8 @@ public partial class resource_list_spell : ResourceList
         spellmodel.descriptionId = desc.entityUid;
         Eevee.models.i18n.Add(desc.entityUid, desc);
 
-        Eevee.models.spellSkins.Add(spellskin.entityUid, spellskin);
         Eevee.models.spellModels.Add(spellmodel.entityUid, spellmodel);
+        Eevee.models.spellSkins.Add(spellskin.entityUid, spellskin);
     }
     public override void onClickRemoveBtn()
     {

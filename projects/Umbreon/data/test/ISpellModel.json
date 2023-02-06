@@ -1,0 +1,31 @@
+{
+  "1": {
+    "$type": "Umbreon.data.resources.SpellModel, Umbreon",
+    "entityUid": "1",
+    "nameId": "1",
+    "descriptionId": "2",
+    "sourceCondition": null,
+    "targetFilter": null,
+    "costs": {
+      "Life": 0,
+      "Mana": 0,
+      "Movement": 0,
+      "Rage": 0,
+      "Summons": 0
+    },
+    "properties": {
+      "maxCharges": null,
+      "maxCastsPerTurn": null,
+      "maxCastsPerTarget": null,
+      "cooldownInitial": null,
+      "cooldownGlobal": null,
+      "cooldown": null,
+      "minRange": null,
+      "maxRange": null,
+      "castInDiagonal": null,
+      "castInLine": null,
+      "needLos": null
+    },
+    "effectIds": []
+  }
+}
