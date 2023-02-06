@@ -1,5 +1,6 @@
 ﻿using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.entity;
+using souchy.celebi.eevee.face.util;
 
 namespace souchy.celebi.eevee.face.shared.conditions
 {
@@ -14,6 +15,6 @@ namespace souchy.celebi.eevee.face.shared.conditions
     {
         public MomentType targetContext { get; set; }
         public ConditionGroupType groupType { get; set; }
-        public List<ICondition> children { get; set; }
+        public IEntityList<ICondition> children { get; set; }
     }
 }

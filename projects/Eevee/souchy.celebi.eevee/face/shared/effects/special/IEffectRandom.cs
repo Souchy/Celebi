@@ -8,7 +8,7 @@ namespace souchy.celebi.eevee.face.shared.effects.special
     public interface IEffectRandom : IEffect
     {
         /// <summary>
-        /// Weight chance to be picked for each child effect
+        /// Weight chance to be picked For Each Child effect
         /// </summary>
         public List<int> weights { get; set; }
 

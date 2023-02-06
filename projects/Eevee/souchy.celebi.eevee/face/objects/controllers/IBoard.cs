@@ -11,11 +11,11 @@ namespace souchy.celebi.eevee.face.objects.controllers
         /// List of creatures on the board <br></br>
         /// Creatures need to be ordered in timeline order
         /// </summary>
-        public List<IID> creatureIds { get; init; }
+        public IEntityList<IID> creatureIds { get; init; }
         /// <summary>
         /// List of cells on the board
         /// </summary>
-        public List<IID> cells { get; init; }
+        public IEntityList<IID> cells { get; init; }
 
 
         // Board will be just a normal data object like the others.

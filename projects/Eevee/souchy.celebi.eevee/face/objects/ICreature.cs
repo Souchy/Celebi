@@ -18,7 +18,7 @@ namespace souchy.celebi.eevee.face.objects
         /// </summary>
         public IID currentOwnerUid { get; set; }
         public IID stats { get; set; }
-        public List<IID> spells { get; set; }
+        public IEntitySet<IID> spells { get; set; }
 
 
         public IPlayer GetOriginalOwner() => this.GetFight().players.Get(originalOwnerUid);

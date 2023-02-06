@@ -1,4 +1,5 @@
 ﻿using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.util.math;
 using souchy.celebi.eevee.face.values;
 
@@ -50,7 +51,7 @@ namespace souchy.celebi.eevee.face.shared.zones
         /// <summary>
         /// 
         /// </summary>
-        public List<IZone> children { get; set; }
+        public IEntityList<IZone> children { get; set; }
     }
 
     //public interface ZoneMulti : IZone

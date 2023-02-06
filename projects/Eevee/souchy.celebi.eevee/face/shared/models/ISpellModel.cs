@@ -5,7 +5,6 @@ using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
 using souchy.celebi.eevee.impl;
-using souchy.celebi.eevee.impl.util;
 
 namespace souchy.celebi.eevee.face.shared.models
 {
@@ -19,7 +18,7 @@ namespace souchy.celebi.eevee.face.shared.models
 
         public Dictionary<ResourceType, int> costs { get; set; }
         public ISpellProperties properties { get; set; }
-        public HashSet<IID> effectIds { get; set; }
+        public IEntityList<IID> effectIds { get; set; }
 
         public IZone RangeZoneMin { get; set; }
         public IZone RangeZoneMax { get; set; }

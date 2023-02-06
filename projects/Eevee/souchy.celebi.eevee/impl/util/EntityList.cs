@@ -1,0 +1,97 @@
+﻿using Newtonsoft.Json;
+using souchy.celebi.eevee.face.entity;
+using souchy.celebi.eevee.face.util;
+
+namespace souchy.celebi.eevee.impl.util
+{
+    public class EntitySet<T> : EntityList<T>, IEntitySet<T> //where T : IEntity
+    {
+        public EntitySet() => allowDuplicates = false;
+        //private EntitySet(IID id) : base(id) { }
+        //public static new EntitySet<T> Create() => new EntitySet<T>(Eevee.RegisterIID<IEntity>())
+        //{
+        //    allowDuplicates = false
+        //};
+    }
+
+    public class EntityList<T> : List<T>, IEntityList<T> //where T : IEntity
+    {
+        [JsonIgnore]
+        public IID entityUid { get; set; } = Eevee.RegisterIID<IEntity>();
+        [JsonIgnore]
+        public bool allowDuplicates { get; init; } = true;
+        [JsonIgnore]
+        public List<T> Values { get => this; }
+
+        public EntityList() { }
+        //private EntityList() { }
+        //protected EntityList(IID id) => entityUid = id;
+        //public static EntityList<T> Create() => new EntityList<T>(Eevee.RegisterIID<IEntity>());
+
+        public new void Add(T t)
+        {
+            if (!this.allowDuplicates && this.Contains(t))
+            {
+                throw new ArgumentException($"Duplicate element: {t}.");
+            }
+            base.Add(t);
+            this.GetEntityBus().publish(nameof(Add), t);
+        }
+
+        public new bool Remove(T t)
+        {
+            bool removed = base.Remove(t);
+            if (removed)
+            {
+                this.GetEntityBus().publish(nameof(Remove), t);
+                if (t is IDisposable dis)
+                    dis.Dispose();
+            }
+            return removed;
+        }
+
+        /// <summary>
+        /// Move an element of the list up or down
+        /// </summary>
+        /// <param name="t"></param>
+        /// <param name="indexDelta">Negative to move towards the start of the list (reduce index) or positive to move towards the end of the list</param>
+        public void Move(T t, int indexDelta)
+        {
+            //base.Add(t);
+            var index0 = base.IndexOf(t);
+            if (index0 == -1) 
+                return;
+            if (index0 + indexDelta < 0)
+                throw new IndexOutOfRangeException();
+            bool removed = base.Remove(t);
+            if (removed)
+            {
+                base.Insert(index0 + indexDelta, t);
+                this.GetEntityBus().publish(nameof(Move), t, indexDelta);
+            }
+            else
+            {
+                throw new Exception($"Failed to remove element: {t}");
+            }
+        }
+
+        public void Remove(Predicate<T> predicate)
+        {
+            var toRemove = this.Where(p => predicate(p)).ToList();
+            foreach (var rem in toRemove)
+                this.Remove(rem);
+        }
+
+        public new void Clear()
+        {
+            foreach (var k in this.ToList())
+                Remove(k);
+        }
+
+        public void Dispose()
+        {
+            Clear();
+            Eevee.DisposeIID<IEntity>(entityUid);
+        }
+    }
+}

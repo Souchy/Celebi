@@ -5,6 +5,8 @@ using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.shared.triggers;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.impl.objects.zones;
+using souchy.celebi.eevee.impl.util;
 
 namespace souchy.celebi.eevee.impl.objects
 {
@@ -13,10 +15,13 @@ namespace souchy.celebi.eevee.impl.objects
         public IID entityUid { get; set; } //= Eevee.RegisterIID();
         public IID modelUid { get; set; }
         public IID fightUid { get; set; }
+
         public ICondition sourceCondition { get; set; }
         public ICondition targetFilter { get; set; }
-        public IZone zone { get; set; }
-        public List<ITrigger> triggers { get; set; }
+        public IZone zone { get; set; } = new Zone();
+        public IEntityList<ITrigger> triggers { get; set; } = new EntityList<ITrigger>(); // EntityList<ITrigger>.Create();
+
+        public IEntityList<IID> children { get; set; } = new EntityList<IID>(); //EntityList<IID>.Create();
 
 
         protected Effect() { }

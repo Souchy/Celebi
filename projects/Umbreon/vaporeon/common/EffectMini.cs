@@ -1,17 +1,17 @@
 using Godot;
 using Godot.Sharp.Extras;
-using PlayFab.EconomyModels;
 using souchy.celebi.eevee.face.objects;
-using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.shared.effects;
 using souchy.celebi.eevee.impl.util;
-using System;
-using System.Reflection;
 using Umbreon.vaporeon;
 using Umbreon.vaporeon.common;
 
 public partial class EffectMini : PanelContainer
 {
+
+    public const string EffectOrderEvent = "order";
+
     private IEffect effect { get; set; }
     private IEffect parent { get; set; }
 
@@ -58,15 +58,19 @@ public partial class EffectMini : PanelContainer
     }
     private void unload()
     {
+        // unsub this
+        effect.GetEntityBus().unsubscribe(this);
+        parent?.GetEntityBus().unsubscribe(this);
+        //
         this.Values.QueueFreeChildren();
     }
     private void load()
     {
-        BtnMoveUp.Disabled = (parent == null);
         // sub vaporeon
         //effect.GetEntityBus().subscribe(this.GetVaporeon(), IEventBus.save);
         // sub this
         effect.GetEntityBus().subscribe(this);
+        parent?.GetEntityBus().subscribe(this);
         // select type
         var indexType = VaporeonUtil.effectTypes.IndexOf(effect.GetType());
         BtnType.Select(indexType);
@@ -74,6 +78,12 @@ public partial class EffectMini : PanelContainer
         PropertiesComponent.GenerateGrid(effect, Values);
         // zone
         ZoneEditorMini.init(effect.zone);
+        // dis/enable buttons
+        var i = parent.children.Values.IndexOf(effect.entityUid);
+        BtnMoveUp.Disabled = (i == 0);
+        BtnMoveUp.Disabled = (parent == null);
+        // create children
+
     }
     #endregion
 
@@ -85,7 +95,8 @@ public partial class EffectMini : PanelContainer
     }
     private void onClickMoveUp()
     {
-        //parent.children.indexof(effect)
+        parent.children.Move(effect.entityUid, -1);
+        parent.GetEntityBus().publish(EffectOrderEvent);
     }
     private void onClickEdit() => this.GetVaporeon().openEditor(effect);
     private void onClickSelectEffectType(long index)
@@ -103,9 +114,23 @@ public partial class EffectMini : PanelContainer
     private void onClickAddChild()
     {
         var newEffect = EffectBase.Create();
-        //this.effect.children.add(newEffect);
+        Eevee.models.effects.Add(newEffect.entityUid, newEffect);
+        this.effect.children.Add(newEffect.entityUid);
+
     }
     private void onClickRemove()
+    {
+        Eevee.models.effects.Remove(effect.entityUid);
+        if(parent != null)
+        {
+            parent.children.Remove(effect.entityUid);
+        }
+    }
+    #endregion
+
+    #region Diamond Handlers
+    [Subscribe(EffectOrderEvent)]
+    public void onOrderChanged()
     {
 
     }

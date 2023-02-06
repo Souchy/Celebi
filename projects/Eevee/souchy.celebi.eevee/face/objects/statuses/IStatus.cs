@@ -1,6 +1,7 @@
 ﻿using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.face.values;
 
 namespace souchy.celebi.eevee.face.objects.statuses
 {
@@ -24,10 +25,10 @@ namespace souchy.celebi.eevee.face.objects.statuses
         /// </summary>
         public IID holderEntity { get; set; }
 
-
-        public IStatSimple delay { get; set; }
-        public IStatSimple duration { get; set; }
-        public List<IID> effectIds { get; set; }
+        
+        public IValue<int> delay { get; set; } // IStatSimple
+        public IValue<int> duration { get; set; }
+        public IEntityList<IID> effectIds { get; set; }
 
     }
 

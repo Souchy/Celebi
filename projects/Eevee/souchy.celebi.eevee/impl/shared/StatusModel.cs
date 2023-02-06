@@ -1,6 +1,7 @@
 ﻿using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
+using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.impl.values;
 
 namespace souchy.celebi.eevee.impl.shared
@@ -13,7 +14,7 @@ namespace souchy.celebi.eevee.impl.shared
         //public IStatSimple duration { get; set; }
         public IValue<int> delay { get; set; } = new Value<int>();
         public IValue<int> duration { get; set; } = new Value<int>();
-        public List<IID> effectIds { get; set; } = new();
+        public IEntityList<IID> effectIds { get; set; } = new EntityList<IID>(); //EntityList<IID>.Create();
 
         private StatusModel() { }
         private StatusModel(IID id) => entityUid = id;

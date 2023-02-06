@@ -22,7 +22,18 @@ namespace souchy.celebi.eevee.face.objects
 
 
         public IZone zone { get; set; }
-        public List<ITrigger> triggers { get; set; }
+        public IEntityList<ITrigger> triggers { get; set; }
+
+        
+        // Reason for child effects: 
+        //      1- have more precise ScopeContext
+        //      2- condition for a group of effects
+        // We have EffectBase as empty effects
+        // We have EffectCopyZone that gives its zone to its children
+        // We have EffectGetValue that gets a value and stores it in ScopeContext for its children
+        // We have EffectRebase that casts its children from a different location/caster
+        // We have EffectRandom that casts a random child effect
+        public IEntityList<IID> children { get; set; }             
 
 
         public ICompiledEffect compile(IFight fight, IID source, IID targetCell); // IActionContext context);

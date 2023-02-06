@@ -104,7 +104,7 @@ public partial class SpellEditor : Control, EditorInitiator<ISpellModel>
             CostsGrid.AddChild(edit);
         }
         // effects
-        foreach(var effectId in spell.effectIds)
+        foreach(var effectId in spell.effectIds.Values)
         {
             IEffect effect = Eevee.models.effects.Get(effectId);
             var effectMini = new EffectMini();

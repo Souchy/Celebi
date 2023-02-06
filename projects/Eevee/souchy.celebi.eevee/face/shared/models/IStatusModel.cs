@@ -11,7 +11,7 @@ namespace souchy.celebi.eevee.face.shared.models
         //public IStatSimple duration { get; set; }
         public IValue<int> delay { get; set; }
         public IValue<int> duration { get; set; }
-        public List<IID> effectIds { get; set; }
+        public IEntityList<IID> effectIds { get; set; }
 
     }
 }

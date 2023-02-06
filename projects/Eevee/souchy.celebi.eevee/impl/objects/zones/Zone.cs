@@ -1,7 +1,9 @@
 ﻿using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.shared.zones;
+using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.util.math;
 using souchy.celebi.eevee.face.values;
+using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.impl.values;
 using System;
 using System.Collections.Generic;
@@ -20,7 +22,7 @@ namespace souchy.celebi.eevee.impl.objects.zones
         public Direction9Type localOrigin { get; set; } = Direction9Type.center;
         public Direction9Type rotation { get; set; } = Direction9Type.center;
         public int sizeIndexExtendFromSource { get; set; }
-        public List<IZone> children { get; set; } = new();
+        public IEntityList<IZone> children { get; set; } = new EntityList<IZone>(); //EntityList<IZone>.Create();
 
 
         // this isn't an entity and doesn't hold complex objects so it's good as public

@@ -6,6 +6,8 @@ using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.util.math;
 using souchy.celebi.eevee.impl;
+using souchy.celebi.eevee.impl.util;
+using souchy.celebi.eevee.impl.util.math;
 
 namespace Umbreon.eevee.impl.objects
 {
@@ -17,11 +19,12 @@ namespace Umbreon.eevee.impl.objects
 
         public IID originalOwnerUid { get; set; }
         public IID currentOwnerUid { get; set; }
+        public IPosition position { get; init; } = new Position();
+
         public IID stats { get; set; }
-        public List<IID> spells { get; set; }
-        public IPosition position { get; init; }
-        public List<IID> statuses { get; init; }
-        public Dictionary<ContextType, IContext> contexts { get; set; }
+        public IEntitySet<IID> spells { get; set; } = new EntitySet<IID>(); // EntitySet<IID>.Create();
+        public IEntitySet<IID> statuses { get; init; } = new EntitySet<IID>(); //EntitySet<IID>.Create();
+        public Dictionary<ContextType, IContext> contexts { get; set; } = new();
 
 
         private Creature() { }
