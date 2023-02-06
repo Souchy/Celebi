@@ -63,7 +63,7 @@ public partial class EffectMini : PanelContainer
         // unsub this
         effect?.GetEntityBus().unsubscribe(this);
         parent?.GetEntityBus().unsubscribe(this);
-        effect?.children.GetEntityBus().unsubscribe(this);
+        effect?.effectIds.GetEntityBus().unsubscribe(this);
         //
         this.Values.QueueFreeChildren();
     }
@@ -74,10 +74,10 @@ public partial class EffectMini : PanelContainer
         // sub this
         effect.GetEntityBus().subscribe(this);
         parent?.GetEntityBus().subscribe(this);
-        effect.children.GetEntityBus().subscribe(this);
+        effect.effectIds.GetEntityBus().subscribe(this);
         //
         this.LblID.Text = effect.entityUid;
-        this.LblChildCount.Text = $"({effect.children.Values.Count})";
+        this.LblChildCount.Text = $"({effect.effectIds.Values.Count})";
         // select type
         var indexType = VaporeonUtil.effectTypes.IndexOf(effect.GetType());
         BtnType.Select(indexType);
@@ -86,10 +86,10 @@ public partial class EffectMini : PanelContainer
         // zone
         ZoneEditorMini.init(effect.zone);
         // dis/enable buttons
-        var i = parent?.children.Values.IndexOf(effect.entityUid);
+        var i = parent?.effectIds.Values.IndexOf(effect.entityUid);
         BtnMoveUp.Disabled = (parent == null || i == 0);
         // create children
-        foreach(var c in effect.GetChildren())
+        foreach(var c in effect.GetEffects())
         {
             var mini = Vaporeon.instanceScene<EffectMini>(); // new EffectMini();
             this.Children.AddChild(mini);
@@ -107,7 +107,7 @@ public partial class EffectMini : PanelContainer
     }
     private void onClickMoveUp()
     {
-        parent.children.Move(effect.entityUid, -1);
+        parent.effectIds.Move(effect.entityUid, -1);
     }
     private void onClickEdit() => this.GetVaporeon().openEditor(effect);
     private void onClickSelectEffectType(long index)
@@ -126,7 +126,7 @@ public partial class EffectMini : PanelContainer
     {
         var newEffect = EffectBase.Create();
         Eevee.models.effects.Add(newEffect.entityUid, newEffect);
-        this.effect.children.Add(newEffect.entityUid);
+        this.effect.effectIds.Add(newEffect.entityUid);
     }
     private void onClickDeleteThis()
     {
@@ -134,7 +134,7 @@ public partial class EffectMini : PanelContainer
         //GD.Print($"Click Delete on {effect.entityUid} = {removed}");
         if(parent != null)
         {
-            bool removedInParent = parent.children.Remove(effect.entityUid);
+            bool removedInParent = parent.effectIds.Remove(effect.entityUid);
             GD.Print($"Click Delete from parent {effect.entityUid} = {removedInParent}");
         }
     }
@@ -144,7 +144,7 @@ public partial class EffectMini : PanelContainer
     [Subscribe(EntityList<IID>.EventAdd)]
     public void onAddEffectChild(IID ei)
     {
-        this.LblChildCount.Text = $"({effect.children.Values.Count})";
+        this.LblChildCount.Text = $"({effect.effectIds.Values.Count})";
         var e = Eevee.models.effects.Get(ei);
         var mini = Vaporeon.instanceScene<EffectMini>(); // packedScene.Instantiate<EffectMini>(); // new EffectMini();
         GD.Print($"add child scene: {mini} with e: {e}");
@@ -155,7 +155,7 @@ public partial class EffectMini : PanelContainer
     public void onRemoveEffectChild(IID ei)
     {
         GD.Print($"On Remove {ei}");
-        this.LblChildCount.Text = $"({effect.children.Values.Count})";
+        this.LblChildCount.Text = $"({effect.effectIds.Values.Count})";
         var node = this.Children.GetChildren<EffectMini>().FirstOrDefault(m => m.effect.entityUid == ei);
         if(node != null) 
             this.Children.RemoveChild(node);
@@ -166,7 +166,7 @@ public partial class EffectMini : PanelContainer
         var node = this.Children.GetChild(indexPrevious);
         this.Children.MoveChild(node, indexNow);
         // dis/enable buttons
-        for (int i = 0; i < effect.children.Values.Count; i++)
+        for (int i = 0; i < effect.effectIds.Values.Count; i++)
         {
            var c = (EffectMini) Children.GetChild(i);
            c.BtnMoveUp.Disabled = i == 0;

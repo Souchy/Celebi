@@ -21,7 +21,10 @@ namespace souchy.celebi.eevee.impl.objects
         public IZone zone { get; set; } = new Zone();
         public IEntityList<ITrigger> triggers { get; set; } = new EntityList<ITrigger>(); // EntityList<ITrigger>.Create();
 
-        public IEntityList<IID> children { get; set; } = new EntityList<IID>(); //EntityList<IID>.Create();
+        /// <summary>
+        /// children
+        /// </summary>
+        public IEntityList<IID> effectIds { get; set; } = new EntityList<IID>(); //EntityList<IID>.Create();
 
 
         protected Effect() { }

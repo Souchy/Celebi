@@ -2,6 +2,7 @@
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects.compiledeffects;
 using souchy.celebi.eevee.face.objects.controllers;
+using souchy.celebi.eevee.face.shared;
 using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.shared.triggers;
 using souchy.celebi.eevee.face.shared.zones;
@@ -16,7 +17,7 @@ namespace souchy.celebi.eevee.face.objects
     /// En fait faut juste traiter les effets préprogrammés dans les spells/status comme des instances
     /// au même titre que des nouvelles instances pour les status on runtime
     /// </summary>
-    public interface IEffect : IEntityModeled, IFightEntity
+    public interface IEffect : IEntityModeled, IFightEntity, IEffectsContainer
     {
         public ICondition sourceCondition { get; set; }
         public ICondition targetFilter { get; set; }
@@ -34,13 +35,15 @@ namespace souchy.celebi.eevee.face.objects
         // We have EffectGetValue that gets a value and stores it in ScopeContext for its children
         // We have EffectRebase that casts its children from a different location/caster
         // We have EffectRandom that casts a random child effect
-        public IEntityList<IID> children { get; set; }             
+        /// <summary>
+        /// Children
+        /// </summary>
+        //public IEntityList<IID> effectIds { get; set; }             
 
 
         public ICompiledEffect compile(IFight fight, IID source, IID targetCell); // IActionContext context);
 
-
-        public IEnumerable<IEffect> GetChildren() => children.Values.Select(i => Eevee.models.effects.Get(i));
+        //public IEnumerable<IEffect> GetChildren() => effectIds.Values.Select(i => Eevee.models.effects.Get(i));
 
     }
 }

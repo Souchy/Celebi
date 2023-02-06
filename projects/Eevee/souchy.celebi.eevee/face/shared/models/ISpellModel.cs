@@ -8,7 +8,7 @@ using souchy.celebi.eevee.impl;
 
 namespace souchy.celebi.eevee.face.shared.models
 {
-    public interface ISpellModel : IEntity
+    public interface ISpellModel : IEntity, IEffectsContainer
     {
         public IID nameId { get; set; }
         public IID descriptionId { get; set; }
@@ -18,7 +18,7 @@ namespace souchy.celebi.eevee.face.shared.models
 
         public Dictionary<ResourceType, int> costs { get; set; }
         public ISpellProperties properties { get; set; }
-        public IEntityList<IID> effectIds { get; set; }
+        //public IEntityList<IID> effectIds { get; set; }
 
         public IZone RangeZoneMin { get; set; }
         public IZone RangeZoneMax { get; set; }

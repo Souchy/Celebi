@@ -1,7 +1,9 @@
 ﻿using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects.stats;
+using souchy.celebi.eevee.face.shared;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
+using souchy.celebi.eevee.impl;
 
 namespace souchy.celebi.eevee.face.objects.statuses
 {
@@ -10,7 +12,7 @@ namespace souchy.celebi.eevee.face.objects.statuses
     /// The client can just visually "merge" them on the UI ?
     /// Use the model id to stack the instances
     /// </summary>
-    public interface IStatus : IEntityModeled, IFightEntity
+    public interface IStatus : IEntityModeled, IFightEntity, IEffectsContainer
     {
         /// <summary>
         /// That or some kind of ID that allows merging of stacks/instances
@@ -28,7 +30,9 @@ namespace souchy.celebi.eevee.face.objects.statuses
         
         public IValue<int> delay { get; set; } // IStatSimple
         public IValue<int> duration { get; set; }
-        public IEntityList<IID> effectIds { get; set; }
+        //public IEntityList<IID> effectIds { get; set; }
+
+        //public IEnumerable<IEffect> GetEffects() => effectIds.Values.Select(i => Eevee.models.effects.Get(i));
 
     }
 

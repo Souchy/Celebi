@@ -27,7 +27,10 @@ namespace souchy.celebi.eevee.face.objects.controllers
 
         /// <summary>
         /// Status effects
-        /// ////////Instanced Effects for variable statuses like fourberie as opposed to static statuses like passives 
+        /// ///Instanced Effects for 
+        ///     - variable statuses: like fourberie, colère d'iop
+        /// as opposed to 
+        ///     - static statuses: like passives
         /// </summary>
         public IEntityDictionary<IID, IEffect> effects { get; init; }
 
