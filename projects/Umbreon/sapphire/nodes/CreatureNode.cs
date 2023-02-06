@@ -1,11 +1,7 @@
 using Umbreon.data;
-using Umbreon.src;
 using Godot;
 using Godot.Sharp.Extras;
-using souchy.celebi.eevee;
-using System;
-using System.Xml.Linq;
-using Umbreon.eevee.impl.objects;
+using souchy.celebi.eevee.impl.objects;
 
 public partial class CreatureNode : Node3D
 {

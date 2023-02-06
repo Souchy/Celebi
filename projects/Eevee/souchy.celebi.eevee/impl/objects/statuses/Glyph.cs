@@ -11,8 +11,8 @@ namespace souchy.celebi.eevee.statuses
 
 
         private Glyph() { }
-        private Glyph(IID id) : base(id) { }
-        public static new IGlyph Create() => new Glyph(Eevee.RegisterIID<IGlyph>());
+        private Glyph(IID id, IID fightId) : base(id, fightId) { }
+        public static new IGlyph Create(IID fightId) => new Glyph(Eevee.RegisterIID<IGlyph>(), fightId);
 
         public new void Dispose()
         {

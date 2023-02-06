@@ -11,8 +11,8 @@ namespace souchy.celebi.eevee.interfaces.statuses
         public IEntitySet<IID> cellIds { get; set; } = new EntitySet<IID>();
 
         private Trap() { }
-        private Trap(IID id) : base(id) { }
-        public static new ITrap Create() => new Trap(Eevee.RegisterIID<ITrap>());
+        private Trap(IID id, IID fightId) : base(id, fightId) { }
+        public static new ITrap Create(IID fightId) => new Trap(Eevee.RegisterIID<ITrap>(), fightId);
 
         public new void Dispose()
         {
