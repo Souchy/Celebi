@@ -1,5 +1,6 @@
 ﻿using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.entity;
+using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.shared.zones;
@@ -23,10 +24,10 @@ namespace souchy.celebi.eevee.impl.shared
 
         public Dictionary<ResourceType, int> costs { get; set; } = new();
         public ISpellProperties properties { get; set; } = new SpellProperties();
-        public IEntityList<IID> effectIds { get; set; } = new EntityList<IID>(); //EntityList<IID>.Create();
+        public IEntityList<IID> effectIds { get; set; } = new EntityList<IID>(); 
 
         public IZone RangeZoneMin { get; set; } = new Zone();
-        public IZone RangeZoneMax { get; set; } = new Zone(); // Zone.Create();
+        public IZone RangeZoneMax { get; set; } = new Zone();
 
         private SpellModel() { }
         private SpellModel(IID id) => entityUid = id;
@@ -39,6 +40,7 @@ namespace souchy.celebi.eevee.impl.shared
         }
 
 
+        public IEnumerable<IEffect> GetEffects() => effectIds.Values.Select(i => Eevee.models.effects.Get(i));
         public void Dispose()
         {
             Eevee.DisposeIID<ISpellModel>(entityUid);

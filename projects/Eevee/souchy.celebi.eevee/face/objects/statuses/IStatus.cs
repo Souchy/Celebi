@@ -33,6 +33,7 @@ namespace souchy.celebi.eevee.face.objects.statuses
         //public IEntityList<IID> effectIds { get; set; }
 
         //public IEnumerable<IEffect> GetEffects() => effectIds.Values.Select(i => Eevee.models.effects.Get(i));
+        //public new IEnumerable<IEffect> GetEffects() => effectIds.Values.Select(i => this.GetFight().effects.Get(i));
 
     }
 

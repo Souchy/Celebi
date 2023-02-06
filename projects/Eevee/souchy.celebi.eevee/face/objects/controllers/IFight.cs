@@ -31,6 +31,9 @@ namespace souchy.celebi.eevee.face.objects.controllers
         ///     - variable statuses: like fourberie, colère d'iop
         /// as opposed to 
         ///     - static statuses: like passives
+        ///     
+        /// But maybe it could still be done with only static effects and adding stats idk
+        /// 
         /// </summary>
         public IEntityDictionary<IID, IEffect> effects { get; init; }
 

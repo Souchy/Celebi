@@ -24,7 +24,7 @@ namespace souchy.celebi.eevee.impl.objects
         /// <summary>
         /// children
         /// </summary>
-        public IEntityList<IID> effectIds { get; set; } = new EntityList<IID>(); //EntityList<IID>.Create();
+        public IEntityList<IID> effectIds { get; set; } = new EntityList<IID>(); 
 
 
         protected Effect() { }
@@ -33,7 +33,7 @@ namespace souchy.celebi.eevee.impl.objects
 
         public abstract ICompiledEffect compile(IFight fight, IID source, IID targetCell);
 
-
+        public IEnumerable<IEffect> GetEffects() => effectIds.Values.Select(i => this.GetFight()?.effects.Get(i) ?? Eevee.models.effects.Get(i));
         public void Dispose()
         {
             Eevee.DisposeIID<IEffect>(entityUid);
