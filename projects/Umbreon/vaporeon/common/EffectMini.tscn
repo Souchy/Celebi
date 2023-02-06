@@ -1,0 +1,108 @@
+[gd_scene load_steps=4 format=3 uid="uid://50doxjkeqmov"]
+
+[ext_resource type="Theme" uid="uid://bnrv7qp6ltiwn" path="res://vaporeon/themes/Vaporeon.tres" id="1_8ljt4"]
+[ext_resource type="Script" path="res://vaporeon/common/EffectMini.cs" id="2_3o2fq"]
+[ext_resource type="PackedScene" uid="uid://bpx5wtg2ya6o2" path="res://vaporeon/common/zones/ZoneEditorMini.tscn" id="2_aosvd"]
+
+[node name="EffectMini" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_8ljt4")
+script = ExtResource("2_3o2fq")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Header" type="Panel" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="Main" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Header"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -19.5
+offset_right = 173.0
+offset_bottom = 19.5
+grow_vertical = 2
+
+[node name="BtnHide" type="Button" parent="MarginContainer/VBoxContainer/Header/Main"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "_"
+
+[node name="BtnMoveUp" type="Button" parent="MarginContainer/VBoxContainer/Header/Main"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "^"
+
+[node name="BtnType" type="OptionButton" parent="MarginContainer/VBoxContainer/Header/Main"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+
+[node name="BtnEdit" type="Button" parent="MarginContainer/VBoxContainer/Header/Main"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Full Editor"
+
+[node name="BtnAddChild" type="Button" parent="MarginContainer/VBoxContainer/Header/Main"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_default_cursor_shape = 2
+text = "Add Child"
+
+[node name="BtnRemove" type="Button" parent="MarginContainer/VBoxContainer/Header"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -19.5
+offset_bottom = 19.5
+grow_horizontal = 0
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+text = "-"
+
+[node name="Content" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Values" type="GridContainer" parent="MarginContainer/VBoxContainer/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="ZoneEditorMini" parent="MarginContainer/VBoxContainer/Content" instance=ExtResource("2_aosvd")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="Children" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3

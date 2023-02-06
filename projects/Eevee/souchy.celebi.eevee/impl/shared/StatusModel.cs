@@ -1,12 +1,7 @@
-﻿using souchy.celebi.eevee.face.objects.stats;
-using souchy.celebi.eevee.face.objects.statuses;
-using souchy.celebi.eevee.face.shared.models;
+﻿using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using souchy.celebi.eevee.face.values;
+using souchy.celebi.eevee.impl.values;
 
 namespace souchy.celebi.eevee.impl.shared
 {
@@ -14,9 +9,11 @@ namespace souchy.celebi.eevee.impl.shared
     {
         public IID entityUid { get; set; }
 
-        public IStatSimple delay { get; set; }
-        public IStatSimple duration { get; set; }
-        public List<IID> effectIds { get; set; }
+        //public IStatSimple delay { get; set; }
+        //public IStatSimple duration { get; set; }
+        public IValue<int> delay { get; set; } = new Value<int>();
+        public IValue<int> duration { get; set; } = new Value<int>();
+        public List<IID> effectIds { get; set; } = new();
 
         private StatusModel() { }
         private StatusModel(IID id) => entityUid = id;
@@ -25,7 +22,6 @@ namespace souchy.celebi.eevee.impl.shared
         public void Dispose()
         {
             Eevee.DisposeIID<IStatusModel>(entityUid);
-            throw new NotImplementedException();
         }
     }
 }

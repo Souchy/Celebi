@@ -14,7 +14,7 @@ public enum PopupAction
 public partial class SmallResourceTree : VBoxContainer
 {
 
-    private object selected { get; set; }
+    private TreeItem selected { get; set; }
 
     [Export]
     public string Title { get; set; }
@@ -83,6 +83,12 @@ public partial class SmallResourceTree : VBoxContainer
         add => this.PasteBtn.Pressed += value;
         remove => this.PasteBtn.Pressed -= value;
     }
+
+    //public void addChild(Control c)
+    //{
+    //    if(selected != null)
+    //        selected.chil
+    //}
 
     /*
     public void onTreeItemDoubleClick()

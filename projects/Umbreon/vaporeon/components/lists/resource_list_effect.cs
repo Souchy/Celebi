@@ -6,6 +6,7 @@ using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.shared.effects;
 using souchy.celebi.eevee.impl.util;
 using System.Reflection;
+using System.Xml.Linq;
 using Umbreon.vaporeon;
 
 public partial class resource_list_effect : ResourceList
@@ -36,11 +37,17 @@ public partial class resource_list_effect : ResourceList
     public override void createChildNode(IID effectId)
     {
         var effect = Eevee.models.effects.Get(effectId);
-        IEffectModel model = Eevee.models.effectModels.Get(effect.modelUid);
-        var name = model.GetName()?.ToString() ?? "uid " + model.entityUid.ToString();
-        //var name = model.GetName(); 
-        var desc = model.GetDescription();
-        base.addChild(name, new Color().Random(), effect.entityUid);
+        if(Eevee.models.effectModels.Has(effect.modelUid))
+        {
+            IEffectModel model = Eevee.models.effectModels.Get(effect.modelUid);
+            var name = model.GetName()?.ToString() ?? "uid " + model.entityUid.ToString();
+            //var name = model.GetName(); 
+            var desc = model.GetDescription();
+            base.addChild(name, new Color().Random(), effect.entityUid);
+        } else
+        {
+            base.addChild($"#{effect.entityUid}, {effect.GetType().Name}", new Color().Random(), effect.entityUid);
+        }
     }
     public override void publishSelect(IID id)
     {

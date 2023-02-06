@@ -1,0 +1,12 @@
+{
+  "1": {
+    "$type": "souchy.celebi.eevee.impl.shared.effects.EffectBase, Eevee",
+    "entityUid": "1",
+    "modelUid": null,
+    "fightUid": null,
+    "sourceCondition": null,
+    "targetFilter": null,
+    "zone": null,
+    "triggers": null
+  }
+}

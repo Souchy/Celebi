@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://c5pro78vguufj"]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Theme" uid="uid://bnrv7qp6ltiwn" path="res://vaporeon/themes/Vaporeon.tres" id="1_ay8c8"]
-[ext_resource type="Script" path="res://vaporeon/common/ZoneEditor.cs" id="1_rv3jo"]
+[ext_resource type="Script" path="res://vaporeon/common/zones/ZoneEditor.cs" id="1_rv3jo"]
 
 [node name="ZoneEditor" type="PanelContainer"]
 anchors_preset = 15

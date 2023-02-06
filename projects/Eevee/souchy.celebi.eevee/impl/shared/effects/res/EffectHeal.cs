@@ -9,6 +9,7 @@ using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.objects.compiledeffects;
 using souchy.celebi.eevee.impl.stats;
+using souchy.celebi.eevee.impl.values;
 using System.Xml.Linq;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -16,8 +17,8 @@ namespace souchy.celebi.eevee.face.shared.effects.res
 {
     public class EffectHeal : Effect, IEffectHeal
     {
-        public IValue<ElementType> element { get; set; }
-        public IValue<int> Value { get; set; }
+        public IValue<ElementType> element { get; set; } = new Value<ElementType>();
+        public IValue<int> Value { get; set; } = new Value<int>();
 
 
         private EffectHeal() { }

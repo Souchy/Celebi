@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://30p2ewm0t6rv"]
+[gd_scene load_steps=6 format=3 uid="uid://bsb8p1k316333"]
 
 [ext_resource type="Script" path="res://vaporeon/menus/CreatureEditor.cs" id="1_hggn1"]
 [ext_resource type="PackedScene" path="res://vaporeon/common/StatsEditor.tscn" id="1_vih3n"]
@@ -32,6 +32,7 @@ theme_override_constants/separation = 10
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme = ExtResource("2_4n2a3")
 text = "Save"
 
@@ -92,6 +93,7 @@ horizontal_alignment = 1
 [node name="BtnAddSpell" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/SpellsPanel/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Add"
 
 [node name="SpellsList" type="VFlowContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/SpellsPanel/VBoxContainer"]
@@ -120,6 +122,7 @@ horizontal_alignment = 1
 [node name="BtnAddPassive" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/PassivesPanel/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Add"
 
 [node name="PassivesList" type="VFlowContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/PassivesPanel/VBoxContainer"]
@@ -148,6 +151,7 @@ horizontal_alignment = 1
 [node name="BtnAddSkin" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/SkinsPanel/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Add"
 
 [node name="SkinsList" type="VFlowContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/SkinsPanel/VBoxContainer"]

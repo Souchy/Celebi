@@ -1,0 +1,14 @@
+{
+  "1": {
+    "$type": "souchy.celebi.eevee.impl.shared.CreatureModel, Eevee",
+    "entityUid": "1",
+    "nameId": "1",
+    "descriptionId": "2",
+    "skins": [
+      "1"
+    ],
+    "baseStats": "1",
+    "baseSpells": [],
+    "baseStatusPassives": []
+  }
+}

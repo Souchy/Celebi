@@ -11,7 +11,9 @@ namespace souchy.celebi.eevee.impl.values
     {
         public T value { get; set; }
 
-        public Value(T v)
+
+
+        public Value(T v = default(T))
         {
             value = v;
         }

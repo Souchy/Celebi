@@ -1,0 +1,65 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpx5wtg2ya6o2"]
+
+[ext_resource type="Theme" uid="uid://bnrv7qp6ltiwn" path="res://vaporeon/themes/Vaporeon.tres" id="1_270uk"]
+[ext_resource type="Script" path="res://vaporeon/common/zones/ZoneEditorMini.cs" id="2_3c0k7"]
+
+[node name="ZoneEditorMini" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_270uk")
+script = ExtResource("2_3c0k7")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Zone"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="ZoneType" type="OptionButton" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+item_count = 4
+popup/item_0/text = "Point"
+popup/item_0/id = 0
+popup/item_1/text = "Line"
+popup/item_1/id = 1
+popup/item_2/text = "Circle"
+popup/item_2/id = 2
+popup/item_3/text = "Square"
+popup/item_3/id = 3
+
+[node name="SizeVectorI0" type="SpinBox" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+rounded = true
+prefix = "Min"
+custom_arrow_step = 1.0
+select_all_on_focus = true
+
+[node name="SizeVectorI1" type="SpinBox" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+prefix = "Max"
+select_all_on_focus = true
+
+[node name="BtnEdit" type="Button" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Edit"

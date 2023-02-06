@@ -44,7 +44,7 @@ public partial class Vaporeon : Control
     #endregion
 
     #region Packed Scenes
-    private PackedScene ZonePreviewScene { get; } = GD.Load<PackedScene>("res://vaporeon/common/ZonePreview.tscn");
+    private PackedScene ZonePreviewScene { get; } = GD.Load<PackedScene>("res://vaporeon/common/zones/ZonePreview.tscn");
     private static Dictionary<Type, PackedScene> SceneTypes { get; } = new();
     #endregion
 
@@ -77,11 +77,12 @@ public partial class Vaporeon : Control
     {
         this.OnReady();
         this.Inject();
-
+        
         SceneTypes.Add(typeof(ICreatureModel), GD.Load<PackedScene>("res://vaporeon/menus/CreatureEditor.tscn"));
         SceneTypes.Add(typeof(ISpellModel), GD.Load<PackedScene>("res://vaporeon/menus/SpellEditor.tscn"));
         SceneTypes.Add(typeof(IEffect), GD.Load<PackedScene>("res://vaporeon/menus/EffectEditor.tscn"));
-        SceneTypes.Add(typeof(IZone), GD.Load<PackedScene>("res://vaporeon/common/ZoneEditor.tscn"));
+        SceneTypes.Add(typeof(IStatusModel), GD.Load<PackedScene>("res://vaporeon/menus/StatusEditor.tscn"));
+        SceneTypes.Add(typeof(IZone), GD.Load<PackedScene>("res://vaporeon/common/zones/ZoneEditor.tscn"));
         SceneTypes.Add(typeof(IStatBool), GD.Load<PackedScene>("res://vaporeon/common/stats/StatBoolEditor.tscn"));
         SceneTypes.Add(typeof(IStatDetailed), GD.Load<PackedScene>("res://vaporeon/common/stats/StatDetailedEditor.tscn"));
         SceneTypes.Add(typeof(IStatResource), GD.Load<PackedScene>("res://vaporeon/common/stats/StatResourceEditor.tscn"));

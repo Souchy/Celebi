@@ -1,0 +1,15 @@
+{
+  "2": {
+    "$type": "souchy.celebi.eevee.impl.shared.StatusModel, Eevee",
+    "entityUid": "2",
+    "delay": {
+      "$type": "souchy.celebi.eevee.impl.values.Value`1[[System.Int32, System.Private.CoreLib]], Eevee",
+      "value": 1
+    },
+    "duration": {
+      "$type": "souchy.celebi.eevee.impl.values.Value`1[[System.Int32, System.Private.CoreLib]], Eevee",
+      "value": 3
+    },
+    "effectIds": []
+  }
+}

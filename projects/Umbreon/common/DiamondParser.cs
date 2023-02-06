@@ -157,7 +157,7 @@ namespace Umbreon.common
         {
             Debouncer.debounce($"{nameof(DiamondParser)}.{nameof(save)}:{fileName}", () => _save(dic, fileName));
         }
-        private void _save(object dic, string fileName)
+        private async void _save(object dic, string fileName)
         {
             GD.Print($"Parser.save: {fileName}");
             var str = JsonConvert.SerializeObject(dic, jsonSettings);

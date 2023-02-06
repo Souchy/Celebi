@@ -1,6 +1,7 @@
 ﻿using Godot;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.impl.objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,7 @@ namespace Umbreon.vaporeon
         public static List<Type> effectTypes { get; } = AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(s => s.GetTypes())
             .Where(p => typeof(IEffect).IsAssignableFrom(p))
+            .Where(t => !t.IsInterface && t != typeof(Effect))
             .ToList();
         #endregion
 

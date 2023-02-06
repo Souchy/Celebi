@@ -77,16 +77,20 @@ public partial class CreatureEditor : Control, EditorInitiator<ICreatureModel>
     private void unload()
     {
         if (creature == null) return;
-        creature.GetEntityBus().unsubscribe(this.GetVaporeon());
-        creature.GetBaseStats().GetEntityBus().unsubscribe(this.GetVaporeon());
+        // unsub vaporeon
+        creature.GetEntityBus().unsubscribe(this.GetVaporeon(), IEventBus.save);
+        creature.GetBaseStats().GetEntityBus().unsubscribe(this.GetVaporeon(), IEventBus.save);
+        // unsub this
         creature.GetEntityBus().unsubscribe(this);
         creature.GetName().GetEntityBus().unsubscribe(this);
         creature.GetDescription().GetEntityBus().unsubscribe(this);
     }
     private void load()
     {
-        creature.GetEntityBus().subscribe(this.GetVaporeon());
-        creature.GetBaseStats().GetEntityBus().subscribe(this.GetVaporeon());
+        // sub vaporeon for save event
+        creature.GetEntityBus().subscribe(this.GetVaporeon(), IEventBus.save);
+        creature.GetBaseStats().GetEntityBus().subscribe(this.GetVaporeon(), IEventBus.save);
+        // sub this
         creature.GetEntityBus().subscribe(this);
         creature.GetName().GetEntityBus().subscribe(this, nameof(onNameChanged));
         creature.GetDescription().GetEntityBus().subscribe(this, nameof(onDescChanged));

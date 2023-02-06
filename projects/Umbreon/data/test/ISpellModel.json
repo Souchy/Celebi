@@ -1,9 +1,9 @@
 {
   "1": {
-    "$type": "Umbreon.data.resources.SpellModel, Umbreon",
+    "$type": "souchy.celebi.eevee.impl.shared.SpellModel, Eevee",
     "entityUid": "1",
-    "nameId": "1",
-    "descriptionId": "2",
+    "nameId": "3",
+    "descriptionId": "4",
     "sourceCondition": null,
     "targetFilter": null,
     "costs": {
@@ -14,18 +14,80 @@
       "Summons": 0
     },
     "properties": {
-      "maxCharges": null,
-      "maxCastsPerTurn": null,
-      "maxCastsPerTarget": null,
-      "cooldownInitial": null,
-      "cooldownGlobal": null,
-      "cooldown": null,
-      "minRange": null,
-      "maxRange": null,
-      "castInDiagonal": null,
-      "castInLine": null,
-      "needLos": null
+      "$type": "souchy.celebi.eevee.impl.shared.SpellProperties, Eevee",
+      "maxCharges": {
+        "$type": "souchy.celebi.eevee.impl.values.Value`1[[System.Int32, System.Private.CoreLib]], Eevee",
+        "value": 0
+      },
+      "maxCastsPerTurn": {
+        "$type": "souchy.celebi.eevee.impl.values.Value`1[[System.Int32, System.Private.CoreLib]], Eevee",
+        "value": 0
+      },
+      "maxCastsPerTarget": {
+        "$type": "souchy.celebi.eevee.impl.values.Value`1[[System.Int32, System.Private.CoreLib]], Eevee",
+        "value": 0
+      },
+      "cooldownInitial": {
+        "$type": "souchy.celebi.eevee.impl.values.Value`1[[System.Int32, System.Private.CoreLib]], Eevee",
+        "value": 0
+      },
+      "cooldownGlobal": {
+        "$type": "souchy.celebi.eevee.impl.values.Value`1[[System.Int32, System.Private.CoreLib]], Eevee",
+        "value": 0
+      },
+      "cooldown": {
+        "$type": "souchy.celebi.eevee.impl.values.Value`1[[System.Int32, System.Private.CoreLib]], Eevee",
+        "value": 0
+      },
+      "minRange": {
+        "$type": "souchy.celebi.eevee.impl.values.Value`1[[System.Int32, System.Private.CoreLib]], Eevee",
+        "value": 0
+      },
+      "maxRange": {
+        "$type": "souchy.celebi.eevee.impl.values.Value`1[[System.Int32, System.Private.CoreLib]], Eevee",
+        "value": 0
+      },
+      "castInDiagonal": {
+        "$type": "souchy.celebi.eevee.impl.values.Value`1[[System.Boolean, System.Private.CoreLib]], Eevee",
+        "value": false
+      },
+      "castInLine": {
+        "$type": "souchy.celebi.eevee.impl.values.Value`1[[System.Boolean, System.Private.CoreLib]], Eevee",
+        "value": false
+      },
+      "needLos": {
+        "$type": "souchy.celebi.eevee.impl.values.Value`1[[System.Boolean, System.Private.CoreLib]], Eevee",
+        "value": true
+      }
     },
-    "effectIds": []
+    "effectIds": [],
+    "RangeZoneMin": {
+      "$type": "souchy.celebi.eevee.impl.objects.zones.Zone, Eevee",
+      "size": {
+        "$type": "souchy.celebi.eevee.impl.values.Value`1[[souchy.celebi.eevee.face.util.math.Vector3, Eevee]], Eevee",
+        "value": null
+      },
+      "negative": false,
+      "worldOrigin": 0,
+      "worldOffset": null,
+      "localOrigin": 0,
+      "rotation": 0,
+      "sizeIndexExtendFromSource": 0,
+      "children": []
+    },
+    "RangeZoneMax": {
+      "$type": "souchy.celebi.eevee.impl.objects.zones.Zone, Eevee",
+      "size": {
+        "$type": "souchy.celebi.eevee.impl.values.Value`1[[souchy.celebi.eevee.face.util.math.Vector3, Eevee]], Eevee",
+        "value": null
+      },
+      "negative": false,
+      "worldOrigin": 0,
+      "worldOffset": null,
+      "localOrigin": 0,
+      "rotation": 0,
+      "sizeIndexExtendFromSource": 0,
+      "children": []
+    }
   }
 }

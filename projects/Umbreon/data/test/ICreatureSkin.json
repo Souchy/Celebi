@@ -1,0 +1,13 @@
+{
+  "1": {
+    "$type": "souchy.celebi.eevee.impl.shared.CreatureSkin, Eevee",
+    "entityUid": "1",
+    "nameId": "1",
+    "descriptionId": "2",
+    "meshModel": null,
+    "icon": null,
+    "animations": null,
+    "spellSkins": null,
+    "effectSkins": null
+  }
+}

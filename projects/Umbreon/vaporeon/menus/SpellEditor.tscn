@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://d67o3f2t7nuo"]
+[gd_scene load_steps=6 format=3 uid="uid://d67o3f2t7nuo"]
 
 [ext_resource type="Script" path="res://vaporeon/menus/SpellEditor.cs" id="1_30wwd"]
 [ext_resource type="Theme" uid="uid://bnrv7qp6ltiwn" path="res://vaporeon/themes/Vaporeon.tres" id="1_ta1tr"]
-[ext_resource type="PackedScene" uid="uid://c5pro78vguufj" path="res://vaporeon/common/ZoneEditor.tscn" id="3_2sys8"]
+[ext_resource type="PackedScene" uid="uid://bpx5wtg2ya6o2" path="res://vaporeon/common/zones/ZoneEditorMini.tscn" id="3_ykg86"]
+[ext_resource type="PackedScene" uid="uid://50doxjkeqmov" path="res://vaporeon/common/EffectMini.tscn" id="5_10frm"]
 [ext_resource type="PackedScene" uid="uid://c7ytdebf8oyv0" path="res://vaporeon/components/SmallResourceTree.tscn" id="5_tmavo"]
 
 [node name="SpellModelEditor" type="PanelContainer"]
@@ -29,6 +30,7 @@ theme_override_constants/separation = 10
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Save"
 
 [node name="EntityID" type="Label" parent="MarginContainer/VBoxContainer/Main"]
@@ -55,14 +57,14 @@ placeholder_text = "Description"
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HSplitContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+horizontal_scroll_mode = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer"]
 layout_mode = 2
@@ -97,7 +99,6 @@ layout_mode = 2
 text = "Cooldown"
 
 [node name="Cooldown" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PropertiesGrid"]
-unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 placeholder_text = "0"
@@ -109,7 +110,6 @@ layout_mode = 2
 text = "Max Charges"
 
 [node name="MaxCharges" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PropertiesGrid"]
-unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 placeholder_text = "0"
@@ -121,7 +121,6 @@ layout_mode = 2
 text = "Cast Per Turn"
 
 [node name="CastPerTurn" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PropertiesGrid"]
-unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 placeholder_text = "0"
@@ -133,7 +132,6 @@ layout_mode = 2
 text = "Casts Per Target"
 
 [node name="CastPerTarget" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PropertiesGrid"]
-unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 placeholder_text = "0"
@@ -145,7 +143,6 @@ layout_mode = 2
 text = "Range Min"
 
 [node name="RangeMin" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PropertiesGrid"]
-unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 placeholder_text = "0"
@@ -157,7 +154,6 @@ layout_mode = 2
 text = "Range Max"
 
 [node name="RangeMax" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PropertiesGrid"]
-unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 placeholder_text = "0"
@@ -170,7 +166,6 @@ text = "Cast In Line
 "
 
 [node name="CastInLine" type="CheckBox" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PropertiesGrid"]
-unique_name_in_owner = true
 layout_mode = 2
 
 [node name="CastInDiagonalLbl" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PropertiesGrid"]
@@ -178,7 +173,6 @@ layout_mode = 2
 text = "Cast In Diagonal"
 
 [node name="CastInDiagonal" type="CheckBox" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PropertiesGrid"]
-unique_name_in_owner = true
 layout_mode = 2
 
 [node name="NeedLosLbl" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PropertiesGrid"]
@@ -187,46 +181,55 @@ text = "Need Line of Sight
 "
 
 [node name="NeedLos" type="CheckBox" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PropertiesGrid"]
+layout_mode = 2
+
+[node name="RangeLbl" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Range"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ZoneEditorMiniMin" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_ykg86")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ScrollContainer2" type="ScrollContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="EffectsTree" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer2/VBoxContainer" instance=ExtResource("5_tmavo")]
+[node name="ZoneEditorMiniMax" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_ykg86")]
 unique_name_in_owner = true
 layout_mode = 2
-Title = "Effects"
 
-[node name="SourceConditionsTree" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer2/VBoxContainer" instance=ExtResource("5_tmavo")]
+[node name="SourceConditionsTree" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("5_tmavo")]
 unique_name_in_owner = true
 layout_mode = 2
 Title = "Source Conditions"
 
-[node name="TargetConditionsTree" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer2/VBoxContainer" instance=ExtResource("5_tmavo")]
+[node name="TargetConditionsTree" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("5_tmavo")]
 unique_name_in_owner = true
 layout_mode = 2
 Title = "Target Conditions"
 
-[node name="ScrollContainer3" type="ScrollContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="BtnAddEffectChild" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_default_cursor_shape = 2
+text = "Add Child"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer3"]
-layout_mode = 2
-
-[node name="RangeZoneMinEditor" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer3/VBoxContainer" instance=ExtResource("3_2sys8")]
+[node name="EffectsChildren" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-Title = "Range Min"
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="RangeZoneMaxEditor" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer3/VBoxContainer" instance=ExtResource("3_2sys8")]
-unique_name_in_owner = true
+[node name="EffectMini" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/EffectsChildren" instance=ExtResource("5_10frm")]
 layout_mode = 2
-Title = "Range Max"
+size_flags_horizontal = 3

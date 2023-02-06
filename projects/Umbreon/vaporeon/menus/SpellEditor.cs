@@ -8,6 +8,11 @@ using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.impl.util;
+using Umbreon.vaporeon;
+using souchy.celebi.eevee.impl.shared.effects;
+using System.Reflection;
+using Umbreon.eevee.impl.objects;
+using souchy.celebi.eevee.face.util;
 
 public partial class SpellEditor : Control, EditorInitiator<ISpellModel>
 {
@@ -26,17 +31,31 @@ public partial class SpellEditor : Control, EditorInitiator<ISpellModel>
     #region Nodes
     [NodePath] public GridContainer CostsGrid { get; set; }
     [NodePath] public GridContainer PropertiesGrid { get; set; }
-    [NodePath] public SmallResourceTree EffectsTree { get; set; }
+    [NodePath] public ZoneEditorMini ZoneEditorMiniMin { get; set; }
+    [NodePath] public ZoneEditorMini ZoneEditorMiniMax { get; set; }
     [NodePath] public SmallResourceTree SourceConditionsTree { get; set; }
     [NodePath] public SmallResourceTree TargetConditionsTree { get; set; }
+    #endregion
+
+    #region Effects
+    [NodePath] public Button BtnAddEffectChild { get; set; }
+    [NodePath] public VBoxContainer EffectsChildren { get; set; }
     #endregion
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         this.OnReady();
+        EffectsChildren.QueueFreeChildren();
+        BtnSave.ButtonUp += onClickSave;
+        BtnAddEffectChild.ButtonUp += onClickAddEffectChild;
+        NameEdit.TextChanged += (txt) => spell.GetName().value = txt;
+        DescriptionEdit.TextChanged += (txt) => spell.GetDescription().value = txt;
+        ZoneEditorMiniMin.Label.Text = "Min";
+        ZoneEditorMiniMax.Label.Text = "Max";
     }
 
+    #region Init
     public void init(ISpellModel spell)
     {
         unload();
@@ -47,22 +66,40 @@ public partial class SpellEditor : Control, EditorInitiator<ISpellModel>
     private void unload()
     {
         if (spell == null) return;
+        // un vaporeon (save event)
+        spell.GetEntityBus().unsubscribe(this, IEventBus.save);
+        // unsub this
+        spell.GetEntityBus().unsubscribe(this);
+        spell.GetName().GetEntityBus().unsubscribe(this, nameof(onNameChanged));
+        spell.GetDescription().GetEntityBus().unsubscribe(this, nameof(onDescChanged));
     }
     private void load()
     {
-
         if (spell == null) return;
+        // sub vaporeon (save event)
+        spell.GetEntityBus().subscribe(this, IEventBus.save);
+        // sub this
+        spell.GetEntityBus().subscribe(this);
+        spell.GetName().GetEntityBus().subscribe(this, nameof(onNameChanged));
+        spell.GetDescription().GetEntityBus().subscribe(this, nameof(onDescChanged));
+        // id & name & desc
+        this.EntityID.Text = spell.entityUid;
+        this.NameEdit.Text = spell.GetName().ToString();
+        this.DescriptionEdit.Text = spell.GetDescription().ToString();
         // props
         PropertiesGrid.QueueFreeChildren();
         PropertiesComponent.GenerateGrid(spell.properties, PropertiesGrid);
         // costs
         foreach (ResourceType res in Enum.GetValues(typeof(ResourceType)))
         {
+            // lbl
             var lbl = new Label();
             lbl.Text = Enum.GetName(typeof(ResourceType), res);
+            // edit
             var edit = new SpinBox();
             edit.Value = spell.costs[res];
             edit.ValueChanged += (value) => spell.costs[res] = (int) value;
+            // add nodes
             CostsGrid.AddChild(lbl);
             CostsGrid.AddChild(edit);
         }
@@ -70,15 +107,47 @@ public partial class SpellEditor : Control, EditorInitiator<ISpellModel>
         foreach(var effectId in spell.effectIds)
         {
             IEffect effect = Eevee.models.effects.Get(effectId);
-            IEffectModel effectModel = Eevee.models.effectModels.Get(effect.modelUid);
-            Label lbl = new Label();
-            lbl.Text = effect.entityUid + ": " + Eevee.models.i18n.Get(effectModel.nameId);
-            lbl.SetMeta("id", (string) effectId);
-            lbl.SetMeta("type", nameof(IEffect));
-            EffectsTree.AddChild(lbl);
+            var effectMini = new EffectMini();
+            effectMini.init(effect, null);
+            EffectsChildren.AddChild(effectMini);
         }
+        // zones
+        ZoneEditorMiniMin.init(spell.RangeZoneMin);
+        ZoneEditorMiniMin.init(spell.RangeZoneMax);
     }
+    #endregion
 
+
+    #region GUI Handlers
+    private void onClickAddEffectChild()
+    {
+        var effect = EffectBase.Create();
+        Eevee.models.effects.Add(effect.entityUid, effect);
+        spell.effectIds.Add(effect.entityUid);
+        // need eventful hashset for effect ids
+    }
+    private void onClickSave()
+    {
+        spell.GetEntityBus().publish(IEventBus.save, spell);
+    }
+    #endregion
+
+    #region Diamond Handlers
+    [Subscribe]
+    public void onNameChanged(IStringEntity str)
+    {
+        int col = NameEdit.CaretColumn;
+        NameEdit.Text = str.ToString();
+        NameEdit.CaretColumn = col;
+    }
+    [Subscribe]
+    public void onDescChanged(IStringEntity str)
+    {
+        int col = DescriptionEdit.CaretColumn;
+        DescriptionEdit.Text = str.ToString();
+        DescriptionEdit.CaretColumn = col;
+    }
+    #endregion
 
 
 }

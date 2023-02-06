@@ -1,6 +1,7 @@
 ﻿using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.shared.conditions;
+using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
 using souchy.celebi.eevee.impl;
@@ -19,6 +20,9 @@ namespace souchy.celebi.eevee.face.shared.models
         public Dictionary<ResourceType, int> costs { get; set; }
         public ISpellProperties properties { get; set; }
         public HashSet<IID> effectIds { get; set; }
+
+        public IZone RangeZoneMin { get; set; }
+        public IZone RangeZoneMax { get; set; }
 
         public IStringEntity GetName() => Eevee.models.i18n.Get(nameId);
         public IStringEntity GetDescription() => Eevee.models.i18n.Get(descriptionId);
@@ -47,11 +51,11 @@ namespace souchy.celebi.eevee.face.shared.models
         public IValue<bool> needLos { get; set; }
     }
 
-    public interface ICost
-    {
-        public StatType resource { get; set; } // StatType, int, ResourceType
-        public int value { get; set; }
-    }
+    //public interface ICost
+    //{
+    //    public StatType resource { get; set; } // StatType, int, ResourceType
+    //    public int value { get; set; }
+    //}
 
 
 }

@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bgkkcmf8w34gj"]
+[gd_scene load_steps=4 format=3 uid="uid://bgkkcmf8w34gj"]
 
-[ext_resource type="Theme" uid="uid://ntm47kc1cyv" path="res://vaporeon/themes/Vaporeon.tres" id="1_pr2ke"]
+[ext_resource type="Theme" uid="uid://bnrv7qp6ltiwn" path="res://vaporeon/themes/Vaporeon.tres" id="1_pr2ke"]
 [ext_resource type="Script" path="res://vaporeon/menus/StatusEditor.cs" id="2_mnxp2"]
+[ext_resource type="PackedScene" uid="uid://50doxjkeqmov" path="res://vaporeon/common/EffectMini.tscn" id="3_4cs7b"]
 
-[node name="StatusEditor" type="MarginContainer"]
+[node name="StatusEditor" type="PanelContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -11,3 +12,77 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_pr2ke")
 script = ExtResource("2_mnxp2")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Main" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BtnSave" type="Button" parent="MarginContainer/VBoxContainer/Main"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Save"
+
+[node name="EntityID" type="Label" parent="MarginContainer/VBoxContainer/Main"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "#EntityID"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/Main"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Main"]
+layout_mode = 2
+text = "Delay:"
+
+[node name="Delay" type="SpinBox" parent="MarginContainer/VBoxContainer/Main"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+select_all_on_focus = true
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/Main"]
+layout_mode = 2
+text = "Duration:"
+
+[node name="Duration" type="SpinBox" parent="MarginContainer/VBoxContainer/Main"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+select_all_on_focus = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="BtnAddEffectChild" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_default_cursor_shape = 2
+text = "Add Child"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="EffectsChildren" type="VBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="EffectMini" parent="MarginContainer/VBoxContainer/VBoxContainer/ScrollContainer/EffectsChildren" instance=ExtResource("3_4cs7b")]
+layout_mode = 2
+size_flags_horizontal = 3

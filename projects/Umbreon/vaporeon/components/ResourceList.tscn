@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cq776x4yclm8j"]
 
 [ext_resource type="Script" path="res://vaporeon/components/ResourceList.cs" id="1_lifcy"]
-[ext_resource type="Theme" uid="uid://ntm47kc1cyv" path="res://vaporeon/themes/Vaporeon.tres" id="1_m0p85"]
+[ext_resource type="Theme" uid="uid://bnrv7qp6ltiwn" path="res://vaporeon/themes/Vaporeon.tres" id="1_m0p85"]
 [ext_resource type="PackedScene" uid="uid://bo4pqgpejlnxk" path="res://vaporeon/components/ResourceListItem.tscn" id="2_450rl"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1hrpg"]
@@ -62,6 +62,7 @@ text = "x"
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Create
 "
 
@@ -69,6 +70,7 @@ text = "Create
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Delete"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
