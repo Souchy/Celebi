@@ -7,14 +7,21 @@ using souchy.celebi.eevee.impl.shared.effects;
 using souchy.celebi.eevee.impl.util;
 using Umbreon.vaporeon;
 using Umbreon.vaporeon.common;
+using Umbreon.vaporeon.components;
 
-public partial class EffectMini : PanelContainer
+public partial class EffectMini : PanelContainer, IEffectNodesContainer
 {
 
 
     public IEffect effect { get; private set; }
-    public IEffect parent { get; private set; }
-    
+
+    #region Impl EffectContainer
+    public IEntityList<IID> parentList { get; private set; }
+    public IEntityList<IID> GetEffectIds() => this.effect.effectIds;
+    public IEnumerable<IEffect> GetEffectsEnum() => this.effect.GetEffects();
+    public Control GetContainer() => this.Children;
+    #endregion
+
     #region Btns
     [NodePath] public Label LblID { get; set; }
     [NodePath] public Label LblChildCount { get; set; }
@@ -46,23 +53,23 @@ public partial class EffectMini : PanelContainer
         BtnMoveUp.ButtonUp += onClickMoveUp;
         BtnType.ItemSelected += onClickSelectEffectType;
         BtnEdit.ButtonUp += onClickEdit;
-        BtnAddChild.ButtonUp += onClickAddChild;
+        BtnAddChild.ButtonUp += ((IEffectNodesContainer) this).onClickAddChild; //onClickAddChild;
         BtnRemove.ButtonUp += onClickDeleteThis;
     }
 
     #region Init
-    public void init(IEffect e, IEffect parent = null)
+    public void init(IEffect e, IEntityList<IID> parent = null)
     {
         unload();
         this.effect = e;
-        this.parent = parent;
+        this.parentList = parent;
         load();
     }
     private void unload()
     {
         // unsub this
         effect?.GetEntityBus().unsubscribe(this);
-        parent?.GetEntityBus().unsubscribe(this);
+        //parentList?.GetEntityBus().unsubscribe(this);
         effect?.effectIds.GetEntityBus().unsubscribe(this);
         //
         this.Values.QueueFreeChildren();
@@ -73,7 +80,7 @@ public partial class EffectMini : PanelContainer
         //effect.GetEntityBus().subscribe(this.GetVaporeon(), IEventBus.save);
         // sub this
         effect.GetEntityBus().subscribe(this);
-        parent?.GetEntityBus().subscribe(this);
+        //parentList?.GetEntityBus().subscribe(this);
         effect.effectIds.GetEntityBus().subscribe(this);
         //
         this.LblID.Text = effect.entityUid;
@@ -86,15 +93,9 @@ public partial class EffectMini : PanelContainer
         // zone
         ZoneEditorMini.init(effect.zone);
         // dis/enable buttons
-        var i = parent?.effectIds.Values.IndexOf(effect.entityUid);
-        BtnMoveUp.Disabled = (parent == null || i == 0);
+        var i = parentList?.Values.IndexOf(effect.entityUid);
+        BtnMoveUp.Disabled = (parentList == null || i == 0);
         // create children
-        foreach(var c in effect.GetEffects())
-        {
-            var mini = Vaporeon.instanceScene<EffectMini>(); // new EffectMini();
-            this.Children.AddChild(mini);
-            mini.init(c, effect);
-        }
     }
     #endregion
 
@@ -105,41 +106,35 @@ public partial class EffectMini : PanelContainer
         Content.Visible = !Content.Visible;
         Children.Visible = !Children.Visible;
     }
-    private void onClickMoveUp()
-    {
-        parent.effectIds.Move(effect.entityUid, -1);
-    }
     private void onClickEdit() => this.GetVaporeon().openEditor(effect);
     private void onClickSelectEffectType(long index)
     {
         Type effectType = VaporeonUtil.effectTypes[(int) index];
         if (effectType == this.effect?.GetType()) // ignore if we didn't actually change effect type
             return;
-
-        //public static IEffectDirectDamage Create() 
-        var creator = effectType.GetMethod(nameof(EffectBase.Create)); //, BindingFlags.Static);
+        var creator = effectType.GetMethod(nameof(EffectBase.Create)); 
         IEffect newEffect = (IEffect) creator.Invoke(null, null);
         // re-init with new effect
-        init(newEffect, parent);
+        init(newEffect, parentList);
     }
-    private void onClickAddChild()
+    private void onClickMoveUp()
     {
-        var newEffect = EffectBase.Create();
-        Eevee.models.effects.Add(newEffect.entityUid, newEffect);
-        this.effect.effectIds.Add(newEffect.entityUid);
+        parentList.Move(effect.entityUid, -1);
     }
     private void onClickDeleteThis()
     {
         bool removed = Eevee.models.effects.Remove(effect.entityUid);
         //GD.Print($"Click Delete on {effect.entityUid} = {removed}");
-        if(parent != null)
+        if(parentList != null)
         {
-            bool removedInParent = parent.effectIds.Remove(effect.entityUid);
+            bool removedInParent = parentList.Remove(effect.entityUid);
             GD.Print($"Click Delete from parent {effect.entityUid} = {removedInParent}");
         }
     }
+
     #endregion
 
+    /*
     #region Diamond Handlers
     [Subscribe(EntityList<IID>.EventAdd)]
     public void onAddEffectChild(IID ei)
@@ -175,5 +170,6 @@ public partial class EffectMini : PanelContainer
         //BtnMoveUp.Disabled = (parent == null || i == 0);
     }
     #endregion
+    */
 
 }

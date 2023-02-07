@@ -8,13 +8,19 @@ using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.impl.shared.effects;
 using souchy.celebi.eevee.face.util;
+using Umbreon.vaporeon.components;
 
-public partial class SpellEditor : Control, EditorInitiator<ISpellModel>
+public partial class SpellEditor : Control, EditorInitiator<ISpellModel>, IEffectNodesContainer
 {
-
-    //public ISpellModel spell { get => this.GetVaporeon().CurrentSpellModel; }
     private ISpellModel spell { get; set; }
 
+
+    #region Impl EffectContainer
+    public IEntityList<IID> parentList { get; private set; } = null;
+    public IEntityList<IID> GetEffectIds() => this.spell.effectIds;
+    public IEnumerable<IEffect> GetEffectsEnum() => this.spell.GetEffects();
+    public Control GetContainer() => this.EffectsChildren;
+    #endregion
 
     #region Nodes - Main bar 
     [NodePath] public Button BtnSave { get; set; }
@@ -43,7 +49,7 @@ public partial class SpellEditor : Control, EditorInitiator<ISpellModel>
         this.OnReady();
         EffectsChildren.QueueFreeChildren();
         BtnSave.ButtonUp += onClickSave;
-        BtnAddEffectChild.ButtonUp += onClickAddEffectChild;
+        BtnAddEffectChild.ButtonUp += this.onClickAddChild; //onClickAddEffectChild;
         NameEdit.TextChanged += (txt) => spell.GetName().value = txt;
         DescriptionEdit.TextChanged += (txt) => spell.GetDescription().value = txt;
         ZoneEditorMiniMin.Label.Text = "Min";
@@ -67,6 +73,7 @@ public partial class SpellEditor : Control, EditorInitiator<ISpellModel>
         spell.GetEntityBus().unsubscribe(this);
         spell.GetName().GetEntityBus().unsubscribe(this, nameof(onNameChanged));
         spell.GetDescription().GetEntityBus().unsubscribe(this, nameof(onDescChanged));
+        spell.effectIds.GetEntityBus().unsubscribe(this);
     }
     private void load()
     {
@@ -77,6 +84,7 @@ public partial class SpellEditor : Control, EditorInitiator<ISpellModel>
         spell.GetEntityBus().subscribe(this);
         spell.GetName().GetEntityBus().subscribe(this, nameof(onNameChanged));
         spell.GetDescription().GetEntityBus().subscribe(this, nameof(onDescChanged));
+        spell.effectIds.GetEntityBus().subscribe(this);
         // id & name & desc
         this.EntityID.Text = spell.entityUid;
         this.NameEdit.Text = spell.GetName().ToString();
@@ -99,13 +107,7 @@ public partial class SpellEditor : Control, EditorInitiator<ISpellModel>
             CostsGrid.AddChild(edit);
         }
         // effects
-        foreach(var effectId in spell.effectIds.Values)
-        {
-            IEffect effect = Eevee.models.effects.Get(effectId);
-            var effectMini = new EffectMini();
-            effectMini.init(effect, null);
-            EffectsChildren.AddChild(effectMini);
-        }
+        this.fillEffects();
         // zones
         ZoneEditorMiniMin.init(spell.RangeZoneMin);
         ZoneEditorMiniMin.init(spell.RangeZoneMax);
@@ -114,13 +116,6 @@ public partial class SpellEditor : Control, EditorInitiator<ISpellModel>
 
 
     #region GUI Handlers
-    private void onClickAddEffectChild()
-    {
-        var effect = EffectBase.Create();
-        Eevee.models.effects.Add(effect.entityUid, effect);
-        spell.effectIds.Add(effect.entityUid);
-        // need eventful hashset for effect ids
-    }
     private void onClickSave()
     {
         spell.GetEntityBus().publish(IEventBus.save, spell);

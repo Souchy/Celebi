@@ -8,11 +8,19 @@ using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.util;
 using System;
 using Umbreon.vaporeon.common;
+using souchy.celebi.eevee.face.objects;
+using Umbreon.vaporeon.components;
 
-public partial class StatusEditor : PanelContainer, EditorInitiator<IStatusModel>
+public partial class StatusEditor : PanelContainer, EditorInitiator<IStatusModel>, IEffectNodesContainer
 {
     private IStatusModel status { get; set; }
 
+    #region Impl EffectContainer
+    public IEntityList<IID> parentList { get; private set; } = null;
+    public IEntityList<IID> GetEffectIds() => this.status.effectIds;
+    public IEnumerable<IEffect> GetEffectsEnum() => this.status.GetEffects();
+    public Control GetContainer() => this.EffectsChildren;
+    #endregion
 
     #region Nodes - Main bar 
     [NodePath] public Button BtnSave { get; set; }
@@ -35,7 +43,7 @@ public partial class StatusEditor : PanelContainer, EditorInitiator<IStatusModel
         Delay.ValueChanged += (val) => status.delay.value = (int) val;
         Duration.ValueChanged += (val) => status.duration.value = (int) val;
         BtnSave.ButtonUp += () => status?.GetEntityBus().publish(IEventBus.save, status);
-        BtnAddEffectChild.ButtonUp += onClickAddEffectChild;
+        BtnAddEffectChild.ButtonUp += this.onClickAddChild;
     }
 
     #region Init
@@ -49,26 +57,25 @@ public partial class StatusEditor : PanelContainer, EditorInitiator<IStatusModel
     {
         // unsub vaporeon
         status.GetEntityBus().unsubscribe(this.GetVaporeon(), IEventBus.save);
+        // unsub this
+        status.effectIds.GetEntityBus().unsubscribe(this);
     }
     private void load()
     {
         // sub vaporeon
         status.GetEntityBus().subscribe(this.GetVaporeon(), IEventBus.save);
+        // sub this
+        status.effectIds.GetEntityBus().subscribe(this);
         // id & delay & duration
         EntityID.Text = "#" + status.entityUid;
         Delay.Value = status.delay.value;
         Duration.Value = status.duration.value;
+        //
+        this.fillEffects();
     }
     #endregion
 
     #region GUI Handlers 
-    private void onClickAddEffectChild()
-    {
-        var effect = EffectBase.Create();
-        Eevee.models.effects.Add(effect.entityUid, effect);
-        status.effectIds.Add(effect.entityUid);
-        // need eventful hashset for effect ids
-    }
     #endregion
 
 }
