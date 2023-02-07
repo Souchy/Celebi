@@ -47,13 +47,16 @@ public partial class SpellEditor : Control, EditorInitiator<ISpellModel>, IEffec
     public override void _Ready()
     {
         this.OnReady();
-        EffectsChildren.QueueFreeChildren();
-        BtnSave.ButtonUp += onClickSave;
-        BtnAddEffectChild.ButtonUp += this.onClickAddChild; //onClickAddEffectChild;
-        NameEdit.TextChanged += (txt) => spell.GetName().value = txt;
-        DescriptionEdit.TextChanged += (txt) => spell.GetDescription().value = txt;
+        // basic
         ZoneEditorMiniMin.Label.Text = "Min";
         ZoneEditorMiniMax.Label.Text = "Max";
+        NameEdit.TextChanged += (txt) => spell.GetName().value = txt;
+        DescriptionEdit.TextChanged += (txt) => spell.GetDescription().value = txt;
+        // effects
+        EffectsChildren.QueueFreeChildren();
+        BtnAddEffectChild.ButtonUp += this.onClickAddChild; 
+        // save
+        BtnSave.ButtonUp += publishSave;
     }
 
     #region Init
@@ -116,10 +119,6 @@ public partial class SpellEditor : Control, EditorInitiator<ISpellModel>, IEffec
 
 
     #region GUI Handlers
-    private void onClickSave()
-    {
-        spell.GetEntityBus().publish(IEventBus.save, spell);
-    }
     #endregion
 
     #region Diamond Handlers
@@ -139,5 +138,9 @@ public partial class SpellEditor : Control, EditorInitiator<ISpellModel>, IEffec
     }
     #endregion
 
+    public void publishSave()
+    {
+        spell.GetEntityBus().publish(IEventBus.save, spell);
+    }
 
 }

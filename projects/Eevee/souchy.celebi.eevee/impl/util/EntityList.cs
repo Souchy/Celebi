@@ -20,6 +20,7 @@ namespace souchy.celebi.eevee.impl.util
         public const string EventAdd = nameof(Add);
         public const string EventRemove = nameof(Remove);
         public const string EventMove = nameof(Move);
+        public const string EventReplace = nameof(Replace);
 
         [JsonIgnore]
         public IID entityUid { get; set; } = Eevee.RegisterIID<IEntity>();
@@ -49,9 +50,17 @@ namespace souchy.celebi.eevee.impl.util
             if (removed)
             {
                 this.GetEntityBus().publish(EventRemove, t);
-                if (t is IDisposable dis)
-                    dis.Dispose();
+                //if (t is IDisposable dis)
+                //    dis.Dispose();
             }
+            return removed;
+        }
+
+        public bool Replace(T t0, T t1)
+        {
+            bool removed = base.Remove(t0);
+            base.Add(t1);
+            this.GetEntityBus().publish(EventAdd, t0, t1);
             return removed;
         }
 

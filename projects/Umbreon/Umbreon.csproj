@@ -46,7 +46,6 @@
     <Folder Include="sapphire\nodes\" />
     <Folder Include="sapphire\scenes\" />
     <Folder Include="vaporeon\common\stats\" />
-    <Folder Include="vaporeon\components\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\animations\locomotion-magic.res" />

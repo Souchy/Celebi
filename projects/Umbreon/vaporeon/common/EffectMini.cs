@@ -12,7 +12,6 @@ using Umbreon.vaporeon.components;
 public partial class EffectMini : PanelContainer, IEffectNodesContainer
 {
 
-
     public IEffect effect { get; private set; }
 
     #region Impl EffectContainer
@@ -53,7 +52,7 @@ public partial class EffectMini : PanelContainer, IEffectNodesContainer
         BtnMoveUp.ButtonUp += onClickMoveUp;
         BtnType.ItemSelected += onClickSelectEffectType;
         BtnEdit.ButtonUp += onClickEdit;
-        BtnAddChild.ButtonUp += ((IEffectNodesContainer) this).onClickAddChild; //onClickAddChild;
+        BtnAddChild.ButtonUp += this.onClickAddChild; //onClickAddChild;
         BtnRemove.ButtonUp += onClickDeleteThis;
     }
 
@@ -67,17 +66,22 @@ public partial class EffectMini : PanelContainer, IEffectNodesContainer
     }
     private void unload()
     {
+        if (effect != null && effect.GetEntityBus() == null)
+            GD.PrintErr($"EffectMini: effect has no entity bus {effect}");
+        // unsub vaporeon
+        effect?.GetEntityBus()?.unsubscribe(this.GetVaporeon(), IEventBus.save);
         // unsub this
-        effect?.GetEntityBus().unsubscribe(this);
+        effect?.GetEntityBus()?.unsubscribe(this);
         //parentList?.GetEntityBus().unsubscribe(this);
-        effect?.effectIds.GetEntityBus().unsubscribe(this);
+        effect?.effectIds.GetEntityBus()?.unsubscribe(this);
         //
         this.Values.QueueFreeChildren();
+        this.Children.QueueFreeChildren();
     }
     private void load()
     {
         // sub vaporeon
-        //effect.GetEntityBus().subscribe(this.GetVaporeon(), IEventBus.save);
+        effect.GetEntityBus().subscribe(this.GetVaporeon(), IEventBus.save);
         // sub this
         effect.GetEntityBus().subscribe(this);
         //parentList?.GetEntityBus().subscribe(this);
@@ -96,6 +100,7 @@ public partial class EffectMini : PanelContainer, IEffectNodesContainer
         var i = parentList?.Values.IndexOf(effect.entityUid);
         BtnMoveUp.Disabled = (parentList == null || i == 0);
         // create children
+        this.fillEffects();
     }
     #endregion
 
@@ -112,9 +117,19 @@ public partial class EffectMini : PanelContainer, IEffectNodesContainer
         Type effectType = VaporeonUtil.effectTypes[(int) index];
         if (effectType == this.effect?.GetType()) // ignore if we didn't actually change effect type
             return;
+        // create
         var creator = effectType.GetMethod(nameof(EffectBase.Create)); 
         IEffect newEffect = (IEffect) creator.Invoke(null, null);
-        // re-init with new effect
+        effect.CopyTo(newEffect);
+        // swap in eevee models
+        Eevee.models.effects.Remove(this.effect.entityUid);
+        Eevee.models.effects.Add(newEffect.entityUid, newEffect);
+        // replace in parent (add/remove without event that would replace the node and mess the order)
+        if(parentList != null)
+        {
+            parentList.Replace(effect.entityUid, newEffect.entityUid);
+        }
+        // re-init this node with new effect
         init(newEffect, parentList);
     }
     private void onClickMoveUp()
@@ -131,8 +146,12 @@ public partial class EffectMini : PanelContainer, IEffectNodesContainer
             GD.Print($"Click Delete from parent {effect.entityUid} = {removedInParent}");
         }
     }
-
     #endregion
+
+    public void publishSave()
+    {
+        effect.GetEntityBus().publish(IEventBus.save, effect);
+    }
 
     /*
     #region Diamond Handlers

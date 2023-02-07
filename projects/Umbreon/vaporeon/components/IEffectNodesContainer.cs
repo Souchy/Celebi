@@ -14,9 +14,7 @@ namespace Umbreon.vaporeon.components
         public IEntityList<IID> GetEffectIds();
         public IEnumerable<IEffect> GetEffectsEnum();
         public Control GetContainer();
-
-        #region Gui Handlers
-        #endregion
+        public void publishSave();
 
         #region Diamond Handlers
         /// <summary>
@@ -29,18 +27,21 @@ namespace Umbreon.vaporeon.components
             var e = Eevee.models.effects.Get(ei);
             var mini = Vaporeon.instanceScene<EffectMini>();
             this.GetContainer().AddChild(mini);
-            mini.init(e, parentList);
+            mini.init(e, this.GetEffectIds()); // parentList);
+            publishSave();
         }
         /// <summary>
         /// Remove a child from this list
         /// </summary>
-        /// <param name="ei"></param>
+        /// <param name="id"></param>
         [Subscribe(EntityList<IID>.EventRemove)]
-        public void onRemoveEffectChild(IID ei)
+        public void onRemoveEffectChild(IID id)
         {
-            var node = this.GetContainer().GetChildren<EffectMini>().FirstOrDefault(m => m.effect.entityUid == ei);
+            var node = this.GetContainer().GetChildren<EffectMini>()
+                .FirstOrDefault(m => m.effect.entityUid == id);
             if (node != null)
                 this.GetContainer().RemoveChild(node);
+            publishSave();
         }
         /// <summary>
         /// Move in the parent list.
@@ -53,11 +54,16 @@ namespace Umbreon.vaporeon.components
             var node = this.GetContainer().GetChild(indexPrevious);
             this.GetContainer().MoveChild(node, indexNow);
             // dis/enable buttons
-            for (int i = 0; i < GetContainer().GetChildCount(); i++)
+            foreach (var child in this.GetContainer().GetChildren<EffectMini>())
             {
-                var c = (EffectMini) GetContainer().GetChild(i);
-                c.BtnMoveUp.Disabled = i == 0;
+                child.BtnMoveUp.Disabled = child.GetIndex() == 0;
             }
+            publishSave();
+        }
+        [Subscribe(EntityList<IID>.EventReplace)]
+        public void onReplaceEffectInParent(IID e0, IID e1)
+        {
+            publishSave();
         }
         #endregion
     }
@@ -72,11 +78,11 @@ namespace Umbreon.vaporeon.components
         }
         public static void fillEffects(this IEffectNodesContainer container)
         {
-            foreach (var c in container.GetEffectsEnum())
+            foreach (var e in container.GetEffectsEnum())
             {
                 var mini = Vaporeon.instanceScene<EffectMini>(); // new EffectMini();
                 container.GetContainer().AddChild(mini);
-                mini.init(c, container.parentList);
+                mini.init(e, container.GetEffectIds()); // container.parentList);
             }
         }
     }

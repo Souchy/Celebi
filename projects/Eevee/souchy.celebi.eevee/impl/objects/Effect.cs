@@ -34,6 +34,17 @@ namespace souchy.celebi.eevee.impl.objects
         public abstract ICompiledEffect compile(IFight fight, IID source, IID targetCell);
 
         public IEnumerable<IEffect> GetEffects() => effectIds.Values.Select(i => this.GetFight()?.effects.Get(i) ?? Eevee.models.effects.Get(i));
+
+
+        public void CopyTo(IEffect e)
+        {
+            e.sourceCondition = sourceCondition;
+            e.targetFilter = targetFilter;
+            e.zone = zone;
+            e.triggers = triggers;
+            e.effectIds = effectIds;
+        }
+
         public void Dispose()
         {
             Eevee.DisposeIID<IEffect>(entityUid);

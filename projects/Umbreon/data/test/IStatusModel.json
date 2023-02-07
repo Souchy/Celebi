@@ -1,15 +1,20 @@
 {
-  "2": {
+  "1": {
     "$type": "souchy.celebi.eevee.impl.shared.StatusModel, Eevee",
-    "entityUid": "2",
+    "entityUid": "1",
     "delay": {
       "$type": "souchy.celebi.eevee.impl.values.Value`1[[System.Int32, System.Private.CoreLib]], Eevee",
-      "value": 1
+      "value": 0
     },
     "duration": {
       "$type": "souchy.celebi.eevee.impl.values.Value`1[[System.Int32, System.Private.CoreLib]], Eevee",
-      "value": 3
+      "value": 0
     },
-    "effectIds": []
+    "effectIds": {
+      "$type": "souchy.celebi.eevee.impl.util.EntityList`1[[souchy.celebi.eevee.face.util.IID, Eevee]], Eevee",
+      "$values": [
+        "4"
+      ]
+    }
   }
 }

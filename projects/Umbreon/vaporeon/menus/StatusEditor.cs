@@ -39,22 +39,23 @@ public partial class StatusEditor : PanelContainer, EditorInitiator<IStatusModel
     public override void _Ready()
 	{
         this.OnReady();
-        EffectsChildren.QueueFreeChildren();
         Delay.ValueChanged += (val) => status.delay.value = (int) val;
         Duration.ValueChanged += (val) => status.duration.value = (int) val;
-        BtnSave.ButtonUp += () => status?.GetEntityBus().publish(IEventBus.save, status);
+        EffectsChildren.QueueFreeChildren();
         BtnAddEffectChild.ButtonUp += this.onClickAddChild;
+        BtnSave.ButtonUp += publishSave;
     }
 
     #region Init
     public void init(IStatusModel model)
     {
-        if(status != null) unload();
+        unload();
         this.status = model;
         load();
     }
     private void unload()
     {
+        if (status == null) return; 
         // unsub vaporeon
         status.GetEntityBus().unsubscribe(this.GetVaporeon(), IEventBus.save);
         // unsub this
@@ -77,5 +78,10 @@ public partial class StatusEditor : PanelContainer, EditorInitiator<IStatusModel
 
     #region GUI Handlers 
     #endregion
+
+    public void publishSave()
+    {
+        status.GetEntityBus().publish(IEventBus.save, status);
+    }
 
 }

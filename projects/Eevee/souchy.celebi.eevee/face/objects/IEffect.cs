@@ -45,5 +45,10 @@ namespace souchy.celebi.eevee.face.objects
 
         //public IEnumerable<IEffect> GetChildren() => effectIds.Values.Select(i => Eevee.models.effects.Get(i));
 
+        /// <summary>
+        /// Copy basic properties to passed effect. (not model nor model-specific properties)
+        /// </summary>
+        public void CopyTo(IEffect e);
+
     }
 }
