@@ -107,7 +107,6 @@ public partial class Vaporeon : Control
         BtnCreatureSkins.ButtonUp +=() => TabContainer.CurrentTab = (int) VaporeonTab.CreatureSkins;
         BtnSpellSkins.ButtonUp +=   () => TabContainer.CurrentTab = (int) VaporeonTab.SpellSkins;
         BtnEffectSkins.ButtonUp +=  () => TabContainer.CurrentTab = (int) VaporeonTab.EffectSkins;
-
     }
 
     private void TabContainer_TabChanged(long tab)
@@ -121,8 +120,9 @@ public partial class Vaporeon : Control
     }
 
     #region Save handler
+    // FIXME i dont think we ever go here? and if we do, we might be proccing it twice because of "bus.subscribe(this.GetDiamondsParser());"
     [Subscribe("", IEventBus.save)]
-    public void onSave(IEntity e) => this.GetDiamondsParser().onSave(e);
+    public void onSave(IEntity e) => this.GetDiamondsParser().persistance.onSave(e);
     #endregion
 
     #region Open Editors

@@ -1,8 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://50doxjkeqmov"]
+[gd_scene load_steps=5 format=3 uid="uid://50doxjkeqmov"]
 
 [ext_resource type="Theme" uid="uid://bnrv7qp6ltiwn" path="res://vaporeon/themes/Vaporeon.tres" id="1_8ljt4"]
 [ext_resource type="Script" path="res://vaporeon/common/EffectMini.cs" id="2_3o2fq"]
 [ext_resource type="PackedScene" uid="uid://bpx5wtg2ya6o2" path="res://vaporeon/common/zones/ZoneEditorMini.tscn" id="2_aosvd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_awmy8"]
+bg_color = Color(0.898039, 0.898039, 0.898039, 1)
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.372549, 0.592157, 0.619608, 1)
+shadow_size = 5
 
 [node name="EffectMini" type="PanelContainer"]
 anchors_preset = 15
@@ -11,6 +21,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_8ljt4")
+theme_override_styles/panel = SubResource("StyleBoxFlat_awmy8")
 script = ExtResource("2_3o2fq")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -60,25 +71,31 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 
-[node name="BtnEdit" type="Button" parent="MarginContainer/VBoxContainer/Header/Main"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-mouse_default_cursor_shape = 2
-text = "Full Editor"
-
 [node name="BtnAddChild" type="Button" parent="MarginContainer/VBoxContainer/Header/Main"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(30, 30)
+custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
 size_flags_horizontal = 0
 mouse_default_cursor_shape = 2
 text = "Add Child"
 
+[node name="BtnStatusCheck" type="CheckBox" parent="MarginContainer/VBoxContainer/Header/Main"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "IsStatus"
+
 [node name="LblChildCount" type="Label" parent="MarginContainer/VBoxContainer/Header/Main"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "(0)"
+
+[node name="BtnEdit" type="Button" parent="MarginContainer/VBoxContainer/Header/Main"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Edit"
 
 [node name="BtnRemove" type="Button" parent="MarginContainer/VBoxContainer/Header"]
 unique_name_in_owner = true
@@ -97,12 +114,25 @@ grow_vertical = 2
 mouse_default_cursor_shape = 2
 text = "-"
 
-[node name="Content" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Content" type="HFlowContainer" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Values" type="GridContainer" parent="MarginContainer/VBoxContainer/Content"]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/Content"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Content/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Content/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Content/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Properties"
+
+[node name="Values" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Content/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
@@ -112,6 +142,27 @@ size_flags_vertical = 4
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="StatusPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer/Content"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Content/StatusPanel"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Content/StatusPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Content/StatusPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Status"
+
+[node name="StatusValues" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Content/StatusPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 4
 
 [node name="Children" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]

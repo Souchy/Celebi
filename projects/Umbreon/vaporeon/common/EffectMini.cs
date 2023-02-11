@@ -1,10 +1,12 @@
 using Godot;
 using Godot.Sharp.Extras;
+using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.shared.effects;
 using souchy.celebi.eevee.impl.util;
+using souchy.celebi.eevee.impl.values;
 using Umbreon.vaporeon;
 using Umbreon.vaporeon.common;
 using Umbreon.vaporeon.components;
@@ -30,13 +32,16 @@ public partial class EffectMini : PanelContainer, IEffectNodesContainer
     [NodePath] public Button BtnEdit { get; set; }
     [NodePath] public Button BtnAddChild { get; set; }
     [NodePath] public Button BtnRemove { get; set; }
+    [NodePath] public CheckBox BtnStatusCheck { get; set; }
     #endregion
 
     #region Nodes
-    [NodePath] public HBoxContainer Content { get; set; }
-    [NodePath] public GridContainer Values { get; set; }
+    [NodePath] public HFlowContainer Content { get; set; }
+    [NodePath] public HBoxContainer Values { get; set; }
     [NodePath] public ZoneEditorMini ZoneEditorMini { get; set; }
     [NodePath] public VBoxContainer Children { get; set; }
+    [NodePath] public PanelContainer StatusPanel { get; set; }
+    [NodePath] public HBoxContainer StatusValues { get; set; }
     #endregion
 
 
@@ -54,6 +59,7 @@ public partial class EffectMini : PanelContainer, IEffectNodesContainer
         BtnEdit.ButtonUp += onClickEdit;
         BtnAddChild.ButtonUp += this.onClickAddChild; //onClickAddChild;
         BtnRemove.ButtonUp += onClickDeleteThis;
+        BtnStatusCheck.Toggled += BtnStatusCheck_Toggled;
     }
 
     #region Init
@@ -77,6 +83,7 @@ public partial class EffectMini : PanelContainer, IEffectNodesContainer
         //
         this.Values.QueueFreeChildren();
         this.Children.QueueFreeChildren();
+        this.StatusValues.QueueFreeChildren();
     }
     private void load()
     {
@@ -94,6 +101,9 @@ public partial class EffectMini : PanelContainer, IEffectNodesContainer
         BtnType.Select(indexType);
         // props
         PropertiesComponent.GenerateGrid(effect, Values);
+        // status props
+        if(effect.statusProperties != null)
+            PropertiesComponent.GenerateGrid(effect.statusProperties, StatusValues, publishSave);
         // zone
         ZoneEditorMini.init(effect.zone);
         // dis/enable buttons
@@ -106,6 +116,33 @@ public partial class EffectMini : PanelContainer, IEffectNodesContainer
 
 
     #region GUI Handlers
+    private void BtnStatusCheck_Toggled(bool buttonPressed)
+    {
+        if (buttonPressed)
+        {
+
+            effect.statusProperties = new()
+            {
+                StatusFusingStrategy = new Value<StatusFusingStrategy>(StatusFusingStrategy.RefreshOldest_KeepBestValue_IfMaxStacks),
+                Duration = new Value<int>(),
+                Delay = new Value<int>(),
+                MaxStacks = new Value<int>()
+            };
+            StatusPanel.Visible = true; 
+            PropertiesComponent.GenerateGrid(effect.statusProperties, StatusValues, publishSave);
+        }
+        else
+        {
+            //effect.statusProperties.Delay.value = 0;
+            //effect.statusProperties.Duration.value = 0;
+            //effect.statusProperties.MaxStacks.value = 0;
+            //effect.statusProperties.StatusFusingStrategy.value = StatusFusingStrategy.RefreshOldest_KeepBestValue_IfMaxStacks;
+            StatusPanel.Visible = false;
+            StatusValues.QueueFreeChildren();
+            effect.statusProperties = null;
+            publishSave();
+        }
+    }
     private void onClickHide()
     {
         Content.Visible = !Content.Visible;

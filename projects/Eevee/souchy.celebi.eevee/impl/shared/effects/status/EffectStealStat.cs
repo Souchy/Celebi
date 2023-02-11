@@ -3,12 +3,13 @@ using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.compiledeffects;
 using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.shared.effects.move;
+using souchy.celebi.eevee.face.shared.effects.status;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
 
-namespace souchy.celebi.eevee.face.shared.effects.res
+namespace souchy.celebi.eevee.impl.shared.effects.status
 {
     public class EffectStealStat : Effect, IEffectStealStat
     {

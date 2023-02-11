@@ -5,6 +5,6 @@ namespace souchy.celebi.eevee.face.shared.effects.creature
 {
     public interface IEffectDig : IEffect
     {
-        public IValue<int> depth { get; set; }
+        public IValue<int> Depth { get; set; }
     }
 }

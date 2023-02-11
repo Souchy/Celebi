@@ -34,6 +34,8 @@ public partial class StatusEditor : PanelContainer, EditorInitiator<IStatusModel
     [NodePath] public VBoxContainer EffectsChildren { get; set; }
     #endregion
 
+    [NodePath] public ScrollContainer ScrollContainer { get; set; }
+
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -44,6 +46,7 @@ public partial class StatusEditor : PanelContainer, EditorInitiator<IStatusModel
         EffectsChildren.QueueFreeChildren();
         BtnAddEffectChild.ButtonUp += this.onClickAddChild;
         BtnSave.ButtonUp += publishSave;
+        ScrollContainer.GetVScrollBar().CustomStep = 5;
     }
 
     #region Init

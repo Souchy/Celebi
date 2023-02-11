@@ -6,9 +6,12 @@ namespace souchy.celebi.eevee.face.shared.effects.status
 {
     public interface IEffectDispellStatus : IEffect
     {
-        public IStatusCondition filter { get; set; }
-        public IValue<bool> dispellCompletely { get; set; }
-        public IValue<int> dispellTurns { get; set; }
+        public IStatusCondition Filter { get; set; }
+        //public IValue<bool> DispellCompletely { get; set; }
+        /// <summary>
+        /// 0 for completely/infinite dispell
+        /// </summary>
+        public IValue<int> DispellTurns { get; set; }
 
     }
 }

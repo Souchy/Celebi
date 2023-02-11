@@ -6,12 +6,13 @@ using souchy.celebi.eevee.face.util.math;
 using souchy.celebi.eevee.face.values;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
+using souchy.celebi.eevee.impl.values;
 
 namespace souchy.celebi.eevee.face.shared.effects.move
 {
     public class EffectTranslateTo : Effect, IEffectTranslateTo
     {
-        public IValue<IPosition> position { get; set; }
+        public IValue<IPosition> Position { get; set; } = new Value<IPosition>();
 
 
         private EffectTranslateTo() { }

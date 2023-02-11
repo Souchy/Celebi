@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bjxqjy57p0c0b"]
+[gd_scene load_steps=7 format=3 uid="uid://bjxqjy57p0c0b"]
 
 [ext_resource type="Script" path="res://vaporeon/menus/EffectEditor.cs" id="1_f8vfk"]
 [ext_resource type="Theme" uid="uid://bnrv7qp6ltiwn" path="res://vaporeon/themes/Vaporeon.tres" id="1_x2lar"]
+[ext_resource type="StyleBox" uid="uid://dutxepo71lhgw" path="res://vaporeon/themes/windowBg.tres" id="2_w5jw5"]
 [ext_resource type="PackedScene" uid="uid://bpx5wtg2ya6o2" path="res://vaporeon/common/zones/ZoneEditorMini.tscn" id="3_1hgp7"]
 [ext_resource type="PackedScene" uid="uid://c7ytdebf8oyv0" path="res://vaporeon/components/SmallResourceTree.tscn" id="3_ylmo8"]
 [ext_resource type="PackedScene" uid="uid://50doxjkeqmov" path="res://vaporeon/common/EffectMini.tscn" id="6_12u5t"]
@@ -13,6 +14,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_x2lar")
+theme_override_styles/panel = ExtResource("2_w5jw5")
 script = ExtResource("1_f8vfk")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

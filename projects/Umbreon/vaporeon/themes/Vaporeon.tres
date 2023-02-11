@@ -3,14 +3,13 @@
 [ext_resource type="StyleBox" uid="uid://e74f2cv84vnf" path="res://vaporeon/themes/btnPressed.tres" id="1_dslvo"]
 [ext_resource type="StyleBox" uid="uid://7w68w81vf85g" path="res://vaporeon/themes/btnNormal.tres" id="2_ssm8x"]
 [ext_resource type="StyleBox" uid="uid://b4y6oyjyixxci" path="res://vaporeon/themes/panelBox.tres" id="3_vdocs"]
+[ext_resource type="StyleBox" uid="uid://dutxepo71lhgw" path="res://vaporeon/themes/windowBg.tres" id="4_fdhck"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bfaa5"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rsm1b"]
-bg_color = Color(0.92549, 0.92549, 0.92549, 1)
-
 [resource]
 Button/colors/font_color = Color(0.101961, 0.827451, 0.917647, 1)
+Button/colors/font_focus_color = Color(0.101961, 0.827451, 0.917647, 1)
 Button/colors/font_hover_color = Color(0, 0, 0, 1)
 Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 Button/colors/font_pressed_color = Color(0, 0, 0, 1)
@@ -31,6 +30,7 @@ FlowContainer/constants/v_separation = 4
 GridContainer/constants/h_separation = 15
 GridContainer/constants/v_separation = 0
 HBoxContainer/constants/separation = 10
+Label/colors/font_color = Color(1, 1, 1, 1)
 LineEdit/colors/caret_color = Color(0.101961, 0.827451, 0.917647, 1)
 LineEdit/styles/normal = ExtResource("2_ssm8x")
 MarginContainer/constants/margin_bottom = 10
@@ -40,4 +40,4 @@ MarginContainer/constants/margin_top = 10
 Panel/styles/panel = ExtResource("3_vdocs")
 TabContainer/styles/panel = ExtResource("3_vdocs")
 VBoxContainer/constants/separation = 10
-Window/styles/embedded_border = SubResource("StyleBoxFlat_rsm1b")
+Window/styles/embedded_border = ExtResource("4_fdhck")

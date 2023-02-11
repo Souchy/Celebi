@@ -7,7 +7,7 @@ namespace souchy.celebi.eevee.face.shared.effects.status
     public interface IEffectAddStatus : IEffect
     {
 
-        public IValue<IID> spellModelId { get; set; }
+        public IValue<IID> SpellModelId { get; set; }
 
     }
 }

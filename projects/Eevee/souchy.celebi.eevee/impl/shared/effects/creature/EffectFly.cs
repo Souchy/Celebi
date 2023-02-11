@@ -6,12 +6,13 @@ using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
+using souchy.celebi.eevee.impl.values;
 
 namespace souchy.celebi.eevee.face.shared.effects.creature
 {
     public class EffectFly : Effect, IEffectFly
     {
-        public IValue<int> height { get; set; }
+        public IValue<int> Height { get; set; } = new Value<int>();
 
 
         private EffectFly() { }

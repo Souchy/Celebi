@@ -6,12 +6,13 @@ using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
+using souchy.celebi.eevee.impl.values;
 
 namespace souchy.celebi.eevee.face.shared.effects.creature
 {
     public class EffectDig : Effect, IEffectDig
     {
-        public IValue<int> depth { get; set; }
+        public IValue<int> Depth { get; set; } = new Value<int>();
 
         private EffectDig() { }
         private EffectDig(IID id) : base(id) { }

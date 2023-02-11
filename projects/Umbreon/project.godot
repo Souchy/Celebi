@@ -17,7 +17,7 @@ config/features=PackedStringArray("4.0", "C#")
 [autoload]
 
 DependencyInjectionSystem="*res://common/DependencyInjectionSystem.cs"
-DiamondParser="*res://common/DiamondParser.cs"
+DiamondParser="*res://common/persistance/DiamondParser.cs"
 Umbreon="*res://common/Umbreon.cs"
 
 [display]

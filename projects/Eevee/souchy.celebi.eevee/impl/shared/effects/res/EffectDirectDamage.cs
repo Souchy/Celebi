@@ -14,7 +14,7 @@ namespace souchy.celebi.eevee.face.shared.effects.res
 {
     public class EffectDirectDamage : Effect, IEffectDirectDamage
     {
-        public IValue<ElementType> element { get; set; } = new Value<ElementType>();
+        public IValue<ElementType> Element { get; set; } = new Value<ElementType>();
         public IValue<int> Value { get; set; } = new Value<int>();
 
 
@@ -34,11 +34,11 @@ namespace souchy.celebi.eevee.face.shared.effects.res
             var dist = creaSource.position.distanceManhattan(creaTarget.position);
 
             // apply affinities + resistances
-            IStatSimple aff = sourceStats.Get<IStatSimple>(element.value.GetAffinity());
+            IStatSimple aff = sourceStats.Get<IStatSimple>(Element.value.GetAffinity());
             IStatSimple affg = sourceStats.Get<IStatSimple>(StatType.GlobalDamageAffinity);
             IStatSimple affdist;
 
-            IStatSimple res = targetStats.Get<IStatSimple>(element.value.GetResistance());
+            IStatSimple res = targetStats.Get<IStatSimple>(Element.value.GetResistance());
             IStatSimple resg = targetStats.Get<IStatSimple>(StatType.GlobalDamageResistance);
             IStatSimple resdist;
 

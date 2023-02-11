@@ -14,6 +14,11 @@ using System.Threading.Tasks;
 
 namespace souchy.celebi.eevee.impl.shared.effects
 {
+    /// <summary>
+    /// Just nothing. As said in Interface: <br></br>
+    /// Effect that doesnt do anything. <br></br>
+    /// It just holds other child effects and conditions
+    /// </summary>
     public class EffectBase : Effect, IEffectBase
     {
 

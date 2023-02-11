@@ -6,12 +6,16 @@ using souchy.celebi.eevee.face.util.math;
 using souchy.celebi.eevee.face.values;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
+using souchy.celebi.eevee.impl.values;
 
 namespace souchy.celebi.eevee.face.shared.effects.move
 {
+    /// <summary>
+    /// Translate by X in the direction of the target
+    /// </summary>
     public class EffectTranslateBy : Effect, IEffectTranslateBy
     {
-        public IValue<IPosition> delta { get; set; }
+        public IValue<IPosition> Delta { get; set; } = new Value<IPosition>();
 
         private EffectTranslateBy() { }
         private EffectTranslateBy(IID id) : base(id) { }
@@ -22,9 +26,12 @@ namespace souchy.celebi.eevee.face.shared.effects.move
         }
     }
 
+    /// <summary>
+    /// Pull by X in the direction of the source
+    /// </summary>
     public class EffectPullBy : Effect, IEffectPullBy
     {
-        public IValue<IPosition> delta { get; set; }
+        public IValue<IPosition> Delta { get; set; } = new Value<IPosition>();
 
         private EffectPullBy() { }
         private EffectPullBy(IID id) : base(id) { }
@@ -36,7 +43,7 @@ namespace souchy.celebi.eevee.face.shared.effects.move
     }
     public class EffectPushBy : Effect, IEffectPushBy
     {
-        public IValue<IPosition> delta { get; set; }
+        public IValue<IPosition> Delta { get; set; } = new Value<IPosition>();
 
         private EffectPushBy() { }
         private EffectPushBy(IID id) : base(id) { }
@@ -48,7 +55,7 @@ namespace souchy.celebi.eevee.face.shared.effects.move
     }
     public class EffectDashBy : Effect, IEffectDashBy
     {
-        public IValue<IPosition> delta { get; set; }
+        public IValue<IPosition> Delta { get; set; } = new Value<IPosition>();
 
         private EffectDashBy() { }
         private EffectDashBy(IID id) : base(id) { }
@@ -60,7 +67,7 @@ namespace souchy.celebi.eevee.face.shared.effects.move
     }
     public class EffectDashAwayBy : Effect, IEffectDashAwayBy
     {
-        public IValue<IPosition> delta { get; set; }
+        public IValue<IPosition> Delta { get; set; } = new Value<IPosition>();
 
         private EffectDashAwayBy() { }
         private EffectDashAwayBy(IID id) : base(id) { }

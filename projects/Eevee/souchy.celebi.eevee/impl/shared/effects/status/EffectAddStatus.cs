@@ -5,12 +5,16 @@ using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
+using souchy.celebi.eevee.impl.values;
 
 namespace souchy.celebi.eevee.face.shared.effects.status
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class EffectAddStatus : Effect, IEffectAddStatus
     {
-        public IValue<IID> spellModelId { get; set; }
+        public IValue<IID> SpellModelId { get; set; } = new Value<IID>();
 
 
         private EffectAddStatus() { }

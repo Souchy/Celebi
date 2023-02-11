@@ -7,7 +7,7 @@ namespace souchy.celebi.eevee.face.shared.effects.move
     public interface IEffectTeleportSymmetrically : IEffect
     {
 
-        public IValue<IPosition> center { get; set; }
+        public IValue<IPosition> Center { get; set; }
 
     }
 }

@@ -10,7 +10,7 @@ namespace souchy.celebi.eevee.face.shared.effects.special
         /// <summary>
         /// Weight chance to be picked For Each Child effect
         /// </summary>
-        public List<int> weights { get; set; }
+        public List<int> Weights { get; set; }
 
     }
 }

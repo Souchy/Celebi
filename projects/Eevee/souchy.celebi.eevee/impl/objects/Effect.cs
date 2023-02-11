@@ -1,12 +1,16 @@
-﻿using souchy.celebi.eevee.face.objects;
+﻿using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.compiledeffects;
 using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.shared.triggers;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.face.values;
 using souchy.celebi.eevee.impl.objects.zones;
 using souchy.celebi.eevee.impl.util;
+using souchy.celebi.eevee.impl.values;
+using static souchy.celebi.eevee.face.objects.IEffect;
 
 namespace souchy.celebi.eevee.impl.objects
 {
@@ -15,6 +19,11 @@ namespace souchy.celebi.eevee.impl.objects
         public IID entityUid { get; set; } //= Eevee.RegisterIID();
         public IID modelUid { get; set; }
         public IID fightUid { get; set; }
+
+
+        #region Dynamic status creation
+        public StatusProperties statusProperties { get; set; } = null;
+        #endregion
 
         public ICondition sourceCondition { get; set; }
         public ICondition targetFilter { get; set; }
@@ -43,6 +52,7 @@ namespace souchy.celebi.eevee.impl.objects
             e.zone = zone;
             e.triggers = triggers;
             e.effectIds = effectIds;
+            e.statusProperties = statusProperties;
         }
 
         public void Dispose()

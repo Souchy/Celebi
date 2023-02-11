@@ -8,14 +8,15 @@ using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
+using souchy.celebi.eevee.impl.values;
 
 namespace souchy.celebi.eevee.face.shared.effects.status
 {
     public class EffectDispellStatus : Effect, IEffectDispellStatus
     {
-        public IStatusCondition filter { get; set; }
-        public IValue<bool> dispellCompletely { get; set; }
-        public IValue<int> dispellTurns { get; set; }
+        public IStatusCondition Filter { get; set; } //= new StatusCondition();
+        //public IValue<bool> DispellCompletely { get; set; }
+        public IValue<int> DispellTurns { get; set; } = new Value<int>();
 
 
         private EffectDispellStatus() { }

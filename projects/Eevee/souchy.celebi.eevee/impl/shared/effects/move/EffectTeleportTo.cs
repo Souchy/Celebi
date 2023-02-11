@@ -6,12 +6,16 @@ using souchy.celebi.eevee.face.util.math;
 using souchy.celebi.eevee.face.values;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
+using souchy.celebi.eevee.impl.values;
 
 namespace souchy.celebi.eevee.face.shared.effects.move
 {
+    /// <summary>
+    /// Teleport to target cell or specific cell taken from other values (ex: start pos, first pos around a creature...)
+    /// </summary>
     public class EffectTeleportTo : Effect, IEffectTeleportTo
     {
-        public IValue<IPosition> position { get; set; }
+        public IValue<IPosition> Position { get; set; } = new Value<IPosition>();
 
 
         private EffectTeleportTo() { }

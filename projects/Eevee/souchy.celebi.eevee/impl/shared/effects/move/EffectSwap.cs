@@ -7,6 +7,9 @@ using souchy.celebi.eevee.impl.objects;
 
 namespace souchy.celebi.eevee.face.shared.effects.move
 {
+    /// <summary>
+    /// Swap position with the target if there's a creature there
+    /// </summary>
     public class EffectSwap : Effect, IEffectSwap
     {
 

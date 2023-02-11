@@ -26,6 +26,7 @@ namespace Umbreon.vaporeon.components
         {
             var e = Eevee.models.effects.Get(ei);
             var mini = Vaporeon.instanceScene<EffectMini>();
+            GD.Print($"onAddEffectChild:: Who am i: {this}, my container: {this.GetContainer()}");
             this.GetContainer().AddChild(mini);
             mini.init(e, this.GetEffectIds()); // parentList);
             publishSave();

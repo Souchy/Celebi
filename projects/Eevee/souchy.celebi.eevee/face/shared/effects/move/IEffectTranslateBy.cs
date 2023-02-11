@@ -6,25 +6,25 @@ namespace souchy.celebi.eevee.face.shared.effects.move
 {
     public interface IEffectTranslateBy : IEffect
     {
-        public IValue<IPosition> delta { get; set; }
+        public IValue<IPosition> Delta { get; set; }
     }
 
 
     public interface IEffectPullBy : IEffect
     {
-        public IValue<IPosition> delta { get; set; }
+        public IValue<IPosition> Delta { get; set; }
     }
     public interface IEffectPushBy : IEffect
     {
-        public IValue<IPosition> delta { get; set; }
+        public IValue<IPosition> Delta { get; set; }
     }
     public interface IEffectDashBy : IEffect
     {
-        public IValue<IPosition> delta { get; set; }
+        public IValue<IPosition> Delta { get; set; }
     }
     public interface IEffectDashAwayBy : IEffect
     {
-        public IValue<IPosition> delta { get; set; }
+        public IValue<IPosition> Delta { get; set; }
     }
 
 

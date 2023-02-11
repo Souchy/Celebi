@@ -7,7 +7,7 @@ namespace souchy.celebi.eevee.face.shared.effects.res
     public interface IEffectDirectDamage : IEffect
     {
 
-        public IValue<ElementType> element { get; set; }
+        public IValue<ElementType> Element { get; set; }
         public IValue<int> Value { get; set; }
 
     }

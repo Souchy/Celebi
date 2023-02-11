@@ -7,6 +7,7 @@ using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
+using souchy.celebi.eevee.impl.values;
 
 namespace souchy.celebi.eevee.face.shared.effects.special
 {
@@ -15,15 +16,15 @@ namespace souchy.celebi.eevee.face.shared.effects.special
     /// </summary>
     public class EffectCastSubSpell : Effect, IEffectCastSubSpell
     {
-        public IValue<IID> spellModelId { get; set; }
+        public IValue<IID> SpellModelId { get; set; } = new Value<IID>();
         /// <summary>
         /// Who will cast the spell
         /// </summary>
-        public ActorType newCaster { get; set; }
+        public ActorType NewCaster { get; set; } = ActorType.Source;
         /// <summary>
         /// From where will the spell be cast (ex: frappe xel vs teleportation xel serait possible, mais mieux de faire 2 effets différents pour ça)
         /// </summary>
-        public ActorType newCasterOrigin { get; set; }
+        public ActorType NewCasterOrigin { get; set; } = ActorType.Source;
 
 
         private EffectCastSubSpell() { }

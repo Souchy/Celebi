@@ -14,7 +14,7 @@ namespace souchy.celebi.eevee.face.shared.effects.special
         /// <summary>
         /// Weight chance to be picked for each child effect
         /// </summary>
-        public List<int> weights { get; set; }
+        public List<int> Weights { get; set; } = new();
 
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)
         {

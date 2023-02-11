@@ -18,24 +18,24 @@ namespace souchy.celebi.eevee.face.shared.effects.special
         /// Example: "entity.stats.Movement.current", "entity.stats.Movement.current>3"
         /// thats how we need to do conditions??????
         /// </summary>
-        public string propertyPath { get; set; }
+        public string PropertyPath { get; set; } = "";
         /// <summary>
         /// Example: "targetCurrentMP"
         /// </summary>
-        public string assignContextName { get; set; }
+        public string AssignContextName { get; set; } = "";
 
         /// <summary>
-        /// If the value is a number, we have the possibility to return the sum
+        /// If the value is a number, we have the possibility to return the sum of all targets in aoe
         /// </summary>
-        public bool numberSumTargets { get; set; }
+        public bool NumberSumTargets { get; set; } = false;
         /// <summary>
-        /// If the value is a number, we have the possibility to return the average
+        /// If the value is a number, we have the possibility to return the average of all targets in aoe 
         /// </summary>
-        public bool numberAverageTargets { get; set; }
+        public bool NumberAverageTargets { get; set; } = false;
         /// <summary>
-        /// If the value is a bool, 
+        /// If the value is a bool, check if any of the targets in aoe have the property to true
         /// </summary>
-        public bool boolAnyTarget { get; set; }
+        public bool BoolAnyTarget { get; set; } = false;
 
 
         private EffectGetValue() { }

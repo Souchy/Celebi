@@ -2,8 +2,8 @@
 {
     public enum ActorType
     {
-        source,
-        target,
+        Source,
+        Target,
         //accumulator // this was in java, idk if still needed
 
     }

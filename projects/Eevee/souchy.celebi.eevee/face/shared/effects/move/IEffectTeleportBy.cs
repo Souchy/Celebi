@@ -6,6 +6,6 @@ namespace souchy.celebi.eevee.face.shared.effects.move
 {
     public interface IEffectTeleportBy : IEffect
     {
-        public IValue<IPosition> delta { get; set; }
+        public IValue<IPosition> Delta { get; set; }
     }
 }

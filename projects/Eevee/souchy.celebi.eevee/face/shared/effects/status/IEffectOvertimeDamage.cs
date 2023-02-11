@@ -5,9 +5,9 @@ using souchy.celebi.eevee.impl.values;
 
 namespace souchy.celebi.eevee.face.shared.effects.res
 {
-    public interface IEffectIndirectDamage : IEffect
+    public interface IEffectOvertimeDamage : IEffect
     {
-        public IValue<ElementType> Element { get; set; }
+        public IValue<ElementType> Element { get; set; } 
         public IValue<int> Value { get; set; }
     }
 }

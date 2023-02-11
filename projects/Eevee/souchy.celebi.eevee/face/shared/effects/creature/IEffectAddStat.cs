@@ -7,8 +7,8 @@ namespace souchy.celebi.eevee.face.shared.effects.creature
     public interface IEffectAddStat : IEffect
     {
 
-        public StatType statType { get; set; }
-        public IStat stat { get; set; }
+        public StatType StatType { get; set; }
+        public IStat Stat { get; set; }
 
     }
 }

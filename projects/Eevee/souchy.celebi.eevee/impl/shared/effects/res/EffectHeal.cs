@@ -17,7 +17,7 @@ namespace souchy.celebi.eevee.face.shared.effects.res
 {
     public class EffectHeal : Effect, IEffectHeal
     {
-        public IValue<ElementType> element { get; set; } = new Value<ElementType>();
+        public IValue<ElementType> Element { get; set; } = new Value<ElementType>();
         public IValue<int> Value { get; set; } = new Value<int>();
 
 
@@ -36,7 +36,7 @@ namespace souchy.celebi.eevee.face.shared.effects.res
             var dist = creaSource.position.distanceManhattan(creaTarget.position);
 
             // apply affinities + resistances
-            IStatSimple aff = sourceStats.Get<IStatSimple>(element.value.GetAffinity());
+            IStatSimple aff = sourceStats.Get<IStatSimple>(Element.value.GetAffinity());
             IStatSimple affh = sourceStats.Get<IStatSimple>(StatType.HealAffinity);
             IStatSimple affdist;
 

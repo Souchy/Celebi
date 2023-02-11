@@ -6,12 +6,16 @@ using souchy.celebi.eevee.face.util.math;
 using souchy.celebi.eevee.face.values;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
+using souchy.celebi.eevee.impl.values;
 
 namespace souchy.celebi.eevee.face.shared.effects.move
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class EffectTeleportSymmetrically : Effect, IEffectTeleportSymmetrically
     {
-        public IValue<IPosition> center { get; set; }
+        public IValue<IPosition> Center { get; set; } = new Value<IPosition>();
 
 
         private EffectTeleportSymmetrically() { }

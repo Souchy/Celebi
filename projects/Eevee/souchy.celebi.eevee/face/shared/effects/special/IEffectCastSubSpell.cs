@@ -10,14 +10,14 @@ namespace souchy.celebi.eevee.face.shared.effects.special
     /// </summary>
     public interface IEffectCastSubSpell : IEffect
     {
-        public IValue<IID> spellModelId { get; set; }
+        public IValue<IID> SpellModelId { get; set; }
         /// <summary>
         /// Who will cast the spell
         /// </summary>
-        public ActorType newCaster { get; set; }
+        public ActorType NewCaster { get; set; }
         /// <summary>
         /// From where will the spell be cast (ex: frappe xel vs teleportation xel serait possible, mais mieux de faire 2 effets différents pour ça)
         /// </summary>
-        public ActorType newCasterOrigin { get; set; }
+        public ActorType NewCasterOrigin { get; set; }
     }
 }

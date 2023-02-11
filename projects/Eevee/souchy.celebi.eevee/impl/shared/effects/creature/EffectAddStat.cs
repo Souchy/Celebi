@@ -4,7 +4,6 @@ using souchy.celebi.eevee.face.objects.compiledeffects;
 using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.effects.creature;
-using souchy.celebi.eevee.face.shared.effects.status;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
@@ -14,8 +13,8 @@ namespace souchy.celebi.eevee.face.shared.effects.res
     public class EffectAddStat : Effect, IEffectAddStat
     {
 
-        public StatType statType { get; set; }
-        public IStat stat { get; set; }
+        public StatType StatType { get; set; }
+        public IStat Stat { get; set; }
 
 
         private EffectAddStat() { }

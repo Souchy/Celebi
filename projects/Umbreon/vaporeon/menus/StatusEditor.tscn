@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bgkkcmf8w34gj"]
+[gd_scene load_steps=5 format=3 uid="uid://bgkkcmf8w34gj"]
 
 [ext_resource type="Theme" uid="uid://bnrv7qp6ltiwn" path="res://vaporeon/themes/Vaporeon.tres" id="1_pr2ke"]
 [ext_resource type="Script" path="res://vaporeon/menus/StatusEditor.cs" id="2_mnxp2"]
+[ext_resource type="StyleBox" uid="uid://dutxepo71lhgw" path="res://vaporeon/themes/windowBg.tres" id="2_r30an"]
 [ext_resource type="PackedScene" uid="uid://50doxjkeqmov" path="res://vaporeon/common/EffectMini.tscn" id="3_4cs7b"]
 
 [node name="StatusEditor" type="PanelContainer"]
@@ -11,6 +12,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_pr2ke")
+theme_override_styles/panel = ExtResource("2_r30an")
 script = ExtResource("2_mnxp2")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -73,6 +75,7 @@ mouse_default_cursor_shape = 2
 text = "Add Child"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
