@@ -4,7 +4,7 @@ using souchy.celebi.eevee.interfaces;
 
 namespace souchy.celebi.eevee.face.shared.zones
 {
-    public interface IArea
+    public interface IBoardArea
     {
         public IZone zone { get; set; }
         public List<ICell> Cells { get; set; }

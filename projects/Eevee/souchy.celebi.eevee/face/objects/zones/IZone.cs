@@ -8,11 +8,15 @@ namespace souchy.celebi.eevee.face.shared.zones
     public interface IZone
     {
         /// <summary>
+        /// 
+        /// </summary>
+        public IValue<ZoneType> zoneType { get; set; }
+        /// <summary>
         /// 1) lengthMin
         /// 2) lengthMax
         /// 3) % opening (ex 25% remove the line at the bottom, 50% cuts it in half to make a half-circle)
         /// </summary>
-        public IValue<Vector3> size { get; set; }
+        public IValue<IVector3> size { get; set; }
         /// <summary>
         /// If we substract this zone from its parent and siblings
         /// </summary>
@@ -26,7 +30,7 @@ namespace souchy.celebi.eevee.face.shared.zones
         /// <summary>
         /// offset from cast cell to local origin in the direction of the orientation
         /// </summary>
-        public Vector2 worldOffset { get; set; }
+        public IVector2 worldOffset { get; set; }
         /// <summary>
         /// AKA the zone Anchor local to the aoe. <br></br>
         /// center for a circle/square <br></br>
@@ -40,6 +44,10 @@ namespace souchy.celebi.eevee.face.shared.zones
         /// </summary>
         public Direction9Type rotation { get; set; }
         /// <summary>
+        /// Wether the player can rotate the aoe manually or if it's fixed
+        /// </summary>
+        public IValue<bool> canRotate { get; set; }
+        /// <summary>
         /// This overrides a size variable like length/radius to make them equal to .distance(target,source)
         /// The index given is the {1,2,3} value overriden in the vector.
         /// </summary>
@@ -47,7 +55,7 @@ namespace souchy.celebi.eevee.face.shared.zones
         /// <summary>
         /// Get the cells touched by this area at target point
         /// </summary>
-        public IArea getArea(IPosition targetCell);
+        public IBoardArea getArea(IPosition targetCell);
         /// <summary>
         /// 
         /// </summary>

@@ -46,9 +46,9 @@ directional_shadow_max_distance = 25.0
 visible = false
 
 [node name="Map" parent="Environment" instance=ExtResource("2_kls1v")]
-visible = false
 
 [node name="MapCelebi" parent="Environment" instance=ExtResource("4_3dy4y")]
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="Environment"]
 offset_right = 40.0

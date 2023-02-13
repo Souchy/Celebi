@@ -1,15 +1,33 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://ciev3itomtiue"]
 
 [ext_resource type="Script" path="res://vaporeon/common/zones/ZonePreview.cs" id="1_3guhc"]
+[ext_resource type="Theme" uid="uid://bnrv7qp6ltiwn" path="res://vaporeon/themes/Vaporeon.tres" id="1_umiwl"]
 
-[node name="ZonePreview" type="MarginContainer"]
+[node name="ZonePreview" type="PanelContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_umiwl")
 script = ExtResource("1_3guhc")
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Preview"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 3
+theme_override_constants/v_separation = 3
 columns = 20

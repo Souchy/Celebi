@@ -1,5 +1,6 @@
 using Godot;
 using Godot.Sharp.Extras;
+using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.shared.zones;
 using System;
@@ -22,6 +23,8 @@ public partial class ZoneEditorMini : PanelContainer
     {
         this.OnReady();
         // fill zone types
+        foreach (var z in Enum.GetNames<ZoneType>())
+            ZoneType.AddItem(z);
         ZoneType.Select(0);
     }
 

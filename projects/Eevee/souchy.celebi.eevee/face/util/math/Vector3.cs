@@ -2,7 +2,7 @@
 
 namespace souchy.celebi.eevee.face.util.math
 {
-    public interface Vector3
+    public interface IVector3
     {
         /// <summary>
         /// Board width
@@ -21,37 +21,74 @@ namespace souchy.celebi.eevee.face.util.math
         /// <summary>
         /// Returns self for chaining
         /// </summary>
-        public Vector3 set(int x, int z, int y = 0);
+        public IVector3 set(int x, int z, int y = 0);
         /// <summary>
         /// Returns self for chaining
         /// </summary>
-        public Vector3 add(Vector3 p);
+        public IVector3 add(IVector3 p);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="z"></param>
+        /// <returns></returns>
+        public IVector3 add(int x, int z);
         /// <summary>
         /// Returns self for chaining
         /// </summary>
-        public Vector3 sub(Vector3 p);
+        public IVector3 sub(IVector3 p);
         /// <summary>
         /// Returns self for chaining
         /// </summary>
-        public Vector3 mult(Vector3 p);
+        public IVector3 mult(IVector3 p);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        public IVector3 scale(int x, int y);
         /// <summary>
         /// Returns self for chaining
         /// </summary>
-        public Vector3 div(Vector3 p);
+        public IVector3 div(IVector3 p);
         /// <summary>
-        /// Returns self for chaining
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public int length();
+        /// <summary>
+        /// Returns self for chaining <br></br>
+        /// 0 = x, 1 = z, 2 = y
         /// </summary>
         /// <param name="index">0, 1, 2 for x, z, y</param>
         /// <param name="value">value to set</param>
         /// <returns></returns>
-        public Vector3 setAt(int index, int value);
+        public IVector3 setAt(int index, int value);
+        /// <summary>
+        /// Get value at index: 0 = x, 1 = z, 2 = y
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public int getAt(int index);
         /// <summary>
         /// Returns self for chaining
         /// </summary>
-        public Vector3 copy();
+        public IVector3 copy();
         /// <summary>
         /// Returns self 
         /// </summary>
-        public Vector3 abs();
+        public IVector3 abs();
+
+        /// <summary>
+        /// 2D distance
+        /// </summary>
+        public int distanceManhattan(IVector3 p);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="v"></param>
+        /// <returns></returns>
+        public bool equals(IVector3 v);
     }
 }

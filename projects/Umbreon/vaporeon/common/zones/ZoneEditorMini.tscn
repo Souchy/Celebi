@@ -32,17 +32,9 @@ layout_mode = 2
 
 [node name="ZoneType" type="OptionButton" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 mouse_default_cursor_shape = 2
-item_count = 4
-popup/item_0/text = "Point"
-popup/item_0/id = 0
-popup/item_1/text = "Line"
-popup/item_1/id = 1
-popup/item_2/text = "Circle"
-popup/item_2/id = 2
-popup/item_3/text = "Square"
-popup/item_3/id = 3
 
 [node name="SizeVectorI0" type="SpinBox" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
