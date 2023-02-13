@@ -17,7 +17,7 @@ namespace souchy.celebi.eevee.impl.objects.zones
     public class Zone : IZone
     {
         public IValue<ZoneType> zoneType { get; set; } = new Value<ZoneType>(ZoneType.point);
-        public IValue<IVector3> size { get; set; } = new Value<IVector3>(new Vector3());
+        public IValue<IVector3> size { get; set; } = new Value<IVector3>(new Vector3(1, 1, 1));
         public bool negative { get; set; } = false;
         public ActorType worldOrigin { get; set; } = ActorType.Source;
         public IVector2 worldOffset { get; set; } = new Vector2();

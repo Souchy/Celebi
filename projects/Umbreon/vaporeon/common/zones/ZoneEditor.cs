@@ -48,6 +48,8 @@ public partial class ZoneEditor : Control
     public override void _Ready()
 	{
         this.OnReady();
+        // sub preview
+        this.bus.subscribe(this.ZonePreview);
         //this.NameEdit.Text = Title;
 
         ZoneType.Clear();
@@ -61,6 +63,14 @@ public partial class ZoneEditor : Control
             LocalOriginBtn.AddItem(type);
             RotationBtn.AddItem(type);
         }
+        // on selected type
+        ZoneType.ItemSelected += (i) =>
+        {
+            zone.zoneType.value = (ZoneType) i;
+            SizeVector.RemoveAndQueueFreeChildren();
+            PropertiesComponent.GenerateGrid(zone.GetSize(), SizeVector, publishRefresh);
+            publishRefresh();
+        };
 
         // TEST ONLY
         var z = new Zone();
@@ -72,61 +82,19 @@ public partial class ZoneEditor : Control
     public void init(IZone model)
     {
         this.zone = model;
-        // sub preview
-        this.bus.subscribe(this.ZonePreview);
         // size parameters
         SizeVector.RemoveAndQueueFreeChildren();
         PropertiesComponent.GenerateGrid(model.GetSize(), SizeVector, publishRefresh);
-        // type
+        // select
         ZoneType.Select((int) model.zoneType.value);
-        ZoneType.ItemSelected += (i) =>
-        {
-            model.zoneType.value = (ZoneType) i;
-            SizeVector.RemoveAndQueueFreeChildren();
-            PropertiesComponent.GenerateGrid(model.GetSize(), SizeVector, publishRefresh);
-            publishRefresh();
-        };
+        publishRefresh();
     }
+    /// <summary>
+    /// refresh preview
+    /// </summary>
     public void publishRefresh()
     {
-        GD.Print("publishRefresh");
         bus.publish(nameof(ZonePreview.RefreshPreview), zone);
     }
-
-    /*
-    public void onZoneTypeSelected(int id)
-    {
-        switch ((ZoneType) id)
-        {
-            case souchy.celebi.eevee.enums.ZoneType.line:
-                SizeVectorI0.Editable = true;
-                SizeVectorI1.Editable = true;
-                SizeVectorI2.Editable = false;
-                SizeVectorI0.Prefix = "Min";
-                SizeVectorI1.Prefix = "Max";
-                SizeVectorI2.Prefix = "";
-                break;
-            case souchy.celebi.eevee.enums.ZoneType.circle:
-            case souchy.celebi.eevee.enums.ZoneType.square:
-            case souchy.celebi.eevee.enums.ZoneType.rectangle:
-                SizeVectorI0.Editable = true;
-                SizeVectorI1.Editable = true;
-                SizeVectorI2.Editable = true;
-                SizeVectorI0.Prefix = "Min";
-                SizeVectorI1.Prefix = "Max";
-                SizeVectorI2.Prefix = "%";
-                break;
-            case souchy.celebi.eevee.enums.ZoneType.point:
-            default:
-                SizeVectorI0.Editable = false;
-                SizeVectorI1.Editable = false;
-                SizeVectorI2.Editable = false;
-                SizeVectorI0.Prefix = "";
-                SizeVectorI1.Prefix = "";
-                SizeVectorI2.Prefix = "";
-                break;
-        }
-    }
-    */
 
 }

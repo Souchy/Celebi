@@ -26,7 +26,6 @@ public partial class ZonePreview : PanelContainer
     [Subscribe(nameof(RefreshPreview))]
     public void RefreshPreview(IZone zone)
     {
-        //GD.Print("RefreshPreview 1");
         var points = zone.GeneratePoints();
         GridContainer.RemoveAndQueueFreeChildren();
         GD.Print($"Bounds: min [{points.minX()}, {points.minZ()}], max [{points.maxX()}, {points.maxZ()}]");
@@ -34,7 +33,6 @@ public partial class ZonePreview : PanelContainer
         if (points.Count == 0)
             return;
         GridContainer.Columns = points.sizeX();
-        //GD.Print("RefreshPreview 2");
         for (int j = points.minZ(); j <= points.maxZ(); j++)
         {
             for (int i = points.minX(); i <= points.maxX(); i++)
