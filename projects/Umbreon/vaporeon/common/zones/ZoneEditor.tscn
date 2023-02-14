@@ -76,6 +76,7 @@ text = "Zone Type"
 [node name="ZoneType" type="OptionButton" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/ParametersGrid"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 item_count = 4
 popup/item_0/text = "Point"
 popup/item_0/id = 0
@@ -136,10 +137,14 @@ size_flags_horizontal = 3
 [node name="WorldOffsetVectorX" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/ParametersGrid/WorldOffsetVector"]
 unique_name_in_owner = true
 layout_mode = 2
+min_value = -100.0
+rounded = true
 
 [node name="WorldOffsetVectorZ" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/ParametersGrid/WorldOffsetVector"]
 unique_name_in_owner = true
 layout_mode = 2
+min_value = -100.0
+rounded = true
 
 [node name="LocalOriginLbl" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/ParametersGrid"]
 layout_mode = 2

@@ -22,7 +22,7 @@ namespace souchy.celebi.eevee.impl.objects.zones
         public ActorType worldOrigin { get; set; } = ActorType.Source;
         public IVector2 worldOffset { get; set; } = new Vector2();
         public Direction9Type localOrigin { get; set; } = Direction9Type.center;
-        public Direction9Type rotation { get; set; } = Direction9Type.center;
+        public Rotation4Type rotation { get; set; } = Rotation4Type.top;
         public IValue<bool> canRotate { get; set; } = new Value<bool>(false);
         public int sizeIndexExtendFromSource { get; set; } = -1;
         public IEntityList<IZone> children { get; set; } = new EntityList<IZone>(); //EntityList<IZone>.Create();

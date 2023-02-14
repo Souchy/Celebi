@@ -42,7 +42,7 @@ namespace souchy.celebi.eevee.face.shared.zones
         /// <summary>
         /// Rotation of the zone around the localOrigin
         /// </summary>
-        public Direction9Type rotation { get; set; }
+        public Rotation4Type rotation { get; set; }
         /// <summary>
         /// Wether the player can rotate the aoe manually or if it's fixed
         /// </summary>

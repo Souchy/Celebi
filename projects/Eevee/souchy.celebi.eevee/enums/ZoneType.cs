@@ -21,17 +21,24 @@ namespace souchy.celebi.eevee.enums
         [ZoneSize<ZoneSizeRadius2>] xcross, // 'x' made of 2 diagonals
         [ZoneSize<ZoneSizeRadius2>] star, // both crosses (=8 directions)
 
+        [ZoneSize<ZoneSizeRadius2>] crossHalf,
+        [ZoneSize<ZoneSizeRadius2Ring>] crossRing,
+        [ZoneSize<ZoneSizeRadius2Ring>] crossHalfRing,
+        [ZoneSize<ZoneSizeRadius2Ring>] xcrossRing, 
+
         [ZoneSize<ZoneSizeRadius>] circle,      // like a diamond
-        [ZoneSize<ZoneSizeRadius>] square,      // orthogonal square
         [ZoneSize<ZoneSizeRadius>] circleHalf,  // cone, like a triangle
+        [ZoneSize<ZoneSizeRadius>] square,      // orthogonal square
+        [ZoneSize<ZoneSizeRadius>] squareHalf,  // orthogonal half square makes a bit of a rectangle
         [ZoneSize<ZoneSizeRadius2>] rectangle,
         [ZoneSize<ZoneSizeRadius2>] ellipse,     // ellipse : radius, radius
         [ZoneSize<ZoneSizeRadius2>] ellipseHalf,
 
         // adds a parameter for ring width
         [ZoneSize<ZoneSizeRadiusRing>] circleRing,      // 
-        [ZoneSize<ZoneSizeRadiusRing>] squareRing,      // like 1 perpendicular line and 2 sides
         [ZoneSize<ZoneSizeRadiusRing>] circleHalfRing,  // like a V
+        [ZoneSize<ZoneSizeRadiusRing>] squareRing,      // like 1 perpendicular line and 2 sides
+        [ZoneSize<ZoneSizeRadiusRing>] squareHalfRing,      // like 1 perpendicular line and 2 sides
         [ZoneSize<ZoneSizeRadius2Ring>] rectangleRing,  // 
         [ZoneSize<ZoneSizeRadius2Ring>] rectangleHalfRing,  // 
         [ZoneSize<ZoneSizeRadius2Ring>] ellipseRing,    // take 2 radius from ellipse and 3rd parameter is ring width
@@ -82,7 +89,10 @@ namespace souchy.celebi.eevee.enums
             var points = (Points) typeof(AreaGenerator)
                 .GetMethod(Enum.GetName(zone.zoneType.value))
                 .Invoke(null, new object[] { zone });
-            return points;
+            return points
+                .anchor()
+                .rotate()
+                .offset();
         }
     }
 

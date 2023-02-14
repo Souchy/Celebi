@@ -45,9 +45,9 @@ namespace souchy.celebi.eevee.face.util.math
         /// 
         /// </summary>
         /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="z"></param>
         /// <returns></returns>
-        public IVector3 scale(int x, int y);
+        public IVector3 scale(int x, int z);
         /// <summary>
         /// Returns self for chaining
         /// </summary>

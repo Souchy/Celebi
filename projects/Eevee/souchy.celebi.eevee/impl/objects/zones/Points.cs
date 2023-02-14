@@ -1,6 +1,7 @@
 ﻿using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util.math;
+using static souchy.celebi.eevee.impl.objects.zones.AreaGenerator;
 
 namespace souchy.celebi.eevee.impl.objects.zones
 {
@@ -10,16 +11,88 @@ namespace souchy.celebi.eevee.impl.objects.zones
         {
             public IZone zone { get; set; }
             public Points(IZone zone) => this.zone = zone;
+            /// <summary>
+            /// rotate around the anchor
+            /// </summary>
+            /// <returns></returns>
             public Points rotate()
             {
+                //var x2 = sizeX() / 2;
+                //var z2 = sizeZ() / 2;
+                //Math.Sin(45);
+                var unit = this.zone.rotation.GetUnitVector().z;
+                //foreach(var p in this)
+                //{
+                //    var add = p.copy().scale((int) unit.x, (int) unit.z);
+                //    p.add(add);
+                //}
+                var angle = unit * Math.PI / 180;
+                foreach (var p in this)
+                {
+                    var xb = Math.Round(p.x * Math.Cos(angle) - p.z * Math.Sin(angle));
+                    var zb = Math.Round(p.z * Math.Cos(angle) + p.x * Math.Sin(angle));
+                    p.set((int) xb, (int) zb);
+                }
+                /*
+                foreach(var p in this)
+                    switch(this.zone.rotation)
+                    {
+                        case Rotation4Type.top:
+                            break;
+                        case Rotation4Type.bottom:
+                            p.scale(1, -1);
+                            break;
+                        case Rotation4Type.right:
+                            var tempx = p.x;
+                            p.x = p.z;
+                            p.z = tempx;
+                            break;
+                        case Rotation4Type.left:
+                            var tempx2 = p.x;
+                            p.x = p.z;
+                            p.z = tempx2;
+                            break;
+                    }
+                */
                 return this;
             }
             public Points anchor()
             {
-                var unit = this.zone.localOrigin.GetUnitVector();
-                int offx = sizeX() / 2 * unit.x;
-                int offz = sizeZ() / 2 * unit.z;
-                return offset(offx, offz);
+                switch (zone.zoneType.value)
+                {
+                    case ZoneType.point:
+                        return this;
+                    case ZoneType.line:
+                    case ZoneType.diagonal:
+                        return Anchoring.anchorLine(this);
+                    case ZoneType.crossHalf:
+                    case ZoneType.crossHalfRing:
+                    case ZoneType.circleHalf:
+                    case ZoneType.circleHalfRing:
+                    case ZoneType.squareHalf:
+                    case ZoneType.squareHalfRing:
+                    case ZoneType.rectangleHalfRing:
+                    case ZoneType.ellipseHalf:
+                    case ZoneType.ellipseHalfRing:
+                        return Anchoring.anchorFormHalf(this);
+                    case ZoneType.cross:
+                    case ZoneType.crossRing:
+                    case ZoneType.xcrossRing:
+                    case ZoneType.xcross:
+                    case ZoneType.star:
+                    case ZoneType.circle:
+                    case ZoneType.circleRing:
+                    case ZoneType.square:
+                    case ZoneType.squareRing:
+                    case ZoneType.rectangle:
+                    case ZoneType.rectangleRing:
+                    case ZoneType.ellipse:
+                    case ZoneType.ellipseRing:
+                        return Anchoring.anchorForm(this);
+                        //default:
+                        //    throw new Exception("Invalid zonetype: " + zone.zoneType.value);
+                }
+                return this;
             }
             public Points offset()  => offset(zone.worldOffset.x, zone.worldOffset.z);
             public Points offset(int x, int z)
@@ -54,6 +127,40 @@ namespace souchy.celebi.eevee.impl.objects.zones
             public IBoardArea projectToBoard()
             {
                 throw new Exception();
+            }
+            public override string ToString()
+            {
+                return "[" + string.Join(", ", this) + "]";
+            }
+        }
+
+
+        public static class Anchoring
+        {
+            public static Points anchorLine(Points points)
+            {
+                var origin = (Direction3TypeLine) (int) points.zone.localOrigin;
+                var unit = origin.GetUnitVector();
+                int offx = (int) Math.Floor((points.sizeX() - 1) * unit.x);
+                int offz = (int) Math.Floor((points.sizeZ() - 1) * unit.z);
+                return points.offset(offx, offz);
+            }
+            public static Points anchorForm(Points points)
+            {
+                var unit = points.zone.localOrigin.GetUnitVector();
+                int offx = (int) (Math.Floor(points.sizeX() / 2f) * unit.x);
+                int offz = (int) (Math.Floor(points.sizeZ() / 2f) * unit.z);
+                return points.offset(offx, offz);
+            }
+            public static Points anchorFormHalf(Points points)
+            {
+                var unit = points.zone.localOrigin.GetUnitVector();
+                //var origin2 = (Direction3TypeLine) points.zone.localOrigin;
+                //var unit2 = points.zone.localOrigin.GetUnitVector();
+
+                int offx = (int) (Math.Floor(points.sizeX() / 2f) * unit.x);
+                int offz = (int) Math.Floor((points.sizeZ() - 1) * unit.z);
+                return points.offset(offx, offz);
             }
         }
 

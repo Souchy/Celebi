@@ -2,9 +2,11 @@
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.face.util.math;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.stats;
 using souchy.celebi.eevee.impl.util;
+using souchy.celebi.eevee.impl.util.math;
 using Umbreon.common;
 
 namespace PlayfabClientTest
@@ -16,8 +18,8 @@ namespace PlayfabClientTest
             Console.WriteLine("Hello, World!");
 
             //var asd = Eevee.uIdGenerator;
-            var breed = new Breed();
-            breed.throwEvent();
+            //var breed = new Breed();
+            //breed.throwEvent();
             //string txt = nameof(breed.Id);
             //Console.WriteLine($"text: {txt} or {nameof(Breed.asdf)}.");
 
@@ -26,8 +28,39 @@ namespace PlayfabClientTest
             //var c = new Umbreon.common.PlayfabClientTest();
             //c.thing();
 
+            //[
+            //[-3, 0, 0],
+            //[-2, 0, 0], [-2, 1, 0],
+            //[-1, 0, 0], [-1, 1, 0], [-1, 2, 0],
+            //[0, 0, 0], [0, 1, 0], [0, 2, 0], [0, 3, 0],
+            //[1, 0, 0], [1, 1, 0], [1, 2, 0],
+            //[2, 0, 0], [2, 1, 0],
+            //[3, 0, 0]
+            //]
+            //rotate(new Vector3(-3, 0, 0));
+            //rotate(new Vector3(-2, 1, 0));
+            //rotate(new Vector3(-2, 2, 0));
+            //rotate(new Vector3(-1, 0, 0));
+            rotate(new Vector3(-1, 1, 0));
+            //rotate(new Vector3(-1, 2, 0));
+            //rotate(new Vector3(0, 0, 0));
+            //rotate(new Vector3(0, 1, 0));
+            //rotate(new Vector3(0, 2, 0));
+            //rotate(new Vector3(0, 3, 0));
+
 
             Console.ReadLine();
+        }
+        public static void rotate(IVector3 p)
+        {
+            var original = p.copy();
+            var unit = -90d;
+            var angle = unit * Math.PI / 180;
+
+            var xb = Math.Round(p.x * Math.Cos(angle) - p.z * Math.Sin(angle));
+            var zb = Math.Round(p.z * Math.Cos(angle) + p.x * Math.Sin(angle));
+            p.set((int) xb, (int) zb);
+            Console.WriteLine($"original: {original}, output p: {p}, or float [{xb}, {zb}]");
         }
     }
 

@@ -50,19 +50,27 @@ public partial class ZoneEditor : Control
         this.OnReady();
         // sub preview
         this.bus.subscribe(this.ZonePreview);
-        //this.NameEdit.Text = Title;
-
+        // Type
         ZoneType.Clear();
+        ZoneType.ExpandIcon = false;
         foreach (var type in Enum.GetNames(typeof(ZoneType)))
         {
-            ZoneType.AddItem(type);
+            //var tex = GD.Load<Texture2D>($"res://assets/icons/zones/{type}.png");
+            //tex.GetImage().Resize(30, 30);
+            //var img = Image.LoadFromFile($"res://assets/icons/zones/{type}.png");
+            var img = new Image();
+            img.Load($"res://assets/icons/zones/{type}.png");
+            img.Resize(24, 24);
+            //var tex = new Texture2D();
+            var tex2 = ImageTexture.CreateFromImage(img);
+            ZoneType.AddIconItem(tex2, type);
         }
-        // Direction9Type
+        // Anchor
         foreach(var type in Enum.GetNames(typeof(Direction9Type)))
-        {
             LocalOriginBtn.AddItem(type);
+        // Rotation
+        foreach (var type in Enum.GetNames(typeof(Rotation4Type)))
             RotationBtn.AddItem(type);
-        }
         // on selected type
         ZoneType.ItemSelected += (i) =>
         {
@@ -71,11 +79,31 @@ public partial class ZoneEditor : Control
             PropertiesComponent.GenerateGrid(zone.GetSize(), SizeVector, publishRefresh);
             publishRefresh();
         };
+        WorldOffsetVectorX.ValueChanged += (i) =>
+        {
+            zone.worldOffset.x = (int) i;
+            publishRefresh();
+        };
+        WorldOffsetVectorZ.ValueChanged += (i) =>
+        {
+            zone.worldOffset.z = (int) i;
+            publishRefresh();
+        };
+        LocalOriginBtn.ItemSelected += (i) =>
+        {
+            zone.localOrigin = (Direction9Type) i;
+            publishRefresh();
+        };
+        RotationBtn.ItemSelected += (i) =>
+        {
+            zone.rotation = (Rotation4Type) i;
+            publishRefresh();
+        };
+
 
         // TEST ONLY
         var z = new Zone();
         z.zoneType.value = souchy.celebi.eevee.enums.ZoneType.circle;
-        z.size.value.setAt(0, 3);
         init(z);
     }
 

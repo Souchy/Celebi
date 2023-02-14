@@ -112,10 +112,10 @@ namespace souchy.celebi.eevee.impl.util.math
             return this;
         }
 
-        public IVector3 scale(int x, int y)
+        public IVector3 scale(int x, int z)
         {
             this.x *= x;
-            this.y *= y;
+            this.z *= z;
             return this;
         }
 
@@ -127,6 +127,11 @@ namespace souchy.celebi.eevee.impl.util.math
         public bool equals(IVector3 v)
         {
             return v.x == x && v.z == z && v.y == y;
+        }
+
+        public override string ToString()
+        {
+            return $"[{x}, {z}, {y}]";
         }
     }
 }
