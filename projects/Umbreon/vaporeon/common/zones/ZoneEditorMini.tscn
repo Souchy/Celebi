@@ -21,37 +21,50 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Zone"
-
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Zone"
 
 [node name="ZoneType" type="OptionButton" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-
-[node name="SizeVectorI0" type="SpinBox" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-rounded = true
-prefix = "Min"
-custom_arrow_step = 1.0
-select_all_on_focus = true
-
-[node name="SizeVectorI1" type="SpinBox" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-prefix = "Max"
-select_all_on_focus = true
 
 [node name="BtnEdit" type="Button" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Edit"
+
+[node name="SizeVector" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="SizeVectorI0" type="SpinBox" parent="MarginContainer/CenterContainer/VBoxContainer/SizeVector"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+rounded = true
+custom_arrow_step = 1.0
+select_all_on_focus = true
+
+[node name="SizeVectorI1" type="SpinBox" parent="MarginContainer/CenterContainer/VBoxContainer/SizeVector"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+select_all_on_focus = true
+
+[node name="SizeVectorI2" type="SpinBox" parent="MarginContainer/CenterContainer/VBoxContainer/SizeVector"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+select_all_on_focus = true

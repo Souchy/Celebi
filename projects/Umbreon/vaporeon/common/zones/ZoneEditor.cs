@@ -8,7 +8,7 @@ using souchy.celebi.eevee.impl.util;
 using System;
 using Umbreon.vaporeon.common;
 
-public partial class ZoneEditor : Control
+public partial class ZoneEditor : Control, EditorInitiator<IZone>
 {
     //[Export]
     private IZone zone { get; set; }
@@ -65,12 +65,6 @@ public partial class ZoneEditor : Control
             var tex2 = ImageTexture.CreateFromImage(img);
             ZoneType.AddIconItem(tex2, type);
         }
-        // Anchor
-        foreach(var type in Enum.GetNames(typeof(Direction9Type)))
-            LocalOriginBtn.AddItem(type);
-        // Rotation
-        foreach (var type in Enum.GetNames(typeof(Rotation4Type)))
-            RotationBtn.AddItem(type);
         // on selected type
         ZoneType.ItemSelected += (i) =>
         {
@@ -79,6 +73,12 @@ public partial class ZoneEditor : Control
             PropertiesComponent.GenerateGrid(zone.GetSize(), SizeVector, publishRefresh);
             publishRefresh();
         };
+        // Anchor
+        foreach(var type in Enum.GetNames(typeof(Direction9Type)))
+            LocalOriginBtn.AddItem(type);
+        // Rotation
+        foreach (var type in Enum.GetNames(typeof(Rotation4Type)))
+            RotationBtn.AddItem(type);
         WorldOffsetVectorX.ValueChanged += (i) =>
         {
             zone.worldOffset.x = (int) i;

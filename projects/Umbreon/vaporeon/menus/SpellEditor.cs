@@ -30,10 +30,16 @@ public partial class SpellEditor : Control, EditorInitiator<ISpellModel>, IEffec
     #endregion
 
     #region Nodes
+    [NodePath] public Button BtnCosts { get; set; }
     [NodePath] public GridContainer CostsGrid { get; set; }
+    [NodePath] public Button BtnProperties { get; set; }
     [NodePath] public GridContainer PropertiesGrid { get; set; }
+    [NodePath] public Button BtnRange { get; set; }
+    [NodePath] public VBoxContainer Range { get; set; }
     [NodePath] public ZoneEditorMini ZoneEditorMiniMin { get; set; }
     [NodePath] public ZoneEditorMini ZoneEditorMiniMax { get; set; }
+    [NodePath] public Button BtnConditions { get; set; }
+    [NodePath] public VBoxContainer Conditions { get; set; }
     [NodePath] public SmallResourceTree SourceConditionsTree { get; set; }
     [NodePath] public SmallResourceTree TargetConditionsTree { get; set; }
     #endregion
@@ -53,10 +59,15 @@ public partial class SpellEditor : Control, EditorInitiator<ISpellModel>, IEffec
         NameEdit.TextChanged += (txt) => spell.GetName().value = txt;
         DescriptionEdit.TextChanged += (txt) => spell.GetDescription().value = txt;
         // effects
-        EffectsChildren.QueueFreeChildren();
+        EffectsChildren.RemoveAndQueueFreeChildren();
         BtnAddEffectChild.ButtonUp += this.onClickAddChild; 
         // save
         BtnSave.ButtonUp += publishSave;
+        // tabs
+        BtnCosts.Toggled += (t) => CostsGrid.Visible = t;
+        BtnProperties.Toggled += (t) => PropertiesGrid.Visible = t;
+        BtnRange.Toggled += (t) => Range.Visible = t;
+        BtnConditions.Toggled += (t) => Conditions.Visible = t;
     }
 
     #region Init
@@ -71,7 +82,7 @@ public partial class SpellEditor : Control, EditorInitiator<ISpellModel>, IEffec
     {
         if (spell == null) return;
         // un vaporeon (save event)
-        spell.GetEntityBus().unsubscribe(this, IEventBus.save);
+        spell.GetEntityBus().unsubscribe(this.GetVaporeon(), IEventBus.save);
         // unsub this
         spell.GetEntityBus().unsubscribe(this);
         spell.GetName().GetEntityBus().unsubscribe(this, nameof(onNameChanged));
@@ -82,19 +93,16 @@ public partial class SpellEditor : Control, EditorInitiator<ISpellModel>, IEffec
     {
         if (spell == null) return;
         // sub vaporeon (save event)
-        spell.GetEntityBus().subscribe(this, IEventBus.save);
+        spell.GetEntityBus().subscribe(this.GetVaporeon(), IEventBus.save);
         // sub this
         spell.GetEntityBus().subscribe(this);
         spell.GetName().GetEntityBus().subscribe(this, nameof(onNameChanged));
         spell.GetDescription().GetEntityBus().subscribe(this, nameof(onDescChanged));
         spell.effectIds.GetEntityBus().subscribe(this);
         // id & name & desc
-        this.EntityID.Text = spell.entityUid;
+        this.EntityID.Text = "#" + spell.entityUid;
         this.NameEdit.Text = spell.GetName().ToString();
         this.DescriptionEdit.Text = spell.GetDescription().ToString();
-        // props
-        PropertiesGrid.QueueFreeChildren();
-        PropertiesComponent.GenerateGrid(spell.properties, PropertiesGrid);
         // costs
         foreach (ResourceType res in Enum.GetValues(typeof(ResourceType)))
         {
@@ -109,11 +117,16 @@ public partial class SpellEditor : Control, EditorInitiator<ISpellModel>, IEffec
             CostsGrid.AddChild(lbl);
             CostsGrid.AddChild(edit);
         }
+        // props
+        PropertiesGrid.QueueFreeChildren();
+        PropertiesComponent.GenerateGrid(spell.properties, PropertiesGrid);
         // effects
         this.fillEffects();
         // zones
         ZoneEditorMiniMin.init(spell.RangeZoneMin);
-        ZoneEditorMiniMin.init(spell.RangeZoneMax);
+        ZoneEditorMiniMax.init(spell.RangeZoneMax);
+        // TODO conditions
+        // ...
     }
     #endregion
 

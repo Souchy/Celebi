@@ -51,7 +51,7 @@ public partial class EffectMini : PanelContainer, IEffectNodesContainer
         this.OnReady();
         foreach (var e in VaporeonUtil.effectTypes)
             BtnType.AddItem(e.Name);
-        BtnType.Select(0);
+        //BtnType.Select(0);
 
         BtnHide.ButtonUp += onClickHide;
         BtnMoveUp.ButtonUp += onClickMoveUp;
@@ -148,7 +148,12 @@ public partial class EffectMini : PanelContainer, IEffectNodesContainer
         Content.Visible = !Content.Visible;
         Children.Visible = !Children.Visible;
     }
-    private void onClickEdit() => this.GetVaporeon().openEditor(effect);
+    private void onClickEdit()
+    {
+        EffectEditor editor = (EffectEditor) Vaporeon.instanceEditor(effect);
+        this.GetVaporeon().newWindow(editor);
+        editor.init(effect, parentList);
+    }
     private void onClickSelectEffectType(long index)
     {
         Type effectType = VaporeonUtil.effectTypes[(int) index];

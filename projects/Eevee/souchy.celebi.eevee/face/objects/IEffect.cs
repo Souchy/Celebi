@@ -79,8 +79,8 @@ namespace souchy.celebi.eevee.face.objects
             /// </summary>
             public IValue<int> Duration { get; set; }
             public IValue<int> Delay { get; set; }
-            public IValue<StatusFusingStrategy> StatusFusingStrategy { get; set; }
             public IValue<int> MaxStacks { get; set; }
+            public IValue<StatusFusingStrategy> StatusFusingStrategy { get; set; }
         }
     }
 

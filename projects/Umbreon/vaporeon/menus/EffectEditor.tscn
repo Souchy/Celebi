@@ -26,6 +26,7 @@ layout_mode = 2
 [node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+split_offset = 400
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HSplitContainer"]
 layout_mode = 2
@@ -73,16 +74,16 @@ layout_mode = 2
 text = "Parameters"
 horizontal_alignment = 1
 
-[node name="ParametersGrid" type="GridContainer" parent="MarginContainer/VBoxContainer/HSplitContainer/VBoxContainer/ScrollContainer/VBoxContainer/ParametersBox"]
+[node name="Values" type="GridContainer" parent="MarginContainer/VBoxContainer/HSplitContainer/VBoxContainer/ScrollContainer/VBoxContainer/ParametersBox"]
 unique_name_in_owner = true
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HSplitContainer/VBoxContainer/ScrollContainer/VBoxContainer/ParametersBox/ParametersGrid"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HSplitContainer/VBoxContainer/ScrollContainer/VBoxContainer/ParametersBox/Values"]
 layout_mode = 2
 text = "a kinda long name"
 
-[node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/HSplitContainer/VBoxContainer/ScrollContainer/VBoxContainer/ParametersBox/ParametersGrid"]
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/HSplitContainer/VBoxContainer/ScrollContainer/VBoxContainer/ParametersBox/Values"]
 layout_mode = 2
 placeholder_text = "value"
 caret_blink = true
@@ -92,23 +93,37 @@ caret_blink_interval = 0.5
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HSplitContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="BtnStatus" type="Button" parent="MarginContainer/VBoxContainer/HSplitContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-text = "Conditions"
-horizontal_alignment = 1
-vertical_alignment = 1
+toggle_mode = true
+text = "Status"
 
-[node name="SourceConditionsTree" parent="MarginContainer/VBoxContainer/HSplitContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_ylmo8")]
+[node name="StatusValues" type="GridContainer" parent="MarginContainer/VBoxContainer/HSplitContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="BtnConditions" type="Button" parent="MarginContainer/VBoxContainer/HSplitContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = true
+text = "Conditions"
+
+[node name="Conditions" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HSplitContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="SourceConditionsTree" parent="MarginContainer/VBoxContainer/HSplitContainer/VBoxContainer/ScrollContainer/VBoxContainer/Conditions" instance=ExtResource("3_ylmo8")]
 unique_name_in_owner = true
 layout_mode = 2
 Title = "Source Conditions"
 
-[node name="TargetConditionsTree" parent="MarginContainer/VBoxContainer/HSplitContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_ylmo8")]
+[node name="TargetConditionsTree" parent="MarginContainer/VBoxContainer/HSplitContainer/VBoxContainer/ScrollContainer/VBoxContainer/Conditions" instance=ExtResource("3_ylmo8")]
 unique_name_in_owner = true
 layout_mode = 2
 Title = "Target Conditions"
 
-[node name="TriggerConditionsTree" parent="MarginContainer/VBoxContainer/HSplitContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_ylmo8")]
+[node name="TriggerConditionsTree" parent="MarginContainer/VBoxContainer/HSplitContainer/VBoxContainer/ScrollContainer/VBoxContainer/Conditions" instance=ExtResource("3_ylmo8")]
 unique_name_in_owner = true
 layout_mode = 2
 Title = "Trigger Conditions"

@@ -126,12 +126,12 @@ public partial class Vaporeon : Control
     #endregion
 
     #region Open Editors
-    public static Node instanceEditor(object model)
+    public static Control instanceEditor(object model)
     {
         if (model == null) return null;
         foreach(var t in SceneTypes.Keys)
             if(t.IsAssignableFrom(model.GetType()))
-                return SceneTypes[t].Instantiate();
+                return (Control) SceneTypes[t].Instantiate();
         return null;
     }
     public static T instanceScene<T>() where T : Node
@@ -146,14 +146,7 @@ public partial class Vaporeon : Control
         newWindow((Control) editor);
         editor.init(model);
     }
-    public void openZonePreview(IZone model)
-    {
-        if (model == null) return;
-        var preview = ZonePreviewScene.Instantiate<ZonePreview>();
-        newWindow(preview);
-        preview.init(model);
-    }
-    private void newWindow(Control root)
+    public void newWindow(Control root)
     {
         var wd = new Window();
         wd.GuiEmbedSubwindows = false;

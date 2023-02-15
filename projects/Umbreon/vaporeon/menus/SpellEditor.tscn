@@ -48,6 +48,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 placeholder_text = "Name"
+select_all_on_focus = true
 caret_blink = true
 caret_blink_interval = 0.5
 
@@ -56,6 +57,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Description"
+select_all_on_focus = true
 caret_blink = true
 caret_blink_interval = 0.5
 
@@ -73,22 +75,28 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="CostsLbl" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="BtnCosts" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 18
+toggle_mode = true
+button_pressed = true
 text = "Costs"
-horizontal_alignment = 1
 
 [node name="CostsGrid" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 columns = 2
 
-[node name="PropertiesLbl" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="BtnProperties" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 18
+toggle_mode = true
+button_pressed = true
 text = "Properties"
-horizontal_alignment = 1
 
 [node name="PropertiesGrid" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -185,27 +193,45 @@ text = "Need Line of Sight
 [node name="NeedLos" type="CheckBox" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PropertiesGrid"]
 layout_mode = 2
 
-[node name="RangeLbl" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="BtnRange" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 18
+toggle_mode = true
+button_pressed = true
 text = "Range"
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="ZoneEditorMiniMin" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_ykg86")]
+[node name="Range" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ZoneEditorMiniMax" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_ykg86")]
+[node name="ZoneEditorMiniMin" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Range" instance=ExtResource("3_ykg86")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="SourceConditionsTree" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("5_tmavo")]
+[node name="ZoneEditorMiniMax" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Range" instance=ExtResource("3_ykg86")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="BtnConditions" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+toggle_mode = true
+button_pressed = true
+text = "Conditions"
+
+[node name="Conditions" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="SourceConditionsTree" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Conditions" instance=ExtResource("5_tmavo")]
 unique_name_in_owner = true
 layout_mode = 2
 Title = "Source Conditions"
 
-[node name="TargetConditionsTree" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("5_tmavo")]
+[node name="TargetConditionsTree" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Conditions" instance=ExtResource("5_tmavo")]
 unique_name_in_owner = true
 layout_mode = 2
 Title = "Target Conditions"
