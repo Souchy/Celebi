@@ -44,6 +44,10 @@ namespace souchy.celebi.eevee.enums
         Fire,
         Earth,
         Air,
+        /// <summary>
+        /// True damage. Not sure if it's an element or just a EffectTrueDamage
+        /// </summary>
+        True
     }
     #endregion
 
@@ -138,6 +142,8 @@ namespace souchy.celebi.eevee.enums
         Speed, // Initiative in timeline
         [StatTypeProperties(Simple, Other)]
         Echo, // like Poe shrine: repeat spells x times
+        [StatTypeProperties(Simple, Other)]
+        Erosion, // life erosion % on damage
         #endregion
 
         #region States ?
