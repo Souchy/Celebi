@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfjm0hvvmri8d"]
+
+[ext_resource type="Theme" uid="uid://bnrv7qp6ltiwn" path="res://vaporeon/themes/Vaporeon.tres" id="1_ln1p8"]
+[ext_resource type="PackedScene" uid="uid://bja0vubq0rsqe" path="res://vaporeon/simuroom/editors/TeamEditor.tscn" id="1_m7t7s"]
+
+[node name="FightEditor" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ln1p8")
+
+[node name="Team" parent="." instance=ExtResource("1_m7t7s")]
+layout_mode = 1
+offset_left = 17.0
+offset_top = 17.0
+offset_right = -957.0
+offset_bottom = 262.0
+
+[node name="Team2" parent="." instance=ExtResource("1_m7t7s")]
+layout_mode = 1
+offset_left = 265.0
+offset_top = 17.0
+offset_right = -714.0
+offset_bottom = 266.0

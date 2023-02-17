@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://cy07vf0mgx0ww"]
+
+[ext_resource type="Shader" path="res://vaporeon/simuroom/sobdel.gdshader" id="1_osu84"]
+[ext_resource type="Shader" uid="uid://cvmmf5d61eu7u" path="res://vaporeon/simuroom/checkers.tres" id="2_njj41"]
+[ext_resource type="PackedScene" uid="uid://dfjm0hvvmri8d" path="res://vaporeon/simuroom/editors/FightEditor.tscn" id="4_cb6jy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pycfi"]
+render_priority = 0
+shader = ExtResource("1_osu84")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xae2k"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_pycfi")
+shader = ExtResource("2_njj41")
+shader_parameter/Bias = Vector3(0.001, 0, -0.001)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hu88l"]
+material = SubResource("ShaderMaterial_xae2k")
+size = Vector3(6, 1, 6)
+
+[node name="Simuroom" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_hu88l")
+
+[node name="Hud" type="Node" parent="."]
+
+[node name="FightEditor" parent="Hud" instance=ExtResource("4_cb6jy")]

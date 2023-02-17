@@ -9,44 +9,32 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Resources" type="MarginContainer" parent="."]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Life" type="Label" parent="Resources"]
-offset_top = 8.0
-offset_right = 40.0
-offset_bottom = 31.0
+layout_mode = 2
 
 [node name="Ap" type="Label" parent="Resources"]
-offset_top = 8.0
-offset_right = 40.0
-offset_bottom = 31.0
+layout_mode = 2
 
 [node name="Mp" type="Label" parent="Resources"]
-offset_top = 8.0
-offset_right = 40.0
-offset_bottom = 31.0
+layout_mode = 2
 
 [node name="Characteristics" type="MarginContainer" parent="."]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Fire" type="Label" parent="Characteristics"]
-offset_top = 8.0
-offset_right = 40.0
-offset_bottom = 31.0
+layout_mode = 2
 
 [node name="Water" type="Label" parent="Characteristics"]
-offset_top = 8.0
-offset_right = 40.0
-offset_bottom = 31.0
+layout_mode = 2
 
 [node name="Earth" type="Label" parent="Characteristics"]
-offset_top = 8.0
-offset_right = 40.0
-offset_bottom = 31.0
+layout_mode = 2
 
 [node name="Wind" type="Label" parent="Characteristics"]
-offset_top = 8.0
-offset_right = 40.0
-offset_bottom = 31.0
+layout_mode = 2
