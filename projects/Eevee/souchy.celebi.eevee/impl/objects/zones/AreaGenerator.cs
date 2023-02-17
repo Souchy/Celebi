@@ -127,7 +127,7 @@ namespace souchy.celebi.eevee.impl.objects.zones
         public static Points circleRing(IZone zone)
         {
             Points points = new(zone);
-            var size = zone.GetSize<ZoneSizeRadiusRing>();
+            var size = zone.GetSize<ZoneSizeRadius>();
             for (int i = -size.radius; i <= size.radius; i++)
                 for (int j = -size.radius; j <= size.radius; j++)
                 {
@@ -140,7 +140,7 @@ namespace souchy.celebi.eevee.impl.objects.zones
         public static Points circleHalfRing(IZone zone)
         {
             Points points = new(zone);
-            var size = zone.GetSize<ZoneSizeRadiusRing>();
+            var size = zone.GetSize<ZoneSizeRadius>();
             for (int i = -size.radius; i <= size.radius; i++)
                 for (int j = 0; j <= size.radius; j++)
                 {
@@ -174,7 +174,7 @@ namespace souchy.celebi.eevee.impl.objects.zones
         public static Points squareRing(IZone zone)
         {
             Points points = new(zone);
-            var size = zone.GetSize<ZoneSizeRadiusRing>();
+            var size = zone.GetSize<ZoneSizeRadius>();
             for (int i = -size.radius; i <= size.radius; i++)
                 for (int j = -size.radius; j <= size.radius; j++)
                 {
@@ -187,7 +187,7 @@ namespace souchy.celebi.eevee.impl.objects.zones
         public static Points squareHalfRing(IZone zone)
         {
             Points points = new(zone);
-            var size = zone.GetSize<ZoneSizeRadiusRing>();
+            var size = zone.GetSize<ZoneSizeRadius>();
             for (int i = -size.radius; i <= size.radius; i++)
                 for (int j = 0; j <= size.radius; j++)
                 {
@@ -212,7 +212,7 @@ namespace souchy.celebi.eevee.impl.objects.zones
         public static Points rectangleRing(IZone zone)
         {
             Points points = new(zone);
-            var size = zone.GetSize<ZoneSizeRadius2Ring>();
+            var size = zone.GetSize<ZoneSizeRadius2>();
             for (int i = -size.radiusSide; i <= size.radiusSide; i++)
                 for (int j = -size.radiusForward; j <= size.radiusForward; j++)
                 {
@@ -226,7 +226,7 @@ namespace souchy.celebi.eevee.impl.objects.zones
         public static Points rectangleHalfRing(IZone zone)
         {
             Points points = new(zone);
-            var size = zone.GetSize<ZoneSizeRadius2Ring>();
+            var size = zone.GetSize<ZoneSizeRadius2>();
             for (int i = -size.radiusSide; i <= size.radiusSide; i++)
                 for (int j = 0; j <= size.radiusForward; j++)
                 {
@@ -273,7 +273,7 @@ namespace souchy.celebi.eevee.impl.objects.zones
         public static Points ellipseRing(IZone zone)
         {
             Points points = new(zone);
-            var size = zone.GetSize<ZoneSizeRadius2Ring>();
+            var size = zone.GetSize<ZoneSizeRadius2>();
             int maxRadius = Math.Max(size.radiusSide, size.radiusForward);
             int minRadius = Math.Min(size.radiusSide, size.radiusForward);
             for (int i = -size.radiusSide; i <= size.radiusSide; i++)
@@ -296,7 +296,7 @@ namespace souchy.celebi.eevee.impl.objects.zones
         public static Points ellipseHalfRing(IZone zone)
         {
             Points points = new(zone);
-            var size = zone.GetSize<ZoneSizeRadius2Ring>();
+            var size = zone.GetSize<ZoneSizeRadius2>();
             int maxRadius = Math.Max(size.radiusSide, size.radiusForward);
             int minRadius = Math.Min(size.radiusSide, size.radiusForward);
             for (int i = -size.radiusSide; i <= size.radiusSide; i++)

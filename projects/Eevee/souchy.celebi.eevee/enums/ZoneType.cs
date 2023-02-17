@@ -7,8 +7,6 @@ using static souchy.celebi.eevee.impl.objects.zones.AreaGenerator;
 namespace souchy.celebi.eevee.enums
 {
 
-
-
     public enum ZoneType
     {
         [ZoneSize<ZoneSizePoint>] point,
@@ -22,9 +20,7 @@ namespace souchy.celebi.eevee.enums
         [ZoneSize<ZoneSizeRadius2>] star, // both crosses (=8 directions)
 
         [ZoneSize<ZoneSizeRadius2>] crossHalf,
-        [ZoneSize<ZoneSizeRadius2Ring>] crossRing,
-        [ZoneSize<ZoneSizeRadius2Ring>] crossHalfRing,
-        [ZoneSize<ZoneSizeRadius2Ring>] xcrossRing, 
+        [ZoneSize<ZoneSizeRadius2>] xcrossHalf,
 
         [ZoneSize<ZoneSizeRadius>] circle,      // like a diamond
         [ZoneSize<ZoneSizeRadius>] circleHalf,  // cone, like a triangle
@@ -33,16 +29,6 @@ namespace souchy.celebi.eevee.enums
         [ZoneSize<ZoneSizeRadius2>] rectangle,
         [ZoneSize<ZoneSizeRadius2>] ellipse,     // ellipse : radius, radius
         [ZoneSize<ZoneSizeRadius2>] ellipseHalf,
-
-        // adds a parameter for ring width
-        [ZoneSize<ZoneSizeRadiusRing>] circleRing,      // 
-        [ZoneSize<ZoneSizeRadiusRing>] circleHalfRing,  // like a V
-        [ZoneSize<ZoneSizeRadiusRing>] squareRing,      // like 1 perpendicular line and 2 sides
-        [ZoneSize<ZoneSizeRadiusRing>] squareHalfRing,      // like 1 perpendicular line and 2 sides
-        [ZoneSize<ZoneSizeRadius2Ring>] rectangleRing,  // 
-        [ZoneSize<ZoneSizeRadius2Ring>] rectangleHalfRing,  // 
-        [ZoneSize<ZoneSizeRadius2Ring>] ellipseRing,    // take 2 radius from ellipse and 3rd parameter is ring width
-        [ZoneSize<ZoneSizeRadius2Ring>] ellipseHalfRing,// aka boomerang
     }
 
     public abstract class IZoneSizeAttribute : Attribute
@@ -58,10 +44,6 @@ namespace souchy.celebi.eevee.enums
     public class ZoneSizeAttribute<T> : IZoneSizeAttribute where T : IZoneSize
     {
         public override Type type() => typeof(T); 
-        //public Func<IZone, Points> action { get; set; }
-        //public ZoneSizeAttribute(Func<IZone, Points> action) {
-        //    //this.action = action;
-        //}
         public T createT(IZone zone) {
             var t = (T) Activator.CreateInstance(typeof(T));
             t.sizeParams = zone.size.value;
@@ -86,8 +68,9 @@ namespace souchy.celebi.eevee.enums
         }
         public static Points GeneratePoints(this IZone zone)
         {
+            var methodName = Enum.GetName(zone.zoneType.value) + (zone.GetRingWidth() != 0 ? "Ring" : "");
             var points = (Points) typeof(AreaGenerator)
-                .GetMethod(Enum.GetName(zone.zoneType.value))
+                .GetMethod(methodName)
                 .Invoke(null, new object[] { zone });
             return points
                 .anchor()
@@ -98,47 +81,28 @@ namespace souchy.celebi.eevee.enums
 
     public abstract class IZoneSize
     {
-        public IVector3 sizeParams; // { get; set; }
+        public IVector3 sizeParams;
+        public int ringWidth { get => sizeParams.z; set => sizeParams.z = value; }
     }
     public class ZoneSizePoint : IZoneSize
     {
-        //public IVector3 sizeParams { get; set; }
     }
     // line, diagonal
     public class ZoneSizeLength : IZoneSize
     {
-        //public IVector3 sizeParams { get; set; }
         public int length { get => sizeParams.x; set => sizeParams.x = value; }
     }
     // circle O, square [], halfcircle /_\, v  /\
     public class ZoneSizeRadius : IZoneSize
     {
-        //public IVector3 sizeParams { get; set; }
         public int radius { get => sizeParams.x; set => sizeParams.x = value; }
     }
     // cross, xcross, star, rectangle, ellipse, ellipseHalf
     public class ZoneSizeRadius2 : IZoneSize
     {
-        //public IVector3 sizeParams { get; set; }
         public int radiusForward { get => sizeParams.x; set => sizeParams.x = value; }
         public int radiusSide { get => sizeParams.z; set => sizeParams.z = value; }
     }
-    // circleRing /\, squareRing :_:, circleHalfRing
-    public class ZoneSizeRadiusRing : IZoneSize
-    {
-        //public IVector3 sizeParams { get; set; } 
-        public int radius { get => sizeParams.x; set => sizeParams.x = value; }
-        public int ringWidth { get => sizeParams.z; set => sizeParams.z = value; }
-    }
-    // rectangleRing :_:, ellipseRing, ellipseHalfRing .-.
-    public class ZoneSizeRadius2Ring : IZoneSize
-    {
-        //public IVector3 sizeParams { get; set; }
-        public int radiusForward { get => sizeParams.x; set => sizeParams.x = value; }
-        public int radiusSide { get => sizeParams.z; set => sizeParams.z = value; }
-        public int ringWidth { get => sizeParams.y; set => sizeParams.y = value; }
-    }
-
 
 
 }

@@ -1,4 +1,5 @@
 *.import
+addons/
 
 out/
 src/.vs/

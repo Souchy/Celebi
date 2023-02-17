@@ -66,28 +66,17 @@ namespace souchy.celebi.eevee.impl.objects.zones
                     case ZoneType.diagonal:
                         return Anchoring.anchorLine(this);
                     case ZoneType.crossHalf:
-                    case ZoneType.crossHalfRing:
                     case ZoneType.circleHalf:
-                    case ZoneType.circleHalfRing:
                     case ZoneType.squareHalf:
-                    case ZoneType.squareHalfRing:
-                    case ZoneType.rectangleHalfRing:
                     case ZoneType.ellipseHalf:
-                    case ZoneType.ellipseHalfRing:
                         return Anchoring.anchorFormHalf(this);
                     case ZoneType.cross:
-                    case ZoneType.crossRing:
-                    case ZoneType.xcrossRing:
                     case ZoneType.xcross:
                     case ZoneType.star:
                     case ZoneType.circle:
-                    case ZoneType.circleRing:
                     case ZoneType.square:
-                    case ZoneType.squareRing:
                     case ZoneType.rectangle:
-                    case ZoneType.rectangleRing:
                     case ZoneType.ellipse:
-                    case ZoneType.ellipseRing:
                         return Anchoring.anchorForm(this);
                         //default:
                         //    throw new Exception("Invalid zonetype: " + zone.zoneType.value);

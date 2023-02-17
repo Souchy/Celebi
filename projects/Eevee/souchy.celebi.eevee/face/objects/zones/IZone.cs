@@ -14,7 +14,7 @@ namespace souchy.celebi.eevee.face.shared.zones
         /// <summary>
         /// 1) lengthMin
         /// 2) lengthMax
-        /// 3) % opening (ex 25% remove the line at the bottom, 50% cuts it in half to make a half-circle)
+        /// 3) Ring width: 0 = full shape, x = actual ring width
         /// </summary>
         public IValue<IVector3> size { get; set; }
         /// <summary>
@@ -60,6 +60,9 @@ namespace souchy.celebi.eevee.face.shared.zones
         /// 
         /// </summary>
         public IEntityList<IZone> children { get; set; }
+
+
+        public int GetRingWidth() => size.value.z;
     }
 
     //public interface ZoneMulti : IZone
