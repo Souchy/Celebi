@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbsy6uf5j02c5"]
+
+[ext_resource type="Script" path="res://sapphire/controls/Controls.cs" id="1_tni8e"]
+[ext_resource type="PackedScene" path="res://sapphire/controls/cursor.tscn" id="2_pl3bu"]
+
+[node name="Controls" type="Node"]
+script = ExtResource("1_tni8e")
+
+[node name="cursorBoard" parent="." instance=ExtResource("2_pl3bu")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, -2.98023e-08, -2.98023e-08, 1, 2.98023e-08, -2.98023e-08, 0, 1, 2, 0.01, 8)
+
+[node name="cursorWorld" parent="." instance=ExtResource("2_pl3bu")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, -2.98023e-08, -2.98023e-08, 1, 2.98023e-08, -2.98023e-08, 0, 1, 2, 0.01, 8)
+
+[node name="CamRotY" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)
+
+[node name="CamRotX" type="Node3D" parent="CamRotY"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+
+[node name="camIso" type="Camera3D" parent="CamRotY/CamRotX"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+projection = 1
+current = true
+size = 20.0
+near = 0.001
+far = 25.0
+
+[node name="camTop" type="Camera3D" parent="CamRotY"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)
+projection = 1
+size = 20.0
+near = 0.001
+far = 15.0
