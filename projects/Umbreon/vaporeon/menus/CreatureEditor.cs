@@ -100,13 +100,13 @@ public partial class CreatureEditor : Control, EditorInitiator<ICreatureModel>
         this.DescriptionEdit.Text = creature.GetDescription().ToString();
 
         // Spells
-        foreach(var s in creature.baseSpells.Select(s => Eevee.models.spellModels.Get(s)))
+        foreach(var s in creature.GetSpells())
             addSpellToList(s);
         // Passives
-        foreach (var s in creature.baseStatusPassives.Select(s => Eevee.models.statusModels.Get(s)))
+        foreach (var s in creature.GetPassives())
             addPassiveToList(s);
         // Skins
-        foreach (var s in creature.skins.Select(s => Eevee.models.creatureSkins.Get(s)))
+        foreach (var s in creature.GetSkins())
             addSkinToList(s);
     }
 
@@ -144,8 +144,11 @@ public partial class CreatureEditor : Control, EditorInitiator<ICreatureModel>
     public void onAddSelectSpell(Control selector, ISpellModel model)
     {
         if (selector != this) return;
-        bool added = this.creature.baseSpells.Add(model.entityUid);
-        if(added) addSpellToList(model); // tood: remove this, make an eventful hashset/list
+        if (this.creature.baseSpells.Contains(model.entityUid)) return;
+        //bool added = 
+        this.creature.baseSpells.Add(model.entityUid);
+        //if(added) 
+            addSpellToList(model); // tood: remove this, make an eventful hashset/list
     }
     public void addSpellToList(ISpellModel model)
     {
@@ -169,8 +172,11 @@ public partial class CreatureEditor : Control, EditorInitiator<ICreatureModel>
     public void onAddSelectStatus(Control selector, IStatusModel model)
     {
         if (selector != this) return;
-        bool added = this.creature.baseStatusPassives.Add(model.entityUid);
-        if (added) addPassiveToList(model); // todo: remove this, make an eventful hashset/list
+        if(this.creature.baseStatusPassives.Contains(model.entityUid)) return;
+        //bool added = 
+        this.creature.baseStatusPassives.Add(model.entityUid);
+        //if (added) 
+        addPassiveToList(model); // todo: remove this, make an eventful hashset/list
     }
     public void addPassiveToList(IStatusModel model)
     {
@@ -194,8 +200,11 @@ public partial class CreatureEditor : Control, EditorInitiator<ICreatureModel>
     public void onAddSelectSkin(Control selector, ICreatureSkin model)
     {
         if (selector != this) return;
-        bool added = this.creature.skins.Add(model.entityUid);
-        if (added) addSkinToList(model); // todo: remove this, make an eventful hashset/list
+        if (this.creature.skins.Contains(model.entityUid)) return;
+        //bool added = 
+        this.creature.skins.Add(model.entityUid);
+        //if (added) 
+            addSkinToList(model); // todo: remove this, make an eventful hashset/list
     }
     public void addSkinToList(ICreatureSkin model)
     {

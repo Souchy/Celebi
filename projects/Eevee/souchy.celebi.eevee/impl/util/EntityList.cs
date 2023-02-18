@@ -7,11 +7,6 @@ namespace souchy.celebi.eevee.impl.util
     public class EntitySet<T> : EntityList<T>, IEntitySet<T> //where T : IEntity
     {
         public EntitySet() => allowDuplicates = false;
-        //private EntitySet(IID id) : base(id) { }
-        //public static new EntitySet<T> Create() => new EntitySet<T>(Eevee.RegisterIID<IEntity>())
-        //{
-        //    allowDuplicates = false
-        //};
     }
 
     public class EntityList<T> : List<T>, IEntityList<T> //where T : IEntity
@@ -30,9 +25,6 @@ namespace souchy.celebi.eevee.impl.util
         public List<T> Values { get => this; }
 
         public EntityList() { }
-        //private EntityList() { }
-        //protected EntityList(IID id) => entityUid = id;
-        //public static EntityList<T> Create() => new EntityList<T>(Eevee.RegisterIID<IEntity>());
 
         public new void Add(T t)
         {

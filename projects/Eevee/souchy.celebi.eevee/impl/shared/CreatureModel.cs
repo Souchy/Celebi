@@ -2,6 +2,7 @@
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.stats;
+using souchy.celebi.eevee.impl.util;
 
 namespace souchy.celebi.eevee.impl.shared
 {
@@ -10,15 +11,15 @@ namespace souchy.celebi.eevee.impl.shared
         public IID entityUid { get; set; }
         public IID nameId { get; set; }
         public IID descriptionId { get; set; }
-        public HashSet<IID> skins { get; init; } = new HashSet<IID>();
+        public IEntitySet<IID> skins { get; init; } = new EntitySet<IID>();
 
         public IID baseStats { get; set; }
-        public HashSet<IID> baseSpells { get; init; } = new HashSet<IID>();
-        public HashSet<IID> baseStatusPassives { get; init; } = new HashSet<IID>();
+        public IID growthStats { get; set; }
+        public IEntitySet<IID> baseSpells { get; init; } = new EntitySet<IID>();
+        public IEntitySet<IID> baseStatusPassives { get; init; } = new EntitySet<IID>();
 
         private CreatureModel() { }
-        //private CreatureModel(IID id) => entityUid = id;
-        public static ICreatureModel Create() => new CreatureModel() //Eevee.RegisterIID())
+        public static ICreatureModel Create() => new CreatureModel() 
         {
             entityUid = Eevee.RegisterIID<ICreatureModel>(),
         };

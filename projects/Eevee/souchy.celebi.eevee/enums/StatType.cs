@@ -65,13 +65,6 @@ namespace souchy.celebi.eevee.enums
         [StatTypeProperties(StatValueType.Resource, StatCategory.Resource)]
         Summons,
 
-        // TODO ResourceMax, maybe we just use StatResource
-        //LifeMax,
-        //ManaMax,
-        //MovementMax,
-        //RageMax,
-        //SummonsMax,
-
         [StatTypeProperties(Simple, StatCategory.Resource)]
         LifeRegen, // -1 = full every turn, 0 = no regen, 1 = 1/turn, 0.25 = 1 per 4 turns // string to parse for different regens
         [StatTypeProperties(Simple, StatCategory.Resource)]
