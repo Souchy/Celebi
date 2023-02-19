@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using souchy.celebi.eevee.face.shared.models.skins;
 
 namespace souchy.celebi.eevee.impl.factories
 {
@@ -22,16 +23,6 @@ namespace souchy.celebi.eevee.impl.factories
         {
             // Model + Skin
             var creatureModel = CreatureModel.Create();
-            var creatureSkin = CreatureSkin.Create();
-            creatureModel.skins.Add(creatureSkin.entityUid);
-            // Name
-            var name = StringEntity.Create("CreatureName #" + creatureSkin.entityUid);
-            creatureSkin.nameId = name.entityUid;
-            Eevee.models.i18n.Add(creatureSkin.nameId, name);
-            // Desc
-            var desc = StringEntity.Create("CreatureDesc #" + creatureSkin.entityUid);
-            creatureSkin.descriptionId = desc.entityUid;
-            Eevee.models.i18n.Add(creatureSkin.descriptionId, desc);
             // Stats
             var stats = Stats.Create();
             creatureModel.baseStats = stats.entityUid;
@@ -42,9 +33,39 @@ namespace souchy.celebi.eevee.impl.factories
             creatureModel.growthStats = growthStats.entityUid;
             Eevee.models.stats.Add(growthStats.entityUid, growthStats);
             fillStats(growthStats, true);
-            // add Model + Skin
-            Eevee.models.creatureSkins.Add(creatureSkin.entityUid, creatureSkin);
+            // Skin
+            var creatureSkin = newCreatureSkin();
+            creatureModel.skins.Add(creatureSkin.entityUid);
+            // Eevee
             Eevee.models.creatureModels.Add(creatureModel.entityUid, creatureModel);
+        }
+
+        private static ICreatureSkin newCreatureSkin()
+        {
+            var creatureSkin = CreatureSkin.Create();
+            // Name
+            var name = StringEntity.Create("CreatureName #" + creatureSkin.entityUid);
+            creatureSkin.nameId = name.entityUid;
+            Eevee.models.i18n.Add(creatureSkin.nameId, name);
+            // Desc
+            var desc = StringEntity.Create("CreatureDesc #" + creatureSkin.entityUid);
+            creatureSkin.descriptionId = desc.entityUid;
+            Eevee.models.i18n.Add(creatureSkin.descriptionId, desc);
+            // model
+            creatureSkin.meshModel = "ybot/ybot_pro_magic";
+            creatureSkin.meshName = "Alpha_Surface";
+            creatureSkin.animations = new()
+            {
+                idle = "locomotion/idle",
+                run = "Armature050|mixamocom|Layer0|run forward",
+                walk = "Armature054|mixamocom|Layer0|walk forward hold",
+                receiveHit = "Armature043|mixamocom|Layer0|hit from front",
+                victory = "Victory",
+                defeat = "Defeat"
+            };
+            // Eevee
+            Eevee.models.creatureSkins.Add(creatureSkin.entityUid, creatureSkin);
+            return creatureSkin;
         }
 
         private static void fillStats(IStats stats, bool isModel)
