@@ -1,9 +1,108 @@
-[gd_scene format=3 uid="uid://c7qb482sng5dk"]
+[gd_scene load_steps=7 format=3 uid="uid://c7qb482sng5dk"]
 
-[node name="CreatureInstanceEditor" type="Control"]
-layout_mode = 3
+[ext_resource type="Theme" uid="uid://bnrv7qp6ltiwn" path="res://vaporeon/themes/Vaporeon.tres" id="1_a103a"]
+[ext_resource type="PackedScene" uid="uid://cb2gvesrrqq3m" path="res://vaporeon/common/StatsEditor.tscn" id="2_8nii8"]
+[ext_resource type="Script" path="res://vaporeon/simuroom/editors/CreatureInstanceEditor.cs" id="2_610dt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_42unx"]
+draw_center = false
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_snlw4"]
+bg_color = Color(0.12549, 0.12549, 0.12549, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_odof1"]
+
+[node name="CreatureInstanceEditor" type="PanelContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_a103a")
+theme_override_styles/panel = SubResource("StyleBoxFlat_42unx")
+script = ExtResource("2_610dt")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LblName" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.101961, 0.827451, 0.917647, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_snlw4")
+text = "Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnModel" type="OptionButton" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+
+[node name="Pos" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LblPos" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/Pos"]
+layout_mode = 2
+text = "Position"
+
+[node name="PosX" type="SpinBox" parent="MarginContainer/ScrollContainer/VBoxContainer/Pos"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+suffix = "X"
+select_all_on_focus = true
+
+[node name="PosZ" type="SpinBox" parent="MarginContainer/ScrollContainer/VBoxContainer/Pos"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+suffix = "Z"
+select_all_on_focus = true
+
+[node name="PosY" type="SpinBox" parent="MarginContainer/ScrollContainer/VBoxContainer/Pos"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+suffix = "Y"
+select_all_on_focus = true
+
+[node name="BtnStatuses" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+toggle_mode = true
+text = "Statuses"
+
+[node name="Statuses" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="BtnSpells" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+toggle_mode = true
+text = "Spells"
+
+[node name="Spells" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="StatsEditor" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_8nii8")]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_odof1")

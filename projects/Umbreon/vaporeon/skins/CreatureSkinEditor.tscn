@@ -1,9 +1,239 @@
-[gd_scene format=3 uid="uid://27vyyc8clir4"]
+[gd_scene load_steps=3 format=3 uid="uid://27vyyc8clir4"]
 
-[node name="CreatureSkinEditor" type="Control"]
-layout_mode = 3
+[ext_resource type="Theme" uid="uid://bnrv7qp6ltiwn" path="res://vaporeon/themes/Vaporeon.tres" id="1_q7xyc"]
+[ext_resource type="Script" path="res://vaporeon/skins/CreatureSkinEditor.cs" id="2_7e6fn"]
+
+[node name="CreatureSkinEditor" type="PanelContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_q7xyc")
+script = ExtResource("2_7e6fn")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="Main" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="BtnSave" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/Main"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_q7xyc")
+text = "Save"
+
+[node name="EntityID" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/Main"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "#EntityID"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NameEdit" type="LineEdit" parent="MarginContainer/ScrollContainer/VBoxContainer/Main"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+placeholder_text = "Name"
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="DescriptionEdit" type="LineEdit" parent="MarginContainer/ScrollContainer/VBoxContainer/Main"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Description"
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="RowModel" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LblModel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/RowModel"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+text = "Model File Name"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="InputModel" type="LineEdit" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/RowModel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BtnModel" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/RowModel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="FileDialogModel" type="FileDialog" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/RowModel/BtnModel"]
+unique_name_in_owner = true
+size = Vector2i(286, 141)
+
+[node name="RowMesh" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LblMesh" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/RowMesh"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+text = "Mesh Name"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="InputMesh" type="LineEdit" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/RowMesh"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RowIcon" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LblIcon" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/RowIcon"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+text = "Icon"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="InputIcon" type="LineEdit" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/RowIcon"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BtnIcon" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/RowIcon"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="FileDialogIcon" type="FileDialog" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/RowIcon/BtnIcon"]
+unique_name_in_owner = true
+size = Vector2i(286, 141)
+
+[node name="RowAnimations" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LblAnimations" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/RowAnimations"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Animations"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RowIdle" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/RowAnimations"]
+layout_mode = 2
+
+[node name="LblIdle" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/RowAnimations/RowIdle"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+text = "Idle"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="InputIdle" type="LineEdit" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/RowAnimations/RowIdle"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RowRun" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/RowAnimations"]
+layout_mode = 2
+
+[node name="LblRun" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/RowAnimations/RowRun"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+text = "Run"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="InputRun" type="LineEdit" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/RowAnimations/RowRun"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RowWalk" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/RowAnimations"]
+layout_mode = 2
+
+[node name="LblWalk" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/RowAnimations/RowWalk"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+text = "Walk"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="InputWalk" type="LineEdit" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/RowAnimations/RowWalk"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RowReceiveHit" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/RowAnimations"]
+layout_mode = 2
+
+[node name="LblReceiveHit" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/RowAnimations/RowReceiveHit"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+text = "ReceiveHit"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="InputReceiveHit" type="LineEdit" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/RowAnimations/RowReceiveHit"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RowVictory" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/RowAnimations"]
+layout_mode = 2
+
+[node name="LblVictory" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/RowAnimations/RowVictory"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+text = "Victory"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="InputVictory" type="LineEdit" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/RowAnimations/RowVictory"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RowDefeat" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/RowAnimations"]
+layout_mode = 2
+
+[node name="LblDefeat" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/RowAnimations/RowDefeat"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+text = "Defeat"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="InputDefeat" type="LineEdit" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/RowAnimations/RowDefeat"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3

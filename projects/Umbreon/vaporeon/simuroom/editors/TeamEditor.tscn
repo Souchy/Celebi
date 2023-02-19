@@ -1,14 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://bja0vubq0rsqe"]
+[gd_scene load_steps=3 format=3 uid="uid://bja0vubq0rsqe"]
 
 [ext_resource type="Theme" uid="uid://bnrv7qp6ltiwn" path="res://vaporeon/themes/Vaporeon.tres" id="1_roble"]
+[ext_resource type="Script" path="res://vaporeon/simuroom/editors/TeamEditor.cs" id="2_0sxk6"]
 
-[node name="Team" type="PanelContainer"]
+[node name="TeamEditor" type="PanelContainer"]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 192.0
 grow_horizontal = 2
 size_flags_vertical = 3
 theme = ExtResource("1_roble")
+script = ExtResource("2_0sxk6")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -26,6 +28,7 @@ toggle_mode = true
 text = "Team 1"
 
 [node name="Content" type="VBoxContainer" parent="MarginContainer/Widget"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -46,19 +49,15 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Widget/Content/ScrollContainer/Creatures"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Widget/Content/ScrollContainer/Creatures/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Widget/Content/ScrollContainer/Creatures"]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="MarginContainer/Widget/Content/ScrollContainer/Creatures/MarginContainer/HBoxContainer"]
+[node name="BtnEdit" type="Button" parent="MarginContainer/Widget/Content/ScrollContainer/Creatures/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Hello"
 
-[node name="Button" type="Button" parent="MarginContainer/Widget/Content/ScrollContainer/Creatures/MarginContainer/HBoxContainer"]
+[node name="BtnDelete" type="Button" parent="MarginContainer/Widget/Content/ScrollContainer/Creatures/HBoxContainer"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 text = "x"

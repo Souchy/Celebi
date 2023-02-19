@@ -6,7 +6,7 @@
 input_name = "inv_view_matrix"
 
 [sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_vhloy"]
-constant = Color(1, 0.174348, 0.264066, 1)
+constant = Color(0.0742188, 0.0742188, 0.0742188, 1)
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_5wgj8"]
 operator = 2
@@ -53,7 +53,7 @@ uniform vec3 Bias;
 
 void fragment() {
 // ColorConstant:22
-	vec4 n_out22p0 = vec4(1.000000, 0.174348, 0.264066, 1.000000);
+	vec4 n_out22p0 = vec4(0.074219, 0.074219, 0.074219, 1.000000);
 
 
 // Vector3Parameter:33
@@ -105,7 +105,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(395.577, -24.8645)
+graph_offset = Vector2(693.312, 41.3109)
 nodes/vertex/0/position = Vector2(560, 380)
 nodes/vertex/5/node = SubResource("VisualShaderNodeInput_se00p")
 nodes/vertex/5/position = Vector2(0, 620)
@@ -140,5 +140,5 @@ nodes/fragment/32/position = Vector2(320, 620)
 nodes/fragment/33/node = SubResource("VisualShaderNodeVec3Parameter_yfu0m")
 nodes/fragment/33/position = Vector2(80, 200)
 nodes/fragment/34/node = SubResource("VisualShaderNodeFloatFunc_8rxn7")
-nodes/fragment/34/position = Vector2(1240, 460)
+nodes/fragment/34/position = Vector2(1140, 480)
 nodes/fragment/connections = PackedInt32Array(7, 0, 14, 1, 16, 0, 14, 0, 22, 0, 23, 0, 26, 0, 28, 0, 28, 0, 27, 0, 28, 2, 27, 1, 27, 0, 29, 0, 30, 0, 26, 0, 14, 0, 30, 1, 33, 0, 30, 0, 23, 0, 0, 0, 29, 0, 23, 1)

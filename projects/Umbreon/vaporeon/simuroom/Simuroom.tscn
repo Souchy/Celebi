@@ -1,8 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://cy07vf0mgx0ww"]
+[gd_scene load_steps=12 format=3 uid="uid://cy07vf0mgx0ww"]
 
+[ext_resource type="Script" path="res://vaporeon/simuroom/Simuroom.cs" id="1_32hk8"]
 [ext_resource type="Shader" path="res://vaporeon/simuroom/sobdel.gdshader" id="1_osu84"]
 [ext_resource type="Shader" uid="uid://cvmmf5d61eu7u" path="res://vaporeon/simuroom/checkers.tres" id="2_njj41"]
+[ext_resource type="PackedScene" uid="uid://bj8425l6mfenk" path="res://sapphire/nodes/CreatureNode.tscn" id="3_47xta"]
+[ext_resource type="PackedScene" uid="uid://cbsy6uf5j02c5" path="res://sapphire/controls/Controls.tscn" id="4_3hfpk"]
 [ext_resource type="PackedScene" uid="uid://dfjm0hvvmri8d" path="res://vaporeon/simuroom/editors/FightEditor.tscn" id="4_cb6jy"]
+[ext_resource type="PackedScene" uid="uid://cii1gj3l421b8" path="res://vaporeon/simuroom/editors/SpellList.tscn" id="4_wo5jd"]
+[ext_resource type="PackedScene" uid="uid://bja0vubq0rsqe" path="res://vaporeon/simuroom/editors/TeamEditor.tscn" id="7_w5qjm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pycfi"]
 render_priority = 0
@@ -12,17 +17,62 @@ shader = ExtResource("1_osu84")
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_pycfi")
 shader = ExtResource("2_njj41")
-shader_parameter/Bias = Vector3(0.001, 0, -0.001)
+shader_parameter/Bias = Vector3(0.501, 0, -0.501)
 
 [sub_resource type="BoxMesh" id="BoxMesh_hu88l"]
 material = SubResource("ShaderMaterial_xae2k")
-size = Vector3(6, 1, 6)
+size = Vector3(5, 1, 5)
 
-[node name="Simuroom" type="Node3D"]
+[node name="Simuroom" type="Node"]
+script = ExtResource("1_32hk8")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="World" type="Node" parent="."]
+
+[node name="BoardMesh" type="MeshInstance3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 mesh = SubResource("BoxMesh_hu88l")
+skeleton = NodePath("../..")
+
+[node name="Creatures" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="CreatureNode" parent="Creatures" instance=ExtResource("3_47xta")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="CreatureNode2" parent="Creatures" instance=ExtResource("3_47xta")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
 
 [node name="Hud" type="Node" parent="."]
+unique_name_in_owner = true
 
 [node name="FightEditor" parent="Hud" instance=ExtResource("4_cb6jy")]
+visible = false
+
+[node name="SpellList" parent="Hud" instance=ExtResource("4_wo5jd")]
+visible = false
+
+[node name="StatusListTodo" type="Control" parent="Hud"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 294.0
+offset_top = 369.0
+offset_right = 693.0
+offset_bottom = 553.0
+
+[node name="TeamEditor1" parent="Hud" instance=ExtResource("7_w5qjm")]
+unique_name_in_owner = true
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -970.0
+offset_bottom = 260.0
+
+[node name="TeamEditor2" parent="Hud" instance=ExtResource("7_w5qjm")]
+unique_name_in_owner = true
+offset_left = 250.0
+offset_top = 10.0
+offset_right = -730.0
+offset_bottom = 260.0
+
+[node name="Controls" parent="." instance=ExtResource("4_3hfpk")]
+unique_name_in_owner = true
