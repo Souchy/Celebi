@@ -1,0 +1,45 @@
+
+Gaby is a slime/goo girl
+
+
+Statuses:
+    1. When main body is killed, splits into x small blobs of slime (x = body_max_life / life_per_blob)
+    2. 
+
+Spells:
+    A. Meta spells
+        1. Split: 
+            - aoe star 6, ring 1
+            - splits into 5 small blobs of slime
+            - divides stats accross all blobs
+            - damage in line from center to each blobs
+        2. Control:
+            - take control of a slime blob to cast spells from there
+            - The controlled body takes the shape of Gaby
+        3. Merge:
+            - range 5
+            - circle 1: merge with blobs in the aoe
+            - Gain the stats of all merged blobs
+
+            //- or maybe merge everything onto your current location 
+            //    - and do damage in line from each from to target 
+        4. Command
+            - 6 range, no los
+            - All blobs move 2pm towards the target cell
+
+    B. Damage spells
+        4. Slime hammer
+            - 2 range, circle 1
+            - Cast a hammer of slime from your currently controlled body
+        5. Spikes
+            - 0 range, circle 2 around every blob
+            - damage aoe around each blob, can shotgun with overlap
+        9. Slime spit
+            - 7 range, 1 point 
+            - spit projectile at a target, small damage
+
+    C. Movement
+        6. Pull
+            - 
+        7. Dash
+            - 
