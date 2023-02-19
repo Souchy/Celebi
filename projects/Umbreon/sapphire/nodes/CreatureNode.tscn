@@ -14,6 +14,9 @@ material = SubResource("StandardMaterial3D_y1gvy")
 inner_radius = 0.45
 outer_radius = 0.5
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_7g31o"]
+viewport_path = NodePath("SubViewport")
+
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_1bhg5"]
 properties/0/path = NodePath("Model:mesh")
 properties/0/spawn = true
@@ -52,9 +55,6 @@ properties/11/path = NodePath("Model/AnimationPlayer:current_animation")
 properties/11/spawn = true
 properties/11/sync = true
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_xp1ui"]
-viewport_path = NodePath("SubViewport")
-
 [node name="CreatureNode" type="Node3D"]
 script = ExtResource("1_36dcd")
 
@@ -72,14 +72,14 @@ mesh = SubResource("TorusMesh_4l0a7")
 
 [node name="creature_shadow" parent="." instance=ExtResource("2_1auck")]
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_1bhg5")
-
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.84837)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 4)
 current = true
 
 [node name="Healthbar" parent="." instance=ExtResource("3_gmy82")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
-texture = SubResource("ViewportTexture_xp1ui")
+texture = SubResource("ViewportTexture_7g31o")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_1bhg5")

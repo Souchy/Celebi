@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bsb8p1k316333"]
 
 [ext_resource type="Script" path="res://vaporeon/menus/CreatureEditor.cs" id="1_hggn1"]
-[ext_resource type="PackedScene" path="res://vaporeon/common/StatsEditor.tscn" id="1_vih3n"]
+[ext_resource type="PackedScene" uid="uid://cb2gvesrrqq3m" path="res://vaporeon/common/StatsEditor.tscn" id="1_vih3n"]
 [ext_resource type="Theme" uid="uid://bnrv7qp6ltiwn" path="res://vaporeon/themes/Vaporeon.tres" id="2_4n2a3"]
 [ext_resource type="StyleBox" uid="uid://dutxepo71lhgw" path="res://vaporeon/themes/windowBg.tres" id="2_abt84"]
 [ext_resource type="StyleBox" uid="uid://iptaoq0rc1pi" path="res://vaporeon/themes/panelDark.tres" id="4_78pmx"]
@@ -60,24 +60,24 @@ placeholder_text = "Description"
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Content" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="StatsEditor" parent="MarginContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("1_vih3n")]
+[node name="StatsEditor" parent="MarginContainer/VBoxContainer/Content" instance=ExtResource("1_vih3n")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(450, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SpellsPanel" type="Panel" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="SpellsPanel" type="Panel" parent="MarginContainer/VBoxContainer/Content"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("4_78pmx")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/SpellsPanel"]
+[node name="Spells" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Content/SpellsPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -85,28 +85,44 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/SpellsPanel/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Content/SpellsPanel/Spells"]
 layout_mode = 2
 text = "Base Spells"
 horizontal_alignment = 1
 
-[node name="BtnAddSpell" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/SpellsPanel/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Content/SpellsPanel/Spells"]
+layout_mode = 2
+
+[node name="BtnAddSpell" type="Button" parent="MarginContainer/VBoxContainer/Content/SpellsPanel/Spells/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "Add"
 
-[node name="SpellsList" type="VFlowContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/SpellsPanel/VBoxContainer"]
+[node name="BtnNewSpell" type="Button" parent="MarginContainer/VBoxContainer/Content/SpellsPanel/Spells/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
+text = "New"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/Content/SpellsPanel/Spells"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="SpellsList" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Content/SpellsPanel/Spells/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PassivesPanel" type="Panel" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="PassivesPanel" type="Panel" parent="MarginContainer/VBoxContainer/Content"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("4_78pmx")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/PassivesPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Content/PassivesPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -114,28 +130,43 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/PassivesPanel/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Content/PassivesPanel/VBoxContainer"]
 layout_mode = 2
 text = "Base Passives"
 horizontal_alignment = 1
 
-[node name="BtnAddPassive" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/PassivesPanel/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Content/PassivesPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="BtnAddPassive" type="Button" parent="MarginContainer/VBoxContainer/Content/PassivesPanel/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "Add"
 
-[node name="PassivesList" type="VFlowContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/PassivesPanel/VBoxContainer"]
+[node name="BtnNewPassive" type="Button" parent="MarginContainer/VBoxContainer/Content/PassivesPanel/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "New"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/Content/PassivesPanel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="SkinsPanel" type="Panel" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="PassivesList" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Content/PassivesPanel/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SkinsPanel" type="Panel" parent="MarginContainer/VBoxContainer/Content"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("4_78pmx")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/SkinsPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Content/SkinsPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -143,18 +174,34 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/SkinsPanel/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Content/SkinsPanel/VBoxContainer"]
 layout_mode = 2
 text = "Skins"
 horizontal_alignment = 1
 
-[node name="BtnAddSkin" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/SkinsPanel/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Content/SkinsPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="BtnAddSkin" type="Button" parent="MarginContainer/VBoxContainer/Content/SkinsPanel/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "Add"
 
-[node name="SkinsList" type="VFlowContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/SkinsPanel/VBoxContainer"]
+[node name="BtnNewSkin" type="Button" parent="MarginContainer/VBoxContainer/Content/SkinsPanel/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+text = "New"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/Content/SkinsPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SkinsList" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Content/SkinsPanel/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3

@@ -16,16 +16,8 @@ namespace souchy.celebi.eevee.impl.shared
         public string meshName { get; set; }
         public string icon { get; set; }
         public AnimationsData animations { get; set; }
-
-
-        /// <summary>
-        /// <spellModelid, spellSkinId>
-        /// </summary>
-        public Dictionary<IID, IID> spellSkins { get; set; }
-        /// <summary>
-        /// <effectId, effectSkinId>
-        /// </summary>
-        public Dictionary<IID, IID> effectSkins { get; set; } // FIXME This should go inside ISpellSkin
+        public Dictionary<IID, IID> spellSkins { get; set; } = new Dictionary<IID, IID>();
+        public Dictionary<IID, IID> effectSkins { get; set; } = new Dictionary<IID, IID>(); // FIXME This should go inside ISpellSkin
 
 
         private CreatureSkin() { }

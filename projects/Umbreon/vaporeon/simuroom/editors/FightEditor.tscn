@@ -14,14 +14,74 @@ theme = ExtResource("1_ln1p8")
 
 [node name="Team" parent="." instance=ExtResource("1_m7t7s")]
 layout_mode = 1
-offset_left = 17.0
+offset_left = 470.0
 offset_top = 17.0
-offset_right = -957.0
+offset_right = -504.0
 offset_bottom = 262.0
 
 [node name="Team2" parent="." instance=ExtResource("1_m7t7s")]
 layout_mode = 1
-offset_left = 265.0
-offset_top = 17.0
-offset_right = -714.0
-offset_bottom = 266.0
+offset_left = 759.0
+offset_top = 11.0
+offset_right = -220.0
+offset_bottom = 260.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Creature 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnCreatureModel1" type="OptionButton" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Reset Resources"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 0
+offset_left = 213.0
+offset_top = 1.0
+offset_right = 324.0
+offset_bottom = 65.0
+
+[node name="Label" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+text = "Creature 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnCreatureModel2" type="OptionButton" parent="VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+
+[node name="Button" type="Button" parent="VBoxContainer2"]
+layout_mode = 2
+text = "Reset Resources"
+
+[node name="MenuBar" type="MenuBar" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 40.0
+offset_top = 373.0
+offset_right = 444.0
+offset_bottom = 423.0
+
+[node name="MenuButton" type="MenuButton" parent="MenuBar"]
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 20.0
+text = "cdfgd"

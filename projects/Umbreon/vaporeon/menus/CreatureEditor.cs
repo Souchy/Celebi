@@ -27,12 +27,24 @@ public partial class CreatureEditor : Control, EditorInitiator<ICreatureModel>
 
     #region Nodes - Content
     [NodePath] public StatsEditor StatsEditor { get; set; }
+    #endregion
+
+    #region Nodes - Spells 
     [NodePath] public Button BtnAddSpell { get; set; }
-    [NodePath] public VFlowContainer SpellsList { get; set; }
+    [NodePath] public Button BtnNewSpell { get; set; }
+    [NodePath] public VBoxContainer SpellsList { get; set; }
+    #endregion
+
+    #region Nodes - Passives
     [NodePath] public Button BtnAddPassive { get; set; }
-    [NodePath] public VFlowContainer PassivesList { get; set; }
+    [NodePath] public Button BtnNewPassive { get; set; }
+    [NodePath] public VBoxContainer PassivesList { get; set; }
+    #endregion
+
+    #region Nodes - Skins
     [NodePath] public Button BtnAddSkin { get; set; }
-    [NodePath] public VFlowContainer SkinsList { get; set; }
+    [NodePath] public Button BtnNewSkin { get; set; }
+    [NodePath] public VBoxContainer SkinsList { get; set; }
     #endregion
 
     #region Init
@@ -43,14 +55,11 @@ public partial class CreatureEditor : Control, EditorInitiator<ICreatureModel>
         GD.Print("CreatureEditor ready");
         this.GetVaporeon().bus.subscribe(this);
 
-
-        //creature?.GetEntityBus().subscribe(this);
-        //creature.GetBaseStats().GetEntityBus().subscribe(this);
-        //Eevee.models.i18n.GetEntityBus().subscribe(this, nameof(onNameChanged));
+        // main bar
         NameEdit.TextChanged += (txt) => creature.GetName().value = txt;
         DescriptionEdit.TextChanged += (txt) => creature.GetDescription().value = txt;
-
         BtnSave.ButtonUp += onClickBtnSave;
+        //
         BtnAddSpell.ButtonUp += onClickBtnAddSpell;
         BtnAddSkin.ButtonUp += onClickBtnAddSkin;
         BtnAddPassive.ButtonUp += onClickBtnAddPassive;

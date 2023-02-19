@@ -13,14 +13,20 @@ namespace souchy.celebi.eevee.face.shared.models.skins
         public string icon { get; set; }
         public AnimationsData animations { get; set; }
 
+        /// <summary>
+        /// <spellModelid, spellSkinId>
+        /// </summary>
         public Dictionary<IID, IID> spellSkins { get; set; }
+        /// <summary>
+        /// <effectId, effectSkinId>
+        /// </summary>
         public Dictionary<IID, IID> effectSkins { get; set; }
 
         public IStringEntity GetName() => Eevee.models.i18n.Get(nameId);
         public IStringEntity GetDescription() => Eevee.models.i18n.Get(descriptionId);
     }
 
-    public struct AnimationsData
+    public class AnimationsData
     {
         public string idle;
         public string run;

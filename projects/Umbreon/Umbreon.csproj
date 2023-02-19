@@ -26,7 +26,9 @@
     <Content Include="assets\splash\lilia.png" />
     <Content Include="data\creatures.json" />
     <Content Include="data\effects.json" />
+    <Content Include="data\i18n_fr.json" />
     <Content Include="data\maps.json" />
+    <Content Include="data\skins.json" />
     <Content Include="data\spells.json" />
   </ItemGroup>
   <ItemGroup>
@@ -44,6 +46,7 @@
     <Folder Include="assets\creatures\chailai\" />
     <Folder Include="assets\effects\" />
     <Folder Include="assets\spells\" />
+    <Folder Include="data\test\" />
     <Folder Include="sapphire\nodes\" />
     <Folder Include="sapphire\scenes\" />
     <Folder Include="vaporeon\common\stats\" />

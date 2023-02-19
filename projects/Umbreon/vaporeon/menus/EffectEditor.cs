@@ -134,7 +134,7 @@ public partial class EffectEditor : Control, IEffectNodesContainer // EditorInit
         // create
         var creator = effectType.GetMethod(nameof(EffectBase.Create));
         IEffect newEffect = (IEffect) creator.Invoke(null, null);
-        effect.CopyTo(newEffect);
+        effect.CopyBasicTo(newEffect);
         // swap in eevee models
         Eevee.models.effects.Remove(this.effect.entityUid);
         Eevee.models.effects.Add(newEffect.entityUid, newEffect);

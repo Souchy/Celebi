@@ -1,9 +1,7 @@
 using Godot;
 using Godot.Sharp.Extras;
-using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
-using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.util;
 using Umbreon.vaporeon;
 
@@ -47,7 +45,7 @@ public partial class ResourceList : Control
 	{
         this.OnReady();
 
-        this.Container.QueueFreeChildren();
+        this.Container.RemoveAndQueueFreeChildren();
         fillList();
 
         this.Search.TextChanged += onSearchChanged;
@@ -173,8 +171,6 @@ public partial class ResourceList : Control
             if (selectedNode == item)
             {
                 onClickEdit();
-                PackedScene creatureEditorScene = GD.Load<PackedScene>("res://vaporeon/menus/CreatureEditor.tscn");
-                creatureEditorScene.Instantiate<CreatureEditor>();
             }
             // remove previous selected
             if (selectedNode != null)
