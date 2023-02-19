@@ -2,51 +2,54 @@ using Umbreon.data;
 using Godot;
 using Godot.Sharp.Extras;
 using souchy.celebi.eevee.impl.objects;
+using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.face.shared.models.skins;
+using souchy.celebi.eevee.face.objects.stats;
+using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.impl.util;
 
 public partial class CreatureNode : Node3D
 {
-
-    //[Inject]
-    //public ICreature data;
-
-    //[NodePath]
-    //public Node3D Model; // MeshInstance3D
-    [NodePath]
-    public MeshInstance3D TeamIndicator;
-    [Export]
-    public Color color = new Color(0, 0, 0);
-
-    //[Export]
     public Creature Creature { get; set; }
+
+    #region Nodes
+    [NodePath] public Node3D Model { get; set; } 
+    [NodePath] public MeshInstance3D TeamIndicator { get; set; }
+    [NodePath] public AnimationPlayer AnimationPlayer { get; set; }
+    [NodePath] public Healthbar Healthbar { get; set; }
+    #endregion
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         this.OnReady();
-        //this.Inject();
-
     }
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(double delta)
+    [Subscribe(nameof(StatType.Life))]
+    public void onLifeChanged(IStatResource life)
     {
-
+        Healthbar.set(life.current, life.currentMax);
     }
 
-    public void init(CreatureSkinData skin, int team) //string name)
+    public void init(ICreature c, ICreatureSkin skin, int team) //string name)
     {
+        // Sub
+        c.GetStats().Get<IStatResource>(StatType.Life).GetEntityBus().subscribe(this);
+
         // Set Model
-        GD.Print("CreatureNode_init: " + skin.model);
-        if (!skin.model.EndsWith(".tscn")) skin.model += ".tscn";
-        PackedScene modelScene = GD.Load<PackedScene>("res://assets/creatures/" + skin.model);
+        GD.Print("CreatureNode_init: " + skin.meshModel);
+        if (!skin.meshModel.EndsWith(".tscn")) skin.meshModel += ".tscn";
+        PackedScene modelScene = GD.Load<PackedScene>("res://assets/creatures/" + skin.meshModel);
         var characterNode = modelScene.Instantiate<Node3D>();
         characterNode.Name = "model";
-        this.GetNode("Model").ReplaceBy(characterNode);
+        var previousModel = this.GetNode("Model");
+        previousModel.ReplaceBy(characterNode);
         
         // Set Color
         var color = getTeamColor(team);
 
         // Set Model Material Color
+        /*
         var meshNode = characterNode.FindChild(skin.meshName, true);
         if (meshNode != null)
         {
@@ -57,19 +60,21 @@ public partial class CreatureNode : Node3D
                 mat.AlbedoColor = color;
             }
         }
+        */
+
         // Set TeamIndicator Material Color
         //TeamIndicator = (MeshInstance3D) this.GetNode("TeamIndicator");
         //var teamMat = (StandardMaterial3D) TeamIndicator.MaterialOverride;
         //teamMat.AlbedoColor = color;
 
         // Set Idle Animation
-        var player = characterNode.GetNode<AnimationPlayer>("AnimationPlayer");
+        //var player = characterNode.GetNode<AnimationPlayer>("AnimationPlayer");
         string idle = skin.animations.idle;
-        if (player.HasAnimation(idle))
+        if (AnimationPlayer.HasAnimation(idle))
         {
-            var anim = player.GetAnimation(idle);
+            var anim = AnimationPlayer.GetAnimation(idle);
             anim.LoopMode = Animation.LoopModeEnum.Linear;
-            player.Play(idle);
+            AnimationPlayer.Play(idle);
         }
     }
 
@@ -80,7 +85,7 @@ public partial class CreatureNode : Node3D
         {
             case 0: return rng;
             case 1: return rng;
-            default: return this.color;
+            default: return rng; // this.color;
         }
     }
 

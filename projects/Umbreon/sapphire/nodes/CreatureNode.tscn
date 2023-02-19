@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bj8425l6mfenk"]
+[gd_scene load_steps=9 format=3 uid="uid://bj8425l6mfenk"]
 
 [ext_resource type="Script" path="res://sapphire/nodes/CreatureNode.cs" id="1_36dcd"]
 [ext_resource type="PackedScene" path="res://assets/creatures/shadow.tscn" id="2_1auck"]
+[ext_resource type="PackedScene" uid="uid://oh7oefa5tech" path="res://sapphire/ui/healthbar.tscn" id="3_gmy82"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_b7ayt"]
 
@@ -51,20 +52,22 @@ properties/11/path = NodePath("Model/AnimationPlayer:current_animation")
 properties/11/spawn = true
 properties/11/sync = true
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_xp1ui"]
+viewport_path = NodePath("SubViewport")
+
 [node name="CreatureNode" type="Node3D"]
 script = ExtResource("1_36dcd")
 
 [node name="Model" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_b7ayt")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Model"]
-
-[node name="ProgressBar" type="ProgressBar" parent="Model"]
-offset_right = 121.0
-offset_bottom = 32.0
-value = 31.08
+unique_name_in_owner = true
 
 [node name="TeamIndicator" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
 mesh = SubResource("TorusMesh_4l0a7")
 
 [node name="creature_shadow" parent="." instance=ExtResource("2_1auck")]
@@ -75,3 +78,8 @@ replication_config = SubResource("SceneReplicationConfig_1bhg5")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.84837)
 current = true
+
+[node name="Healthbar" parent="." instance=ExtResource("3_gmy82")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+texture = SubResource("ViewportTexture_xp1ui")
