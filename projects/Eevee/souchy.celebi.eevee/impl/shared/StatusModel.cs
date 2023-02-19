@@ -11,6 +11,8 @@ namespace souchy.celebi.eevee.impl.shared
     {
         public IID entityUid { get; set; }
 
+        public IID nameId { get; set; }
+        public IID descriptionId { get; set; }
         public IValue<int> delay { get; set; } = new Value<int>();
         public IValue<int> duration { get; set; } = new Value<int>();
 

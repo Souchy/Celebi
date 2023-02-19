@@ -12,12 +12,19 @@ namespace souchy.celebi.eevee.impl.shared
         public IID nameId { get; set; }
         public IID descriptionId { get; set; }
 
-        public IID meshModel { get; set; }
-        public IID icon { get; set; }
-        public IID animations { get; set; }
-        // <spellModelid, spellSkinId>
+        public string meshModel { get; set; }
+        public string meshName { get; set; }
+        public string icon { get; set; }
+        public AnimationsData animations { get; set; }
+
+
+        /// <summary>
+        /// <spellModelid, spellSkinId>
+        /// </summary>
         public Dictionary<IID, IID> spellSkins { get; set; }
-        // <effectId, effectSkinId>
+        /// <summary>
+        /// <effectId, effectSkinId>
+        /// </summary>
         public Dictionary<IID, IID> effectSkins { get; set; } // FIXME This should go inside ISpellSkin
 
 

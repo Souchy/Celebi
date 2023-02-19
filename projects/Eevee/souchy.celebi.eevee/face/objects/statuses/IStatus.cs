@@ -17,7 +17,7 @@ namespace souchy.celebi.eevee.face.objects.statuses
         /// <summary>
         /// That or some kind of ID that allows merging of stacks/instances
         /// </summary>
-        public IID sourceSpell { get; set; }
+        public IID sourceSpellModel { get; set; }
         /// <summary>
         /// Creature who applied the status
         /// </summary>

@@ -15,7 +15,7 @@ namespace souchy.celebi.eevee.statuses
         public IID modelUid { get; set; }
         public IID fightUid { get; set; }
 
-        public IID sourceSpell { get; set; }
+        public IID sourceSpellModel { get; set; }
         public IID sourceCreature { get; set; }
         public IID holderEntity { get; set; }
 

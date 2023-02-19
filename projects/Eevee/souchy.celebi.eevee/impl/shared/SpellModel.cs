@@ -23,7 +23,7 @@ namespace souchy.celebi.eevee.impl.shared
         public ICondition targetFilter { get; set; }
 
         public Dictionary<ResourceType, int> costs { get; set; } = new();
-        public ISpellProperties properties { get; set; } = new SpellProperties();
+        public SpellProperties properties { get; set; } = new SpellProperties();
         public IEntityList<IID> effectIds { get; set; } = new EntityList<IID>(); 
 
         public IZone RangeZoneMin { get; set; } = new Zone();
@@ -47,7 +47,7 @@ namespace souchy.celebi.eevee.impl.shared
         }
     }
 
-
+    /*
     public class SpellProperties : ISpellProperties
     {
         public IValue<int> maxCharges { get; set; } = new Value<int>();
@@ -62,6 +62,7 @@ namespace souchy.celebi.eevee.impl.shared
         public IValue<bool> castInLine { get; set; } = new Value<bool>();
         public IValue<bool> needLos { get; set; } = new Value<bool>(true);
     }
+    */
 
     //public class Cost : ICost
     //{
