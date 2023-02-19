@@ -50,7 +50,12 @@ namespace Umbreon.common
             TypeNameHandling = TypeNameHandling.Auto,
             Formatting = Formatting.Indented,
             ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
-            Converters = new List<JsonConverter> { new IIDJsonConverter() }
+            Converters = new List<JsonConverter> { 
+                new IIDJsonConverter(), new IStringEntitysonConverter(),
+                new IEntitySetJsonConverter(), new IEntityListJsonConverter(),
+                new IValueIntJsonConverter(), new IValueDoubleJsonConverter(), new IValueBoolJsonConverter(),
+                new StatTypeJsonConverter(), new IValueElementJsonConverter()
+            }
         };
         internal readonly IDiamondPersistance persistance = new DiamondPersistanceJson(); //new DiamondParserMongo();
 
@@ -62,6 +67,16 @@ namespace Umbreon.common
 
         public override void _Ready()
         {
+            // json object creation converters
+            //List<JsonConverter> converters = AppDomain.CurrentDomain.GetAssemblies()
+            //   .SelectMany(s => s.GetTypes())
+            //   .Where(t => t.IsInterface)
+            //   .Select(t => new CreationConverter(t))
+            //   .Where(c => c.implType != null)
+            //   .ToList<JsonConverter>();
+            //foreach (var c in converters)
+            //    jsonSettings.Converters.Add(c);
+            // parse
             parseData();
             // FIXME Autosave for Vaporeon only
             Eevee.models.creatureModels.GetEntityBus().subscribe(persistance);
