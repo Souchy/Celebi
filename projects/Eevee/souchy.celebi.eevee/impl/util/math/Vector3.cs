@@ -25,6 +25,14 @@ namespace souchy.celebi.eevee.impl.util.math
             return this;
         }
 
+        public IVector3 set(IVector3 vec)
+        {
+            this.x = vec.x;
+            this.z = vec.z;
+            this.y = vec.y;
+            return this;
+        }
+
         public IVector3 add(IVector3 p)
         {
             this.x += p.x;

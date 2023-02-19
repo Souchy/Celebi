@@ -22,10 +22,11 @@ namespace souchy.celebi.eevee.face.util.math
         /// Returns self for chaining
         /// </summary>
         public IVector3 set(int x, int z, int y = 0);
+        public IVector3 set(IVector3 vec);
         /// <summary>
         /// Returns self for chaining
         /// </summary>
-        public IVector3 add(IVector3 p);
+        public IVector3 add(IVector3 vec);
         /// <summary>
         /// 
         /// </summary>
@@ -36,11 +37,11 @@ namespace souchy.celebi.eevee.face.util.math
         /// <summary>
         /// Returns self for chaining
         /// </summary>
-        public IVector3 sub(IVector3 p);
+        public IVector3 sub(IVector3 vec);
         /// <summary>
         /// Returns self for chaining
         /// </summary>
-        public IVector3 mult(IVector3 p);
+        public IVector3 mult(IVector3 vec);
         /// <summary>
         /// 
         /// </summary>
@@ -51,7 +52,7 @@ namespace souchy.celebi.eevee.face.util.math
         /// <summary>
         /// Returns self for chaining
         /// </summary>
-        public IVector3 div(IVector3 p);
+        public IVector3 div(IVector3 vec);
         /// <summary>
         /// 
         /// </summary>
@@ -83,7 +84,7 @@ namespace souchy.celebi.eevee.face.util.math
         /// <summary>
         /// 2D distance
         /// </summary>
-        public int distanceManhattan(IVector3 p);
+        public int distanceManhattan(IVector3 vec);
         /// <summary>
         /// 
         /// </summary>

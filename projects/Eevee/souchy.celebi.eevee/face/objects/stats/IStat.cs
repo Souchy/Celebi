@@ -8,9 +8,6 @@ namespace souchy.celebi.eevee.face.objects.stats
     {
 
         public StatType statId { get; init; }
-        //public StatValueType valueType { get; }
-        //public int get();
-        //public int set(int value);
 
         public IStat copy();
 

@@ -52,7 +52,7 @@ namespace souchy.celebi.eevee.impl.util
         {
             bool removed = base.Remove(t0);
             base.Add(t1);
-            this.GetEntityBus().publish(EventAdd, t0, t1);
+            this.GetEntityBus().publish(EventReplace, t0, t1);
             return removed;
         }
 

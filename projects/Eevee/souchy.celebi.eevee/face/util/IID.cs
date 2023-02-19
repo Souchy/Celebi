@@ -13,7 +13,7 @@
 
         public override bool Equals(object obj)
         {
-            if(obj == null) return false;
+            //if(obj == null) return false; // already checked by object.Equals
             if(obj.GetType() != typeof(IID)) return false;
             IID id = (IID) obj;
             return id.value == this.value;
@@ -27,7 +27,7 @@
         public static implicit operator int(IID i) => int.Parse(i.value);
         public static explicit operator IID(int i) => new IID(i.ToString());
 
-        public static bool operator ==(IID leftSide, IID rightSide) =>  object.Equals(leftSide, rightSide);
+        public static bool operator ==(IID leftSide, IID rightSide) => object.Equals(leftSide, rightSide);
         public static bool operator !=(IID leftSide, IID rightSide) => !(leftSide == rightSide);
 
     }

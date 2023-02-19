@@ -59,7 +59,7 @@ namespace souchy.celebi.eevee.face.objects
         /// <summary>
         /// Copy basic properties to passed effect. (not model nor model-specific properties)
         /// </summary>
-        public void CopyTo(IEffect e);
+        public void CopyBasicTo(IEffect e);
 
         /// <summary>
         /// StatusProperties to create a Status instance with this effect

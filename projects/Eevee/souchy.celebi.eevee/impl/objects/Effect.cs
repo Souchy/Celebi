@@ -45,7 +45,7 @@ namespace souchy.celebi.eevee.impl.objects
         public IEnumerable<IEffect> GetEffects() => effectIds.Values.Select(i => this.GetFight()?.effects.Get(i) ?? Eevee.models.effects.Get(i));
 
 
-        public void CopyTo(IEffect e)
+        public void CopyBasicTo(IEffect e)
         {
             e.sourceCondition = sourceCondition;
             e.targetFilter = targetFilter;

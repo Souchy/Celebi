@@ -18,7 +18,6 @@ namespace souchy.celebi.eevee.impl.util
         protected EntityDictionary(IID id) => entityUid = id;
         public static IEntityDictionary<TKey, TValue> Create() => new EntityDictionary<TKey, TValue>(Eevee.RegisterIID<IEntityDictionary<TKey, TValue>>());
 
-
         public TValue Get(TKey key)
         {
             if (ContainsKey(key))

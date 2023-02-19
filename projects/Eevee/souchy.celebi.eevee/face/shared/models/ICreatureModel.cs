@@ -22,8 +22,9 @@ namespace souchy.celebi.eevee.face.shared.models
         public IStringEntity GetDescription() => Eevee.models.i18n.Get(descriptionId);
         public IStats GetBaseStats() => Eevee.models.stats.Get(baseStats);
         public IEnumerable<ICreatureSkin> GetSkins() => skins.Values.Select(i => Eevee.models.creatureSkins.Get(i));
-        public IEnumerable<IStatusModel> GetPassives() => baseStatusPassives.Values.Select(i => Eevee.models.statusModels.Get(i));
+        public IEnumerable<IStatusModel> GetStatusPassives() => baseStatusPassives.Values.Select(i => Eevee.models.statusModels.Get(i));
         public IEnumerable<ISpellModel> GetSpells() => baseSpells.Values.Select(i => Eevee.models.spellModels.Get(i));
+        public ICreatureSkin GetBaseSkin() => Eevee.models.creatureSkins.Get(skins.Values.First());
 
     }
 }
