@@ -103,7 +103,7 @@ public partial class CreatureEditor : Control, EditorInitiator<ICreatureModel>
         foreach(var s in creature.GetSpells())
             addSpellToList(s);
         // Passives
-        foreach (var s in creature.GetPassives())
+        foreach (var s in creature.GetStatusPassives())
             addPassiveToList(s);
         // Skins
         foreach (var s in creature.GetSkins())

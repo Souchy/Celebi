@@ -2,6 +2,7 @@ using Godot;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
+using souchy.celebi.eevee.impl.factories;
 using souchy.celebi.eevee.impl.shared;
 using souchy.celebi.eevee.impl.stats;
 using souchy.celebi.eevee.impl.util;
@@ -45,27 +46,7 @@ public partial class resource_list_creature : ResourceList
     public override void onClickCopy() => this.GetVaporeon().CurrentObjectCopied = getSelectedItem();
     public override void onClickCreateBtn()
     {
-        // Model + Skin
-        var creatureSkin = CreatureSkin.Create();
-        var creatureModel = CreatureModel.Create();
-        creatureModel.skins.Add(creatureSkin.entityUid);
-        // Name
-        var name = StringEntity.Create("Name for: " + creatureSkin.entityUid);
-        creatureModel.nameId = name.entityUid;
-        creatureSkin.nameId = name.entityUid;
-        Eevee.models.i18n.Add(creatureSkin.nameId, name);
-        // Desc
-        var desc = StringEntity.Create("Desc for: " + creatureSkin.entityUid);
-        creatureModel.descriptionId = desc.entityUid;
-        creatureSkin.descriptionId = desc.entityUid;
-        Eevee.models.i18n.Add(creatureSkin.descriptionId, desc);
-        // Stats
-        var stats = Stats.Create();
-        creatureModel.baseStats = stats.entityUid;
-        Eevee.models.stats.Add(stats.entityUid, stats);
-        // add Model + Skin
-        Eevee.models.creatureSkins.Add(creatureSkin.entityUid, creatureSkin);
-        Eevee.models.creatureModels.Add(creatureModel.entityUid, creatureModel);
+        Factories.newCreatureModel();
     }
     public override void onClickRemoveBtn()
     {

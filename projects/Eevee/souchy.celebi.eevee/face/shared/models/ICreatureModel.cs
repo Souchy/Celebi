@@ -8,19 +8,21 @@ namespace souchy.celebi.eevee.face.shared.models
 {
     public interface ICreatureModel : IEntity
     {
-        public IID nameId { get; set; }
-        public IID descriptionId { get; set; }
+        //public IID nameId { get; set; }
+        //public IID descriptionId { get; set; }
         public IEntitySet<IID> skins { get; init; }
 
         public IID baseStats { get; set; }
+        public IID growthStats { get; set; }
         public IEntitySet<IID> baseSpells { get; init; }
         public IEntitySet<IID> baseStatusPassives { get; init; }
 
 
 
-        public IStringEntity GetName() => Eevee.models.i18n.Get(nameId);
-        public IStringEntity GetDescription() => Eevee.models.i18n.Get(descriptionId);
+        public IStringEntity GetName() => GetBaseSkin().GetName(); // Eevee.models.i18n.Get(nameId);
+        public IStringEntity GetDescription() => GetBaseSkin().GetName(); //Eevee.models.i18n.Get(descriptionId);
         public IStats GetBaseStats() => Eevee.models.stats.Get(baseStats);
+        public IStats GetGrowthStats() => Eevee.models.stats.Get(growthStats);
         public IEnumerable<ICreatureSkin> GetSkins() => skins.Values.Select(i => Eevee.models.creatureSkins.Get(i));
         public IEnumerable<IStatusModel> GetStatusPassives() => baseStatusPassives.Values.Select(i => Eevee.models.statusModels.Get(i));
         public IEnumerable<ISpellModel> GetSpells() => baseSpells.Values.Select(i => Eevee.models.spellModels.Get(i));

@@ -10,7 +10,7 @@ using souchy.celebi.eevee.impl.util;
 using System;
 using Umbreon.vaporeon.common;
 
-public partial class StatsEditor : Panel
+public partial class StatsEditor : PanelContainer
 {
     
     private IStats _stats { get; set; }
@@ -39,64 +39,38 @@ public partial class StatsEditor : Panel
             { StatCategory.State, StateContainer }, 
             { StatCategory.Other, OtherContainer },
         };
-
-        //BtnAdd.ButtonUp += BtnAdd_ButtonUp;
     }
     public void init(IStats stats)
     {
-        _stats?.GetEntityBus().unsubscribe(this);
-
+        unload();
         _stats = stats;
-
-        _stats.GetEntityBus().subscribe(this);
-        //StatsContainer.QueueFreeChildren();
+        load();
+    }
+    private void unload()
+    {
+        _stats?.GetEntityBus().unsubscribe(this);
         foreach (var container in containers.Values)
-            container.QueueFreeChildren();
+            container.RemoveAndQueueFreeChildren();
+    }
+    private void load()
+    {
+        _stats.GetEntityBus().subscribe(this);
 
-        var asdf = Enum.GetValues<StatType>().Where(st => !_stats.Has(st));
-        //GD.Print($"asdf: { string.Join(", ", asdf.Select(e => Enum.GetName(e))) }");
-
-        // add missing stats just in case
-        foreach (var statType in Enum.GetValues<StatType>().Where(st => !_stats.Has(st)))
-        {
-            var stat = statType.Create();
-            //GD.Print($"Want to add {Enum.GetName(statType)} = {stat.statId}, has: {_stats.Has(statType)}");
-            _stats.Add(stat);
-        }
-
-        foreach(var category in Enum.GetValues<StatCategory>())
+        // create stats widgets by category
+        foreach (var category in Enum.GetValues<StatCategory>())
         {
             var sts = Enum.GetValues<StatType>().Where(st => st.GetProperties().category == category);
-            foreach(var st in sts)
+            foreach (var st in sts)
             {
                 var stat = _stats.Get(st);
-                //GD.Print($"foreach st: {st} = {stat} at {stat.entityUid} with bus {stat.GetEntityBus()}");
                 PropertiesComponent.GenerateStat(containers[category], st, stat);
             }
         }
-        //stats.stats.ForEach((k, v) => 
-        //    PropertiesComponent.GenerateStat(StatsContainer, k, v)
-        //);
     }
     #endregion
 
 
     #region Diamond Handlers
-    //[Subscribe("Add", "Set")]
-    //public void onStatAddSet(IEntityDictionary<StatType, IStat> dic, StatType key, IStat value)
-    //{
-    //    var cat = key.GetProperties().category;
-    //    var container = containers[cat];
-    //    PropertiesComponent.GenerateStat(container, key, value);
-    //}
-    //[Subscribe("Remove")]
-    //public void onStatRemove(IEntityDictionary<StatType, IStat> dic, StatType key, IStat value)
-    //{
-    //    var cat = key.GetProperties().category;
-    //    var container = containers[cat];
-    //    container.GetNode("lbl:" + Enum.GetName(key)).QueueFree();
-    //    container.GetNode(Enum.GetName(key)).QueueFree();
-    //}
     [Subscribe]
     public void onStatChange(IStat stat)
     {
@@ -107,27 +81,6 @@ public partial class StatsEditor : Panel
 
 
     #region GUI Handlers
-    private void BtnAdd_ButtonUp()
-    {
-        if (true) return;
-        var pop = new PopupMenu();
-        //pop.Position
-        pop.InitialPosition = Window.WindowInitialPosition.Absolute;
-        // list stats that we dont already have
-        foreach (var statType in Enum.GetValues<StatType>().Where(st => !_stats.Has(st)))
-            pop.AddItem(Enum.GetName(statType));
-        // on choose
-        pop.IndexPressed += (index) =>
-        {
-            var st = Enum.GetValues<StatType>()[(int) index];
-            var stat = st.Create();
-            stat.GetEntityBus().subscribe(this);
-            _stats.Add(stat);
-            //PropertiesComponent.GenerateStat(StatsContainer, st);
-        };
-        pop.Show();
-        this.AddChild(pop);
-    }
     #endregion
 
 }
