@@ -1,10 +1,4 @@
 {
-  "1": {
-    "$type": "souchy.celebi.eevee.impl.shared.StringEntity, Eevee",
-    "value": "Fireball"
-  },
-  "2": {
-    "$type": "souchy.celebi.eevee.impl.shared.StringEntity, Eevee",
-    "value": "Throws a fireball, expoding and burning enemies around location"
-  }
+  "1": "Name for: 1",
+  "2": "Desc for: 1"
 }
