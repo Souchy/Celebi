@@ -1,6 +1,8 @@
 using Godot;
 using Godot.Sharp.Extras;
 using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.impl;
+using souchy.celebi.eevee.impl.factories;
 using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.util;
 using System;
@@ -26,8 +28,11 @@ public partial class TeamEditor : PanelContainer
         BtnTeam.ButtonUp += () => Content.Visible = !Content.Visible;
         BtnAddCreature.ButtonUp += () =>
         {
-            var crea = Creature.Create();
-
+            var firstmodel = Eevee.models.creatureModels.Values.ToList()[0];
+            ICreature crea = Factories.newCreatureFromModel(firstmodel, this.GetVaporeon().fightId);
+            var creaScene = GD.Load<PackedScene>("");
+            var node = creaScene.Instantiate<CreatureNode>();
+            node.init(crea, firstmodel.GetBaseSkin(), 0);
         };
 	}
 

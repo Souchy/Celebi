@@ -1,0 +1,93 @@
+{
+  "1": {
+    "$type": "souchy.celebi.eevee.impl.shared.SpellModel, Eevee",
+    "entityUid": "1",
+    "nameId": "1",
+    "descriptionId": "2",
+    "sourceCondition": null,
+    "targetFilter": null,
+    "costs": {
+      "Life": 0,
+      "Mana": 0,
+      "Movement": 0,
+      "Rage": 0,
+      "Summons": 0
+    },
+    "properties": {
+      "maxCharges": 0,
+      "maxCastsPerTurn": 0,
+      "maxCastsPerTarget": 0,
+      "cooldownInitial": 0,
+      "cooldownGlobal": 0,
+      "cooldown": 0,
+      "minRange": 0,
+      "maxRange": 0,
+      "castInDiagonal": false,
+      "castInLine": false,
+      "needLos": true
+    },
+    "effectIds": [],
+    "RangeZoneMin": {
+      "$type": "souchy.celebi.eevee.impl.objects.zones.Zone, Eevee",
+      "zoneType": {
+        "$type": "souchy.celebi.eevee.impl.values.Value`1[[souchy.celebi.eevee.enums.ZoneType, Eevee]], Eevee",
+        "value": 0
+      },
+      "size": {
+        "$type": "souchy.celebi.eevee.impl.values.Value`1[[souchy.celebi.eevee.face.util.math.IVector3, Eevee]], Eevee",
+        "value": {
+          "$type": "souchy.celebi.eevee.impl.util.math.Vector3, Eevee",
+          "x": 1,
+          "z": 1,
+          "y": 1
+        }
+      },
+      "negative": false,
+      "worldOrigin": 0,
+      "worldOffset": {
+        "$type": "souchy.celebi.eevee.impl.util.math.Vector2, Eevee",
+        "x": 0,
+        "z": 0
+      },
+      "localOrigin": 0,
+      "rotation": 0,
+      "canRotate": false,
+      "sizeIndexExtendFromSource": -1,
+      "children": {
+        "$type": "souchy.celebi.eevee.impl.util.EntityList`1[[souchy.celebi.eevee.face.shared.zones.IZone, Eevee]], Eevee",
+        "$values": []
+      }
+    },
+    "RangeZoneMax": {
+      "$type": "souchy.celebi.eevee.impl.objects.zones.Zone, Eevee",
+      "zoneType": {
+        "$type": "souchy.celebi.eevee.impl.values.Value`1[[souchy.celebi.eevee.enums.ZoneType, Eevee]], Eevee",
+        "value": 0
+      },
+      "size": {
+        "$type": "souchy.celebi.eevee.impl.values.Value`1[[souchy.celebi.eevee.face.util.math.IVector3, Eevee]], Eevee",
+        "value": {
+          "$type": "souchy.celebi.eevee.impl.util.math.Vector3, Eevee",
+          "x": 1,
+          "z": 1,
+          "y": 1
+        }
+      },
+      "negative": false,
+      "worldOrigin": 0,
+      "worldOffset": {
+        "$type": "souchy.celebi.eevee.impl.util.math.Vector2, Eevee",
+        "x": 0,
+        "z": 0
+      },
+      "localOrigin": 0,
+      "rotation": 0,
+      "canRotate": false,
+      "sizeIndexExtendFromSource": -1,
+      "children": {
+        "$type": "souchy.celebi.eevee.impl.util.EntityList`1[[souchy.celebi.eevee.face.shared.zones.IZone, Eevee]], Eevee",
+        "$values": []
+      }
+    }
+  }
+}

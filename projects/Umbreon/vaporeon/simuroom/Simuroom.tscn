@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cy07vf0mgx0ww"]
+[gd_scene load_steps=15 format=3 uid="uid://cy07vf0mgx0ww"]
 
 [ext_resource type="Script" path="res://vaporeon/simuroom/Simuroom.cs" id="1_32hk8"]
 [ext_resource type="Shader" path="res://vaporeon/simuroom/sobdel.gdshader" id="1_osu84"]
@@ -23,6 +23,18 @@ shader_parameter/Bias = Vector3(0.501, 0, -0.501)
 material = SubResource("ShaderMaterial_xae2k")
 size = Vector3(5, 1, 5)
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mp0y7"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_24pyo"]
+sky_material = SubResource("ProceduralSkyMaterial_mp0y7")
+
+[sub_resource type="Environment" id="Environment_1hlaj"]
+background_mode = 2
+sky = SubResource("Sky_24pyo")
+tonemap_mode = 2
+
 [node name="Simuroom" type="Node"]
 script = ExtResource("1_32hk8")
 
@@ -32,6 +44,14 @@ script = ExtResource("1_32hk8")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 mesh = SubResource("BoxMesh_hu88l")
 skeleton = NodePath("../..")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = SubResource("Environment_1hlaj")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_max_distance = 250.0
 
 [node name="Creatures" type="Node" parent="."]
 unique_name_in_owner = true

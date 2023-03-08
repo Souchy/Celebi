@@ -15,7 +15,7 @@ using Umbreon.data;
 using FileAccess = Godot.FileAccess;
 
 
-namespace Umbreon.common
+namespace Umbreon.common.persistance
 {
 
     public static class DiamondParserExtension
@@ -61,8 +61,8 @@ namespace Umbreon.common
 
 
         public static I18NType i18nType { get; set; } = I18NType.fr;
-        public CreatureModelData[] creatureModelsData;
-        public CreatureSkinData[] creatureSkinsData;
+        //public CreatureModelData[] creatureModelsData;
+        //public CreatureSkinData[] creatureSkinsData;
         public MapModelData[] mapModelsData;
 
         public override void _Ready()
@@ -96,10 +96,10 @@ namespace Umbreon.common
 
         public void parseData()
         {
-            var creatureModelsText = FileAccess.Open("res://data/creatures.json", FileAccess.ModeFlags.Read).GetAsText();
-            creatureModelsData = JsonConvert.DeserializeObject<CreatureModelData[]>(creatureModelsText);
-            var creatureSkinsText = FileAccess.Open("res://data/skins.json", FileAccess.ModeFlags.Read).GetAsText();
-            creatureSkinsData = JsonConvert.DeserializeObject<CreatureSkinData[]>(creatureSkinsText);
+            //var creatureModelsText = FileAccess.Open("res://data/creatures.json", FileAccess.ModeFlags.Read).GetAsText();
+            //creatureModelsData = JsonConvert.DeserializeObject<CreatureModelData[]>(creatureModelsText);
+            //var creatureSkinsText = FileAccess.Open("res://data/skins.json", FileAccess.ModeFlags.Read).GetAsText();
+            //creatureSkinsData = JsonConvert.DeserializeObject<CreatureSkinData[]>(creatureSkinsText);
             var mapModelsDataText = FileAccess.Open("res://data/maps.json", FileAccess.ModeFlags.Read).GetAsText();
             mapModelsData = JsonConvert.DeserializeObject<MapModelData[]>(mapModelsDataText);
 

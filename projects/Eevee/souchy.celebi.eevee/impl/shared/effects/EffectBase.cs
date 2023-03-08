@@ -24,6 +24,9 @@ namespace souchy.celebi.eevee.impl.shared.effects
 
         private EffectBase() { }
         private EffectBase(IID id) : base(id) { }
+
+        public IID textId { get; set; }
+
         public static IEffectBase Create() => new EffectBase(Eevee.RegisterIID<IEffect>());
 
         public override ICompiledEffect compile(IFight fight, IID source, IID targetCell)

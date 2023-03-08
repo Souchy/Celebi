@@ -3,12 +3,15 @@ using Godot;
 using Godot.Sharp.Extras;
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.util;
 using Umbreon.common;
+using Umbreon.common.persistance;
 using Umbreon.src;
 using Umbreon.vaporeon.common;
 
@@ -29,9 +32,14 @@ public enum VaporeonTab
     Spells,
     Effects,
     Status,
+    //
     CreatureSkins,
     SpellSkins,
-    EffectSkins
+    EffectSkins,
+    //
+    Current1,
+    Current2,
+    Current3,
 }
 
 public partial class Vaporeon : Control
@@ -41,11 +49,11 @@ public partial class Vaporeon : Control
     #endregion
 
     #region Properties
+    public IID fightId { get; set; } = Eevee.RegisterIID<IFight>();
     public object CurrentObjectCopied { get; set; }
     #endregion
 
     #region Packed Scenes
-    private PackedScene ZonePreviewScene { get; } = GD.Load<PackedScene>("res://vaporeon/common/zones/ZonePreview.tscn");
     private static Dictionary<Type, PackedScene> SceneTypes { get; } = new();
     #endregion
 
@@ -55,11 +63,14 @@ public partial class Vaporeon : Control
     [NodePath] public resource_list_creature CreaturesList { get; set; }
     [NodePath] public resource_list_spell SpellsList { get; set; }
     [NodePath] public resource_list_effect EffectsList { get; set; }
-    // todo
     [NodePath] public resource_list_status StatusList { get; set; }
+    // todo
     [NodePath] public resource_list_creature_skin CreatureSkinsList { get; set; }
     [NodePath] public resource_list_spell_skin SpellSkinsList { get; set; }
     [NodePath] public resource_list_effect_skin EffectSkinsList { get; set; }
+    // simuroom
+    //
+    
     #endregion
 
     #region Tab Buttons
@@ -71,7 +82,15 @@ public partial class Vaporeon : Control
     [NodePath] public Button BtnCreatureSkins { get; set; }
     [NodePath] public Button BtnSpellSkins { get; set; }
     [NodePath] public Button BtnEffectSkins { get; set; }
+    //
+    [NodePath] public Button BtnSimuroom { get; set; }
+    //
+    [NodePath] public Button BtnCurrent1 { get; set; }
+    [NodePath] public Button BtnCurrent2 { get; set; }
+    [NodePath] public Button BtnCurrent3 { get; set; }
     #endregion
+
+    private readonly Simuroom simuroom = instanceScene<Simuroom>();
 
     static Vaporeon()
     {
@@ -85,13 +104,14 @@ public partial class Vaporeon : Control
         SceneTypes.Add(typeof(IStatResource), GD.Load<PackedScene>("res://vaporeon/common/stats/StatResourceEditor.tscn"));
         SceneTypes.Add(typeof(IStatSimple), GD.Load<PackedScene>("res://vaporeon/common/stats/StatSimpleEditor.tscn"));
         SceneTypes.Add(typeof(EffectMini), GD.Load<PackedScene>("res://vaporeon/common/EffectMini.tscn"));
+        SceneTypes.Add(typeof(Simuroom), GD.Load<PackedScene>("res://vaporeon/simuroom/Simuroom.tscn"));
     }
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         this.OnReady();
-        this.Inject();
+        //this.Inject();
 
         bus.subscribe(this.GetDiamondsParser());
 
@@ -107,6 +127,14 @@ public partial class Vaporeon : Control
         BtnCreatureSkins.ButtonUp +=() => TabContainer.CurrentTab = (int) VaporeonTab.CreatureSkins;
         BtnSpellSkins.ButtonUp +=   () => TabContainer.CurrentTab = (int) VaporeonTab.SpellSkins;
         BtnEffectSkins.ButtonUp +=  () => TabContainer.CurrentTab = (int) VaporeonTab.EffectSkins;
+        BtnCurrent1.ButtonUp +=     () => TabContainer.CurrentTab = (int) VaporeonTab.Current1;
+        BtnCurrent2.ButtonUp +=     () => TabContainer.CurrentTab = (int) VaporeonTab.Current2;
+        BtnCurrent3.ButtonUp +=     () => TabContainer.CurrentTab = (int) VaporeonTab.Current3;
+
+        BtnSimuroom.ButtonUp += () =>
+        {
+            newWindow(simuroom);
+        };
     }
 
     private void TabContainer_TabChanged(long tab)
@@ -136,7 +164,7 @@ public partial class Vaporeon : Control
     }
     public static T instanceScene<T>() where T : Node
     {
-        GD.Print($"instanceScene <{typeof(T)}> in {SceneTypes.Last()}");
+        GD.Print($"instanceScene <{typeof(T)}> in {SceneTypes}");
         return SceneTypes[typeof(T)].Instantiate<T>();
     }
     public void openEditor<T>(T model)
@@ -146,7 +174,7 @@ public partial class Vaporeon : Control
         newWindow((Control) editor);
         editor.init(model);
     }
-    public void newWindow(Control root)
+    public void newWindow(Node root)
     {
         var wd = new Window();
         wd.GuiEmbedSubwindows = false;

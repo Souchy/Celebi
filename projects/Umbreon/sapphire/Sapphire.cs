@@ -1,4 +1,4 @@
-using Umbreon.common;
+using Umbreon.common.persistance;
 using Umbreon.data;
 using Umbreon.src;
 using Godot;
@@ -8,6 +8,10 @@ using souchy.celebi.eevee;
 using System;
 using System.Security.Cryptography.X509Certificates;
 using souchy.celebi.eevee.impl;
+using souchy.celebi.eevee.impl.objects;
+using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.face.shared.models;
+using souchy.celebi.eevee.face.shared.models.skins;
 
 public partial class Sapphire : Node3D
 {
@@ -41,36 +45,35 @@ public partial class Sapphire : Node3D
         {
             GD.Print("team: " + team);
             int i = 0;
-            foreach (var model in diamonds.creatureModelsData)
+            foreach (var model in Eevee.models.creatureModels.Values) //diamonds.creatureModelsData)
             {
-                createCreature(model, diamonds.creatureSkinsData[model.skins[0]], team, true, map.teamStartPositions[team][i]);
+                //createCreature(model, diamonds.creatureSkinsData[model.skins[0]], team, true, map.teamStartPositions[team][i]);
+                var skin = Eevee.models.creatureSkins.Get(model.skins.Values[0]);
+                createCreature(model, skin, team, true, map.teamStartPositions[team][i]);
                 i++;
             }
         }
-
-        /*
-        createCreature("ybot/ybot_pro_magic", true, new Vector3(7, 0, 7));
-		createCreature("aurelia/aurelia", true, new Vector3(5, 0, 7));
-		createCreature("ybot/ybot_packed", true, new Vector3(14, 0, 9));
-		createCreature("ybot/ybot_pro_magic", true, new Vector3(12, 0, 11));
-		createCreature("aurelia/aurelia", true, new Vector3(14, 0, 11));
-        */
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
+    // Called every frame. 'delta' is the elapsed time since the previous frame.
+    public override void _Process(double delta)
+    {
+    }
 
-	public void createCreature(CreatureModelData model, CreatureSkinData skin, int team, bool spawnOnBoard, Vector3 pos)
-	{
+
+    // CreatureModelData model, CreatureSkinData skin
+    public void createCreature(ICreatureModel model, ICreatureSkin skin, int team, bool spawnOnBoard, Vector3 pos)
+    {
         GD.Print("create pos: " + pos);
-		var crea = creaScene.Instantiate<CreatureNode>();
-		crea.Name = model.name; // name
-        crea.Position = pos; //.toGodot();
-		crea.init(skin, team);
-		Creatures.AddChild(crea);
-	}
+        ICreature crea = Creature.Create();
+        //TODO crea.modelUid = model.id;
+
+        var node = creaScene.Instantiate<CreatureNode>();
+        node.Name = model.GetName().value;
+        node.Position = pos; //.toGodot();
+        node.init(crea, skin, team);
+        Creatures.AddChild(node);
+    }
 
     public static int mapLengthX = 19;
     public static int mapLengthZ = 15;
@@ -88,7 +91,4 @@ public static class Vector3Extensions
     {
         return new Vector3(fromGodot.X + (Sapphire.mapLengthX - 1) / 2, fromGodot.Y, fromGodot.Z + (Sapphire.mapLengthZ - 1) / 2);
     }
-
-
-
 } 

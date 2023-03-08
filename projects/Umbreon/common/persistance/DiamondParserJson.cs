@@ -6,7 +6,7 @@ using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 using FileAccess = Godot.FileAccess;
-using static Umbreon.common.DiamondParser;
+using static Umbreon.common.persistance.DiamondParser;
 
 namespace Umbreon.common.persistance
 {

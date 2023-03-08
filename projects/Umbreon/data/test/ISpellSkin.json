@@ -1,0 +1,11 @@
+{
+  "1": {
+    "$type": "souchy.celebi.eevee.impl.shared.SpellSkin, Eevee",
+    "entityUid": "1",
+    "spellModelUid": "1",
+    "icon": null,
+    "sourceAnimation": null,
+    "targetAnimation": null,
+    "behaviourScript": null
+  }
+}

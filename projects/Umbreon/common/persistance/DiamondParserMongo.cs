@@ -1,12 +1,10 @@
 ﻿using Godot;
-using Newtonsoft.Json;
 using souchy.celebi.eevee.face.entity;
-using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
-using static Umbreon.common.DiamondParser;
 using MongoDB.Driver;
+using static Umbreon.common.persistance.DiamondParser;
 
 namespace Umbreon.common.persistance
 {

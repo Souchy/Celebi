@@ -1,11 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://70xwfuyjqk5k"]
+[gd_scene load_steps=11 format=3 uid="uid://70xwfuyjqk5k"]
 
 [ext_resource type="Script" path="res://sapphire/Sapphire.cs" id="1_axpwp"]
 [ext_resource type="PackedScene" uid="uid://cj17xap1x2dhg" path="res://assets/maps/mapDofus6/map6_toonwater.tscn" id="2_cj6ch"]
 [ext_resource type="PackedScene" uid="uid://bxel5q1htlcm4" path="res://assets/maps/mapDofus6/map_6.tscn" id="2_kls1v"]
-[ext_resource type="Script" path="res://sapphire/controls/Controls.cs" id="3_1ug5b"]
-[ext_resource type="PackedScene" path="res://sapphire/controls/cursor.tscn" id="3_tnfnv"]
 [ext_resource type="PackedScene" uid="uid://btnc3cc0avyqg" path="res://assets/maps/celebi/map_celebi.tscn" id="4_3dy4y"]
+[ext_resource type="PackedScene" uid="uid://cbsy6uf5j02c5" path="res://sapphire/controls/Controls.tscn" id="5_oq2ih"]
 [ext_resource type="PackedScene" uid="uid://ba4siyb7odwxq" path="res://assets/creatures/makima/makima3.tscn" id="6_8on86"]
 [ext_resource type="PackedScene" uid="uid://4j7eex12m7i5" path="res://sapphire/ui/sapphireHud.tscn" id="8_aehap"]
 [ext_resource type="PackedScene" uid="uid://bmbllwohsgppj" path="res://assets/creatures/agni/agni.tscn" id="8_mkduh"]
@@ -13,6 +12,7 @@
 [sub_resource type="Environment" id="Environment_dqre3"]
 background_color = Color(0.207843, 0.776471, 0.294118, 1)
 tonemap_mode = 3
+tonemap_exposure = 1.5
 ssr_enabled = true
 ssao_enabled = true
 ssao_radius = 16.0
@@ -35,7 +35,7 @@ camera_attributes = SubResource("CameraAttributesPractical_5ltxg")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
 transform = Transform3D(-0.77198, -0.378418, 0.510732, 7.02427e-08, 0.803483, 0.595328, -0.635647, 0.459581, -0.620273, 0, 8, -5)
 light_color = Color(0.662745, 0.666667, 1, 1)
-light_energy = 1.5
+light_energy = 2.0
 shadow_enabled = true
 shadow_bias = 0.07
 shadow_opacity = 0.55
@@ -50,39 +50,7 @@ visible = false
 [node name="MapCelebi" parent="Environment" instance=ExtResource("4_3dy4y")]
 visible = false
 
-[node name="ColorRect" type="ColorRect" parent="Environment"]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Controls" type="Node" parent="."]
-script = ExtResource("3_1ug5b")
-
-[node name="cursorBoard" parent="Controls" instance=ExtResource("3_tnfnv")]
-transform = Transform3D(1, 0, -2.98023e-08, -2.98023e-08, 1, 2.98023e-08, -2.98023e-08, 0, 1, 2, 0.01, 8)
-
-[node name="cursorWorld" parent="Controls" instance=ExtResource("3_tnfnv")]
-transform = Transform3D(1, 0, -2.98023e-08, -2.98023e-08, 1, 2.98023e-08, -2.98023e-08, 0, 1, 2, 0.01, 8)
-
-[node name="CamRotY" type="Node3D" parent="Controls"]
-transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)
-
-[node name="CamRotX" type="Node3D" parent="Controls/CamRotY"]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
-
-[node name="camIso" type="Camera3D" parent="Controls/CamRotY/CamRotX"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
-projection = 1
-current = true
-size = 20.0
-near = 0.001
-far = 25.0
-
-[node name="camTop" type="Camera3D" parent="Controls/CamRotY"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)
-projection = 1
-size = 20.0
-near = 0.001
-far = 15.0
+[node name="Controls" parent="." instance=ExtResource("5_oq2ih")]
 
 [node name="sapphireHud" parent="." instance=ExtResource("8_aehap")]
 unique_name_in_owner = true
