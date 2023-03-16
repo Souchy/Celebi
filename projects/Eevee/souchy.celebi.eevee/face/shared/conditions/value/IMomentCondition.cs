@@ -2,8 +2,8 @@
 
 namespace souchy.celebi.eevee.face.shared.conditions.value
 {
-    public interface IHeightCondition : ICondition //: IIntCondition
+    public interface IMomentCondition : ICondition
     {
-        public int height { get; set; }
+        public MomentType momentType { get; set; }
     }
 }
