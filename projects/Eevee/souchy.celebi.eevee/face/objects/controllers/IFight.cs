@@ -37,5 +37,15 @@ namespace souchy.celebi.eevee.face.objects.controllers
         /// </summary>
         public IEntityDictionary<IID, IEffect> effects { get; init; }
 
+        public IBoardEntity GetBoardEntity(IID entityId) {
+            if(this.board.creatureIds.Values.Contains(entityId)) {
+                return creatures.Get(entityId);
+            }
+            if(this.board.cells.Values.Contains(entityId)) {
+                return cells.Get(entityId);
+            }
+            return null;
+        }
+
     }
 }
