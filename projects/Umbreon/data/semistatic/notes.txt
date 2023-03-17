@@ -1,0 +1,30 @@
+
+
+Effect {
+
+	properties<string, value>
+
+}
+
+
+
+effectModels.json: 
+	1: {
+		nameId: 1 (damage)
+		properties: {
+			amount: "value<int>"
+			element: "value<element>"
+		}	
+	}
+	2: {
+		nameId: 2 (dash)
+		properties: {
+			amount: "value<int>"
+		}	
+	}
+
+//characteristics.json:
+elements.json:
+resources.json:
+affinities.json:
+states.json:
