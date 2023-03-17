@@ -4,17 +4,18 @@ using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.util.math;
 using souchy.celebi.eevee.impl;
+using souchy.celebi.eevee.impl.util;
 using static souchy.celebi.eevee.face.entity.IEntity;
 
 namespace Espeon.souchy.celebi.espeon.eevee.impl.controllers
 {
     public class Board : IBoard
     {
-        public IID entityUid { get; init; } = Eevee.RegisterIID();
-        public IID fightUid { get; init; }
+        public IID entityUid { get; set; } = Eevee.RegisterIID<IBoard>();
+        public IID fightUid { get; set; }
 
-        public List<IID> creatureIds { get; init; } = new List<IID>();
-        public List<IID> cells { get; init; } = new List<IID>();
+        public IEntityList<IID> creatureIds { get; init; } = new EntityList<IID>();
+        public IEntityList<IID> cells { get; init; } = new EntityList<IID>();
 
         public Board(ScopeID scopeId)
         {
@@ -27,7 +28,7 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.controllers
         public void Dispose()
         {
             this.GetFight().board = null;
-            Eevee.DisposeIID(this);
+            Eevee.DisposeIID<IBoard>(this.entityUid);
             // nothing to dispose? 
             //throw new NotImplementedException();
         }

@@ -1,5 +1,4 @@
 ﻿using souchy.celebi.eevee.enums;
-using souchy.celebi.eevee.face.conditions;
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects.compiledeffects;
 using souchy.celebi.eevee.face.objects.controllers;
@@ -9,12 +8,6 @@ using souchy.celebi.eevee.face.shared.triggers;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
-using souchy.celebi.eevee.impl;
-using souchy.celebi.eevee.impl.objects;
-using souchy.celebi.eevee.impl.values;
-using souchy.celebi.eevee.interfaces;
-using souchy.celebi.eevee.statuses;
-using System.ComponentModel;
 
 namespace souchy.celebi.eevee.face.objects
 {

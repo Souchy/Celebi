@@ -19,9 +19,8 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest
         [Fact]
         public async Task TestCSharpScriptPerformance()
         {
-            IStats stats = new Stats();
-            stats.set(StatType.Life, new StatResource());
-            stats.get<IStatResource>(StatType.Life).current = 7;
+            IStats stats = Stats.Create();
+            stats.Set(StatType.Life, StatResource.Create(StatType.Life, 7, 10, 10));
 
             var options = ScriptOptions.Default;
             options = options.AddReferences(typeof(IStats).Assembly);

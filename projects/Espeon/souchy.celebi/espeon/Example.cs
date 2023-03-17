@@ -58,15 +58,15 @@ namespace Espeon.souchy.celebi.espeon
         private void addStats(ICreature creature)
         {
             var stats = fight.stats.Get(creature.stats);
-            stats.set(StatType.Life, new StatResource());
-            stats.get<IStatResource>(StatType.Life).current = rng.Next(1, 90);
-            stats.get<IStatResource>(StatType.Life).currentMax = rng.Next(100, 150);
-            stats.get<IStatResource>(StatType.Life).initialMax = rng.Next(100, 150);
+            stats.Set(StatType.Life, StatResource.Create(StatType.Life, 0, 0, 0));
+            stats.Get<IStatResource>(StatType.Life).current = rng.Next(1, 90);
+            stats.Get<IStatResource>(StatType.Life).currentMax = rng.Next(100, 150);
+            stats.Get<IStatResource>(StatType.Life).initialMax = rng.Next(100, 150);
 
-            stats.set(StatType.Mana, new StatResource());
-            stats.get<IStatResource>(StatType.Mana).current = rng.Next(1, 10);
-            stats.get<IStatResource>(StatType.Mana).currentMax = rng.Next(10, 12);
-            stats.get<IStatResource>(StatType.Mana).initialMax = rng.Next(10, 12);
+            stats.Set(StatType.Mana, StatResource.Create(StatType.Mana, 0, 0, 0));
+            stats.Get<IStatResource>(StatType.Mana).current = rng.Next(1, 10);
+            stats.Get<IStatResource>(StatType.Mana).currentMax = rng.Next(10, 12);
+            stats.Get<IStatResource>(StatType.Mana).initialMax = rng.Next(10, 12);
         }
 
         private void addSpell(ICreature creature)

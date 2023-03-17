@@ -7,6 +7,7 @@ using souchy.celebi.eevee.face.shared.triggers;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
+using souchy.celebi.eevee.impl.objects.compiledeffects;
 using souchy.celebi.eevee.impl.objects.zones;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.impl.values;
@@ -44,6 +45,10 @@ namespace souchy.celebi.eevee.impl.objects
 
         public IEnumerable<IEffect> GetEffects() => effectIds.Values.Select(i => this.GetFight()?.effects.Get(i) ?? Eevee.models.effects.Get(i));
 
+        public IEnumerable<CompiledEffect> checkTriggers(TriggerOrderType orderType, CompiledEffect e)
+        {
+            throw new NotImplementedException();
+        }
 
         public void CopyBasicTo(IEffect e)
         {
@@ -59,5 +64,6 @@ namespace souchy.celebi.eevee.impl.objects
         {
             Eevee.DisposeIID<IEffect>(entityUid);
         }
+
     }
 }
