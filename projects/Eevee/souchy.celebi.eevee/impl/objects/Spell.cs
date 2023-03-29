@@ -19,7 +19,7 @@ namespace souchy.celebi.eevee.impl.objects
 
         public int chargesRemaining { get; set; }
         public int cooldownRemaining { get; set; }
-        public int numberOfCastsThisTurn { get; set; }
+        public int numberOfCastsThisTurn { get => numberOfCastPerEntityThisTurn.Values.Sum(); }
         public Dictionary<IID, int> numberOfCastPerEntityThisTurn { get; set; }
 
         private Spell() { }

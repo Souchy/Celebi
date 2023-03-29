@@ -13,7 +13,7 @@ namespace souchy.celebi.eevee.impl.shared.conditions.value
     public class SpellCondition : Condition, ISpellCondition
     {
         public int spellModelId { get; set; }
-        public int statId { get; set; }
+        public StatType statId { get; set; }
         public object value { get; set; }
 
         public override bool check(IID fightId, IID source, IID target)
@@ -25,7 +25,7 @@ namespace souchy.celebi.eevee.impl.shared.conditions.value
             var fight = Eevee.fights.Get(fightId);
             var creature = fight.creatures.Get(checkable);
             var spell = creature.GetSpells().FirstOrDefault(s => s.modelUid == spellModelId);
-            var stat = spell.GetStats().Get((StatType) statId);
+            var stat = spell.GetStats().Get(statId);
             // var stat = creature.GetStats().Get((StatType) statId);
             
             object fetchedValue = null;

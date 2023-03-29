@@ -28,6 +28,8 @@
     <Content Include="data\effects.json" />
     <Content Include="data\i18n_fr.json" />
     <Content Include="data\maps.json" />
+    <Content Include="data\semistatic\effects.json" />
+    <Content Include="data\semistatic\resources.json" />
     <Content Include="data\skins.json" />
     <Content Include="data\spells.json" />
   </ItemGroup>

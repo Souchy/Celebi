@@ -4,7 +4,7 @@ namespace souchy.celebi.eevee.face.shared.conditions.value
 {
     public interface IStatCondition : ICondition //: IIntCondition
     {
-        public int statId { get; set; }
-        public Object value { get; set; } // could be int or double or bool
+        public StatType statId { get; set; }
+        public object value { get; set; } // could be int or double or bool
     }
 }

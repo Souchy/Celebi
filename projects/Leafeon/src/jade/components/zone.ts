@@ -4,7 +4,7 @@ import { Zone as ZoneData } from "../../../../../arch/common/components/zone";
 import { Effect } from "../../../../../arch/common/effects";
 import { db } from "../../db";
 
-@inject(db)
+@inject(db, IEventAggregator)
 export class Zone {
 
     public db: db;
@@ -12,7 +12,7 @@ export class Zone {
     @bindable
     public zone: ZoneData
 
-    constructor(db: db, @IEventAggregator readonly ea: IEventAggregator) {
+    constructor(db: db, readonly ea: IEventAggregator) {
         this.db = db;
     }
 
