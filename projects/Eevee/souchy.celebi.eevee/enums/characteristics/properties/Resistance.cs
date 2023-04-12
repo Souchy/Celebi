@@ -7,39 +7,37 @@ using System.Threading.Tasks;
 
 namespace souchy.celebi.eevee.enums.characteristics.creature
 {
-    public sealed record Resistance(int localId) : CharacteristicType<IStatSimple>(CharacteristicCategory.Resistance, localId)
+    public sealed record Resistance : CharacteristicType
     {
-        public static readonly Resistance BaseFire = new(1);
-        public static readonly Resistance BaseWater = new(2);
-        public static readonly Resistance BaseEarth = new(3);
-        public static readonly Resistance BaseAir = new(4);
-        public static readonly Resistance BaseDamage = new(5);
-        public static readonly Resistance BaseHeal = new(6);
-        public static readonly Resistance BaseMelee = new(7);
-        public static readonly Resistance BaseDistance = new(8);
-        public static readonly Resistance BaseTrap = new(9);
-        public static readonly Resistance BaseGlyph = new(10);
+        public ElementType Element { get; init; }
+        public Resistance(int localId, string name, ElementType ele = ElementType.None) : base(CharacteristicCategory.Resistance, localId, name, SimpleFactory)
+        {
+            this.Element = ele;
+            this.StatValueType = StatValueType.Simple;
+        }
 
-        public static readonly Resistance Fire = new(11);
-        public static readonly Resistance Water = new(12);
-        public static readonly Resistance Earth = new(13);
-        public static readonly Resistance Air = new(14);
-        public static readonly Resistance Damage = new(15);
-        public static readonly Resistance Heal = new(16);
-        public static readonly Resistance Melee = new(17);
-        public static readonly Resistance Distance = new(18);
-        public static readonly Resistance Trap = new(19);
-        public static readonly Resistance Glyph = new(20);
+        public static readonly Resistance Fire      = new(1, nameof(Fire),  ElementType.Fire);
+        public static readonly Resistance Water     = new(2, nameof(Water), ElementType.Water);
+        public static readonly Resistance Earth     = new(3, nameof(Earth), ElementType.Earth);
+        public static readonly Resistance Air       = new(4, nameof(Air),   ElementType.Air);
+        public static readonly Resistance True      = new(5, nameof(True),  ElementType.True);
+
+        public static readonly Resistance Damage    = new(6,  nameof(Damage));
+        public static readonly Resistance Heal      = new(7,  nameof(Heal));
+        public static readonly Resistance Melee     = new(8,  nameof(Melee));
+        public static readonly Resistance Distance  = new(9,  nameof(Distance));
+        public static readonly Resistance Trap      = new(10, nameof(Trap));
+        public static readonly Resistance Glyph     = new(11, nameof(Glyph));
 
 
-        public static readonly Dictionary<int, Resistance> values = new();
+        public static readonly Dictionary<CharacteristicId, Resistance> values = new();
         static Resistance()
         {
             var fields = typeof(Resistance).GetFields();
             foreach (var field in fields)
             {
                 var value = (Resistance) field.GetValue(null);
-                values[value.id] = value;
+                values[value.ID] = value;
             }
         }
     }

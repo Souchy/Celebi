@@ -54,7 +54,7 @@ namespace Umbreon.common.persistance
                 new IIDJsonConverter(), new IStringEntitysonConverter(),
                 new IEntitySetJsonConverter(), new IEntityListJsonConverter(),
                 new IValueIntJsonConverter(), new IValueDoubleJsonConverter(), new IValueBoolJsonConverter(),
-                new StatTypeJsonConverter(), new IValueElementJsonConverter()
+                new CharacTypeJsonConverter(), new CharacIdJsonConverter(), new IValueElementJsonConverter()
             }
         };
         internal readonly IDiamondPersistance persistance = new DiamondPersistanceJson(); //new DiamondParserMongo();
@@ -105,6 +105,7 @@ namespace Umbreon.common.persistance
 
             // Load and register entities
             persistance.load(Eevee.models.i18n); //, getFileName<IStringEntity>());
+            persistance.loadCharacteristics();
             persistance.load(Eevee.models.creatureSkins);
             persistance.load(Eevee.models.spellSkins);
             persistance.load(Eevee.models.effectSkins);
@@ -158,6 +159,7 @@ namespace Umbreon.common.persistance
         public void save(object dic, string fileName);
         //public void _save(object dic, string fileName);
         public IEntityDictionary<IID, V> load<V>(IEntityDictionary<IID, V> dic, string filename = "") where V : IEntity;
+        public void loadCharacteristics(string filename = "");
         #endregion
     }
 

@@ -13,14 +13,15 @@ namespace souchy.celebi.eevee.impl.objects
 {
     public class Spell : ISpell
     {
-        public IID entityUid { get; set; } 
-        public IID modelUid { get; set; }
         public IID fightUid { get; set; }
+        public IID modelUid { get; set; }
+        public IID entityUid { get; set; } 
 
-        public int chargesRemaining { get; set; }
-        public int cooldownRemaining { get; set; }
-        public int numberOfCastsThisTurn { get => numberOfCastPerEntityThisTurn.Values.Sum(); }
-        public Dictionary<IID, int> numberOfCastPerEntityThisTurn { get; set; }
+        public IID stats { get; set; }
+        //public int chargesRemaining { get; set; }
+        //public int cooldownRemaining { get; set; }
+        //public int numberOfCastsThisTurn { get => numberOfCastPerEntityThisTurn.Values.Sum(); }
+        //public Dictionary<IID, int> numberOfCastPerEntityThisTurn { get; set; }
 
         private Spell() { }
         private Spell(IID fightId, IID id)
@@ -32,8 +33,8 @@ namespace souchy.celebi.eevee.impl.objects
 
         public void Dispose()
         {
+            ((ISpell) this).GetStats().Dispose();
             Eevee.DisposeIID<ISpell>(entityUid);
-            throw new NotImplementedException();
         }
     }
 }

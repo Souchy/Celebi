@@ -15,7 +15,7 @@ namespace souchy.celebi.eevee.face.entity
         public Dictionary<ContextType, IContext> contexts { get; set; }
 
 
-        public IEnumerable<IStatus> GetStatuses() => this.GetFight().statuses.Values.Where(s => statuses.Contains(s.entityUid));
+        public IEnumerable<IStatusInstance> GetStatuses() => this.GetFight().statuses.Values.Where(s => statuses.Contains(s.entityUid));
 
     }
 }

@@ -1,8 +1,11 @@
 ﻿using Godot;
 using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.face.objects.stats;
+using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
+using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.impl.values;
 using System.Reflection;
@@ -124,17 +127,19 @@ namespace Umbreon.vaporeon.common
 
         
 
-        public static void GenerateStat(GridContainer container, StatType statType, IStat stat) 
+        public static void GenerateStat(GridContainer container, CharacteristicType statType, IStat stat) 
         {
             Label lbl = new Label();
-            lbl.Name = "lbl:" + Enum.GetName(statType);
-            lbl.Text = Enum.GetName(statType);
+            //Eevee.models.i18n.Get(statType.ID);
+            //Eevee.RegisterIID<IStringEntity>();
+            lbl.Name = "lbl:" + statType.GetName(); //Enum.GetName(statType);
+            lbl.Text = statType.GetName().value; //Enum.GetName(statType);
             if (stat == null)
                 stat = statType.Create();
             container.AddChild(lbl);
 
             var editor = Vaporeon.instanceEditor(stat);
-            editor.Name = Enum.GetName(statType);
+            editor.Name = statType.GetName().value; //Enum.GetName(statType);
             container.AddChild(editor);
 
             if (stat is IStatSimple)

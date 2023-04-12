@@ -7,22 +7,27 @@ using System.Threading.Tasks;
 
 namespace souchy.celebi.eevee.enums.characteristics.properties
 {
-    public sealed record OtherProperty(int localId) : CharacteristicType<IStatSimple>(CharacteristicCategory.Other, localId)
+    public sealed record OtherProperty: CharacteristicType
     {
-        public static readonly OtherProperty Range = new(0);
-        public static readonly OtherProperty Speed = new(1);
-        public static readonly OtherProperty Erosion = new(2);
-        public static readonly OtherProperty Echo = new(3);
+        public OtherProperty(int localId) : base(CharacteristicCategory.Other, localId, CharacteristicType.SimpleFactory)
+        {
+            this.StatValueType = StatValueType.Simple;
+        }
+
+        public static readonly OtherProperty Range      = new(0);
+        public static readonly OtherProperty Speed      = new(1); // initiative
+        public static readonly OtherProperty Erosion    = new(2);
+        public static readonly OtherProperty Echo       = new(3); // number of times it echoes
 
 
-        public static readonly Dictionary<int, OtherProperty> values = new();
+        public static readonly Dictionary<CharacteristicId, OtherProperty> values = new();
         static OtherProperty()
         {
             var fields = typeof(OtherProperty).GetFields();
             foreach (var field in fields)
             {
                 var value = (OtherProperty) field.GetValue(null);
-                values[value.id] = value;
+                values[value.ID] = value;
             }
         }
     }

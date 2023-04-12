@@ -3,7 +3,7 @@ using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
-using souchy.celebi.eevee.impl.objects.compiledeffects;
+using souchy.celebi.eevee.impl.objects.effectResults;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.impl.values;
 
@@ -27,7 +27,7 @@ namespace souchy.celebi.eevee.impl.shared
 
 
         public IEnumerable<IEffect> GetEffects() => effectIds.Values.Select(i => Eevee.models.effects.Get(i));
-        public IEnumerable<CompiledEffect> checkTriggers(TriggerOrderType orderType, CompiledEffect e)
+        public IEnumerable<EffectResult> checkTriggers(TriggerOrderType orderType, EffectResult e)
         {
             throw new NotImplementedException();
         }

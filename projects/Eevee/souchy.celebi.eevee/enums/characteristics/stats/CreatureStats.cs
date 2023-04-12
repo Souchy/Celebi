@@ -12,31 +12,31 @@ namespace souchy.celebi.eevee.enums.characteristics.other
 {
     public class CreatureStats
     {
-        private Dictionary<IID, IStat> stats = new();
+        private Dictionary<CharacteristicId, IStat> stats = new();
         // -1 = full every turn, 0 = no regen, 1 = 1/turn, 0.25 = 1 per 4 turns // string to parse for different regens
         //private readonly Dictionary<string, IValue<int>> resourceRegen = new();
         // gain x every turn
-        private readonly Dictionary<IID, IValue<int>> growth = new();
+        private readonly Dictionary<CharacteristicId, IValue<int>> growth = new();
         int turnsBetweenGrowths;
 
-        public T get<T>(CharacteristicType<T> ct) where T : IStat
+        public T get<T>(CharacteristicType ct) where T : IStat
         {
-            return (T) stats[ct.id];
+            return (T) stats[ct.ID];
         }
-        public T get<T>(IID id) where T : IStat
+        public T get<T>(CharacteristicId id) where T : IStat
         {
             return (T) stats[id];
         }
-        public int getGrowth<T>(CharacteristicType<T> ct) where T : IStat
+        public int getGrowth<T>(CharacteristicType ct) where T : IStat
         {
-            return growth[ct.id].value;
+            return growth[ct.ID].value;
         }
         public void applyRegen()
         {
             foreach (var res in Enum.GetValues<ResourceEnum>())
             {
-                var current = get(Resource.getKey(res, ResourceProperty.Current));
-                var regen = get(Resource.getKey(res, ResourceProperty.Regen));
+                var current = get<IStatSimple>(Resource.getKey(res, ResourceProperty.Current));
+                var regen = get<IStatSimple>(Resource.getKey(res, ResourceProperty.Regen));
                 current.value += regen.value;
             }
         }

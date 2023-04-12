@@ -1,6 +1,6 @@
 ﻿using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.entity;
-using souchy.celebi.eevee.face.objects.compiledeffects;
+using souchy.celebi.eevee.face.objects.effectResults;
 using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.shared;
 using souchy.celebi.eevee.face.shared.conditions;
@@ -8,6 +8,7 @@ using souchy.celebi.eevee.face.shared.triggers;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
+using souchy.celebi.eevee.impl.shared.triggers;
 
 namespace souchy.celebi.eevee.face.objects
 {
@@ -45,7 +46,7 @@ namespace souchy.celebi.eevee.face.objects
         // We have EffectRandom that casts a random child effect
 
 
-        public ICompiledEffect compile(IFight fight, IID source, IID targetCell); // IActionContext context);
+        public IEffectResult compile(IFight fight, IAction action, TriggerEvent trigger); // IActionContext context);
 
         //public IEnumerable<IEffect> GetChildren() => effectIds.Values.Select(i => Eevee.models.effects.Get(i));
 

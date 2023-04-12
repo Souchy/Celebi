@@ -1,6 +1,7 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.impl.stats;
 using System.Diagnostics;
@@ -20,7 +21,7 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest
         public async Task TestCSharpScriptPerformance()
         {
             IStats stats = Stats.Create();
-            stats.Set(StatType.Life, StatResource.Create(StatType.Life, 7, 10, 10));
+            stats.Set(Resource.Life.ID, StatResource.Create(Resource.Life.ID, 7, 10, 10));
 
             var options = ScriptOptions.Default;
             options = options.AddReferences(typeof(IStats).Assembly);

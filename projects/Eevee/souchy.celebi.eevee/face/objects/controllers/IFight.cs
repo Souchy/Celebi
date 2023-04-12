@@ -21,7 +21,7 @@ namespace souchy.celebi.eevee.face.objects.controllers
         public IEntityDictionary<IID, IPlayer> players { get; init; }
         public IEntityDictionary<IID, ICreature> creatures { get; init; }
         public IEntityDictionary<IID, ISpell> spells { get; init; }
-        public IEntityDictionary<IID, IStatus> statuses { get; init; }
+        public IEntityDictionary<IID, IStatusInstance> statuses { get; init; }
         public IEntityDictionary<IID, ICell> cells { get; init; }
         public IEntityDictionary<IID, IStats> stats { get; init; }
 

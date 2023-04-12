@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
@@ -29,12 +30,19 @@ namespace Umbreon.common.util
         public override void WriteJson(JsonWriter writer, IStringEntity value, JsonSerializer serializer)
             => writer.WriteValue(value.ToString());
     }
-    public class StatTypeJsonConverter : JsonConverter<StatType>
+    public class CharacTypeJsonConverter : JsonConverter<CharacteristicType>
     {
-        public override StatType ReadJson(JsonReader reader, Type objectType, StatType existingValue, bool hasExistingValue, JsonSerializer serializer)
-            => Enum.Parse<StatType>(reader.ReadAsString());
-        public override void WriteJson(JsonWriter writer, StatType value, JsonSerializer serializer)
-            => writer.WriteValue(Enum.GetName<StatType>(value));
+        public override CharacteristicType ReadJson(JsonReader reader, Type objectType, CharacteristicType existingValue, bool hasExistingValue, JsonSerializer serializer)
+            => new CharacteristicId(reader.ReadAsInt32().Value).GetCharactType();
+        public override void WriteJson(JsonWriter writer, CharacteristicType value, JsonSerializer serializer)
+            => writer.WriteValue(value.ID);
+    }
+    public class CharacIdJsonConverter : JsonConverter<CharacteristicId>
+    {
+        public override CharacteristicId ReadJson(JsonReader reader, Type objectType, CharacteristicId existingValue, bool hasExistingValue, JsonSerializer serializer)
+            => new CharacteristicId(reader.ReadAsInt32().Value);
+        public override void WriteJson(JsonWriter writer, CharacteristicId value, JsonSerializer serializer)
+            => writer.WriteValue(value);
     }
     public class IValueElementJsonConverter : JsonConverter<IValue<ElementType>>
     {

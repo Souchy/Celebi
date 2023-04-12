@@ -5,6 +5,8 @@ using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 using MongoDB.Driver;
 using static Umbreon.common.persistance.DiamondParser;
+using souchy.celebi.eevee.enums.characteristics;
+using souchy.celebi.eevee.face.shared.models;
 
 namespace Umbreon.common.persistance
 {
@@ -36,7 +38,7 @@ namespace Umbreon.common.persistance
             }
         }
 
-        public IMongoCollection<T> GetCollection<T>() where T : IEntity
+        private IMongoCollection<T> GetCollection<T>() //where T : IEntity
         {
             return db.GetCollection<T>(typeof(T).Name);
         }
@@ -91,9 +93,9 @@ namespace Umbreon.common.persistance
             try
             {
                 var collection = GetCollection<V>();
-                var asd = collection.Find(Builders<V>.Filter.Empty)
+                var list = collection.Find(Builders<V>.Filter.Empty)
                     .ToList();
-                foreach (var v in asd)
+                foreach (var v in list)
                 {
                     dic.Add(v.entityUid, v);
                     Eevee.RegisterIID<V>(v.entityUid);
@@ -105,6 +107,32 @@ namespace Umbreon.common.persistance
                 GD.PrintErr(e);
             }
             return dic;
+        }
+
+        public void loadCharacteristics(string filename = "")
+        {
+            try
+            {
+                var collection = GetCollection<CharacteristicType>();
+                var list = collection.Find(Builders<CharacteristicType>.Filter.Empty)
+                    .ToList();
+                foreach (var ch in CharacteristicType.Characteristics)
+                {
+                    var ct = list.Find(c => c.ID == ch.ID);
+                    if (ct == null)
+                    {
+                        GD.Print($"Parser Characteristic missing data id {ch.ID}");
+                        continue;
+                    }
+                    ch.NameID = ct.NameID;
+                    Eevee.RegisterIID<IStringEntity>(ch.NameID);
+                    ch.GetName().GetEntityBus().subscribe(this, nameof(onSave));
+                }
+            }
+            catch (Exception e)
+            {
+                GD.PrintErr(e);
+            }
         }
         #endregion
 

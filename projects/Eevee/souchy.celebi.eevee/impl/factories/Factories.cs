@@ -13,6 +13,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using souchy.celebi.eevee.face.shared.models.skins;
+using souchy.celebi.eevee.face.objects.statuses;
+using souchy.celebi.eevee.impl.objects.statuses;
+using souchy.celebi.eevee.enums.characteristics.creature;
+using souchy.celebi.eevee.enums.characteristics;
 
 namespace souchy.celebi.eevee.impl.factories
 {
@@ -71,24 +75,26 @@ namespace souchy.celebi.eevee.impl.factories
         private static void fillStats(IStats stats, bool isModel)
         {
             // fill stats
-            foreach (var statType in Enum.GetValues<StatType>())
+            foreach (var statType in CharacteristicType.Characteristics) //Enum.GetValues<StatType>())
             {
-                var valueType = statType.GetProperties().valueType;
-                // dont need current/max when making a creature model
-                if (isModel && valueType == StatValueType.Resource)
-                    stats.Add(StatValueType.Simple.Create(statType));
-                else 
-                    stats.Add(statType.Create());
+                IStat s = statType.Create();
+                stats.Add(s);
+                //var valueType = statType.StatValueType; // statType.GetProperties().valueType;
+                //// dont need current/max when making a creature model
+                //if (isModel && valueType == StatValueType.Resource)
+                //    stats.Add(StatValueType.Simple.Create(statType));
+                //else 
+                //    stats.Add(statType.Create());
             }
         }
 
         public static ICreature newCreatureFromModel(ICreatureModel model, IID fightId)
         {
             var crea = Creature.Create();
-            foreach (var st in Enum.GetValues<StatType>())
+            foreach (CharacteristicType st in CharacteristicType.Characteristics) //Enum.GetValues<StatType>())
             {
                 var stat = st.Create();
-                var modelStat = model.GetBaseStats().Get(st);
+                var modelStat = model.GetBaseStats().Get(st.ID);
                 if (stat is IStatResource sr)
                 {
                     var mss = ((IStatSimple) modelStat);
@@ -104,22 +110,26 @@ namespace souchy.celebi.eevee.impl.factories
                 {
                     sb.value = msb.value;
                 }
-                crea.GetStats().Set(st, stat);
+                crea.GetStats().Set(st.ID, stat);
             }
-            foreach (var spellModel in model.GetSpells())
+            foreach (ISpellModel spellModel in model.GetSpells())
             {
                 var spell = Spell.Create(fightId);
                 spell.modelUid = spellModel.entityUid;
             }
-            foreach (var statusModel in model.GetStatusPassives())
+            foreach (IStatusModel statusModel in model.GetStatusPassives())
             {
-                var status = Status.Create(fightId);
+                var container = StatusContainer.Create(fightId);
+                container.sourceCreature = crea.entityUid;
+                container.holderEntity = crea.entityUid;
+                var status = StatusInstance.Create(fightId);
                 status.modelUid = statusModel.entityUid;
-                status.sourceCreature = crea.entityUid;
-                status.holderEntity = crea.entityUid;
                 status.effectIds = statusModel.effectIds;
-                status.duration.value = statusModel.duration.value;
-                status.delay.value = statusModel.delay.value;
+
+                var duration = StatusModelProperty.Duration.Create(statusModel.duration.value);
+                var delay = StatusModelProperty.Delay.Create(statusModel.delay.value);
+                status.GetStats().Set(duration);
+                status.GetStats().Set(delay);
             }
             Eevee.fights.Get(fightId).creatures.Add(crea.entityUid, crea);
             return crea;

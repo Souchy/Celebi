@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.shared.zones;
@@ -18,7 +19,7 @@ namespace souchy.celebi.eevee.face.shared.models
         public ICondition sourceCondition { get; set; }
         public ICondition targetFilter { get; set; }
 
-        public Dictionary<ResourceType, int> costs { get; set; }
+        public Dictionary<ResourceEnum, int> costs { get; set; }
         public SpellProperties properties { get; set; }
         //public IEntityList<IID> effectIds { get; set; }
 

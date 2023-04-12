@@ -1,4 +1,5 @@
 using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.shared.conditions.value;
 using souchy.celebi.eevee.face.util;
@@ -8,7 +9,7 @@ namespace souchy.celebi.eevee.impl.shared.conditions.value
 {
     public class StatCondition : Condition, IStatCondition
     {
-        public int statId { get; set; }
+        public CharacteristicId statId { get; set; }
         public object value { get; set; }
 
         public override bool check(IID fightId, IID source, IID target) {
@@ -17,7 +18,7 @@ namespace souchy.celebi.eevee.impl.shared.conditions.value
             IID checkable = this.actorType == ActorType.Source ? source : target;
             var fight = Eevee.fights.Get(fightId);
             var creature = fight.creatures.Get(checkable);
-            var stat = creature.GetStats().Get((StatType) statId);
+            var stat = creature.GetStats().Get(statId);
 
             object fetchedValue = null;
             if(stat is StatSimple statSimple) {

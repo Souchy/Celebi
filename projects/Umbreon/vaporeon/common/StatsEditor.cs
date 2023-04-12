@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Sharp.Extras;
 using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
@@ -16,7 +17,7 @@ public partial class StatsEditor : PanelContainer
     private IStats _stats { get; set; }
 
 
-    private Dictionary<StatCategory, GridContainer> containers;
+    private Dictionary<CharacteristicCategory, GridContainer> containers;
     #region Nodes 
     [NodePath] public GridContainer ResourceContainer { get; set; }
     [NodePath] public GridContainer AffinityContainer { get; set; }
@@ -33,11 +34,11 @@ public partial class StatsEditor : PanelContainer
         this.GetVaporeon().bus.subscribe(this);
 
         containers = new() {
-            { StatCategory.Resource, ResourceContainer }, 
-            { StatCategory.Affinity, AffinityContainer }, 
-            { StatCategory.Resistance, ResistanceContainer }, 
-            { StatCategory.State, StateContainer }, 
-            { StatCategory.Other, OtherContainer },
+            { CharacteristicCategory.Resource, ResourceContainer }, 
+            { CharacteristicCategory.Affinity, AffinityContainer }, 
+            { CharacteristicCategory.Resistance, ResistanceContainer }, 
+            { CharacteristicCategory.State, StateContainer }, 
+            { CharacteristicCategory.Other, OtherContainer },
         };
     }
     public void init(IStats stats)
@@ -57,12 +58,12 @@ public partial class StatsEditor : PanelContainer
         _stats.GetEntityBus().subscribe(this);
 
         // create stats widgets by category
-        foreach (var category in Enum.GetValues<StatCategory>())
+        foreach (var category in Enum.GetValues<CharacteristicCategory>())
         {
-            var sts = Enum.GetValues<StatType>().Where(st => st.GetProperties().category == category);
+            var sts = CharacteristicType.Characteristics.Where(st => st.ID.GetCategory() == category);
             foreach (var st in sts)
             {
-                var stat = _stats.Get(st);
+                var stat = _stats.Get(st.ID);
                 PropertiesComponent.GenerateStat(containers[category], st, stat);
             }
         }

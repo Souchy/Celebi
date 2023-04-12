@@ -4,7 +4,7 @@ using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
-using souchy.celebi.eevee.impl.shared.effects;
+using souchy.celebi.eevee.impl.objects.effects;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.impl.values;
 using Umbreon.vaporeon;

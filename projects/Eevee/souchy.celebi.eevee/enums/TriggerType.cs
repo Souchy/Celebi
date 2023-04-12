@@ -21,6 +21,7 @@
         OnCreatureWalkExitCell,
         OnCreatureWalkStopCell,
 
+        CompileStats,
     }
 
     public enum TriggerOrderType {

@@ -1,5 +1,6 @@
 ﻿using souchy.celebi.eevee.enums;
-using souchy.celebi.eevee.face.objects.compiledeffects;
+using souchy.celebi.eevee.enums.characteristics;
+using souchy.celebi.eevee.face.objects.effectResults;
 using souchy.celebi.eevee.face.util;
 
 namespace souchy.celebi.eevee.face.objects
@@ -14,7 +15,7 @@ namespace souchy.celebi.eevee.face.objects
 
         public Dictionary<string, object> valuesStored { get; set; }
 
-        public Dictionary<ResourceType, int> resourceUsed { get; set; }
+        public Dictionary<ResourceEnum, int> resourceUsed { get; set; }
         /*
         public Dictionary<ResourceType, int> resourceGained { get; set; }
         public Dictionary<ResourceType, int> resourceLost { get; set; }
@@ -35,7 +36,7 @@ namespace souchy.celebi.eevee.face.objects
         /// List of effects related to this creature. <br></br>
         /// Can be the source of the target, it's in the CompiledEffect
         /// </summary>
-        public Dictionary<Type, List<ICompiledEffect>> compiledEffects { get; set; }
+        public Dictionary<Type, List<IEffectResult>> compiledEffects { get; set; }
     }
 
     public class SpellCastHistory

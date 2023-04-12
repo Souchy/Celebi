@@ -1,7 +1,6 @@
 ﻿using Espeon.souchy.celebi.eeevee.impl;
 using Espeon.souchy.celebi.eeevee.impl.controllers;
 using Espeon.souchy.celebi.espeon.eevee.impl.controllers;
-using Espeon.souchy.celebi.espeon.eevee.impl.objects;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using souchy.celebi.eevee;
@@ -71,9 +70,9 @@ namespace Espeon.souchy.celebi.espeon
             //services.AddTransient<IMap, Map>();
             services.AddTransient<IPlayer, Player>();
             services.AddTransient<IStats, Stats>();
-            services.AddTransient<ICreature, Creature>();
-            services.AddTransient<ISpell, Spell>();
-            services.AddTransient<IEffect, Effect>();
+            //services.AddTransient<ICreature, Creature>();
+            //services.AddTransient<ISpell, Spell>();
+            //services.AddTransient<IEffect, Effect>();
         }
 
 

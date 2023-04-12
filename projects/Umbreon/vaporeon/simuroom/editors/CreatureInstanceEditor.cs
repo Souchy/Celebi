@@ -79,8 +79,8 @@ public partial class CreatureInstanceEditor : PanelContainer
             lbl.Text = "no model or source for status #" + s.entityUid;
             if (s.modelUid != default)
                 lbl.Text = Eevee.models.statusModels.Get(s.modelUid).GetName().value;
-            if (s.sourceSpellModel != default)
-                lbl.Text = Eevee.models.spellModels.Get(s.sourceSpellModel).GetName().value;
+            //if (s.sourceSpellModel != default)
+            //    lbl.Text = Eevee.models.spellModels.Get(s.sourceSpellModel).GetName().value;
             Statuses.AddChild(lbl);
         }
     }

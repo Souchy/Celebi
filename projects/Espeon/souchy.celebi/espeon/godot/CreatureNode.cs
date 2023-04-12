@@ -1,6 +1,6 @@
-﻿using Espeon.souchy.celebi.espeon.eevee.impl.objects;
-using Godot;
+﻿using Godot;
 using souchy.celebi.eevee;
+using souchy.celebi.eevee.impl.objects;
 
 namespace Espeon.souchy.celebi.espeon.godot
 {

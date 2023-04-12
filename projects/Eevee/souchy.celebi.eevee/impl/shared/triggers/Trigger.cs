@@ -13,4 +13,7 @@ namespace souchy.celebi.eevee.impl.shared.triggers
         public ICondition triggererFilter { get; set; }
         public ICondition holderCondition { get; set; }
     }
+
+    public record TriggerEvent(TriggerType type, TriggerOrderType orderType = TriggerOrderType.After);
+
 }

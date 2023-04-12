@@ -4,11 +4,18 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="souchy.celebi\eeevee.impl\objects\Cell.cs" />
+    <Compile Remove="souchy.celebi\eeevee.impl\objects\Creature.cs" />
+    <Compile Remove="souchy.celebi\eeevee.impl\objects\Effect.cs" />
+    <Compile Remove="souchy.celebi\eeevee.impl\objects\Spell.cs" />
+  </ItemGroup>
   
   <ItemGroup>
     <Folder Include="souchy.celebi\eeevee.impl\effects\" />
     <Folder Include="souchy.celebi\eeevee.impl\conditions\" />
     <Folder Include="souchy.celebi\eeevee.impl\models\" />
+    <Folder Include="souchy.celebi\eeevee.impl\objects\" />
     <Folder Include="souchy.celebi\eeevee.impl\skins\" />
     <Folder Include="souchy.celebi\espeon\interfaces\net\" />
   </ItemGroup>

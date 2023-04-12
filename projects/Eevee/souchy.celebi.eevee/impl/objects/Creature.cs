@@ -35,7 +35,7 @@ namespace souchy.celebi.eevee.impl.objects
 
         public IStats GetStats() => this.GetFight().stats.Get(stats);
         public IEnumerable<ISpell> GetSpells() => spells.Values.Select(i => this.GetFight().spells.Get(i));
-        public IEnumerable<IStatus> GetStatuses() => statuses.Values.Select(i => this.GetFight().statuses.Get(i));
+        public IEnumerable<IStatusInstance> GetStatuses() => statuses.Values.Select(i => this.GetFight().statuses.Get(i));
 
         public void Dispose()
         {

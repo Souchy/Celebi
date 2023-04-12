@@ -8,7 +8,7 @@ namespace souchy.celebi.eevee.face.entity
     {
         public IID fightUid { get; set; }
 
-        //public IFight GetFight() => Eevee.fights.Get(fightUid); 
+        public IFight GetFight() => Eevee.fights.Get(fightUid); 
 
     }
 }

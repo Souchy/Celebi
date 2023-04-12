@@ -7,6 +7,7 @@ using souchy.celebi.eevee.face.shared.models.skins;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.impl.util;
+using Resource = souchy.celebi.eevee.enums.characteristics.creature.Resource;
 
 public partial class CreatureNode : Node3D
 {
@@ -25,7 +26,8 @@ public partial class CreatureNode : Node3D
         this.OnReady();
     }
 
-    [Subscribe(nameof(StatType.Life))]
+    [Subscribe(nameof(Resource.Life))]
+    //[Subscribe(id: Resource.Life.ID.ID)]
     public void onLifeChanged(IStatResource life)
     {
         Healthbar.set(life.current, life.currentMax);
@@ -34,7 +36,7 @@ public partial class CreatureNode : Node3D
     public void init(ICreature c, ICreatureSkin skin, int team) //string name)
     {
         // Sub
-        c.GetStats().Get<IStatResource>(StatType.Life).GetEntityBus().subscribe(this);
+        c.GetStats().Get<IStatResource>(Resource.Life).GetEntityBus().subscribe(this);
 
         // Set Model
         GD.Print("CreatureNode_init: " + skin.meshModel);

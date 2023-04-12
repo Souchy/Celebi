@@ -1,17 +1,18 @@
 ﻿using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.objects;
-using souchy.celebi.eevee.face.objects.compiledeffects;
+using souchy.celebi.eevee.face.objects.effectResults;
 using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.shared.triggers;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
-using souchy.celebi.eevee.impl.objects.compiledeffects;
+using souchy.celebi.eevee.impl.objects.effectResults;
 using souchy.celebi.eevee.impl.objects.zones;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.impl.values;
 using static souchy.celebi.eevee.face.objects.IEffect;
+using souchy.celebi.eevee.impl.shared.triggers;
 
 namespace souchy.celebi.eevee.impl.objects
 {
@@ -40,12 +41,11 @@ namespace souchy.celebi.eevee.impl.objects
         protected Effect() { }
         protected Effect(IID id) => entityUid = id;
 
-
-        public abstract ICompiledEffect compile(IFight fight, IID source, IID targetCell);
+        public abstract IEffectResult compile(IFight fight, IAction action, TriggerEvent trigger);
 
         public IEnumerable<IEffect> GetEffects() => effectIds.Values.Select(i => this.GetFight()?.effects.Get(i) ?? Eevee.models.effects.Get(i));
 
-        public IEnumerable<CompiledEffect> checkTriggers(TriggerOrderType orderType, CompiledEffect e)
+        public IEnumerable<EffectResult> checkTriggers(TriggerOrderType orderType, EffectResult e)
         {
             throw new NotImplementedException();
         }

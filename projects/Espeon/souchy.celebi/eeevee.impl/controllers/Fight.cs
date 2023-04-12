@@ -21,7 +21,7 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.controllers
         public IEntityDictionary<IID, IPlayer> players { get; init; } = EntityDictionary<IID, IPlayer>.Create();
         public IEntityDictionary<IID, ICreature> creatures { get; init; } = EntityDictionary<IID, ICreature>.Create();
         public IEntityDictionary<IID, ISpell> spells { get; init; } = EntityDictionary<IID, ISpell>.Create();
-        public IEntityDictionary<IID, IStatus> statuses { get; init; } = EntityDictionary<IID, IStatus>.Create();
+        public IEntityDictionary<IID, IStatusInstance> statuses { get; init; } = EntityDictionary<IID, IStatusInstance>.Create();
         public IEntityDictionary<IID, ICell> cells { get; init; } = EntityDictionary<IID, ICell>.Create();
         public IEntityDictionary<IID, IStats> stats { get; init; } = EntityDictionary<IID, IStats>.Create();
         public IEntityDictionary<IID, IEffect> effects { get; init; } = EntityDictionary<IID, IEffect>.Create();

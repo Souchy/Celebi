@@ -7,6 +7,7 @@ using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 using FileAccess = Godot.FileAccess;
 using static Umbreon.common.persistance.DiamondParser;
+using souchy.celebi.eevee.enums.characteristics;
 
 namespace Umbreon.common.persistance
 {
@@ -86,6 +87,30 @@ namespace Umbreon.common.persistance
             dic.AddAll(data);
 
             return data;
+        }
+        public void loadCharacteristics(string filename = "")
+        {
+            if (filename == "") filename = getFileName<CharacteristicType>();
+            string filepath = $"res://data/test/{filename}.json";
+            if (!FileAccess.FileExists(filepath))
+                return;
+            using FileAccess file = FileAccess.Open(filepath, FileAccess.ModeFlags.Read);
+            if (file == null)
+                GD.Print($"Parser.load null: {filepath}");
+            var json = file.GetAsText();
+            List<CharacteristicType> data = JsonConvert.DeserializeObject<List<CharacteristicType>>(json, jsonSettings);
+            foreach(var ch in CharacteristicType.Characteristics)
+            {
+                var ct = data.Find(c => c.ID == ch.ID);
+                if(ct == null)
+                {
+                    GD.Print($"Parser Characteristic missing data id {ch.ID}");
+                    continue;
+                }
+                ch.NameID = ct.NameID;
+                Eevee.RegisterIID<IStringEntity>(ch.NameID);
+                ch.GetName().GetEntityBus().subscribe(this, nameof(onSave));
+            }
         }
         #endregion
 

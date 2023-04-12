@@ -1,5 +1,7 @@
 ﻿using souchy.celebi.eevee;
 using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.enums.characteristics;
+using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.objects.stats;
@@ -58,22 +60,28 @@ namespace Espeon.souchy.celebi.espeon
         private void addStats(ICreature creature)
         {
             var stats = fight.stats.Get(creature.stats);
-            stats.Set(StatType.Life, StatResource.Create(StatType.Life, 0, 0, 0));
-            stats.Get<IStatResource>(StatType.Life).current = rng.Next(1, 90);
-            stats.Get<IStatResource>(StatType.Life).currentMax = rng.Next(100, 150);
-            stats.Get<IStatResource>(StatType.Life).initialMax = rng.Next(100, 150);
+            stats.Set(Resource.Life.Create(90));
+            stats.Set(Resource.LifeMax.Create(150));
+            //stats.Set(Resource.Life.Create(0));
+            //stats.Get<IStatResource>(Resource.Life).current = rng.Next(1, 90);
+            //stats.Get<IStatResource>(Resource.Life).currentMax = rng.Next(100, 150);
+            //stats.Get<IStatResource>(Resource.Life).initialMax = rng.Next(100, 150);
 
-            stats.Set(StatType.Mana, StatResource.Create(StatType.Mana, 0, 0, 0));
-            stats.Get<IStatResource>(StatType.Mana).current = rng.Next(1, 10);
-            stats.Get<IStatResource>(StatType.Mana).currentMax = rng.Next(10, 12);
-            stats.Get<IStatResource>(StatType.Mana).initialMax = rng.Next(10, 12);
+            stats.Set(Resource.Mana.Create(7));
+            stats.Set(Resource.ManaMax.Create(12));
+            //stats.Set(Resource.Mana.Create(0));
+            //stats.Get<IStatResource>(Resource.Mana).current = rng.Next(1, 10);
+            //stats.Get<IStatResource>(Resource.Mana).currentMax = rng.Next(10, 12);
+            //stats.Get<IStatResource>(Resource.Mana).initialMax = rng.Next(10, 12);
         }
 
         private void addSpell(ICreature creature)
         {
             var spell = Scopes.GetRequiredScoped<ISpell>(fight.entityUid);
-            spell.chargesRemaining = rng.Next(1, 5);
-            spell.cooldownRemaining = rng.Next(1, 5);
+            //spell.chargesRemaining = rng.Next(1, 5);
+            //spell.cooldownRemaining = rng.Next(1, 5);
+            spell.GetStats().Set(SpellProperty.RemainingCharges.Create(5));
+            spell.GetStats().Set(SpellProperty.RemainingCooldown.Create(3));
             creature.spells.Add(spell.entityUid);
         }
     }

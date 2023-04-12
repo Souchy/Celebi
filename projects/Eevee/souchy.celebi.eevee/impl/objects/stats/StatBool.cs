@@ -1,4 +1,5 @@
 ﻿using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.util;
@@ -9,20 +10,20 @@ namespace souchy.celebi.eevee.impl.stats
     public class StatBool : IStatBool
     {
         public IID entityUid { get; set; }
-        public StatType statId { get; init; }
+        public CharacteristicId statId { get; init; }
 
         private bool _value;
         public bool value { get => _value; 
             set
             {
                 _value = value;
-                this.GetEntityBus()?.publish(Enum.GetName(statId), this);
+                this.GetEntityBus()?.publish(statId, this);
                 this.GetEntityBus()?.publish(this);
             }
         }
 
         private StatBool() { }
-        public static StatBool Create(StatType st, bool value = false)
+        public static StatBool Create(CharacteristicId st, bool value = false)
             => new StatBool()
             {
                 statId = st,
@@ -30,11 +31,8 @@ namespace souchy.celebi.eevee.impl.stats
                 entityUid = Eevee.RegisterIID<IStatBool>()
             };
 
-        public IStat copy() => Create(statId, value); //new StatBool(statId, value);
+        public IStat copy() => Create(statId, value); 
 
-        public void Dispose()
-        {
-            Eevee.DisposeIID<IStatBool>(entityUid);
-        }
+        public void Dispose() => Eevee.DisposeIID<IStatBool>(entityUid);
     }
 }
