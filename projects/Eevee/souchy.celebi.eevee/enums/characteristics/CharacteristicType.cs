@@ -18,12 +18,10 @@ namespace souchy.celebi.eevee.enums.characteristics
     {
         public StatValueType StatValueType { get; init; }
         public CharacteristicId ID { get; init; } = new CharacteristicId(((int) Category) * 1000 + LocalId);
-        public IID NameID { get; set; }
+        public IID NameID { get; set; } = (IID) (nameof(CharacteristicType) + "." + BaseName);
 
         public IStringEntity GetName() => Eevee.models.i18n.Get(NameID);
 
-        //public string Name => I
-        //public StatFactory Factory { get; init; }
 
         public static IEnumerable<CharacteristicType> Characteristics = Enum.GetValues<CharacteristicCategory>().SelectMany(c => c.GetCharacs());
         public static StatFactory SimpleFactory = (id, value) => StatSimple.Create(id, (int) value);

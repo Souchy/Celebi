@@ -16,15 +16,15 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
 
         public static readonly Contextual LifeGained        = new(1, nameof(LifeGained));
         public static readonly Contextual LifeLost          = new(2, nameof(LifeLost));
-        public static readonly Contextual ManaGained        = new(3, nameof(True));
-        public static readonly Contextual ManaUsed          = new(4, nameof(True));
-        public static readonly Contextual ManaLost          = new(5, nameof(True));
-        public static readonly Contextual MovementGained    = new(6, nameof(True));
-        public static readonly Contextual MovementUsed      = new(7, nameof(True));
-        public static readonly Contextual MovementLost      = new(8, nameof(True));
+        public static readonly Contextual ManaGained        = new(3, nameof(ManaGained));
+        public static readonly Contextual ManaUsed          = new(4, nameof(ManaUsed));
+        public static readonly Contextual ManaLost          = new(5, nameof(ManaLost));
+        public static readonly Contextual MovementGained    = new(6, nameof(MovementGained));
+        public static readonly Contextual MovementUsed      = new(7, nameof(MovementUsed));
+        public static readonly Contextual MovementLost      = new(8, nameof(MovementLost));
 
-        public static readonly Contextual CountHitsGiven    = new(9, nameof(True));
-        public static readonly Contextual CountHitsReceived = new(10, nameof(True));
+        public static readonly Contextual CountHitsGiven    = new(9, nameof(CountHitsGiven));
+        public static readonly Contextual CountHitsReceived = new(10, nameof(CountHitsReceived));
 
 
         public static readonly Dictionary<CharacteristicId, Contextual> values = new();

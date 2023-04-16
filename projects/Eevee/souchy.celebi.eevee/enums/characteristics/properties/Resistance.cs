@@ -16,11 +16,11 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
             this.StatValueType = StatValueType.Simple;
         }
 
-        public static readonly Resistance Fire      = new(1, nameof(Fire),  ElementType.Fire);
-        public static readonly Resistance Water     = new(2, nameof(Water), ElementType.Water);
-        public static readonly Resistance Earth     = new(3, nameof(Earth), ElementType.Earth);
-        public static readonly Resistance Air       = new(4, nameof(Air),   ElementType.Air);
-        public static readonly Resistance True      = new(5, nameof(True),  ElementType.True);
+        public static readonly Resistance Fire      = new(1,  nameof(Fire),  ElementType.Fire);
+        public static readonly Resistance Water     = new(2,  nameof(Water), ElementType.Water);
+        public static readonly Resistance Earth     = new(3,  nameof(Earth), ElementType.Earth);
+        public static readonly Resistance Air       = new(4,  nameof(Air),   ElementType.Air);
+        public static readonly Resistance True      = new(5,  nameof(True),  ElementType.True);
 
         public static readonly Resistance Damage    = new(6,  nameof(Damage));
         public static readonly Resistance Heal      = new(7,  nameof(Heal));

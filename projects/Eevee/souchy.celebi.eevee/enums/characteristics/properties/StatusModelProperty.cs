@@ -9,17 +9,17 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
 {
     public sealed record StatusModelProperty : CharacteristicType
     {
-        public StatusModelProperty(int localId) : base(CharacteristicCategory.State, localId, SimpleFactory)
+        public StatusModelProperty(int localId, string name) : base(CharacteristicCategory.State, localId, name, SimpleFactory)
         {
             this.StatValueType = StatValueType.Simple;
         }
 
-        public static readonly StatusModelProperty Stacks       = new(0);
-        public static readonly StatusModelProperty Delay        = new(1);
-        public static readonly StatusModelProperty Duration     = new(2);
-        public static readonly StatusModelProperty MaxStacks    = new(3);
-        public static readonly StatusModelProperty MaxDelay     = new(4);
-        public static readonly StatusModelProperty MaxDuration  = new(5);
+        public static readonly StatusModelProperty Stacks       = new(0, nameof(Stacks     ));
+        public static readonly StatusModelProperty Delay        = new(1, nameof(Delay      ));
+        public static readonly StatusModelProperty Duration     = new(2, nameof(Duration   ));
+        public static readonly StatusModelProperty MaxStacks    = new(3, nameof(MaxStacks  ));
+        public static readonly StatusModelProperty MaxDelay     = new(4, nameof(MaxDelay   ));
+        public static readonly StatusModelProperty MaxDuration  = new(5, nameof(MaxDuration));
 
 
         public static readonly Dictionary<CharacteristicId, StatusModelProperty> values = new();

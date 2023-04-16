@@ -27,7 +27,6 @@ public partial class CreatureNode : Node3D
     }
 
     [Subscribe(nameof(Resource.Life))]
-    //[Subscribe(id: Resource.Life.ID.ID)]
     public void onLifeChanged(IStatResource life)
     {
         Healthbar.set(life.current, life.currentMax);

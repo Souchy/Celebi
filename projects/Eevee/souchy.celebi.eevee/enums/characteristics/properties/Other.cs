@@ -9,15 +9,15 @@ namespace souchy.celebi.eevee.enums.characteristics.properties
 {
     public sealed record OtherProperty: CharacteristicType
     {
-        public OtherProperty(int localId) : base(CharacteristicCategory.Other, localId, CharacteristicType.SimpleFactory)
+        public OtherProperty(int localId, string name) : base(CharacteristicCategory.Other, localId, name, SimpleFactory)
         {
             this.StatValueType = StatValueType.Simple;
         }
 
-        public static readonly OtherProperty Range      = new(0);
-        public static readonly OtherProperty Speed      = new(1); // initiative
-        public static readonly OtherProperty Erosion    = new(2);
-        public static readonly OtherProperty Echo       = new(3); // number of times it echoes
+        public static readonly OtherProperty Range      = new(0, nameof(Range));
+        public static readonly OtherProperty Speed      = new(1, nameof(Speed)); // initiative
+        public static readonly OtherProperty Erosion    = new(2, nameof(Erosion));
+        public static readonly OtherProperty Echo       = new(3, nameof(Echo)); // number of times it echoes
 
 
         public static readonly Dictionary<CharacteristicId, OtherProperty> values = new();

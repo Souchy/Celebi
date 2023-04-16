@@ -35,12 +35,12 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
     }
     public sealed record SpellModelState : CharacteristicType
     {
-        public SpellModelState(int localId) : base(CharacteristicCategory.SpellModel, localId, CharacteristicType.BoolFactory)
+        public SpellModelState(int localId, string name) : base(CharacteristicCategory.SpellModel, localId, name, BoolFactory)
         {
             this.StatValueType = StatValueType.Bool;
         }
 
-        public static readonly SpellModelState LineOfSightRequired = new(0);
+        public static readonly SpellModelState LineOfSightRequired = new(0, nameof(LineOfSightRequired));
 
 
         public static readonly Dictionary<CharacteristicId, SpellModelState> values = new();
