@@ -15,7 +15,7 @@ namespace souchy.celebi.eevee.impl.objects.effects.creature
     public class EffectAddStat : Effect, IEffectAddStat
     {
         public CharacteristicId statId { get; set; }
-        public IStat Stat { get; set; }
+        public IStat stat { get; set; }
 
 
         private EffectAddStat() { }

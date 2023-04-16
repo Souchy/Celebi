@@ -1,4 +1,5 @@
-﻿using souchy.celebi.eevee.face.util;
+﻿using souchy.celebi.eevee.face.objects.controllers;
+using souchy.celebi.eevee.face.util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,27 +10,28 @@ namespace souchy.celebi.eevee.face.objects
 {
     public interface IAction
     {
+        public IFight fight { get; set; }
+        public IID caster { get; set; }
+        public IID targetCell { get; set; }
     }
 
     public interface IActionSpell : IAction
     {
-        public IID caster { get; set; }
-        public IID targetCell { get; set; }
         public IID spell { get; set; }
     }
     public interface IActionMove : IAction
     {
-        public IID caster { get; set; }
-        public IID targetCell { get; set; }
+        //public IID caster { get; set; }
+        //public IID targetCell { get; set; }
     }
     public interface IActionPass : IAction
     {
-        public IID caster { get; set; }
-        public IID target { get; set; }
+        //public IID caster { get; set; }
+        //public IID target { get; set; }
     }
     public interface IActionSwapOut : IAction
     {
-        public IID caster { get; set; }
-        public IID target { get; set; }
+        //public IID caster { get; set; }
+        //public IID target { get; set; }
     }
 }

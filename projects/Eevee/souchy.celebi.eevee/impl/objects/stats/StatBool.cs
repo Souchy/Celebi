@@ -34,5 +34,11 @@ namespace souchy.celebi.eevee.impl.stats
         public IStat copy() => Create(statId, value); 
 
         public void Dispose() => Eevee.DisposeIID<IStatBool>(entityUid);
+
+        public void Add(IStat s)
+        {
+            if (s is StatBool b)
+                this.value |= b.value;
+        }
     }
 }

@@ -26,6 +26,7 @@
 
     public enum TriggerOrderType {
         Before,
+        Apply,
         After
     }
 

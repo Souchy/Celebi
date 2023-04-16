@@ -35,31 +35,31 @@ namespace souchy.celebi.eevee.impl.objects.effects.res
             var creaTarget = fight.board.getCreatureOnCell(act.targetCell);
             if (creaSource == null || creaTarget == null) return null;
 
-            var sourceStats = creaSource.GetStats();
-            var targetStats = creaTarget.GetStats();
+            var sourceStats = creaSource.GetStats(action, trigger);
+            var targetStats = creaTarget.GetStats(action, trigger);
 
             var dist = creaSource.position.distanceManhattan(creaTarget.position);
 
             // apply affinities + resistances
             IStatSimple aff = sourceStats.Get<IStatSimple>(Element.value.GetAffinity());
-            IStatSimple affg = sourceStats.Get<IStatSimple>(Affinity.Damage); // StatType.GlobalDamageAffinity);
+            IStatSimple affg = sourceStats.Get<IStatSimple>(Affinity.Damage);
             IStatSimple affdist;
 
             IStatSimple res = targetStats.Get<IStatSimple>(Element.value.GetResistance());
-            IStatSimple resg = targetStats.Get<IStatSimple>(Resistance.Damage); //StatType.GlobalDamageResistance);
+            IStatSimple resg = targetStats.Get<IStatSimple>(Resistance.Damage);
             IStatSimple resdist;
 
             // distance
             if (dist > 1)
             {
-                affdist = sourceStats.Get<IStatSimple>(Affinity.Distance); // StatType.DistanceAffinity);
-                resdist = targetStats.Get<IStatSimple>(Resistance.Distance); // StatType.DistanceResistance);
+                affdist = sourceStats.Get<IStatSimple>(Affinity.Distance);
+                resdist = targetStats.Get<IStatSimple>(Resistance.Distance);
             }
             // melee
             else
             {
-                affdist = sourceStats.Get<IStatSimple>(Affinity.Melee); //StatType.MeleeAffinity);
-                resdist = targetStats.Get<IStatSimple>(Resistance.Melee); //StatType.MeleeResistance);
+                affdist = sourceStats.Get<IStatSimple>(Affinity.Melee);
+                resdist = targetStats.Get<IStatSimple>(Resistance.Melee);
             }
 
             var damage = Value.value;

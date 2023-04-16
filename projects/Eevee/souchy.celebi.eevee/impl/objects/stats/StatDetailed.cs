@@ -72,7 +72,18 @@ namespace souchy.celebi.eevee.impl.stats
                 entityUid = Eevee.RegisterIID<IStatDetailed>()
             };
 
-        public IStat copy() => Create(statId, baseFlat, increasedPercent, increasedFlat, morePercent); 
+        public IStat copy() => Create(statId, baseFlat, increasedPercent, increasedFlat, morePercent);
+
+        public void Add(IStat s)
+        {
+            if (s is StatDetailed b)
+            {
+                this.baseFlat += b.baseFlat;
+                this.increasedFlat += b.increasedFlat;
+                this.increasedPercent += b.increasedPercent;
+                this.morePercent += b.morePercent;
+            }
+        }
 
         public void Dispose()
         {

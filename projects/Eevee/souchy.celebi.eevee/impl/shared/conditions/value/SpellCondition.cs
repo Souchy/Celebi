@@ -20,7 +20,7 @@ namespace souchy.celebi.eevee.impl.shared.conditions.value
         public CharacteristicId statId { get; set; }
         public object value { get; set; }
 
-        public override bool check(IID fightId, IID source, IID target)
+        public override bool check(IAction action, TriggerEvent trigger, ICreature boardSource, IBoardEntity boardTarget)
         {
             if(!this.checkChildren(fightId, source, target)) 
                 return false;

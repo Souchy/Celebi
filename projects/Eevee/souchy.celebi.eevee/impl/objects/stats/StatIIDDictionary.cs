@@ -30,6 +30,17 @@ namespace souchy.celebi.eevee.impl.objects.stats
                 entityUid = Eevee.RegisterIID<IStatBool>()
             };
 
+        public void Add(IStat s)
+        {
+            if (s is StatIIDDictionary b)
+            {
+                foreach(var p in value)
+                {
+                    if(b.value.ContainsKey(p.Key))
+                        p.Value.Add(b.value[p.Key]);
+                }
+            }
+        }
 
         public IStat copy()
         {

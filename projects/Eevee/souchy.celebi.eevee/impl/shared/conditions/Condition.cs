@@ -1,6 +1,9 @@
 using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.face.entity;
+using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.impl.shared.triggers;
 using souchy.celebi.eevee.impl.util;
 
 namespace souchy.celebi.eevee.impl.shared.conditions
@@ -16,9 +19,9 @@ namespace souchy.celebi.eevee.impl.shared.conditions
         public ConditionGroupType groupType { get; set; }
         public IEntityList<ICondition> children { get; set; } = new EntityList<ICondition>();
 
-        public abstract bool check(IID fightId, IID source, IID target);
+        public abstract bool check(IAction action, TriggerEvent trigger, ICreature boardSource, IBoardEntity boardTarget);
 
-        public bool checkChildren(IID fightId, IID source, IID target)
+        public bool checkChildren(IAction action, TriggerEvent trigger, ICreature boardSource, IBoardEntity boardTarget)
         {
             if(children.Values.Count == 0) 
                 return true;
@@ -27,7 +30,7 @@ namespace souchy.celebi.eevee.impl.shared.conditions
                 bool result = true;
                 foreach (var c in children.Values)
                 {
-                    result &= c.check(fightId, source, target);
+                    result &= c.check(action, trigger, boardSource, boardTarget);
                 }
                 return result;
             }
@@ -36,7 +39,7 @@ namespace souchy.celebi.eevee.impl.shared.conditions
                 bool result = false;
                 foreach (var c in children.Values)
                 {
-                    result |= c.check(fightId, source, target);
+                    result |= c.check(action, trigger, boardSource, boardTarget);
                 }
                 return result;
             }

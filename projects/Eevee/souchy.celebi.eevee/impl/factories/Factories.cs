@@ -110,7 +110,7 @@ namespace souchy.celebi.eevee.impl.factories
                 {
                     sb.value = msb.value;
                 }
-                crea.GetStats().Set(st.ID, stat);
+                crea.GetBaseStats().Set(st.ID, stat);
             }
             foreach (ISpellModel spellModel in model.GetSpells())
             {

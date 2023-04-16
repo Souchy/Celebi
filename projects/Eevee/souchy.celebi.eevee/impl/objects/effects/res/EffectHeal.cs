@@ -38,8 +38,8 @@ namespace souchy.celebi.eevee.impl.objects.effects.res
             var creaSource = fight.creatures.Get(act.caster);
             var creaTarget = fight.board.getCreatureOnCell(act.targetCell);
             if (creaSource == null || creaTarget == null) return null;
-            var sourceStats = creaSource.GetStats();
-            var targetStats = creaTarget.GetStats();
+            var sourceStats = creaSource.GetStats(action, trigger);
+            var targetStats = creaTarget.GetStats(action, trigger);
             var dist = creaSource.position.distanceManhattan(creaTarget.position);
 
             // apply affinities + resistances

@@ -1,8 +1,11 @@
 using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.enums.characteristics;
+using souchy.celebi.eevee.face.entity;
+using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.shared.conditions.value;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.impl.shared.triggers;
 using souchy.celebi.eevee.impl.stats;
 
 namespace souchy.celebi.eevee.impl.shared.conditions.value
@@ -12,13 +15,13 @@ namespace souchy.celebi.eevee.impl.shared.conditions.value
         public CharacteristicId statId { get; set; }
         public object value { get; set; }
 
-        public override bool check(IID fightId, IID source, IID target) {
-            if(!this.checkChildren(fightId, source, target)) 
+        public override bool check(IAction action, TriggerEvent trigger, ICreature boardSource, IBoardEntity boardTarget)
+        {
+            if(!this.checkChildren(action, trigger, boardSource, boardTarget)) 
                 return false;
-            IID checkable = this.actorType == ActorType.Source ? source : target;
-            var fight = Eevee.fights.Get(fightId);
-            var creature = fight.creatures.Get(checkable);
-            var stat = creature.GetStats().Get(statId);
+            IID checkable = this.actorType == ActorType.Source ? action.caster : action.targetCell;
+            var creature = action.fight.creatures.Get(checkable);
+            var stat = creature.GetStats(action, trigger).Get(statId);
 
             object fetchedValue = null;
             if(stat is StatSimple statSimple) {

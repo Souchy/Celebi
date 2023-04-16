@@ -22,5 +22,13 @@ namespace souchy.celebi.eevee.impl.stats
             Add(value.statId, value);
         }
 
+        public IStats anonymousCopy()
+        {
+            var c = new Stats();
+            foreach(var s in this) 
+                c.Set(s.Key, s.Value);
+            return c;
+        }
+
     }
 }

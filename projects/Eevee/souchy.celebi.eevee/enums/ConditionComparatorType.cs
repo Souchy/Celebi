@@ -13,6 +13,7 @@
     public static class ConditionComparatorTypeExtentions {
         public static bool check(this ConditionComparatorType comparator, object fetchedValue, object wantedValue) {
             if(fetchedValue == null) return false;
+            // can compare EQ, NE between IID, strings, numbers...
             if(comparator == ConditionComparatorType.EQ) {
                 return fetchedValue == wantedValue;
             }

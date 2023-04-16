@@ -2,6 +2,7 @@
 using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.impl.objects.stats;
 using souchy.celebi.eevee.impl.util;
 
 namespace souchy.celebi.eevee.impl.stats
@@ -59,6 +60,16 @@ namespace souchy.celebi.eevee.impl.stats
             initialMax = initialMax,
             entityUid = Eevee.RegisterIID<IStatResource>()
         };
+
+        public void Add(IStat s)
+        {
+            if (s is StatResource b)
+            {
+                this.current += b.current;
+                this.initialMax += b.initialMax;
+                this.currentMax += b.currentMax;
+            }
+        }
 
         public IStat copy() => Create(statId, current, currentMax, initialMax);
 

@@ -4,6 +4,7 @@ using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
+using souchy.celebi.eevee.impl.objects.stats;
 using souchy.celebi.eevee.impl.util;
 
 namespace souchy.celebi.eevee.impl.stats
@@ -32,6 +33,12 @@ namespace souchy.celebi.eevee.impl.stats
                 value = value,
                 entityUid = Eevee.RegisterIID<IStatSimple>(),
             };
+
+        public void Add(IStat s)
+        {
+            if (s is StatSimple b)
+                this.value += b.value;
+        }
 
         public IStat copy() => Create(statId, value); //new StatSimple(StatType, value);
 

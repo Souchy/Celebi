@@ -8,7 +8,7 @@ namespace souchy.celebi.eevee.face.objects.effects.creature
     public interface IEffectAddStat : IEffect
     {
         public CharacteristicId statId { get; set; }
-        public IStat Stat { get; set; }
+        public IStat stat { get; set; }
 
     }
 }

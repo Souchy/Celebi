@@ -8,6 +8,7 @@ using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.util.math;
 using souchy.celebi.eevee.impl.objects.effectResults;
 using souchy.celebi.eevee.impl.shared.triggers;
+using souchy.celebi.eevee.face.objects.stats;
 
 namespace Espeon.souchy.celebi.eeveeimpl.controllers
 {
@@ -18,40 +19,50 @@ namespace Espeon.souchy.celebi.eeveeimpl.controllers
             ISpellModel s = default;
             ICreature sourceCrea = default;
             IFight fight = default;
-
+            var sourceStats = sourceCrea.GetStats(action, new TriggerEvent(TriggerType.CompileStats, TriggerOrderType.Before));
+            
             // check costs
-            //foreach (ICost cost in s.costs)
-            //{
-            //    if (source.stats.get<IStatResource>(cost.resource).current < cost.value)
-            //    {
-            //        return;
-            //    }
-            //}
+            foreach (var cost in s.costs)
+            {
+                if(cost.Value > sourceStats.Get<IStatSimple>(cost.Key).value)
+                {
+                    return;
+                }
+            }
             // check line of sight
             // check target cell filter
 
             // spend costs
-            //foreach (ICost cost in s.costs)
-            //{
-            //    source.stats.get<IStatResource>(cost.resource).current -= cost.value;
-            //}
+            foreach (var cost in s.costs)
+            {
+                sourceStats.Get<IStatSimple>(cost.Key).value -= cost.Value;
+            }
+
             EffectResultPipeline pipeline = new EffectResultPipeline();
 
-            TriggerEvent trigger = new TriggerEvent(TriggerType.OnCreatureSpellCast, TriggerOrderType.Before);
+            TriggerEvent triggerBefore= new TriggerEvent(TriggerType.OnCreatureSpellCast, TriggerOrderType.Before);
+            TriggerEvent triggerApply = new TriggerEvent(TriggerType.OnCreatureSpellCast, TriggerOrderType.Apply);
+            TriggerEvent triggerAfter = new TriggerEvent(TriggerType.OnCreatureSpellCast, TriggerOrderType.After);
             // trigger before effects
             foreach (IEffect effect in s.GetEffects())
             {
-                pipeline.triggeredBefore.Add(effect.compile(fight, action, trigger)); //source, target, spellId);
+                var result = effect.compile(fight, action, triggerBefore);
+                if(result != null)
+                    pipeline.triggeredBefore.Add(result); 
             }
             // apply spell effects
             foreach (IEffect effect in s.GetEffects())
             {
-                pipeline.children.Add(effect.compile(fight, action, trigger)); //source, target, spellId);
+                var result = effect.compile(fight, action, triggerApply);
+                if (result != null) 
+                    pipeline.children.Add(result); 
             }
             // trigger after effects
             foreach (IEffect effect in s.GetEffects())
             {
-                pipeline.triggeredBefore.Add(effect.compile(fight, action, trigger)); //source, target, spellId);
+                var result = effect.compile(fight, action, triggerAfter);
+                if (result != null) 
+                    pipeline.triggeredBefore.Add(result);
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.enums.characteristics;
+using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.shared.conditions;
@@ -24,7 +25,7 @@ namespace souchy.celebi.eevee.impl.shared
         public ICondition sourceCondition { get; set; }
         public ICondition targetFilter { get; set; }
 
-        public Dictionary<ResourceEnum, int> costs { get; set; } = new();
+        public Dictionary<CharacteristicId, int> costs { get; set; } = new();
         public SpellProperties properties { get; set; } = new SpellProperties();
         public IEntityList<IID> effectIds { get; set; } = new EntityList<IID>(); 
 
@@ -36,8 +37,11 @@ namespace souchy.celebi.eevee.impl.shared
         public static ISpellModel Create()
         {
             var model = new SpellModel(Eevee.RegisterIID<ISpellModel>());
-            foreach (var resType in Enum.GetValues<ResourceEnum>())
-                model.costs.Add(resType, 0);
+            //foreach (var resType in Enum.GetValues<ResourceEnum>())
+            //{
+            //    var res = Resource.getKey(resType, ResourceProperty.Current);
+            //    model.costs.Add(res.ID, 0);
+            //}
             return model;
         }
 

@@ -12,6 +12,8 @@ namespace souchy.celebi.eevee.face.objects.stats
 
         public IStat copy();
 
+        public void Add(IStat s);
+
     }
 
 }
