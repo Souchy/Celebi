@@ -1,6 +1,7 @@
 *.*.import
 *.import
 addons/
+api/
 
 out/
 src/.vs/

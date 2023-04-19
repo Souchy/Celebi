@@ -1,0 +1,39 @@
+{
+    "root": "C:/Robyn/Celebi/projects/eevee/**/*.cs",
+    "include": [
+        "souchy"
+    ],
+    "exclude": [
+        "./models/foo/bar.cs"
+    ],
+    "namespace": "",
+    "output": "api",
+    "camelCase": false,
+    "camelCaseEnums": false,
+    "camelCaseOptions": {
+        "pascalCase": false,
+        "preserveConsecutiveUppercase": false,
+        "locale": "en-US"
+    },
+    "numericEnums": false,
+    "omitFilePathComment": false,
+    "omitSemicolon": false,
+    "stringLiteralTypesInsteadOfEnums": false,
+    "customTypeTranslations": {
+        "IActionResult": "Promise<Response>",
+        "Task<IActionResult>": "Promise<Response>",
+        "IEntityDictionary": "Dictionary",
+        "IEntityList": "Array",
+        "IEntitySet": "Array"
+    },
+    "controllerParents": [
+        "Controller",
+        "ControllerBase"
+    ],
+    "modelAttribute": "GenerateFrontendModel",
+    "controllerAttribute": "GenerateFrontendController",
+    "omitBaseClasses": [
+        "Controller",
+        "IXmlSerializable"
+    ]
+}
