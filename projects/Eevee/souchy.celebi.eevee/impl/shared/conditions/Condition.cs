@@ -10,13 +10,9 @@ namespace souchy.celebi.eevee.impl.shared.conditions
 {
     public abstract class Condition : ICondition
     {
-        public MomentType targetContext { get; set; }
-
-        public ConditionType conditionType { get; set; }
-        public ActorType actorType { get; set; }
-        public ConditionComparatorType comparator { get; set; }
-
-        public ConditionGroupType groupType { get; set; }
+        public ActorType actorType { get; set; } = ActorType.Target;
+        public ConditionComparatorType comparator { get; set; } = ConditionComparatorType.EQ;
+        public ConditionGroupType groupType { get; set; } = ConditionGroupType.AND;
         public IEntityList<ICondition> children { get; set; } = new EntityList<ICondition>();
 
         public abstract bool check(IAction action, TriggerEvent trigger, ICreature boardSource, IBoardEntity boardTarget);

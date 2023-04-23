@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.enums.characteristics;
+using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.conditions.value;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.shared.conditions;
+using souchy.celebi.eevee.impl.shared.triggers;
 using souchy.celebi.eevee.impl.stats;
 
 namespace souchy.celebi.eevee.impl.shared.conditions.value
@@ -22,12 +24,14 @@ namespace souchy.celebi.eevee.impl.shared.conditions.value
 
         public override bool check(IAction action, TriggerEvent trigger, ICreature boardSource, IBoardEntity boardTarget)
         {
-            if(!this.checkChildren(fightId, source, target)) 
+            if (!this.checkChildren(action, trigger, boardSource, boardTarget)) // fightId, source, target)) 
                 return false;
                 
-            IID checkable = this.actorType == ActorType.Source ? source : target;
-            IFight fight = Eevee.fights.Get(fightId);
-            ICreature creature = fight.creatures.Get(checkable);
+            //IID checkable = this.actorType == ActorType.Source ? source : target;
+            ICreature creature = (ICreature) (this.actorType == ActorType.Source ? boardSource : boardTarget);
+
+            //IFight fight = Eevee.fights.Get(fightId);
+            //ICreature creature = action.fight.creatures.Get(checkable);
             ISpell spell = creature.GetSpells().FirstOrDefault(s => s.modelUid == spellModelId);
             IStat stat = spell.GetStats().Get(statId);
             // var stat = creature.GetStats().Get((StatType) statId);

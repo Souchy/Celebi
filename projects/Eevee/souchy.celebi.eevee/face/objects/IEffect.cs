@@ -9,6 +9,8 @@ using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
 using souchy.celebi.eevee.impl.shared.triggers;
+using souchy.celebi.eevee.impl.objects.effectReturn;
+using souchy.celebi.eevee.face.util.math;
 
 namespace souchy.celebi.eevee.face.objects
 {
@@ -19,13 +21,13 @@ namespace souchy.celebi.eevee.face.objects
     public interface IEffect : IEntityModeled, IFightEntity, IEffectsContainer
     {
 
-        #region Dynamic Status creation
+        //#region Dynamic Status creation
         /// <summary>
         /// Properties to create a status instance from an effect.
         /// When this is not null, create a status instead of applying the effect.
         /// </summary>
-        public StatusProperties statusProperties { get; set; }
-        #endregion
+        //public StatusProperties statusProperties { get; set; }
+        //#endregion
 
         public ICondition sourceCondition { get; set; }
         public ICondition targetFilter { get; set; }
@@ -46,9 +48,15 @@ namespace souchy.celebi.eevee.face.objects
         // We have EffectRandom that casts a random child effect
 
 
-        public IEffectResult compile(IFight fight, IAction action, TriggerEvent trigger); // IActionContext context);
+        public IEffectPreview preview(IAction action, IEnumerable<IBoardEntity> targets);
+        public IEffectReturnValue apply(IAction action, IEnumerable<IBoardEntity> targets); // IActionContext context);
 
         //public IEnumerable<IEffect> GetChildren() => effectIds.Values.Select(i => Eevee.models.effects.Get(i));
+
+        /// <summary>
+        /// Get unfiltered entities in this effect's area
+        /// </summary>
+        public IEnumerable<IBoardEntity> GetPossibleBoardTargets(IFight fight, IPosition targetCell);
 
         /// <summary>
         /// Copy basic properties to passed effect. (not model nor model-specific properties)
@@ -66,16 +74,16 @@ namespace souchy.celebi.eevee.face.objects
         ///     By SpellID / SpellModelID only instead of StatusModelID
         ///     Statuses made with StatusModel can use the model id
         /// </summary>
-        public sealed class StatusProperties
-        {
-            /// <summary>
-            /// Duration is also the Max Duration
-            /// </summary>
-            public IValue<int> Duration { get; set; }
-            public IValue<int> Delay { get; set; }
-            public IValue<int> MaxStacks { get; set; }
-            public IValue<StatusFusingStrategy> StatusFusingStrategy { get; set; }
-        }
+        //public sealed class StatusProperties
+        //{
+        //    /// <summary>
+        //    /// Duration is also the Max Duration
+        //    /// </summary>
+        //    public IValue<int> Duration { get; set; }
+        //    public IValue<int> Delay { get; set; }
+        //    public IValue<int> MaxStacks { get; set; }
+        //    public IValue<StatusFusingStrategy> StatusFusingStrategy { get; set; }
+        //}
     }
 
 

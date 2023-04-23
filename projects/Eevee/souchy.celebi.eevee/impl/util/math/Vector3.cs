@@ -66,9 +66,13 @@ namespace souchy.celebi.eevee.impl.util.math
 
         public int distanceManhattan(IVector3 p)
         {
-            return Math.Abs(p.x - x) + Math.Abs(p.y - y) + Math.Abs(p.z - z);
+            return Math.Abs(p.x - x) + Math.Abs(p.z - z);
         }
 
+        public int distanceManhattan3(IVector3 p)
+        {
+            return Math.Abs(p.x - x) + Math.Abs(p.z - z) + Math.Abs(p.y - y);
+        }
 
         public IVector3 copy()
         {

@@ -13,6 +13,11 @@ using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.impl.values;
 using static souchy.celebi.eevee.face.objects.IEffect;
 using souchy.celebi.eevee.impl.shared.triggers;
+using souchy.celebi.eevee.impl.objects.effectReturn;
+using souchy.celebi.eevee.face.entity;
+using souchy.celebi.eevee.face.util.math;
+using System.ComponentModel;
+using System.Linq;
 
 namespace souchy.celebi.eevee.impl.objects
 {
@@ -23,10 +28,11 @@ namespace souchy.celebi.eevee.impl.objects
         public IID fightUid { get; set; }
 
 
-        #region Dynamic status creation
-        public StatusProperties statusProperties { get; set; } = null;
-        #endregion
+        //#region Dynamic status creation
+        //public StatusProperties statusProperties { get; set; } = null;
+        //#endregion
 
+        public BoardTargetType BoardTargetType { get; set; }
         public ICondition sourceCondition { get; set; }
         public ICondition targetFilter { get; set; }
         public IZone zone { get; set; } = new Zone();
@@ -36,18 +42,20 @@ namespace souchy.celebi.eevee.impl.objects
         /// children
         /// </summary>
         public IEntityList<IID> effectIds { get; set; } = new EntityList<IID>(); 
+        public IEnumerable<IEffect> GetEffects() => effectIds.Values.Select(i => this.GetFight()?.effects.Get(i) ?? Eevee.models.effects.Get(i));
 
 
         protected Effect() { }
         protected Effect(IID id) => entityUid = id;
 
-        public abstract IEffectResult compile(IFight fight, IAction action, TriggerEvent trigger);
+        public abstract IEffectPreview preview(IAction action, IEnumerable<IBoardEntity> targets);
+        public abstract IEffectReturnValue apply(IAction action, IEnumerable<IBoardEntity> targets);
 
-        public IEnumerable<IEffect> GetEffects() => effectIds.Values.Select(i => this.GetFight()?.effects.Get(i) ?? Eevee.models.effects.Get(i));
-
-        public IEnumerable<EffectResult> checkTriggers(TriggerOrderType orderType, EffectResult e)
+        public IEnumerable<IBoardEntity> GetPossibleBoardTargets(IFight fight, IPosition targetCell)
         {
-            throw new NotImplementedException();
+            IArea area = this.zone.getArea(fight, targetCell);
+            IEnumerable<ICreature> creas = area.Cells.SelectMany(cell => fight.board.GetCreaturesOnCell(cell.entityUid));
+            return Enumerable.Concat<IBoardEntity>(area.Cells, creas);
         }
 
         public void CopyBasicTo(IEffect e)
@@ -57,7 +65,7 @@ namespace souchy.celebi.eevee.impl.objects
             e.zone = zone;
             e.triggers = triggers;
             e.effectIds = effectIds;
-            e.statusProperties = statusProperties;
+            //e.statusProperties = statusProperties;
         }
 
         public void Dispose()

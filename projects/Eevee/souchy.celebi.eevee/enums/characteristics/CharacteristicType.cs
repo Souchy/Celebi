@@ -1,6 +1,7 @@
 ﻿using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.enums.characteristics.properties;
 using souchy.celebi.eevee.face.objects.stats;
+using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
@@ -14,7 +15,7 @@ namespace souchy.celebi.eevee.enums.characteristics
 
     public delegate IStat StatFactory(CharacteristicId id, object value = null);
 
-    public record CharacteristicType(CharacteristicCategory Category, int LocalId, string BaseName, StatFactory Factory)
+    public record CharacteristicType(CharacteristicCategory Category, int LocalId, string BaseName, StatFactory Factory, params ICondition[] conditions)
     {
         public StatValueType StatValueType { get; init; }
         public CharacteristicId ID { get; init; } = new CharacteristicId(((int) Category) * 1000 + LocalId);
@@ -26,6 +27,13 @@ namespace souchy.celebi.eevee.enums.characteristics
         public static IEnumerable<CharacteristicType> Characteristics = Enum.GetValues<CharacteristicCategory>().SelectMany(c => c.GetCharacs());
         public static StatFactory SimpleFactory = (id, value) => StatSimple.Create(id, (int) value);
         public static StatFactory BoolFactory = (id, value) => StatBool.Create(id, (bool) value);
+        public static IEnumerable<T> iterate<T>() where T : CharacteristicType
+        {
+            var t = typeof(T);
+            return t.GetFields()
+                .Where(f => f.FieldType == t)
+                .Select(f => (T) f.GetValue(null));
+        }
     }
 
     public readonly record struct CharacteristicId(int ID)

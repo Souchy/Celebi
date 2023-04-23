@@ -25,7 +25,7 @@ namespace souchy.celebi.eevee.face.objects
         public IPlayer GetOriginalOwner();
         public IPlayer GetCurrentOwner();
         public IStats GetBaseStats();
-        public IStats GetStats(IAction action, TriggerEvent trigger);
+        public IStats GetStats(IAction action); //, TriggerEvent trigger);
         public IEnumerable<ISpell> GetSpells();
 
     }

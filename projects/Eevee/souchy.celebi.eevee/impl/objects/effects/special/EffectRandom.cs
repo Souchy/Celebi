@@ -5,6 +5,9 @@ using souchy.celebi.eevee.face.objects.effects.special;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.shared.triggers;
+using souchy.celebi.eevee.impl.objects.effectReturn;
+using souchy.celebi.eevee.face.shared.zones;
+using souchy.celebi.eevee.face.entity;
 
 namespace souchy.celebi.eevee.impl.objects.effects.special
 {
@@ -18,7 +21,11 @@ namespace souchy.celebi.eevee.impl.objects.effects.special
         /// </summary>
         public List<int> Weights { get; set; } = new();
 
-        public override IEffectResult compile(IFight fight, IAction action, TriggerEvent trigger)
+        public override IEffectPreview preview(IAction action, IEnumerable<IBoardEntity> targets) {
+            throw new NotImplementedException();
+        }
+
+        public override IEffectReturnValue apply(IAction action, IEnumerable<IBoardEntity> targets)
         {
             throw new NotImplementedException();
         }

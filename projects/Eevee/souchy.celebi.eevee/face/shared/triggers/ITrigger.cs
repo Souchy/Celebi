@@ -1,6 +1,8 @@
 ﻿using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.shared.zones;
+using souchy.celebi.eevee.impl.shared.triggers;
 
 namespace souchy.celebi.eevee.face.shared.triggers
 {
@@ -31,5 +33,27 @@ namespace souchy.celebi.eevee.face.shared.triggers
         /// Additionaly Conditions on the holder of the trigger buff, ex: hp higher than 50
         /// </summary>
         public ICondition holderCondition { get; set; }
+
+        public bool checkTrigger(IAction action, TriggerEvent triggerEvent)
+        {
+            var caster = action.fight.creatures.Get(action.caster); //action.fight.GetBoardEntity(action.caster);
+            var targetCell = action.fight.GetBoardEntity(action.targetCell); //.cells.Get(action.targetCell);
+
+            if (!holderCondition.check(action, triggerEvent, caster, targetCell))
+                return false;
+            if (!triggererFilter.check(action, triggerEvent, caster, targetCell))
+                return false;
+
+            var area = zone.getArea(action.fight, targetCell.position);
+            var isCasterInArea = area.Cells.Any(c => c.position == caster.position);
+            if (!isCasterInArea) 
+                return false;
+
+            var isRightType = this.type == triggerEvent.type && this.orderType == triggerEvent.orderType;
+            if (!isRightType) 
+                return false;
+
+            return true;
+        }
     }
 }

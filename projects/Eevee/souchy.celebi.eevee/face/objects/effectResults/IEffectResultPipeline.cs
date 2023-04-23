@@ -15,8 +15,8 @@ namespace souchy.celebi.eevee.face.objects.effectResults
 
         public IID spellID { get; set; }
 
-        public List<IEffectResult> triggeredBefore { get; set; }
-        public List<IEffectResult> triggeredAfter { get; set; }
+        public List<IEffectPreview> triggeredBefore { get; set; }
+        public List<IEffectPreview> triggeredAfter { get; set; }
 
         public void apply(IFight fight);
     }

@@ -21,7 +21,8 @@ namespace souchy.celebi.eevee.impl.shared.conditions.value
                 return false;
             IID checkable = this.actorType == ActorType.Source ? action.caster : action.targetCell;
             var creature = action.fight.creatures.Get(checkable);
-            var stat = creature.GetStats(action, trigger).Get(statId);
+            var stat = creature.GetStats(action) //, trigger)
+                .Get(statId);
 
             object fetchedValue = null;
             if(stat is StatSimple statSimple) {

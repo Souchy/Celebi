@@ -8,6 +8,9 @@ using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.values;
 using souchy.celebi.eevee.impl.shared.triggers;
+using souchy.celebi.eevee.impl.objects.effectReturn;
+using souchy.celebi.eevee.face.shared.zones;
+using souchy.celebi.eevee.face.entity;
 
 namespace souchy.celebi.eevee.impl.objects.effects.status
 {
@@ -23,7 +26,11 @@ namespace souchy.celebi.eevee.impl.objects.effects.status
         private EffectAddStatus(IID id) : base(id) { }
         public static IEffectAddStatus Create() => new EffectAddStatus(Eevee.RegisterIID<IEffect>());
 
-        public override IEffectResult compile(IFight fight, IAction action, TriggerEvent trigger)
+        public override IEffectPreview preview(IAction action, IEnumerable<IBoardEntity> targets) {
+            throw new NotImplementedException();
+        }
+
+        public override IEffectReturnValue apply(IAction action, IEnumerable<IBoardEntity> targets)
         {
             throw new NotImplementedException();
         }

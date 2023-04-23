@@ -1,4 +1,5 @@
 ﻿using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.util.math;
 using souchy.celebi.eevee.face.values;
@@ -53,16 +54,18 @@ namespace souchy.celebi.eevee.face.shared.zones
         /// </summary>
         public int sizeIndexExtendFromSource { get; set; }
         /// <summary>
-        /// Get the cells touched by this area at target point
-        /// </summary>
-        public IBoardArea getArea(IPosition targetCell);
-        /// <summary>
         /// 
         /// </summary>
         public IEntityList<IZone> children { get; set; }
 
-
         public int GetRingWidth() => size.value.z;
+
+
+        /// <summary>
+        /// Get the cells touched by this area at target point
+        /// </summary>
+        public IArea getArea(IFight fight, IPosition targetCell);
+
     }
 
     //public interface ZoneMulti : IZone

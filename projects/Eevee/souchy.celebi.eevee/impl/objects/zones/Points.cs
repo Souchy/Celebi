@@ -113,7 +113,7 @@ namespace souchy.celebi.eevee.impl.objects.zones
             public int maxZ() => this.Max(v => v.z);
             public int sizeX() => maxX() - minX() + 1;
             public int sizeZ() => maxZ() - minZ() + 1;
-            public IBoardArea projectToBoard()
+            public IArea projectToBoard()
             {
                 throw new Exception();
             }

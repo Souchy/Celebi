@@ -10,6 +10,9 @@ using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.values;
 using souchy.celebi.eevee.impl.shared.triggers;
 using souchy.celebi.eevee.impl.shared.triggers;
+using souchy.celebi.eevee.impl.objects.effectReturn;
+using souchy.celebi.eevee.face.shared.zones;
+using souchy.celebi.eevee.face.entity;
 
 namespace souchy.celebi.eevee.impl.objects.effects.move
 {
@@ -23,7 +26,11 @@ namespace souchy.celebi.eevee.impl.objects.effects.move
         private EffectTranslateBy() { }
         private EffectTranslateBy(IID id) : base(id) { }
         public static IEffectTranslateBy Create() => new EffectTranslateBy(Eevee.RegisterIID<IEffect>());
-        public override IEffectResult compile(IFight fight, IAction action, TriggerEvent trigger)
+        public override IEffectPreview preview(IAction action, IEnumerable<IBoardEntity> targets) {
+            throw new NotImplementedException();
+        }
+
+        public override IEffectReturnValue apply(IAction action, IEnumerable<IBoardEntity> targets)
         {
             throw new NotImplementedException();
         }
@@ -39,7 +46,11 @@ namespace souchy.celebi.eevee.impl.objects.effects.move
         private EffectPullBy() { }
         private EffectPullBy(IID id) : base(id) { }
         public static IEffectPullBy Create() => new EffectPullBy(Eevee.RegisterIID<IEffect>());
-        public override IEffectResult compile(IFight fight, IAction action, TriggerEvent trigger)
+        public override IEffectPreview preview(IAction action, IEnumerable<IBoardEntity> targets) {
+            throw new NotImplementedException();
+        }
+
+        public override IEffectReturnValue apply(IAction action, IEnumerable<IBoardEntity> targets)
         {
             throw new NotImplementedException();
         }
@@ -51,7 +62,11 @@ namespace souchy.celebi.eevee.impl.objects.effects.move
         private EffectPushBy() { }
         private EffectPushBy(IID id) : base(id) { }
         public static IEffectPushBy Create() => new EffectPushBy(Eevee.RegisterIID<IEffect>());
-        public override IEffectResult compile(IFight fight, IAction action, TriggerEvent trigger)
+        public override IEffectPreview preview(IAction action, IEnumerable<IBoardEntity> targets) {
+            throw new NotImplementedException();
+        }
+
+        public override IEffectReturnValue apply(IAction action, IEnumerable<IBoardEntity> targets)
         {
             throw new NotImplementedException();
         }
@@ -63,7 +78,11 @@ namespace souchy.celebi.eevee.impl.objects.effects.move
         private EffectDashBy() { }
         private EffectDashBy(IID id) : base(id) { }
         public static IEffectDashBy Create() => new EffectDashBy(Eevee.RegisterIID<IEffect>());
-        public override IEffectResult compile(IFight fight, IAction action, TriggerEvent trigger)
+        public override IEffectPreview preview(IAction action, IEnumerable<IBoardEntity> targets) {
+            throw new NotImplementedException();
+        }
+
+        public override IEffectReturnValue apply(IAction action, IEnumerable<IBoardEntity> targets)
         {
             throw new NotImplementedException();
         }
@@ -75,7 +94,11 @@ namespace souchy.celebi.eevee.impl.objects.effects.move
         private EffectDashAwayBy() { }
         private EffectDashAwayBy(IID id) : base(id) { }
         public static IEffectDashAwayBy Create() => new EffectDashAwayBy(Eevee.RegisterIID<IEffect>());
-        public override IEffectResult compile(IFight fight, IAction action, TriggerEvent trigger)
+        public override IEffectPreview preview(IAction action, IEnumerable<IBoardEntity> targets) {
+            throw new NotImplementedException();
+        }
+
+        public override IEffectReturnValue apply(IAction action, IEnumerable<IBoardEntity> targets)
         {
             throw new NotImplementedException();
         }

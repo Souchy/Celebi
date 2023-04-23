@@ -1,5 +1,6 @@
 using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.objects.controllers;
+using souchy.celebi.eevee.face.objects.statuses;
 using souchy.celebi.eevee.impl.objects.effectResults;
 
 namespace souchy.celebi.eevee.concepts;
@@ -7,20 +8,20 @@ namespace souchy.celebi.eevee.concepts;
 public class ConceptPipeline
 {
     public IFight fight;
-    public List<EffectResult> pipe = new List<EffectResult>();
+    public List<EffectPreview> pipe = new List<EffectPreview>();
 
-    public void pushCompiledEffect(EffectResult e) {
+    public void pushCompiledEffect(EffectPreview e) {
         procTriggers(TriggerOrderType.Before, e);
         pipe.Add(e);
         procTriggers(TriggerOrderType.After, e);
     }
 
-    private void procTriggers(TriggerOrderType orderType, EffectResult e) {
-        foreach(var s in fight.statuses.Values) {
+    private void procTriggers(TriggerOrderType orderType, EffectPreview e) {
+        foreach(IStatusInstance s in fight.statuses.Values.SelectMany(sc => sc.instances)) {
             // s.holderEntity
-            var triggeredEffects = s.checkTriggers(orderType, e);
+            var triggeredEffects = s.checkTriggers(null, null); // orderType, e);
             foreach(var te in triggeredEffects)
-                pushCompiledEffect(te);
+                pushCompiledEffect(null);
         }
     }
 

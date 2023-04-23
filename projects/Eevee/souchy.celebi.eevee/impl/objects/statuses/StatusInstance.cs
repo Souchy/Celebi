@@ -35,11 +35,6 @@ namespace souchy.celebi.eevee.statuses
 
         public IEnumerable<IEffect> GetEffects() => effectIds.Values.Select(i => this.GetFight().effects.Get(i));
 
-        public IEnumerable<EffectResult> checkTriggers(TriggerOrderType orderType, EffectResult e)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Dispose()
         {
             ((IStatusInstance) this).GetStats().Dispose();

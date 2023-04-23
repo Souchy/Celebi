@@ -14,9 +14,9 @@ namespace souchy.celebi.eevee.impl.objects.effectResults
         public IID sourceID { get; set; }
         public IID targetID { get; set; }
         public IID spellID { get; set; }
-        public List<IEffectResult> triggeredBefore { get; set; }
-        public List<IEffectResult> children { get; set; } = new List<IEffectResult>();
-        public List<IEffectResult> triggeredAfter { get; set; }
+        public List<IEffectPreview> triggeredBefore { get; set; }
+        public List<IEffectPreview> children { get; set; } = new List<IEffectPreview>();
+        public List<IEffectPreview> triggeredAfter { get; set; }
 
         public void apply(IFight fight)
         {

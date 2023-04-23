@@ -8,6 +8,9 @@ using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.values;
 using souchy.celebi.eevee.impl.shared.triggers;
+using souchy.celebi.eevee.impl.objects.effectReturn;
+using souchy.celebi.eevee.face.shared.zones;
+using souchy.celebi.eevee.face.entity;
 
 namespace souchy.celebi.eevee.impl.objects.effects.creature
 {
@@ -19,7 +22,11 @@ namespace souchy.celebi.eevee.impl.objects.effects.creature
         private EffectDig(IID id) : base(id) { }
         public static IEffectDig Create() => new EffectDig(Eevee.RegisterIID<IEffect>());
 
-        public override IEffectResult compile(IFight fight, IAction action, TriggerEvent trigger)
+        public override IEffectPreview preview(IAction action, IEnumerable<IBoardEntity> targets) {
+            throw new NotImplementedException();
+        }
+
+        public override IEffectReturnValue apply(IAction action, IEnumerable<IBoardEntity> targets)
         {
             throw new NotImplementedException();
         }

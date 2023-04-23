@@ -23,7 +23,7 @@ namespace souchy.celebi.eevee.impl.shared.conditions.value
 
             var fight = action.fight; // Eevee.fights.Get(fightId);
             if(creatureModelId == "S") { // take the source as the "reference" id to compare with
-                var targetCrea = fight.board.getCreatureOnCell(action.targetCell);
+                var targetCrea = fight.board.GetCreatureOnCell(action.targetCell);
                 var model1 = targetCrea.modelUid;
                 var model2 = fight.creatures.Get(action.caster).modelUid;
                 return this.comparator.check(model1, model2);
@@ -37,7 +37,7 @@ namespace souchy.celebi.eevee.impl.shared.conditions.value
                     return this.comparator.check(model, creatureModelId);
                 } else
                 {
-                    var targetCrea = fight.board.getCreatureOnCell(action.targetCell);
+                    var targetCrea = fight.board.GetCreatureOnCell(action.targetCell);
                     var model = targetCrea.modelUid;
                     return this.comparator.check(model, creatureModelId);
                 }

@@ -12,16 +12,17 @@
         OnTurnPass,
 
         // complex, based on an effect, 
-        OnCreatureSwapIn,
-        OnCreatureSwapOut,
+        //OnCreatureSwapIn,
+        //OnCreatureSwapOut,
         // complex, could filter on the creature id, the spell id, the 
         OnCreatureSpellCast,
+        OnEffect,
 
         OnCreatureWalkEnterCell,
         OnCreatureWalkExitCell,
         OnCreatureWalkStopCell,
 
-        CompileStats,
+        //CompileStats,
     }
 
     public enum TriggerOrderType {

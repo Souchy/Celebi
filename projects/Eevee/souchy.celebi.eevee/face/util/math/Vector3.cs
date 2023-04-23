@@ -94,6 +94,10 @@ namespace souchy.celebi.eevee.face.util.math
         /// </summary>
         public int distanceManhattan(IVector3 vec);
         /// <summary>
+        /// 3D distance
+        /// </summary>
+        public int distanceManhattan3(IVector3 vec);
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="v"></param>

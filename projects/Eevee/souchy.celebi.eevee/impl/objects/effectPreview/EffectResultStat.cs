@@ -11,7 +11,7 @@ using souchy.celebi.eevee.enums.characteristics;
 
 namespace souchy.celebi.eevee.impl.objects.effectResults
 {
-    public class EffectResultStat : EffectResult, IEffectResultStat
+    public class EffectResultStat : EffectPreview, IEffectResultStat
     {
         public CharacteristicId statId { get; set; }
         public IStat stat { get; set; }

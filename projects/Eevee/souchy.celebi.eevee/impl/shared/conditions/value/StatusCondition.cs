@@ -31,10 +31,11 @@ namespace souchy.celebi.eevee.impl.shared.conditions.value
             targ = boardTargetType switch
             {
                 BoardTargetType.Cell => targ,
-                BoardTargetType.Creature => action.fight.GetBoardEntity(targ.entityUid)
-            }; ;
+                BoardTargetType.Creature => action.fight.GetBoardEntity(targ.entityUid),
+                _ => throw new Exception()
+            };
 
-            IStatusInstance status = targ.GetStatuses().FirstOrDefault(s => s.modelUid == statusModelId);
+            IStatusContainer status = targ.GetStatuses().FirstOrDefault(s => s.modelUid == statusModelId);
             var stat = status.GetStats().Get(statId);
             // var stat = creature.GetStats().Get((StatType) statId);
             

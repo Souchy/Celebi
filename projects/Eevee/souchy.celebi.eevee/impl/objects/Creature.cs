@@ -1,5 +1,7 @@
 ﻿using souchy.celebi.eevee;
 using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.enums.characteristics;
+using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.controllers;
@@ -13,6 +15,7 @@ using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.shared.triggers;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.impl.util.math;
+using System.Collections.Generic;
 
 namespace souchy.celebi.eevee.impl.objects
 {
@@ -39,10 +42,10 @@ namespace souchy.celebi.eevee.impl.objects
         public IPlayer GetOriginalOwner() => this.GetFight().players.Get(originalOwnerUid);
         public IPlayer GetCurrentOwner() => this.GetFight().players.Get(currentOwnerUid);
         public IStats GetBaseStats() => this.GetFight().stats.Get(stats);
-        public IStats GetStats(IAction action, TriggerEvent trigger)
+        public IStats GetStats(IAction action) //, TriggerEvent trigger)
         {
             var statsBag = this.GetBaseStats().anonymousCopy();
-            foreach(var status in GetStatuses())
+            foreach(IStatusInstance status in GetStatuses().SelectMany(s => s.instances))
             {
                 foreach(IEffectAddStat eff in status.GetEffects().Where(e => e is IEffectAddStat))
                 {
@@ -51,10 +54,24 @@ namespace souchy.celebi.eevee.impl.objects
                     stat.Add(eff.stat);
                 }
             }
+            var boardSource = action.fight.creatures.Get(action.caster);
+            var boardTarget = action.fight.board.GetCreatureOnCell(action.targetCell);
+            statsBag.ForEach(stat =>
+            {
+                if(stat is IStatSimple simple) {
+                    var success = simple.statId.GetCharactType().conditions.All(c =>
+                    {
+                        //var dist = creaSource.position.distanceManhattan(creaTarget.position);
+                        return c.check(action, null, boardSource, boardTarget);
+                    });
+                    if(!success) 
+                        simple.value = 0;
+                }
+            });
             return statsBag;
         }
         public IEnumerable<ISpell> GetSpells() => spells.Values.Select(i => this.GetFight().spells.Get(i));
-        public IEnumerable<IStatusInstance> GetStatuses() => statuses.Values.Select(i => this.GetFight().statuses.Get(i));
+        public IEnumerable<IStatusContainer> GetStatuses() => statuses.Values.Select(i => this.GetFight().statuses.Get(i));
 
 
         public void Dispose()

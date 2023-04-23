@@ -5,9 +5,9 @@ using souchy.celebi.eevee.face.values;
 namespace souchy.celebi.eevee.face.objects.effects.move
 {
     /// <summary>
-    /// Teleport the caster symmetrically over the target
+    /// Teleports all entities in the zone symmetrically over the caster
     /// </summary>
-    public interface IEffectTeleportSymmetrically : IEffect
+    public interface IEffectTeleportSymmetricallyAround : IEffect
     {
 
     }

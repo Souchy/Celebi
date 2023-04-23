@@ -36,7 +36,7 @@ namespace souchy.celebi.eevee.face.objects
         /// List of effects related to this creature. <br></br>
         /// Can be the source of the target, it's in the CompiledEffect
         /// </summary>
-        public Dictionary<Type, List<IEffectResult>> compiledEffects { get; set; }
+        public Dictionary<Type, List<IEffectPreview>> compiledEffects { get; set; }
     }
 
     public class SpellCastHistory

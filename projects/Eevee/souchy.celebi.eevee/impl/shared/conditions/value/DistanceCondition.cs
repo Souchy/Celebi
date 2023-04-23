@@ -14,15 +14,16 @@ namespace souchy.celebi.eevee.impl.shared.conditions.value
 
         public override bool check(IAction action, TriggerEvent trigger, ICreature boardSource, IBoardEntity boardTarget)
         {
-            if(!this.checkChildren(fightId, source, target))
+            if(!this.checkChildren(action, trigger, boardSource, boardTarget)) //fightId, source, target))
                 return false;
 
-            var fight = Eevee.fights.Get(fightId);
-            var e1 = fight.GetBoardEntity(source);
-            var e2 = fight.GetBoardEntity(target);
-
-            var actualDistance = e1.position.copy().sub(e1.position)
-                .set(IVector3.Y_INDEX, 0).abs().length();
+            var actualDistance = boardSource.position
+                .distanceManhattan(boardTarget.position);
+                //.copy()
+                //.sub(boardTarget.position)
+                //.set(IVector3.Y_INDEX, 0)
+                //.abs()
+                //.length();
             
             return this.comparator.check(actualDistance, distance);
         }

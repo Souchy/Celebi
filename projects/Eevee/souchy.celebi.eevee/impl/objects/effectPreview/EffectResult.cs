@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace souchy.celebi.eevee.impl.objects.effectResults
 {
-    public abstract class EffectResult : IEffectResult
+    public abstract class EffectPreview : IEffectPreview
     {
         public IID sourceID { get; set; }
         public IID targetID { get; set; }
@@ -17,8 +17,8 @@ namespace souchy.celebi.eevee.impl.objects.effectResults
         public IID effectModelID { get; set; }
         public IID effectInstanceID { get; set; }
 
-        public List<IEffectResult> triggeredBefore { get; set; } = new List<IEffectResult>();
-        public List<IEffectResult> triggeredAfter { get; set; } = new List<IEffectResult>();
+        public List<IEffectPreview> triggeredBefore { get; set; } = new List<IEffectPreview>();
+        public List<IEffectPreview> triggeredAfter { get; set; } = new List<IEffectPreview>();
 
         public void apply(IFight fight)
         {

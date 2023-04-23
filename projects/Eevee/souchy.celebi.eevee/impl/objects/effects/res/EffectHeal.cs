@@ -16,6 +16,10 @@ using static System.Net.Mime.MediaTypeNames;
 using souchy.celebi.eevee.impl.shared.triggers;
 using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.enums.characteristics.creature;
+using souchy.celebi.eevee.impl.objects.effectReturn;
+using souchy.celebi.eevee.impl.objects.effectReturn;
+using souchy.celebi.eevee.face.shared.zones;
+using souchy.celebi.eevee.face.entity;
 
 namespace souchy.celebi.eevee.impl.objects.effects.res
 {
@@ -30,16 +34,20 @@ namespace souchy.celebi.eevee.impl.objects.effects.res
         public static IEffectHeal Create() => new EffectHeal(Eevee.RegisterIID<IEffect>());
 
 
-        public override IEffectResult compile(IFight fight, IAction action, TriggerEvent trigger)
+        public override IEffectPreview preview(IAction action, IEnumerable<IBoardEntity> targets) {
+            throw new NotImplementedException();
+        }
+
+        public override IEffectReturnValue apply(IAction action, IEnumerable<IBoardEntity> targets)
         {
             if (action is not IActionSpell) return null;
             IActionSpell act = (IActionSpell) action;
 
-            var creaSource = fight.creatures.Get(act.caster);
-            var creaTarget = fight.board.getCreatureOnCell(act.targetCell);
+            var creaSource = action.fight.creatures.Get(act.caster);
+            var creaTarget = action.fight.board.GetCreatureOnCell(act.targetCell);
             if (creaSource == null || creaTarget == null) return null;
-            var sourceStats = creaSource.GetStats(action, trigger);
-            var targetStats = creaTarget.GetStats(action, trigger);
+            var sourceStats = creaSource.GetStats(action); //, trigger);
+            var targetStats = creaTarget.GetStats(action); //, trigger);
             var dist = creaSource.position.distanceManhattan(creaTarget.position);
 
             // apply affinities + resistances
@@ -68,8 +76,8 @@ namespace souchy.celebi.eevee.impl.objects.effects.res
             IStatSimple currentLife = targetStats.Get<IStatSimple>(Resource.Life);
             IStatSimple newLife = (IStatSimple)currentLife.copy(); // new StatSimple(StatType.Life, currentLife.value + heal);
             newLife.value += heal;
-            var compiled = new EffectResultStat(Resource.Life.ID, newLife);
-            return compiled;
+            //var compiled = new EffectResultStat(Resource.Life.ID, newLife);
+            //return compiled;
         }
     }
 }

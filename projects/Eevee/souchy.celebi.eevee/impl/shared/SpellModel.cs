@@ -47,10 +47,6 @@ namespace souchy.celebi.eevee.impl.shared
 
 
         public IEnumerable<IEffect> GetEffects() => effectIds.Values.Select(i => Eevee.models.effects.Get(i));
-        public IEnumerable<EffectResult> checkTriggers(TriggerOrderType orderType, EffectResult e)
-        {
-            throw new NotImplementedException();
-        }
 
         public void Dispose()
         {

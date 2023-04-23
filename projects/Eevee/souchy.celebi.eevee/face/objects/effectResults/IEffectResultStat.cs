@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace souchy.celebi.eevee.face.objects.effectResults
 {
-    public interface IEffectResultStat : IEffectResult
+    public interface IEffectResultStat : IEffectPreview
     {
 
         public CharacteristicId statId { get; set; }
