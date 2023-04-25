@@ -11,13 +11,13 @@ using souchy.celebi.eevee.enums.characteristics;
 
 namespace souchy.celebi.eevee.impl.objects.effectResults
 {
-    public class EffectResultStat : EffectPreview, IEffectResultStat
+    public class EffectPreviewStat : EffectPreview, IEffectResultStat
     {
         public CharacteristicId statId { get; set; }
         public IStat stat { get; set; }
 
-        public EffectResultStat() { }
-        public EffectResultStat(CharacteristicId statType, IStat stat)
+        public EffectPreviewStat() { }
+        public EffectPreviewStat(CharacteristicId statType, IStat stat)
         {
             this.statId = statType;
             this.stat = stat;

@@ -1,5 +1,7 @@
-﻿using souchy.celebi.eevee.face.objects.effectResults;
+﻿using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.face.objects.effectResults;
 using souchy.celebi.eevee.face.objects.controllers;
+using souchy.celebi.eevee.face.util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,15 +10,10 @@ using System.Threading.Tasks;
 
 namespace souchy.celebi.eevee.impl.objects.effectResults
 {
-    public class EffectResultDamage : EffectPreview, IEffectResultLifeDamage
+    public class EffectPreviewMove : EffectPreview, IEffectResultMove
     {
-        public int damage { get; set; }
-
-        public EffectResultDamage() { }
-        public EffectResultDamage(int damage)
-        {
-            this.damage = damage;
-        }
+        public MoveType MoveType { get; set; }
+        public IID newCell { get; set; }
 
         public override void apply0(IFight fight)
         {

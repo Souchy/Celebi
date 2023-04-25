@@ -1,4 +1,5 @@
-﻿using System;
+﻿using souchy.celebi.eevee.face.objects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,10 @@ namespace souchy.celebi.eevee.impl.objects.effectReturn
     /// - EffectMathAdd: return the sum of x + y where both can be numbers or other effects
     /// - 
     /// </summary>
-    public interface IEffectReturnValue
-    {
-    }
+    //public interface IEffectReturnValue
+    //{
+    //    public IEffect effect { get; set; }
+    //    public object value { get; set; }
+    //}
+    public record IEffectReturnValue(IEffect effect, object value);
 }

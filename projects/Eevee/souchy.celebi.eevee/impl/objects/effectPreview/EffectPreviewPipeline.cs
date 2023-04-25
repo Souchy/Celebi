@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace souchy.celebi.eevee.impl.objects.effectResults
 {
-    public class EffectResultPipeline : IEffectResultPipeline
+    public class EffectPreviewPipeline : IEffectResultPipeline
     {
         public IID sourceID { get; set; }
         public IID targetID { get; set; }
