@@ -13,3 +13,15 @@ Most other stats tho, are functional:
 	- States definitely need additional code to check for them (unmovable, gravity, invisibility line of sight, fly/dig height, etc)
 
 	but in the case of elements, i think we never need to directly address them like Elements.water
+
+
+
+
+
+
+
+
+
+
+
+distinction permanent vs temporary models & iids

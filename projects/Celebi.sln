@@ -5,9 +5,9 @@ VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eevee", "Eevee\Eevee.csproj", "{D831FD67-A7EB-4498-B240-304CCD5998FD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Espeon", "Espeon\Espeon.csproj", "{AC4CEF81-74BE-49C3-8C83-067D2889AE7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Espeon", "game\Espeon\Espeon.csproj", "{AC4CEF81-74BE-49C3-8C83-067D2889AE7F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Umbreon", "Umbreon\Umbreon.csproj", "{04B86560-6FEE-4E75-B712-D227E42548B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Umbreon", "game\Umbreon\Umbreon.csproj", "{04B86560-6FEE-4E75-B712-D227E42548B5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlayfabClientTest", "ConsoleApp1\PlayfabClientTest.csproj", "{08C29E53-7306-45FC-A0C0-A039972A4206}"
 EndProject
@@ -15,13 +15,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{761B8FBA
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{89685B87-06FE-41C9-BC0A-5D40952DBDB4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EeveeUnitTests", "EeveeUnitTests\EeveeUnitTests.csproj", "{6F0ACA55-BB2E-4982-A057-3D28DD8B22DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EeveeUnitTests", "tests\EeveeUnitTests\EeveeUnitTests.csproj", "{6F0ACA55-BB2E-4982-A057-3D28DD8B22DA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Game", "Game", "{78CBEF78-B352-4FF6-A26C-A4A2EE288F51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UmbreonUnitTests", "tests\UmbreonUnitTests\UmbreonUnitTests.csproj", "{66B1421B-D360-4F0B-93B5-6A11150D35CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UmbreonUnitTests", "tests\UmbreonUnitTests\UmbreonUnitTests.csproj", "{66B1421B-D360-4F0B-93B5-6A11150D35CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EspeonUnitTests", "tests\EspeonUnitTests\EspeonUnitTests.csproj", "{4A43DE04-3387-44FD-9A30-55384D753F9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EspeonUnitTests", "tests\EspeonUnitTests\EspeonUnitTests.csproj", "{4A43DE04-3387-44FD-9A30-55384D753F9D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{36544D98-C5DD-44F5-823D-FA0FAFDF79BB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spark", "web\Spark\Spark.csproj", "{C9B06E6A-76DC-4172-B90E-BEEDA3A43034}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other", "Other", "{DFE957F6-FC64-47E3-9B3D-5A0897A8375C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +93,14 @@ Global
 		{4A43DE04-3387-44FD-9A30-55384D753F9D}.ExportRelease|Any CPU.Build.0 = Release|Any CPU
 		{4A43DE04-3387-44FD-9A30-55384D753F9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A43DE04-3387-44FD-9A30-55384D753F9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9B06E6A-76DC-4172-B90E-BEEDA3A43034}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9B06E6A-76DC-4172-B90E-BEEDA3A43034}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9B06E6A-76DC-4172-B90E-BEEDA3A43034}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9B06E6A-76DC-4172-B90E-BEEDA3A43034}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
+		{C9B06E6A-76DC-4172-B90E-BEEDA3A43034}.ExportRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{C9B06E6A-76DC-4172-B90E-BEEDA3A43034}.ExportRelease|Any CPU.Build.0 = Release|Any CPU
+		{C9B06E6A-76DC-4172-B90E-BEEDA3A43034}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9B06E6A-76DC-4172-B90E-BEEDA3A43034}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,6 +113,7 @@ Global
 		{6F0ACA55-BB2E-4982-A057-3D28DD8B22DA} = {761B8FBA-00FB-411F-B808-C7D1211E34FD}
 		{66B1421B-D360-4F0B-93B5-6A11150D35CB} = {761B8FBA-00FB-411F-B808-C7D1211E34FD}
 		{4A43DE04-3387-44FD-9A30-55384D753F9D} = {761B8FBA-00FB-411F-B808-C7D1211E34FD}
+		{C9B06E6A-76DC-4172-B90E-BEEDA3A43034} = {36544D98-C5DD-44F5-823D-FA0FAFDF79BB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EA50F941-63F5-455C-8466-4E5D128D00DA}

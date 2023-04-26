@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace souchy.celebi.eevee.face.objects.effects
 {
     /// <summary>
-    /// Effect that doesnt do anything. <br></br>
+    /// Effect that doesnt do anything. (ex. text like "Si saoul:", "Pour chaque rune:") <br></br>
     /// It just holds other child effects and conditions and applies them in its aoe. <br></br>
     /// It can have a string to describe the condition or the children, example: <br></br>
     /// <code>

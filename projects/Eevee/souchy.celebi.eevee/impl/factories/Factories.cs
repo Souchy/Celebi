@@ -26,7 +26,7 @@ namespace souchy.celebi.eevee.impl.factories
         public static void newCreatureModel()
         {
             // Model + Skin
-            var creatureModel = CreatureModel.Create();
+            var creatureModel = CreatureModel.CreatePermanent();
             // Stats
             var stats = Stats.Create();
             creatureModel.baseStats = stats.entityUid;

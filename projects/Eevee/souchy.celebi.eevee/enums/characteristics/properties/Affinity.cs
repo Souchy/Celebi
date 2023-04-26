@@ -28,13 +28,16 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
         public static readonly Affinity Heal        = new(7,  nameof(Heal));
         public static readonly Affinity Melee       = new(8,  nameof(Melee), conditions: new ICondition[]{ 
             new DistanceCondition() {
-                distance = 1,
+                distance = Constants.MELEE_RANGE,
                 comparator = ConditionComparatorType.LE,
-                // actorType = ActorType.Target
-                // conditionType = ConditionType.Distance
             }
         });
-        public static readonly Affinity Distance    = new(9,  nameof(Distance));
+        public static readonly Affinity Distance    = new(9,  nameof(Distance), conditions: new ICondition[]{
+            new DistanceCondition() {
+                distance = Constants.MELEE_RANGE,
+                comparator = ConditionComparatorType.GT,
+            }
+        });
         public static readonly Affinity Trap        = new(10, nameof(Trap));
         public static readonly Affinity Glyph       = new(11, nameof(Glyph));
 

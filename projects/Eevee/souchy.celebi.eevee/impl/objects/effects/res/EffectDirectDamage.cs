@@ -16,6 +16,7 @@ using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.impl.objects.effectReturn;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.entity;
+using System.Collections.Generic;
 
 namespace souchy.celebi.eevee.impl.objects.effects.res
 {
@@ -42,47 +43,48 @@ namespace souchy.celebi.eevee.impl.objects.effects.res
             var creaTarget = action.fight.board.GetCreatureOnCell(act.targetCell);
             if (creaSource == null || creaTarget == null) return null;
 
+            var sourceStats = creaSource.GetStats(action);
+            var targetStats = creaTarget.GetStats(action);
+            int dmg = calculateDamage(sourceStats, targetStats);
 
+            var shield = targetStats.Get<IStatSimple>(Resource.Shield);
+            var remainingDmgAfterShield = dmg;
 
-            var sourceStats = creaSource.GetStats(action); //, trigger);
-            var targetStats = creaTarget.GetStats(action); //, trigger);
+            var startShield = shield.value;
+            shield.value -= dmg;
+            shield.value = Math.Max(0, shield.value);
+            remainingDmgAfterShield = startShield - shield.value;
 
-            var dist = creaSource.position.distanceManhattan(creaTarget.position);
+            var life = targetStats.Get<IStatSimple>(Resource.Life);
+            life.value -= remainingDmgAfterShield;
 
+            //var compiled = new EffectPreviewDamage(damage);
+            //return compiled;
+            return new IEffectReturnValue(this, dmg);
+        }
+
+        private int calculateDamage(IStats sourceStats, IStats targetStats)
+        {
             // apply affinities + resistances
             IStatSimple aff = sourceStats.Get<IStatSimple>(Element.value.GetAffinity());
             IStatSimple affg = sourceStats.Get<IStatSimple>(Affinity.Damage);
-            IStatSimple affdist;
+
+            int affdist = targetStats.Get<IStatSimple>(Affinity.Distance).value + targetStats.Get<IStatSimple>(Affinity.Melee).value;
 
             IStatSimple res = targetStats.Get<IStatSimple>(Element.value.GetResistance());
             IStatSimple resg = targetStats.Get<IStatSimple>(Resistance.Damage);
-            IStatSimple resdist;
 
-            // distance
-            if (dist > 1)
-            {
-                affdist = sourceStats.Get<IStatSimple>(Affinity.Distance);
-                resdist = targetStats.Get<IStatSimple>(Resistance.Distance);
-            }
-            // melee
-            else
-            {
-                affdist = sourceStats.Get<IStatSimple>(Affinity.Melee);
-                resdist = targetStats.Get<IStatSimple>(Resistance.Melee);
-            }
+            int resdist = targetStats.Get<IStatSimple>(Resistance.Distance).value + targetStats.Get<IStatSimple>(Resistance.Melee).value;
 
             var damage = Value.value;
-
             damage *= (100 + aff.value) / 100;
             damage *= (100 + affg.value) / 100;
-            damage *= (100 + affdist.value) / 100;
+            damage *= (100 + affdist) / 100;
 
             damage *= (100 - res.value) / 100;
             damage *= (100 - resg.value) / 100;
-            damage *= (100 - resdist.value) / 100;
-
-            var compiled = new EffectResultDamage(damage);
-            return compiled;
+            damage *= (100 - resdist) / 100;
+            return damage;
         }
     }
 }

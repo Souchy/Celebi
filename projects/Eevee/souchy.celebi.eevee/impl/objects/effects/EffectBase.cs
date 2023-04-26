@@ -38,8 +38,9 @@ namespace souchy.celebi.eevee.impl.objects.effects
 
         public override IEffectReturnValue apply(IAction action, IEnumerable<IBoardEntity> targets)
         {
-            // just compile children
-            throw new NotImplementedException();
+            // just apply children, nothing else
+            Mind.applyEffectContainer(action, this);
+            return null;
         }
     }
 }

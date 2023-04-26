@@ -19,7 +19,7 @@ namespace souchy.celebi.eevee.impl.shared
         public IEntitySet<IID> baseStatusPassives { get; init; } = new EntitySet<IID>();
 
         private CreatureModel() { }
-        public static ICreatureModel Create() => new CreatureModel() 
+        public static ICreatureModel CreatePermanent() => new CreatureModel() 
         {
             entityUid = Eevee.RegisterIID<ICreatureModel>(),
         };

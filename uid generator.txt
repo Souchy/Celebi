@@ -1,0 +1,5 @@
+
+
+- UIDGenerator
+	- 1 pour modèles permanents: utilise les nombres pour chaque type de model
+	- 2 pour modèles temporaires: utilise la date as a string

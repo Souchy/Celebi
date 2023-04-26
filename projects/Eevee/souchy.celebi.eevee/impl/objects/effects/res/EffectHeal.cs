@@ -78,6 +78,7 @@ namespace souchy.celebi.eevee.impl.objects.effects.res
             newLife.value += heal;
             //var compiled = new EffectResultStat(Resource.Life.ID, newLife);
             //return compiled;
+            return null;
         }
     }
 }
