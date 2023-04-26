@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>1da1bb08-f4c7-4a9c-85b4-1d6fd26f2f8a</UserSecretsId>
+    <RootNamespace />
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,12 +25,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Eevee\Eevee.csproj" />
+    <ProjectReference Include="..\..\Eevee\Eevee.csproj" />
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
   	<Exec Command="dotnet tool restore" />
   	<Exec Command="dotnet swagger tofile --output bin/swagger.json $(OutputPath)\$(AssemblyName).dll v1 " />
+	  <Exec WorkingDirectory="../Flareon" Command="npm run swagger"></Exec>
   </Target>
 	
 </Project>

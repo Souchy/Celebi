@@ -1,4 +1,4 @@
-﻿namespace Spark.Models
+﻿namespace Spark.souchy.celebi.spark.models
 {
     public class CollectionSettings
     {

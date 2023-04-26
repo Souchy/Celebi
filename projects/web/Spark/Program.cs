@@ -2,9 +2,12 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
-using Spark.Models;
-using Spark.Services;
-using static Spark.Services.CreatureModelService;
+using Microsoft.OpenApi.Models;
+using souchy.celebi.spark.services;
+using souchy.celebi.spark.util.swagger;
+using Spark.souchy.celebi.spark.models;
+using Spark.util.swagger;
+using static souchy.celebi.spark.services.CreatureModelService;
 
 namespace Spark
 {
@@ -13,33 +16,23 @@ namespace Spark
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var services = builder.Services;
             var configuration = builder.Configuration;
 
+            services.AddControllers();
             // Add services to the container.
-            configureServices(builder.Services, configuration);
-
-            builder.Services.AddControllers();
+            configureServices(services, configuration);
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-
-            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme,
-                    options => builder.Configuration.Bind("JwtSettings", options))
-                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
-                    options => builder.Configuration.Bind("CookieSettings", options))
-
-                .AddGoogle(googleOptions =>
-                {
-                    googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
-                    googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
-                });
-                   //.AddGoogle(options =>
-                   //{
-                   //    IConfigurationSection googleAuthNSection = config.GetSection("Authentication:Google");
-                   //    options.ClientId = googleAuthNSection["ClientId"];
-                   //    options.ClientSecret = googleAuthNSection["ClientSecret"];
-                   //});
+            services.AddEndpointsApiExplorer();
+            services.AddSwaggerGen(c =>
+            {
+                //c.SwaggerDoc("Spark", new OpenApiInfo { Title = "Spark", Version = "v1" });
+                c.SchemaFilter<EnumSchemaFilter>();
+            });
+            services.AddControllers(options =>
+            {
+                options.Conventions.Add(new ControllerNamingConvention());
+            });
 
             var app = builder.Build();
 
@@ -51,14 +44,12 @@ namespace Spark
             }
 
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
-
             app.MapControllers();
 
             app.Run();
         }
+
 
         private static void configureServices(IServiceCollection services, ConfigurationManager configuration)
         {
@@ -73,7 +64,27 @@ namespace Spark
             services.AddSingleton<MongoFightsService>();
             services.AddSingleton<MongoExtraService>();
             services.AddSingleton<CreatureModelService>();
+        }
 
+        private static void configureAuthentication(IServiceCollection services, ConfigurationManager configuration)
+        {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme,
+                    options => configuration.Bind("JwtSettings", options))
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
+                    options => configuration.Bind("CookieSettings", options))
+
+                .AddGoogle(googleOptions =>
+                {
+                    googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
+                    googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+                });
+            //.AddGoogle(options =>
+            //{
+            //    IConfigurationSection googleAuthNSection = config.GetSection("Authentication:Google");
+            //    options.ClientId = googleAuthNSection["ClientId"];
+            //    options.ClientSecret = googleAuthNSection["ClientSecret"];
+            //});
         }
 
     }

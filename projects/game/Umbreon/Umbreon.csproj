@@ -41,7 +41,7 @@
     <PackageReference Include="SimpleInjector" Version="5.4.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Eevee\Eevee.csproj" />
+    <ProjectReference Include="..\..\Eevee\Eevee.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="amethyst\ui\" />

@@ -48,7 +48,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Eevee\Eevee.csproj" />
+    <ProjectReference Include="..\..\Eevee\Eevee.csproj" />
   </ItemGroup>
   
 </Project>

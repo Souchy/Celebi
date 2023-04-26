@@ -1,4 +1,4 @@
-﻿namespace Spark.Controllers
+﻿namespace souchy.celebi.spark.controllers
 {
     public class AuthController
     {

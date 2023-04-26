@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using Spark.Models;
+using Spark.souchy.celebi.spark.models;
 
-namespace Spark.Services
+namespace souchy.celebi.spark.services
 {
     public class MongoService
     {

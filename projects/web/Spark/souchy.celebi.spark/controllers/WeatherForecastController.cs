@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using Spark.souchy.celebi.spark.models;
 
-namespace Spark.Controllers
+namespace souchy.celebi.spark.controllers
 {
     [ApiController]
     [Route("[controller]")]
