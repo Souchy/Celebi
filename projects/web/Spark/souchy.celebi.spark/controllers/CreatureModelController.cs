@@ -39,7 +39,7 @@ namespace souchy.celebi.spark.controllers
         }
 
         [HttpPut("{id:length(24)}")]
-        public async Task<IActionResult> Update(string id, CreatureModel updatedCreatureModel)
+        public async Task<IActionResult> Update(string id, ICreatureModel updatedCreatureModel)
         {
             var book = await creatureModelService.GetAsync(id);
 

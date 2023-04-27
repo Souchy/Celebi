@@ -10,27 +10,26 @@ namespace souchy.celebi.spark.util.swagger
     {
         public void Apply(OpenApiSchema schema, SchemaFilterContext context)
         {
-            if (!context.Type.IsEnum) return;
-
-            schema.Enum.Clear();
-
-            foreach (string enumName in Enum.GetNames(context.Type))
+            if (context.Type.IsEnum)
             {
-                MemberInfo? memberInfo = context.Type.GetMember(enumName).FirstOrDefault(m => m.DeclaringType == context.Type);
-                EnumMemberAttribute? enumMemberAttribute = null;
-                if (memberInfo != null)
-                {
-                    enumMemberAttribute = memberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false).OfType<EnumMemberAttribute>().FirstOrDefault();
-                }
-                string label = null;
-                if (enumMemberAttribute != null)
-                {
-                    label = enumMemberAttribute.Value;
-                }
+                schema.Enum.Clear();
 
-                schema.Enum.Add(new OpenApiString(label));
-                schema.Type = "string";
-                //schema.Format = "string";
+                foreach (string enumName in Enum.GetNames(context.Type))
+                {
+                    MemberInfo? memberInfo = context.Type.GetMember(enumName).FirstOrDefault(m => m.DeclaringType == context.Type);
+                    EnumMemberAttribute? enumMemberAttribute = 
+                        memberInfo == null
+                        ? null
+                        : memberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false).OfType<EnumMemberAttribute>().FirstOrDefault();
+                    string label =
+                        (enumMemberAttribute == null || string.IsNullOrWhiteSpace(enumMemberAttribute.Value))
+                        ? enumName
+                        : enumMemberAttribute.Value;
+
+                    schema.Enum.Add(new OpenApiString(label));
+                    schema.Type = "string";
+                    schema.Format = string.Empty;
+                }
             }
 
         }

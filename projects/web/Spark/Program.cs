@@ -6,7 +6,6 @@ using Microsoft.OpenApi.Models;
 using souchy.celebi.spark.services;
 using souchy.celebi.spark.util.swagger;
 using Spark.souchy.celebi.spark.models;
-using Spark.util.swagger;
 using static souchy.celebi.spark.services.CreatureModelService;
 
 namespace Spark
@@ -19,20 +18,23 @@ namespace Spark
             var services = builder.Services;
             var configuration = builder.Configuration;
 
-            services.AddControllers();
             // Add services to the container.
             configureServices(services, configuration);
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();
+            services.AddSwaggerGen();
             services.AddSwaggerGen(c =>
             {
-                //c.SwaggerDoc("Spark", new OpenApiInfo { Title = "Spark", Version = "v1" });
                 c.SchemaFilter<EnumSchemaFilter>();
             });
+            //services.AddControllers();
             services.AddControllers(options =>
             {
                 options.Conventions.Add(new ControllerNamingConvention());
             });
+            configureAuthentication(services, configuration);
+            services.AddCors();
+
 
             var app = builder.Build();
 
@@ -46,6 +48,7 @@ namespace Spark
             app.UseHttpsRedirection();
             app.UseAuthorization();
             app.MapControllers();
+            app.UseStaticFiles("/../Jolteon/dist");
 
             app.Run();
         }
@@ -73,11 +76,10 @@ namespace Spark
                     options => configuration.Bind("JwtSettings", options))
                 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
                     options => configuration.Bind("CookieSettings", options))
-
                 .AddGoogle(googleOptions =>
                 {
-                    googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
-                    googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+                    googleOptions.ClientId = configuration["google:clientId"];
+                    googleOptions.ClientSecret = configuration["google:clientSecret"];
                 });
             //.AddGoogle(options =>
             //{

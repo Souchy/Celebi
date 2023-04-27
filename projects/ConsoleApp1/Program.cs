@@ -9,7 +9,6 @@ using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.stats;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.impl.util.math;
-using Umbreon.common;
 
 namespace PlayfabClientTest
 {

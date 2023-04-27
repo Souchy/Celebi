@@ -17,5 +17,6 @@
   ],
   "files": [
     "src/resource.d.ts"
-  ]
+  ],
+  "types": ["google-one-tap", "google.accounts"]
 }

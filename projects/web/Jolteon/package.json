@@ -55,7 +55,8 @@
     "start": "webpack serve",
     "build": "rimraf dist && webpack --env production",
     "analyze": "rimraf dist && webpack --env production --analyze",
-    "test": "jest"
+    "test": "jest",
+    "swagger": "npx swagger-typescript-api -p ../Spark/bin/swagger.json -o src/services/api --templates ./swagger-templates --responses --modular --module-name-first-tag --clean-output"
   },
   "jest": {
     "testMatch": [
