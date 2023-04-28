@@ -1,0 +1,17 @@
+<import from="./signin/signin"></import>
+<import from="./signin/signup"></import>
+<import from="./signin/signout"></import>
+
+
+<div if.bind="!isConnected()">
+    <signin></signin>
+    <signup></signup>
+</div>
+
+<div if.bind="isConnected()">
+    <div>
+        <!-- show account's displayName as a button to go  see his account's info/settings -->
+        {getConnectedAccount().displayName}
+    </div>
+    <signout></signout>
+</div>

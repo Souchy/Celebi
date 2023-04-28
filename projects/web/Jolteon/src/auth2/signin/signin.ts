@@ -15,7 +15,7 @@ export class Signin {
     }
 
     public clickSignin() {
-
+        
     }
 
     public clickSigninGoogle() {
