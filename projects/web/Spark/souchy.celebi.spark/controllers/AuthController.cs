@@ -1,54 +1,71 @@
 ﻿//using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using souchy.celebi.spark.models;
+using souchy.celebi.spark.services;
 using System.Diagnostics;
-//using System.Web.Http;
-//using HttpGetAttribute = Microsoft.AspNetCore.Mvc.HttpGetAttribute;
 
 namespace souchy.celebi.spark.controllers
 {
-    public class AuthController : ControllerBase // ApiController //
+    [ApiController]
+    [Produces("application/json")]
+    [Route("auth")]
+    public class AuthController : ControllerBase 
     {
-        //[HttpGet]
+        private readonly AccountService accountService;
+        public AuthController(AccountService service) => accountService = service;
+
         [HttpGet("ping")]
-        public string ping()
+        public ActionResult<string> ping()
         {
             Debug.WriteLine(Request.Cookies);
-            //Console.WriteLine(token);
-            return "pong";
+            if(new DateTime().Year > 2024) return this.BadRequest();
+            return Ok("pong");
         }
 
         [Authorize]
-        //[HttpGet]
         [HttpGet("privatePring")]
-        public string privatePring()
+        public ActionResult<string> privatePring()
         {
             Debug.WriteLine(Request.Cookies);
-            return "private";
+            if (new DateTime().Year > 2024) return this.BadRequest();
+            return Ok("private");
         }
 
-        //[Route("google")]
-        //[HttpPost]
-        [HttpPost("google")]
-        public void signInGoogle()
+        [HttpPost("signUp")]
+        public async Task<bool> signUp()
         {
-
+            var auth = Request.Headers.Authorization;
+            var cookies = Request.Cookies;
+            Account newAcc = new Account();
+            var success = await accountService.Create(newAcc);
+            return success;
         }
-
+        [HttpPost("signIn")]
         public void signIn()
         {
+            var auth = Request.Headers.Authorization;
+            var cookies = Request.Cookies;
+            Account account = null;
 
         }
 
-        public void refresh()
-        {
+        //[HttpPost]
+        //public void signIn()
+        //{
 
-        }
+        //}
 
-        public void signOut()
-        {
+        //public void refresh()
+        //{
 
-        }
+        //}
+
+        //public void signOut()
+        //{
+
+        //}
 
 
 

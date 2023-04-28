@@ -16,6 +16,7 @@
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="7.0.5" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.Twitter" Version="7.0.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.5" />
 		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.2" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.5">
@@ -35,7 +36,7 @@
 		<Exec Command="dotnet swagger tofile --output bin/swagger.json $(OutputPath)\$(AssemblyName).dll v1 " />
 		<Exec WorkingDirectory="../Flareon" Command="npm run swagger"></Exec>
 		<Exec WorkingDirectory="../Jolteon" Command="npm run swagger"></Exec>
-		<Exec WorkingDirectory="../Jolteon" Command="npm run build"></Exec>
+		<!-- <Exec WorkingDirectory="../Jolteon" Command="npm run build"></Exec> -->
 	</Target>
 
 </Project>

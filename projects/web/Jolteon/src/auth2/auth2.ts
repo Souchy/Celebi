@@ -1,7 +1,6 @@
 import { HttpClient, IEventAggregator, inject } from "aurelia";
-import { IRoute, IRouter, IRouteableComponent, ReloadBehavior, Navigation, Parameters, RoutingInstruction } from '@aurelia/router';
-import { AuthController } from "../services/api/AuthController";
 import { RequestParams } from "../services/api/http-client";
+import { AuthController } from "../services/api/AuthController";
 
 declare global {
 	interface Window {
@@ -17,9 +16,12 @@ export class Auth2 {
 	public clientid = "850322629277-c9fu1umd1dlk7tjv325u6s33g32fb0ea.apps.googleusercontent.com";
 	public redirect_uri = "http://localhost:7000/auth/google";
 	public gapi_uri = "https://accounts.google.com/o/oauth2/v2/auth";
-	// private readonly auth = new AuthController();
+	public readonly auth = new AuthController();
+	public responseValue: string = "";
 
 	constructor(readonly ea: IEventAggregator) {
+		this.auth.baseUrl = "https://localhost:7295"
+		console.log("ctor auth: " + this.auth);
 		ea.subscribe("googleCallback", this.googleCallback);
 		
 		window.handleCredentialResponse = (token) => {
@@ -29,8 +31,6 @@ export class Auth2 {
 
 	public googleCallback(token) {
 		console.log("hi callback")
-		console.log(token);
-		document.cookie = token;
 		// decodeJwtResponse() is a custom function defined by you
 		// to decode the credential response.
 		let responsePayload = decodeJwtResponse(token.credential)
@@ -41,27 +41,42 @@ export class Auth2 {
 		console.log('Family Name: ' + responsePayload.family_name);
 		console.log("Image URL: " + responsePayload.picture);
 		console.log("Email: " + responsePayload.email);
-
-		let auth = new AuthController();
 		
-		let params: RequestParams = {
-			headers: {
-				"a token": "hi"
-			}
-		}
-		auth.getPing(params).then(
-			res => console.log(res),
-			rej => console.log(rej)
-		)
-		auth.getPrivatePring(params).then(
-			res => console.log(res),
-			rej => console.log(rej)
-		)
-		this.testRequest();
+		console.log("set cookie: " + JSON.stringify(token));
+		document.cookie = token;
 	}
 
 	public testRequest() {
 		console.log("testrequest");
+		// let params: RequestParams = {
+		// 	headers: {
+		// 		"a token": "hi"
+		// 	}
+		// }
+		// this.auth.getPing().then(
+		// 	res => {
+		// 		console.log("res: " + res.data)
+		// 		console.log(res);
+		// 		this.responseValue = res.data;
+		// 	},
+		// 	rej => {
+		// 		console.error("rej: " + rej.error)
+		// 		console.error(rej);
+		// 		this.responseValue = rej.error;
+		// 	}
+		// )
+		this.auth.getPrivatePring().then(
+			res => {
+				console.log("res: " + res.data)
+				console.log(res);
+				this.responseValue = res.data;
+			},
+			rej => {
+				console.error("rej: " + rej.error)
+				console.error(rej);
+				this.responseValue = rej.error;
+			}
+		)
 	}
 
 }

@@ -17,12 +17,12 @@ export class AuthController<SecurityDataType = unknown> extends HttpClient<Secur
    *
    * @tags AuthController
    * @name GetPing
-   * @request GET:/ping
+   * @request GET:/auth/ping
    * @response `200` `string` Success
    */
   getPing = (params: RequestParams = {}) =>
     this.request<string, any>({
-      path: `/ping`,
+      path: `/auth/ping`,
       method: "GET",
       format: "json",
       ...params,
@@ -32,12 +32,12 @@ export class AuthController<SecurityDataType = unknown> extends HttpClient<Secur
    *
    * @tags AuthController
    * @name GetPrivatePring
-   * @request GET:/privatePring
+   * @request GET:/auth/privatePring
    * @response `200` `string` Success
    */
   getPrivatePring = (params: RequestParams = {}) =>
     this.request<string, any>({
-      path: `/privatePring`,
+      path: `/auth/privatePring`,
       method: "GET",
       format: "json",
       ...params,
@@ -46,13 +46,41 @@ export class AuthController<SecurityDataType = unknown> extends HttpClient<Secur
    * No description
    *
    * @tags AuthController
+   * @name GetPping
+   * @request GET:/auth/pping
+   * @response `200` `void` Success
+   */
+  getPping = (params: RequestParams = {}) =>
+    this.request<void, any>({
+      path: `/auth/pping`,
+      method: "GET",
+      ...params,
+    });
+  /**
+   * No description
+   *
+   * @tags AuthController
+   * @name GetAaing
+   * @request GET:/auth/aaing
+   * @response `200` `void` Success
+   */
+  getAaing = (params: RequestParams = {}) =>
+    this.request<void, any>({
+      path: `/auth/aaing`,
+      method: "GET",
+      ...params,
+    });
+  /**
+   * No description
+   *
+   * @tags AuthController
    * @name PostGoogle
-   * @request POST:/google
+   * @request POST:/auth/google
    * @response `200` `void` Success
    */
   postGoogle = (params: RequestParams = {}) =>
     this.request<void, any>({
-      path: `/google`,
+      path: `/auth/google`,
       method: "POST",
       ...params,
     });

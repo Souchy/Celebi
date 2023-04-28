@@ -14,26 +14,29 @@ namespace souchy.celebi.spark.services
         public IMongoCollection<T> GetCollection<T>(IOptions<CollectionSettings> settings)
             => _client.GetDatabase(settings.Value.DatabaseName).GetCollection<T>(settings.Value.CollectionName);
     }
-    public class MongoModelsService
+    public class MongoModelsDbService
     {
         private readonly IMongoDatabase db;
 
-        public MongoModelsService(MongoService mongoService) => db = mongoService.GetDatabase("Models");
-        public IMongoCollection<T> GetMongoCollection<T>(IOptions<CollectionSettings> settings)
-            => db.GetCollection<T>(settings.Value.CollectionName);
+        public MongoModelsDbService(MongoService mongoService) => db = mongoService.GetDatabase("Celebi#Models");
+        public IMongoCollection<T> GetMongoCollection<T>(string collectionName) => db.GetCollection<T>(collectionName);
     }
-    public class MongoFightsService
+    public class MongoFightsDbService
     {
         private readonly IMongoDatabase db;
-        public MongoFightsService(MongoService mongoService) => db = mongoService.GetDatabase("Fights");
-        public IMongoCollection<T> GetMongoCollection<T>(IOptions<CollectionSettings> settings)
-            => db.GetCollection<T>(settings.Value.CollectionName);
+        public MongoFightsDbService(MongoService mongoService) => db = mongoService.GetDatabase("Celebi#Fights");
+        public IMongoCollection<T> GetMongoCollection<T>(string collectionName) => db.GetCollection<T>(collectionName);
     }
-    public class MongoExtraService
+    public class MongoExtraDbService
     {
         private readonly IMongoDatabase db;
-        public MongoExtraService(MongoService mongoService) => db = mongoService.GetDatabase("Extra");
-        public IMongoCollection<T> GetMongoCollection<T>(IOptions<CollectionSettings> settings)
-            => db.GetCollection<T>(settings.Value.CollectionName);
+        public MongoExtraDbService(MongoService mongoService) => db = mongoService.GetDatabase("Celebi#Extra");
+        public IMongoCollection<T> GetMongoCollection<T>(string collectionName) => db.GetCollection<T>(collectionName);
+    }
+    public class MongoMetaDbService
+    {
+        private readonly IMongoDatabase db;
+        public MongoMetaDbService(MongoService mongoService) => db = mongoService.GetDatabase("Celebi#Meta");
+        public IMongoCollection<T> GetMongoCollection<T>(string collectionName) => db.GetCollection<T>(collectionName);
     }
 }
