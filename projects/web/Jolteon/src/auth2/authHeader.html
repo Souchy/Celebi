@@ -3,12 +3,12 @@
 <import from="./signin/signout"></import>
 
 
-<div if.bind="!isConnected()">
+<div if.bind="!isConnected()" class="d-flex">
     <signin></signin>
     <signup></signup>
 </div>
 
-<div if.bind="isConnected()">
+<div if.bind="isConnected()" class="d-flex">
     <div>
         <!-- show account's displayName as a button to go  see his account's info/settings -->
         {getConnectedAccount().displayName}

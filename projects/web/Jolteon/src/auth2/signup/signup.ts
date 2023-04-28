@@ -22,16 +22,21 @@ export class Signup {
 
     }
 
-    public clickSignupGoogle() {
+    public submitSignup() {
+        
+    }
+
+    public clickGoogle() {
 
     }
 
-    public clickSignupTwitter() {
+    public clickTwitter() {
 
     }
 
-    public clickSignupFacebook() {
+    public clickFacebook() {
 
     }
+
 
 }

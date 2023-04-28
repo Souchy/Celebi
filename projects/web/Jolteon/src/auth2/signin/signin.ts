@@ -18,15 +18,19 @@ export class Signin {
         
     }
 
-    public clickSigninGoogle() {
+    public submitSignin() {
+        
+    }
+
+    public clickGoogle() {
 
     }
 
-    public clickSigninTwitter() {
+    public clickTwitter() {
 
     }
 
-    public clickSigninFacebook() {
+    public clickFacebook() {
 
     }
 

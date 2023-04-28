@@ -1,14 +1,17 @@
+<button click.delegate="clickSignup()">Signout</button>
 
-
-<form>
-    <input type="text" value.bind="username">
-    <input type="text" value.bind="displayName">
-    <input type="password" value.bind="password">
-    <button type="submit">Signin</button>
-</form>
-
+<!-- modal -->
 <div>
-    <button>Google</button>
-    <button>Twitter</button>
-    <button>Facebook</button>
+    <form>
+        <input type="text" value.bind="username">
+        <input type="text" value.bind="displayName">
+        <input type="password" value.bind="password">
+        <button type="submit" click.delegate="submitSignup()">Signup</button>
+    </form>
+
+    <div>
+        <button click.delegate="clickGoogle()">Google</button>
+        <button click.delegate="clickTwitter()">Twitter</button>
+        <button click.delegate="clickFacebook()">Facebook</button>
+    </div>
 </div>

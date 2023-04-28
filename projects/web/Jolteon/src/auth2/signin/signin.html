@@ -1,15 +1,18 @@
 
+<button click.delegate="clickSignin()">Signout</button>
 
-
-<form>
-    <!-- autofill username/pass with remind me, might be done automatically by browser? -->
-    <input type="text" value.bind="identifier">
-    <input type="password" value.bind="password">
-    <button type="submit">Signin</button>
-</form>
-
+<!-- modal -->
 <div>
-    <button>Google</button>
-    <button>Twitter</button>
-    <button>Facebook</button>
+    <form>
+        <!-- autofill username/pass with remind me, might be done automatically by browser? -->
+        <input type="text" value.bind="identifier">
+        <input type="password" value.bind="password">
+        <button type="submit" click.delegate="submitSignin()">Signin</button>
+    </form>
+
+    <div>
+        <button click.delegate="clickGoogle()">Google</button>
+        <button click.delegate="clickTwitter()">Twitter</button>
+        <button click.delegate="clickFacebook()">Facebook</button>
+    </div>
 </div>
