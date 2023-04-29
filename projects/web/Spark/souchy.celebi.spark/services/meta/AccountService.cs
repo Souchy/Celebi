@@ -10,7 +10,7 @@ namespace souchy.celebi.spark.services.meta
 
         public AccountService(MongoMetaDbService service) => _accountCollection = service.GetMongoCollection<Account>(nameof(Account));
 
-        public async Task<Account?> FindAuthAccount(Account account)
+        public async Task<Account?> FindAuthorizedAccount(Account account)
         {
             if (account.ID != "")
             {
@@ -22,29 +22,17 @@ namespace souchy.celebi.spark.services.meta
                 var acc = await _accountCollection.Find(x => x.Email == account.Email && x.Password == account.Password).SingleOrDefaultAsync();
                 if (acc != null) return acc;
             }
-            if (account.Username != "")
-            {
-                var acc = await _accountCollection.Find(x => x.Username == account.Username && x.Password == account.Password).SingleOrDefaultAsync();
-                if (acc != null) return acc;
-            }
+            //if (account.Username != "")
+            //{
+            //    var acc = await _accountCollection.Find(x => x.Username == account.Username && x.Password == account.Password).SingleOrDefaultAsync();
+            //    if (acc != null) return acc;
+            //}
             return null;
         }
-        //public async Task<Account> GetByID(string ID)
-        //{
-        //    return await _accountCollection.Find(x => x.ID == ID).SingleOrDefaultAsync();
-        //}
-        //public async Task<Account> GetByUserPass(string user, string pass)
-        //{
-        //    return await _accountCollection.Find(x => x.Username == user && x.Password == pass).SingleOrDefaultAsync();
-        //}
-        //public async Task<Account> GetByEmailPass(string email, string pass)
-        //{
-        //    return await _accountCollection.Find(x => x.Email == email && x.Password == pass).SingleOrDefaultAsync();
-        //}
 
         public async Task<bool> Create(Account account)
         {
-            var similar = await FindSimilar(account);
+            var similar = await Find(account);
             if (similar != null) return false;
             await _accountCollection.InsertOneAsync(account);
             return true;
@@ -60,7 +48,7 @@ namespace souchy.celebi.spark.services.meta
             return await _accountCollection.DeleteOneAsync(x => x.ID == account.ID);
         }
 
-        public async Task<Account?> FindSimilar(Account account)
+        public async Task<Account?> Find(Account account)
         {
             if (account.ID != "")
             {
@@ -72,11 +60,11 @@ namespace souchy.celebi.spark.services.meta
                 var acc = await _accountCollection.Find(x => x.Email == account.Email).SingleOrDefaultAsync();
                 if (acc != null) return acc;
             }
-            if (account.Username != "")
-            {
-                var acc = await _accountCollection.Find(x => x.Username == account.Username).SingleOrDefaultAsync();
-                if (acc != null) return acc;
-            }
+            //if (account.Username != "")
+            //{
+            //    var acc = await _accountCollection.Find(x => x.Username == account.Username).SingleOrDefaultAsync();
+            //    if (acc != null) return acc;
+            //}
             if (account.DisplayName != "")
             {
                 var acc = await _accountCollection.Find(x => x.DisplayName == account.DisplayName).SingleOrDefaultAsync();

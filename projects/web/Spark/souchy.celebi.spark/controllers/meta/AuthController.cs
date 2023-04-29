@@ -32,23 +32,35 @@ namespace souchy.celebi.spark.controllers.meta
             if (new DateTime().Year > 2024) return BadRequest();
             return Ok("private");
         }
-
         [HttpPost("signUp")]
-        public async Task<bool> signUp()
+        public async Task<ActionResult<Account>> signUp([FromBody] Account acc)
         {
             var auth = Request.Headers.Authorization;
             var cookies = Request.Cookies;
-            Account newAcc = new Account();
-            var success = await accountService.Create(newAcc);
-            return success;
+            Account newAcc = acc != null ? acc : new Account();
+            bool success = await accountService.Create(newAcc);
+            if (success) return Ok(acc);
+            else return BadRequest();
         }
         [HttpPost("signIn")]
-        public void signIn()
+        public async Task<ActionResult<Account>> signIn([FromBody] Account acc) // signin with either: tokenID or email+pass
         {
             var auth = Request.Headers.Authorization;
             var cookies = Request.Cookies;
-            Account account = null;
-
+            Debug.WriteLine("auth: " + auth);
+            Debug.WriteLine("cookies: " + cookies);
+            Account? account = await accountService.FindAuthorizedAccount(acc);
+            if(account == null) return this.Unauthorized();
+            else return account;
+        }
+        [HttpPost("signOut")]
+        public async Task<IActionResult> signOut()
+        {
+            var auth = Request.Headers.Authorization;
+            var cookies = Request.Cookies;
+            Debug.WriteLine("auth: " + auth);
+            if (true) return Ok();
+            else return BadRequest();
         }
 
         //[HttpPost]

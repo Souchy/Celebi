@@ -1,5 +1,8 @@
 ﻿namespace souchy.celebi.eevee.enums
 {
+    /// <summary>
+    /// TODO: Wont need this anymore I believe with ContextualProperty stats
+    /// </summary>
     public enum ContextType
     {
         Fight, // current fight

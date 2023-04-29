@@ -4,8 +4,9 @@ using souchy.celebi.eevee.face.util;
 namespace souchy.celebi.spark.models
 {
     /// <summary>
-    /// Pretty much everything is optional
-    /// We can authenticate either with a token ID, or user+pass or email+pass
+    /// Pretty much everything is optional <br></br>
+    /// We can authenticate with either a token ID or email+pass <br></br>
+    /// There is no username, we just use emails
     /// </summary>
     public class Account
     {
@@ -15,12 +16,11 @@ namespace souchy.celebi.spark.models
         /// ID from JWT token
         /// </summary>
         public string ID { get; }
-
         /// <summary>
         /// Unique
-        /// Username is optional
+        /// Can also authenticate with email+pass instead of user+pass
         /// </summary>
-        public string Username { get; set; }
+        public string Email { get; set; }
         /// <summary>
         /// Password is hashed and optional
         /// </summary>
@@ -28,11 +28,6 @@ namespace souchy.celebi.spark.models
         #endregion
 
         #region User information from Google, Facebook, Twitter, Microsoft or custom
-        /// <summary>
-        /// Unique
-        /// Can also authenticate with email+pass instead of user+pass
-        /// </summary>
-        public string Email { get; set; }
         /// <summary>
         /// Unique
         /// Pseudo
