@@ -51,12 +51,13 @@ export class Auth2 {
 		console.log("testrequest");
 		this.auth.getPrivatePing().then(
 			res => {
-				console.log("res: " + res.data)
+				// console.log("res: " + res.data)
 				console.log(res);
 				this.responseValue = res.data;
 			},
 			rej => {
-				console.error("rej: " + rej.error)
+				// if(rej.error) {}
+				// console.error("rej: " + rej.error)
 				console.error(rej);
 				this.responseValue = rej.error;
 			}

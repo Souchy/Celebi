@@ -1,3 +1,4 @@
+import { getCookie, setCookie } from 'typescript-cookie'
 import { JwtUtil } from "../../../util/JWT";
 
 
@@ -40,19 +41,21 @@ export class Signin {
 
 	public googleCallback(token) {
 		console.log("hi callback")
+		console.log(token);
+		// console.log()
 		// decodeJwtResponse() is a custom function defined by you
 		// to decode the credential response.
+		// setCookie("". "m");
 		let responsePayload = JwtUtil.decodeJwtResponse(token.credential)
-
 		console.log("ID: " + responsePayload.sub);
 		console.log('Full Name: ' + responsePayload.name);
 		console.log('Given Name: ' + responsePayload.given_name);
 		console.log('Family Name: ' + responsePayload.family_name);
 		console.log("Image URL: " + responsePayload.picture);
 		console.log("Email: " + responsePayload.email);
-		
-		console.log("set cookie: " + JSON.stringify(token));
-		document.cookie = token;
+		// document.cookie = token;
+		setCookie('googleToken', token);
+		location.href = "home";
 	}
 	public twitterCallback(token) {
 
