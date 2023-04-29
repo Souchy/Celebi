@@ -7,15 +7,15 @@ using Spark;
 namespace souchy.celebi.spark.controllers.models
 {
     [ApiController]
-    [Route(Routes.Models + "[controller]")]
+    [Route(Routes.Models + "creature")] //  [Route(Routes.Models + "[controller]")]
     public class CreatureModelController : ControllerBase
     {
         private readonly CreatureModelService _creatureModelService;
 
         public CreatureModelController(CreatureModelService service) => _creatureModelService = service;
 
-        [HttpGet]
-        public async Task<List<ICreatureModel>> Get() => await _creatureModelService.GetAsync();
+        [HttpGet("creatures")]
+        public async Task<List<ICreatureModel>> GetAll() => await _creatureModelService.GetAsync();
 
         [HttpGet("{id:length(24)}")]
         public async Task<ActionResult<ICreatureModel>> Get(string id)
@@ -25,10 +25,10 @@ namespace souchy.celebi.spark.controllers.models
             if (creatureModel is null)
                 return NotFound();
 
-            return (CreatureModel)creatureModel;
+            return (CreatureModel) creatureModel;
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<IActionResult> Post(ICreatureModel newCreatureModel)
         {
             await _creatureModelService.CreateAsync(newCreatureModel);

@@ -11,7 +11,7 @@ namespace souchy.celebi.spark.controllers.meta
 {
     [ApiController]
     [Produces("application/json")]
-    [Route(Routes.Meta + "[controller]")]
+    [Route(Routes.Meta + "auth")] // [Route(Routes.Meta + "[controller]")]
     public class AuthController : ControllerBase
     {
         private readonly AccountService accountService;

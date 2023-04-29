@@ -7,7 +7,7 @@ using Spark;
 namespace souchy.celebi.spark.controllers.meta
 {
     [ApiController]
-    [Route(Routes.Meta + "[controller]")]
+    [Route(Routes.Meta + "shop")]
     public class ShopController : ControllerBase
     {
 

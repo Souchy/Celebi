@@ -5,7 +5,7 @@ using Spark;
 namespace souchy.celebi.spark.controllers.models
 {
     [ApiController]
-    [Route(Routes.Models + "[controller]")]
+    [Route(Routes.Models + "spell")]
     public class SpellModelController : ControllerBase
     {
         private readonly SpellModelService spellService;

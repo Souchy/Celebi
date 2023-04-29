@@ -1,6 +1,5 @@
 import { HttpClient, IEventAggregator, inject } from "aurelia";
-import { RequestParams } from "../services/api/http-client";
-import { AuthController } from "../services/api/AuthController";
+import { AuthController } from "../../services/api/AuthController";
 
 declare global {
 	interface Window {

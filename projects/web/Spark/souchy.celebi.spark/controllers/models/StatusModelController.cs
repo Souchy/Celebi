@@ -6,7 +6,7 @@ using Spark;
 namespace souchy.celebi.spark.controllers.models
 {
     [ApiController]
-    [Route(Routes.Models + "[controller]")]
+    [Route(Routes.Models + "status")]
     public class StatusModelController : ControllerBase
     {
         private readonly StatusModelService _statusService;

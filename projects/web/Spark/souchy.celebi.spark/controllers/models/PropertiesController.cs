@@ -14,7 +14,7 @@ namespace souchy.celebi.spark.controllers.models
     //}
 
     [ApiController]
-    [Route(Routes.Models + "[controller]")]
+    [Route(Routes.Models + "properties")]
     public class PropertiesController : ControllerBase
     {
         [HttpGet("charac/characteristicId")]
