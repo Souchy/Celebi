@@ -22,6 +22,8 @@ namespace souchy.celebi.spark.controllers
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
+            _logger.LogInformation("hi info get weather");
+            _logger.LogDebug("hi debug get weather");
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),

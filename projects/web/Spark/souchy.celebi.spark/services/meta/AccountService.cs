@@ -2,7 +2,7 @@
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.spark.models;
 
-namespace souchy.celebi.spark.services
+namespace souchy.celebi.spark.services.meta
 {
     public class AccountService
     {

@@ -3,15 +3,15 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using souchy.celebi.spark.models;
-using souchy.celebi.spark.services;
+using souchy.celebi.spark.services.meta;
 using System.Diagnostics;
 
-namespace souchy.celebi.spark.controllers
+namespace souchy.celebi.spark.controllers.meta
 {
     [ApiController]
     [Produces("application/json")]
     [Route("auth")]
-    public class AuthController : ControllerBase 
+    public class AuthController : ControllerBase
     {
         private readonly AccountService accountService;
         public AuthController(AccountService service) => accountService = service;
@@ -20,16 +20,16 @@ namespace souchy.celebi.spark.controllers
         public ActionResult<string> ping()
         {
             Debug.WriteLine(Request.Cookies);
-            if(new DateTime().Year > 2024) return this.BadRequest();
+            if (new DateTime().Year > 2024) return BadRequest();
             return Ok("pong");
         }
 
         [Authorize]
-        [HttpGet("privatePring")]
-        public ActionResult<string> privatePring()
+        [HttpGet("privatePing")]
+        public ActionResult<string> privatePing()
         {
             Debug.WriteLine(Request.Cookies);
-            if (new DateTime().Year > 2024) return this.BadRequest();
+            if (new DateTime().Year > 2024) return BadRequest();
             return Ok("private");
         }
 

@@ -4,13 +4,22 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using souchy.celebi.spark.controllers.models;
 using souchy.celebi.spark.services;
+using souchy.celebi.spark.services.meta;
+using souchy.celebi.spark.services.models;
 using souchy.celebi.spark.util.swagger;
 using Spark.souchy.celebi.spark.models;
-using static souchy.celebi.spark.services.CreatureModelService;
+using static souchy.celebi.spark.services.models.CreatureModelService;
 
 namespace Spark
 {
+    public static class Routes
+    {
+        public const string Models = "models/";
+        public const string Fights = "fights/";
+        public const string Meta = "meta/";
+    }
     public class Program
     {
         public static void Main(string[] args)
@@ -48,7 +57,6 @@ namespace Spark
             //services.AddFormatterMappings()
             //.AddJsonFormatters();
 
-            http://localhost:9000
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -75,17 +83,18 @@ namespace Spark
 
         private static void configureServices(IServiceCollection services, ConfigurationManager configuration)
         {
-            // relates toappsettings.json
-            services.Configure<CelebiModelsDatabaseSettings>(configuration.GetSection("CelebiModelsDatabase"));
-
-            //services.Configure<CreatureModelDatabaseSettings>(
-            //    builder.Configuration.GetSection("CreatureModelDatabase") // relates toappsettings.json
-            //);
+            // Mongo    
+            services.Configure<MongoSettings>(configuration.GetSection("MongoSettings")); // relates to appsettings.json
             services.AddSingleton<MongoService>();
             services.AddSingleton<MongoModelsDbService>();
             services.AddSingleton<MongoFightsDbService>();
-            services.AddSingleton<MongoExtraDbService>();
+            // Meta
+            services.AddSingleton<AccountService>();
+            // Models
             services.AddSingleton<CreatureModelService>();
+            services.AddSingleton<SpellModelController>();
+            services.AddSingleton<StatusModelController>();
+            // Fights
         }
 
         private static void configureAuthentication(IServiceCollection services, ConfigurationManager configuration)
