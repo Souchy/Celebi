@@ -1,18 +1,27 @@
+<import from="../../modal/modal"></import>
 
-<button click.delegate="clickSignin()">Signout</button>
+<!-- <button click.delegate="clickSignin()">Signout</button> -->
+<a click.trigger="clickSignin()" data-bs-toggle="modal" data-bs-target="#exampleModal">Signin</a>
 
-<!-- modal -->
-<div>
-    <form>
-        <!-- autofill username/pass with remind me, might be done automatically by browser? -->
-        <input type="text" value.bind="identifier">
-        <input type="password" value.bind="password">
-        <button type="submit" click.delegate="submitSignin()">Signin</button>
-    </form>
+<!-- Modal -->
+<modal id="exampleModal" asd="My great title">
+  <form>
+    <!-- autofill username/pass with remind me, might be done automatically by browser? -->
+    <input type="text" value.bind="identifier">
+    <input type="password" value.bind="password">
+    <button type="submit" click.delegate="submitSignin()">Signin</button>
+  </form>
 
-    <div>
-        <button click.delegate="clickGoogle()">Google</button>
-        <button click.delegate="clickTwitter()">Twitter</button>
-        <button click.delegate="clickFacebook()">Facebook</button>
+  <div>
+    <div style="width: 50%; margin-left: auto; margin-right: auto;">
+      <div id="g_id_onload" data-client_id="850322629277-c9fu1umd1dlk7tjv325u6s33g32fb0ea.apps.googleusercontent.com" data-context="signin" data-ux_mode="popup" data-auto_select="true" data-itp_support="true" data-auto_prompt="false" data-callback="googleCallback">
+      </div>
+
+      <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="filled_black" data-text="signin" data-size="large" data-logo_alignment="left">
+      </div>
     </div>
-</div>
+    <!-- <button click.delegate="clickGoogle()">Google</button> -->
+    <button click.delegate="clickTwitter()">Twitter</button>
+    <button click.delegate="clickFacebook()">Facebook</button>
+  </div>
+</modal>

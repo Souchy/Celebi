@@ -1,4 +1,5 @@
-<import from="../welcome-page"></import>
+<!-- <import from="../welcome-page"></import> -->
+<import from="../pages/home/home"></import>
 <import from="../auth/auth"></import>
 <import from="../missing-page"></import>
 <import from="./auth2/authHeader"></import>
@@ -7,12 +8,8 @@
 
   <ul class="navbar-nav mr-auto">
     <li class="nav-item">
-      <!-- <a class="nav-link" href="#/builds">Builds</a> -->
-      <a load="welcome-page">Welcome</a>
+      <a load="home">Home</a>
     </li>
-    <!-- <li class="nav-item">
-        <a load="auth">Auth</a>
-      </li> -->
   </ul>
 
   <ul class="navbar-nav ms-auto">
@@ -33,7 +30,7 @@
       <a load="auth2">Auth2</a>
     </li>
 
-    <authHeader></authHeader>
+    <auth-header></auth-header>
     
   </ul>
 

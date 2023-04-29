@@ -1,3 +1,4 @@
+import { Account } from "../../services/api/data-contracts";
 
 
 export class AuthHeader {

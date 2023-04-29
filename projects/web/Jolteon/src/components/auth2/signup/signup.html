@@ -1,7 +1,8 @@
-<button click.delegate="clickSignup()">Signout</button>
+<!-- <button click.delegate="clickSignup()">Signout</button> -->
+<a click.trigger="clickSignup()">Signup</a>
 
 <!-- modal -->
-<div>
+<div style="display: none;">
     <form>
         <input type="text" value.bind="username">
         <input type="text" value.bind="displayName">

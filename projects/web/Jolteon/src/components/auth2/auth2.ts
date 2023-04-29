@@ -1,5 +1,7 @@
 import { HttpClient, IEventAggregator, inject } from "aurelia";
 import { AuthController } from "../../services/api/AuthController";
+import { JwtUtil } from "../../util/JWT";
+import { serverUrl } from "../../constants";
 
 declare global {
 	interface Window {
@@ -19,7 +21,7 @@ export class Auth2 {
 	public responseValue: string = "";
 
 	constructor(readonly ea: IEventAggregator) {
-		this.auth.baseUrl = "https://localhost:7295"
+		this.auth.baseUrl = serverUrl
 		console.log("ctor auth: " + this.auth);
 		ea.subscribe("googleCallback", this.googleCallback);
 		
@@ -32,7 +34,7 @@ export class Auth2 {
 		console.log("hi callback")
 		// decodeJwtResponse() is a custom function defined by you
 		// to decode the credential response.
-		let responsePayload = decodeJwtResponse(token.credential)
+		let responsePayload = JwtUtil.decodeJwtResponse(token.credential)
 
 		console.log("ID: " + responsePayload.sub);
 		console.log('Full Name: ' + responsePayload.name);
@@ -47,24 +49,7 @@ export class Auth2 {
 
 	public testRequest() {
 		console.log("testrequest");
-		// let params: RequestParams = {
-		// 	headers: {
-		// 		"a token": "hi"
-		// 	}
-		// }
-		// this.auth.getPing().then(
-		// 	res => {
-		// 		console.log("res: " + res.data)
-		// 		console.log(res);
-		// 		this.responseValue = res.data;
-		// 	},
-		// 	rej => {
-		// 		console.error("rej: " + rej.error)
-		// 		console.error(rej);
-		// 		this.responseValue = rej.error;
-		// 	}
-		// )
-		this.auth.getPrivatePring().then(
+		this.auth.getPrivatePing().then(
 			res => {
 				console.log("res: " + res.data)
 				console.log(res);
@@ -78,13 +63,4 @@ export class Auth2 {
 		)
 	}
 
-}
-
-function decodeJwtResponse(token) {
-	let base64Url = token.split('.')[1]
-	let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-	let jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
-		return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-	}).join(''));
-	return JSON.parse(jsonPayload)
 }
