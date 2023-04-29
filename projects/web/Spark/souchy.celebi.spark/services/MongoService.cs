@@ -24,19 +24,25 @@ namespace souchy.celebi.spark.services
     {
         private readonly IMongoDatabase db;
 
-        public MongoModelsDbService(MongoService mongoService, MongoSettings settings) => db = mongoService.GetDatabase(settings.ModelsDB);
-        public IMongoCollection<T> GetMongoCollection<T>(string collectionName) => db.GetCollection<T>(collectionName);
+        public MongoModelsDbService(MongoService mongoService, IOptions<MongoSettings> settings)
+            => db = mongoService.GetDatabase(settings.Value.ModelsDB);
+        public IMongoCollection<T> GetMongoCollection<T>(string collectionName)
+            => db.GetCollection<T>(collectionName);
     }
     public class MongoFightsDbService
     {
         private readonly IMongoDatabase db;
-        public MongoFightsDbService(MongoService mongoService, MongoSettings settings) => db = mongoService.GetDatabase(settings.FightsDB);
-        public IMongoCollection<T> GetMongoCollection<T>(string collectionName) => db.GetCollection<T>(collectionName);
+        public MongoFightsDbService(MongoService mongoService, IOptions<MongoSettings> settings)
+            => db = mongoService.GetDatabase(settings.Value.FightsDB);
+        public IMongoCollection<T> GetMongoCollection<T>(string collectionName)
+            => db.GetCollection<T>(collectionName);
     }
     public class MongoMetaDbService
     {
         private readonly IMongoDatabase db;
-        public MongoMetaDbService(MongoService mongoService, MongoSettings settings) => db = mongoService.GetDatabase(settings.MetaDB);
-        public IMongoCollection<T> GetMongoCollection<T>(string collectionName) => db.GetCollection<T>(collectionName);
+        public MongoMetaDbService(MongoService mongoService, IOptions<MongoSettings> settings)
+            => db = mongoService.GetDatabase(settings.Value.MetaDB);
+        public IMongoCollection<T> GetMongoCollection<T>(string collectionName)
+            => db.GetCollection<T>(collectionName);
     }
 }

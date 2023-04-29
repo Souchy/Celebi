@@ -1,3 +1,4 @@
+import { bindable } from "aurelia";
 
 export class ModalButtons {
     public ok;
@@ -5,9 +6,15 @@ export class ModalButtons {
 }
 
 export class Modal {
-    public asd: string = "not binded";
+    @bindable
+    public header: string = "";
+    @bindable
     public draggable: boolean = false;
+    @bindable
     public close: boolean = true;
-
+    @bindable
+    public footer: boolean = true;
+    @bindable
+    public buttons: ModalButtons;
 
 }

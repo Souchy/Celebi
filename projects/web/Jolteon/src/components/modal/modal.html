@@ -3,16 +3,16 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
 
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">header: ${asd}</h5>
-        <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">✕</button>
+      <div class="modal-header" if.bind="header || close">
+        <h5 class="modal-title" id="exampleModalLabel" if.bind="header">${header}</h5>
+        <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" if.bind="close">✕</button>
       </div>
 
       <div class="modal-body">
         <au-slot></au-slot>
       </div>
 
-      <div class="modal-footer">
+      <div class="modal-footer" if.bind="footer">
         <button type="button" class="btn">Ok</button>
         <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
       </div>
