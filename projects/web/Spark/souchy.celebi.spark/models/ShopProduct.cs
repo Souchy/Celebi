@@ -25,10 +25,16 @@ namespace souchy.celebi.spark.models
         /// Price in game currency
         /// </summary>
         public int CurrencyPrice { get; set; }
+
         /// <summary>
         /// If the product is available in the shop or not. 
         /// We need to keep track of older products for transactions even if they are not available anymore
         /// </summary>
         public bool IsAvailable { get; set; }
+
+        /// <summary>
+        /// Limit that any account can own (e:x if the limit is 3, could refund 3->2 then rebuy 2->3)
+        /// </summary>
+        public int LimitPerAccount { get; set; }
     }
 }
