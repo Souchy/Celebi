@@ -102,8 +102,8 @@ public partial class EffectMini : PanelContainer, IEffectNodesContainer
         // props
         PropertiesComponent.GenerateGrid(effect, Values);
         // status props
-        if(effect.statusProperties != null)
-            PropertiesComponent.GenerateGrid(effect.statusProperties, StatusValues, publishSave);
+        //if(effect.statusProperties != null)
+        //    PropertiesComponent.GenerateGrid(effect.statusProperties, StatusValues, publishSave);
         // zone
         ZoneEditorMini.init(effect.zone);
         // dis/enable buttons
@@ -118,30 +118,30 @@ public partial class EffectMini : PanelContainer, IEffectNodesContainer
     #region GUI Handlers
     private void BtnStatusCheck_Toggled(bool buttonPressed)
     {
-        if (buttonPressed)
-        {
+        //if (buttonPressed)
+        //{
 
-            effect.statusProperties = new()
-            {
-                StatusFusingStrategy = new Value<StatusFusingStrategy>(StatusFusingStrategy.RefreshOldest_KeepBestValue_IfMaxStacks),
-                Duration = new Value<int>(),
-                Delay = new Value<int>(),
-                MaxStacks = new Value<int>()
-            };
-            StatusPanel.Visible = true; 
-            PropertiesComponent.GenerateGrid(effect.statusProperties, StatusValues, publishSave);
-        }
-        else
-        {
+        //    effect.statusProperties = new()
+        //    {
+        //        StatusFusingStrategy = new Value<StatusFusingStrategy>(StatusFusingStrategy.RefreshOldest_KeepBestValue_IfMaxStacks),
+        //        Duration = new Value<int>(),
+        //        Delay = new Value<int>(),
+        //        MaxStacks = new Value<int>()
+        //    };
+        //    StatusPanel.Visible = true; 
+        //    PropertiesComponent.GenerateGrid(effect.statusProperties, StatusValues, publishSave);
+        //}
+        //else
+        //{
             //effect.statusProperties.Delay.value = 0;
             //effect.statusProperties.Duration.value = 0;
             //effect.statusProperties.MaxStacks.value = 0;
             //effect.statusProperties.StatusFusingStrategy.value = StatusFusingStrategy.RefreshOldest_KeepBestValue_IfMaxStacks;
             StatusPanel.Visible = false;
             StatusValues.QueueFreeChildren();
-            effect.statusProperties = null;
+            //effect.statusProperties = null;
             publishSave();
-        }
+        //}
     }
     private void onClickHide()
     {

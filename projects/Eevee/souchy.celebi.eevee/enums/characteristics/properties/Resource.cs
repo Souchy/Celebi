@@ -36,6 +36,27 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
     }
     */
 
+    public enum ResourceEnum
+    {
+        Life,
+        Mana,
+        Movement,
+        Summon,
+        Rage,
+        Shield
+    }
+
+    public enum ResourceProperty
+    {
+        InitialMax,
+        Current,
+        Max,
+        Missing,
+        Regen,
+        Percent,
+        MissingPercent
+    }
+
     public sealed record Resource : CharacteristicType
     {
         public ResourceEnum resType { get; init; }

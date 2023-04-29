@@ -117,25 +117,6 @@ namespace souchy.celebi.eevee.enums.characteristics
         SpellModel = 8,
         Status = 9,
     }
-    public enum ResourceEnum
-    {
-        Life,
-        Mana,
-        Movement,
-        Summon,
-        Rage,
-        Shield
-    }
-    public enum ResourceProperty
-    {
-        InitialMax,
-        Current,
-        Max,
-        Missing,
-        Regen,
-        Percent,
-        MissingPercent
-    }
 
 
 }

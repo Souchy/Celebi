@@ -18,12 +18,12 @@ export class CreatureModelController<SecurityDataType = unknown> extends HttpCli
    *
    * @tags CreatureModelController
    * @name GetCreatureModelController
-   * @request GET:/api/CreatureModelController
+   * @request GET:/models/CreatureModelController
    * @response `200` `(ICreatureModel)[]` Success
    */
   getCreatureModelController = (params: RequestParams = {}) =>
     this.request<ICreatureModel[], any>({
-      path: `/api/CreatureModelController`,
+      path: `/models/CreatureModelController`,
       method: "GET",
       format: "json",
       ...params,
@@ -33,12 +33,12 @@ export class CreatureModelController<SecurityDataType = unknown> extends HttpCli
    *
    * @tags CreatureModelController
    * @name PostCreatureModelController
-   * @request POST:/api/CreatureModelController
+   * @request POST:/models/CreatureModelController
    * @response `200` `void` Success
    */
   postCreatureModelController = (data: ICreatureModel, params: RequestParams = {}) =>
     this.request<void, any>({
-      path: `/api/CreatureModelController`,
+      path: `/models/CreatureModelController`,
       method: "POST",
       body: data,
       type: ContentType.Json,
@@ -49,14 +49,14 @@ export class CreatureModelController<SecurityDataType = unknown> extends HttpCli
    *
    * @tags CreatureModelController
    * @name GetCreatureModelController2
-   * @request GET:/api/CreatureModelController/{id}
+   * @request GET:/models/CreatureModelController/{id}
    * @originalName getCreatureModelController
    * @duplicate
    * @response `200` `ICreatureModel` Success
    */
   getCreatureModelController2 = (id: string, params: RequestParams = {}) =>
     this.request<ICreatureModel, any>({
-      path: `/api/CreatureModelController/${id}`,
+      path: `/models/CreatureModelController/${id}`,
       method: "GET",
       format: "json",
       ...params,
@@ -66,12 +66,12 @@ export class CreatureModelController<SecurityDataType = unknown> extends HttpCli
    *
    * @tags CreatureModelController
    * @name PutCreatureModelController
-   * @request PUT:/api/CreatureModelController/{id}
+   * @request PUT:/models/CreatureModelController/{id}
    * @response `200` `void` Success
    */
   putCreatureModelController = (id: string, data: ICreatureModel, params: RequestParams = {}) =>
     this.request<void, any>({
-      path: `/api/CreatureModelController/${id}`,
+      path: `/models/CreatureModelController/${id}`,
       method: "PUT",
       body: data,
       type: ContentType.Json,
@@ -82,12 +82,12 @@ export class CreatureModelController<SecurityDataType = unknown> extends HttpCli
    *
    * @tags CreatureModelController
    * @name DeleteCreatureModelController
-   * @request DELETE:/api/CreatureModelController/{id}
+   * @request DELETE:/models/CreatureModelController/{id}
    * @response `200` `void` Success
    */
   deleteCreatureModelController = (id: string, params: RequestParams = {}) =>
     this.request<void, any>({
-      path: `/api/CreatureModelController/${id}`,
+      path: `/models/CreatureModelController/${id}`,
       method: "DELETE",
       ...params,
     });
