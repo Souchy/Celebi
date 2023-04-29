@@ -9,9 +9,10 @@ namespace souchy.celebi.eevee.enums.characteristics.properties
 {
     public sealed record OtherProperty: CharacteristicType
     {
-        public OtherProperty(int localId, string name) : base(CharacteristicCategory.Other, localId, name, SimpleFactory)
+        public OtherProperty(int localId, string name) : base(CharacteristicCategory.Other, localId, name)
         {
             this.StatValueType = StatValueType.Simple;
+            this.Factory = SimpleFactory;
         }
 
         public static readonly OtherProperty Range      = new(0, nameof(Range));

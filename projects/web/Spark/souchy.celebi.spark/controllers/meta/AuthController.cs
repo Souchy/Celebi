@@ -4,13 +4,14 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using souchy.celebi.spark.models;
 using souchy.celebi.spark.services.meta;
+using Spark;
 using System.Diagnostics;
 
 namespace souchy.celebi.spark.controllers.meta
 {
     [ApiController]
     [Produces("application/json")]
-    [Route("auth")]
+    [Route(Routes.Meta + "[controller]")]
     public class AuthController : ControllerBase
     {
         private readonly AccountService accountService;

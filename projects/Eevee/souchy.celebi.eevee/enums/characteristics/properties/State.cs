@@ -9,9 +9,10 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
 {
     public sealed record State : CharacteristicType
     {
-        public State(int localId, string name) : base(CharacteristicCategory.State, localId, name, BoolFactory)
+        public State(int localId, string name) : base(CharacteristicCategory.State, localId, name)
         {
             this.StatValueType = StatValueType.Bool;
+            this.Factory = BoolFactory;
         }
 
         public static readonly State Visible     = new(16, nameof(Visible    ));

@@ -1,4 +1,5 @@
-﻿using souchy.celebi.eevee.enums.characteristics.creature;
+﻿using Newtonsoft.Json;
+using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.enums.characteristics.properties;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.conditions;
@@ -13,13 +14,16 @@ using System.Security.AccessControl;
 namespace souchy.celebi.eevee.enums.characteristics
 {
 
+    //[JsonIgnore]
     public delegate IStat StatFactory(CharacteristicId id, object value = null);
 
-    public record CharacteristicType(CharacteristicCategory Category, int LocalId, string BaseName, StatFactory Factory, params ICondition[] conditions)
+    public record CharacteristicType(CharacteristicCategory Category, int LocalId, string BaseName, params ICondition[] conditions)
     {
         public StatValueType StatValueType { get; init; }
         public CharacteristicId ID { get; init; } = new CharacteristicId(((int) Category) * 1000 + LocalId);
         public IID NameID { get; set; } = (IID) (nameof(CharacteristicType) + "." + BaseName);
+        [JsonIgnore]
+        public StatFactory Factory { get; init; }
 
         public IStringEntity GetName() => Eevee.models.i18n.Get(NameID);
 
@@ -48,31 +52,10 @@ namespace souchy.celebi.eevee.enums.characteristics
 
     public static class CharacteristicIdExtentions
     {
-        //public  static Type GetClassType(this CharacteristicId stat)
-        //{
-        //    var cat = stat.GetCategory();
-        //    return cat switch
-        //    {
-        //        CharacteristicCategory.State => typeof(State),
-        //        _ => throw new Exception()
-        //    };
-        //}
-        //public static StatTypePropertiesAttribute GetProperties(this CharacteristicId statType)
-        //{
-        //    var attr = statType.GetType()
-        //            .GetField(Enum.GetName(statType))
-        //            .GetCustomAttribute(typeof(StatTypePropertiesAttribute), true);
-        //    return (StatTypePropertiesAttribute) attr;
-        //}
-        //public static StatTypePropertiesAttribute GetProperties(this ResourceType statType) =>
-        //    statType.GetStatType().GetProperties();
         public static CharacteristicId GetAffinity(this ElementType stat) =>
             Affinity.values.Values.First(v => v.Element == stat).ID;
         public static CharacteristicId GetResistance(this ElementType stat) =>
             Resistance.values.Values.First(v => v.Element == stat).ID;
-        //public static CharacteristicId GetStatType(this CharacteristicId stat) =>
-        //    Resistance.values.Values.First(v => v.ID == stat).ID;
-            //(CharacteristicId) Enum.Parse(typeof(CharacteristicId), Enum.GetName(stat));
         public static IEnumerable<CharacteristicType> GetCharacs(this CharacteristicCategory cat) => cat switch
         {
             CharacteristicCategory.Resource     => Resource.values.Values,
@@ -91,17 +74,6 @@ namespace souchy.celebi.eevee.enums.characteristics
         public static CharacteristicType GetCharactType(this CharacteristicId id) =>
             id.GetCategory().GetCharacs().FirstOrDefault(v => v.ID == id);
         public static IStat Create(this CharacteristicType type, object value = null) => type.Factory(type.ID, value);
-        //public static IStat Create(this CharacteristicId type) =>
-        //    type.GetProperties().valueType.Create(type);
-        //public static void Create(this CharacteristicId id, StatValueType valueType) =>
-        //    valueType switch
-        //    {
-        //        StatValueType.Simple => StatSimple.Create(st), //new StatSimple(st),
-        //        StatValueType.Detailed => StatDetailed.Create(st), //new StatDetailed(st),
-        //        StatValueType.Bool => StatBool.Create(st), //new StatBool(st),
-        //        StatValueType.Resource => StatResource.Create(st), //new StatResource(st),
-        //        _ => throw new Exception()
-        //    };
     }
 
     public enum CharacteristicCategory

@@ -11,10 +11,10 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
 {
     public sealed record SpellProperty : CharacteristicType
     {
-        public SpellProperty(int localId, string name, StatFactory factory) : base(CharacteristicCategory.Spell, localId, name, factory)
+        public SpellProperty(int localId, string name, StatFactory factory) : base(CharacteristicCategory.Spell, localId, name)
         {
-            //this.statValueType = typeof(IStat);
             this.StatValueType = StatValueType.Variant;
+            this.Factory = factory;
         }
 
 

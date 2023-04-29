@@ -9,9 +9,10 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
 {
     public sealed record Contextual : CharacteristicType
     {
-        public Contextual(int localId, string name) : base(CharacteristicCategory.Contextual, localId, name, SimpleFactory)
+        public Contextual(int localId, string name) : base(CharacteristicCategory.Contextual, localId, name)
         {
             this.StatValueType = StatValueType.Simple;
+            this.Factory = SimpleFactory;
         }
 
         public static readonly Contextual LifeGained        = new(1, nameof(LifeGained));

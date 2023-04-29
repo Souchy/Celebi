@@ -10,7 +10,7 @@ namespace souchy.celebi.spark.models
     public class ShopCurrency
     {
         /// <summary>
-        /// Mongo's ID contains a date so we can sort products by most recent
+        /// Mongo's ID contains a date (=release date) so we can sort products by most recent
         /// </summary>
         public ObjectId MongoID { get; set; }
 

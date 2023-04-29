@@ -35,6 +35,7 @@ namespace Spark
             {
                 c.SchemaFilter<EnumSchemaFilter>();
             });
+            services.AddSwaggerGenNewtonsoftSupport();
             //services.AddControllers();
             services.AddControllers(options =>
             {

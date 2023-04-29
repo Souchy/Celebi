@@ -12,10 +12,11 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
     public sealed record Affinity : CharacteristicType
     {
         public ElementType Element { get; init; }
-        public Affinity(int localId, string name, ElementType ele = ElementType.None, params ICondition[] conditions) : base(CharacteristicCategory.Affinity, localId, name, SimpleFactory, conditions)
+        public Affinity(int localId, string name, ElementType ele = ElementType.None, params ICondition[] conditions) : base(CharacteristicCategory.Affinity, localId, name, conditions)
         {
             this.Element = ele;
             this.StatValueType = StatValueType.Simple;
+            this.Factory = SimpleFactory;
         }
 
         public static readonly Affinity Fire        = new(1, nameof(Fire),  ElementType.Fire);
@@ -43,14 +44,14 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
 
 
         public static readonly Dictionary<CharacteristicId, Affinity> values = new();
-        static Affinity()
-        {
-            var fields = typeof(Affinity).GetFields();
-            foreach (var field in fields)
-            {
-                var value = (Affinity) field.GetValue(null);
-                values[value.ID] = value;
-            }
-        }
+        //static Affinity()
+        //{
+        //    var fields = typeof(Affinity).GetFields();
+        //    foreach (var field in fields)
+        //    {
+        //        var value = (Affinity) field.GetValue(null);
+        //        values[value.ID] = value;
+        //    }
+        //}
     }
 }

@@ -61,11 +61,13 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
     {
         public ResourceEnum resType { get; init; }
         public ResourceProperty resProp { get; init; }
-        public Resource(int localId, string name, ResourceEnum resType, ResourceProperty resProp) : base(CharacteristicCategory.Resource, localId, name, SimpleFactory)
+        public Resource(int localId, string name, ResourceEnum resType, ResourceProperty resProp) 
+            : base(CharacteristicCategory.Resource, localId, name)
         {
             this.resProp = resProp;
             this.resType = resType;
             this.StatValueType = StatValueType.Simple;
+            this.Factory = SimpleFactory;
         }
 
         // peut-être comme ça à la place (IStatSimple pour chaque valeur)

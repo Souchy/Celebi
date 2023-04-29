@@ -13,10 +13,11 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
     {
         public ElementType Element { get; init; }
         public Resistance(int localId, string name, ElementType ele = ElementType.None, params ICondition[] conditions) 
-            : base(CharacteristicCategory.Resistance, localId, name, SimpleFactory, conditions)
+            : base(CharacteristicCategory.Resistance, localId, name, conditions)
         {
             this.Element = ele;
             this.StatValueType = StatValueType.Simple;
+            this.Factory = SimpleFactory;
         }
 
         public static readonly Resistance Fire      = new(1,  nameof(Fire),  ElementType.Fire);

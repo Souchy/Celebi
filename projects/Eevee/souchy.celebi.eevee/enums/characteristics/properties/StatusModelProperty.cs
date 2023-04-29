@@ -9,9 +9,10 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
 {
     public sealed record StatusModelProperty : CharacteristicType
     {
-        public StatusModelProperty(int localId, string name) : base(CharacteristicCategory.State, localId, name, SimpleFactory)
+        public StatusModelProperty(int localId, string name) : base(CharacteristicCategory.State, localId, name)
         {
             this.StatValueType = StatValueType.Simple;
+            this.Factory = SimpleFactory;
         }
 
         public static readonly StatusModelProperty Stacks       = new(0, nameof(Stacks     ));

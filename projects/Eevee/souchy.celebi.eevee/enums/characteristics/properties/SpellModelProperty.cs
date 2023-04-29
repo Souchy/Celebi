@@ -9,9 +9,10 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
 {
     public sealed record SpellModelProperty: CharacteristicType
     {
-        public SpellModelProperty(int localId, string name) : base(CharacteristicCategory.SpellModel, localId, name, SimpleFactory)
+        public SpellModelProperty(int localId, string name) : base(CharacteristicCategory.SpellModel, localId, name)
         {
             this.StatValueType = StatValueType.Simple;
+            this.Factory = SimpleFactory;
         }
 
         public static readonly SpellModelProperty MaxCharges        = new(1, nameof(MaxCharges));
@@ -35,9 +36,10 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
     }
     public sealed record SpellModelState : CharacteristicType
     {
-        public SpellModelState(int localId, string name) : base(CharacteristicCategory.SpellModel, localId, name, BoolFactory)
+        public SpellModelState(int localId, string name) : base(CharacteristicCategory.SpellModel, localId, name)
         {
             this.StatValueType = StatValueType.Bool;
+            this.Factory = BoolFactory;
         }
 
         public static readonly SpellModelState LineOfSightRequired = new(0, nameof(LineOfSightRequired));
