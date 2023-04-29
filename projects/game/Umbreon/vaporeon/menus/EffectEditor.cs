@@ -113,8 +113,8 @@ public partial class EffectEditor : Control, IEffectNodesContainer // EditorInit
         // props
         PropertiesComponent.GenerateGrid(effect, Values);
         // status props
-        if (effect.statusProperties != null)
-            PropertiesComponent.GenerateGrid(effect.statusProperties, StatusValues, publishSave);
+        //if (effect.statusProperties != null)
+        //    PropertiesComponent.GenerateGrid(effect.statusProperties, StatusValues, publishSave);
         // zone
         ZoneEditorMini.init(effect.zone);
         // create children

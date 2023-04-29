@@ -35,7 +35,7 @@ public partial class CreatureNode : Node3D
     public void init(ICreature c, ICreatureSkin skin, int team) //string name)
     {
         // Sub
-        c.GetStats().Get<IStatResource>(Resource.Life).GetEntityBus().subscribe(this);
+        c.GetStats(null).Get<IStatResource>(Resource.Life).GetEntityBus().subscribe(this);
 
         // Set Model
         GD.Print("CreatureNode_init: " + skin.meshModel);

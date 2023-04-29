@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Umbreon\Umbreon.csproj" />
+    <ProjectReference Include="..\..\game\Umbreon\Umbreon.csproj" />
   </ItemGroup>
 
 </Project>

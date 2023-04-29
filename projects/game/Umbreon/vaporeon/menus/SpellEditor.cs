@@ -10,6 +10,8 @@ using souchy.celebi.eevee.impl.objects.effects;
 using souchy.celebi.eevee.face.util;
 using Umbreon.vaporeon.components;
 using souchy.celebi.eevee.enums.characteristics;
+using souchy.celebi.eevee.enums.characteristics.creature;
+using Resource = souchy.celebi.eevee.enums.characteristics.creature.Resource;
 
 public partial class SpellEditor : Control, EditorInitiator<ISpellModel>, IEffectNodesContainer
 {
@@ -107,13 +109,14 @@ public partial class SpellEditor : Control, EditorInitiator<ISpellModel>, IEffec
         // costs
         foreach (ResourceEnum res in Enum.GetValues<ResourceEnum>())
         {
+            var characId = Resource.getKey(res, ResourceProperty.Current).ID;
             // lbl
             var lbl = new Label();
-            lbl.Text = Enum.GetName<ResourceEnum>(res);
+            lbl.Text = Enum.GetName(res);
             // edit
             var edit = new SpinBox();
-            edit.Value = spell.costs[res];
-            edit.ValueChanged += (value) => spell.costs[res] = (int) value;
+            edit.Value = spell.costs[characId];
+            edit.ValueChanged += (value) => spell.costs[characId] = (int) value;
             // add nodes
             CostsGrid.AddChild(lbl);
             CostsGrid.AddChild(edit);

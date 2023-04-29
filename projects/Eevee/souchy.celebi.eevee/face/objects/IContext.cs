@@ -1,12 +1,15 @@
 ﻿using souchy.celebi.eevee.enums;
-using souchy.celebi.eevee.enums.characteristics;
+using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.face.objects.effectResults;
 using souchy.celebi.eevee.face.util;
 
 namespace souchy.celebi.eevee.face.objects
 {
     /// <summary>
-    /// Context Stats for every entity (creature, cell). 
+    /// TODO: Wont need this anymore I believe with ContextualProperty stats. <br></br>
+    /// Some concepts are interesting but we can do otherwise with just stats. <br></br>
+    /// -- <br></br>
+    /// Context Stats for every entity (creature, cell). <br></br>
     /// Can be during a Fight, Round, Turn or Action
     /// </summary>
     public interface IContext

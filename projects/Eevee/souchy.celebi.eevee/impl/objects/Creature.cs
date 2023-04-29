@@ -42,9 +42,16 @@ namespace souchy.celebi.eevee.impl.objects
         public IPlayer GetOriginalOwner() => this.GetFight().players.Get(originalOwnerUid);
         public IPlayer GetCurrentOwner() => this.GetFight().players.Get(currentOwnerUid);
         public IStats GetBaseStats() => this.GetFight().stats.Get(stats);
-        public IStats GetStats(IAction action) //, TriggerEvent trigger)
+        /// <summary>
+        /// If an IAction is specified, it will filter out conditional stats that are not valid
+        /// </summary>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        public IStats GetStats(IAction action) 
         {
+            // base stats
             var statsBag = this.GetBaseStats().anonymousCopy();
+            // status stats effects
             foreach(IStatusInstance status in GetStatuses().SelectMany(s => s.instances))
             {
                 foreach(IEffectAddStat eff in status.GetEffects().Where(e => e is IEffectAddStat))
@@ -54,20 +61,24 @@ namespace souchy.celebi.eevee.impl.objects
                     stat.Add(eff.stat);
                 }
             }
-            var boardSource = action.fight.creatures.Get(action.caster);
-            var boardTarget = action.fight.board.GetCreatureOnCell(action.targetCell);
-            statsBag.ForEach(stat =>
+            // reset conditional stats to 0
+            if(action != null)
             {
-                if(stat is IStatSimple simple) {
-                    var success = simple.statId.GetCharactType().conditions.All(c =>
+                var boardSource = this.GetFight().creatures.Get(action.caster);
+                var boardTarget = this.GetFight().board.GetCreatureOnCell(action.targetCell);
+                statsBag.ForEach(stat =>
+                {
+                    if (stat is IStatSimple simple)
                     {
-                        //var dist = creaSource.position.distanceManhattan(creaTarget.position);
-                        return c.check(action, null, boardSource, boardTarget);
-                    });
-                    if(!success) 
-                        simple.value = 0;
-                }
-            });
+                        var success = simple.statId.GetCharactType().conditions.All(c =>
+                        {
+                            return c.check(action, null, boardSource, boardTarget);
+                        });
+                        if (!success)
+                            simple.value = 0;
+                    }
+                });
+            }
             return statsBag;
         }
         public IEnumerable<ISpell> GetSpells() => spells.Values.Select(i => this.GetFight().spells.Get(i));

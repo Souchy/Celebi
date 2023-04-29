@@ -1,15 +1,13 @@
 ﻿using MongoDB.Bson;
-using souchy.celebi.eevee.face.util;
 
-namespace souchy.celebi.spark.services
+namespace souchy.celebi.spark.models
 {
     /// <summary>
-    /// An item you can buy in the shop.
-    /// It links to a model like a Spell, Creature, Skin...
-    /// The modelId is then added the the owned models on the account.
-    /// It costs currency.
+    /// A bundle/package of currency that you can buy for real money.
+    /// There might be a few bundles like : [5 currency, 10, 30, 50] for the same price in cad or something idk
+    /// Sometimes there could be a sale bundle so you add for example 5 currency for 3$ instead of 5 for 5 
     /// </summary>
-    public class ShopProduct
+    public class ShopCurrency
     {
         /// <summary>
         /// Mongo's ID contains a date so we can sort products by most recent
@@ -17,14 +15,15 @@ namespace souchy.celebi.spark.services
         public ObjectId MongoID { get; set; }
 
         /// <summary>
-        /// CreatureModel, SpellModel, CreatureSkin... maybe BoardSkins?
+        /// Amount of game currency to buy
         /// </summary>
-        public IID ModelID { get; set; }
+        public int Amount { get; set; }
 
         /// <summary>
-        /// Price in game currency
+        /// Real money price
         /// </summary>
-        public int CurrencyPrice { get; set; }
+        public int Price { get; set; }
+
         /// <summary>
         /// If the product is available in the shop or not. 
         /// We need to keep track of older products for transactions even if they are not available anymore

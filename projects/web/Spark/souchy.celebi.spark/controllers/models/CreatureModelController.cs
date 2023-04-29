@@ -1,39 +1,37 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.impl.shared;
-using souchy.celebi.spark.services;
+using souchy.celebi.spark.services.models;
+using Spark;
 
-namespace souchy.celebi.spark.controllers
+namespace souchy.celebi.spark.controllers.models
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route(Routes.Models + "[controller]")]
     public class CreatureModelController : ControllerBase
     {
-        private readonly CreatureModelService creatureModelService;
+        private readonly CreatureModelService _creatureModelService;
 
-        public CreatureModelController(CreatureModelService service)
-        {
-            creatureModelService = service;
-        }
+        public CreatureModelController(CreatureModelService service) => _creatureModelService = service;
 
         [HttpGet]
-        public async Task<List<ICreatureModel>> Get() => await creatureModelService.GetAsync();
+        public async Task<List<ICreatureModel>> Get() => await _creatureModelService.GetAsync();
 
         [HttpGet("{id:length(24)}")]
         public async Task<ActionResult<ICreatureModel>> Get(string id)
         {
-            ICreatureModel? creatureModel = await creatureModelService.GetAsync(id);
+            ICreatureModel? creatureModel = await _creatureModelService.GetAsync(id);
 
             if (creatureModel is null)
                 return NotFound();
 
-            return (CreatureModel) creatureModel;
+            return (CreatureModel)creatureModel;
         }
 
         [HttpPost]
         public async Task<IActionResult> Post(ICreatureModel newCreatureModel)
         {
-            await creatureModelService.CreateAsync(newCreatureModel);
+            await _creatureModelService.CreateAsync(newCreatureModel);
 
             return CreatedAtAction(nameof(Get), new { id = newCreatureModel.entityUid }, newCreatureModel);
         }
@@ -41,7 +39,7 @@ namespace souchy.celebi.spark.controllers
         [HttpPut("{id:length(24)}")]
         public async Task<IActionResult> Update(string id, ICreatureModel updatedCreatureModel)
         {
-            var book = await creatureModelService.GetAsync(id);
+            var book = await _creatureModelService.GetAsync(id);
 
             if (book is null)
             {
@@ -50,7 +48,7 @@ namespace souchy.celebi.spark.controllers
 
             updatedCreatureModel.entityUid = book.entityUid;
 
-            await creatureModelService.UpdateAsync(id, updatedCreatureModel);
+            await _creatureModelService.UpdateAsync(id, updatedCreatureModel);
 
             return NoContent();
         }
@@ -58,14 +56,14 @@ namespace souchy.celebi.spark.controllers
         [HttpDelete("{id:length(24)}")]
         public async Task<IActionResult> Delete(string id)
         {
-            var book = await creatureModelService.GetAsync(id);
+            var book = await _creatureModelService.GetAsync(id);
 
             if (book is null)
             {
                 return NotFound();
             }
 
-            await creatureModelService.RemoveAsync(id);
+            await _creatureModelService.RemoveAsync(id);
 
             return NoContent();
         }

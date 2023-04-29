@@ -15,6 +15,15 @@ namespace souchy.celebi.eevee.face.objects
         public IID caster { get; set; }
         public IID targetCell { get; set; }
     }
+    /// <summary>
+    /// for retrieving stats whenever, for the UI
+    /// </summary>
+    public record EmptyAction(IFight fight) : IAction
+    {
+        public IFight fight { get; set; } = fight;
+        public IID caster { get; set; }
+        public IID targetCell { get; set; }
+    }
 
     public interface IActionSpell : IAction
     {

@@ -1,5 +1,4 @@
-﻿using Espeon.souchy.celebi.eeevee.impl;
-using Moq;
+﻿using Moq;
 using souchy.celebi.eevee.face.shared;
 using souchy.celebi.eevee.impl;
 
