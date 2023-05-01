@@ -1,4 +1,6 @@
+import { AuthController } from "../../../services/api/AuthController";
 import { JwtUtil } from "../../../util/JWT";
+import { SessionManager } from "../../../util/sessionManager";
 
 declare global {
 	interface Window {
@@ -22,10 +24,10 @@ export class Signup {
      */ 
     public password: string;
 
-    constructor() {
-		window.signinGoogleCallback = (token) => this.googleCallback(token);
-		window.signinTwitterCallback = (token) => this.twitterCallback(token);
-		window.signinFacebookCallback = (token) => this.facebookCallback(token);
+    constructor() { //private readonly session: SessionManager) {
+		window.signupGoogleCallback = (token) => this.googleCallback(token);
+		window.signupTwitterCallback = (token) => this.twitterCallback(token);
+		window.signupFacebookCallback = (token) => this.facebookCallback(token);
     }
 
     public clickSignup() {
@@ -41,7 +43,8 @@ export class Signup {
     // public clickFacebook() {}
 
 	public googleCallback(token) {
-		console.log("hi callback")
+		console.log("hi signup callback")
+		console.log(token);
 		// decodeJwtResponse() is a custom function defined by you
 		// to decode the credential response.
 		let responsePayload = JwtUtil.decodeJwtResponse(token.credential)
@@ -53,8 +56,13 @@ export class Signup {
 		console.log("Image URL: " + responsePayload.picture);
 		console.log("Email: " + responsePayload.email);
 		
-		console.log("set cookie: " + JSON.stringify(token));
 		document.cookie = token;
+		// location.href = "home";
+
+		// new AuthController().postSignUp({
+		// 	id: responsePayload.sub,
+		// 	email: responsePayload.email,
+		// });
 	}
 	public twitterCallback(token) {
 

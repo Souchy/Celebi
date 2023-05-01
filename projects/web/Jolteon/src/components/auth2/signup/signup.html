@@ -1,18 +1,52 @@
+<import from="../../modal/modal"></import>
+
 <!-- <button click.delegate="clickSignup()">Signout</button> -->
-<a click.trigger="clickSignup()">Signup</a>
+<a click.trigger="clickSignup()" data-bs-toggle="modal" data-bs-target="#signupModal">Signup</a>
 
 <!-- modal -->
-<div style="display: none;">
-    <form>
-        <input type="text" value.bind="username">
-        <input type="text" value.bind="displayName">
-        <input type="password" value.bind="password">
-        <button type="submit" click.delegate="submitSignup()">Signup</button>
-    </form>
+<!-- <div style="display: none;">
+  <form>
+    <input type="text" value.bind="username">
+    <input type="text" value.bind="displayName">
+    <input type="password" value.bind="password">
+    <button type="submit" click.delegate="submitSignup()">Signup</button>
+  </form>
 
-    <div>
-        <button click.delegate="clickGoogle()">Google</button>
-        <button click.delegate="clickTwitter()">Twitter</button>
-        <button click.delegate="clickFacebook()">Facebook</button>
-    </div>
-</div>
+  <div>
+    <button click.delegate="clickGoogle()">Google</button>
+    <button click.delegate="clickTwitter()">Twitter</button>
+    <button click.delegate="clickFacebook()">Facebook</button>
+  </div>
+</div> -->
+
+
+<modal id="signupModal" header.bind="Signup" close.bind=false footer.bind=false>
+
+    <form submit.trigger="submitSignup()">
+        <!-- Email -->
+        <div class="mb-3">
+          <label for="signinUser" class="form-label">Email</label>
+          <input id="signinUser" type="email" class="form-control" value.bind="identifier">
+        </div>
+        <!-- Password -->
+        <div class="mb-3">
+          <label for="signinPass" class="form-label">Password</label>
+          <input id="signinPass" type="password" class="form-control" value.bind="password">
+        </div>
+        <!-- Remember me -->
+        <!-- <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div> -->
+        <!-- btn -->
+        <button type="submit" class="btn">Submit</button>
+      </form>
+    
+
+  <!-- Google -->
+  <div>
+    <div id="g_id_onload" data-client_id="myclientid" data-context="signup" data-ux_mode="redirect" data-login_uri="localhost:9000/home" data-nonce="" data-auto_prompt="false"></div>
+    <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline" data-text="signup_with" data-size="large" data-logo_alignment="left"></div>
+  </div>
+
+</modal>

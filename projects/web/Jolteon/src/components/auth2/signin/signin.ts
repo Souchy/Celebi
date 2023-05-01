@@ -1,5 +1,9 @@
 import { getCookie, setCookie } from 'typescript-cookie'
 import { JwtUtil } from "../../../util/JWT";
+import { IHttpClient, inject } from 'aurelia';
+import { SessionManager } from '../../../util/sessionManager';
+import { AuthController } from '../../../services/api/AuthController';
+import { Constants } from '../../../constants';
 
 
 declare global {
@@ -10,43 +14,60 @@ declare global {
 	}
 }
 
-
+@inject(IHttpClient)
 export class Signin {
-    /**
-     * nvm, we dont do usernames, only emails ////can be email or username
-     */
-    public identifier: string;
-    /**
-     * pass
-     */ 
-    public password: string;
+	/**
+	 * we dont do usernames, only emails 
+	 */
+	public identifier: string;
+	/**
+	 * pass
+	 */
+	public password: string;
 
-    constructor() {
+	private auth: AuthController;
+
+	constructor(private readonly http: IHttpClient) { //http: IHttpClient) { //private readonly session: SessionManager) {
+		this.auth = new AuthController(http);
+		this.auth.aureliaClient.baseUrl = Constants.serverUrl;
 		window.signinGoogleCallback = (token) => this.googleCallback(token);
 		window.signinTwitterCallback = (token) => this.twitterCallback(token);
 		window.signinFacebookCallback = (token) => this.facebookCallback(token);
-    }
+	}
 
-    public clickSignin() {
-        
-    }
+	public clickSignin() {
 
-    public submitSignin() {
-        
-    }
+	}
 
-    // public clickGoogle() { }
-    // public clickTwitter() { }
-    // public clickFacebook() { }
+	public submitSignin() {
+		console.log("submit signin: " + this.identifier + ", " + this.password)
+		this.auth.postIdentitySignin({
+			// displayName: "souchy",
+			email: this.identifier,
+			pass: this.password
+		}).then(
+			res => {
+				console.log(res);
+			},
+			rej => {
+				console.log(rej);
+			}
+		)
+	}
+
+	// public clickGoogle() { }
+	// public clickTwitter() { }
+	// public clickFacebook() { }
 
 	public googleCallback(token) {
-		console.log("hi callback")
-		console.log(token);
+		console.log("hi signin callback")
+		console.log(token.credential);
 		// console.log()
 		// decodeJwtResponse() is a custom function defined by you
 		// to decode the credential response.
 		// setCookie("". "m");
 		let responsePayload = JwtUtil.decodeJwtResponse(token.credential)
+		console.log(responsePayload);
 		console.log("ID: " + responsePayload.sub);
 		console.log('Full Name: ' + responsePayload.name);
 		console.log('Given Name: ' + responsePayload.given_name);
@@ -55,13 +76,14 @@ export class Signin {
 		console.log("Email: " + responsePayload.email);
 		// document.cookie = token;
 		setCookie('googleToken', token);
-		location.href = "home";
+		// location.href = "home";
+		// fetch()
 	}
 	public twitterCallback(token) {
 
 	}
 	public facebookCallback(token) {
-		
+
 	}
 
 }

@@ -1,10 +1,10 @@
-import { Account } from "../../services/api/data-contracts";
+import { AccountInfo } from "../../services/api/data-contracts";
 
 
 export class AuthHeader {
 
 
-    public getConnectedAccount(): Account {
+    public getConnectedAccount(): AccountInfo {
         return null;
     }
 

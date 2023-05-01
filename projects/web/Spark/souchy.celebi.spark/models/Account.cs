@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using AspNetCore.Identity.Mongo.Model;
+using MongoDB.Bson;
 using souchy.celebi.eevee.face.util;
 
 namespace souchy.celebi.spark.models
@@ -8,38 +9,27 @@ namespace souchy.celebi.spark.models
     /// We can authenticate with either a token ID or email+pass <br></br>
     /// There is no username, we just use emails
     /// </summary>
-    public class Account
+    public class Account : MongoUser
     {
-        #region User authentication
-        /// <summary>
-        /// Unique
-        /// ID from JWT token
-        /// </summary>
-        public string ID { get; }
-        /// <summary>
-        /// Unique
-        /// Can also authenticate with email+pass instead of user+pass
-        /// </summary>
-        public string Email { get; set; }
-        /// <summary>
-        /// Password is hashed and optional
-        /// </summary>
-        public string Password { get; set; }
-        #endregion
+        public AccountInfo Info { get; set; }
+    }
 
-        #region User information from Google, Facebook, Twitter, Microsoft or custom
+    public class AccountInfo
+    {
+        #region User information
         /// <summary>
         /// Unique
         /// Pseudo
         /// </summary>
         public string DisplayName { get; set; }
-        public AccountType Type { get; set; }
-        public string Phone { get; set; }
-        public string FullName { get; set; }
         public string Name { get; set; }
         public string FamilyName { get; set; }
         public string Picture { get; set; }
-        public DateTime CreationDate { get; set; }
+        /// <summary>
+        /// Only 1 access object per ip. Update the LastAccess when using the same ip.
+        /// Ask for verification when using a new IP (ex: poe asks email confirmation).
+        /// </summary>
+        public List<IpAccess> AccessByIp = new List<IpAccess>();
         #endregion
 
         #region Owned 
@@ -60,6 +50,27 @@ namespace souchy.celebi.spark.models
 
         // i think we dont list fights here?, rather go fights.where(f => f.date >= lastWeek && f.players.contains(this)) ? 
 
+        public void CheckAccess(string ipAddress)
+        {
+            var access = AccessByIp.Find(a => a.IpAddress == ipAddress);
+            if (access != null)
+            {
+                if (access.IsExpired())
+                {
+                    // expired
+                }
+                if (!access.Verified)
+                {
+                    // unverified
+                }
+                // good
+            }
+            // add new access & verify
+        }
+        public void AddAccess()
+        {
+
+        }
     }
 
     public enum AccountType
@@ -69,5 +80,19 @@ namespace souchy.celebi.spark.models
         Admin = 999
     }
 
+    public class AccountRole : MongoRole
+    {
+
+    }
+
+    public class IpAccess
+    {
+        public static readonly TimeSpan expirationTime = TimeSpan.FromDays(30);
+        public string IpAddress { get; set; }
+        public DateTime LastAccess { get; set; } 
+        public bool Verified { get; set; }
+        public string RefreshToken { get; set; }
+        public bool IsExpired() => LastAccess.Add(IpAccess.expirationTime) < DateTime.UtcNow;
+    }
 
 }

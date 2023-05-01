@@ -1,8 +1,8 @@
-import { Account } from "../../services/api/data-contracts";
+import { AccountInfo } from "../../services/api/data-contracts";
 
 export class Profile {
     
-    constructor(private readonly account: Account) {
+    constructor(private readonly account: AccountInfo) {
 
     }
 

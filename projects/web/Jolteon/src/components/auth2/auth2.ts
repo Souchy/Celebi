@@ -1,7 +1,7 @@
-import { HttpClient, IEventAggregator, inject } from "aurelia";
+import { HttpClient, IEventAggregator, IHttpClient, inject } from "aurelia";
 import { AuthController } from "../../services/api/AuthController";
 import { JwtUtil } from "../../util/JWT";
-import { serverUrl } from "../../constants";
+import { Constants } from "../../constants";
 
 declare global {
 	interface Window {
@@ -10,18 +10,21 @@ declare global {
 }
 
 
-@inject(IEventAggregator)
+@inject(IEventAggregator, IHttpClient)
 export class Auth2 {
 
-	public http = new HttpClient();
+	// public http = new HttpClient();
 	public clientid = "850322629277-c9fu1umd1dlk7tjv325u6s33g32fb0ea.apps.googleusercontent.com";
 	public redirect_uri = "http://localhost:7000/auth/google";
 	public gapi_uri = "https://accounts.google.com/o/oauth2/v2/auth";
-	public readonly auth = new AuthController();
 	public responseValue: string = "";
+	// public readonly auth = new AuthController();
+	public auth:AuthController = null;
 
-	constructor(readonly ea: IEventAggregator) {
-		this.auth.baseUrl = serverUrl
+	constructor(readonly ea: IEventAggregator, readonly http: IHttpClient) {
+		this.auth = new AuthController(http);
+		this.auth.aureliaClient.baseUrl = Constants.serverUrl;
+
 		console.log("ctor auth: " + this.auth);
 		ea.subscribe("googleCallback", this.googleCallback);
 		

@@ -66,14 +66,14 @@ const responseFormatTmpl = responseContentKind[responseBodyInfo.success && respo
 const securityTmpl = security ? 'true' : null;
 
 const describeReturnType = () => {
-    if (!config.toJS) return "";
+    // if (!config.toJS) return "";
 
     switch(config.httpClientType) {
         case HTTP_CLIENT.AXIOS: {
-          return `Promise<AxiosResponse<${type}>>`
+          return `: Promise<AxiosResponse<${type}>>`
         }
         default: {
-          return `Promise<HttpResponse<${type}, ${errorType}>`
+          return `: Promise<HttpResponse<${type}, ${errorType}>>`
         }
     }
 }
@@ -87,8 +87,8 @@ const describeReturnType = () => {
 <%~ routeDocs.lines %>
 
  */
-<%~ route.routeName.usage %> = (<%~ wrapperArgs %>)<%~ config.toJS ? `: ${describeReturnType()}` : "" %> =>
-    <%~ config.singleHttpClient ? 'this.http.request' : 'this.request' %><<%~ type %>, <%~ errorType %>>({
+public <%~ route.routeName.usage %>(<%~ wrapperArgs %>) <%~describeReturnType()%> {
+    return <%~ config.singleHttpClient ? 'this.http.request' : 'this.request' %><<%~ type %>, <%~ errorType %>>({
         path: `<%~ path %>`,
         method: '<%~ _.upperCase(method) %>',
         <%~ queryTmpl ? `query: ${queryTmpl},` : '' %>
@@ -97,4 +97,5 @@ const describeReturnType = () => {
         <%~ bodyContentKindTmpl ? `type: ${bodyContentKindTmpl},` : '' %>
         <%~ responseFormatTmpl ? `format: ${responseFormatTmpl},` : '' %>
         ...<%~ _.get(requestConfigParam, "name") %>,
-    })
+    });
+}

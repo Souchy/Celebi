@@ -1,6 +1,7 @@
 <%
 const { apiConfig, generateResponses, config } = it;
 %>
+import { IHttpClient, inject } from "aurelia";
 
 export type QueryParamsType = Record<string | number, any>;
 export type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
@@ -48,13 +49,12 @@ export enum ContentType {
     Text = "text/plain",
 }
 
+@inject(IHttpClient)
 export class HttpClient<SecurityDataType = unknown> {
-    public baseUrl: string = "<%~ apiConfig.baseUrl %>";
+
     private securityData: SecurityDataType | null = null;
     private securityWorker?: ApiConfig<SecurityDataType>["securityWorker"];
     private abortControllers = new Map<CancelToken, AbortController>();
-    private customFetch = (...fetchParams: Parameters<typeof fetch>) => fetch(...fetchParams);
-
     private baseApiParams: RequestParams = {
         credentials: 'same-origin',
         headers: {},
@@ -62,10 +62,11 @@ export class HttpClient<SecurityDataType = unknown> {
         referrerPolicy: 'no-referrer',
     }
 
-    constructor(apiConfig: ApiConfig<SecurityDataType> = {}) {
+    constructor(readonly aureliaClient: IHttpClient, apiConfig: ApiConfig<SecurityDataType> = {}) {
         Object.assign(this, apiConfig);
     }
 
+    
     public setSecurityData = (data: SecurityDataType | null) => {
         this.securityData = data;
     }
@@ -177,8 +178,7 @@ export class HttpClient<SecurityDataType = unknown> {
         const payloadFormatter = this.contentFormatters[type || ContentType.Json];
         const responseFormat = format || requestParams.format;
 
-        return this.customFetch(
-        `${baseUrl || this.baseUrl || ""}${path}${queryString ? `?${queryString}` : ""}`,
+        return this.aureliaClient.fetch(`${baseUrl || this.aureliaClient.baseUrl || ""}${path}${queryString ? `?${queryString}` : ""}`,
         {
             ...requestParams,
             headers: {
@@ -187,6 +187,7 @@ export class HttpClient<SecurityDataType = unknown> {
             },
             signal: cancelToken ? this.createAbortSignal(cancelToken) : requestParams.signal,
             body: typeof body === "undefined" || body === null ? null : payloadFormatter(body),
+            credentials: 'include'
         }
         ).then(async (response) => {
             const r = response as HttpResponse<T, E>;
