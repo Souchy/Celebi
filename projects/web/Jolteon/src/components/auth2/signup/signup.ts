@@ -1,6 +1,6 @@
-import { AuthController } from "../../../services/api/AuthController";
-import { JwtUtil } from "../../../util/JWT";
-import { SessionManager } from "../../../util/sessionManager";
+import { AuthController } from "../../../jolteon/services/api/AuthController";
+import { JwtUtil } from "../../../jolteon/util/JWT";
+import { SessionManager } from "../../../jolteon/util/sessionManager";
 
 declare global {
 	interface Window {

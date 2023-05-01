@@ -16,6 +16,7 @@ using souchy.celebi.spark.services.models;
 using souchy.celebi.spark.util.swagger;
 using System.Diagnostics;
 using System.Text;
+using Microsoft.AspNetCore.Authentication;
 
 namespace Spark
 {
@@ -57,7 +58,6 @@ namespace Spark
                         .WithOrigins("https://localhost:9000", "http://localhost:9000")
                         .AllowAnyHeader()
                         .AllowAnyMethod()
-                        //.AllowAnyOrigin()
                         .AllowCredentials()
                 );
             });
@@ -89,12 +89,33 @@ namespace Spark
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
                 //options.Cookie.Expiration = TimeSpan.FromSeconds(30);
 
-                options.LoginPath = "/mammoth"; // this happens when you try to access unauthorized resource, it redirects to login
+                // this happens when you try to access unauthorized resource, it redirects to login
+                options.LoginPath = "/meta/auth/mammoth"; 
                 options.LogoutPath = "/penguin";
                 options.AccessDeniedPath = "/orangoutan";
                 options.ReturnUrlParameter = "challenged";
                 options.ClaimsIssuer = settings.Issuer;
                 options.SlidingExpiration = true;
+                
+                options.Events = new CookieAuthenticationEvents()
+                {
+                    OnRedirectToLogin = c =>
+                    {
+                        //c.HttpContext.Response.Redirect("https://localhost:9000/mammoth");
+                        c.HttpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                        c.HttpContext.Response.Headers.Add("logout", "OnRedirectToLogin");
+                        c.HttpContext.SignOutAsync();
+                        //c.HttpContext.User.
+                        return Task.CompletedTask;
+                    },
+                    OnRedirectToAccessDenied = c =>
+                    {
+                        c.HttpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                        c.HttpContext.Response.Headers.Add("logout", "OnRedirectToAccessDenied");
+                        c.HttpContext.SignOutAsync();
+                        return Task.CompletedTask;
+                    }
+                };
             });
         }
 
@@ -111,7 +132,7 @@ namespace Spark
             }).AddNewtonsoftJson();
         }
 
-        private static void configureApp(WebApplication? app)
+        private static void configureApp(WebApplication app)
         {
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

@@ -1,9 +1,11 @@
 import { getCookie, setCookie } from 'typescript-cookie'
-import { JwtUtil } from "../../../util/JWT";
+import { JwtUtil } from "../../../jolteon/util/JWT";
 import { IHttpClient, inject } from 'aurelia';
-import { SessionManager } from '../../../util/sessionManager';
-import { AuthController } from '../../../services/api/AuthController';
-import { Constants } from '../../../constants';
+import { SessionManager } from '../../../jolteon/util/sessionManager';
+import { Constants } from '../../../jolteon/constants';
+import { AuthController } from '../../../jolteon/services/api/AuthController';
+import { IStore } from '@aurelia/state';
+import { LoginAction, LogoutAction } from '../../../jolteon/action-handler';
 
 
 declare global {
@@ -14,29 +16,25 @@ declare global {
 	}
 }
 
-@inject(IHttpClient)
+@inject(IHttpClient, IStore)
 export class Signin {
 	/**
 	 * we dont do usernames, only emails 
 	 */
-	public identifier: string;
+	private identifier: string;
 	/**
 	 * pass
 	 */
-	public password: string;
+	private password: string;
 
 	private auth: AuthController;
 
-	constructor(private readonly http: IHttpClient) { //http: IHttpClient) { //private readonly session: SessionManager) {
+	constructor(private readonly http: IHttpClient, private readonly store: IStore<{}, LoginAction | LogoutAction>) { 
 		this.auth = new AuthController(http);
 		this.auth.aureliaClient.baseUrl = Constants.serverUrl;
 		window.signinGoogleCallback = (token) => this.googleCallback(token);
 		window.signinTwitterCallback = (token) => this.twitterCallback(token);
 		window.signinFacebookCallback = (token) => this.facebookCallback(token);
-	}
-
-	public clickSignin() {
-
 	}
 
 	public submitSignin() {
@@ -48,6 +46,8 @@ export class Signin {
 		}).then(
 			res => {
 				console.log(res);
+				let action: LoginAction = { value: res.data };
+				this.store.dispatch(action);
 			},
 			rej => {
 				console.log(rej);
@@ -55,9 +55,6 @@ export class Signin {
 		)
 	}
 
-	// public clickGoogle() { }
-	// public clickTwitter() { }
-	// public clickFacebook() { }
 
 	public googleCallback(token) {
 		console.log("hi signin callback")

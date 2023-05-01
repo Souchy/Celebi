@@ -7,19 +7,20 @@
 
 
 <div class="d-flex">
-  <li class="nav-item">
+  
+  <li class="nav-item" if.bind="!isConnected">
     <signin></signin>
   </li>
 
-  <li class="nav-item">
+  <li class="nav-item" if.bind="!isConnected">
     <signup></signup>
   </li>
 
-  <li class="nav-item">
+  <li class="nav-item" if.bind="isConnected">
     <!-- <div if.bind="isConnected()" class="d-flex"> -->
-    <div>
+    <div innerhtml.bind="displayName">
       <!-- show account's displayName as a button to go  see his account's info/settings -->
-      ${getConnectedAccount().displayName}
+      <!-- ${getConnectedAccount().displayName} -->
     </div>
     <signout></signout>
     <!-- </div> -->

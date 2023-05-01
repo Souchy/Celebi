@@ -1,7 +1,7 @@
 import { HttpClient, IEventAggregator, IHttpClient, inject } from "aurelia";
-import { AuthController } from "../../services/api/AuthController";
-import { JwtUtil } from "../../util/JWT";
-import { Constants } from "../../constants";
+import { AuthController } from "../../jolteon/services/api/AuthController";
+import { JwtUtil } from "../../jolteon/util/JWT";
+import { Constants } from "../../jolteon/constants";
 
 declare global {
 	interface Window {

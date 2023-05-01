@@ -3,7 +3,7 @@ import { IEventAggregator, IHttpClient } from 'aurelia';
 import { newInstanceOf } from '@aurelia/kernel';
 import { bindable, inject } from 'aurelia';
 import { IRoute, IRouter, IRouteableComponent, ReloadBehavior, Navigation, Parameters, RoutingInstruction } from '@aurelia/router';
-import { Api } from '../api';
+import { Api } from '../../api';
 
 @inject(IEventAggregator, Api)
 export class Auth {

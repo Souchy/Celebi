@@ -1,4 +1,4 @@
-import { AccountInfo } from "../../services/api/data-contracts";
+import { AccountInfo } from "../../jolteon/services/api/data-contracts";
 
 export class Profile {
     

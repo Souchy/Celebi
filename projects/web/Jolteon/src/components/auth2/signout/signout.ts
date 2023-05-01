@@ -1,4 +1,4 @@
-import { SessionManager } from "../../../util/sessionManager";
+import { SessionManager } from "../../../jolteon/util/sessionManager";
 
 export class Signout {
 

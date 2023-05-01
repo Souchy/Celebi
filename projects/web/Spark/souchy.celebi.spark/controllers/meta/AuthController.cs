@@ -2,6 +2,7 @@
 using Azure;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -23,8 +24,8 @@ namespace souchy.celebi.spark.controllers.meta
 {
 
     [ApiController]
+    [Route(Routes.Meta + "auth")]
     [Produces("application/json")]
-    [Route(Routes.Meta + "auth")] // [Route(Routes.Meta + "[controller]")]
     public class AuthController : ControllerBase
     {
         private readonly AccountService accountService;
@@ -47,6 +48,12 @@ namespace souchy.celebi.spark.controllers.meta
         }
 
         #region shared
+        [HttpGet("mammoth")]
+        public RedirectResult mammoth()
+        {
+            return Redirect("https://localhost:9000");
+        }
+
         [HttpGet("ping")]
         public ActionResult<string> ping()
         {
