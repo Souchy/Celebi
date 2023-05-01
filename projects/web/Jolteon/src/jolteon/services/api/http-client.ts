@@ -68,8 +68,8 @@ export class HttpClient<SecurityDataType = unknown> {
     referrerPolicy: "no-referrer",
   };
 
-  constructor(readonly aureliaClient: IHttpClient, apiConfig: ApiConfig<SecurityDataType> = {}) {
-    Object.assign(this, apiConfig);
+  constructor(readonly aureliaClient: IHttpClient) { //, apiConfig: ApiConfig<SecurityDataType> = {}) {
+    // Object.assign(this, apiConfig);
   }
 
   public setSecurityData = (data: SecurityDataType | null) => {

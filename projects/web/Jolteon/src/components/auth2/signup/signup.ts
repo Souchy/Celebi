@@ -1,6 +1,10 @@
+import { IStore } from "@aurelia/state";
+import { LoginAction } from "../../../jolteon/action-handler";
+import { GlobalState } from "../../../jolteon/initialstate";
 import { AuthController } from "../../../jolteon/services/api/AuthController";
 import { JwtUtil } from "../../../jolteon/util/JWT";
 import { SessionManager } from "../../../jolteon/util/sessionManager";
+import { inject } from "aurelia";
 
 declare global {
 	interface Window {
@@ -10,6 +14,7 @@ declare global {
 	}
 }
 
+@inject(AuthController, IStore)
 export class Signup {
     /**
      * 
@@ -24,7 +29,7 @@ export class Signup {
      */ 
     public password: string;
 
-    constructor() { //private readonly session: SessionManager) {
+	constructor(private readonly auth: AuthController, private readonly store: IStore<GlobalState, LoginAction>) { 
 		window.signupGoogleCallback = (token) => this.googleCallback(token);
 		window.signupTwitterCallback = (token) => this.twitterCallback(token);
 		window.signupFacebookCallback = (token) => this.facebookCallback(token);
@@ -34,9 +39,21 @@ export class Signup {
 
     }
 
-    public submitSignup() {
-        
-    }
+	public submitSignup() {
+		// console.log("submit signup: " + this.email + ", " + this.password)
+		this.auth.postIdentitySignin({
+			// displayName: "souchy",
+			email: this.email,
+			pass: this.password
+		}).then(
+			res => {
+				this.store.dispatch(new LoginAction(res.data));
+			},
+			rej => {
+				console.log(rej);
+			}
+		)
+	}
 
     // public clickGoogle() {}
     // public clickTwitter() {}

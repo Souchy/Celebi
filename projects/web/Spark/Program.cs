@@ -84,7 +84,7 @@ namespace Spark
                 var settings = configuration.GetSection(nameof(JwtSettings)).Get<JwtSettings>()!;
                 //configuration.Bind("CookieSettings", options);
                 options.Cookie.Name = "squid";
-                options.ExpireTimeSpan = TimeSpan.FromSeconds(30);
+                options.ExpireTimeSpan = TimeSpan.FromDays(14); //TimeSpan.FromSeconds(30);
                 options.Cookie.SameSite = SameSiteMode.Strict;
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
                 //options.Cookie.Expiration = TimeSpan.FromSeconds(30);
@@ -103,7 +103,8 @@ namespace Spark
                     {
                         //c.HttpContext.Response.Redirect("https://localhost:9000/mammoth");
                         c.HttpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                        c.HttpContext.Response.Headers.Add("logout", "OnRedirectToLogin");
+                        //c.HttpContext.Response.Headers.Add("logout", "OnRedirectToLogin");
+                        HttpResponseWritingExtensions.WriteAsync(c.Response, "logout");
                         c.HttpContext.SignOutAsync();
                         //c.HttpContext.User.
                         return Task.CompletedTask;
@@ -111,7 +112,8 @@ namespace Spark
                     OnRedirectToAccessDenied = c =>
                     {
                         c.HttpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                        c.HttpContext.Response.Headers.Add("logout", "OnRedirectToAccessDenied");
+                        //c.HttpContext.Response.Headers.Add("logout", "OnRedirectToAccessDenied");
+                        HttpResponseWritingExtensions.WriteAsync(c.Response, "logout");
                         c.HttpContext.SignOutAsync();
                         return Task.CompletedTask;
                     }

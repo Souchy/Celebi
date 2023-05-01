@@ -4,8 +4,9 @@ import { IHttpClient, inject } from 'aurelia';
 import { SessionManager } from '../../../jolteon/util/sessionManager';
 import { Constants } from '../../../jolteon/constants';
 import { AuthController } from '../../../jolteon/services/api/AuthController';
-import { IStore } from '@aurelia/state';
 import { LoginAction, LogoutAction } from '../../../jolteon/action-handler';
+import { GlobalState } from '../../../jolteon/initialstate';
+import { IStore } from '@aurelia/state';
 
 
 declare global {
@@ -16,7 +17,7 @@ declare global {
 	}
 }
 
-@inject(IHttpClient, IStore)
+@inject(AuthController, IStore)
 export class Signin {
 	/**
 	 * we dont do usernames, only emails 
@@ -27,14 +28,14 @@ export class Signin {
 	 */
 	private password: string;
 
-	private auth: AuthController;
-
-	constructor(private readonly http: IHttpClient, private readonly store: IStore<{}, LoginAction | LogoutAction>) { 
-		this.auth = new AuthController(http);
-		this.auth.aureliaClient.baseUrl = Constants.serverUrl;
+	constructor(private readonly auth: AuthController, private readonly store: IStore<GlobalState, LoginAction>) { 
 		window.signinGoogleCallback = (token) => this.googleCallback(token);
 		window.signinTwitterCallback = (token) => this.twitterCallback(token);
 		window.signinFacebookCallback = (token) => this.facebookCallback(token);
+	}
+
+	public clickSignin() {
+		
 	}
 
 	public submitSignin() {
@@ -45,9 +46,7 @@ export class Signin {
 			pass: this.password
 		}).then(
 			res => {
-				console.log(res);
-				let action: LoginAction = { value: res.data };
-				this.store.dispatch(action);
+				this.store.dispatch(new LoginAction(res.data));
 			},
 			rej => {
 				console.log(rej);

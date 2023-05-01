@@ -1,23 +1,7 @@
 <import from="../../modal/modal"></import>
 
-<!-- <button click.delegate="clickSignup()">Signout</button> -->
+<!-- <button click.trigger="clickSignup()">Signout</button> -->
 <a click.trigger="clickSignup()" data-bs-toggle="modal" data-bs-target="#signupModal">Signup</a>
-
-<!-- modal -->
-<!-- <div style="display: none;">
-  <form>
-    <input type="text" value.bind="username">
-    <input type="text" value.bind="displayName">
-    <input type="password" value.bind="password">
-    <button type="submit" click.delegate="submitSignup()">Signup</button>
-  </form>
-
-  <div>
-    <button click.delegate="clickGoogle()">Google</button>
-    <button click.delegate="clickTwitter()">Twitter</button>
-    <button click.delegate="clickFacebook()">Facebook</button>
-  </div>
-</div> -->
 
 
 <modal id="signupModal" header.bind="Signup" close.bind=false footer.bind=false>
@@ -39,7 +23,7 @@
             <label class="form-check-label" for="exampleCheck1">Check me out</label>
         </div> -->
         <!-- btn -->
-        <button type="submit" class="btn">Submit</button>
+        <button type="submit" class="btn" data-bs-dismiss="modal">Submit</button>
       </form>
     
 

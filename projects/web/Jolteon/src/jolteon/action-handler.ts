@@ -1,31 +1,38 @@
 import { GlobalState } from "./initialstate";
 import { AccountInfo } from "./services/api/data-contracts";
 
-
-export function keywordsHandler(currentState, action) {
-  return action.type === 'newKeywords'
-    ? { ...currentState, keywords: action.value }
-    : currentState
+//#region Names
+export class ActionNames {
+  public static readonly login = 'login';
+  public static readonly logout = 'logout';
 }
+//#endregion
 
-export type EditAction = { type: 'edit'; value: string }
-export type ClearAction = { type: 'clear' }
+//#region Actions
+export class LoginAction {
+  public readonly type: string = ActionNames.login
+  // public value: AccountInfo
+  constructor(readonly value: AccountInfo) { }
+}
+export class LogoutAction {
+  readonly type: string = ActionNames.logout
+}
+//#endregion
 
-
-
-
-export type LoginAction = { value: AccountInfo }
-export function LoginHandler(currentState: GlobalState, action: LoginAction) {
+//#region Handlers
+export function LoginHandler(currentState: GlobalState, action: LoginAction): GlobalState {
+  if (action.type !== ActionNames.login) return currentState;
   return {
     ...currentState,
     account: action.value
   };
 }
-export type LogoutAction = { }
-export function LogoutHandler(currentState: GlobalState, action: LogoutAction) {
+
+export function LogoutHandler(currentState: GlobalState, action: LogoutAction): GlobalState {
+  if (action.type !== ActionNames.logout) return currentState;
   return {
     ...currentState,
     account: null
   };
 }
-
+//#endregion

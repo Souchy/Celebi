@@ -17,12 +17,12 @@
   </li>
 
   <li class="nav-item" if.bind="isConnected">
-    <!-- <div if.bind="isConnected()" class="d-flex"> -->
-    <div innerhtml.bind="displayName">
-      <!-- show account's displayName as a button to go  see his account's info/settings -->
-      <!-- ${getConnectedAccount().displayName} -->
-    </div>
-    <signout></signout>
-    <!-- </div> -->
+    <!-- show account's displayName as a button to go  see his account's info/settings -->
+    <a load="profile" innerhtml.bind="displayName"></a>
   </li>
+
+  <li class="nav-item" if.bind="isConnected">
+    <signout></signout>
+  </li>
+
 </div>

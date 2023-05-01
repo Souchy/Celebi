@@ -1,10 +1,10 @@
 <import from="../../modal/modal"></import>
 
-<!-- <button click.delegate="clickSignin()">Signout</button> -->
-<a click.trigger="clickSignin()" data-bs-toggle="modal" data-bs-target="#exampleModal">Signin</a>
+<!-- <button click.trigger="clickSignin()">Signout</button> -->
+<a click.trigger="clickSignin()" data-bs-toggle="modal" data-bs-target="#signinModal">Signin</a>
 
 <!-- Modal -->
-<modal id="exampleModal" header.bind="Signin" close.bind=false footer.bind=false>
+<modal id="signinModal" header.bind="Signin" close.bind=false footer.bind=false>
   <!-- autofill username/pass with remind me, might be done automatically by browser? -->
 
   <form submit.trigger="submitSignin()">
@@ -24,7 +24,7 @@
         <label class="form-check-label" for="exampleCheck1">Check me out</label>
     </div> -->
     <!-- btn -->
-    <button type="submit" class="btn">Submit</button>
+    <button type="submit" class="btn" data-bs-dismiss="modal">Submit</button>
   </form>
 
   <hr>
@@ -33,8 +33,8 @@
       <div id="g_id_onload" data-client_id="850322629277-c9fu1umd1dlk7tjv325u6s33g32fb0ea.apps.googleusercontent.com" data-context="signin" data-ux_mode="popup" data-auto_select="true" data-itp_support="true" data-auto_prompt="false" data-callback="signinGoogleCallback"></div>
       <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="filled_black" data-text="signin" data-size="large" data-logo_alignment="left" data-bs-dismiss="modal"></div>
     </div>
-    <!-- <button click.delegate="clickGoogle()">Google</button> -->
-    <button click.delegate="clickTwitter()">Twitter</button>
-    <button click.delegate="clickFacebook()">Facebook</button>
+    <!-- <button click.trigger="clickGoogle()">Google</button> -->
+    <button click.trigger="clickTwitter()">Twitter</button>
+    <button click.trigger="clickFacebook()">Facebook</button>
   </div>
 </modal>
