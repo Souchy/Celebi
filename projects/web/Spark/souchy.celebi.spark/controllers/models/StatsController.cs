@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.impl.shared;
+using souchy.celebi.eevee.impl.stats;
 using souchy.celebi.spark.services.models;
 using Spark;
 
@@ -29,15 +31,17 @@ namespace souchy.celebi.spark.controllers.models
             return Ok(stats);
         }
 
+        [Authorize]
         [HttpPost("stats")]
-        public async Task<IActionResult> Post(IStats newStats)
+        public async Task<IActionResult> Post(Stats newStats)
         {
             await _statsService.CreateAsync(newStats);
             return CreatedAtAction(nameof(Get), new { id = newStats.entityUid }, newStats);
         }
 
+        [Authorize]
         [HttpPut("stats/{id}")]
-        public async Task<ActionResult<ReplaceOneResult>> Update(string id, IStats updatedStats)
+        public async Task<ActionResult<ReplaceOneResult>> Update(string id, Stats updatedStats)
         {
             var stats = await _statsService.GetAsync(id);
             if (stats is null) 
@@ -47,6 +51,7 @@ namespace souchy.celebi.spark.controllers.models
             return Ok(result);
         }
 
+        [Authorize]
         [HttpDelete("stats/{id}")]
         public async Task<ActionResult<DeleteResult>> Delete(string id)
         {

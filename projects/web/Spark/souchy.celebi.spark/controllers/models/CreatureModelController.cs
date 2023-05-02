@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.impl.shared;
@@ -22,21 +23,23 @@ namespace souchy.celebi.spark.controllers.models
         [HttpGet("creature/{id}")]
         public async Task<ActionResult<ICreatureModel>> Get(string id)
         {
-            ICreatureModel? creatureModel = await _creatureModelService.GetAsync(id);
+            var creatureModel = await _creatureModelService.GetAsync(id);
             if (creatureModel is null)
                 return NotFound();
             return Ok(creatureModel);
         }
 
+        [Authorize]
         [HttpPost("creature")]
-        public async Task<IActionResult> Post(ICreatureModel newCreatureModel)
+        public async Task<IActionResult> Post(CreatureModel newCreatureModel)
         {
             await _creatureModelService.CreateAsync(newCreatureModel);
             return CreatedAtAction(nameof(Get), new { id = newCreatureModel.entityUid }, newCreatureModel);
         }
 
+        [Authorize]
         [HttpPut("creature/{id}")]
-        public async Task<ActionResult<ReplaceOneResult>> Update(string id, ICreatureModel updatedCreatureModel)
+        public async Task<ActionResult<ReplaceOneResult>> Update(string id, CreatureModel updatedCreatureModel)
         {
             var crea = await _creatureModelService.GetAsync(id);
             if (crea is null) 
@@ -46,6 +49,7 @@ namespace souchy.celebi.spark.controllers.models
             return Ok(result);
         }
 
+        [Authorize]
         [HttpDelete("creature/{id}")]
         public async Task<ActionResult<DeleteResult>> Delete(string id)
         {

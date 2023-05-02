@@ -1,6 +1,9 @@
 <import from="./creature"></import>
 
-Hi Creature List
 
+<h3>Hi Creature List</h3>
 
-<creature></creature>
+<button class="btn" click.trigger="clickCreate()">New creature</button>
+
+<!-- todo bind creature -->
+<creature repeat.for="crea of creatures" model.bind="crea"></creature>

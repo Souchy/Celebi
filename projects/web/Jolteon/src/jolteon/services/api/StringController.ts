@@ -9,7 +9,13 @@
  * ---------------------------------------------------------------
  */
 
-import { DeleteResult, IStringEntity, IStringEntityFilterDefinition, ReplaceOneResult } from "./data-contracts";
+import {
+  DeleteResult,
+  IStringEntity,
+  IStringEntityFilterDefinition,
+  ReplaceOneResult,
+  StringEntity,
+} from "./data-contracts";
 import { ContentType, HttpClient, HttpResponse, RequestParams } from "./http-client";
 
 export class StringController<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
@@ -76,7 +82,7 @@ export class StringController<SecurityDataType = unknown> extends HttpClient<Sec
    */
   public putString(
     id: string,
-    data: IStringEntity,
+    data: StringEntity,
     params: RequestParams = {},
   ): Promise<HttpResponse<ReplaceOneResult, any>> {
     return this.request<ReplaceOneResult, any>({
@@ -112,7 +118,7 @@ export class StringController<SecurityDataType = unknown> extends HttpClient<Sec
    * @request POST:/models/strings/string
    * @response `200` `void` Success
    */
-  public postString(data: IStringEntity, params: RequestParams = {}): Promise<HttpResponse<void, any>> {
+  public postString(data: StringEntity, params: RequestParams = {}): Promise<HttpResponse<void, any>> {
     return this.request<void, any>({
       path: `/models/strings/string`,
       method: "POST",

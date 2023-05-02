@@ -99,6 +99,17 @@ export interface Contextual {
   nameID?: IID;
 }
 
+export interface CreatureModel {
+  entityUid?: IID;
+  nameId?: IID;
+  descriptionId?: IID;
+  skins?: IIDIEntitySet;
+  baseStats?: IID;
+  growthStats?: IID;
+  baseSpells?: IIDIEntitySet;
+  baseStatusPassives?: IIDIEntitySet;
+}
+
 export interface DeleteResult {
   /** @format int64 */
   deletedCount?: number;
@@ -128,6 +139,18 @@ export enum Direction9Type {
   Bottomleft = "bottomleft",
   Left = "left",
   Topleft = "topleft",
+}
+
+export interface Effect {
+  entityUid?: IID;
+  modelUid?: IID;
+  fightUid?: IID;
+  boardTargetType?: BoardTargetType;
+  sourceCondition?: ICondition;
+  targetFilter?: ICondition;
+  zone?: IZone;
+  triggers?: ITriggerIEntityList;
+  effectIds?: IIDIEntityList;
 }
 
 /** @format  */
@@ -175,7 +198,9 @@ export interface IEffect {
   effectIds?: IIDIEntityList;
 }
 
-export type IID = object;
+export interface IID {
+  value?: string;
+}
 
 export interface IIDIEntityList {
   allowDuplicates?: boolean;
@@ -402,6 +427,19 @@ export interface ShopProduct {
   limitPerAccount?: number;
 }
 
+export interface SpellModel {
+  entityUid?: IID;
+  nameId?: IID;
+  descriptionId?: IID;
+  sourceCondition?: ICondition;
+  targetFilter?: ICondition;
+  costs?: Record<string, number | null>;
+  properties?: SpellProperties;
+  effectIds?: IIDIEntityList;
+  rangeZoneMin?: IZone;
+  rangeZoneMax?: IZone;
+}
+
 export interface SpellModelProperty {
   category?: CharacteristicCategory;
   /** @format int32 */
@@ -456,6 +494,17 @@ export interface State {
   nameID?: IID;
 }
 
+export interface StatusModel {
+  entityUid?: IID;
+  nameId?: IID;
+  descriptionId?: IID;
+  delay?: Int32IValue;
+  duration?: Int32IValue;
+  canBeUnbewitched?: BooleanIValue;
+  priority?: StatusPriorityTypeIValue;
+  effectIds?: IIDIEntityList;
+}
+
 export interface StatusModelProperty {
   category?: CharacteristicCategory;
   /** @format int32 */
@@ -476,6 +525,10 @@ export enum StatusPriorityType {
 
 export interface StatusPriorityTypeIValue {
   value?: StatusPriorityType;
+}
+
+export interface StringEntity {
+  value?: string | null;
 }
 
 /** @format  */

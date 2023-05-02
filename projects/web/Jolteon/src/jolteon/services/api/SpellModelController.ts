@@ -9,7 +9,7 @@
  * ---------------------------------------------------------------
  */
 
-import { DeleteResult, ISpellModel, ReplaceOneResult } from "./data-contracts";
+import { DeleteResult, ISpellModel, ReplaceOneResult, SpellModel } from "./data-contracts";
 import { ContentType, HttpClient, HttpResponse, RequestParams } from "./http-client";
 
 export class SpellModelController<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
@@ -55,7 +55,7 @@ export class SpellModelController<SecurityDataType = unknown> extends HttpClient
    */
   public putSpell(
     id: string,
-    data: ISpellModel,
+    data: SpellModel,
     params: RequestParams = {},
   ): Promise<HttpResponse<ReplaceOneResult, any>> {
     return this.request<ReplaceOneResult, any>({
@@ -91,7 +91,7 @@ export class SpellModelController<SecurityDataType = unknown> extends HttpClient
    * @request POST:/models/spells/spell
    * @response `200` `void` Success
    */
-  public postSpell(data: ISpellModel, params: RequestParams = {}): Promise<HttpResponse<void, any>> {
+  public postSpell(data: SpellModel, params: RequestParams = {}): Promise<HttpResponse<void, any>> {
     return this.request<void, any>({
       path: `/models/spells/spell`,
       method: "POST",

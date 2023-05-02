@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using souchy.celebi.eevee.face.shared.models;
+using souchy.celebi.eevee.impl.shared;
 using souchy.celebi.spark.services.fights;
 using souchy.celebi.spark.services.models;
 using Spark;
@@ -28,15 +30,17 @@ namespace souchy.celebi.spark.controllers.models
             return Ok(creatureModel);
         }
 
+        [Authorize]
         [HttpPost("status")]
-        public async Task<IActionResult> Post(IStatusModel newSpellModel)
+        public async Task<IActionResult> Post(StatusModel newSpellModel)
         {
             await _statusService.CreateAsync(newSpellModel);
             return CreatedAtAction(nameof(Get), new { id = newSpellModel.entityUid }, newSpellModel);
         }
+        [Authorize]
 
         [HttpPut("status/{id}")]
-        public async Task<ActionResult<ReplaceOneResult>> Update(string id, IStatusModel updatedSpellModel)
+        public async Task<ActionResult<ReplaceOneResult>> Update(string id, StatusModel updatedSpellModel)
         {
             var crea = await _statusService.GetAsync(id);
             if (crea is null)
@@ -46,6 +50,7 @@ namespace souchy.celebi.spark.controllers.models
             return Ok(result);
         }
 
+        [Authorize]
         [HttpDelete("status/{id}")]
         public async Task<ActionResult<DeleteResult>> Delete(string id)
         {

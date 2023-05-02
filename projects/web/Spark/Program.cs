@@ -18,6 +18,15 @@ using System.Diagnostics;
 using System.Text;
 using Microsoft.AspNetCore.Authentication;
 using souchy.celebi.spark.models.settings;
+using souchy.celebi.eevee.face.shared.models;
+using souchy.celebi.eevee.impl.shared;
+using souchy.celebi.eevee.face.objects.stats;
+using souchy.celebi.eevee.impl.stats;
+using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.impl.util;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.Serializers;
+using Microsoft.OpenApi.Any;
 
 namespace Spark
 {
@@ -35,6 +44,8 @@ namespace Spark
             var builder = WebApplication.CreateBuilder(args);
             var services = builder.Services;
             var configuration = builder.Configuration;
+            // Register types
+            configureMongo();
             // services
             configureBuilder(services, configuration);
             // App
@@ -127,6 +138,7 @@ namespace Spark
             services.AddSwaggerGen(c =>
             {
                 c.SchemaFilter<EnumSchemaFilter>();
+                //c.MapType<IID>(() => new OpenApiSchema() { Type = "IID" });
             });
             services.AddSwaggerGenNewtonsoftSupport();
             services.AddControllers(options =>
@@ -184,6 +196,11 @@ namespace Spark
             services.AddSingleton<CreatureService>();
             services.AddSingleton<SpellModelService>();
             services.AddSingleton<StatusModelService>();
+
+            //services.AddTransient<ICreatureModel, CreatureModel>();
+            //services.AddTransient<ISpellModel, SpellModel>();
+            //services.AddTransient<IStats, Stats>();
+            //services.AddTransient<IEntitySet<IID>, EntitySet<IID>>();
         }
 
         private static void configureAuthentication(IServiceCollection services, ConfigurationManager configuration)
@@ -237,6 +254,17 @@ namespace Spark
             //        options.TokenValidationParameters = tokenValidationParameters;
             //    });
 
+        }
+
+        private static void configureMongo()
+        {
+            var objectSerializer = new ObjectSerializer(type => 
+                ObjectSerializer.DefaultAllowedTypes(type) || type.FullName.StartsWith("souchy.celebi")
+            );
+            BsonSerializer.RegisterSerializer(objectSerializer);
+            BsonClassMap.RegisterClassMap<IID>();
+            BsonClassMap.RegisterClassMap<CreatureModel>();
+            BsonClassMap.RegisterClassMap<EntitySet<IID>>();
         }
 
     }

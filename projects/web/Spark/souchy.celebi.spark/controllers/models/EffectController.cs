@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.shared.models;
+using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.shared;
 using souchy.celebi.spark.services.models;
 using Spark;
@@ -29,15 +31,17 @@ namespace souchy.celebi.spark.controllers.models
             return Ok(effect);
         }
 
+        [Authorize]
         [HttpPost("effect")]
-        public async Task<IActionResult> Post(IEffect newEffect)
+        public async Task<IActionResult> Post(Effect newEffect)
         {
             await _effectService.CreateAsync(newEffect);
             return CreatedAtAction(nameof(Get), new { id = newEffect.entityUid }, newEffect);
         }
 
+        [Authorize]
         [HttpPut("effect/{id}")]
-        public async Task<ActionResult<ReplaceOneResult>> Update(string id, IEffect updatedEffect)
+        public async Task<ActionResult<ReplaceOneResult>> Update(string id, Effect updatedEffect)
         {
             var effect = await _effectService.GetAsync(id);
             if (effect is null) 
@@ -47,6 +51,7 @@ namespace souchy.celebi.spark.controllers.models
             return Ok(result);
         }
 
+        [Authorize]
         [HttpDelete("effect/{id}")]
         public async Task<ActionResult<DeleteResult>> Delete(string id)
         {

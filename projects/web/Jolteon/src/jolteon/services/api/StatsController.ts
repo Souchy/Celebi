@@ -9,7 +9,7 @@
  * ---------------------------------------------------------------
  */
 
-import { DeleteResult, IStats, ReplaceOneResult } from "./data-contracts";
+import { DeleteResult, IStat, IStats, ReplaceOneResult } from "./data-contracts";
 import { ContentType, HttpClient, HttpResponse, RequestParams } from "./http-client";
 
 export class StatsController<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
@@ -53,7 +53,11 @@ export class StatsController<SecurityDataType = unknown> extends HttpClient<Secu
    * @request PUT:/models/stats/stats/{id}
    * @response `200` `ReplaceOneResult` Success
    */
-  public putStats(id: string, data: IStats, params: RequestParams = {}): Promise<HttpResponse<ReplaceOneResult, any>> {
+  public putStats(
+    id: string,
+    data: Record<string, IStat>,
+    params: RequestParams = {},
+  ): Promise<HttpResponse<ReplaceOneResult, any>> {
     return this.request<ReplaceOneResult, any>({
       path: `/models/stats/stats/${id}`,
       method: "PUT",
@@ -87,7 +91,7 @@ export class StatsController<SecurityDataType = unknown> extends HttpClient<Secu
    * @request POST:/models/stats/stats
    * @response `200` `void` Success
    */
-  public postStats(data: IStats, params: RequestParams = {}): Promise<HttpResponse<void, any>> {
+  public postStats(data: Record<string, IStat>, params: RequestParams = {}): Promise<HttpResponse<void, any>> {
     return this.request<void, any>({
       path: `/models/stats/stats`,
       method: "POST",

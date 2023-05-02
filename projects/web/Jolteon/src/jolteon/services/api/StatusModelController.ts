@@ -9,7 +9,7 @@
  * ---------------------------------------------------------------
  */
 
-import { DeleteResult, IStatusModel, ReplaceOneResult } from "./data-contracts";
+import { DeleteResult, IStatusModel, ReplaceOneResult, StatusModel } from "./data-contracts";
 import { ContentType, HttpClient, HttpResponse, RequestParams } from "./http-client";
 
 export class StatusModelController<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
@@ -55,7 +55,7 @@ export class StatusModelController<SecurityDataType = unknown> extends HttpClien
    */
   public putStatus(
     id: string,
-    data: IStatusModel,
+    data: StatusModel,
     params: RequestParams = {},
   ): Promise<HttpResponse<ReplaceOneResult, any>> {
     return this.request<ReplaceOneResult, any>({
@@ -91,7 +91,7 @@ export class StatusModelController<SecurityDataType = unknown> extends HttpClien
    * @request POST:/models/status/status
    * @response `200` `void` Success
    */
-  public postStatus(data: IStatusModel, params: RequestParams = {}): Promise<HttpResponse<void, any>> {
+  public postStatus(data: StatusModel, params: RequestParams = {}): Promise<HttpResponse<void, any>> {
     return this.request<void, any>({
       path: `/models/status/status`,
       method: "POST",

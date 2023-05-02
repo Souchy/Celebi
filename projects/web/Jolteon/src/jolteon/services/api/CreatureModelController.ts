@@ -9,7 +9,7 @@
  * ---------------------------------------------------------------
  */
 
-import { DeleteResult, ICreatureModel, ReplaceOneResult } from "./data-contracts";
+import { CreatureModel, DeleteResult, ICreatureModel, ReplaceOneResult } from "./data-contracts";
 import { ContentType, HttpClient, HttpResponse, RequestParams } from "./http-client";
 
 export class CreatureModelController<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
@@ -55,7 +55,7 @@ export class CreatureModelController<SecurityDataType = unknown> extends HttpCli
    */
   public putCreature(
     id: string,
-    data: ICreatureModel,
+    data: CreatureModel,
     params: RequestParams = {},
   ): Promise<HttpResponse<ReplaceOneResult, any>> {
     return this.request<ReplaceOneResult, any>({
@@ -91,7 +91,7 @@ export class CreatureModelController<SecurityDataType = unknown> extends HttpCli
    * @request POST:/models/creatures/creature
    * @response `200` `void` Success
    */
-  public postCreature(data: ICreatureModel, params: RequestParams = {}): Promise<HttpResponse<void, any>> {
+  public postCreature(data: CreatureModel, params: RequestParams = {}): Promise<HttpResponse<void, any>> {
     return this.request<void, any>({
       path: `/models/creatures/creature`,
       method: "POST",

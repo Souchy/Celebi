@@ -9,7 +9,7 @@
  * ---------------------------------------------------------------
  */
 
-import { DeleteResult, IEffect, ReplaceOneResult } from "./data-contracts";
+import { DeleteResult, Effect, IEffect, ReplaceOneResult } from "./data-contracts";
 import { ContentType, HttpClient, HttpResponse, RequestParams } from "./http-client";
 
 export class EffectController<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
@@ -53,11 +53,7 @@ export class EffectController<SecurityDataType = unknown> extends HttpClient<Sec
    * @request PUT:/models/effects/effect/{id}
    * @response `200` `ReplaceOneResult` Success
    */
-  public putEffect(
-    id: string,
-    data: IEffect,
-    params: RequestParams = {},
-  ): Promise<HttpResponse<ReplaceOneResult, any>> {
+  public putEffect(id: string, data: Effect, params: RequestParams = {}): Promise<HttpResponse<ReplaceOneResult, any>> {
     return this.request<ReplaceOneResult, any>({
       path: `/models/effects/effect/${id}`,
       method: "PUT",
@@ -91,7 +87,7 @@ export class EffectController<SecurityDataType = unknown> extends HttpClient<Sec
    * @request POST:/models/effects/effect
    * @response `200` `void` Success
    */
-  public postEffect(data: IEffect, params: RequestParams = {}): Promise<HttpResponse<void, any>> {
+  public postEffect(data: Effect, params: RequestParams = {}): Promise<HttpResponse<void, any>> {
     return this.request<void, any>({
       path: `/models/effects/effect`,
       method: "POST",
