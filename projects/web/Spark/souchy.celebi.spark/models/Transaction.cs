@@ -7,7 +7,7 @@ namespace souchy.celebi.spark.models
         /// <summary>
         /// MongoID will contain the date of the transaction
         /// </summary>
-        public ObjectId Id { get; set; }
+        public ObjectId _id { get; set; }
         /// <summary>
         /// Id of the product bought
         /// </summary>
@@ -15,7 +15,12 @@ namespace souchy.celebi.spark.models
         /// <summary>
         /// Types include: Purchase, Refund
         /// </summary>
-        public TransactionType Type { get; set; }
+        public TransactionType Type { get; set; } = TransactionType.Purchase;
+        /// <summary>
+        /// Price at the time of the transaction. The product's price could change later.
+        /// Important for refunds? 
+        /// </summary>
+        public float Price { get; set; }  
     }
 
     public enum TransactionType { 

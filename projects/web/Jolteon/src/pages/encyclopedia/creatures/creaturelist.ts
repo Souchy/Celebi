@@ -19,7 +19,7 @@ export class CreatureList {
 
     public clickCreate() {
         let crea: CreatureModel = {
-            entityUid: { value: "456" }
+            // entityUid: { value: "456" }
         }; //new ICreatureModel();
         this.creatures.push(crea);
         this.http.postCreature(crea);

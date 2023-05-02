@@ -88,6 +88,33 @@ export enum ConditionGroupType {
   OR = "OR",
 }
 
+export interface ConsumableDrop {
+  productId?: string;
+  /** @format int32 */
+  weight?: number;
+}
+
+export interface ConsumableProduct {
+  type?: ConsumableType;
+  drops?: ConsumableDrop[] | null;
+  _id?: string;
+  /** @format int32 */
+  currency?: number;
+  isAvailableInShop?: boolean;
+  isAvailableInDrop?: boolean;
+  /** @format int32 */
+  dropWeight?: number;
+  limitType?: LimitType;
+  /** @format int32 */
+  limitPerAccount?: number;
+}
+
+/** @format  */
+export enum ConsumableType {
+  All = "All",
+  Random = "Random",
+}
+
 export interface Contextual {
   category?: CharacteristicCategory;
   /** @format int32 */
@@ -108,6 +135,21 @@ export interface CreatureModel {
   growthStats?: IID;
   baseSpells?: IIDIEntitySet;
   baseStatusPassives?: IIDIEntitySet;
+}
+
+export interface CurrencyProduct {
+  /** @format float */
+  price?: number;
+  _id?: string;
+  /** @format int32 */
+  currency?: number;
+  isAvailableInShop?: boolean;
+  isAvailableInDrop?: boolean;
+  /** @format int32 */
+  dropWeight?: number;
+  limitType?: LimitType;
+  /** @format int32 */
+  limitPerAccount?: number;
 }
 
 export interface DeleteResult {
@@ -325,6 +367,26 @@ export interface IpAccess {
 }
 
 /** @format  */
+export enum LimitType {
+  Owned = "Owned",
+  Bought = "Bought",
+}
+
+export interface ModelProduct {
+  modelID?: IID;
+  _id?: string;
+  /** @format int32 */
+  currency?: number;
+  isAvailableInShop?: boolean;
+  isAvailableInDrop?: boolean;
+  /** @format int32 */
+  dropWeight?: number;
+  limitType?: LimitType;
+  /** @format int32 */
+  limitPerAccount?: number;
+}
+
+/** @format  */
 export enum MoveType {
   Walk = "Walk",
   Translate = "Translate",
@@ -406,25 +468,6 @@ export enum Rotation4Type {
   Right = "right",
   Bottom = "bottom",
   Left = "left",
-}
-
-export interface ShopCurrency {
-  mongoID?: string;
-  /** @format int32 */
-  amount?: number;
-  /** @format int32 */
-  price?: number;
-  isAvailable?: boolean;
-}
-
-export interface ShopProduct {
-  mongoID?: string;
-  modelID?: IID;
-  /** @format int32 */
-  currencyPrice?: number;
-  isAvailable?: boolean;
-  /** @format int32 */
-  limitPerAccount?: number;
 }
 
 export interface SpellModel {

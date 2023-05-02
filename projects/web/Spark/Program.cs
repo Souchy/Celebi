@@ -184,8 +184,9 @@ namespace Spark
 
             // Meta
             services.AddSingleton<AccountService>();
-            services.AddSingleton<ShopCurrencyService>();
-            services.AddSingleton<ShopProductService>();
+            services.AddSingleton<CurrencyProductService>();
+            services.AddSingleton<ModelProductService>();
+            services.AddSingleton<ConsumableProductService>();
             // Models
             services.AddSingleton<CreatureModelService>();
             services.AddSingleton<SpellModelService>();
@@ -262,7 +263,7 @@ namespace Spark
                 ObjectSerializer.DefaultAllowedTypes(type) || type.FullName.StartsWith("souchy.celebi")
             );
             BsonSerializer.RegisterSerializer(objectSerializer);
-            BsonClassMap.RegisterClassMap<IID>();
+            //BsonClassMap.RegisterClassMap<IID>();
             BsonClassMap.RegisterClassMap<CreatureModel>();
             BsonClassMap.RegisterClassMap<EntitySet<IID>>();
         }
