@@ -32,14 +32,12 @@
 		<ProjectReference Include="..\..\Eevee\Eevee.csproj" />
 	</ItemGroup>
 
-	<!-- 
+	
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
 		<Exec Command="dotnet tool restore" />
-		<Exec Command="dotnet swagger tofile - -output bin/swagger.json $(OutputPath)\$(AssemblyName).dll v1 " />
-		<!- - <Exec WorkingDirectory="../Flareon" Command="npm run swagger"></Exec> - ->
+		<Exec Command="dotnet swagger tofile --output bin/swagger.json $(OutputPath)\$(AssemblyName).dll v1 " />
 		<Exec WorkingDirectory="../Jolteon" Command="npm run swagger"></Exec>
-		<!- - <Exec WorkingDirectory="../Jolteon" Command="npm run build"></Exec> - ->
 	</Target>
-	-->
+	
 	
 </Project>

@@ -8,8 +8,8 @@ namespace souchy.celebi.eevee.face.shared.models
 {
     public interface ICreatureModel : IEntity
     {
-        //public IID nameId { get; set; }
-        //public IID descriptionId { get; set; }
+        public IID nameId { get; set; }
+        public IID descriptionId { get; set; }
         public IEntitySet<IID> skins { get; init; }
 
         public IID baseStats { get; set; }

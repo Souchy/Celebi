@@ -9,7 +9,7 @@
  * ---------------------------------------------------------------
  */
 
-import { ICreatureModel } from "./data-contracts";
+import { DeleteResult, ICreatureModel, ReplaceOneResult } from "./data-contracts";
 import { ContentType, HttpClient, HttpResponse, RequestParams } from "./http-client";
 
 export class CreatureModelController<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
@@ -17,13 +17,13 @@ export class CreatureModelController<SecurityDataType = unknown> extends HttpCli
    * No description
    *
    * @tags CreatureModelController
-   * @name GetCreatures
-   * @request GET:/models/creature/creatures
+   * @name GetAll
+   * @request GET:/models/creatures/all
    * @response `200` `(ICreatureModel)[]` Success
    */
-  public getCreatures(params: RequestParams = {}): Promise<HttpResponse<ICreatureModel[], any>> {
+  public getAll(params: RequestParams = {}): Promise<HttpResponse<ICreatureModel[], any>> {
     return this.request<ICreatureModel[], any>({
-      path: `/models/creature/creatures`,
+      path: `/models/creatures/all`,
       method: "GET",
       format: "json",
       ...params,
@@ -34,12 +34,12 @@ export class CreatureModelController<SecurityDataType = unknown> extends HttpCli
    *
    * @tags CreatureModelController
    * @name GetCreature
-   * @request GET:/models/creature/{id}
+   * @request GET:/models/creatures/creature/{id}
    * @response `200` `ICreatureModel` Success
    */
   public getCreature(id: string, params: RequestParams = {}): Promise<HttpResponse<ICreatureModel, any>> {
     return this.request<ICreatureModel, any>({
-      path: `/models/creature/${id}`,
+      path: `/models/creatures/creature/${id}`,
       method: "GET",
       format: "json",
       ...params,
@@ -50,15 +50,20 @@ export class CreatureModelController<SecurityDataType = unknown> extends HttpCli
    *
    * @tags CreatureModelController
    * @name PutCreature
-   * @request PUT:/models/creature/{id}
-   * @response `200` `void` Success
+   * @request PUT:/models/creatures/creature/{id}
+   * @response `200` `ReplaceOneResult` Success
    */
-  public putCreature(id: string, data: ICreatureModel, params: RequestParams = {}): Promise<HttpResponse<void, any>> {
-    return this.request<void, any>({
-      path: `/models/creature/${id}`,
+  public putCreature(
+    id: string,
+    data: ICreatureModel,
+    params: RequestParams = {},
+  ): Promise<HttpResponse<ReplaceOneResult, any>> {
+    return this.request<ReplaceOneResult, any>({
+      path: `/models/creatures/creature/${id}`,
       method: "PUT",
       body: data,
       type: ContentType.Json,
+      format: "json",
       ...params,
     });
   }
@@ -67,13 +72,14 @@ export class CreatureModelController<SecurityDataType = unknown> extends HttpCli
    *
    * @tags CreatureModelController
    * @name DeleteCreature
-   * @request DELETE:/models/creature/{id}
-   * @response `200` `void` Success
+   * @request DELETE:/models/creatures/creature/{id}
+   * @response `200` `DeleteResult` Success
    */
-  public deleteCreature(id: string, params: RequestParams = {}): Promise<HttpResponse<void, any>> {
-    return this.request<void, any>({
-      path: `/models/creature/${id}`,
+  public deleteCreature(id: string, params: RequestParams = {}): Promise<HttpResponse<DeleteResult, any>> {
+    return this.request<DeleteResult, any>({
+      path: `/models/creatures/creature/${id}`,
       method: "DELETE",
+      format: "json",
       ...params,
     });
   }
@@ -81,13 +87,13 @@ export class CreatureModelController<SecurityDataType = unknown> extends HttpCli
    * No description
    *
    * @tags CreatureModelController
-   * @name PostCreate
-   * @request POST:/models/creature/create
+   * @name PostCreature
+   * @request POST:/models/creatures/creature
    * @response `200` `void` Success
    */
-  public postCreate(data: ICreatureModel, params: RequestParams = {}): Promise<HttpResponse<void, any>> {
+  public postCreature(data: ICreatureModel, params: RequestParams = {}): Promise<HttpResponse<void, any>> {
     return this.request<void, any>({
-      path: `/models/creature/create`,
+      path: `/models/creatures/creature`,
       method: "POST",
       body: data,
       type: ContentType.Json,

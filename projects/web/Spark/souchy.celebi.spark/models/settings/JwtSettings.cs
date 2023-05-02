@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.DataProtection;
 
-namespace souchy.celebi.spark.models
+namespace souchy.celebi.spark.models.settings
 {
     public class JwtSettings
     {

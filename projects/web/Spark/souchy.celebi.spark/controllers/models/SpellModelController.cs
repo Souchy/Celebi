@@ -1,14 +1,58 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
+using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.spark.services.models;
 using Spark;
 
 namespace souchy.celebi.spark.controllers.models
 {
     [ApiController]
-    [Route(Routes.Models + "spell")]
+    [Produces("application/json")]
+    [Route(Routes.Models + "spells")]
     public class SpellModelController : ControllerBase
     {
-        private readonly SpellModelService spellService;
-        public SpellModelController(SpellModelService spells) => spellService = spells;
+        private readonly SpellModelService _spellService;
+        public SpellModelController(SpellModelService spells) => _spellService = spells;
+
+        [HttpGet("all")]
+        public async Task<List<ISpellModel>> GetAll() => await _spellService.GetAsync();
+
+        [HttpGet("spell/{id}")]
+        public async Task<ActionResult<ISpellModel>> Get(string id)
+        {
+            ISpellModel? creatureModel = await _spellService.GetAsync(id);
+            if (creatureModel is null)
+                return NotFound();
+            return Ok(creatureModel);
+        }
+
+        [HttpPost("spell")]
+        public async Task<IActionResult> Post(ISpellModel newSpellModel)
+        {
+            await _spellService.CreateAsync(newSpellModel);
+            return CreatedAtAction(nameof(Get), new { id = newSpellModel.entityUid }, newSpellModel);
+        }
+
+        [HttpPut("spell/{id}")]
+        public async Task<ActionResult<ReplaceOneResult>> Update(string id, ISpellModel updatedSpellModel)
+        {
+            var crea = await _spellService.GetAsync(id);
+            if (crea is null)
+                return NotFound();
+            updatedSpellModel.entityUid = crea.entityUid;
+            var result = await _spellService.UpdateAsync(id, updatedSpellModel);
+            return Ok(result);
+        }
+
+        [HttpDelete("spell/{id}")]
+        public async Task<ActionResult<DeleteResult>> Delete(string id)
+        {
+            var crea = await _spellService.GetAsync(id);
+            if (crea is null)
+                return NotFound();
+            var result = await _spellService.RemoveAsync(id);
+            return Ok(result);
+        }
+
     }
 }

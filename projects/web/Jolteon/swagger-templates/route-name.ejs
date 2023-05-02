@@ -34,9 +34,12 @@ const createCustomOperationId = (method, route, moduleName) => {
       )
   ).join("_");
 
-  return routeParts.length > 3 && methodAliases[method]
-    ? methodAliases[method](routeParts, hasPathInserts)
-    : _.camelCase(_.lowerCase(method) + "_" + [moduleName].join("_")) || "index";
+  let res1 = methodAliases[method](routeParts, hasPathInserts);
+  let res3 = _.camelCase(_.lowerCase(method) + "_" + [moduleName].join("_")) // idk what res2/3 is supposed to be but res1 is good
+  let res2 = res3 || "index";
+  let result = routeParts.length > 2 && methodAliases[method] ? res1 : res2;
+  // console.log("route: " + route + " -> " + result + ": ["+res1+", "+res2+"] from " + res3)
+  return result;
 };
 
 if (operationId)

@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using MongoDB.Driver.Core.Configuration;
-using Spark.souchy.celebi.spark.models;
 
 namespace souchy.celebi.spark.services
 {

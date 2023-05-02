@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.enums.characteristics.creature;
+using souchy.celebi.eevee.enums.characteristics.properties;
 using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.impl.stats;
 using souchy.celebi.eevee.impl.values;
@@ -17,32 +18,27 @@ namespace souchy.celebi.spark.controllers.models
     [Route(Routes.Models + "properties")]
     public class PropertiesController : ControllerBase
     {
-        [HttpGet("charac/characteristicId")]
-        public List<CharacteristicId> GetCharacId() => new List<CharacteristicId>();
-        [HttpGet("charac/characType")]
-        public List<CharacteristicType> GetCharacType() => new List<CharacteristicType>();
-
-        //[HttpGet("charac/testrecord")]
-        //public TestRecord TestRecord() => new TestRecord("test", CharacteristicCategory.Resource, null); // CharacteristicCategory.Resource, 1, "test", null);
-
-
-        //[HttpGet("charac/resource")]
-        //public List<Resource> GetResource() => Resource.values.Values.ToList();
-        //[HttpGet("charac/affinity")]
-        //public List<Affinity> GetAffinity() => Affinity.values.Values.ToList();
-        //[HttpGet("charac/resistance")]
-        //public List<Resistance> GetResistance() => Resistance.values.Values.ToList();
-        //[HttpGet("charac/contextual")]
-        //public List<Contextual> GetContextual() => Contextual.values.Values.ToList();
-        //[HttpGet("charac/other")]
-        //public List<OtherProperty> GetOther() => OtherProperty.values.Values.ToList();
-        //[HttpGet("charac/spellmodel")]
-        //public List<SpellModelProperty> GetSpellModelProperty() => SpellModelProperty.values.Values.ToList();
-        //[HttpGet("charac/spell")]
-        //public List<SpellProperty> GetSpellProperty() => SpellProperty.values.Values.ToList();
-        //[HttpGet("charac/state")]
-        //public List<State> GetState() => State.values.Values.ToList();
-        //[HttpGet("charac/statusmodel")]
-        //public List<StatusModelProperty> GetStatusModelProperty() => StatusModelProperty.values.Values.ToList();
+        //[HttpGet("charac/characteristicId")]
+        //public List<CharacteristicId> GetCharacId() => new List<CharacteristicId>();
+        //[HttpGet("charac/characType")]
+        //public List<CharacteristicType> GetCharacType() => new List<CharacteristicType>();
+        [HttpGet("charac/resource")]
+        public List<Resource> GetResource() => Resource.values.Values.ToList();
+        [HttpGet("charac/affinity")]
+        public List<Affinity> GetAffinity() => Affinity.values.Values.ToList();
+        [HttpGet("charac/resistance")]
+        public List<Resistance> GetResistance() => Resistance.values.Values.ToList();
+        [HttpGet("charac/contextual")]
+        public List<Contextual> GetContextual() => Contextual.values.Values.ToList();
+        [HttpGet("charac/other")]
+        public List<OtherProperty> GetOther() => OtherProperty.values.Values.ToList();
+        [HttpGet("charac/spellmodel")]
+        public List<SpellModelProperty> GetSpellModelProperty() => SpellModelProperty.values.Values.ToList();
+        [HttpGet("charac/spell")]
+        public List<SpellProperty> GetSpellProperty() => SpellProperty.values.Values.ToList();
+        [HttpGet("charac/state")]
+        public List<State> GetState() => State.values.Values.ToList();
+        [HttpGet("charac/statusmodel")]
+        public List<StatusModelProperty> GetStatusModelProperty() => StatusModelProperty.values.Values.ToList();
     }
 }

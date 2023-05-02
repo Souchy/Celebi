@@ -33,6 +33,14 @@ export class App implements IRouteableComponent {
 			data: {
 				requiresAuth: true
 			}
+		},
+		{
+			path: 'editor',
+			component: import('./pages/admin/editor/editor'),
+			title: 'Editor',
+			data: {
+				requiresAuth: true
+			}
 		}
 	];
 

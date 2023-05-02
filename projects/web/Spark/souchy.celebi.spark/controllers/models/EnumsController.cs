@@ -17,6 +17,7 @@ namespace souchy.celebi.spark.controllers.models
         public ResourceProperty[] GetResourceType() => Enum.GetValues<ResourceProperty>();
         [HttpGet("charac/resourceProperty")]
         public ResourceEnum[] GetResourceProperty() => Enum.GetValues<ResourceEnum>();
+
         [HttpGet("actorType")]
         public ActorType[] GetActorTypes() => Enum.GetValues<ActorType>();
         [HttpGet("boardTargetType")]

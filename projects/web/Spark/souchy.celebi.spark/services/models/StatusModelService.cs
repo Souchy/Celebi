@@ -2,7 +2,6 @@
 using MongoDB.Driver;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.impl.shared;
-using Spark.souchy.celebi.spark.models;
 
 namespace souchy.celebi.spark.services.models
 {
@@ -24,10 +23,10 @@ namespace souchy.celebi.spark.services.models
         public async Task CreateAsync(IStatusModel newStatusModel) =>
             await _StatusModelsCollection.InsertOneAsync(newStatusModel);
 
-        public async Task UpdateAsync(string id, IStatusModel updatedStatusModel) =>
+        public async Task<ReplaceOneResult> UpdateAsync(string id, IStatusModel updatedStatusModel) =>
             await _StatusModelsCollection.ReplaceOneAsync(x => x.entityUid == id, updatedStatusModel);
 
-        public async Task RemoveAsync(string id) =>
+        public async Task<DeleteResult> RemoveAsync(string id) =>
             await _StatusModelsCollection.DeleteOneAsync(x => x.entityUid == id);
 
     }

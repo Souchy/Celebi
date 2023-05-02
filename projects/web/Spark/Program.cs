@@ -17,6 +17,7 @@ using souchy.celebi.spark.util.swagger;
 using System.Diagnostics;
 using System.Text;
 using Microsoft.AspNetCore.Authentication;
+using souchy.celebi.spark.models.settings;
 
 namespace Spark
 {

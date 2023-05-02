@@ -27,10 +27,26 @@ export enum ActorType {
   Target = "Target",
 }
 
+export interface Affinity {
+  element?: ElementType;
+  category?: CharacteristicCategory;
+  /** @format int32 */
+  localId?: number;
+  baseName?: string | null;
+  conditions?: ICondition[] | null;
+  statValueType?: StatValueType;
+  id?: CharacteristicId;
+  nameID?: IID;
+}
+
 /** @format  */
 export enum BoardTargetType {
   Cell = "Cell",
   Creature = "Creature",
+}
+
+export interface BooleanIValue {
+  value?: boolean;
 }
 
 /** @format  */
@@ -51,15 +67,9 @@ export interface CharacteristicId {
   id?: number;
 }
 
-export interface CharacteristicType {
-  category?: CharacteristicCategory;
-  /** @format int32 */
-  localId?: number;
-  baseName?: string | null;
-  conditions?: ICondition[] | null;
-  statValueType?: StatValueType;
-  id?: CharacteristicId;
-  nameID?: IID;
+export interface CharacteristicIdIStatKeyValuePair {
+  key?: CharacteristicId;
+  value?: IStat;
 }
 
 /** @format  */
@@ -76,6 +86,23 @@ export enum ConditionComparatorType {
 export enum ConditionGroupType {
   AND = "AND",
   OR = "OR",
+}
+
+export interface Contextual {
+  category?: CharacteristicCategory;
+  /** @format int32 */
+  localId?: number;
+  baseName?: string | null;
+  conditions?: ICondition[] | null;
+  statValueType?: StatValueType;
+  id?: CharacteristicId;
+  nameID?: IID;
+}
+
+export interface DeleteResult {
+  /** @format int64 */
+  deletedCount?: number;
+  isAcknowledged?: boolean;
 }
 
 /** @format  */
@@ -103,6 +130,16 @@ export enum Direction9Type {
   Topleft = "topleft",
 }
 
+/** @format  */
+export enum ElementType {
+  None = "None",
+  Water = "Water",
+  Fire = "Fire",
+  Earth = "Earth",
+  Air = "Air",
+  True = "True",
+}
+
 export interface ICondition {
   actorType?: ActorType;
   comparator?: ConditionComparatorType;
@@ -117,6 +154,8 @@ export interface IConditionIEntityList {
 }
 
 export interface ICreatureModel {
+  nameId?: IID;
+  descriptionId?: IID;
   skins?: IIDIEntitySet;
   baseStats?: IID;
   growthStats?: IID;
@@ -125,12 +164,131 @@ export interface ICreatureModel {
   entityUid?: IID;
 }
 
+export interface IEffect {
+  sourceCondition?: ICondition;
+  targetFilter?: ICondition;
+  zone?: IZone;
+  triggers?: ITriggerIEntityList;
+  modelUid?: IID;
+  entityUid?: IID;
+  fightUid?: IID;
+  effectIds?: IIDIEntityList;
+}
+
 export type IID = object;
+
+export interface IIDIEntityList {
+  allowDuplicates?: boolean;
+  values?: IID[] | null;
+  entityUid?: IID;
+}
 
 export interface IIDIEntitySet {
   allowDuplicates?: boolean;
   values?: IID[] | null;
   entityUid?: IID;
+}
+
+export interface ISpellModel {
+  nameId?: IID;
+  descriptionId?: IID;
+  sourceCondition?: ICondition;
+  targetFilter?: ICondition;
+  costs?: Record<string, number | null>;
+  properties?: SpellProperties;
+  rangeZoneMin?: IZone;
+  rangeZoneMax?: IZone;
+  entityUid?: IID;
+  effectIds?: IIDIEntityList;
+}
+
+export interface IStat {
+  statId?: CharacteristicId;
+  entityUid?: IID;
+}
+
+export interface IStats {
+  entityUid?: IID;
+  keys?: CharacteristicId[] | null;
+  values?: IStat[] | null;
+  pairs?: CharacteristicIdIStatKeyValuePair[] | null;
+}
+
+export interface IStatusModel {
+  nameId?: IID;
+  descriptionId?: IID;
+  delay?: Int32IValue;
+  duration?: Int32IValue;
+  canBeUnbewitched?: BooleanIValue;
+  priority?: StatusPriorityTypeIValue;
+  entityUid?: IID;
+  effectIds?: IIDIEntityList;
+}
+
+export interface IStringEntity {
+  value?: string | null;
+  entityUid?: IID;
+}
+
+export type IStringEntityFilterDefinition = object;
+
+export interface ITrigger {
+  type?: TriggerType;
+  orderType?: TriggerOrderType;
+  zone?: IZone;
+  triggererFilter?: ICondition;
+  holderCondition?: ICondition;
+}
+
+export interface ITriggerIEntityList {
+  allowDuplicates?: boolean;
+  values?: ITrigger[] | null;
+  entityUid?: IID;
+}
+
+export interface IVector2 {
+  /** @format int32 */
+  x?: number;
+  /** @format int32 */
+  z?: number;
+}
+
+export interface IVector3 {
+  /** @format int32 */
+  x?: number;
+  /** @format int32 */
+  z?: number;
+  /** @format int32 */
+  y?: number;
+}
+
+export interface IVector3IValue {
+  value?: IVector3;
+}
+
+export interface IZone {
+  zoneType?: ZoneTypeIValue;
+  size?: IVector3IValue;
+  negative?: boolean;
+  worldOrigin?: ActorType;
+  worldOffset?: IVector2;
+  localOrigin?: Direction9Type;
+  rotation?: Rotation4Type;
+  canRotate?: BooleanIValue;
+  /** @format int32 */
+  sizeIndexExtendFromSource?: number;
+  children?: IZoneIEntityList;
+}
+
+export interface IZoneIEntityList {
+  allowDuplicates?: boolean;
+  values?: IZone[] | null;
+  entityUid?: IID;
+}
+
+export interface Int32IValue {
+  /** @format int32 */
+  value?: number;
 }
 
 export interface IpAccess {
@@ -148,6 +306,52 @@ export enum MoveType {
   Teleport = "Teleport",
   Carry = "Carry",
   Throw = "Throw",
+}
+
+export interface OtherProperty {
+  category?: CharacteristicCategory;
+  /** @format int32 */
+  localId?: number;
+  baseName?: string | null;
+  conditions?: ICondition[] | null;
+  statValueType?: StatValueType;
+  id?: CharacteristicId;
+  nameID?: IID;
+}
+
+export interface ReplaceOneResult {
+  isAcknowledged?: boolean;
+  isModifiedCountAvailable?: boolean;
+  /** @format int64 */
+  matchedCount?: number;
+  /** @format int64 */
+  modifiedCount?: number;
+  upsertedId?: string | null;
+}
+
+export interface Resistance {
+  element?: ElementType;
+  category?: CharacteristicCategory;
+  /** @format int32 */
+  localId?: number;
+  baseName?: string | null;
+  conditions?: ICondition[] | null;
+  statValueType?: StatValueType;
+  id?: CharacteristicId;
+  nameID?: IID;
+}
+
+export interface Resource {
+  resType?: ResourceEnum;
+  resProp?: ResourceProperty;
+  category?: CharacteristicCategory;
+  /** @format int32 */
+  localId?: number;
+  baseName?: string | null;
+  conditions?: ICondition[] | null;
+  statValueType?: StatValueType;
+  id?: CharacteristicId;
+  nameID?: IID;
 }
 
 /** @format  */
@@ -171,6 +375,14 @@ export enum ResourceProperty {
   MissingPercent = "MissingPercent",
 }
 
+/** @format  */
+export enum Rotation4Type {
+  Top = "top",
+  Right = "right",
+  Bottom = "bottom",
+  Left = "left",
+}
+
 export interface ShopCurrency {
   mongoID?: string;
   /** @format int32 */
@@ -190,6 +402,42 @@ export interface ShopProduct {
   limitPerAccount?: number;
 }
 
+export interface SpellModelProperty {
+  category?: CharacteristicCategory;
+  /** @format int32 */
+  localId?: number;
+  baseName?: string | null;
+  conditions?: ICondition[] | null;
+  statValueType?: StatValueType;
+  id?: CharacteristicId;
+  nameID?: IID;
+}
+
+export interface SpellProperties {
+  maxCharges?: Int32IValue;
+  maxCastsPerTurn?: Int32IValue;
+  maxCastsPerTarget?: Int32IValue;
+  cooldownInitial?: Int32IValue;
+  cooldownGlobal?: Int32IValue;
+  cooldown?: Int32IValue;
+  minRange?: Int32IValue;
+  maxRange?: Int32IValue;
+  castInDiagonal?: BooleanIValue;
+  castInLine?: BooleanIValue;
+  needLos?: BooleanIValue;
+}
+
+export interface SpellProperty {
+  category?: CharacteristicCategory;
+  /** @format int32 */
+  localId?: number;
+  baseName?: string | null;
+  conditions?: ICondition[] | null;
+  statValueType?: StatValueType;
+  id?: CharacteristicId;
+  nameID?: IID;
+}
+
 /** @format  */
 export enum StatValueType {
   Simple = "Simple",
@@ -197,11 +445,37 @@ export enum StatValueType {
   Variant = "Variant",
 }
 
+export interface State {
+  category?: CharacteristicCategory;
+  /** @format int32 */
+  localId?: number;
+  baseName?: string | null;
+  conditions?: ICondition[] | null;
+  statValueType?: StatValueType;
+  id?: CharacteristicId;
+  nameID?: IID;
+}
+
+export interface StatusModelProperty {
+  category?: CharacteristicCategory;
+  /** @format int32 */
+  localId?: number;
+  baseName?: string | null;
+  conditions?: ICondition[] | null;
+  statValueType?: StatValueType;
+  id?: CharacteristicId;
+  nameID?: IID;
+}
+
 /** @format  */
 export enum StatusPriorityType {
   System = "System",
   Passive = "Passive",
   Status = "Status",
+}
+
+export interface StatusPriorityTypeIValue {
+  value?: StatusPriorityType;
 }
 
 /** @format  */
@@ -219,6 +493,13 @@ export enum TowerDirectionType {
 }
 
 /** @format  */
+export enum TriggerOrderType {
+  Before = "Before",
+  Apply = "Apply",
+  After = "After",
+}
+
+/** @format  */
 export enum TriggerType {
   OnFightStart = "OnFightStart",
   OnFightEnd = "OnFightEnd",
@@ -232,16 +513,6 @@ export enum TriggerType {
   OnCreatureWalkEnterCell = "OnCreatureWalkEnterCell",
   OnCreatureWalkExitCell = "OnCreatureWalkExitCell",
   OnCreatureWalkStopCell = "OnCreatureWalkStopCell",
-}
-
-export interface WeatherForecast {
-  /** @format date */
-  date?: string;
-  /** @format int32 */
-  temperatureC?: number;
-  /** @format int32 */
-  temperatureF?: number;
-  summary?: string | null;
 }
 
 /** @format  */
@@ -261,4 +532,8 @@ export enum ZoneType {
   Rectangle = "rectangle",
   Ellipse = "ellipse",
   EllipseHalf = "ellipseHalf",
+}
+
+export interface ZoneTypeIValue {
+  value?: ZoneType;
 }

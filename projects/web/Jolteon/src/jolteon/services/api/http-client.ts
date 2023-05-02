@@ -59,18 +59,16 @@ export enum ContentType {
 @inject(IHttpClient)
 export class HttpClient<SecurityDataType = unknown> {
   private securityData: SecurityDataType | null = null;
-  private securityWorker?: ApiConfig<SecurityDataType>["securityWorker"];
   private abortControllers = new Map<CancelToken, AbortController>();
-  private baseApiParams: RequestParams = {
+  public securityWorker?: ApiConfig<SecurityDataType>["securityWorker"];
+  public baseApiParams: RequestParams = {
     credentials: "same-origin",
     headers: {},
     redirect: "follow",
     referrerPolicy: "no-referrer",
   };
 
-  constructor(readonly aureliaClient: IHttpClient) { //, apiConfig: ApiConfig<SecurityDataType> = {}) {
-    // Object.assign(this, apiConfig);
-  }
+  constructor(readonly aureliaClient: IHttpClient) {}
 
   public setSecurityData = (data: SecurityDataType | null) => {
     this.securityData = data;

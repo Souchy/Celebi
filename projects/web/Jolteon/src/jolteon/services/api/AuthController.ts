@@ -17,6 +17,21 @@ export class AuthController<SecurityDataType = unknown> extends HttpClient<Secur
    * No description
    *
    * @tags AuthController
+   * @name GetMammoth
+   * @request GET:/meta/auth/mammoth
+   * @response `200` `void` Success
+   */
+  public getMammoth(params: RequestParams = {}): Promise<HttpResponse<void, any>> {
+    return this.request<void, any>({
+      path: `/meta/auth/mammoth`,
+      method: "GET",
+      ...params,
+    });
+  }
+  /**
+   * No description
+   *
+   * @tags AuthController
    * @name GetPing
    * @request GET:/meta/auth/ping
    * @response `200` `string` Success
@@ -159,6 +174,27 @@ export class AuthController<SecurityDataType = unknown> extends HttpClient<Secur
     return this.request<void, any>({
       path: `/meta/auth/identitySigninExternal`,
       method: "POST",
+      ...params,
+    });
+  }
+  /**
+   * No description
+   *
+   * @tags AuthController
+   * @name GetVerify
+   * @request GET:/meta/auth/verify
+   * @response `200` `void` Success
+   */
+  public getVerify(
+    query?: {
+      token?: string;
+    },
+    params: RequestParams = {},
+  ): Promise<HttpResponse<void, any>> {
+    return this.request<void, any>({
+      path: `/meta/auth/verify`,
+      method: "GET",
+      query: query,
       ...params,
     });
   }

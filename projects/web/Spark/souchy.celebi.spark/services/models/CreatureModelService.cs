@@ -2,7 +2,6 @@
 using MongoDB.Driver;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.impl.shared;
-using Spark.souchy.celebi.spark.models;
 
 namespace souchy.celebi.spark.services.models
 {
@@ -24,10 +23,10 @@ namespace souchy.celebi.spark.services.models
         public async Task CreateAsync(ICreatureModel newCreatureModel) =>
             await _creatureModelsCollection.InsertOneAsync(newCreatureModel);
 
-        public async Task UpdateAsync(string id, ICreatureModel updatedCreatureModel) =>
+        public async Task<ReplaceOneResult> UpdateAsync(string id, ICreatureModel updatedCreatureModel) =>
             await _creatureModelsCollection.ReplaceOneAsync(x => x.entityUid == id, updatedCreatureModel);
 
-        public async Task RemoveAsync(string id) =>
+        public async Task<DeleteResult> RemoveAsync(string id) =>
             await _creatureModelsCollection.DeleteOneAsync(x => x.entityUid == id);
 
     }
