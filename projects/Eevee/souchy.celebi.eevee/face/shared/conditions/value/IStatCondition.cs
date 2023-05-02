@@ -1,9 +1,11 @@
 ﻿using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.enums.characteristics;
 
-namespace souchy.celebi.eevee.face.conditions
+namespace souchy.celebi.eevee.face.shared.conditions.value
 {
-    public interface IStatCondition : IIntCondition
+    public interface IStatCondition : ICondition //: IIntCondition
     {
-        public int statId { get; set; }
+        public CharacteristicId statId { get; set; }
+        public object value { get; set; } // could be int or double or bool
     }
 }

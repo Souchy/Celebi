@@ -4,6 +4,7 @@ using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
+using souchy.celebi.eevee.impl.shared.triggers;
 
 namespace souchy.celebi.eevee.face.objects
 {
@@ -21,10 +22,11 @@ namespace souchy.celebi.eevee.face.objects
         public IEntitySet<IID> spells { get; set; }
 
 
-        public IPlayer GetOriginalOwner() => this.GetFight().players.Get(originalOwnerUid);
-        public IPlayer GetCurrentOwner() => this.GetFight().players.Get(currentOwnerUid);
-        public IStats GetStats() => this.GetFight().stats.Get(stats);
-        public IEnumerable<ISpell> GetSpells() => this.GetFight().spells.Values.Where(s => spells.Contains(s.entityUid));
+        public IPlayer GetOriginalOwner();
+        public IPlayer GetCurrentOwner();
+        public IStats GetBaseStats();
+        public IStats GetStats(IAction action); //, TriggerEvent trigger);
+        public IEnumerable<ISpell> GetSpells();
 
     }
 }

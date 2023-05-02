@@ -9,8 +9,8 @@ namespace souchy.celebi.eevee.impl.shared
     public class CreatureModel : ICreatureModel
     {
         public IID entityUid { get; set; }
-        //public IID nameId { get; set; }
-        //public IID descriptionId { get; set; }
+        public IID nameId { get; set; }
+        public IID descriptionId { get; set; }
         public IEntitySet<IID> skins { get; init; } = new EntitySet<IID>();
 
         public IID baseStats { get; set; }
@@ -19,7 +19,7 @@ namespace souchy.celebi.eevee.impl.shared
         public IEntitySet<IID> baseStatusPassives { get; init; } = new EntitySet<IID>();
 
         private CreatureModel() { }
-        public static ICreatureModel Create() => new CreatureModel() 
+        public static ICreatureModel CreatePermanent() => new CreatureModel() 
         {
             entityUid = Eevee.RegisterIID<ICreatureModel>(),
         };

@@ -1,0 +1,10 @@
+<import from="./creature"></import>
+
+
+<h3>Hi Creature List</h3>
+
+<button class="btn" click.trigger="refresh()">Refresh</button>
+<button class="btn" click.trigger="clickCreate()">New creature</button>
+
+<!-- todo bind creature -->
+<creature repeat.for="crea of creatures" model.bind="crea"></creature>

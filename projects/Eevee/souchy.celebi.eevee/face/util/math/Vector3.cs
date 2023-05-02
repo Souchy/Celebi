@@ -4,6 +4,14 @@ namespace souchy.celebi.eevee.face.util.math
 {
     public interface IVector3
     {
+        public const int X_INDEX = 0;
+        public const int Z_INDEX = 1;
+        /**
+        Height
+        */
+        public const int Y_INDEX = 2;
+
+
         /// <summary>
         /// Board width
         /// </summary>
@@ -85,6 +93,10 @@ namespace souchy.celebi.eevee.face.util.math
         /// 2D distance
         /// </summary>
         public int distanceManhattan(IVector3 vec);
+        /// <summary>
+        /// 3D distance
+        /// </summary>
+        public int distanceManhattan3(IVector3 vec);
         /// <summary>
         /// 
         /// </summary>

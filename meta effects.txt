@@ -1,0 +1,17 @@
+
+EffectMeta
+	- An effect that just contains children but doesn't apply anything on its own
+	
+EffectMetaString
+	- has a string ID to show in the spell description
+
+EffectMetaSpell - meta effect which contains a list of effects that apply to a spell
+	+ spellid
+	+ effects
+		- reduced mana cost
+		- add base damage
+		- add range
+		- reduced max cooldown
+		- increase number of MaxCharges
+		- 
+

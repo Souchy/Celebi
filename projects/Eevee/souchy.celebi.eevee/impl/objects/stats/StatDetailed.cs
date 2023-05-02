@@ -1,4 +1,5 @@
 ﻿using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.util;
@@ -8,7 +9,7 @@ namespace souchy.celebi.eevee.impl.stats
 {
     public class StatDetailed : IStatDetailed
     {
-        public StatType statId { get; init; }
+        public CharacteristicId statId { get; init; }
         public IID entityUid { get; set; }
 
 
@@ -17,7 +18,7 @@ namespace souchy.celebi.eevee.impl.stats
             set
             {
                 _baseFlat = value;
-                this.GetEntityBus()?.publish(Enum.GetName(statId), this);
+                this.GetEntityBus()?.publish(statId, this);
                 this.GetEntityBus()?.publish(this);
             }
         }
@@ -25,7 +26,7 @@ namespace souchy.celebi.eevee.impl.stats
             set
             {
                 _increasedPercent = value;
-                this.GetEntityBus()?.publish(Enum.GetName(statId), this);
+                this.GetEntityBus()?.publish(statId, this);
                 this.GetEntityBus()?.publish(this);
             }
         }
@@ -33,7 +34,7 @@ namespace souchy.celebi.eevee.impl.stats
             set
             {
                 _increasedFlat = value;
-                this.GetEntityBus()?.publish(Enum.GetName(statId), this);
+                this.GetEntityBus()?.publish(statId, this);
                 this.GetEntityBus()?.publish(this);
             }
         }
@@ -41,7 +42,7 @@ namespace souchy.celebi.eevee.impl.stats
             set
             {
                 _morePercent = value;
-                this.GetEntityBus()?.publish(Enum.GetName(statId), this);
+                this.GetEntityBus()?.publish(statId, this);
                 this.GetEntityBus()?.publish(this);
             }
         }
@@ -60,7 +61,7 @@ namespace souchy.celebi.eevee.impl.stats
 
 
         private StatDetailed() { }
-        public static StatDetailed Create(StatType st, int baseFlat = 0, int increasedPercent = 0, int increasedFlat = 0, int morePercent = 0)
+        public static StatDetailed Create(CharacteristicId st, int baseFlat = 0, int increasedPercent = 0, int increasedFlat = 0, int morePercent = 0)
             => new StatDetailed() 
             {
                 statId = st,
@@ -71,7 +72,18 @@ namespace souchy.celebi.eevee.impl.stats
                 entityUid = Eevee.RegisterIID<IStatDetailed>()
             };
 
-        public IStat copy() => Create(statId, baseFlat, increasedPercent, increasedFlat, morePercent); 
+        public IStat copy() => Create(statId, baseFlat, increasedPercent, increasedFlat, morePercent);
+
+        public void Add(IStat s)
+        {
+            if (s is StatDetailed b)
+            {
+                this.baseFlat += b.baseFlat;
+                this.increasedFlat += b.increasedFlat;
+                this.increasedPercent += b.increasedPercent;
+                this.morePercent += b.morePercent;
+            }
+        }
 
         public void Dispose()
         {

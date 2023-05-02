@@ -54,10 +54,11 @@ namespace souchy.celebi.eevee.impl.util
     public class SubscribeAttribute : Attribute {
         public string[] paths = { "" };
         public SubscribeAttribute() { }
-        public SubscribeAttribute(params string[] paths)
+        //public SubscribeAttribute(int id) => this.paths[0] = id.ToString();
+        public SubscribeAttribute(params object[] paths)
         {
-            if(paths != null && paths.Length > 0)
-                this.paths = paths;
+            if (paths != null && paths.Length > 0)
+                this.paths = paths.Select(p => p.ToString()).ToArray();
         }
     }
 

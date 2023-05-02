@@ -94,7 +94,7 @@ namespace souchy.celebi.eevee.impl.util.math
             {
                 0 => x,
                 1 => z,
-                _ => throw new NotImplementedException()
+                _ => throw new NotImplementedException(),
             };
         }
 

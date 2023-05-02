@@ -1,7 +1,6 @@
 ﻿using souchy.celebi.eevee.enums;
-using souchy.celebi.eevee.face.conditions;
 using souchy.celebi.eevee.face.entity;
-using souchy.celebi.eevee.face.objects.compiledeffects;
+using souchy.celebi.eevee.face.objects.effectResults;
 using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.shared;
 using souchy.celebi.eevee.face.shared.conditions;
@@ -9,12 +8,9 @@ using souchy.celebi.eevee.face.shared.triggers;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
-using souchy.celebi.eevee.impl;
-using souchy.celebi.eevee.impl.objects;
-using souchy.celebi.eevee.impl.values;
-using souchy.celebi.eevee.interfaces;
-using souchy.celebi.eevee.statuses;
-using System.ComponentModel;
+using souchy.celebi.eevee.impl.shared.triggers;
+using souchy.celebi.eevee.impl.objects.effectReturn;
+using souchy.celebi.eevee.face.util.math;
 
 namespace souchy.celebi.eevee.face.objects
 {
@@ -25,13 +21,13 @@ namespace souchy.celebi.eevee.face.objects
     public interface IEffect : IEntityModeled, IFightEntity, IEffectsContainer
     {
 
-        #region Dynamic Status creation
+        //#region Dynamic Status creation
         /// <summary>
         /// Properties to create a status instance from an effect.
         /// When this is not null, create a status instead of applying the effect.
         /// </summary>
-        public StatusProperties statusProperties { get; set; }
-        #endregion
+        //public StatusProperties statusProperties { get; set; }
+        //#endregion
 
         public ICondition sourceCondition { get; set; }
         public ICondition targetFilter { get; set; }
@@ -52,9 +48,15 @@ namespace souchy.celebi.eevee.face.objects
         // We have EffectRandom that casts a random child effect
 
 
-        public ICompiledEffect compile(IFight fight, IID source, IID targetCell); // IActionContext context);
+        public IEffectPreview preview(IAction action, IEnumerable<IBoardEntity> targets);
+        public IEffectReturnValue apply(IAction action, IEnumerable<IBoardEntity> targets); // IActionContext context);
 
         //public IEnumerable<IEffect> GetChildren() => effectIds.Values.Select(i => Eevee.models.effects.Get(i));
+
+        /// <summary>
+        /// Get unfiltered entities in this effect's area
+        /// </summary>
+        public IEnumerable<IBoardEntity> GetPossibleBoardTargets(IFight fight, IPosition targetCell);
 
         /// <summary>
         /// Copy basic properties to passed effect. (not model nor model-specific properties)
@@ -72,16 +74,16 @@ namespace souchy.celebi.eevee.face.objects
         ///     By SpellID / SpellModelID only instead of StatusModelID
         ///     Statuses made with StatusModel can use the model id
         /// </summary>
-        public sealed class StatusProperties
-        {
-            /// <summary>
-            /// Duration is also the Max Duration
-            /// </summary>
-            public IValue<int> Duration { get; set; }
-            public IValue<int> Delay { get; set; }
-            public IValue<int> MaxStacks { get; set; }
-            public IValue<StatusFusingStrategy> StatusFusingStrategy { get; set; }
-        }
+        //public sealed class StatusProperties
+        //{
+        //    /// <summary>
+        //    /// Duration is also the Max Duration
+        //    /// </summary>
+        //    public IValue<int> Duration { get; set; }
+        //    public IValue<int> Delay { get; set; }
+        //    public IValue<int> MaxStacks { get; set; }
+        //    public IValue<StatusFusingStrategy> StatusFusingStrategy { get; set; }
+        //}
     }
 
 

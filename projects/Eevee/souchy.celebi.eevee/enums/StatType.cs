@@ -26,9 +26,10 @@ namespace souchy.celebi.eevee.enums
     public enum StatValueType
     {
         Simple,
-        Detailed,
         Bool,
-        Resource
+        //Detailed,
+        //Resource,
+        Variant
     }
     public enum StatCategory
     {
@@ -40,6 +41,7 @@ namespace souchy.celebi.eevee.enums
     }
     public enum ElementType
     {
+        None,
         Water,
         Fire,
         Earth,
@@ -51,6 +53,7 @@ namespace souchy.celebi.eevee.enums
     }
     #endregion
 
+    /*
     public enum StatType
     {
         #region Resources & Limits & Regens
@@ -264,5 +267,6 @@ namespace souchy.celebi.eevee.enums
                 _ => throw new Exception()
             };
     }
+    */
 
 }

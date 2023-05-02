@@ -1,0 +1,43 @@
+
+<import from="../pages/home/home"></import>
+<import from="../pages/auth/auth"></import>
+<import from="../pages/missing/missing-page"></import>
+<import from="./auth2/authHeader"></import>
+
+<nav class="navbar navbar-expand-lg">
+
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+      <a load="home">Home</a>
+    </li>
+
+    <!-- TODO: how to include this tab only in dev/private build? -->
+    <li class="nav-item">
+      <a load="editor">Editor</a>
+    </li>
+
+  </ul>
+
+  <ul class="navbar-nav ms-auto">
+    <li class="nav-item">
+      <a href="https://twitter.com/souchy7" target="_blank">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a click.trigger="changeTheme()">Theme</a>
+    </li>
+    <li class="nav-item">
+      <!-- <a click.trigger="loginUI()">Login</a> -->
+      <a load="auth">Login</a>
+    </li>
+    <li class="nav-item">
+      <!-- <a click.trigger="loginUI()">Login</a> -->
+      <a load="auth2">Auth2</a>
+    </li>
+
+    <auth-header></auth-header>
+    
+  </ul>
+
+</nav>

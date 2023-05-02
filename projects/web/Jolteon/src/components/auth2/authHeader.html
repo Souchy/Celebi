@@ -1,0 +1,28 @@
+<import from="./signin/signin"></import>
+<import from="./signup/signup"></import>
+<import from="./signout/signout"></import>
+
+<!-- <div if.bind="!isConnected()" class="d-flex"> -->
+<!-- </div> -->
+
+
+<div class="d-flex">
+  
+  <li class="nav-item" if.bind="!isConnected">
+    <signin></signin>
+  </li>
+
+  <li class="nav-item" if.bind="!isConnected">
+    <signup></signup>
+  </li>
+
+  <li class="nav-item" if.bind="isConnected">
+    <!-- show account's displayName as a button to go  see his account's info/settings -->
+    <a load="profile" innerhtml.bind="displayName"></a>
+  </li>
+
+  <li class="nav-item" if.bind="isConnected">
+    <signout></signout>
+  </li>
+
+</div>

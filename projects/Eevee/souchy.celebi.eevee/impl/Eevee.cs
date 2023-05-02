@@ -27,6 +27,14 @@ namespace souchy.celebi.eevee.impl
         {
             return UidExtensions.RegisterIID<T>();
         }
+        public static IID RegisterIIDPermanent<T>()
+        {
+            return UidExtensions.RegisterIID<T>(); // Todo
+        }
+        public static IID RegisterIIDTemporary<T>()
+        {
+            return UidExtensions.RegisterIID<T>(); // Todo
+        }
         public static bool RegisterIID<T>(IID id)
         {
             return UidExtensions.RegisterIID<T>(id);

@@ -1,0 +1,68 @@
+<form submit.trigger="submitSignin()">
+    <!-- Email -->
+    <div class="mb-3">
+        <label for="signinUser" class="form-label">Username or Email</label>
+        <input id="signinUser" type="string" class="form-control" value.bind="signinUser">
+    </div>
+    <!-- Password -->
+    <div class="mb-3">
+        <label for="signinPass" class="form-label">Password</label>
+        <input id="signinPass" type="password" class="form-control" value.bind="signinPass">
+    </div>
+    <!-- Remember me -->
+    <!-- <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div> -->
+    <!-- btn -->
+    <button type="submit" class="btn">Submit</button>
+</form>
+
+<hr>
+
+<button type="button" class="btn" click.trigger="signUp()">Sign up</button>
+<button type="button" class="btn" click.trigger="signIn()">Sign in</button>
+<!-- <a href.bind="getGoogleOAuthURL()">OAuth</a> -->
+<button type="button" class="btn" click.trigger="google()">GOOGLE</button>
+
+<hr>
+
+<button type="button" class="btn">Google</button>
+<button type="button" class="btn">Microsoft</button>
+<button type="button" class="btn">Facebook</button>
+<button type="button" class="btn">Github</button>
+
+<hr>
+
+Sign up
+
+
+<form submit.trigger="submitSignup()">
+    <!-- Pseudo -->
+    <div class="mb-3">
+        <label for="signupPseudo" class="form-label">Password</label>
+        <input id="signupPseudo" type="string" class="form-control" value.bind="signupPseudo">
+    </div>
+    <!-- User -->
+    <div class="mb-3">
+        <label for="signupUser" class="form-label">Username</label>
+        <input id="signupUser" type="string" class="form-control" value.bind="signupUser">
+    </div>
+    <!-- Email -->
+    <div class="mb-3">
+        <label for="signupMail" class="form-label">Email</label>
+        <input id="signupMail" type="string" class="form-control" value.bind="signupMail">
+    </div>
+    <!-- Password -->
+    <div class="mb-3">
+        <label for="signupPass" class="form-label">Password</label>
+        <input id="signupPass" type="password" class="form-control" value.bind="signupPass">
+    </div>
+    <!-- Password Confirm -->
+    <div class="mb-3">
+        <label for="signupPass2" class="form-label">Password</label>
+        <input id="signupPass2" type="password" class="form-control" value.bind="signupPass2">
+    </div>
+    <!-- btn -->
+    <button type="submit" class="btn">Submit</button>
+</form>

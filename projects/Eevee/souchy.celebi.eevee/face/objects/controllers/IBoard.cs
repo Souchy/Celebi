@@ -26,14 +26,22 @@ namespace souchy.celebi.eevee.face.objects.controllers
         //public List<ICreature> getCreatures(IPosition pos);
         //public bool hasCreature(IPosition pos);
 
-        public ICreature? getCreatureOnCell(IID targetCell)
+        public IEnumerable<ICreature> GetCreatures() => creatureIds.Values.Select(crea => GetFight().creatures.Get(crea));
+        public IEnumerable<ICell> GetCells() => cells.Values.Select(cell => GetFight().cells.Get(cell));
+
+        public IEnumerable<ICreature> GetCreaturesOnCell(IID targetCell)
         {
             var cell = this.GetFight().cells.Get(targetCell);
-            ICreature? crea = this.GetFight().creatures.Values
-                    .Where(c => c.position == cell.position)
-                    .Where(c => creatureIds.Contains(c.entityUid))
-                    .FirstOrDefault();
-            return crea;
+            return this.GetCreatures()
+                    .Where(crea => crea.position == cell.position);
+        }
+        public ICreature? GetCreatureOnCell(IID targetCell)
+        {
+            return GetCreaturesOnCell(targetCell).FirstOrDefault();
+        }
+        public ICell? GetCreatureCell(ICreature crea)
+        {
+            return this.GetCells().FirstOrDefault(cell => cell.position == crea.position);
         }
 
     }

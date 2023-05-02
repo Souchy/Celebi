@@ -1,4 +1,5 @@
 ﻿using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.util.math;
@@ -34,7 +35,7 @@ namespace souchy.celebi.eevee.impl.objects.zones
         //public static IZone Create() => new Zone();
 
 
-        public IBoardArea getArea(IPosition targetCell)
+        public IArea getArea(IFight fight, IPosition targetCell)
         {
             throw new NotImplementedException();
         }

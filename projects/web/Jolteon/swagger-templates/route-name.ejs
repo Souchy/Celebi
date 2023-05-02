@@ -1,0 +1,51 @@
+<%
+const { routeInfo, utils } = it;
+const {
+  operationId,
+  method,
+  route,
+  moduleName,
+  responsesTypes,
+  description,
+  tags,
+  summary,
+  pathArgs,
+} = routeInfo;
+const { _, fmtToJSDocLine, require } = utils;
+
+const methodAliases = {
+  get: (pathName, hasPathInserts) => _.camelCase(`get-${pathName}`),
+  post: (pathName, hasPathInserts) => _.camelCase(`post-${pathName}`),
+  put: (pathName, hasPathInserts) => _.camelCase(`put-${pathName}`),
+  patch: (pathName, hasPathInserts) => _.camelCase(`patch-${pathName}`),
+  delete: (pathName, hasPathInserts) => _.camelCase(`delete-${pathName}`),
+};
+
+const createCustomOperationId = (method, route, moduleName) => {
+  const hasPathInserts = /\{(\w){1,}\}/g.test(route);
+  const splitedRouteBySlash = _.compact(_.replace(route, /\{(\w){1,}\}/g, "").split("/"));
+  const routeParts = (
+      splitedRouteBySlash.length > 2
+      ? splitedRouteBySlash.splice(2)
+      : (
+        splitedRouteBySlash.length > 1
+        ? splitedRouteBySlash.splice(1)
+        : splitedRouteBySlash
+      )
+  ).join("_");
+
+  let res1 = methodAliases[method](routeParts, hasPathInserts);
+  let res3 = _.camelCase(_.lowerCase(method) + "_" + [moduleName].join("_")) // idk what res2/3 is supposed to be but res1 is good
+  let res2 = res3 || "index";
+  let result = routeParts.length > 2 && methodAliases[method] ? res1 : res2;
+  // console.log("route: " + route + " -> " + result + ": ["+res1+", "+res2+"] from " + res3)
+  return result;
+};
+
+if (operationId)
+  return _.camelCase(operationId);
+if (route === "/")
+  return _.camelCase(`${_.lowerCase(method)}Root`);
+
+return createCustomOperationId(method, route, moduleName);
+%>

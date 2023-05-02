@@ -1,0 +1,63 @@
+
+
+Effect class
+
+SpellModel has instances of Effect
+Status has instances of Effect
+
+Creature .baseStats: statbag
+Creature .getTotalStats/applyStats(statbag): statbag {
+	-> foreach(status) 
+		foreach(effect)
+			if an Effect is a EffectStat kind of type, 
+				then call effect.apply(source, target, spell): EffectResultStat(statbag)
+	   return the total stats
+	
+
+There's just a few EffectResult types that trigger in different places:
+	- Stat  (activate in getStats())
+	- Position
+	- Death
+	- Status
+	- Damage   (activates the text popup)
+	- Heal
+	- ?? im confused
+
+It's kinda the same as triggers, use them to apply the effects inthe right place, like here is  apply on statbag
+	Triggers prob have to be on effects rather than statuses btw
+	like when you do: 
+		.applyDamage() {
+			foreach(status)
+				foreach(effect) 
+					effect.apply(onDamageBefore, source, target, spell)
+		}
+	it's the same thing with
+		.applyStats() {
+			foreach(status)
+				foreach(effect) 
+					effect.apply(onStatbag, source, target, spell)
+		}
+	maybe in apply we pass the IEffectResult then cast it
+		.applyStats(IEffectResult r) {
+			IEffectResultStatBag bag = (IEffectResultStatBag) r;
+		}
+
+
+You can have special effects under stats like:
+	- +40% water affinity with Water Gun against ennemy summons
+		- the way this works is: EffectBoostSpellStat ou EffectBoostStatWithSpell
+			- the effect has stat key (wateraffinity) + stat value (40)
+			- the effect has a spell filter with id (water gun)
+			- the effect has a target filter for (enemy summons)
+
+
+Stats -> list of effects rather than stats? ex:
+	- Effect: +
+	- Effect: +40% dmg with lightning arrow against summons
+		maybe code it a different way: 
+		the spell gives a status X
+		the spell checks if the caster has status X. 
+		if it does, then it casts effect A (stronger), otherwise effect B (normal)
+		Effect A would require a new EffectType like: 
+			DamageWithStatBoost(dmg ele, dmg value, stat key, stat value)
+		Then you can use the visibleOnTooltip trick and show different descriptions

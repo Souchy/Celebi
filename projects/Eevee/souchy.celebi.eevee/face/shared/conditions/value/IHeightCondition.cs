@@ -1,8 +1,9 @@
 ﻿using souchy.celebi.eevee.enums;
 
-namespace souchy.celebi.eevee.face.conditions.value
+namespace souchy.celebi.eevee.face.shared.conditions.value
 {
-    public interface IHeightCondition : IIntCondition
+    public interface IHeightCondition : ICondition //: IIntCondition
     {
+        public int height { get; set; }
     }
 }

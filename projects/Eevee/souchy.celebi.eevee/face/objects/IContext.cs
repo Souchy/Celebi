@@ -1,11 +1,15 @@
 ﻿using souchy.celebi.eevee.enums;
-using souchy.celebi.eevee.face.objects.compiledeffects;
+using souchy.celebi.eevee.enums.characteristics.creature;
+using souchy.celebi.eevee.face.objects.effectResults;
 using souchy.celebi.eevee.face.util;
 
 namespace souchy.celebi.eevee.face.objects
 {
     /// <summary>
-    /// Context Stats for every entity (creature, cell). 
+    /// TODO: Wont need this anymore I believe with ContextualProperty stats. <br></br>
+    /// Some concepts are interesting but we can do otherwise with just stats. <br></br>
+    /// -- <br></br>
+    /// Context Stats for every entity (creature, cell). <br></br>
     /// Can be during a Fight, Round, Turn or Action
     /// </summary>
     public interface IContext
@@ -14,7 +18,7 @@ namespace souchy.celebi.eevee.face.objects
 
         public Dictionary<string, object> valuesStored { get; set; }
 
-        public Dictionary<ResourceType, int> resourceUsed { get; set; }
+        public Dictionary<ResourceEnum, int> resourceUsed { get; set; }
         /*
         public Dictionary<ResourceType, int> resourceGained { get; set; }
         public Dictionary<ResourceType, int> resourceLost { get; set; }
@@ -35,7 +39,7 @@ namespace souchy.celebi.eevee.face.objects
         /// List of effects related to this creature. <br></br>
         /// Can be the source of the target, it's in the CompiledEffect
         /// </summary>
-        public Dictionary<Type, List<ICompiledEffect>> compiledEffects { get; set; }
+        public Dictionary<Type, List<IEffectPreview>> compiledEffects { get; set; }
     }
 
     public class SpellCastHistory

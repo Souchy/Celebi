@@ -1,0 +1,27 @@
+
+
+elements can be databased:
+	- we dont really care what the elements are because they dont have inherital function
+	- we can have a database of elements
+	- then target & use that element in the damage effect
+	- we can have it show up in the editor the same way as they do now
+	- just do Elements.values
+
+Most other stats tho, are functional:
+	- melee/distance stats might be able to be configured with the condition
+	- but things like Life, Mana, Movement, Rage, idk
+	- States definitely need additional code to check for them (unmovable, gravity, invisibility line of sight, fly/dig height, etc)
+
+	but in the case of elements, i think we never need to directly address them like Elements.water
+
+
+
+
+
+
+
+
+
+
+
+distinction permanent vs temporary models & iids

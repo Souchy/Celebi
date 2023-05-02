@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
 	<TargetFramework>net7.0</TargetFramework>
@@ -10,12 +10,12 @@
 
   <ItemGroup>
     <Folder Include="souchy.celebi.eevee\face\net\amethyst\" />
-    <Folder Include="souchy.celebi.eevee\impl\shared\conditions\context\" />
     <Folder Include="souchy.celebi.eevee\impl\net\amethyst\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="4.5.0-2.final" />
+    <PackageReference Include="MongoDB.Bson" Version="2.19.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
 

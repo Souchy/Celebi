@@ -7,6 +7,9 @@ using static souchy.celebi.eevee.impl.objects.zones.AreaGenerator;
 namespace souchy.celebi.eevee.enums
 {
 
+    /// <summary>
+    /// TODO: will need to transform this into a class with static constants to avoid [Attributes] on the enum
+    /// </summary>
     public enum ZoneType
     {
         [ZoneSize<ZoneSizePoint>] point,

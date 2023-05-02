@@ -5,6 +5,7 @@ using souchy.celebi.eevee.face.shared.models.skins;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.stats;
+using souchy.celebi.eevee.enums.characteristics;
 
 namespace souchy.celebi.eevee.face.shared
 {
