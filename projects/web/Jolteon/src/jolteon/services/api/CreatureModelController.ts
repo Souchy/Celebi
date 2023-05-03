@@ -9,7 +9,7 @@
  * ---------------------------------------------------------------
  */
 
-import { CreatureModel, DeleteResult, ICreatureModel, ReplaceOneResult } from "./data-contracts";
+import { CreatureModel, DeleteResult, ICreatureModel, IID, ReplaceOneResult } from "./data-contracts";
 import { ContentType, HttpClient, HttpResponse, RequestParams } from "./http-client";
 
 export class CreatureModelController<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
@@ -37,7 +37,7 @@ export class CreatureModelController<SecurityDataType = unknown> extends HttpCli
    * @request GET:/models/creatures/creature/{id}
    * @response `200` `ICreatureModel` Success
    */
-  public getCreature(id: string, params: RequestParams = {}): Promise<HttpResponse<ICreatureModel, any>> {
+  public getCreature(id: IID, params: RequestParams = {}): Promise<HttpResponse<ICreatureModel, any>> {
     return this.request<ICreatureModel, any>({
       path: `/models/creatures/creature/${id}`,
       method: "GET",
@@ -54,7 +54,7 @@ export class CreatureModelController<SecurityDataType = unknown> extends HttpCli
    * @response `200` `ReplaceOneResult` Success
    */
   public putCreature(
-    id: string,
+    id: IID,
     data: CreatureModel,
     params: RequestParams = {},
   ): Promise<HttpResponse<ReplaceOneResult, any>> {
@@ -75,7 +75,7 @@ export class CreatureModelController<SecurityDataType = unknown> extends HttpCli
    * @request DELETE:/models/creatures/creature/{id}
    * @response `200` `DeleteResult` Success
    */
-  public deleteCreature(id: string, params: RequestParams = {}): Promise<HttpResponse<DeleteResult, any>> {
+  public deleteCreature(id: IID, params: RequestParams = {}): Promise<HttpResponse<DeleteResult, any>> {
     return this.request<DeleteResult, any>({
       path: `/models/creatures/creature/${id}`,
       method: "DELETE",
@@ -89,14 +89,15 @@ export class CreatureModelController<SecurityDataType = unknown> extends HttpCli
    * @tags CreatureModelController
    * @name PostCreature
    * @request POST:/models/creatures/creature
-   * @response `200` `void` Success
+   * @response `200` `ICreatureModel` Success
    */
-  public postCreature(data: CreatureModel, params: RequestParams = {}): Promise<HttpResponse<void, any>> {
-    return this.request<void, any>({
+  public postCreature(data: CreatureModel, params: RequestParams = {}): Promise<HttpResponse<ICreatureModel, any>> {
+    return this.request<ICreatureModel, any>({
       path: `/models/creatures/creature`,
       method: "POST",
       body: data,
       type: ContentType.Json,
+      format: "json",
       ...params,
     });
   }

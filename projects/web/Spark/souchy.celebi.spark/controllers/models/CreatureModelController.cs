@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using souchy.celebi.eevee.face.shared.models;
+using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.shared;
 using souchy.celebi.spark.services.models;
 using Spark;
@@ -21,7 +22,7 @@ namespace souchy.celebi.spark.controllers.models
         public async Task<List<ICreatureModel>> GetAll() => await _creatureModelService.GetAsync();
 
         [HttpGet("creature/{id}")]
-        public async Task<ActionResult<ICreatureModel>> Get(string id)
+        public async Task<ActionResult<ICreatureModel>> Get([FromRoute] IID id)
         {
             var creatureModel = await _creatureModelService.GetAsync(id);
             if (creatureModel is null)
@@ -31,7 +32,7 @@ namespace souchy.celebi.spark.controllers.models
 
         [Authorize]
         [HttpPost("creature")]
-        public async Task<IActionResult> Post(CreatureModel newCreatureModel)
+        public async Task<ActionResult<ICreatureModel>> Post(CreatureModel newCreatureModel)
         {
             await _creatureModelService.CreateAsync(newCreatureModel);
             return CreatedAtAction(nameof(Get), new { id = newCreatureModel.entityUid }, newCreatureModel);
@@ -39,7 +40,7 @@ namespace souchy.celebi.spark.controllers.models
 
         [Authorize]
         [HttpPut("creature/{id}")]
-        public async Task<ActionResult<ReplaceOneResult>> Update(string id, CreatureModel updatedCreatureModel)
+        public async Task<ActionResult<ReplaceOneResult>> Update([FromRoute] IID id, [FromBody] CreatureModel updatedCreatureModel)
         {
             var crea = await _creatureModelService.GetAsync(id);
             if (crea is null) 
@@ -51,7 +52,7 @@ namespace souchy.celebi.spark.controllers.models
 
         [Authorize]
         [HttpDelete("creature/{id}")]
-        public async Task<ActionResult<DeleteResult>> Delete(string id)
+        public async Task<ActionResult<DeleteResult>> Delete([FromRoute] IID id)
         {
             var crea = await _creatureModelService.GetAsync(id);
             if (crea is null) 

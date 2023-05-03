@@ -1,7 +1,10 @@
-﻿namespace souchy.celebi.eevee.face.util
+﻿using Newtonsoft.Json;
+
+namespace souchy.celebi.eevee.face.util
 {
     public readonly struct IID
     {
+        [JsonProperty]
         private string value { get; init; }
 
         public IID(string value)
