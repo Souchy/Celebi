@@ -51,7 +51,7 @@ namespace souchy.celebi.spark.controllers.meta
                 return Forbid();
 
             // Transaction
-            var trans = new Transaction()
+            var trans = new ShopTransaction()
             {
                 ProductId = product._id,
                 Type = TransactionType.Purchase,
@@ -80,7 +80,7 @@ namespace souchy.celebi.spark.controllers.meta
                 return Forbid();
 
             // Transaction
-            var trans = new Transaction() { 
+            var trans = new ShopTransaction() { 
                 ProductId = product._id, 
                 Type = TransactionType.Purchase,
                 Price = product.Currency

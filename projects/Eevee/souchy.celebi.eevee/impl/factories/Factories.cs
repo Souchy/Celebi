@@ -23,10 +23,12 @@ namespace souchy.celebi.eevee.impl.factories
     public class Factories
     {
 
-        public static void newCreatureModel()
+        public static ICreatureModel newCreatureModel()
         {
             // Model + Skin
             var creatureModel = CreatureModel.CreatePermanent();
+            creatureModel.nameId = Eevee.RegisterIID<IStringEntity>();
+            creatureModel.descriptionId = Eevee.RegisterIID<IStringEntity>();
             // Stats
             var stats = Stats.Create();
             creatureModel.baseStats = stats.entityUid;
@@ -42,6 +44,7 @@ namespace souchy.celebi.eevee.impl.factories
             creatureModel.skins.Add(creatureSkin.entityUid);
             // Eevee
             Eevee.models.creatureModels.Add(creatureModel.entityUid, creatureModel);
+            return creatureModel;
         }
 
         private static ICreatureSkin newCreatureSkin()
