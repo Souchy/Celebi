@@ -35,7 +35,7 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
         public static readonly Dictionary<CharacteristicId, State> values = new();
         static State()
         {
-            var fields = typeof(State).GetFields();
+            var fields = typeof(State).GetFields().Where(f => f.FieldType == typeof(State));
             foreach (var field in fields)
             {
                 var value = (State) field.GetValue(null);

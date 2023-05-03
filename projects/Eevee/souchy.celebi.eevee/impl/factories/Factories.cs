@@ -78,7 +78,7 @@ namespace souchy.celebi.eevee.impl.factories
             foreach (var statType in CharacteristicType.Characteristics) //Enum.GetValues<StatType>())
             {
                 IStat s = statType.Create();
-                stats.Add(s);
+                stats.Set(s);
                 //var valueType = statType.StatValueType; // statType.GetProperties().valueType;
                 //// dont need current/max when making a creature model
                 //if (isModel && valueType == StatValueType.Resource)

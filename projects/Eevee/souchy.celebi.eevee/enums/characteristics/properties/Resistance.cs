@@ -47,7 +47,8 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
         public static readonly Dictionary<CharacteristicId, Resistance> values = new();
         static Resistance()
         {
-            var fields = typeof(Resistance).GetFields();
+            var fields = typeof(Resistance).GetFields()
+                .Where(f => f.FieldType == typeof(Resistance));
             foreach (var field in fields)
             {
                 var value = (Resistance) field.GetValue(null);

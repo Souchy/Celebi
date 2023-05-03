@@ -31,7 +31,7 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
         public static readonly Dictionary<CharacteristicId, Contextual> values = new();
         static Contextual()
         {
-            var fields = typeof(Contextual).GetFields();
+            var fields = typeof(Contextual).GetFields().Where(f => f.FieldType == typeof(Contextual));
             foreach (var field in fields)
             {
                 var value = (Contextual) field.GetValue(null);

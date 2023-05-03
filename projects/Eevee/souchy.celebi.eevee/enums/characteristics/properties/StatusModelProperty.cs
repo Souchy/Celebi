@@ -26,7 +26,7 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
         public static readonly Dictionary<CharacteristicId, StatusModelProperty> values = new();
         static StatusModelProperty()
         {
-            var fields = typeof(StatusModelProperty).GetFields();
+            var fields = typeof(StatusModelProperty).GetFields().Where(f => f.FieldType == typeof(StatusModelProperty));
             foreach (var field in fields)
             {
                 var value = (StatusModelProperty) field.GetValue(null);

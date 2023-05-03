@@ -17,10 +17,6 @@ namespace souchy.celebi.eevee.impl.stats
         {
             return (T) Get(statId);
         }
-        public void Add(IStat value) 
-        {
-            Add(value.statId, value);
-        }
 
         public IStats anonymousCopy()
         {

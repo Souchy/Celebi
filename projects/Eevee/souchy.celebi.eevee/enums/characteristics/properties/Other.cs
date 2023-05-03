@@ -1,4 +1,5 @@
-﻿using souchy.celebi.eevee.face.objects.stats;
+﻿using souchy.celebi.eevee.enums.characteristics.creature;
+using souchy.celebi.eevee.face.objects.stats;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,8 @@ namespace souchy.celebi.eevee.enums.characteristics.properties
         public static readonly Dictionary<CharacteristicId, OtherProperty> values = new();
         static OtherProperty()
         {
-            var fields = typeof(OtherProperty).GetFields();
+            var fields = typeof(OtherProperty).GetFields()
+                .Where(f => f.FieldType == typeof(OtherProperty));
             foreach (var field in fields)
             {
                 var value = (OtherProperty) field.GetValue(null);
