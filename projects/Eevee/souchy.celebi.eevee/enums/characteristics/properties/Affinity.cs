@@ -44,14 +44,14 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
 
 
         public static readonly Dictionary<CharacteristicId, Affinity> values = new();
-        //static Affinity()
-        //{
-        //    var fields = typeof(Affinity).GetFields();
-        //    foreach (var field in fields)
-        //    {
-        //        var value = (Affinity) field.GetValue(null);
-        //        values[value.ID] = value;
-        //    }
-        //}
+        static Affinity()
+        {
+            var fields = typeof(Affinity).GetFields().Where(f => f.FieldType == typeof(Affinity));
+            foreach (var field in fields)
+            {
+                var value = (Affinity) field.GetValue(null);
+                values[value.ID] = value;
+            }
+        }
     }
 }

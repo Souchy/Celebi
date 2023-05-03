@@ -29,8 +29,8 @@ namespace souchy.celebi.eevee.enums.characteristics
 
 
         public static IEnumerable<CharacteristicType> Characteristics = Enum.GetValues<CharacteristicCategory>().SelectMany(c => c.GetCharacs());
-        public static StatFactory SimpleFactory = (id, value) => StatSimple.Create(id, (int) value);
-        public static StatFactory BoolFactory = (id, value) => StatBool.Create(id, (bool) value);
+        public static StatFactory SimpleFactory = (id, value) => StatSimple.Create(id, value == null ? 0 : (int) value);
+        public static StatFactory BoolFactory = (id, value) => StatBool.Create(id, value == null ? false : (bool) value);
         public static IEnumerable<T> iterate<T>() where T : CharacteristicType
         {
             var t = typeof(T);
@@ -58,17 +58,17 @@ namespace souchy.celebi.eevee.enums.characteristics
             Resistance.values.Values.First(v => v.Element == stat).ID;
         public static IEnumerable<CharacteristicType> GetCharacs(this CharacteristicCategory cat) => cat switch
         {
-            CharacteristicCategory.Resource     => Resource.values.Values,
-            CharacteristicCategory.Affinity     => Affinity.values.Values,
-            CharacteristicCategory.Resistance   => Resistance.values.Values,
+            CharacteristicCategory.Resource     => Enumerable.OfType<CharacteristicType>(Resource.values.Values),
+            CharacteristicCategory.Affinity     => Enumerable.OfType<CharacteristicType>(Affinity.values.Values),
+            CharacteristicCategory.Resistance   => Enumerable.OfType<CharacteristicType>(Resistance.values.Values),
 
-            CharacteristicCategory.Contextual   => Contextual.values.Values,
-            CharacteristicCategory.Other        => OtherProperty.values.Values,
-            CharacteristicCategory.State        => SpellProperty.values.Values,
+            CharacteristicCategory.Contextual   => Enumerable.OfType<CharacteristicType>(Contextual.values.Values),
+            CharacteristicCategory.Other        => Enumerable.OfType<CharacteristicType>(OtherProperty.values.Values),
+            CharacteristicCategory.State        => Enumerable.OfType<CharacteristicType>(SpellProperty.values.Values),
 
             CharacteristicCategory.SpellModel   => Enumerable.Concat<CharacteristicType>(SpellModelProperty.values.Values, SpellModelState.values.Values),
-            CharacteristicCategory.Spell        => SpellProperty.values.Values,
-            CharacteristicCategory.Status       => StatusModelProperty.values.Values,
+            CharacteristicCategory.Spell        => Enumerable.OfType<CharacteristicType>(SpellProperty.values.Values),
+            CharacteristicCategory.Status       => Enumerable.OfType<CharacteristicType>(StatusModelProperty.values.Values),
             _ => throw new NotImplementedException(),
         };
         public static CharacteristicType GetCharactType(this CharacteristicId id) =>

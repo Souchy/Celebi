@@ -124,7 +124,7 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
         public static readonly Dictionary<CharacteristicId, Resource> values = new();
         static Resource()
         {
-            var fields = typeof(Resource).GetFields();
+            var fields = typeof(Resource).GetFields().Where(f => f.FieldType == typeof(Resource));
             foreach (var field in fields)
             {
                 var value = (Resource)field.GetValue(null);

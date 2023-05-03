@@ -26,7 +26,7 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
         public static readonly Dictionary<CharacteristicId, SpellModelProperty> values = new();
         static SpellModelProperty()
         {
-            var fields = typeof(SpellModelProperty).GetFields();
+            var fields = typeof(SpellModelProperty).GetFields().Where(f => f.FieldType == typeof(SpellModelProperty));
             foreach (var field in fields)
             {
                 var value = (SpellModelProperty) field.GetValue(null);
@@ -48,7 +48,7 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
         public static readonly Dictionary<CharacteristicId, SpellModelState> values = new();
         static SpellModelState()
         {
-            var fields = typeof(SpellModelState).GetFields();
+            var fields = typeof(SpellModelState).GetFields().Where(f => f.FieldType == typeof(SpellModelState));
             foreach (var field in fields)
             {
                 var value = (SpellModelState) field.GetValue(null);

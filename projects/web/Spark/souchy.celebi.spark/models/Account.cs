@@ -42,10 +42,6 @@ namespace souchy.celebi.spark.models
         /// Purchasable models include CreatureModel, SpellModel, CreatureSkin...
         /// </summary>
         public List<IID> OwnedModels { get; set; } = new();
-        /// <summary>
-        /// Track every purchase/refund in the shop: currency bought, models bought/refunded, what was the date and how much they paid
-        /// </summary>
-        public List<ObjectId> Transactions { get; set; } = new();
         #endregion
 
         // i think we dont list fights here?, rather go fights.where(f => f.date >= lastWeek && f.players.contains(this)) ? 
