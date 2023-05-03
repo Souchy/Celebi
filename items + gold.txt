@@ -1,0 +1,21 @@
+
+Think TFT, Waven
+	it could replace spell draft
+
+Items
+	- buy with gold? 
+	- random shop of x items each turn? 
+	- random drop 1 item each turn? 
+	- starter items chose in draft? 
+	- contains effects to apply to its holder
+		- certain effects can be Auras for the whole team/aoe
+	
+Gold generation
+	- every turn	
+	
+
+Global Team Buff? 
+	- to select at game start or through an item
+	
+
+
