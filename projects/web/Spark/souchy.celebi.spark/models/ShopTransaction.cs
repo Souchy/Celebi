@@ -2,12 +2,16 @@
 
 namespace souchy.celebi.spark.models
 {
-    public class Transaction
+    public class ShopTransaction
     {
         /// <summary>
         /// MongoID will contain the date of the transaction
         /// </summary>
         public ObjectId _id { get; set; }
+        /// <summary>
+        /// Person who made the transaction
+        /// </summary>
+        public ObjectId Account { get; set; }
         /// <summary>
         /// Id of the product bought
         /// </summary>
