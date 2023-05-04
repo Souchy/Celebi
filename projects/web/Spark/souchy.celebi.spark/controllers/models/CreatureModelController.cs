@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
+using souchy.celebi.eevee.enums.characteristics;
+using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.impl;
+using souchy.celebi.eevee.impl.factories;
 using souchy.celebi.eevee.impl.shared;
 using souchy.celebi.spark.services.models;
 using Spark;
@@ -15,8 +19,15 @@ namespace souchy.celebi.spark.controllers.models
     public class CreatureModelController : ControllerBase
     {
         private readonly CreatureModelService _creatureModelService;
+        private readonly StatsService _stats;
+        private readonly StringService _strings;
 
-        public CreatureModelController(CreatureModelService service) => _creatureModelService = service;
+        public CreatureModelController(CreatureModelService service, StatsService stats, StringService strings)
+        {
+            _creatureModelService = service;
+            _stats = stats;
+            _strings = strings;
+        }
 
         [HttpGet("all")]
         public async Task<List<ICreatureModel>> GetAll() => await _creatureModelService.GetAsync();
@@ -30,13 +41,31 @@ namespace souchy.celebi.spark.controllers.models
             return Ok(creatureModel);
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost("creature")]
         public async Task<ActionResult<ICreatureModel>> Post(CreatureModel newCreatureModel)
         {
             await _creatureModelService.CreateAsync(newCreatureModel);
             return CreatedAtAction(nameof(Get), new { id = newCreatureModel.entityUid }, newCreatureModel);
         }
+
+        [HttpPost("new")]
+        public async Task<ActionResult<ICreatureModel>> PostNew()
+        {
+            var resources = Resource.values.Values;
+            var characs = Enumerable.OfType<CharacteristicType>(resources);
+
+            var newCreatureModel = Factories.newCreatureModel();
+
+            await _stats.CreateAsync(newCreatureModel.GetBaseStats());
+            await _stats.CreateAsync(newCreatureModel.GetGrowthStats());
+            await _strings.CreateAsync(newCreatureModel.GetName());
+            await _strings.CreateAsync(newCreatureModel.GetDescription());
+            await _creatureModelService.CreateAsync(newCreatureModel);
+
+            return CreatedAtAction(nameof(Get), new { id = newCreatureModel.entityUid }, newCreatureModel);
+        }
+        
 
         [Authorize]
         [HttpPut("creature/{id}")]

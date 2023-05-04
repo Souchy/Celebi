@@ -27,6 +27,9 @@ using souchy.celebi.eevee.impl.util;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 using Microsoft.OpenApi.Any;
+using souchy.celebi.eevee.face.entity;
+using MongoDB.Bson.Serialization.IdGenerators;
+using MongoDB.Bson;
 
 namespace Spark
 {
@@ -263,9 +266,39 @@ namespace Spark
                 ObjectSerializer.DefaultAllowedTypes(type) || type.FullName.StartsWith("souchy.celebi")
             );
             BsonSerializer.RegisterSerializer(objectSerializer);
-            //BsonClassMap.RegisterClassMap<IID>();
+            BsonSerializer.RegisterSerializer<IID>(new IIDSerializer());
             BsonClassMap.RegisterClassMap<CreatureModel>();
+            //BsonClassMap.RegisterClassMap<CreatureModel>(c =>
+            //{
+            //    c.MapIdProperty(e => e.entityUid)
+            //        .SetIdGenerator(StringObjectIdGenerator.Instance)
+            //        .SetSerializer(new StringSerializer(BsonType.ObjectId));
+            //});
             BsonClassMap.RegisterClassMap<EntitySet<IID>>();
+
+            BsonClassMap.RegisterClassMap<IID>();
+            //BsonClassMap.RegisterClassMap<IID>(id => new ObjectId(id));
+            //BsonClassMap.RegisterClassMap<IEntity>(e =>
+            //{
+            //    e.AutoMap();
+            //e.MapIdProperty(e => e.entityUid)
+            //    .SetIdGenerator(StringObjectIdGenerator.Instance)
+            //    .SetSerializer(new StringSerializer(BsonType.ObjectId));
+            //});
+            //BsonClassMap.RegisterClassMap<IEntityModeled>(e =>
+            //{
+            //    e.AutoMap();
+            //    e.MapIdProperty(e => e.modelUid)
+            //        .SetIdGenerator(StringObjectIdGenerator.Instance)
+            //        .SetSerializer(new StringSerializer(BsonType.ObjectId));
+            //});
+            //BsonClassMap.RegisterClassMap<IFightEntity>(e =>
+            //{
+            //    e.AutoMap();
+            //    e.MapIdProperty(e => e.fightUid)
+            //        .SetIdGenerator(StringObjectIdGenerator.Instance)
+            //        .SetSerializer(new StringSerializer(BsonType.ObjectId));
+            //});
         }
 
     }

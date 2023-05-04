@@ -1,4 +1,5 @@
-﻿using souchy.celebi.eevee.enums;
+﻿using MongoDB.Bson.Serialization.IdGenerators;
+using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.stats;
@@ -84,6 +85,24 @@ namespace souchy.celebi.eevee.impl.util
         }
     }
 
+    public class ObjectIIdGenerator : IUIdGenerator
+    {
+        public IID next()
+        {
+            //ObjectIdGenerator.Instance.ge
+            //BsonObjectIdGenerator.Instance.
+            //StringObjectIdGenerator.Instance.
+            throw new NotImplementedException();
+        }
+        public bool take(IID id)
+        {
+            throw new NotImplementedException();
+        }
+        public void dispose(IID id)
+        {
+            throw new NotImplementedException();
+        }
+    }
 
     public class UIdGenerator : IUIdGenerator
     {

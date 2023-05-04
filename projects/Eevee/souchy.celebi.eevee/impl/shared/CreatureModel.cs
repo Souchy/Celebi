@@ -1,4 +1,5 @@
-﻿using souchy.celebi.eevee.face.shared.models;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.stats;
@@ -8,6 +9,7 @@ namespace souchy.celebi.eevee.impl.shared
 {
     public class CreatureModel : ICreatureModel
     {
+        [BsonId]
         public IID entityUid { get; set; }
         public IID nameId { get; set; }
         public IID descriptionId { get; set; }
