@@ -3,11 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.enums.characteristics.creature;
+using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.factories;
 using souchy.celebi.eevee.impl.shared;
+using souchy.celebi.spark.services;
 using souchy.celebi.spark.services.models;
 namespace souchy.celebi.spark.controllers.models
 {
@@ -16,24 +18,24 @@ namespace souchy.celebi.spark.controllers.models
     [Route(Routes.Models + "creatures")] 
     public class CreatureModelController : ControllerBase
     {
-        private readonly CreatureModelService _creatureModelService;
-        private readonly StatsService _stats;
+        private readonly CollectionService<ICreatureModel> _creatureModels;
+        private readonly CollectionService<IStats> _stats;
         private readonly StringService _strings;
 
-        public CreatureModelController(CreatureModelService service, StatsService stats, StringService strings)
+        public CreatureModelController(MongoModelsDbService db, StringService strings)
         {
-            _creatureModelService = service;
-            _stats = stats;
+            _creatureModels = db.GetMongoService<ICreatureModel>();
+            _stats = db.GetMongoService<IStats>();
             _strings = strings;
         }
 
         [HttpGet("all")]
-        public async Task<List<ICreatureModel>> GetAll() => await _creatureModelService.GetAsync();
+        public async Task<List<ICreatureModel>> GetAll() => await _creatureModels.GetAsync();
 
         [HttpGet("creature/{id}")]
         public async Task<ActionResult<ICreatureModel>> Get([FromRoute] IID id)
         {
-            var creatureModel = await _creatureModelService.GetAsync(id);
+            var creatureModel = await _creatureModels.GetAsync(id);
             if (creatureModel is null)
                 return NotFound();
             return Ok(creatureModel);
@@ -43,7 +45,7 @@ namespace souchy.celebi.spark.controllers.models
         [HttpPost("creature")]
         public async Task<ActionResult<ICreatureModel>> Post(CreatureModel newCreatureModel)
         {
-            await _creatureModelService.CreateAsync(newCreatureModel);
+            await _creatureModels.CreateAsync(newCreatureModel);
             return CreatedAtAction(nameof(Get), new { id = newCreatureModel.entityUid }, newCreatureModel);
         }
 
@@ -59,7 +61,7 @@ namespace souchy.celebi.spark.controllers.models
             await _stats.CreateAsync(newCreatureModel.GetGrowthStats());
             await _strings.CreateAsync(newCreatureModel.GetName());
             await _strings.CreateAsync(newCreatureModel.GetDescription());
-            await _creatureModelService.CreateAsync(newCreatureModel);
+            await _creatureModels.CreateAsync(newCreatureModel);
 
             return CreatedAtAction(nameof(Get), new { id = newCreatureModel.entityUid }, newCreatureModel);
         }
@@ -69,11 +71,11 @@ namespace souchy.celebi.spark.controllers.models
         [HttpPut("creature/{id}")]
         public async Task<ActionResult<ReplaceOneResult>> Update([FromRoute] IID id, [FromBody] CreatureModel updatedCreatureModel)
         {
-            var crea = await _creatureModelService.GetAsync(id);
+            var crea = await _creatureModels.GetAsync(id);
             if (crea is null) 
                 return NotFound();
             updatedCreatureModel.entityUid = crea.entityUid;
-            var result = await _creatureModelService.UpdateAsync(id, updatedCreatureModel);
+            var result = await _creatureModels.UpdateAsync(id, updatedCreatureModel);
             return Ok(result);
         }
 
@@ -81,10 +83,10 @@ namespace souchy.celebi.spark.controllers.models
         [HttpDelete("creature/{id}")]
         public async Task<ActionResult<DeleteResult>> Delete([FromRoute] IID id)
         {
-            var crea = await _creatureModelService.GetAsync(id);
+            var crea = await _creatureModels.GetAsync(id);
             if (crea is null) 
                 return NotFound();
-            var result = await _creatureModelService.RemoveAsync(id);
+            var result = await _creatureModels.RemoveAsync(id);
             return Ok(result);
         }
     }

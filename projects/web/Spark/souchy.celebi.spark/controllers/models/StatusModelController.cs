@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
+using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.impl.shared;
+using souchy.celebi.spark.services;
 using souchy.celebi.spark.services.fights;
 using souchy.celebi.spark.services.models;
 
@@ -14,8 +16,11 @@ namespace souchy.celebi.spark.controllers.models
     [Route(Routes.Models + "status")]
     public class StatusModelController : ControllerBase
     {
-        private readonly StatusModelService _statusService;
-        public StatusModelController(StatusModelService statuses) => _statusService = statuses;
+        private readonly CollectionService<IStatusModel> _statusService;
+        public StatusModelController(MongoModelsDbService db)
+        {
+            _statusService = db.GetMongoService<IStatusModel>();
+        }
 
         [HttpGet("all")]
         public async Task<List<IStatusModel>> GetAll() => await _statusService.GetAsync();

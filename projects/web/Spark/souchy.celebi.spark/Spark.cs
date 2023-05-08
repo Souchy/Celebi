@@ -180,7 +180,7 @@ namespace souchy.celebi.spark
 
             // Mongo    
             services.Configure<MongoSettings>(configuration.GetSection(nameof(MongoSettings))); // relates to appsettings.json
-            services.AddSingleton<MongoService>();
+            services.AddSingleton<MongoClientService>();
             services.AddSingleton<MongoModelsDbService>();
             services.AddSingleton<MongoFightsDbService>();
             services.AddSingleton<MongoMetaDbService>();
@@ -191,15 +191,9 @@ namespace souchy.celebi.spark
             services.AddSingleton<ModelProductService>();
             services.AddSingleton<ConsumableProductService>();
             // Models
-            services.AddSingleton<CreatureModelService>();
-            services.AddSingleton<SpellModelService>();
-            services.AddSingleton<StatusModelService>();
             services.AddSingleton<SkinService>();
             // Fights
             services.AddSingleton<FightService>();
-            services.AddSingleton<CreatureService>();
-            services.AddSingleton<SpellModelService>();
-            services.AddSingleton<StatusModelService>();
 
             //services.AddTransient<ICreatureModel, CreatureModel>();
             //services.AddTransient<ISpellModel, SpellModel>();
