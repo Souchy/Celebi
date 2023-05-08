@@ -37,6 +37,19 @@ namespace ArchitectTools
 
             if (interf == null) return;
 
+
+            
+            input = Console.ReadLine();
+            if (input == "c")
+                printChildren(interf);
+            if (input == "p")
+                printTree(interf);
+
+            run();
+        }
+
+        private void printChildren(Type interf)
+        {
             Console.WriteLine("Children: ");
             var subs = assemblies()
                 .SelectMany(a => a.GetTypes())
@@ -51,14 +64,36 @@ namespace ArchitectTools
                 //.BaseType == interf || interf.BaseType == t) //interf.IsAssignableFrom(t) && t.IsClass && t.)
                 ;
             Console.WriteLine($"classes : [{string.Join(", ", subs.Where(s => s.IsClass).Select(s => s.Name).ToArray())}]\n");
-            Console.WriteLine();
             Console.WriteLine($"!classes: [{string.Join(", ", subs.Where(s => !s.IsClass).Select(s => s.Name).ToArray())}]");
-            
-            input = Console.ReadLine();
-            if (input == "c")
-                openVSCode(subs.Where(s => s.IsClass));
 
-            run();
+            Console.WriteLine("Open in vscode? y/n");
+            var input = Console.ReadLine();
+            if (input == "y") 
+                openVSCode(subs.Where(s => s.IsClass));
+        }
+
+        private void printTree(Type root, int depth = 0)
+        {
+            string spacer = "";
+            for(int i = 0; i < depth; i++) spacer += "    ";
+            Console.WriteLine($"{spacer}{root.FullName}");
+            var subs = assemblies()
+                .SelectMany(a => a.GetTypes())
+                .Where(t =>
+                {
+                    if (t.BaseType != null)
+                    {
+                        return t.BaseType == root || t.GetInterfaces().Except(t.BaseType.GetInterfaces()).Contains(root);
+                    }
+                    return t.GetInterfaces().Contains(root);
+                })
+                //.BaseType == interf || interf.BaseType == t) //interf.IsAssignableFrom(t) && t.IsClass && t.)
+                ;
+            foreach (Type sub in subs)
+            {
+                printTree(sub, depth + 1);
+                //Console.WriteLine(type.FullName);
+            }
         }
 
         private void openVSCode(IEnumerable<Type> types)
