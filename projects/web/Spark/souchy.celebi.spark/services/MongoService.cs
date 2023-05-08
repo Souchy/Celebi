@@ -53,8 +53,9 @@ namespace souchy.celebi.spark.services
     public class MongoI18NDbService
     {
         private readonly IMongoDatabase db;
-        public MongoMetaDbService(MongoService mongoService, IOptions<MongoSettings> settings)
-            => db = mongoService.GetDatabase(settings.Value.MetaDB);
+
+        public MongoI18NDbService(MongoClientService mongoService, IOptions<MongoSettings> settings)
+            => db = mongoService.GetDatabase(settings.Value.I18NDB);
         public IMongoCollection<T> GetMongoCollection<T>(string collectionName)
             => db.GetCollection<T>(collectionName);
     }

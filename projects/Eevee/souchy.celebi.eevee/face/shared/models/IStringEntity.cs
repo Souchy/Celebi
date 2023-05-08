@@ -2,9 +2,8 @@
 
 namespace souchy.celebi.eevee.face.shared.models
 {
-    public interface IStringEntity : IEntity
+    public interface IStringEntity : IEntityModel
     {
         public string value { get; set; }
-
     }
 }
