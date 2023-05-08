@@ -10,6 +10,16 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="souchy.celebi.spark\services\fights\CreatureService.cs" />
+	  <Compile Remove="souchy.celebi.spark\services\fights\SpellService.cs" />
+	  <Compile Remove="souchy.celebi.spark\services\fights\StatsService.cs" />
+	  <Compile Remove="souchy.celebi.spark\services\fights\StatusService.cs" />
+	  <Compile Remove="souchy.celebi.spark\services\models\CreatureModelService.cs" />
+	  <Compile Remove="souchy.celebi.spark\services\models\SpellModelService.cs" />
+	  <Compile Remove="souchy.celebi.spark\services\models\StatusModelService.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="AspNetCore.Identity.Mongo" Version="8.3.3" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="7.0.5" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="7.0.5" />
