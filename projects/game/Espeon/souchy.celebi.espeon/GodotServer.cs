@@ -1,4 +1,4 @@
-﻿using Espeon.souchy.celebi.espeon.godot;
+﻿using souchy.celebi.espeon.godot;
 using Godot;
 using souchy.celebi.eevee.face.util;
 

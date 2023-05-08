@@ -1,14 +1,14 @@
 using Godot;
 using Godot.Sharp.Extras;
 using souchy.celebi.eevee.enums;
-using Umbreon.vaporeon.common;
+using souchy.celebi.umbreon.vaporeon.common;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.impl.objects.effects;
 using souchy.celebi.eevee.face.util;
-using Umbreon.vaporeon.components;
+using souchy.celebi.umbreon.vaporeon.components;
 using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.enums.characteristics.creature;
 using Resource = souchy.celebi.eevee.enums.characteristics.creature.Resource;

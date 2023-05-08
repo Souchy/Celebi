@@ -5,7 +5,7 @@ using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.shared;
 using souchy.celebi.eevee.impl.util;
-using Umbreon.vaporeon;
+using souchy.celebi.umbreon.vaporeon;
 
 
 public partial class resource_list_effect_skin : ResourceList

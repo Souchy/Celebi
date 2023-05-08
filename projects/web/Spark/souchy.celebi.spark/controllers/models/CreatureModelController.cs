@@ -9,8 +9,6 @@ using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.factories;
 using souchy.celebi.eevee.impl.shared;
 using souchy.celebi.spark.services.models;
-using Spark;
-
 namespace souchy.celebi.spark.controllers.models
 {
     [ApiController]

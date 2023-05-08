@@ -1,7 +1,7 @@
 //using Internal;
-using Umbreon.src;
 using Godot;
 using Godot.Sharp.Extras;
+using souchy.celebi.umbreon.src;
 using System;
 
 namespace souchy.celebi.umbreon.sapphire.ui

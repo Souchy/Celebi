@@ -4,7 +4,7 @@ using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 using MongoDB.Driver;
-using static Umbreon.common.persistance.DiamondParser;
+using static souchy.celebi.umbreon.common.persistance.DiamondParser;
 using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.face.shared.models;
 

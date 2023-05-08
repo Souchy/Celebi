@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using souchy.celebi.spark.models;
 using souchy.celebi.spark.services.meta;
-using Spark;
 
 namespace souchy.celebi.spark.controllers.meta
 {

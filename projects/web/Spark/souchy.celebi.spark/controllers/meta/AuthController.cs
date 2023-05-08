@@ -5,7 +5,6 @@ using Microsoft.Extensions.Options;
 using souchy.celebi.spark.models;
 using souchy.celebi.spark.models.settings;
 using souchy.celebi.spark.services.meta;
-using Spark;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;

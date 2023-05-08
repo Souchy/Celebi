@@ -3,7 +3,7 @@ using Godot.Sharp.Extras;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.util;
-using Umbreon.vaporeon;
+using souchy.celebi.umbreon.vaporeon;
 
 public partial class ResourceList : Control
 {

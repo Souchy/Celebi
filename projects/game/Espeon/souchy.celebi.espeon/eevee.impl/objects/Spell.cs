@@ -25,7 +25,7 @@ namespace souchy.celebi.espeon.eevee.impl.objects
 
     public class Spell : ISpell
     {
-        public IID entityUid { get; init; } = Eevee.RegisterIID();
+        public IID entityUid { get; init; } = Eevee.RegisterIID<ISpell>();
         public IID fightUid { get; init; }
         public IID modelUid { get; set; }
 
@@ -33,6 +33,7 @@ namespace souchy.celebi.espeon.eevee.impl.objects
         public int cooldownRemaining { get; set; } = 0;
         public int numberOfCastsThisTurn { get; set; } = 0;
         public Dictionary<IID, int> numberOfCastPerEntityThisTurn { get; set; } = new Dictionary<IID, int>();
+        public IID stats { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public Spell(ScopeID scopeId)
         {
@@ -44,7 +45,7 @@ namespace souchy.celebi.espeon.eevee.impl.objects
 
         public void Dispose()
         {
-            Eevee.DisposeIID(this);
+            Eevee.DisposeIID<ISpell>(entityUid);
             //Scopes.DisposeIID(fightUid, entityUid);
         }
     }

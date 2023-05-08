@@ -7,7 +7,7 @@ using souchy.celebi.eevee.impl.objects.effects;
 using souchy.celebi.eevee.impl.util;
 using System.Reflection;
 using System.Xml.Linq;
-using Umbreon.vaporeon;
+using souchy.celebi.umbreon.vaporeon;
 
 public partial class resource_list_effect : ResourceList
 {

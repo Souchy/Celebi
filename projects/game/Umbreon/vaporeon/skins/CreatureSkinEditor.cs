@@ -4,7 +4,7 @@ using souchy.celebi.eevee.face.shared.models.skins;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.util;
 using System;
-using Umbreon.vaporeon.common;
+using souchy.celebi.umbreon.vaporeon.common;
 
 public partial class CreatureSkinEditor : PanelContainer, EditorInitiator<ICreatureSkin>
 {

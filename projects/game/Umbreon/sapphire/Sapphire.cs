@@ -1,6 +1,3 @@
-using Umbreon.common.persistance;
-using Umbreon.data;
-using Umbreon.src;
 using Godot;
 using Godot.Sharp.Extras;
 using Newtonsoft.Json;
@@ -12,6 +9,7 @@ using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.shared.models.skins;
+using souchy.celebi.umbreon.common.persistance;
 
 public partial class Sapphire : Node3D
 {

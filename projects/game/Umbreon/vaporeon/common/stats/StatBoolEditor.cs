@@ -2,8 +2,8 @@ using Godot;
 using Godot.Sharp.Extras;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.impl.util;
+using souchy.celebi.umbreon.vaporeon.common;
 using System;
-using Umbreon.vaporeon.common;
 
 public partial class StatBoolEditor : CenterContainer, EditorInitiator<IStatBool>
 {

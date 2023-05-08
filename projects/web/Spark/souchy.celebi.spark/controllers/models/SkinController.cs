@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using souchy.celebi.spark.services.models;
-using Spark;
 
 namespace souchy.celebi.spark.controllers.models
 {

@@ -6,18 +6,15 @@
     <RootNamespace />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="souchy.celebi.espeon\eeevee.impl\objects\Cell.cs" />
-    <Compile Remove="souchy.celebi.espeon\eeevee.impl\objects\Creature.cs" />
-    <Compile Remove="souchy.celebi.espeon\eeevee.impl\objects\Effect.cs" />
-    <Compile Remove="souchy.celebi.espeon\eeevee.impl\objects\Spell.cs" />
+    <Compile Remove="souchy.celebi.espeon\eevee.impl\objects\**" />
+    <EmbeddedResource Remove="souchy.celebi.espeon\eevee.impl\objects\**" />
   </ItemGroup>
   
   <ItemGroup>
-    <Folder Include="souchy.celebi.espeon\eeevee.impl\effects\" />
-    <Folder Include="souchy.celebi.espeon\eeevee.impl\conditions\" />
-    <Folder Include="souchy.celebi.espeon\eeevee.impl\models\" />
-    <Folder Include="souchy.celebi.espeon\eeevee.impl\objects\" />
-    <Folder Include="souchy.celebi.espeon\eeevee.impl\skins\" />
+    <Folder Include="souchy.celebi.espeon\eevee.impl\effects\" />
+    <Folder Include="souchy.celebi.espeon\eevee.impl\conditions\" />
+    <Folder Include="souchy.celebi.espeon\eevee.impl\models\" />
+    <Folder Include="souchy.celebi.espeon\eevee.impl\skins\" />
     <Folder Include="souchy.celebi.espeon\interfaces\net\" />
   </ItemGroup>
   

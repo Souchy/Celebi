@@ -6,7 +6,6 @@ using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.impl.shared;
 using souchy.celebi.spark.services.fights;
 using souchy.celebi.spark.services.models;
-using Spark;
 
 namespace souchy.celebi.spark.controllers.models
 {

@@ -1,4 +1,4 @@
-﻿using Umbreon.data;
+﻿using souchy.celebi.umbreon.data;
 using Godot;
 using Newtonsoft.Json;
 using souchy.celebi.eevee.face.objects;

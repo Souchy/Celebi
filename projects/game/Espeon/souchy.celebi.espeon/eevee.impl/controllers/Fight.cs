@@ -8,7 +8,7 @@ using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.util;
 using static souchy.celebi.eevee.face.entity.IEntity;
 
-namespace souchy.celebi.espeon.eeevee.impl.controllers
+namespace souchy.celebi.espeon.eevee.impl.controllers
 {
     public class Fight : IFight
     {

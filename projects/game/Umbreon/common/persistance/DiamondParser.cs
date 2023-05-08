@@ -9,9 +9,8 @@ using souchy.celebi.eevee.face.shared.models.skins;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.util;
-using Umbreon.common.persistance;
-using Umbreon.common.util;
-using Umbreon.data;
+using souchy.celebi.umbreon.common.util;
+using souchy.celebi.umbreon.data;
 using FileAccess = Godot.FileAccess;
 
 

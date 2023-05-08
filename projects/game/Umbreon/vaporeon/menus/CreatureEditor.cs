@@ -9,8 +9,8 @@ using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.util;
 using System;
-using Umbreon.vaporeon;
-using Umbreon.vaporeon.common;
+using souchy.celebi.umbreon.vaporeon;
+using souchy.celebi.umbreon.vaporeon.common;
 
 public partial class CreatureEditor : Control, EditorInitiator<ICreatureModel>
 {

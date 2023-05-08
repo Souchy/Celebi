@@ -9,7 +9,7 @@ using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.stats;
 using souchy.celebi.eevee.impl.util;
 using System;
-using Umbreon.vaporeon.common;
+using souchy.celebi.umbreon.vaporeon.common;
 
 public partial class StatsEditor : PanelContainer
 {

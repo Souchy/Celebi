@@ -4,7 +4,7 @@ using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.shared.zones;
 using System;
-using Umbreon.vaporeon.common;
+using souchy.celebi.umbreon.vaporeon.common;
 
 public partial class ZoneEditorMini : PanelContainer
 {

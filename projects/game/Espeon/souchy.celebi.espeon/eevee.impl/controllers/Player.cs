@@ -1,4 +1,4 @@
-﻿using Espeon.souchy.celebi.espeon;
+﻿using souchy.celebi.espeon;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.util;
@@ -6,7 +6,7 @@ using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.util;
 using static souchy.celebi.eevee.face.entity.IEntity;
 
-namespace souchy.celebi.espeon.eeevee.impl.controllers
+namespace souchy.celebi.espeon.eevee.impl.controllers
 {
     public class Player : IPlayer
     {

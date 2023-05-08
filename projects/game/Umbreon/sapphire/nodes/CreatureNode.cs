@@ -1,4 +1,3 @@
-using Umbreon.data;
 using Godot;
 using Godot.Sharp.Extras;
 using souchy.celebi.eevee.impl.objects;

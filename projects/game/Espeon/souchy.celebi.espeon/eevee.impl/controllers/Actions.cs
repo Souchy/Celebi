@@ -11,7 +11,7 @@ using souchy.celebi.eevee.impl.shared.triggers;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.face.objects.statuses;
-using Espeon.souchy.celebi.espeon.eevee.impl.controllers;
+using souchy.celebi.espeon.eevee.impl.controllers;
 using souchy.celebi.eevee.impl.shared;
 using System;
 using souchy.celebi.eevee.face.shared;
@@ -19,7 +19,7 @@ using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.entity;
 using Microsoft.AspNetCore.Hosting;
 
-namespace souchy.celebi.espeon.eeevee.impl.controllers
+namespace souchy.celebi.espeon.eevee.impl.controllers
 {
     public class Actions
     {

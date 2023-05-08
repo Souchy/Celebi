@@ -1,7 +1,4 @@
-﻿using Espeon.souchy.celebi.eeevee.impl;
-using Espeon.souchy.celebi.eeevee.impl.controllers;
-using Espeon.souchy.celebi.espeon.eevee.impl.controllers;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using souchy.celebi.eevee;
 using souchy.celebi.eevee.face.objects;
@@ -11,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using souchy.celebi.eevee.impl.stats;
 using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.objects.stats;
+using souchy.celebi.espeon.eevee.impl.controllers;
 
 namespace souchy.celebi.espeon
 {
