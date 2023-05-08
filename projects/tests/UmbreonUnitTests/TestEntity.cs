@@ -2,7 +2,7 @@
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 
-namespace UmbreonUnitTests
+namespace souchy.celebi.umbreonUnitTests
 {
     public class TestEntity : IEntity
     {

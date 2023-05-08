@@ -6,6 +6,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UserSecretsId>1da1bb08-f4c7-4a9c-85b4-1d6fd26f2f8a</UserSecretsId>
 		<RootNamespace />
+		<StartupObject>souchy.celebi.spark.Spark</StartupObject>
 	</PropertyGroup>
 
 	<ItemGroup>

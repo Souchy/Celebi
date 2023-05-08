@@ -3,30 +3,31 @@
     <TargetFramework>net7.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="souchy.celebi\eeevee.impl\objects\Cell.cs" />
-    <Compile Remove="souchy.celebi\eeevee.impl\objects\Creature.cs" />
-    <Compile Remove="souchy.celebi\eeevee.impl\objects\Effect.cs" />
-    <Compile Remove="souchy.celebi\eeevee.impl\objects\Spell.cs" />
+    <Compile Remove="souchy.celebi.espeon\eeevee.impl\objects\Cell.cs" />
+    <Compile Remove="souchy.celebi.espeon\eeevee.impl\objects\Creature.cs" />
+    <Compile Remove="souchy.celebi.espeon\eeevee.impl\objects\Effect.cs" />
+    <Compile Remove="souchy.celebi.espeon\eeevee.impl\objects\Spell.cs" />
   </ItemGroup>
   
   <ItemGroup>
-    <Folder Include="souchy.celebi\eeevee.impl\effects\" />
-    <Folder Include="souchy.celebi\eeevee.impl\conditions\" />
-    <Folder Include="souchy.celebi\eeevee.impl\models\" />
-    <Folder Include="souchy.celebi\eeevee.impl\objects\" />
-    <Folder Include="souchy.celebi\eeevee.impl\skins\" />
-    <Folder Include="souchy.celebi\espeon\interfaces\net\" />
+    <Folder Include="souchy.celebi.espeon\eeevee.impl\effects\" />
+    <Folder Include="souchy.celebi.espeon\eeevee.impl\conditions\" />
+    <Folder Include="souchy.celebi.espeon\eeevee.impl\models\" />
+    <Folder Include="souchy.celebi.espeon\eeevee.impl\objects\" />
+    <Folder Include="souchy.celebi.espeon\eeevee.impl\skins\" />
+    <Folder Include="souchy.celebi.espeon\interfaces\net\" />
   </ItemGroup>
   
   <ItemGroup>
     <None Include="EspeonNode.tscn" />
-    <None Include="souchy.celebi\espeon\GodotNodes\BoardNode.tscn" />
-    <None Include="souchy.celebi\espeon\GodotNodes\CellNode.tscn" />
-    <None Include="souchy.celebi\espeon\GodotNodes\CreatureNode.tscn" />
-    <None Include="souchy.celebi\espeon\GodotNodes\FightNode.tscn" />
-    <None Include="souchy.celebi\espeon\GodotNodes\PlayerNode.tscn" />
+    <None Include="souchy.celebi.espeon\GodotNodes\BoardNode.tscn" />
+    <None Include="souchy.celebi.espeon\GodotNodes\CellNode.tscn" />
+    <None Include="souchy.celebi.espeon\GodotNodes\CreatureNode.tscn" />
+    <None Include="souchy.celebi.espeon\GodotNodes\FightNode.tscn" />
+    <None Include="souchy.celebi.espeon\GodotNodes\PlayerNode.tscn" />
     <None Include="project.godot" />
   </ItemGroup>
 

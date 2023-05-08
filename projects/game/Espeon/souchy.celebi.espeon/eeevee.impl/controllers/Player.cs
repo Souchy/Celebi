@@ -6,11 +6,11 @@ using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.util;
 using static souchy.celebi.eevee.face.entity.IEntity;
 
-namespace Espeon.souchy.celebi.eeevee.impl.controllers
+namespace souchy.celebi.espeon.eeevee.impl.controllers
 {
     public class Player : IPlayer
     {
-        public IID entityUid { get; set; } 
+        public IID entityUid { get; set; }
         public IID fightUid { get; set; }
 
         public ITeam team { get; set; }
@@ -27,9 +27,9 @@ namespace Espeon.souchy.celebi.eeevee.impl.controllers
         {
             creatures.Clear();
             // dispose originaly owned creatures of this player
-            this.GetFight().creatures.Remove(c => c.originalOwnerUid == this.entityUid);
+            this.GetFight().creatures.Remove(c => c.originalOwnerUid == entityUid);
             // reset owner of currently owned creatures of this player
-            this.GetFight().creatures.Values.Where(c => c.currentOwnerUid == this.entityUid).ToList()
+            this.GetFight().creatures.Values.Where(c => c.currentOwnerUid == entityUid).ToList()
                 .ForEach(c => c.currentOwnerUid = c.originalOwnerUid);
 
             Eevee.DisposeIID<IPlayer>(entityUid);

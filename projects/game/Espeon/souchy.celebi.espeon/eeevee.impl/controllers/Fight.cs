@@ -8,7 +8,7 @@ using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.util;
 using static souchy.celebi.eevee.face.entity.IEntity;
 
-namespace Espeon.souchy.celebi.espeon.eevee.impl.controllers
+namespace souchy.celebi.espeon.eeevee.impl.controllers
 {
     public class Fight : IFight
     {
@@ -34,7 +34,7 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.controllers
         {
             //this.entityUid = scopeId;
             //this.board = Scopes.GetRequiredScoped<IBoard>(entityUid);
-            Eevee.fights.Add(this.entityUid, this);
+            Eevee.fights.Add(entityUid, this);
         }
 
         #endregion Constructors
@@ -47,7 +47,7 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.controllers
         {
             //Scopes.DisposeIID(entityUid, entityUid);
 
-            Eevee.DisposeIID<IFight>(this.entityUid);
+            Eevee.DisposeIID<IFight>(entityUid);
             board.Dispose();
             players.Dispose(); //players.Values.ToList().ForEach(p => p.Dispose());
             creatures.Dispose();

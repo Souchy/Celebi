@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Espeon.souchy.celebi.espeon.extensions
+namespace souchy.celebi.espeon.extensions
 {
     public static class IFightEntityExtensions
     {

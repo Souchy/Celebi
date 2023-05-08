@@ -15,7 +15,7 @@ using Umbreon.data;
 using FileAccess = Godot.FileAccess;
 
 
-namespace Umbreon.common.persistance
+namespace souchy.celebi.umbreon.common.persistance
 {
 
     public static class DiamondParserExtension

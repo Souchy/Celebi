@@ -13,7 +13,7 @@ using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.shared;
 //using CreatureData = souchy.celebi.eevee.impl.objects.Creature;
 
-namespace Umbreon.common
+namespace souchy.celebi.umbreon.common
 {
 
     public static class DiamondExtension

@@ -1,7 +1,7 @@
 ﻿using PlayFab.ClientModels;
 using PlayFab;
 
-namespace Umbreon.amethyst.net
+namespace souchy.celebi.umbreon.amethyst.net
 {
     public class Signup
     {

@@ -1,14 +1,14 @@
 ﻿using Godot;
 using souchy.celebi.eevee.face.util;
 
-namespace Espeon.souchy.celebi.espeon.godot
+namespace souchy.celebi.espeon.godot
 {
     public partial class PlayerNode : Node
     {
 
         public PlayerNode(int id)
         {
-            this.SetMultiplayerAuthority(id, true);
+            SetMultiplayerAuthority(id, true);
         }
 
 

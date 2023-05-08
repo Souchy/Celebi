@@ -3,7 +3,7 @@ using Microsoft.Extensions.Hosting;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.util;
 
-namespace Espeon.souchy.celebi.espeon
+namespace souchy.celebi.espeon
 {
     public class ScopeID
     {

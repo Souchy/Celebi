@@ -11,7 +11,7 @@ using System.Reflection;
 using Container = SimpleInjector.Container;
 //using CreatureData = souchy.celebi.eevee.impl.objects.Creature;
 
-namespace Umbreon.src
+namespace souchy.celebi.umbreon.src
 {
 
     static class Registry

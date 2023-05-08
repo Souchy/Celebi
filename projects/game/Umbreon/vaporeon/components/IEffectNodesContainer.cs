@@ -6,7 +6,7 @@ using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects.effects;
 using souchy.celebi.eevee.impl.util;
 
-namespace Umbreon.vaporeon.components
+namespace souchy.celebi.umbreon.vaporeon.components
 {
     public interface IEffectNodesContainer
     {

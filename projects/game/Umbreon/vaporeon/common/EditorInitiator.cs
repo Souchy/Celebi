@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Umbreon.vaporeon.common
+namespace souchy.celebi.umbreon.vaporeon.common
 {
     public interface EditorInitiator<T>
     {

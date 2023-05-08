@@ -1,6 +1,6 @@
 ﻿using souchy.celebi.eevee.face.entity;
 
-namespace UmbreonUnitTests.souchy.celebi.espeon.unittest.util
+namespace souchy.celebi.umbreonUnitTests.souchy.celebi.espeon.unittest.util
 {
     public class EventBusTest
     {

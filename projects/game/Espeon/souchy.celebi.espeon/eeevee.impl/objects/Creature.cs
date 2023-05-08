@@ -7,7 +7,7 @@ using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.util.math;
 using static souchy.celebi.eevee.face.entity.IEntity;
 
-namespace Espeon.souchy.celebi.espeon.eevee.impl.objects
+namespace souchy.celebi.espeon.eevee.impl.objects
 {
     /*
      *

@@ -1,6 +1,6 @@
 ﻿using Godot;
 
-namespace Umbreon.data
+namespace souchy.celebi.umbreon.data
 {
     public class MapModelData
     {

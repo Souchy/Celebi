@@ -9,7 +9,7 @@ using FileAccess = Godot.FileAccess;
 using static Umbreon.common.persistance.DiamondParser;
 using souchy.celebi.eevee.enums.characteristics;
 
-namespace Umbreon.common.persistance
+namespace souchy.celebi.umbreon.common.persistance
 {
     internal class DiamondPersistanceJson : IDiamondPersistance
     {

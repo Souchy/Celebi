@@ -31,7 +31,7 @@ using souchy.celebi.eevee.face.entity;
 using MongoDB.Bson.Serialization.IdGenerators;
 using MongoDB.Bson;
 
-namespace Spark
+namespace souchy.celebi.spark
 {
     public static class Routes
     {
@@ -40,7 +40,7 @@ namespace Spark
         public const string Meta = "meta/";
     }
 
-    public class Program
+    public class Spark
     {
         public static void Main(string[] args)
         {

@@ -7,7 +7,7 @@ using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.util;
 using static souchy.celebi.eevee.face.entity.IEntity;
 
-namespace Espeon.souchy.celebi.espeon.eevee.impl.controllers
+namespace souchy.celebi.espeon.eeevee.impl.controllers
 {
     public class Board : IBoard
     {
@@ -19,7 +19,7 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.controllers
 
         public Board(ScopeID scopeId)
         {
-            this.fightUid = scopeId;
+            fightUid = scopeId;
             this.GetFight().board = this;
             //this.entityUid = Scopes.GetUIdGenerator(fightUid).next();
             //this.instances = Scopes.GetRequiredScoped<IFight>(fightUid);
@@ -28,7 +28,7 @@ namespace Espeon.souchy.celebi.espeon.eevee.impl.controllers
         public void Dispose()
         {
             this.GetFight().board = null;
-            Eevee.DisposeIID<IBoard>(this.entityUid);
+            Eevee.DisposeIID<IBoard>(entityUid);
             // nothing to dispose? 
             //throw new NotImplementedException();
         }

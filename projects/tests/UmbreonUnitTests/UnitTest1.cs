@@ -1,4 +1,4 @@
-namespace UmbreonUnitTests
+namespace souchy.celebi.umbreonUnitTests
 {
     public class UnitTest1
     {

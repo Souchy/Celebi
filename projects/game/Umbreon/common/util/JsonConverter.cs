@@ -8,7 +8,7 @@ using souchy.celebi.eevee.impl.shared;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.impl.values;
 
-namespace Umbreon.common.util
+namespace souchy.celebi.umbreon.common.util
 {
     public class IIDJsonConverter : JsonConverter<IID>
     {

@@ -6,7 +6,7 @@ using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
 using static souchy.celebi.eevee.face.entity.IEntity;
 
-namespace Espeon.souchy.celebi.espeon.eevee.impl.objects
+namespace souchy.celebi.espeon.eevee.impl.objects
 {
     public class Effect : IEffect
     {

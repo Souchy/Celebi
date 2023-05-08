@@ -11,7 +11,7 @@ using souchy.celebi.eevee.impl.values;
 using System.Reflection;
 using Timer = Godot.Timer;
 
-namespace Umbreon.vaporeon.common
+namespace souchy.celebi.umbreon.vaporeon.common
 {
     public static class PropertiesComponent
     {

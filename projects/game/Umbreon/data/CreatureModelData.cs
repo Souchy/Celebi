@@ -1,6 +1,6 @@
 ﻿using souchy.celebi.eevee.face.objects.stats;
 
-namespace Umbreon.data
+namespace souchy.celebi.umbreon.data
 {
     public class CreatureModelData
     {

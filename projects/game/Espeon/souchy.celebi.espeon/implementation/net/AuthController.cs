@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Espeon.souchy.celebi.espeon.implementation.net
+namespace souchy.celebi.espeon.implementation.net
 {
     public class AuthController
     {

@@ -8,7 +8,7 @@ using static Umbreon.common.persistance.DiamondParser;
 using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.face.shared.models;
 
-namespace Umbreon.common.persistance
+namespace souchy.celebi.umbreon.common.persistance
 {
     /// <summary>
     /// This save/load system is moreso based on individual entities instead of saving a whole dictionary for every small change

@@ -1,6 +1,6 @@
 ﻿using souchy.celebi.eevee.face.util;
 
-namespace Espeon.souchy.celebi.espeon.implementation.net
+namespace souchy.celebi.espeon.implementation.net
 {
     /// <summary>
     /// If server -> client: at the end of the lobby, the server tells the client to join as a player

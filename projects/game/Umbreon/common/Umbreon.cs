@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 
-namespace Umbreon.common
+namespace souchy.celebi.umbreon.common
 {
     public partial class Umbreon : Node
     {

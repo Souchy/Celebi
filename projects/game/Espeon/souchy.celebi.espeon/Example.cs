@@ -7,7 +7,7 @@ using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.impl.stats;
 
-namespace Espeon.souchy.celebi.espeon
+namespace souchy.celebi.espeon
 {
     public class Example
     {

@@ -2,7 +2,7 @@
 using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.util;
 
-namespace Espeon.souchy.celebi.espeon.implementation.net
+namespace souchy.celebi.espeon.implementation.net
 {
     public class UmbreonServer
     {

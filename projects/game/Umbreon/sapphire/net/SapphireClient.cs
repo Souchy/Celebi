@@ -2,7 +2,7 @@
 using souchy.celebi.eevee.impl.net.sapphire;
 using souchy.celebi.eevee.impl.net.umbreon;
 
-namespace Umbreon.sapphire.net
+namespace souchy.celebi.umbreon.sapphire.net
 {
     public class SapphireClient
     {

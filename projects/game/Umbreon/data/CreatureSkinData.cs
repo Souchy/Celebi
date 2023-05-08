@@ -1,4 +1,4 @@
-﻿namespace Umbreon.data
+﻿namespace souchy.celebi.umbreon.data
 {
     public class CreatureSkinData
     {

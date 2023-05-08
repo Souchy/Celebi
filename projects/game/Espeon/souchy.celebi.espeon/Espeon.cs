@@ -12,7 +12,7 @@ using souchy.celebi.eevee.impl.stats;
 using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.objects.stats;
 
-namespace Espeon.souchy.celebi.espeon
+namespace souchy.celebi.espeon
 {
     /// <summary>
     /// Espeon is the server
@@ -27,7 +27,8 @@ namespace Espeon.souchy.celebi.espeon
         {
             Console.WriteLine("Hello, World!");
 
-            /*Scopes.*/init(args, configureServices);
+            /*Scopes.*/
+            init(args, configureServices);
 
             //new Example(Scopes.GetRequiredScoped<IFight>(Scopes.NewScope()));
             //new Example(Scopes.GetRequiredScoped<IFight>(Scopes.NewScope()));

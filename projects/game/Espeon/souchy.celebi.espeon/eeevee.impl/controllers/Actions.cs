@@ -19,7 +19,7 @@ using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.entity;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Espeon.souchy.celebi.eeveeimpl.controllers
+namespace souchy.celebi.espeon.eeevee.impl.controllers
 {
     public class Actions
     {
@@ -37,11 +37,11 @@ namespace Espeon.souchy.celebi.eeveeimpl.controllers
             ICreature sourceCrea = action.fight.creatures.Get(action.caster);
             IPosition targetPosition = action.fight.cells.Get(action.targetCell).position;
             var sourceStats = sourceCrea.GetStats(action); //, new TriggerEvent(TriggerType.CompileStats, TriggerOrderType.Before));
-            
+
             // check costs
             foreach (var cost in spellModel.costs)
             {
-                if(cost.Value > sourceStats.Get<IStatSimple>(cost.Key).value)
+                if (cost.Value > sourceStats.Get<IStatSimple>(cost.Key).value)
                 {
                     return;
                 }
@@ -57,7 +57,7 @@ namespace Espeon.souchy.celebi.eeveeimpl.controllers
 
             EffectPreviewPipeline pipeline = new EffectPreviewPipeline();
 
-            TriggerEvent triggerBefore= new TriggerEvent(TriggerType.OnCreatureSpellCast, TriggerOrderType.Before);
+            TriggerEvent triggerBefore = new TriggerEvent(TriggerType.OnCreatureSpellCast, TriggerOrderType.Before);
             TriggerEvent triggerApply = new TriggerEvent(TriggerType.OnCreatureSpellCast, TriggerOrderType.Apply);
             TriggerEvent triggerAfter = new TriggerEvent(TriggerType.OnCreatureSpellCast, TriggerOrderType.After);
 
