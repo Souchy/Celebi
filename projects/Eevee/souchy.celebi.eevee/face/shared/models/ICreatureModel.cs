@@ -6,7 +6,7 @@ using souchy.celebi.eevee.impl;
 
 namespace souchy.celebi.eevee.face.shared.models
 {
-    public interface ICreatureModel : IEntity
+    public interface ICreatureModel : IEntityModel
     {
         public IID nameId { get; set; }
         public IID descriptionId { get; set; }

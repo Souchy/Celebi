@@ -5,7 +5,7 @@ using souchy.celebi.eevee.face.util.math;
 
 namespace souchy.celebi.eevee.face.shared.models
 {
-    public interface IMap : IEntity
+    public interface IMap : IEntityModel
     {
         public IID name { get; set; }
         public IVector3[][] teamsStartPositions { get; set; }

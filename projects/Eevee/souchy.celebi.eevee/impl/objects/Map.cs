@@ -13,6 +13,7 @@ namespace souchy.celebi.eevee.impl.objects
     public class Map : IMap
     {
         public IID entityUid { get; set; }
+        public IID modelUid { get; set; }
 
         public IID name { get; set; }
         public IVector3[][] teamsStartPositions { get; set; }

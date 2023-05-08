@@ -11,6 +11,8 @@ namespace souchy.celebi.eevee.impl.shared
     {
         [BsonId]
         public IID entityUid { get; set; }
+        public IID modelUid { get; set; }
+
         public IID nameId { get; set; }
         public IID descriptionId { get; set; }
         public IEntitySet<IID> skins { get; init; } = new EntitySet<IID>();

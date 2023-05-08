@@ -8,7 +8,7 @@ using souchy.celebi.eevee.impl.values;
 
 namespace souchy.celebi.eevee.face.shared.models
 {
-    public interface IStatusModel : IEntity, IEffectsContainer
+    public interface IStatusModel : IEntityModel, IEffectsContainer
     {
         public IID nameId { get; set; }
         public IID descriptionId { get; set; }

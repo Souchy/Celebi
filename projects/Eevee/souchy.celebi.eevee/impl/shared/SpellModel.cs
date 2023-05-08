@@ -19,6 +19,8 @@ namespace souchy.celebi.eevee.impl.shared
     public class SpellModel : ISpellModel
     {
         public IID entityUid { get; set; }
+        public IID modelUid { get; set; }
+
         public IID nameId { get; set; }
         public IID descriptionId { get; set; }
 

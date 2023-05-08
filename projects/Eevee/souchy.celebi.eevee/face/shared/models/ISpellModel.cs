@@ -12,7 +12,7 @@ using souchy.celebi.eevee.impl.values;
 
 namespace souchy.celebi.eevee.face.shared.models
 {
-    public interface ISpellModel : IEntity, IEffectsContainer
+    public interface ISpellModel : IEntityModel, IEffectsContainer
     {
         public IID nameId { get; set; }
         public IID descriptionId { get; set; }
