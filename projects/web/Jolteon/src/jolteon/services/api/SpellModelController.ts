@@ -9,7 +9,7 @@
  * ---------------------------------------------------------------
  */
 
-import { DeleteResult, ISpellModel, ReplaceOneResult, SpellModel } from "./data-contracts";
+import { DeleteResult, IID, ISpellModel, ReplaceOneResult, SpellModel } from "./data-contracts";
 import { ContentType, HttpClient, HttpResponse, RequestParams } from "./http-client";
 
 export class SpellModelController<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
@@ -37,10 +37,12 @@ export class SpellModelController<SecurityDataType = unknown> extends HttpClient
    * @request GET:/models/spells/spell/{id}
    * @response `200` `ISpellModel` Success
    */
-  public getSpell(id: string, params: RequestParams = {}): Promise<HttpResponse<ISpellModel, any>> {
+  public getSpell(id: string, data: IID, params: RequestParams = {}): Promise<HttpResponse<ISpellModel, any>> {
     return this.request<ISpellModel, any>({
       path: `/models/spells/spell/${id}`,
       method: "GET",
+      body: data,
+      type: ContentType.Json,
       format: "json",
       ...params,
     });
@@ -53,11 +55,7 @@ export class SpellModelController<SecurityDataType = unknown> extends HttpClient
    * @request PUT:/models/spells/spell/{id}
    * @response `200` `ReplaceOneResult` Success
    */
-  public putSpell(
-    id: string,
-    data: SpellModel,
-    params: RequestParams = {},
-  ): Promise<HttpResponse<ReplaceOneResult, any>> {
+  public putSpell(id: IID, data: SpellModel, params: RequestParams = {}): Promise<HttpResponse<ReplaceOneResult, any>> {
     return this.request<ReplaceOneResult, any>({
       path: `/models/spells/spell/${id}`,
       method: "PUT",
@@ -75,7 +73,7 @@ export class SpellModelController<SecurityDataType = unknown> extends HttpClient
    * @request DELETE:/models/spells/spell/{id}
    * @response `200` `DeleteResult` Success
    */
-  public deleteSpell(id: string, params: RequestParams = {}): Promise<HttpResponse<DeleteResult, any>> {
+  public deleteSpell(id: IID, params: RequestParams = {}): Promise<HttpResponse<DeleteResult, any>> {
     return this.request<DeleteResult, any>({
       path: `/models/spells/spell/${id}`,
       method: "DELETE",

@@ -35,9 +35,10 @@ namespace souchy.celebi.spark.controllers.models
         public async Task<List<ISpellModel>> GetAll() => await _spellService.GetAsync();
 
         [HttpGet("spell/{id}")]
-        public async Task<ActionResult<ISpellModel>> Get(ObjectId id)
+        public async Task<ActionResult<ISpellModel>> Get(IID id)
         {
-            ISpellModel? model = await _spellService.GetAsync(id);
+            var filter = Builders<ISpellModel>.Filter.Eq(nameof(ISpellModel.modelUid), id);
+            ISpellModel? model = await _spellService.GetOneAsync(filter);
             if (model is null)
                 return NotFound();
             return Ok(model);
@@ -67,35 +68,28 @@ namespace souchy.celebi.spark.controllers.models
 
         [Authorize]
         [HttpPut("spell/{id}")]
-        public async Task<ActionResult<ReplaceOneResult>> Update(ObjectId id, SpellModel updatedSpellModel)
+        public async Task<ActionResult<ReplaceOneResult>> Update([FromRoute] IID id, SpellModel updatedSpellModel)
         {
-            var model = await _spellService.GetAsync(id);
+            var filter = Builders<ISpellModel>.Filter.Eq(nameof(ISpellModel.modelUid), id);
+            var model = await _spellService.GetOneAsync(filter);
             if (model is null)
                 return NotFound();
             updatedSpellModel.entityUid = model.entityUid;
-            var result = await _spellService.UpdateAsync(id, updatedSpellModel);
+            var result = await _spellService.UpdateAsync(filter, updatedSpellModel);
             return Ok(result);
         }
 
         [Authorize]
         [HttpDelete("spell/{id}")]
-        public async Task<ActionResult<DeleteResult>> Delete(ObjectId id)
-        {
-            var model = await _spellService.GetAsync(id);
-            if (model is null)
-                return NotFound();
-            var result = await _spellService.RemoveAsync(id);
-            return Ok(result);
-        }
-        [Authorize]
-        [HttpDelete("spell/{id}")]
         public async Task<ActionResult<DeleteResult>> Delete([FromRoute] IID id)
         {
             var filter = Builders<ISpellModel>.Filter.Eq(nameof(ISpellModel.modelUid), id);
-            var model = await _spellService.GetAsync(filter);
+            var model = await _spellService.GetOneAsync(filter);
             if (model is null)
                 return NotFound();
             var result = await _spellService.RemoveAsync(filter);
+            await _strings.RemoveAsync(model.nameId);
+            await _strings.RemoveAsync(model.descriptionId);
             return Ok(result);
         }
 

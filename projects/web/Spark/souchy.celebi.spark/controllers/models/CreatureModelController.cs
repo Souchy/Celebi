@@ -7,6 +7,7 @@ using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.models;
+using souchy.celebi.eevee.face.shared.models.skins;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.factories;
@@ -22,6 +23,7 @@ namespace souchy.celebi.spark.controllers.models
     {
         private readonly CollectionService<ICreatureModel> _creatureModels;
         private readonly CollectionService<IStats> _stats;
+        private readonly CollectionService<ICreatureSkin> _skins;
         private readonly StringService _strings;
         private readonly IDCounterService _ids;
 
@@ -29,6 +31,7 @@ namespace souchy.celebi.spark.controllers.models
         {
             _creatureModels = db.GetMongoService<ICreatureModel>();
             _stats = db.GetMongoService<IStats>();
+            _skins = db.GetMongoService<ICreatureSkin>();   
             _strings = strings;
             _ids = ids;
         }
@@ -41,9 +44,10 @@ namespace souchy.celebi.spark.controllers.models
             => await _creatureModels.GetAsync(filter);
 
         [HttpGet("creature/{id}")]
-        public async Task<ActionResult<ICreatureModel>> Get([FromRoute] ObjectId id)
+        public async Task<ActionResult<ICreatureModel>> Get([FromRoute] IID id)
         {
-            var model = await _creatureModels.GetAsync(id);
+            var filter = Builders<ICreatureModel>.Filter.Eq(nameof(ICreatureModel.modelUid), id);
+            var model = await _creatureModels.GetOneAsync(filter);
             if (model is null)
                 return NotFound();
             return Ok(model);
@@ -60,11 +64,8 @@ namespace souchy.celebi.spark.controllers.models
         [HttpPost("new")]
         public async Task<ActionResult<ICreatureModel>> PostNew()
         {
-            //var resources = Resource.values.Values;
-            //var characs = Enumerable.OfType<CharacteristicType>(resources);
             var newCreatureModel = Factories.newCreatureModel();
 
-            //newCreatureModel.entityUid = ObjectId.GenerateNewId().ToString();
             newCreatureModel.modelUid = await _ids.GetID<ICreatureModel>();
             newCreatureModel.GetName().modelUid = await _ids.GetID<IStringEntity>();
             newCreatureModel.GetDescription().modelUid = await _ids.GetID<IStringEntity>();
@@ -72,13 +73,6 @@ namespace souchy.celebi.spark.controllers.models
             var skin = newCreatureModel.GetBaseSkin();
             skin.GetName().modelUid = await _ids.GetID<IStringEntity>();
             skin.GetDescription().modelUid = await _ids.GetID<IStringEntity>();
-            //newCreatureModel.nameId = await _ids.GetID<IStringEntity>();
-            //newCreatureModel.descriptionId = await _ids.GetID<IStringEntity>();
-            //// object ids for stats and effects
-            //newCreatureModel.GetBaseStats().entityUid = (IID)ObjectId.GenerateNewId().ToString();
-            //newCreatureModel.GetGrowthStats().entityUid = (IID)ObjectId.GenerateNewId().ToString();
-            //newCreatureModel.baseStats = newCreatureModel.GetBaseStats().entityUid;
-            //newCreatureModel.growthStats = newCreatureModel.GetGrowthStats().entityUid;
 
             await _stats.CreateAsync(newCreatureModel.GetBaseStats());
             await _stats.CreateAsync(newCreatureModel.GetGrowthStats());
@@ -92,25 +86,15 @@ namespace souchy.celebi.spark.controllers.models
 
         [Authorize]
         [HttpPut("creature/{id}")]
-        public async Task<ActionResult<ReplaceOneResult>> Update([FromRoute] ObjectId id, [FromBody] CreatureModel updateModel)
+        public async Task<ActionResult<ReplaceOneResult>> Update([FromRoute] IID id, [FromBody] CreatureModel updateModel)
         {
-            var model = await _creatureModels.GetAsync(id);
+            var filter = Builders<ICreatureModel>.Filter.Eq(nameof(ICreatureModel.modelUid), id);
+            var model = await _creatureModels.GetOneAsync(filter);
             if (model is null) 
                 return NotFound();
             updateModel.entityUid = model.entityUid;
             updateModel.modelUid = model.modelUid;
-            var result = await _creatureModels.UpdateAsync(id, updateModel);
-            return Ok(result);
-        }
-
-        [Authorize]
-        [HttpDelete("creature/{id}")]
-        public async Task<ActionResult<DeleteResult>> Delete([FromRoute] ObjectId id)
-        {
-            var model = await _creatureModels.GetAsync(id);
-            if (model is null)
-                return NotFound();
-            var result = await _creatureModels.RemoveAsync(id);
+            var result = await _creatureModels.UpdateAsync(filter, updateModel);
             return Ok(result);
         }
 
@@ -119,10 +103,18 @@ namespace souchy.celebi.spark.controllers.models
         public async Task<ActionResult<DeleteResult>> Delete([FromRoute] IID id)
         {
             var filter = Builders<ICreatureModel>.Filter.Eq(nameof(ICreatureModel.modelUid), id);
-            var crea = await _creatureModels.GetAsync(filter);
-            if (crea is null)
+            var model = await _creatureModels.GetOneAsync(filter);
+            if (model is null)
                 return NotFound();
             var result = await _creatureModels.RemoveAsync(filter);
+            await _strings.RemoveAsync(model.nameId);
+            await _strings.RemoveAsync(model.descriptionId);
+            foreach(var skin in model.GetSkins())
+            {
+                await _skins.RemoveAsync(skin.entityUid);
+                await _strings.RemoveAsync(skin.nameId);
+                await _strings.RemoveAsync(skin.descriptionId);
+            }
             return Ok(result);
         }
     }

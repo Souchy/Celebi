@@ -30,7 +30,7 @@ namespace souchy.celebi.spark.controllers.models
         [HttpGet("effect/{id}")]
         public async Task<ActionResult<IEffect>> Get(ObjectId id)
         {
-            IEffect? effect = await _effects.GetAsync(id);
+            IEffect? effect = await _effects.GetOneAsync(id);
             if (effect is null)
                 return NotFound();
             return Ok(effect);
@@ -48,7 +48,7 @@ namespace souchy.celebi.spark.controllers.models
         [HttpPut("effect/{id}")]
         public async Task<ActionResult<ReplaceOneResult>> Update(ObjectId id, Effect updatedEffect)
         {
-            var effect = await _effects.GetAsync(id);
+            var effect = await _effects.GetOneAsync(id);
             if (effect is null) 
                 return NotFound();
             updatedEffect.entityUid = effect.entityUid;
@@ -60,7 +60,7 @@ namespace souchy.celebi.spark.controllers.models
         [HttpDelete("effect/{id}")]
         public async Task<ActionResult<DeleteResult>> Delete(ObjectId id)
         {
-            var effect = await _effects.GetAsync(id);
+            var effect = await _effects.GetOneAsync(id);
             if (effect is null) 
                 return NotFound();
             var result = await _effects.RemoveAsync(id);

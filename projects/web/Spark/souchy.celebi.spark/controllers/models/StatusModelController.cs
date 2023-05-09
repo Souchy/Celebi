@@ -28,7 +28,7 @@ namespace souchy.celebi.spark.controllers.models
         [HttpGet("status/{id}")]
         public async Task<ActionResult<IStatusModel>> Get(ObjectId id)
         {
-            IStatusModel? creatureModel = await _statusService.GetAsync(id);
+            IStatusModel? creatureModel = await _statusService.GetOneAsync(id);
             if (creatureModel is null)
                 return NotFound();
             return Ok(creatureModel);
@@ -46,7 +46,7 @@ namespace souchy.celebi.spark.controllers.models
         [HttpPut("status/{id}")]
         public async Task<ActionResult<ReplaceOneResult>> Update(ObjectId id, StatusModel updatedSpellModel)
         {
-            var crea = await _statusService.GetAsync(id);
+            var crea = await _statusService.GetOneAsync(id);
             if (crea is null)
                 return NotFound();
             updatedSpellModel.entityUid = crea.entityUid;
@@ -58,7 +58,7 @@ namespace souchy.celebi.spark.controllers.models
         [HttpDelete("status/{id}")]
         public async Task<ActionResult<DeleteResult>> Delete(ObjectId id)
         {
-            var crea = await _statusService.GetAsync(id);
+            var crea = await _statusService.GetOneAsync(id);
             if (crea is null)
                 return NotFound();
             var result = await _statusService.RemoveAsync(id);
