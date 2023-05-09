@@ -13,9 +13,8 @@ namespace souchy.celebi.eevee.face.shared.models
 
         public ObjectId baseStats { get; set; }
         public ObjectId growthStats { get; set; }
-        public IEntitySet<IID> baseSpells { get; init; }
-        public IEntitySet<IID> baseStatusPassives { get; init; }
-
+        public IEntitySet<ObjectId> baseSpells { get; init; }
+        public IEntitySet<ObjectId> baseStatusPassives { get; init; }
 
 
         public IStringEntity GetName() => Eevee.models.i18n.Get(nameId); //GetBaseSkin().GetName(); // 

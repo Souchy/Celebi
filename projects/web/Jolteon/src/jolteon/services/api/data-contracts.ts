@@ -133,8 +133,8 @@ export interface CreatureModel {
   skins?: ObjectIdIEntitySet;
   baseStats?: string;
   growthStats?: string;
-  baseSpells?: IIDIEntitySet;
-  baseStatusPassives?: IIDIEntitySet;
+  baseSpells?: ObjectIdIEntitySet;
+  baseStatusPassives?: ObjectIdIEntitySet;
 }
 
 export interface CurrencyProduct {
@@ -230,8 +230,8 @@ export interface ICreatureModel {
   skins?: ObjectIdIEntitySet;
   baseStats?: string;
   growthStats?: string;
-  baseSpells?: IIDIEntitySet;
-  baseStatusPassives?: IIDIEntitySet;
+  baseSpells?: ObjectIdIEntitySet;
+  baseStatusPassives?: ObjectIdIEntitySet;
   modelUid?: IID;
   entityUid?: string;
 }
@@ -251,12 +251,6 @@ export interface IEffect {
 
 export interface IID {
   value?: string;
-}
-
-export interface IIDIEntitySet {
-  allowDuplicates?: boolean;
-  values?: IID[] | null;
-  entityUid?: string;
 }
 
 export interface ISpellModel {

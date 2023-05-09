@@ -115,37 +115,6 @@ namespace souchy.celebi.umbreon.common.persistance
                 ch.GetName().GetEntityBus().subscribe(this, nameof(onSave));
             }
         }
-        public IEntityDictionary<IID, V> load<V>(IEntityDictionary<IID, V> dic, string filename = "") where V : IEntityModel
-        {
-            if (filename == "") filename = getFileName<V>();
-            string filepath = $"res://data/test/{filename}.json";
-            if (!FileAccess.FileExists(filepath))
-                return null;
-
-            using FileAccess file = FileAccess.Open(filepath, FileAccess.ModeFlags.Read);
-            if (file == null)
-                GD.Print($"Parser.load null: {filepath}");
-            var json = file.GetAsText();
-            IEntityDictionary<IID, V> data = JsonConvert.DeserializeObject<EntityDictionary<IID, V>>(json, jsonSettings);
-            if (data == null)
-                data = EntityDictionary<IID, V>.Create();
-            GD.Print($"Parser.load: {filepath} = {data.Keys.Count()} count");
-
-            // restore entity ids from keys
-            if (typeof(IEntity).IsAssignableFrom(typeof(V)))
-                data.ForEach((k, v) => v.modelUid = k);
-            // register IDs to buses + subscribe to save events
-            data.ForEach((k, v) =>
-            {
-                //Eevee.RegisterIID<V>(k);
-                Eevee.RegisterEventBus(v);
-                v.GetEntityBus().subscribe(this, nameof(onSave));
-            });
-            // add all data to Eevee.models dic
-            dic.AddAll(data);
-
-            return data;
-        }
         #endregion
 
     }

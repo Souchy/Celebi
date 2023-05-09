@@ -19,8 +19,8 @@ namespace souchy.celebi.eevee.impl.shared
 
         public ObjectId baseStats { get; set; }
         public ObjectId growthStats { get; set; }
-        public IEntitySet<IID> baseSpells { get; init; } = new EntitySet<IID>();
-        public IEntitySet<IID> baseStatusPassives { get; init; } = new EntitySet<IID>();
+        public IEntitySet<ObjectId> baseSpells { get; init; } = new EntitySet<ObjectId>();
+        public IEntitySet<ObjectId> baseStatusPassives { get; init; } = new EntitySet<ObjectId>();
 
         private CreatureModel() { }
         public static ICreatureModel CreatePermanent() => new CreatureModel() 

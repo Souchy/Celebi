@@ -50,7 +50,7 @@ namespace souchy.celebi.eevee.impl.factories
             var creatureSkin = newCreatureSkin();
             creatureModel.skins.Add(creatureSkin.entityUid);
             // Eevee
-            Eevee.models.creatureModels.Add(creatureModel.modelUid, creatureModel);
+            Eevee.models.creatureModels.Add(creatureModel.entityUid, creatureModel);
             return creatureModel;
         }
         public static ISpellModel newSpellModel()
@@ -70,7 +70,7 @@ namespace souchy.celebi.eevee.impl.factories
             spellModel.stats = stats.entityUid;
             Eevee.models.stats.Add(stats.entityUid, stats);
             // Eevee
-            Eevee.models.spellModels.Add(spellModel.modelUid, spellModel);
+            Eevee.models.spellModels.Add(spellModel.entityUid, spellModel);
             return spellModel;
         }
 

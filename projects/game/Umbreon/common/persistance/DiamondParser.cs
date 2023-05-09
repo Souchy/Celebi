@@ -161,7 +161,6 @@ namespace souchy.celebi.umbreon.common.persistance
         public void save(object dic, string fileName);
         //public void _save(object dic, string fileName);
         public IEntityDictionary<ObjectId, V> load<V>(IEntityDictionary<ObjectId, V> dic, string filename = "") where V : IEntity;
-        public IEntityDictionary<IID, V> load<V>(IEntityDictionary<IID, V> dic, string filename = "") where V : IEntityModel;
         public void loadCharacteristics(string filename = "");
         #endregion
     }

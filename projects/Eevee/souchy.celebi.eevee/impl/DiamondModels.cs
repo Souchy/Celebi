@@ -11,11 +11,11 @@ namespace souchy.celebi.eevee.impl
 {
     public class DiamondModels : IDiamondModels
     {
-        public IEntityDictionary<IID, IMap> maps { get; init; } = EntityDictionary<IID, IMap>.Create();
-        public IEntityDictionary<IID, ICreatureModel> creatureModels { get; init; } = EntityDictionary<IID, ICreatureModel>.Create();
-        public IEntityDictionary<IID, ISpellModel> spellModels { get; init; } = EntityDictionary<IID, ISpellModel>.Create();
-        public IEntityDictionary<IID, IStatusModel> statusModels { get; init; } = EntityDictionary<IID, IStatusModel>.Create();
-        public IEntityDictionary<IID, IEffectModel> effectModels { get; init; } = EntityDictionary<IID, IEffectModel>.Create();
+        public IEntityDictionary<ObjectId, IMap> maps { get; init; } = EntityDictionary<ObjectId, IMap>.Create();
+        public IEntityDictionary<ObjectId, ICreatureModel> creatureModels { get; init; } = EntityDictionary<ObjectId, ICreatureModel>.Create();
+        public IEntityDictionary<ObjectId, ISpellModel> spellModels { get; init; } = EntityDictionary<ObjectId, ISpellModel>.Create();
+        public IEntityDictionary<ObjectId, IStatusModel> statusModels { get; init; } = EntityDictionary<ObjectId, IStatusModel>.Create();
+        public IEntityDictionary<ObjectId, IEffectModel> effectModels { get; init; } = EntityDictionary<ObjectId, IEffectModel>.Create();
 
         public IEntityDictionary<ObjectId, ICreatureSkin> creatureSkins { get; init; } = EntityDictionary<ObjectId, ICreatureSkin>.Create();
         public IEntityDictionary<ObjectId, ISpellSkin> spellSkins { get; init; } = EntityDictionary<ObjectId, ISpellSkin>.Create();

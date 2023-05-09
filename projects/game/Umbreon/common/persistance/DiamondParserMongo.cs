@@ -137,27 +137,6 @@ namespace souchy.celebi.umbreon.common.persistance
             }
         }
 
-        public IEntityDictionary<IID, V> load<V>(IEntityDictionary<IID, V> dic, string filename = "") where V : IEntityModel
-        {
-            try
-            {
-                var collection = GetCollection<V>();
-                var list = collection.Find(Builders<V>.Filter.Empty)
-                    .ToList();
-                foreach (var v in list)
-                {
-                    dic.Add(v.modelUid, v);
-                    //Eevee.RegisterIID<V>(v.entityUid);
-                    Eevee.RegisterEventBus(v);
-                    v.GetEntityBus().subscribe(this, nameof(onSave));
-                }
-            }
-            catch (Exception e)
-            {
-                GD.PrintErr(e);
-            }
-            return dic;
-        }
         #endregion
 
     }

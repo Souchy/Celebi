@@ -11,12 +11,12 @@ namespace souchy.celebi.eevee.face.shared
 {
     public interface IDiamondModels : IDisposable //: IEntity
     {
-        public IEntityDictionary<IID, IMap> maps { get; init; }
+        public IEntityDictionary<ObjectId, IMap> maps { get; init; }
 
-        public IEntityDictionary<IID, ICreatureModel> creatureModels { get; init; }
-        public IEntityDictionary<IID, ISpellModel> spellModels { get; init; }
-        public IEntityDictionary<IID, IStatusModel> statusModels { get; init; }
-        public IEntityDictionary<IID, IEffectModel> effectModels { get; init; }
+        public IEntityDictionary<ObjectId, ICreatureModel> creatureModels { get; init; }
+        public IEntityDictionary<ObjectId, ISpellModel> spellModels { get; init; }
+        public IEntityDictionary<ObjectId, IStatusModel> statusModels { get; init; }
+        public IEntityDictionary<ObjectId, IEffectModel> effectModels { get; init; }
         /// <summary>
         /// 
         /// /////////"Model/Static" effects for spells and static statuses (like passives, as opposed to variable things like fourberie)
