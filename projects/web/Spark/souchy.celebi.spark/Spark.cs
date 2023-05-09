@@ -192,6 +192,8 @@ namespace souchy.celebi.spark
             services.AddSingleton<ConsumableProductService>();
             // Models
             services.AddSingleton<SkinService>();
+            services.AddSingleton<StringService>();
+            services.AddSingleton<IDCounterService>();
             // Fights
             services.AddSingleton<FightService>();
 

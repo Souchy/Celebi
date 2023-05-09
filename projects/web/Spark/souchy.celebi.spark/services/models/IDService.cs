@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.util;
@@ -16,6 +17,15 @@ namespace souchy.celebi.spark.services.models
             var name = typeof(T).Name;
             var docFilter = Builders<IDCounter>.Filter.Eq(nameof(IDCounter.Name), name);
             var counter = await _counters.Find(docFilter).FirstOrDefaultAsync();
+
+            if(counter == null)
+            {
+                counter = new IDCounter()
+                {
+                    Name = name,
+                };
+                await _counters.InsertOneAsync(counter);
+            }
 
             if(counter.Unused.Count > 0)
             {
@@ -45,8 +55,9 @@ namespace souchy.celebi.spark.services.models
 
     public class IDCounter
     {
+        [BsonId]
         public string Name { get; set; }
-        public int Counter { get; set; }
+        public int Counter { get; set; } = 1;
         public Stack<int> Unused { get; set; } = new();
     }
 
