@@ -9,7 +9,14 @@
  * ---------------------------------------------------------------
  */
 
-import { CreatureModel, DeleteResult, ICreatureModel, IID, ReplaceOneResult } from "./data-contracts";
+import {
+  CreatureModel,
+  DeleteResult,
+  ICreatureModel,
+  ICreatureModelFilterDefinition,
+  IID,
+  ReplaceOneResult,
+} from "./data-contracts";
 import { ContentType, HttpClient, HttpResponse, RequestParams } from "./http-client";
 
 export class CreatureModelController<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
@@ -25,6 +32,27 @@ export class CreatureModelController<SecurityDataType = unknown> extends HttpCli
     return this.request<ICreatureModel[], any>({
       path: `/models/creatures/all`,
       method: "GET",
+      format: "json",
+      ...params,
+    });
+  }
+  /**
+   * No description
+   *
+   * @tags CreatureModelController
+   * @name GetFiltered
+   * @request GET:/models/creatures/filtered
+   * @response `200` `(ICreatureModel)[]` Success
+   */
+  public getFiltered(
+    data: ICreatureModelFilterDefinition,
+    params: RequestParams = {},
+  ): Promise<HttpResponse<ICreatureModel[], any>> {
+    return this.request<ICreatureModel[], any>({
+      path: `/models/creatures/filtered`,
+      method: "GET",
+      body: data,
+      type: ContentType.Json,
       format: "json",
       ...params,
     });
@@ -97,6 +125,22 @@ export class CreatureModelController<SecurityDataType = unknown> extends HttpCli
       method: "POST",
       body: data,
       type: ContentType.Json,
+      format: "json",
+      ...params,
+    });
+  }
+  /**
+   * No description
+   *
+   * @tags CreatureModelController
+   * @name PostNew
+   * @request POST:/models/creatures/new
+   * @response `200` `ICreatureModel` Success
+   */
+  public postNew(params: RequestParams = {}): Promise<HttpResponse<ICreatureModel, any>> {
+    return this.request<ICreatureModel, any>({
+      path: `/models/creatures/new`,
+      method: "POST",
       format: "json",
       ...params,
     });

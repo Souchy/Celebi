@@ -11,6 +11,7 @@
 
 import {
   DeleteResult,
+  I18NType,
   IStringEntity,
   IStringEntityFilterDefinition,
   ReplaceOneResult,
@@ -27,10 +28,16 @@ export class StringController<SecurityDataType = unknown> extends HttpClient<Sec
    * @request GET:/models/strings/all
    * @response `200` `(IStringEntity)[]` Success
    */
-  public getAll(params: RequestParams = {}): Promise<HttpResponse<IStringEntity[], any>> {
+  public getAll(
+    query?: {
+      lang?: I18NType;
+    },
+    params: RequestParams = {},
+  ): Promise<HttpResponse<IStringEntity[], any>> {
     return this.request<IStringEntity[], any>({
       path: `/models/strings/all`,
       method: "GET",
+      query: query,
       format: "json",
       ...params,
     });
@@ -45,11 +52,15 @@ export class StringController<SecurityDataType = unknown> extends HttpClient<Sec
    */
   public getFiltered(
     data: IStringEntityFilterDefinition,
+    query?: {
+      lang?: I18NType;
+    },
     params: RequestParams = {},
   ): Promise<HttpResponse<IStringEntity[], any>> {
     return this.request<IStringEntity[], any>({
       path: `/models/strings/filtered`,
       method: "GET",
+      query: query,
       body: data,
       type: ContentType.Json,
       format: "json",
@@ -64,10 +75,17 @@ export class StringController<SecurityDataType = unknown> extends HttpClient<Sec
    * @request GET:/models/strings/string/{id}
    * @response `200` `IStringEntity` Success
    */
-  public getString(id: string, params: RequestParams = {}): Promise<HttpResponse<IStringEntity, any>> {
+  public getString(
+    id: string,
+    query?: {
+      lang?: I18NType;
+    },
+    params: RequestParams = {},
+  ): Promise<HttpResponse<IStringEntity, any>> {
     return this.request<IStringEntity, any>({
       path: `/models/strings/string/${id}`,
       method: "GET",
+      query: query,
       format: "json",
       ...params,
     });
@@ -83,11 +101,15 @@ export class StringController<SecurityDataType = unknown> extends HttpClient<Sec
   public putString(
     id: string,
     data: StringEntity,
+    query?: {
+      lang?: I18NType;
+    },
     params: RequestParams = {},
   ): Promise<HttpResponse<ReplaceOneResult, any>> {
     return this.request<ReplaceOneResult, any>({
       path: `/models/strings/string/${id}`,
       method: "PUT",
+      query: query,
       body: data,
       type: ContentType.Json,
       format: "json",

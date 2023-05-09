@@ -18,7 +18,6 @@ export interface AccountInfo {
   /** @format int32 */
   currency?: number;
   ownedModels?: IID[] | null;
-  transactions?: string[] | null;
 }
 
 /** @format  */
@@ -128,6 +127,7 @@ export interface Contextual {
 
 export interface CreatureModel {
   entityUid?: IID;
+  modelUid?: IID;
   nameId?: IID;
   descriptionId?: IID;
   skins?: IIDIEntitySet;
@@ -205,6 +205,12 @@ export enum ElementType {
   True = "True",
 }
 
+/** @format  */
+export enum I18NType {
+  Fr = "fr",
+  En = "en",
+}
+
 export interface ICondition {
   actorType?: ActorType;
   comparator?: ConditionComparatorType;
@@ -226,8 +232,11 @@ export interface ICreatureModel {
   growthStats?: IID;
   baseSpells?: IIDIEntitySet;
   baseStatusPassives?: IIDIEntitySet;
+  modelUid?: IID;
   entityUid?: IID;
 }
+
+export type ICreatureModelFilterDefinition = object;
 
 export interface IEffect {
   sourceCondition?: ICondition;
@@ -265,6 +274,7 @@ export interface ISpellModel {
   properties?: SpellProperties;
   rangeZoneMin?: IZone;
   rangeZoneMax?: IZone;
+  modelUid?: IID;
   entityUid?: IID;
   effectIds?: IIDIEntityList;
 }
@@ -288,12 +298,14 @@ export interface IStatusModel {
   duration?: Int32IValue;
   canBeUnbewitched?: BooleanIValue;
   priority?: StatusPriorityTypeIValue;
+  modelUid?: IID;
   entityUid?: IID;
   effectIds?: IIDIEntityList;
 }
 
 export interface IStringEntity {
   value?: string | null;
+  modelUid?: IID;
   entityUid?: IID;
 }
 
@@ -472,6 +484,7 @@ export enum Rotation4Type {
 
 export interface SpellModel {
   entityUid?: IID;
+  modelUid?: IID;
   nameId?: IID;
   descriptionId?: IID;
   sourceCondition?: ICondition;
@@ -539,6 +552,7 @@ export interface State {
 
 export interface StatusModel {
   entityUid?: IID;
+  modelUid?: IID;
   nameId?: IID;
   descriptionId?: IID;
   delay?: Int32IValue;
@@ -571,6 +585,8 @@ export interface StatusPriorityTypeIValue {
 }
 
 export interface StringEntity {
+  entityUid?: IID;
+  modelUid?: IID;
   value?: string | null;
 }
 
