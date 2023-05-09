@@ -3,6 +3,7 @@ using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.face.entity;
+using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
@@ -20,13 +21,15 @@ namespace souchy.celebi.eevee.face.shared.models
         public ICondition targetFilter { get; set; }
 
         public Dictionary<CharacteristicId, int> costs { get; set; }
-        public SpellProperties properties { get; set; }
+        //public SpellProperties properties { get; set; }
+        public ObjectId stats { get; set; }
 
         public IZone RangeZoneMin { get; set; }
         public IZone RangeZoneMax { get; set; }
 
         public IStringEntity GetName() => Eevee.models.i18n.Get(nameId);
         public IStringEntity GetDescription() => Eevee.models.i18n.Get(descriptionId);
+        public IStats GetStats() => Eevee.models.stats.Get(stats);
     }
 
     public struct SpellProperties

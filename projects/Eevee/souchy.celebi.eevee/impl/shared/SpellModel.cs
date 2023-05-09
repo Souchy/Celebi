@@ -27,7 +27,8 @@ namespace souchy.celebi.eevee.impl.shared
         public ICondition targetFilter { get; set; }
 
         public Dictionary<CharacteristicId, int> costs { get; set; } = new();
-        public SpellProperties properties { get; set; } = new SpellProperties();
+        //public SpellProperties properties { get; set; } = new SpellProperties();
+        public ObjectId stats { get; set; }
         public IEntityList<ObjectId> effectIds { get; set; } = new EntityList<ObjectId>(); 
 
         public IZone RangeZoneMin { get; set; } = new Zone();

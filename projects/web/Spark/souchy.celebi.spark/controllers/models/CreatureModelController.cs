@@ -59,9 +59,8 @@ namespace souchy.celebi.spark.controllers.models
         [HttpPost("new")]
         public async Task<ActionResult<ICreatureModel>> PostNew()
         {
-            var resources = Resource.values.Values;
-            var characs = Enumerable.OfType<CharacteristicType>(resources);
-
+            //var resources = Resource.values.Values;
+            //var characs = Enumerable.OfType<CharacteristicType>(resources);
             var newCreatureModel = Factories.newCreatureModel();
 
             //newCreatureModel.entityUid = ObjectId.GenerateNewId().ToString();

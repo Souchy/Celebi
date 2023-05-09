@@ -17,6 +17,7 @@ using souchy.celebi.eevee.face.objects.statuses;
 using souchy.celebi.eevee.impl.objects.statuses;
 using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.enums.characteristics;
+using System.Xml.Linq;
 
 namespace souchy.celebi.eevee.impl.factories
 {
@@ -27,35 +28,61 @@ namespace souchy.celebi.eevee.impl.factories
         {
             // Model + Skin
             var creatureModel = CreatureModel.CreatePermanent();
-            creatureModel.nameId = Eevee.RegisterIID<IStringEntity>();
-            creatureModel.descriptionId = Eevee.RegisterIID<IStringEntity>();
+            // Name
+            var name = StringEntity.Create("CreatureName #" + creatureModel.entityUid);
+            creatureModel.nameId = name.entityUid;
+            Eevee.models.i18n.Add(creatureModel.nameId, name);
+            // Desc
+            var desc = StringEntity.Create("CreatureDesc #" + creatureModel.entityUid);
+            creatureModel.descriptionId = desc.entityUid;
+            Eevee.models.i18n.Add(creatureModel.descriptionId, desc);
             // Stats
             var stats = Stats.Create();
             creatureModel.baseStats = stats.entityUid;
             Eevee.models.stats.Add(stats.entityUid, stats);
-            fillStats(stats, true);
+            //fillStats(stats, true);
             // Growth Stats
             var growthStats = Stats.Create();
             creatureModel.growthStats = growthStats.entityUid;
             Eevee.models.stats.Add(growthStats.entityUid, growthStats);
-            fillStats(growthStats, true);
+            //fillStats(growthStats, true);
             // Skin
             var creatureSkin = newCreatureSkin();
             creatureModel.skins.Add(creatureSkin.entityUid);
             // Eevee
-            Eevee.models.creatureModels.Add(creatureModel.entityUid, creatureModel);
+            Eevee.models.creatureModels.Add(creatureModel.modelUid, creatureModel);
             return creatureModel;
+        }
+        public static ISpellModel newSpellModel()
+        {
+            // Model + Skin
+            var spellModel = SpellModel.CreatePermanent();
+            // Name
+            var name = StringEntity.Create("SpellName #" + spellModel.entityUid);
+            spellModel.nameId = name.entityUid;
+            Eevee.models.i18n.Add(spellModel.nameId, name);
+            // Desc
+            var desc = StringEntity.Create("SpellDesc #" + spellModel.entityUid);
+            spellModel.descriptionId = desc.entityUid;
+            Eevee.models.i18n.Add(spellModel.descriptionId, desc);
+            // Stats
+            var stats = Stats.Create();
+            spellModel.stats = stats.entityUid;
+            Eevee.models.stats.Add(stats.entityUid, stats);
+            // Eevee
+            Eevee.models.spellModels.Add(spellModel.modelUid, spellModel);
+            return spellModel;
         }
 
         private static ICreatureSkin newCreatureSkin()
         {
             var creatureSkin = CreatureSkin.Create();
             // Name
-            var name = StringEntity.Create("CreatureName #" + creatureSkin.entityUid);
+            var name = StringEntity.Create("SkinName #" + creatureSkin.entityUid);
             creatureSkin.nameId = name.entityUid;
             Eevee.models.i18n.Add(creatureSkin.nameId, name);
             // Desc
-            var desc = StringEntity.Create("CreatureDesc #" + creatureSkin.entityUid);
+            var desc = StringEntity.Create("SkinDesc #" + creatureSkin.entityUid);
             creatureSkin.descriptionId = desc.entityUid;
             Eevee.models.i18n.Add(creatureSkin.descriptionId, desc);
             // model
@@ -91,9 +118,10 @@ namespace souchy.celebi.eevee.impl.factories
             }
         }
 
-        public static ICreature newCreatureFromModel(ICreatureModel model, IID fightId)
+        public static ICreature newCreatureFromModel(ICreatureModel model, ObjectId fightId)
         {
-            var crea = Creature.Create();
+            var crea = Creature.Create(fightId);
+            crea.modelUid = model.modelUid;
             foreach (CharacteristicType st in CharacteristicType.Characteristics) //Enum.GetValues<StatType>())
             {
                 var stat = st.Create();
@@ -118,7 +146,7 @@ namespace souchy.celebi.eevee.impl.factories
             foreach (ISpellModel spellModel in model.GetSpells())
             {
                 var spell = Spell.Create(fightId);
-                spell.modelUid = spellModel.entityUid;
+                spell.modelUid = spellModel.modelUid; //entityUid;
             }
             foreach (IStatusModel statusModel in model.GetStatusPassives())
             {
@@ -126,7 +154,7 @@ namespace souchy.celebi.eevee.impl.factories
                 container.sourceCreature = crea.entityUid;
                 container.holderEntity = crea.entityUid;
                 var status = StatusInstance.Create(fightId);
-                status.modelUid = statusModel.entityUid;
+                status.modelUid = statusModel.modelUid; //entityUid;
                 status.effectIds = statusModel.effectIds;
 
                 var duration = StatusModelProperty.Duration.Create(statusModel.duration.value);

@@ -4,6 +4,7 @@ using MongoDB.Driver;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.models;
+using souchy.celebi.eevee.impl.factories;
 using souchy.celebi.eevee.impl.shared;
 using souchy.celebi.spark.services;
 using souchy.celebi.spark.services.fights;
@@ -47,6 +48,20 @@ namespace souchy.celebi.spark.controllers.models
         {
             await _spellService.CreateAsync(newSpellModel);
             return CreatedAtAction(nameof(Get), new { id = newSpellModel.entityUid }, newSpellModel);
+        }
+
+        [Authorize]
+        [HttpPost("new")]
+        public async Task<IActionResult> PostNew()
+        {
+            var spellModel = Factories.newSpellModel();
+
+            await _stats.CreateAsync(spellModel.GetStats());
+            await _strings.CreateAsync(spellModel.GetName());
+            await _strings.CreateAsync(spellModel.GetDescription());
+            await _spellService.CreateAsync(spellModel);
+
+            return CreatedAtAction(nameof(Get), new { id = spellModel.entityUid }, spellModel);
         }
 
         [Authorize]
