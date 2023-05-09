@@ -265,7 +265,7 @@ export interface ISpellModel {
   sourceCondition?: ICondition;
   targetFilter?: ICondition;
   costs?: Record<string, number | null>;
-  properties?: SpellProperties;
+  stats?: string;
   rangeZoneMin?: IZone;
   rangeZoneMax?: IZone;
   modelUid?: IID;
@@ -496,7 +496,7 @@ export interface SpellModel {
   sourceCondition?: ICondition;
   targetFilter?: ICondition;
   costs?: Record<string, number | null>;
-  properties?: SpellProperties;
+  stats?: string;
   effectIds?: ObjectIdIEntityList;
   rangeZoneMin?: IZone;
   rangeZoneMax?: IZone;
@@ -511,20 +511,6 @@ export interface SpellModelProperty {
   statValueType?: StatValueType;
   id?: CharacteristicId;
   nameModelUid?: IID;
-}
-
-export interface SpellProperties {
-  maxCharges?: Int32IValue;
-  maxCastsPerTurn?: Int32IValue;
-  maxCastsPerTarget?: Int32IValue;
-  cooldownInitial?: Int32IValue;
-  cooldownGlobal?: Int32IValue;
-  cooldown?: Int32IValue;
-  minRange?: Int32IValue;
-  maxRange?: Int32IValue;
-  castInDiagonal?: BooleanIValue;
-  castInLine?: BooleanIValue;
-  needLos?: BooleanIValue;
 }
 
 export interface SpellProperty {

@@ -100,4 +100,19 @@ export class SpellModelController<SecurityDataType = unknown> extends HttpClient
       ...params,
     });
   }
+  /**
+   * No description
+   *
+   * @tags SpellModelController
+   * @name PostNew
+   * @request POST:/models/spells/new
+   * @response `200` `void` Success
+   */
+  public postNew(params: RequestParams = {}): Promise<HttpResponse<void, any>> {
+    return this.request<void, any>({
+      path: `/models/spells/new`,
+      method: "POST",
+      ...params,
+    });
+  }
 }
