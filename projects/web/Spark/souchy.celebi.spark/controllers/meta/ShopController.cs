@@ -54,9 +54,9 @@ namespace souchy.celebi.spark.controllers.meta
             {
                 ProductId = product._id,
                 Type = TransactionType.Purchase,
-                Price = product.Currency
+                Price = product.Currency,
+                Account = account.Id
             };
-            account.Info.Transactions.Add(trans._id);
             account.Info.Currency -= product.Currency;
 
             // Apply
@@ -82,9 +82,9 @@ namespace souchy.celebi.spark.controllers.meta
             var trans = new ShopTransaction() { 
                 ProductId = product._id, 
                 Type = TransactionType.Purchase,
-                Price = product.Currency
+                Price = product.Currency,
+                Account = account.Id
             };
-            account.Info.Transactions.Add(trans._id);
             account.Info.Currency -= product.Currency;
 
             // Apply
