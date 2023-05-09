@@ -23,12 +23,6 @@ namespace souchy.celebi.eevee.face.util
             return id.value == this.value;
         }
 
-        public static IID GenerateOID() => (IID) ObjectId.GenerateNewId();
-        
-
-        public static implicit operator ObjectId(IID iid) => new ObjectId(iid.ToString());
-        public static explicit operator IID(ObjectId oid) => new IID(oid.ToString());
-
         public static implicit operator string(IID iid) => iid.ToString();
         public static explicit operator IID(string str) => new IID(str);
 

@@ -9,7 +9,7 @@ namespace souchy.celebi.eevee.impl.stats
 {
     public class StatResource : IStatResource
     {
-        public IID entityUid { get; set; }
+        public ObjectId entityUid { get; set; }
         public CharacteristicId statId { get; init; }
 
 
@@ -58,7 +58,7 @@ namespace souchy.celebi.eevee.impl.stats
             current = current,
             currentMax = currentMax,
             initialMax = initialMax,
-            entityUid = Eevee.RegisterIID<IStatResource>()
+            entityUid = Eevee.RegisterIIDTemporary()
         };
 
         public void Add(IStat s)
@@ -75,7 +75,7 @@ namespace souchy.celebi.eevee.impl.stats
 
         public void Dispose()
         {
-            Eevee.DisposeIID<IStatResource>(entityUid);
+            Eevee.DisposeEventBus(this);
         }
     }
 

@@ -6,24 +6,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MongoDB.Bson;
 
 namespace souchy.celebi.eevee.impl.shared
 {
     public class EffectSkin : IEffectSkin
     {
-        public IID entityUid { get; set; }
+        public ObjectId entityUid { get; set; }
 
         public IID vfxOnTarget { get; set; }
         public IID vfxOnSource { get; set; }
         public IID behaviourScript { get; set; }
 
         private EffectSkin() { }
-        private EffectSkin(IID id) => entityUid = id;
-        public static IEffectSkin Create() => new EffectSkin(Eevee.RegisterIID<IEffectSkin>());
+        private EffectSkin(ObjectId id) => entityUid = id;
+        public static IEffectSkin Create() => new EffectSkin(Eevee.RegisterIIDTemporary());
 
         public void Dispose()
         {
-            Eevee.DisposeIID<IEffectSkin>(entityUid);
+            Eevee.DisposeEventBus(this);
             throw new NotImplementedException();
         }
     }

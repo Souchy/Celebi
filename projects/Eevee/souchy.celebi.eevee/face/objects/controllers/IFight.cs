@@ -18,12 +18,12 @@ namespace souchy.celebi.eevee.face.objects.controllers
     {
         public ITimeline timeline { get; set; }
         public IBoard board { get; set; }
-        public IEntityDictionary<IID, IPlayer> players { get; init; }
-        public IEntityDictionary<IID, ICreature> creatures { get; init; }
-        public IEntityDictionary<IID, ISpell> spells { get; init; }
-        public IEntityDictionary<IID, IStatusContainer> statuses { get; init; }
-        public IEntityDictionary<IID, ICell> cells { get; init; }
-        public IEntityDictionary<IID, IStats> stats { get; init; }
+        public IEntityDictionary<ObjectId, IPlayer> players { get; init; }
+        public IEntityDictionary<ObjectId, ICreature> creatures { get; init; }
+        public IEntityDictionary<ObjectId, ISpell> spells { get; init; }
+        public IEntityDictionary<ObjectId, IStatusContainer> statuses { get; init; }
+
+        public IEntityDictionary<ObjectId, ICell> cells { get; init; }
 
         /// <summary>
         /// Status effects
@@ -35,9 +35,11 @@ namespace souchy.celebi.eevee.face.objects.controllers
         /// But maybe it could still be done with only static effects and adding stats idk
         /// 
         /// </summary>
-        public IEntityDictionary<IID, IEffect> effects { get; init; }
+        public IEntityDictionary<ObjectId, IEffect> effects { get; init; }
+        public IEntityDictionary<ObjectId, IStats> stats { get; init; }
 
-        public IBoardEntity GetBoardEntity(IID entityId) {
+
+        public IBoardEntity GetBoardEntity(ObjectId entityId) {
             if(this.board.creatureIds.Values.Contains(entityId)) {
                 return creatures.Get(entityId);
             }

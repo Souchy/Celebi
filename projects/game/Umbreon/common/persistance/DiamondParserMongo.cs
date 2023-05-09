@@ -2,11 +2,12 @@
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.face.util;
-using souchy.celebi.eevee.impl;
 using MongoDB.Driver;
 using static souchy.celebi.umbreon.common.persistance.DiamondParser;
 using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.face.shared.models;
+using MongoDB.Bson;
+using souchy.celebi.eevee;
 
 namespace souchy.celebi.umbreon.common.persistance
 {
@@ -51,14 +52,14 @@ namespace souchy.celebi.umbreon.common.persistance
         }
 
         #region Diamond Models Saver on event handler
-        [Subscribe(nameof(IEntityDictionary<IID, IID>.Add), nameof(IEntityDictionary<IID, IID>.Set))]
-        public void onAddSet(object dic, IID id, IEntity obj)
+        [Subscribe(nameof(IEntityDictionary<ObjectId, ObjectId>.Add), nameof(IEntityDictionary<ObjectId, ObjectId>.Set))]
+        public void onAddSet(object dic, ObjectId id, IEntity obj)
         {
             obj.GetEntityBus().subscribe(this, nameof(onSave));
             save(obj);
         }
-        [Subscribe(nameof(IEntityDictionary<IID, IID>.Remove))]
-        public void onRemove(object dic, IID id, IEntity obj)
+        [Subscribe(nameof(IEntityDictionary<ObjectId, ObjectId>.Remove))]
+        public void onRemove(object dic, ObjectId id, IEntity obj)
         {
             obj.GetEntityBus().unsubscribe(this, nameof(onSave));
             save(obj);
@@ -88,7 +89,7 @@ namespace souchy.celebi.umbreon.common.persistance
             collection.ReplaceOne(filter, entity, options);
             GD.Print($"Parser.save: {fileName}");
         }
-        public IEntityDictionary<IID, V> load<V>(IEntityDictionary<IID, V> dic, string filename = "") where V : IEntity
+        public IEntityDictionary<ObjectId, V> load<V>(IEntityDictionary<ObjectId, V> dic, string filename = "") where V : IEntity
         {
             try
             {
@@ -98,7 +99,8 @@ namespace souchy.celebi.umbreon.common.persistance
                 foreach (var v in list)
                 {
                     dic.Add(v.entityUid, v);
-                    Eevee.RegisterIID<V>(v.entityUid);
+                    //Eevee.RegisterIID<V>(v.entityUid);
+                    Eevee.RegisterEventBus(v);
                     v.GetEntityBus().subscribe(this, nameof(onSave));
                 }
             }
@@ -124,8 +126,8 @@ namespace souchy.celebi.umbreon.common.persistance
                         GD.Print($"Parser Characteristic missing data id {ch.ID}");
                         continue;
                     }
-                    ch.NameID = ct.NameID;
-                    Eevee.RegisterIID<IStringEntity>(ch.NameID);
+                    //ch.NameID = ct.NameID;
+                    //Eevee.RegisterIID<IStringEntity>(ch.NameID);
                     ch.GetName().GetEntityBus().subscribe(this, nameof(onSave));
                 }
             }
@@ -133,6 +135,28 @@ namespace souchy.celebi.umbreon.common.persistance
             {
                 GD.PrintErr(e);
             }
+        }
+
+        public IEntityDictionary<IID, V> load<V>(IEntityDictionary<IID, V> dic, string filename = "") where V : IEntityModel
+        {
+            try
+            {
+                var collection = GetCollection<V>();
+                var list = collection.Find(Builders<V>.Filter.Empty)
+                    .ToList();
+                foreach (var v in list)
+                {
+                    dic.Add(v.modelUid, v);
+                    //Eevee.RegisterIID<V>(v.entityUid);
+                    Eevee.RegisterEventBus(v);
+                    v.GetEntityBus().subscribe(this, nameof(onSave));
+                }
+            }
+            catch (Exception e)
+            {
+                GD.PrintErr(e);
+            }
+            return dic;
         }
         #endregion
 

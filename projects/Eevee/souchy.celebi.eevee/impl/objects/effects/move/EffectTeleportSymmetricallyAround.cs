@@ -10,6 +10,7 @@ using souchy.celebi.eevee.impl.values;
 using souchy.celebi.eevee.impl.objects.effectReturn;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.entity;
+using MongoDB.Bson;
 
 namespace souchy.celebi.eevee.impl.objects.effects.move
 {
@@ -22,8 +23,8 @@ namespace souchy.celebi.eevee.impl.objects.effects.move
 
 
         private EffectTeleportSymmetricallyAround() { }
-        private EffectTeleportSymmetricallyAround(IID id) : base(id) { }
-        public static IEffectTeleportSymmetricallyAround Create() => new EffectTeleportSymmetricallyAround(Eevee.RegisterIID<IEffect>());
+        private EffectTeleportSymmetricallyAround(ObjectId id) : base(id) { }
+        public static IEffectTeleportSymmetricallyAround Create() => new EffectTeleportSymmetricallyAround(Eevee.RegisterIIDTemporary());
 
         public override IEffectPreview preview(IAction action, IEnumerable<IBoardEntity> targets) {
             throw new NotImplementedException();

@@ -5,7 +5,6 @@ using souchy.celebi.eevee.face.objects.effects.move;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.util.math;
 using souchy.celebi.eevee.face.values;
-using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.values;
 using souchy.celebi.eevee.impl.shared.triggers;
@@ -25,8 +24,8 @@ namespace souchy.celebi.eevee.impl.objects.effects.move
 
 
         private EffectTeleportTo() { }
-        private EffectTeleportTo(IID id) => entityUid = id;
-        public static IEffectTeleportTo Create() => new EffectTeleportTo(Eevee.RegisterIID<IEffect>());
+        private EffectTeleportTo(ObjectId id) => entityUid = id;
+        public static IEffectTeleportTo Create() => new EffectTeleportTo(Eevee.RegisterIIDTemporary());
 
         public override IEffectPreview preview(IAction action, IEnumerable<IBoardEntity> targets) {
             throw new NotImplementedException();

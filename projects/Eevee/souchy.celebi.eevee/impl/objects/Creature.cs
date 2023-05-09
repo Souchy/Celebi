@@ -1,5 +1,4 @@
-﻿using souchy.celebi.eevee;
-using souchy.celebi.eevee.enums;
+﻿using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.face.entity;
@@ -11,33 +10,37 @@ using souchy.celebi.eevee.face.objects.statuses;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.util.math;
-using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.shared.triggers;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.impl.util.math;
 using System.Collections.Generic;
+using MongoDB.Bson;
 
 namespace souchy.celebi.eevee.impl.objects
 {
     public class Creature : ICreature
     {
-        public IID entityUid { get; set; }
+        public ObjectId entityUid { get; set; }
         public IID modelUid { get; set; }
-        public IID fightUid { get; set; }
+        public ObjectId fightUid { get; set; }
 
-        public IID originalOwnerUid { get; set; }
-        public IID currentOwnerUid { get; set; }
+        public ObjectId originalOwnerUid { get; set; }
+        public ObjectId currentOwnerUid { get; set; }
         public IPosition position { get; init; } = new Position();
 
-        public IID stats { get; set; }
-        public IEntitySet<IID> spells { get; set; } = new EntitySet<IID>();
-        public IEntitySet<IID> statuses { get; init; } = new EntitySet<IID>();
+        public ObjectId stats { get; set; }
+        public IEntitySet<ObjectId> spells { get; set; } = new EntitySet<ObjectId>();
+        public IEntitySet<ObjectId> statuses { get; init; } = new EntitySet<ObjectId>();
         public Dictionary<ContextType, IContext> contexts { get; set; } = new();
 
 
         private Creature() { }
-        private Creature(IID id) => entityUid = id;
-        public static ICreature Create() => new Creature(Eevee.RegisterIID<ICreature>());
+        private Creature(ObjectId id, ObjectId fightId)
+        {
+            entityUid = id;
+            this.fightUid = fightId;
+        }
+        public static ICreature Create(ObjectId fightId) => new Creature(Eevee.RegisterIIDTemporary(), fightId);
 
         public IPlayer GetOriginalOwner() => this.GetFight().players.Get(originalOwnerUid);
         public IPlayer GetCurrentOwner() => this.GetFight().players.Get(currentOwnerUid);
@@ -87,7 +90,7 @@ namespace souchy.celebi.eevee.impl.objects
 
         public void Dispose()
         {
-            Eevee.DisposeIID<ICreature>(entityUid);
+            Eevee.DisposeEventBus(this);
             throw new NotImplementedException();
         }
     }

@@ -44,6 +44,10 @@
 		<ProjectReference Include="..\..\Eevee\Eevee.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Using Include="MongoDB.Bson" />
+	</ItemGroup>
+
 	
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
 		<Exec Command="dotnet tool restore" />

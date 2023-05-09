@@ -22,9 +22,9 @@ namespace souchy.celebi.spark.services.models
             await getCollection(lang).Find(_ => true).ToListAsync();
         public async Task<List<IStringEntity>> GetAsync(I18NType lang, FilterDefinition<IStringEntity> filter) =>
             await getCollection(lang).Find(filter).ToListAsync();
-        public async Task<IStringEntity?> GetAsync(I18NType lang, string id) =>
+        public async Task<IStringEntity?> GetAsync(I18NType lang, ObjectId id) =>
             await getCollection(lang).Find(x => x.entityUid == id).FirstOrDefaultAsync();
-        public async Task<ReplaceOneResult> UpdateAsync(I18NType lang, string id, IStringEntity updatedStringEntity) =>
+        public async Task<ReplaceOneResult> UpdateAsync(I18NType lang, ObjectId id, IStringEntity updatedStringEntity) =>
             await getCollection(lang).ReplaceOneAsync(x => x.entityUid == id, updatedStringEntity);
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace souchy.celebi.spark.services.models
         /// <summary>
         /// Remove a string entity from all I18n collections
         /// </summary>
-        public async Task<DeleteResult> RemoveAsync(string id)
+        public async Task<DeleteResult> RemoveAsync(ObjectId id)
         {
             //await _stringsCollection.DeleteOneAsync(x => x.entityUid == id);
             DeleteResult result = null;

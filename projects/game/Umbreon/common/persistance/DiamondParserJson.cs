@@ -4,10 +4,12 @@ using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.face.util;
-using souchy.celebi.eevee.impl;
 using FileAccess = Godot.FileAccess;
 using static souchy.celebi.umbreon.common.persistance.DiamondParser;
 using souchy.celebi.eevee.enums.characteristics;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using souchy.celebi.eevee;
 
 namespace souchy.celebi.umbreon.common.persistance
 {
@@ -15,15 +17,15 @@ namespace souchy.celebi.umbreon.common.persistance
     {
 
         #region Diamond Models Saver on event handler
-        [Subscribe(nameof(IEntityDictionary<IID, IID>.Add), nameof(IEntityDictionary<IID, IID>.Set))]
-        public void onAddSet(object dic, IID id, IEntity obj)
+        [Subscribe(nameof(IEntityDictionary<ObjectId, ObjectId>.Add), nameof(IEntityDictionary<ObjectId, ObjectId>.Set))]
+        public void onAddSet(object dic, ObjectId id, IEntity obj)
         {
             //GD.Print($"DiamondParser.onAddSet: {obj} ");
             obj.GetEntityBus().subscribe(this, nameof(onSave));
             save(dic, getFileName(obj));
         }
-        [Subscribe(nameof(IEntityDictionary<IID, IID>.Remove))]
-        public void onRemove(object dic, IID id, IEntity obj)
+        [Subscribe(nameof(IEntityDictionary<ObjectId, ObjectId>.Remove))]
+        public void onRemove(object dic, ObjectId id, IEntity obj)
         {
             //GD.Print($"DiamondParser.onRemove: {obj} ");
             obj.GetEntityBus().unsubscribe(this, nameof(onSave));
@@ -58,7 +60,7 @@ namespace souchy.celebi.umbreon.common.persistance
             file.StoreString(str);
             file.Flush();
         }
-        public IEntityDictionary<IID, V> load<V>(IEntityDictionary<IID, V> dic, string filename = "") where V : IEntity
+        public IEntityDictionary<ObjectId, V> load<V>(IEntityDictionary<ObjectId, V> dic, string filename = "") where V : IEntity
         {
             if (filename == "") filename = getFileName<V>();
             string filepath = $"res://data/test/{filename}.json";
@@ -69,9 +71,9 @@ namespace souchy.celebi.umbreon.common.persistance
             if (file == null)
                 GD.Print($"Parser.load null: {filepath}");
             var json = file.GetAsText();
-            IEntityDictionary<IID, V> data = JsonConvert.DeserializeObject<EntityDictionary<IID, V>>(json, jsonSettings);
+            IEntityDictionary<ObjectId, V> data = JsonConvert.DeserializeObject<EntityDictionary<ObjectId, V>>(json, jsonSettings);
             if (data == null)
-                data = EntityDictionary<IID, V>.Create();
+                data = EntityDictionary<ObjectId, V>.Create();
             GD.Print($"Parser.load: {filepath} = {data.Keys.Count()} count");
 
             // restore entity ids from keys
@@ -80,7 +82,8 @@ namespace souchy.celebi.umbreon.common.persistance
             // register IDs to buses + subscribe to save events
             data.ForEach((k, v) =>
             {
-                Eevee.RegisterIID<V>(k);
+                //Eevee.RegisterIID<V>(k);
+                Eevee.RegisterEventBus(v);
                 v.GetEntityBus().subscribe(this, nameof(onSave));
             });
             // add all data to Eevee.models dic
@@ -107,10 +110,41 @@ namespace souchy.celebi.umbreon.common.persistance
                     GD.Print($"Parser Characteristic missing data id {ch.ID}");
                     continue;
                 }
-                ch.NameID = ct.NameID;
-                Eevee.RegisterIID<IStringEntity>(ch.NameID);
+                //ch.NameID = ct.NameID;
+                //Eevee.RegisterIID<IStringEntity>(ch.NameID);
                 ch.GetName().GetEntityBus().subscribe(this, nameof(onSave));
             }
+        }
+        public IEntityDictionary<IID, V> load<V>(IEntityDictionary<IID, V> dic, string filename = "") where V : IEntityModel
+        {
+            if (filename == "") filename = getFileName<V>();
+            string filepath = $"res://data/test/{filename}.json";
+            if (!FileAccess.FileExists(filepath))
+                return null;
+
+            using FileAccess file = FileAccess.Open(filepath, FileAccess.ModeFlags.Read);
+            if (file == null)
+                GD.Print($"Parser.load null: {filepath}");
+            var json = file.GetAsText();
+            IEntityDictionary<IID, V> data = JsonConvert.DeserializeObject<EntityDictionary<IID, V>>(json, jsonSettings);
+            if (data == null)
+                data = EntityDictionary<IID, V>.Create();
+            GD.Print($"Parser.load: {filepath} = {data.Keys.Count()} count");
+
+            // restore entity ids from keys
+            if (typeof(IEntity).IsAssignableFrom(typeof(V)))
+                data.ForEach((k, v) => v.modelUid = k);
+            // register IDs to buses + subscribe to save events
+            data.ForEach((k, v) =>
+            {
+                //Eevee.RegisterIID<V>(k);
+                Eevee.RegisterEventBus(v);
+                v.GetEntityBus().subscribe(this, nameof(onSave));
+            });
+            // add all data to Eevee.models dic
+            dic.AddAll(data);
+
+            return data;
         }
         #endregion
 

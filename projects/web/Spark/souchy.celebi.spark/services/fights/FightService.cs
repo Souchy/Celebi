@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.controllers;
 
@@ -13,16 +14,16 @@ namespace souchy.celebi.spark.services.fights
         public async Task<List<IFight>> GetAsync() =>
             await _Fights.Find(_ => true).ToListAsync();
 
-        public async Task<IFight?> GetAsync(string id) =>
+        public async Task<IFight?> GetAsync(ObjectId id) =>
             await _Fights.Find(x => x.entityUid == id).FirstOrDefaultAsync();
 
         public async Task CreateAsync(IFight newFight) =>
             await _Fights.InsertOneAsync(newFight);
 
-        public async Task UpdateAsync(string id, IFight updatedFight) =>
+        public async Task UpdateAsync(ObjectId id, IFight updatedFight) =>
             await _Fights.ReplaceOneAsync(x => x.entityUid == id, updatedFight);
 
-        public async Task RemoveAsync(string id) =>
+        public async Task RemoveAsync(ObjectId id) =>
             await _Fights.DeleteOneAsync(x => x.entityUid == id);
 
     }

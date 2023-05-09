@@ -23,7 +23,7 @@ namespace souchy.celebi.spark.controllers.models
         public async Task<List<IStringEntity>> GetAll(I18NType lang, FilterDefinition<IStringEntity>? filter = null) 
             => await _stringService.GetAsync(lang, filter);
         [HttpGet("string/{id}")]
-        public async Task<ActionResult<IStringEntity>> Get(I18NType lang, string id)
+        public async Task<ActionResult<IStringEntity>> Get(I18NType lang, ObjectId id)
         {
             IStringEntity? str = await _stringService.GetAsync(lang, id);
             if (str is null)
@@ -32,7 +32,7 @@ namespace souchy.celebi.spark.controllers.models
         }
         [Authorize]
         [HttpPut("string/{id}")]
-        public async Task<ActionResult<ReplaceOneResult>> Update(I18NType lang, string id, StringEntity updatedStringEntity)
+        public async Task<ActionResult<ReplaceOneResult>> Update(I18NType lang, ObjectId id, StringEntity updatedStringEntity)
         {
             var str = await _stringService.GetAsync(lang, id);
             if (str is null) 
@@ -57,7 +57,7 @@ namespace souchy.celebi.spark.controllers.models
         /// </summary>
         [Authorize]
         [HttpDelete("string/{id}")]
-        public async Task<ActionResult<DeleteResult>> Delete(string id)
+        public async Task<ActionResult<DeleteResult>> Delete(ObjectId id)
         {
             var str = await _stringService.GetAsync(I18NType.fr, id);
             if (str is null) 

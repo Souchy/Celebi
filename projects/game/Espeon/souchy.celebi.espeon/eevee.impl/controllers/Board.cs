@@ -1,9 +1,9 @@
-﻿using souchy.celebi.eevee;
+﻿using MongoDB.Bson;
+using souchy.celebi.eevee;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.util.math;
-using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.util;
 using static souchy.celebi.eevee.face.entity.IEntity;
 
@@ -11,15 +11,15 @@ namespace souchy.celebi.espeon.eevee.impl.controllers
 {
     public class Board : IBoard
     {
-        public IID entityUid { get; set; } = Eevee.RegisterIID<IBoard>();
-        public IID fightUid { get; set; }
+        public ObjectId entityUid { get; set; } = Eevee.RegisterIIDTemporary();
+        public ObjectId fightUid { get; set; }
 
-        public IEntityList<IID> creatureIds { get; init; } = new EntityList<IID>();
-        public IEntityList<IID> cells { get; init; } = new EntityList<IID>();
+        public IEntityList<ObjectId> creatureIds { get; init; } = new EntityList<ObjectId>();
+        public IEntityList<ObjectId> cells { get; init; } = new EntityList<ObjectId>();
 
         public Board(ScopeID scopeId)
         {
-            fightUid = scopeId;
+            //fightUid = scopeId;
             this.GetFight().board = this;
             //this.entityUid = Scopes.GetUIdGenerator(fightUid).next();
             //this.instances = Scopes.GetRequiredScoped<IFight>(fightUid);
@@ -27,8 +27,8 @@ namespace souchy.celebi.espeon.eevee.impl.controllers
 
         public void Dispose()
         {
+            Eevee.DisposeEventBus(this);
             this.GetFight().board = null;
-            Eevee.DisposeIID<IBoard>(entityUid);
             // nothing to dispose? 
             //throw new NotImplementedException();
         }

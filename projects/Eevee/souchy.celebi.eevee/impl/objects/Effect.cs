@@ -18,14 +18,15 @@ using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.util.math;
 using System.ComponentModel;
 using System.Linq;
+using MongoDB.Bson;
 
 namespace souchy.celebi.eevee.impl.objects
 {
     public abstract class Effect : IEffect
     {
-        public IID entityUid { get; set; } //= Eevee.RegisterIID();
+        public ObjectId entityUid { get; set; } //= Eevee.RegisterIID();
         public IID modelUid { get; set; }
-        public IID fightUid { get; set; }
+        public ObjectId fightUid { get; set; }
 
 
         //#region Dynamic status creation
@@ -41,12 +42,12 @@ namespace souchy.celebi.eevee.impl.objects
         /// <summary>
         /// children
         /// </summary>
-        public IEntityList<IID> effectIds { get; set; } = new EntityList<IID>(); 
+        public IEntityList<ObjectId> effectIds { get; set; } = new EntityList<ObjectId>(); 
         public IEnumerable<IEffect> GetEffects() => effectIds.Values.Select(i => this.GetFight()?.effects.Get(i) ?? Eevee.models.effects.Get(i));
 
 
         protected Effect() { }
-        protected Effect(IID id) => entityUid = id;
+        protected Effect(ObjectId id) => entityUid = id;
 
         public abstract IEffectPreview preview(IAction action, IEnumerable<IBoardEntity> targets);
         public abstract IEffectReturnValue apply(IAction action, IEnumerable<IBoardEntity> targets);
@@ -70,7 +71,7 @@ namespace souchy.celebi.eevee.impl.objects
 
         public void Dispose()
         {
-            Eevee.DisposeIID<IEffect>(entityUid);
+            Eevee.DisposeEventBus(this);
         }
 
     }

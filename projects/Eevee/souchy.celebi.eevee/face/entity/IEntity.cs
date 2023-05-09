@@ -16,7 +16,7 @@ namespace souchy.celebi.eevee.face.entity
         //public ObjectId _id { get; set; }
         [BsonId]
         [BsonSerializer(typeof(IIDSerializer))]
-        public IID entityUid { get; set; }
+        public ObjectId entityUid { get; set; }
 
         //public IEventBus GetEventBus() => Eevee.eventBuses[entityUid];
 

@@ -1,34 +1,35 @@
 ﻿using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.shared.models.skins;
 using souchy.celebi.eevee.face.util;
-using souchy.celebi.eevee.impl;
 using System.Collections.Generic;
+using MongoDB.Bson;
+using MongoDB.Bson;
 
 namespace souchy.celebi.eevee.impl.shared
 {
     public class CreatureSkin : ICreatureSkin
     {
-        public IID entityUid { get; set; }
-        public IID nameId { get; set; }
-        public IID descriptionId { get; set; }
+        public ObjectId entityUid { get; set; }
+        public ObjectId nameId { get; set; }
+        public ObjectId descriptionId { get; set; }
 
         public string meshModel { get; set; }
         public string meshName { get; set; }
         public string icon { get; set; }
         public AnimationsData animations { get; set; }
-        public Dictionary<IID, IID> spellSkins { get; set; } = new Dictionary<IID, IID>();
-        public Dictionary<IID, IID> effectSkins { get; set; } = new Dictionary<IID, IID>(); // FIXME This should go inside ISpellSkin
+        public Dictionary<ObjectId, ObjectId> spellSkins { get; set; } = new Dictionary<ObjectId, ObjectId>();
+        public Dictionary<ObjectId, ObjectId> effectSkins { get; set; } = new Dictionary<ObjectId, ObjectId>(); // FIXME This should go inside ISpellSkin
 
 
         private CreatureSkin() { }
         public static ICreatureSkin Create() => new CreatureSkin()
         {
-            entityUid = Eevee.RegisterIID<ICreatureSkin>(),
+            entityUid = Eevee.RegisterIIDTemporary(),
         };
 
         public void Dispose()
         {
-            Eevee.DisposeIID<ICreatureSkin>(entityUid);
+            Eevee.DisposeEventBus(this);
         }
 
     }

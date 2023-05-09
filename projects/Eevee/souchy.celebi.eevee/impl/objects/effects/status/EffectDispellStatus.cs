@@ -5,7 +5,6 @@ using souchy.celebi.eevee.face.objects.effects.status;
 using souchy.celebi.eevee.face.shared.conditions.value;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
-using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.values;
 using souchy.celebi.eevee.impl.shared.triggers;
@@ -23,8 +22,8 @@ namespace souchy.celebi.eevee.impl.objects.effects.status
 
 
         private EffectDispellStatus() { }
-        private EffectDispellStatus(IID id) : base(id) { }
-        public static IEffectDispellStatus Create() => new EffectDispellStatus(Eevee.RegisterIID<IEffect>());
+        private EffectDispellStatus(ObjectId id) : base(id) { }
+        public static IEffectDispellStatus Create() => new EffectDispellStatus(Eevee.RegisterIIDTemporary());
 
         public override IEffectPreview preview(IAction action, IEnumerable<IBoardEntity> targets) {
             throw new NotImplementedException();

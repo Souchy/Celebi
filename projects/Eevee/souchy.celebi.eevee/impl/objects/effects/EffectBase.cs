@@ -14,6 +14,7 @@ using souchy.celebi.eevee.impl.shared.triggers;
 using souchy.celebi.eevee.impl.objects.effectReturn;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.entity;
+using MongoDB.Bson;
 
 namespace souchy.celebi.eevee.impl.objects.effects
 {
@@ -26,11 +27,11 @@ namespace souchy.celebi.eevee.impl.objects.effects
     {
 
         private EffectBase() { }
-        private EffectBase(IID id) : base(id) { }
+        private EffectBase(ObjectId id) : base(id) { }
 
         public IID textId { get; set; }
 
-        public static IEffectBase Create() => new EffectBase(Eevee.RegisterIID<IEffect>());
+        public static IEffectBase Create() => new EffectBase(Eevee.RegisterIIDTemporary());
 
         public override IEffectPreview preview(IAction action, IEnumerable<IBoardEntity> targets) {
             throw new NotImplementedException();

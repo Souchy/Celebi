@@ -7,15 +7,14 @@ using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
-using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.values;
 
 namespace souchy.celebi.eevee.face.shared.models
 {
     public interface ISpellModel : IEntityModel, IEffectsContainer
     {
-        public IID nameId { get; set; }
-        public IID descriptionId { get; set; }
+        public ObjectId nameId { get; set; }
+        public ObjectId descriptionId { get; set; }
 
         public ICondition sourceCondition { get; set; }
         public ICondition targetFilter { get; set; }

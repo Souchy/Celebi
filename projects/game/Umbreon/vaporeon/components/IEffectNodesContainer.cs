@@ -36,7 +36,7 @@ namespace souchy.celebi.umbreon.vaporeon.components
         /// </summary>
         /// <param name="id"></param>
         [Subscribe(EntityList<IID>.EventRemove)]
-        public void onRemoveEffectChild(IID id)
+        public void onRemoveEffectChild(ObjectId id)
         {
             var node = this.GetContainer().GetChildren<EffectMini>()
                 .FirstOrDefault(m => m.effect.entityUid == id);

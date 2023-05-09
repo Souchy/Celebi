@@ -7,7 +7,7 @@ namespace souchy.celebi.eevee.impl.util
 {
     public class EntityDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IEntityDictionary<TKey, TValue> where TValue : IEntity
     {
-        public IID entityUid { get; set; } // = Eevee.RegisterIID();
+        public ObjectId entityUid { get; set; } // = Eevee.RegisterIID();
 
         IEnumerable<TValue> IEntityDictionary<TKey, TValue>.Values => Values;
         IEnumerable<TKey> IEntityDictionary<TKey, TValue>.Keys => Keys;
@@ -15,8 +15,8 @@ namespace souchy.celebi.eevee.impl.util
 
 
         protected EntityDictionary() { }
-        protected EntityDictionary(IID id) => entityUid = id;
-        public static IEntityDictionary<TKey, TValue> Create() => new EntityDictionary<TKey, TValue>(Eevee.RegisterIID<IEntityDictionary<TKey, TValue>>());
+        protected EntityDictionary(ObjectId id) => entityUid = id;
+        public static IEntityDictionary<TKey, TValue> Create() => new EntityDictionary<TKey, TValue>(Eevee.RegisterIIDTemporary());
 
         public TValue Get(TKey key)
         {
@@ -93,8 +93,8 @@ namespace souchy.celebi.eevee.impl.util
 
         public void Dispose()
         {
+            Eevee.DisposeEventBus(this);
             this.Clear();
-            Eevee.DisposeIID<IEntityDictionary<TKey, TValue>>(entityUid);
         }
 
     }

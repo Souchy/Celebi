@@ -6,7 +6,6 @@ using souchy.celebi.eevee.face.objects.effects.res;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
-using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.objects.effectResults;
 using souchy.celebi.eevee.impl.stats;
@@ -30,8 +29,8 @@ namespace souchy.celebi.eevee.impl.objects.effects.res
 
 
         private EffectHeal() { }
-        private EffectHeal(IID id) : base(id) { }
-        public static IEffectHeal Create() => new EffectHeal(Eevee.RegisterIID<IEffect>());
+        private EffectHeal(ObjectId id) : base(id) { }
+        public static IEffectHeal Create() => new EffectHeal(Eevee.RegisterIIDTemporary());
 
 
         public override IEffectPreview preview(IAction action, IEnumerable<IBoardEntity> targets) {

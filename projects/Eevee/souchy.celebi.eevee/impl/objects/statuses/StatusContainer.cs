@@ -12,30 +12,30 @@ namespace souchy.celebi.eevee.impl.objects.statuses
 {
     public class StatusContainer : IStatusContainer
     {
-        public IID fightUid { get; set; }
-        public IID entityUid { get; set; }
+        public ObjectId fightUid { get; set; }
+        public ObjectId entityUid { get; set; }
         public IID modelUid { get; set; }
 
         public IID sourceSpellModel { get; set; }
-        public IID sourceCreature { get; set; }
-        public IID holderEntity { get; set; }
-        public IID stats { get; set; }
+        public ObjectId sourceCreature { get; set; }
+        public ObjectId holderEntity { get; set; }
+        public ObjectId stats { get; set; }
 
         public List<IStatusInstance> instances { get; set; } = new List<IStatusInstance>();
 
-        protected StatusContainer(IID id, IID fightUid)
+        protected StatusContainer(ObjectId id, ObjectId fightUid)
         {
             this.entityUid = id;
             this.fightUid = fightUid;
-            this.stats = Eevee.RegisterIID<IStats>();
+            this.stats = Eevee.RegisterIIDTemporary();
         }
-        public static IStatusContainer Create(IID fightUid) => new StatusContainer(Eevee.RegisterIID<IStatusContainer>(), fightUid);
+        public static IStatusContainer Create(ObjectId fightUid) => new StatusContainer(Eevee.RegisterIIDTemporary(), fightUid);
 
 
         public void Dispose()
         {
+            Eevee.DisposeEventBus(this);
             ((IStatusContainer) this).GetStats().Dispose();
-            Eevee.DisposeIID<IStatusContainer>(entityUid);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace souchy.celebi.eevee.impl.util
         public const string EventReplace = nameof(Replace);
 
         [JsonIgnore]
-        public IID entityUid { get; set; } = Eevee.RegisterIID<IEntity>();
+        public ObjectId entityUid { get; set; } = Eevee.RegisterIIDTemporary();
         [JsonIgnore]
         public bool allowDuplicates { get; init; } = true;
         [JsonIgnore]
@@ -96,8 +96,8 @@ namespace souchy.celebi.eevee.impl.util
 
         public void Dispose()
         {
+            Eevee.DisposeEventBus(this);
             Clear();
-            Eevee.DisposeIID<IEntity>(entityUid);
         }
     }
 }

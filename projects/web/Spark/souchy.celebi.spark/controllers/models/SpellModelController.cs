@@ -33,7 +33,7 @@ namespace souchy.celebi.spark.controllers.models
         public async Task<List<ISpellModel>> GetAll() => await _spellService.GetAsync();
 
         [HttpGet("spell/{id}")]
-        public async Task<ActionResult<ISpellModel>> Get(string id)
+        public async Task<ActionResult<ISpellModel>> Get(ObjectId id)
         {
             ISpellModel? creatureModel = await _spellService.GetAsync(id);
             if (creatureModel is null)
@@ -51,7 +51,7 @@ namespace souchy.celebi.spark.controllers.models
 
         [Authorize]
         [HttpPut("spell/{id}")]
-        public async Task<ActionResult<ReplaceOneResult>> Update(string id, SpellModel updatedSpellModel)
+        public async Task<ActionResult<ReplaceOneResult>> Update(ObjectId id, SpellModel updatedSpellModel)
         {
             var crea = await _spellService.GetAsync(id);
             if (crea is null)
@@ -63,7 +63,7 @@ namespace souchy.celebi.spark.controllers.models
 
         [Authorize]
         [HttpDelete("spell/{id}")]
-        public async Task<ActionResult<DeleteResult>> Delete(string id)
+        public async Task<ActionResult<DeleteResult>> Delete(ObjectId id)
         {
             var crea = await _spellService.GetAsync(id);
             if (crea is null)

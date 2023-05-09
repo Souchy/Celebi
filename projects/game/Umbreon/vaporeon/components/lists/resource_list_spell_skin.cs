@@ -32,7 +32,7 @@ public partial class resource_list_spell_skin : ResourceList
         //var desc = spell.GetDescription();
         base.addChild(name, new Color().Random(), model.entityUid);
     }
-    public override void publishSelect(IID id)
+    public override void publishSelect(ObjectId id)
     {
         var model = Eevee.models.spellSkins.Get(id);
         this.GetVaporeon().bus.publish(VaporeonSignals.select, base.selectorForControl, model);

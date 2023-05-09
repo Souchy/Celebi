@@ -6,7 +6,6 @@ using souchy.celebi.eevee.face.objects.effects.res;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
-using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.objects.effectResults;
 using souchy.celebi.eevee.impl.values;
@@ -27,8 +26,8 @@ namespace souchy.celebi.eevee.impl.objects.effects.res
 
 
         private EffectDirectDamage() { }
-        private EffectDirectDamage(IID id) : base(id) { }
-        public static IEffectDirectDamage Create() => new EffectDirectDamage(Eevee.RegisterIID<IEffect>());
+        private EffectDirectDamage(ObjectId id) : base(id) { }
+        public static IEffectDirectDamage Create() => new EffectDirectDamage(Eevee.RegisterIIDTemporary());
 
         public override IEffectPreview preview(IAction action, IEnumerable<IBoardEntity> targets) {
             throw new NotImplementedException();

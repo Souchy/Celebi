@@ -1,6 +1,7 @@
 ﻿using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.util;
+using MongoDB.Bson;
 
 namespace souchy.celebi.eevee.impl.shared
 {
@@ -9,7 +10,7 @@ namespace souchy.celebi.eevee.impl.shared
         /// <summary>
         /// mongo id
         /// </summary>
-        public IID entityUid { get; set; }
+        public ObjectId entityUid { get; set; }
         /// <summary>
         /// string model id / key
         /// </summary>
@@ -30,7 +31,7 @@ namespace souchy.celebi.eevee.impl.shared
         private StringEntity() { }
         public static StringEntity Create(string val = "") => new StringEntity()
         {
-            entityUid = Eevee.RegisterIID<IStringEntity>(),
+            entityUid = Eevee.RegisterIIDTemporary(),
             value = val
         };
 
@@ -39,7 +40,7 @@ namespace souchy.celebi.eevee.impl.shared
 
         public void Dispose()
         {
-            Eevee.DisposeIID<IStringEntity>(entityUid);
+            Eevee.DisposeEventBus(this);
         }
 
     }

@@ -45,7 +45,6 @@ namespace souchy.celebi.espeon.eevee.impl.objects
 
         public void Dispose()
         {
-            Eevee.DisposeIID<ISpell>(entityUid);
             //Scopes.DisposeIID(fightUid, entityUid);
         }
     }

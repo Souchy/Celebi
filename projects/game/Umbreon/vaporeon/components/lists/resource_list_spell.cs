@@ -63,7 +63,7 @@ public partial class resource_list_spell : ResourceList
         var desc = model.GetDescription(); //Eevee.models.i18n.Get(spell.descriptionId);
         base.addChild(name, new Color().Random(), model.entityUid);
     }
-    public override void publishSelect(IID id)
+    public override void publishSelect(ObjectId id)
     {
         var model = Eevee.models.spellModels.Get(id);
         this.GetVaporeon().bus.publish(VaporeonSignals.select, base.selectorForControl, model);

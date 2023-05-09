@@ -20,4 +20,8 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Using Include="MongoDB.Bson" />
+  </ItemGroup>
+
 </Project>

@@ -19,7 +19,7 @@ namespace souchy.celebi.eevee.impl.shared.conditions.value
         {
             if(!this.checkChildren(action, trigger, boardSource, boardTarget)) 
                 return false;
-            IID checkable = this.actorType == ActorType.Source ? action.caster : action.targetCell;
+            ObjectId checkable = this.actorType == ActorType.Source ? action.caster : action.targetCell;
             var creature = action.fight.creatures.Get(checkable);
             var stat = creature.GetStats(action) //, trigger)
                 .Get(statId);

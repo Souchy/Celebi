@@ -28,7 +28,7 @@ namespace souchy.celebi.spark.controllers.models
         public async Task<List<IEffect>> GetAll() => await _effects.GetAsync();
 
         [HttpGet("effect/{id}")]
-        public async Task<ActionResult<IEffect>> Get(string id)
+        public async Task<ActionResult<IEffect>> Get(ObjectId id)
         {
             IEffect? effect = await _effects.GetAsync(id);
             if (effect is null)
@@ -46,7 +46,7 @@ namespace souchy.celebi.spark.controllers.models
 
         [Authorize]
         [HttpPut("effect/{id}")]
-        public async Task<ActionResult<ReplaceOneResult>> Update(string id, Effect updatedEffect)
+        public async Task<ActionResult<ReplaceOneResult>> Update(ObjectId id, Effect updatedEffect)
         {
             var effect = await _effects.GetAsync(id);
             if (effect is null) 
@@ -58,7 +58,7 @@ namespace souchy.celebi.spark.controllers.models
 
         [Authorize]
         [HttpDelete("effect/{id}")]
-        public async Task<ActionResult<DeleteResult>> Delete(string id)
+        public async Task<ActionResult<DeleteResult>> Delete(ObjectId id)
         {
             var effect = await _effects.GetAsync(id);
             if (effect is null) 

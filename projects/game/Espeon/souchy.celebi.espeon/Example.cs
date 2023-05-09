@@ -5,7 +5,10 @@ using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.objects.stats;
+using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.stats;
+using souchy.celebi.espeon.eevee.impl.controllers;
 
 namespace souchy.celebi.espeon
 {
@@ -43,8 +46,8 @@ namespace souchy.celebi.espeon
         private void addCreature(IPlayer player)
         {
             // create
-            var creature = Scopes.GetRequiredScoped<ICreature>(fight.entityUid);
-            creature.modelUid = Scopes.GetUIdGenerator(fight.entityUid).next();
+            var creature = Creature.Create(fight.entityUid); // Scopes.GetRequiredScoped<ICreature>(fight.entityUid);
+            creature.modelUid = (IID) 1; //Scopes.GetUIdGenerator(fight.entityUid).next();
             // player control
             player.creatures.Add(creature.entityUid);
             creature.currentOwnerUid = player.entityUid;
@@ -77,7 +80,7 @@ namespace souchy.celebi.espeon
 
         private void addSpell(ICreature creature)
         {
-            var spell = Scopes.GetRequiredScoped<ISpell>(fight.entityUid);
+            var spell = Spell.Create(fight.entityUid); // Scopes.GetRequiredScoped<ISpell>(fight.entityUid);
             //spell.chargesRemaining = rng.Next(1, 5);
             //spell.cooldownRemaining = rng.Next(1, 5);
             spell.GetStats().Set(SpellProperty.RemainingCharges.Create(5));

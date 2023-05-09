@@ -13,15 +13,17 @@ namespace souchy.celebi.eevee.impl
     {
         public IEntityDictionary<IID, IMap> maps { get; init; } = EntityDictionary<IID, IMap>.Create();
         public IEntityDictionary<IID, ICreatureModel> creatureModels { get; init; } = EntityDictionary<IID, ICreatureModel>.Create();
-        public IEntityDictionary<IID, IStats> stats { get; init; } = EntityDictionary<IID, IStats>.Create();
         public IEntityDictionary<IID, ISpellModel> spellModels { get; init; } = EntityDictionary<IID, ISpellModel>.Create();
         public IEntityDictionary<IID, IStatusModel> statusModels { get; init; } = EntityDictionary<IID, IStatusModel>.Create();
         public IEntityDictionary<IID, IEffectModel> effectModels { get; init; } = EntityDictionary<IID, IEffectModel>.Create();
-        public IEntityDictionary<IID, IEffect> effects { get; init; } = EntityDictionary<IID, IEffect>.Create();
-        public IEntityDictionary<IID, ICreatureSkin> creatureSkins { get; init; } = EntityDictionary<IID, ICreatureSkin>.Create();
-        public IEntityDictionary<IID, ISpellSkin> spellSkins { get; init; } = EntityDictionary<IID, ISpellSkin>.Create();
-        public IEntityDictionary<IID, IEffectSkin> effectSkins { get; init; } = EntityDictionary<IID, IEffectSkin>.Create();
-        public IEntityDictionary<IID, IStringEntity> i18n { get; init; } = EntityDictionary<IID, IStringEntity>.Create();
+
+        public IEntityDictionary<ObjectId, ICreatureSkin> creatureSkins { get; init; } = EntityDictionary<ObjectId, ICreatureSkin>.Create();
+        public IEntityDictionary<ObjectId, ISpellSkin> spellSkins { get; init; } = EntityDictionary<ObjectId, ISpellSkin>.Create();
+        public IEntityDictionary<ObjectId, IEffectSkin> effectSkins { get; init; } = EntityDictionary<ObjectId, IEffectSkin>.Create();
+
+        public IEntityDictionary<ObjectId, IStringEntity> i18n { get; init; } = EntityDictionary<ObjectId, IStringEntity>.Create();
+        public IEntityDictionary<ObjectId, IEffect> effects { get; init; } = EntityDictionary<ObjectId, IEffect>.Create();
+        public IEntityDictionary<ObjectId, IStats> stats { get; init; } = EntityDictionary<ObjectId, IStats>.Create();
 
         public void Dispose()
         {

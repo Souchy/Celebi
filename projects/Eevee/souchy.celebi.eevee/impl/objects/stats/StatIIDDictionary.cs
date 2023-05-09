@@ -9,7 +9,7 @@ namespace souchy.celebi.eevee.impl.objects.stats
 {
     internal class StatIIDDictionary : IStatIIDDictionary
     {
-        public IID entityUid { get; set; }
+        public ObjectId entityUid { get; set; }
 
         public CharacteristicId statId { get; init; }
         public Dictionary<IID, IStat> value { get; set; }
@@ -27,7 +27,7 @@ namespace souchy.celebi.eevee.impl.objects.stats
             {
                 statId = st,
                 value = value != null ? value : new Dictionary<IID, IStat>(),
-                entityUid = Eevee.RegisterIID<IStatBool>()
+                entityUid = Eevee.RegisterIIDTemporary()
             };
 
         public void Add(IStat s)
@@ -53,9 +53,9 @@ namespace souchy.celebi.eevee.impl.objects.stats
 
         public void Dispose()
         {
+            Eevee.DisposeEventBus(this);
             foreach (var pair in value)
                 pair.Value.Dispose();
-            Eevee.DisposeIID<IStatSimple>(entityUid);
         }
     }
 }

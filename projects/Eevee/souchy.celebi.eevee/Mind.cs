@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace souchy.celebi.eevee.impl
+namespace souchy.celebi.eevee
 {
     public static class Mind
     {

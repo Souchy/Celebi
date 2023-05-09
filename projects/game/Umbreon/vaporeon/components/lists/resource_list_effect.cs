@@ -8,6 +8,7 @@ using souchy.celebi.eevee.impl.util;
 using System.Reflection;
 using System.Xml.Linq;
 using souchy.celebi.umbreon.vaporeon;
+using MongoDB.Bson;
 
 public partial class resource_list_effect : ResourceList
 {
@@ -49,7 +50,7 @@ public partial class resource_list_effect : ResourceList
             base.addChild($"#{effect.entityUid}, {effect.GetType().Name}", new Color().Random(), effect.entityUid);
         }
     }
-    public override void publishSelect(IID id)
+    public override void publishSelect(ObjectId id)
     {
         var model = Eevee.models.effects.Get(id);
         this.GetVaporeon().bus.publish(VaporeonSignals.select, base.selectorForControl, model);

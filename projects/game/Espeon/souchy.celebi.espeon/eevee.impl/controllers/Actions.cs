@@ -9,7 +9,6 @@ using souchy.celebi.eevee.face.util.math;
 using souchy.celebi.eevee.impl.objects.effectResults;
 using souchy.celebi.eevee.impl.shared.triggers;
 using souchy.celebi.eevee.face.objects.stats;
-using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.face.objects.statuses;
 using souchy.celebi.espeon.eevee.impl.controllers;
 using souchy.celebi.eevee.impl.shared;

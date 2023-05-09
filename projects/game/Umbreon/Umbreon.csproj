@@ -6,8 +6,8 @@
     <RootNamespace>souchy.celebi.umbreon</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="vaporeon\creature\**" />
-    <EmbeddedResource Remove="vaporeon\creature\**" />
+    <Compile Remove="vaporeon\**" />
+    <EmbeddedResource Remove="vaporeon\**" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="common\DiamondModels.cs" />
@@ -53,7 +53,6 @@
     <Folder Include="data\test\" />
     <Folder Include="sapphire\nodes\" />
     <Folder Include="sapphire\scenes\" />
-    <Folder Include="vaporeon\common\stats\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\animations\locomotion-magic.res" />

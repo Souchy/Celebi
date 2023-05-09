@@ -1,5 +1,7 @@
 ﻿using Godot;
+using MongoDB.Bson;
 using Newtonsoft.Json;
+using souchy.celebi.eevee;
 using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects;
@@ -7,7 +9,6 @@ using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.shared.models.skins;
 using souchy.celebi.eevee.face.util;
-using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.umbreon.common.util;
 using souchy.celebi.umbreon.data;
@@ -104,23 +105,25 @@ namespace souchy.celebi.umbreon.common.persistance
 
             // Load and register entities
             persistance.load(Eevee.models.i18n); //, getFileName<IStringEntity>());
+
             persistance.loadCharacteristics();
             persistance.load(Eevee.models.creatureSkins);
             persistance.load(Eevee.models.spellSkins);
             persistance.load(Eevee.models.effectSkins);
-            persistance.load(Eevee.models.stats);
-            
+            persistance.load(Eevee.models.maps);
             persistance.load(Eevee.models.creatureModels);
             persistance.load(Eevee.models.statusModels);
             persistance.load(Eevee.models.spellModels);
             persistance.load(Eevee.models.effectModels);
+
+            persistance.load(Eevee.models.stats);
             persistance.load(Eevee.models.effects);
-            persistance.load(Eevee.models.maps);
 
             // Register individual stats
             foreach (var v in Eevee.models.stats.Values)
                 foreach (var s in v.Values)
-                    Eevee.RegisterIID<IStat>(s.entityUid);
+                    Eevee.RegisterEventBus(s);
+                    //Eevee.RegisterIID<IStat>(s.entityUid);
         }
 
         internal static object getDictionaryForEntity(IEntity e)
@@ -143,10 +146,10 @@ namespace souchy.celebi.umbreon.common.persistance
     public interface IDiamondPersistance
     {
         #region Diamond Models Saver on event handler
-        [Subscribe(nameof(IEntityDictionary<IID, IID>.Add), nameof(IEntityDictionary<IID, IID>.Set))]
-        public void onAddSet(object dic, IID id, IEntity obj);
-        [Subscribe(nameof(IEntityDictionary<IID, IID>.Remove))]
-        public void onRemove(object dic, IID id, IEntity obj);
+        [Subscribe(nameof(IEntityDictionary<ObjectId, ObjectId>.Add), nameof(IEntityDictionary<ObjectId, ObjectId>.Set))]
+        public void onAddSet(object dic, ObjectId id, IEntity obj);
+        [Subscribe(nameof(IEntityDictionary<ObjectId, ObjectId>.Remove))]
+        public void onRemove(object dic, ObjectId id, IEntity obj);
         [Subscribe("", IEventBus.save)]
         public void onSave(IEntity e);
         #endregion
@@ -157,7 +160,8 @@ namespace souchy.celebi.umbreon.common.persistance
         public string getFileName<T>();
         public void save(object dic, string fileName);
         //public void _save(object dic, string fileName);
-        public IEntityDictionary<IID, V> load<V>(IEntityDictionary<IID, V> dic, string filename = "") where V : IEntity;
+        public IEntityDictionary<ObjectId, V> load<V>(IEntityDictionary<ObjectId, V> dic, string filename = "") where V : IEntity;
+        public IEntityDictionary<IID, V> load<V>(IEntityDictionary<IID, V> dic, string filename = "") where V : IEntityModel;
         public void loadCharacteristics(string filename = "");
         #endregion
     }

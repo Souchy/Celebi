@@ -8,7 +8,6 @@ using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
-using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects.effectResults;
 using souchy.celebi.eevee.impl.objects.zones;
 using souchy.celebi.eevee.impl.util;
@@ -18,27 +17,27 @@ namespace souchy.celebi.eevee.impl.shared
 {
     public class SpellModel : ISpellModel
     {
-        public IID entityUid { get; set; }
+        public ObjectId entityUid { get; set; }
         public IID modelUid { get; set; }
 
-        public IID nameId { get; set; }
-        public IID descriptionId { get; set; }
+        public ObjectId nameId { get; set; }
+        public ObjectId descriptionId { get; set; }
 
         public ICondition sourceCondition { get; set; }
         public ICondition targetFilter { get; set; }
 
         public Dictionary<CharacteristicId, int> costs { get; set; } = new();
         public SpellProperties properties { get; set; } = new SpellProperties();
-        public IEntityList<IID> effectIds { get; set; } = new EntityList<IID>(); 
+        public IEntityList<ObjectId> effectIds { get; set; } = new EntityList<ObjectId>(); 
 
         public IZone RangeZoneMin { get; set; } = new Zone();
         public IZone RangeZoneMax { get; set; } = new Zone();
 
         private SpellModel() { }
-        private SpellModel(IID id) => entityUid = id;
-        public static ISpellModel Create()
+        private SpellModel(ObjectId id) => entityUid = id;
+        public static ISpellModel CreatePermanent()
         {
-            var model = new SpellModel(Eevee.RegisterIID<ISpellModel>());
+            var model = new SpellModel(Eevee.RegisterIIDTemporary());
             //foreach (var resType in Enum.GetValues<ResourceEnum>())
             //{
             //    var res = Resource.getKey(resType, ResourceProperty.Current);
@@ -52,7 +51,7 @@ namespace souchy.celebi.eevee.impl.shared
 
         public void Dispose()
         {
-            Eevee.DisposeIID<ISpellModel>(entityUid);
+            Eevee.DisposeEventBus(this);
         }
 
     }

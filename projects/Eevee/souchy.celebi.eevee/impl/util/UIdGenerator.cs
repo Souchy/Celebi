@@ -33,53 +33,53 @@ namespace souchy.celebi.eevee.impl.util
             // LAST ONE for things like fight entities (creature, spell, stats, etc)
             typeof(IEntity)
         };
-        private static Dictionary<Type, IUIdGenerator> generators = new(); 
-        private static Dictionary<Type, Dictionary<IID, EventBus>> eventBuses = new(); 
-        static UidExtensions()
+
+        private static Dictionary<ObjectId, EventBus> eventBuses = new();
+
+        //public static IID RegisterIID<T>() 
+        //{
+        //    var idType = getType(typeof(T));
+        //    return RegisterIID(idType);
+        //}
+        //private static IID RegisterIID(Type idType)
+        //{
+        //    var id = generators[idType].next();
+        //    eventBuses[idType].Add(id, new EventBus());
+        //    return id;
+        //}
+        //public static bool RegisterIID<T>(IID id)
+        //{
+        //    var idType = getType(typeof(T));
+        //    var success = generators[idType].take(id);
+        //    eventBuses[idType].Add(id, new EventBus());
+        //    return success;
+        //}
+        //public static void DisposeIID<T>(IID id)
+        //{
+        //    var idType = getType(typeof(T));
+        //    eventBuses[idType][id].Dispose();
+        //    eventBuses[idType].Remove(id);
+        //    generators[idType].dispose(id);
+        //}
+        public static bool RegisterEventBus(ObjectId id)
         {
-            foreach (var modelType in modelTypes)
-            {
-                generators[modelType] = new UIdGenerator();
-                eventBuses[modelType] = new();
-            }
+            if (eventBuses.ContainsKey(id))
+                throw new ArgumentException("Id already exists");
+            eventBuses.Add(id, new EventBus());
+            return true;
         }
-        private static Type getType(Type objType)
+        public static bool DisposeEventBus(ObjectId id)
         {
-            foreach (var modelType in modelTypes)
-                if (modelType.IsAssignableFrom(objType))
-                    return modelType;
-            throw new Exception("Unknown id type");
-        }
-        public static IID RegisterIID<T>() 
-        {
-            var idType = getType(typeof(T));
-            return RegisterIID(idType);
-        }
-        private static IID RegisterIID(Type idType)
-        {
-            var id = generators[idType].next();
-            eventBuses[idType].Add(id, new EventBus());
-            return id;
-        }
-        public static bool RegisterIID<T>(IID id)
-        {
-            var idType = getType(typeof(T));
-            var success = generators[idType].take(id);
-            eventBuses[idType].Add(id, new EventBus());
-            return success;
-        }
-        public static void DisposeIID<T>(IID id)
-        {
-            var idType = getType(typeof(T));
-            eventBuses[idType][id].Dispose();
-            eventBuses[idType].Remove(id);
-            generators[idType].dispose(id);
+            if(!eventBuses.ContainsKey(id)) 
+                return false;
+            eventBuses[id].Dispose();
+            eventBuses.Remove(id);
+            return true;
         }
         public static IEventBus GetEntityBus(this IEntity e)
         {
-            var t = getType(e.GetType());
-            if (eventBuses[t].ContainsKey(e.entityUid))
-                return eventBuses[t][e.entityUid];
+            if (eventBuses.ContainsKey(e.entityUid))
+                return eventBuses[e.entityUid];
             return null; // when NewtonsoftJson deserializes objects, it sets properties which calls the event bus before the entities' id are registered
             //throw new Exception("You made a mistake in type or method called. Maybe call iid.GetEventBus<T>()");
         }

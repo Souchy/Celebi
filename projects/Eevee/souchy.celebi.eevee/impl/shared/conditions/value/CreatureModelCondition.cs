@@ -30,8 +30,7 @@ namespace souchy.celebi.eevee.impl.shared.conditions.value
             } else {
                 if(this.actorType == ActorType.Source)
                 {
-
-                    IID checkable = action.caster; // this.actorType == ActorType.Source ? action.caster : action.targetCell;
+                    ObjectId checkable = action.caster; // this.actorType == ActorType.Source ? action.caster : action.targetCell;
                     var crea = fight.creatures.Get(checkable);
                     var model = crea.modelUid;
                     return this.comparator.check(model, creatureModelId);

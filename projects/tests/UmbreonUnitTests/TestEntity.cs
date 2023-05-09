@@ -1,16 +1,17 @@
-﻿using souchy.celebi.eevee.face.entity;
+﻿using MongoDB.Bson;
+using souchy.celebi.eevee;
+using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.util;
-using souchy.celebi.eevee.impl;
 
 namespace souchy.celebi.umbreonUnitTests
 {
     public class TestEntity : IEntity
     {
-        public IID entityUid { get; set; } = Eevee.RegisterIID<IEntity>();
+        public ObjectId entityUid { get; set; } = Eevee.RegisterIIDTemporary();
 
         public void Dispose()
         {
-            Eevee.DisposeIID<IEntity>(entityUid);
+            Eevee.DisposeEventBus(this);
         }
     }
 }
