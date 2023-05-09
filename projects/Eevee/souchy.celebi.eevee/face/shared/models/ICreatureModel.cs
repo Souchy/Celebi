@@ -2,18 +2,17 @@
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.models.skins;
 using souchy.celebi.eevee.face.util;
-using souchy.celebi.eevee.impl;
 
 namespace souchy.celebi.eevee.face.shared.models
 {
-    public interface ICreatureModel : IEntity
+    public interface ICreatureModel : IEntityModel
     {
-        public IID nameId { get; set; }
-        public IID descriptionId { get; set; }
-        public IEntitySet<IID> skins { get; init; }
+        public ObjectId nameId { get; set; }
+        public ObjectId descriptionId { get; set; }
+        public IEntitySet<ObjectId> skins { get; init; }
 
-        public IID baseStats { get; set; }
-        public IID growthStats { get; set; }
+        public ObjectId baseStats { get; set; }
+        public ObjectId growthStats { get; set; }
         public IEntitySet<IID> baseSpells { get; init; }
         public IEntitySet<IID> baseStatusPassives { get; init; }
 

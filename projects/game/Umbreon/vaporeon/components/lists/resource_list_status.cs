@@ -4,7 +4,7 @@ using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.shared;
 using souchy.celebi.eevee.impl.util;
-using Umbreon.vaporeon;
+using souchy.celebi.umbreon.vaporeon;
 
 public partial class resource_list_status : ResourceList
 {
@@ -31,7 +31,7 @@ public partial class resource_list_status : ResourceList
         //var desc = model.GetDescription();
         base.addChild(name, new Color().Random(), model.entityUid);
     }
-    public override void publishSelect(IID id)
+    public override void publishSelect(ObjectId id)
     {
         var model = Eevee.models.statusModels.Get(id);
         this.GetVaporeon().bus.publish(VaporeonSignals.select, base.selectorForControl, model);

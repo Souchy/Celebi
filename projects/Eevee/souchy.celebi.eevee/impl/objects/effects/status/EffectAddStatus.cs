@@ -4,7 +4,6 @@ using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.objects.effects.status;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
-using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.values;
 using souchy.celebi.eevee.impl.shared.triggers;
@@ -23,8 +22,8 @@ namespace souchy.celebi.eevee.impl.objects.effects.status
 
 
         private EffectAddStatus() { }
-        private EffectAddStatus(IID id) : base(id) { }
-        public static IEffectAddStatus Create() => new EffectAddStatus(Eevee.RegisterIID<IEffect>());
+        private EffectAddStatus(ObjectId id) : base(id) { }
+        public static IEffectAddStatus Create() => new EffectAddStatus(Eevee.RegisterIIDTemporary());
 
         public override IEffectPreview preview(IAction action, IEnumerable<IBoardEntity> targets) {
             throw new NotImplementedException();

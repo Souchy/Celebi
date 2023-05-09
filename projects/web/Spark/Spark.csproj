@@ -6,7 +6,18 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UserSecretsId>1da1bb08-f4c7-4a9c-85b4-1d6fd26f2f8a</UserSecretsId>
 		<RootNamespace />
+		<StartupObject>souchy.celebi.spark.Spark</StartupObject>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="souchy.celebi.spark\services\fights\CreatureService.cs" />
+	  <Compile Remove="souchy.celebi.spark\services\fights\SpellService.cs" />
+	  <Compile Remove="souchy.celebi.spark\services\fights\StatsService.cs" />
+	  <Compile Remove="souchy.celebi.spark\services\fights\StatusService.cs" />
+	  <Compile Remove="souchy.celebi.spark\services\models\CreatureModelService.cs" />
+	  <Compile Remove="souchy.celebi.spark\services\models\SpellModelService.cs" />
+	  <Compile Remove="souchy.celebi.spark\services\models\StatusModelService.cs" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="AspNetCore.Identity.Mongo" Version="8.3.3" />
@@ -23,6 +34,7 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
 		<PackageReference Include="MongoDB.Driver" Version="2.19.1" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.5.0" />
@@ -30,6 +42,10 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\Eevee\Eevee.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Using Include="MongoDB.Bson" />
 	</ItemGroup>
 
 	

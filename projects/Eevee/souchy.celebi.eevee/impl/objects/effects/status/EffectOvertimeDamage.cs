@@ -20,8 +20,8 @@ namespace souchy.celebi.eevee.impl.objects.effects.status
         public IValue<int> Value { get; set; } = new Value<int>();
 
         private EffectOvertimeDamage() { }
-        private EffectOvertimeDamage(IID id) : base(id) { }
-        public static IEffectOvertimeDamage Create() => new EffectOvertimeDamage(Eevee.RegisterIID<IEffect>());
+        private EffectOvertimeDamage(ObjectId id) : base(id) { }
+        public static IEffectOvertimeDamage Create() => new EffectOvertimeDamage(Eevee.RegisterIIDTemporary());
 
         public override IEffectPreview preview(IAction action, IEnumerable<IBoardEntity> targets) {
             throw new NotImplementedException();

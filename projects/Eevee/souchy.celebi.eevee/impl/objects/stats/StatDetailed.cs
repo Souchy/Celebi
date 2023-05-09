@@ -10,7 +10,7 @@ namespace souchy.celebi.eevee.impl.stats
     public class StatDetailed : IStatDetailed
     {
         public CharacteristicId statId { get; init; }
-        public IID entityUid { get; set; }
+        public ObjectId entityUid { get; set; }
 
 
         private int _baseFlat, _increasedPercent, _increasedFlat, _morePercent;
@@ -69,7 +69,7 @@ namespace souchy.celebi.eevee.impl.stats
                 increasedPercent = increasedPercent,
                 increasedFlat = increasedFlat,
                 morePercent = morePercent,
-                entityUid = Eevee.RegisterIID<IStatDetailed>()
+                entityUid = Eevee.RegisterIIDTemporary()
             };
 
         public IStat copy() => Create(statId, baseFlat, increasedPercent, increasedFlat, morePercent);
@@ -87,7 +87,7 @@ namespace souchy.celebi.eevee.impl.stats
 
         public void Dispose()
         {
-            Eevee.DisposeIID<IStatDetailed>(entityUid);
+            Eevee.DisposeEventBus(this);
         }
     }
 }

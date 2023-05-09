@@ -14,8 +14,8 @@ namespace souchy.celebi.eevee.impl.objects.effects.move;
 public class EffectWalk : Effect, IEffectWalk
 {
     private EffectWalk() { }
-    private EffectWalk(IID id) : base(id) { }
-    public static IEffectWalk Create() => new EffectWalk(Eevee.RegisterIID<IEffect>());
+    private EffectWalk(ObjectId id) : base(id) { }
+    public static IEffectWalk Create() => new EffectWalk(Eevee.RegisterIIDTemporary());
 
     public override IEffectPreview preview(IAction action, IEnumerable<IBoardEntity> targets)
     {

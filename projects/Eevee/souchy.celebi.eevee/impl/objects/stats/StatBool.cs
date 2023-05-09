@@ -9,7 +9,7 @@ namespace souchy.celebi.eevee.impl.stats
 {
     public class StatBool : IStatBool
     {
-        public IID entityUid { get; set; }
+        public ObjectId entityUid { get; set; }
         public CharacteristicId statId { get; init; }
 
         private bool _value;
@@ -28,12 +28,15 @@ namespace souchy.celebi.eevee.impl.stats
             {
                 statId = st,
                 value = value,
-                entityUid = Eevee.RegisterIID<IStatBool>()
+                entityUid = Eevee.RegisterIIDTemporary()
             };
 
         public IStat copy() => Create(statId, value); 
 
-        public void Dispose() => Eevee.DisposeIID<IStatBool>(entityUid);
+        public void Dispose()
+        {
+            Eevee.DisposeEventBus(this);
+        }
 
         public void Add(IStat s)
         {

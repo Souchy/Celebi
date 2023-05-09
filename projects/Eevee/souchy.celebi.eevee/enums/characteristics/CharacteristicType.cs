@@ -5,7 +5,6 @@ using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
-using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.stats;
 using System;
 using System.Linq;
@@ -21,11 +20,11 @@ namespace souchy.celebi.eevee.enums.characteristics
     {
         public StatValueType StatValueType { get; init; }
         public CharacteristicId ID { get; init; } = new CharacteristicId(((int) Category) * 1000 + LocalId);
-        public IID NameID { get; set; } = (IID) (nameof(CharacteristicType) + "." + BaseName);
+        public IID nameModelUid { get; set; } = (IID) (nameof(CharacteristicType) + "." + BaseName);
         [JsonIgnore]
         public StatFactory Factory { get; init; }
 
-        public IStringEntity GetName() => Eevee.models.i18n.Get(NameID);
+        public IStringEntity GetName() => Eevee.models.i18n.Values.FirstOrDefault(s => s.modelUid == nameModelUid); //i18n.Get(NameID);
 
 
         public static IEnumerable<CharacteristicType> Characteristics = Enum.GetValues<CharacteristicCategory>().SelectMany(c => c.GetCharacs());

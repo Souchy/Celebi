@@ -1,10 +1,10 @@
 //using Internal;
-using Umbreon.src;
 using Godot;
 using Godot.Sharp.Extras;
+using souchy.celebi.umbreon.src;
 using System;
 
-namespace Umbreon.sapphire.ui
+namespace souchy.celebi.umbreon.sapphire.ui
 {
     public partial class ui_sapphire : Control
     {

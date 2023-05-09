@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Umbreon.vaporeon
+namespace souchy.celebi.umbreon.vaporeon
 {
     public static class VaporeonSignals
     {

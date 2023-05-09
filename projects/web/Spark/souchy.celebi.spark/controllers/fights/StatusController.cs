@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Spark;
 
 namespace souchy.celebi.spark.controllers.fights
 {

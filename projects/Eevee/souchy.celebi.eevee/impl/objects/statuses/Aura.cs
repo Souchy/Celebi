@@ -14,8 +14,8 @@ namespace souchy.celebi.eevee.impl.objects.statuses
     {
         //public IEntitySet<IID> cellIds { get; set; } = new EntitySet<IID>();
 
-        private Aura(IID id, IID fightId) : base(id, fightId) { }
-        public static new IAura Create(IID fightId) => new Aura(Eevee.RegisterIID<IAura>(), fightId);
+        private Aura(ObjectId id, ObjectId fightId) : base(id, fightId) { }
+        public static new IAura Create(ObjectId fightId) => new Aura(Eevee.RegisterIIDTemporary(), fightId);
 
         public new void Dispose()
         {

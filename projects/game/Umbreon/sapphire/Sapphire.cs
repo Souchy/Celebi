@@ -1,17 +1,15 @@
-using Umbreon.common.persistance;
-using Umbreon.data;
-using Umbreon.src;
 using Godot;
 using Godot.Sharp.Extras;
 using Newtonsoft.Json;
 using souchy.celebi.eevee;
 using System;
 using System.Security.Cryptography.X509Certificates;
-using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.shared.models.skins;
+using souchy.celebi.umbreon.common.persistance;
+using souchy.celebi.eevee.face.objects.controllers;
 
 public partial class Sapphire : Node3D
 {
@@ -28,6 +26,10 @@ public partial class Sapphire : Node3D
 
 	private PackedScene creaScene;
 
+    /// <summary>
+    /// TODO
+    /// </summary>
+    public IFight fight { get; set; }
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -65,7 +67,7 @@ public partial class Sapphire : Node3D
     public void createCreature(ICreatureModel model, ICreatureSkin skin, int team, bool spawnOnBoard, Vector3 pos)
     {
         GD.Print("create pos: " + pos);
-        ICreature crea = Creature.Create();
+        ICreature crea = Creature.Create(fight.entityUid);
         //TODO crea.modelUid = model.id;
 
         var node = creaScene.Instantiate<CreatureNode>();

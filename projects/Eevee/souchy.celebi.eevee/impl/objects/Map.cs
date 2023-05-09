@@ -12,7 +12,8 @@ namespace souchy.celebi.eevee.impl.objects
 {
     public class Map : IMap
     {
-        public IID entityUid { get; set; }
+        public ObjectId entityUid { get; set; }
+        public IID modelUid { get; set; }
 
         public IID name { get; set; }
         public IVector3[][] teamsStartPositions { get; set; }
@@ -20,6 +21,7 @@ namespace souchy.celebi.eevee.impl.objects
 
         public void Dispose()
         {
+            Eevee.DisposeEventBus(this);
             throw new NotImplementedException();
         }
     }

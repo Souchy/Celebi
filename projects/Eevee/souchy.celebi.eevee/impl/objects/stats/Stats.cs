@@ -10,8 +10,8 @@ namespace souchy.celebi.eevee.impl.stats
     public class Stats : EntityDictionary<CharacteristicId, IStat>, IStats
     {
         private Stats() { }
-        private Stats(IID id) => entityUid = id;
-        public static new IStats Create() => new Stats(Eevee.RegisterIID<IStats>());
+        public Stats(ObjectId id) => entityUid = id;
+        public static new IStats Create() => new Stats(Eevee.RegisterIIDTemporary());
 
         public T Get<T>(CharacteristicId statId) where T : IStat
         {

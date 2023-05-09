@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Linq;
 
-namespace Umbreon.common
+namespace souchy.celebi.umbreon.common
 {
 
     public class PlayfabClientTest

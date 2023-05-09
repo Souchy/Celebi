@@ -1,7 +1,7 @@
 ﻿using PlayFab;
 using PlayFab.ClientModels;
 
-namespace Umbreon.amethyst.net
+namespace souchy.celebi.umbreon.amethyst.net
 {
     public class GetProfileData
     {

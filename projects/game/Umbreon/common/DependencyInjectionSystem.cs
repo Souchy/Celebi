@@ -1,5 +1,4 @@
-﻿using Umbreon.sapphire.ui;
-using Godot;
+﻿using Godot;
 using SimpleInjector;
 using souchy.celebi.eevee;
 using souchy.celebi.eevee.face.util;
@@ -11,7 +10,7 @@ using System.Reflection;
 using Container = SimpleInjector.Container;
 //using CreatureData = souchy.celebi.eevee.impl.objects.Creature;
 
-namespace Umbreon.src
+namespace souchy.celebi.umbreon.src
 {
 
     static class Registry

@@ -5,7 +5,6 @@ using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.objects.effects.spell;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
-using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.values;
 using souchy.celebi.eevee.impl.shared.triggers;
@@ -22,8 +21,8 @@ namespace souchy.celebi.eevee.impl.objects.effects.spell
         public IValue<int> Value { get; set; } = new Value<int>();
 
         private EffectAddSpellBaseDamage() { }
-        private EffectAddSpellBaseDamage(IID id) : base(id) { }
-        public static IEffectAddSpellBaseDamage Create() => new EffectAddSpellBaseDamage(Eevee.RegisterIID<IEffect>());
+        private EffectAddSpellBaseDamage(ObjectId id) : base(id) { }
+        public static IEffectAddSpellBaseDamage Create() => new EffectAddSpellBaseDamage(Eevee.RegisterIIDTemporary());
 
         public override IEffectPreview preview(IAction action, IEnumerable<IBoardEntity> targets) {
             throw new NotImplementedException();

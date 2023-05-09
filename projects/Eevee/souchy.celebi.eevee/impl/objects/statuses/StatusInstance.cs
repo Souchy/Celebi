@@ -4,7 +4,6 @@ using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.objects.statuses;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
-using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects.effectResults;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.impl.values;
@@ -13,32 +12,32 @@ namespace souchy.celebi.eevee.statuses
 {
     public class StatusInstance : IStatusInstance
     {
-        public IID entityUid { get; set; }
+        public ObjectId entityUid { get; set; }
         public IID modelUid { get; set; }
-        public IID fightUid { get; set; }
+        public ObjectId fightUid { get; set; }
 
         //public IValue<int> delay { get; set; } = new Value<int>();
         //public IValue<int> duration { get; set; } = new Value<int>();
-        public IID stats { get; set; }
+        public ObjectId stats { get; set; }
 
-        public IEntityList<IID> effectIds { get; set; } = new EntityList<IID>();
+        public IEntityList<ObjectId> effectIds { get; set; } = new EntityList<ObjectId>();
 
         protected StatusInstance() { }
-        protected StatusInstance(IID id, IID fightUid)
+        protected StatusInstance(ObjectId id, ObjectId fightUid)
         {
             this.entityUid = id;
             this.fightUid = fightUid;
-            this.stats = Eevee.RegisterIID<IStats>();
+            this.stats = Eevee.RegisterIIDTemporary();
         }
-        public static IStatusInstance Create(IID fightUid) => new StatusInstance(Eevee.RegisterIID<IStatusInstance>(), fightUid);
+        public static IStatusInstance Create(ObjectId fightUid) => new StatusInstance(Eevee.RegisterIIDTemporary(), fightUid);
 
 
         public IEnumerable<IEffect> GetEffects() => effectIds.Values.Select(i => this.GetFight().effects.Get(i));
 
         public void Dispose()
         {
+            Eevee.DisposeEventBus(this);
             ((IStatusInstance) this).GetStats().Dispose();
-            Eevee.DisposeIID<IStatusInstance>(entityUid);
             throw new NotImplementedException();
         }
     }

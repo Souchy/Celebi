@@ -3,7 +3,7 @@ using Godot.Sharp.Extras;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.util;
-using Umbreon.vaporeon;
+using souchy.celebi.umbreon.vaporeon;
 
 public partial class ResourceList : Control
 {
@@ -80,7 +80,7 @@ public partial class ResourceList : Control
     public IID getSelectedItemID() => (IID) selectedNode.GetMeta(VaporeonUtil.metaIID).AsString();
     public virtual void createChildNode(IID modelID) => throw new NotImplementedException();
     public virtual void fillList() => throw new NotImplementedException();
-    public virtual void publishSelect(IID id) => throw new NotImplementedException();
+    public virtual void publishSelect(ObjectId id) => throw new NotImplementedException();
     public virtual void onClickCreateBtn() => throw new NotImplementedException();
     public virtual void onClickRemoveBtn() => throw new NotImplementedException();
     public virtual void onClickEdit() => throw new NotImplementedException();
@@ -106,7 +106,7 @@ public partial class ResourceList : Control
         Container.AddChild(item);
     }
 
-    public void removeChild(IID id)
+    public void removeChild(ObjectId id)
     {
         Node node = Container.GetChildren().First(c => c.GetMeta(VaporeonUtil.metaIID).AsString() == id);
         Container.RemoveChild(node);

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using MongoDB.Driver.Core.Configuration;
+using souchy.celebi.eevee.face.entity;
 
 namespace souchy.celebi.spark.services
 {
@@ -10,37 +11,51 @@ namespace souchy.celebi.spark.services
         public string ModelsDB { get; set; } = null!;
         public string FightsDB { get; set; } = null!;
         public string MetaDB { get; set; } = null!;
+        public string I18NDB { get; set; } = null!;
     }
-    public class MongoService
+    public class MongoClientService
     {
         private readonly IMongoClient _client;
 
-        public MongoService(IOptions<MongoSettings> settings)
+        public MongoClientService(IOptions<MongoSettings> settings)
             => _client = new MongoClient(settings.Value.ConnectionString);
         public IMongoDatabase GetDatabase(string databaseName) => _client.GetDatabase(databaseName);
     }
-    public class MongoModelsDbService
+    public abstract class DbService
+    {
+        protected readonly IMongoDatabase db;
+        protected DbService(IMongoDatabase db) => this.db = db;
+        public IMongoCollection<T> GetMongoCollection<T>(string collectionName)
+            => db.GetCollection<T>(collectionName);
+        public IMongoCollection<T> GetMongoCollection<T>()
+            => db.GetCollection<T>(typeof(T).Name);
+        public CollectionService<T> GetMongoService<T>() where T : IEntity
+            => new CollectionService<T>(db.GetCollection<T>(typeof(T).Name));
+    }
+    public class MongoModelsDbService : DbService
+    {
+        public MongoModelsDbService(MongoClientService mongoService, IOptions<MongoSettings> settings) 
+            : base(mongoService.GetDatabase(settings.Value.ModelsDB))
+        { }
+    }
+    public class MongoFightsDbService : DbService
+    {
+        public MongoFightsDbService(MongoClientService mongoService, IOptions<MongoSettings> settings)
+            : base(mongoService.GetDatabase(settings.Value.FightsDB))
+        { }
+    }
+    public class MongoMetaDbService : DbService
+    {
+        public MongoMetaDbService(MongoClientService mongoService, IOptions<MongoSettings> settings)
+            : base(mongoService.GetDatabase(settings.Value.FightsDB))
+        { }
+    }
+    public class MongoI18NDbService
     {
         private readonly IMongoDatabase db;
 
-        public MongoModelsDbService(MongoService mongoService, IOptions<MongoSettings> settings)
-            => db = mongoService.GetDatabase(settings.Value.ModelsDB);
-        public IMongoCollection<T> GetMongoCollection<T>(string collectionName)
-            => db.GetCollection<T>(collectionName);
-    }
-    public class MongoFightsDbService
-    {
-        private readonly IMongoDatabase db;
-        public MongoFightsDbService(MongoService mongoService, IOptions<MongoSettings> settings)
-            => db = mongoService.GetDatabase(settings.Value.FightsDB);
-        public IMongoCollection<T> GetMongoCollection<T>(string collectionName)
-            => db.GetCollection<T>(collectionName);
-    }
-    public class MongoMetaDbService
-    {
-        private readonly IMongoDatabase db;
-        public MongoMetaDbService(MongoService mongoService, IOptions<MongoSettings> settings)
-            => db = mongoService.GetDatabase(settings.Value.MetaDB);
+        public MongoI18NDbService(MongoClientService mongoService, IOptions<MongoSettings> settings)
+            => db = mongoService.GetDatabase(settings.Value.I18NDB);
         public IMongoCollection<T> GetMongoCollection<T>(string collectionName)
             => db.GetCollection<T>(collectionName);
     }

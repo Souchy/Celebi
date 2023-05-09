@@ -3,10 +3,11 @@
     <TargetFramework>net7.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>souchy.celebi.umbreon</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="vaporeon\creature\**" />
-    <EmbeddedResource Remove="vaporeon\creature\**" />
+    <Compile Remove="vaporeon\**" />
+    <EmbeddedResource Remove="vaporeon\**" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="common\DiamondModels.cs" />
@@ -35,6 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="GodotSharpExtras" Version="0.4.0-beta.4" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
     <PackageReference Include="MongoDB.Driver" Version="2.19.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="PlayFabAllSDK" Version="1.141.221107" />
@@ -51,7 +53,6 @@
     <Folder Include="data\test\" />
     <Folder Include="sapphire\nodes\" />
     <Folder Include="sapphire\scenes\" />
-    <Folder Include="vaporeon\common\stats\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\animations\locomotion-magic.res" />

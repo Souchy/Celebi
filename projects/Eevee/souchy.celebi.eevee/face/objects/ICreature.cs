@@ -13,13 +13,13 @@ namespace souchy.celebi.eevee.face.objects
         /// <summary>
         /// Original owner of the creature (set once)
         /// </summary>
-        public IID originalOwnerUid { get; set; }
+        public ObjectId originalOwnerUid { get; set; }
         /// <summary>
         /// Current owner of the creature
         /// </summary>
-        public IID currentOwnerUid { get; set; }
-        public IID stats { get; set; }
-        public IEntitySet<IID> spells { get; set; }
+        public ObjectId currentOwnerUid { get; set; }
+        public ObjectId stats { get; set; }
+        public IEntitySet<ObjectId> spells { get; set; }
 
 
         public IPlayer GetOriginalOwner();

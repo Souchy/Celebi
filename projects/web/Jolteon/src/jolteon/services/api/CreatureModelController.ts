@@ -9,7 +9,13 @@
  * ---------------------------------------------------------------
  */
 
-import { CreatureModel, DeleteResult, ICreatureModel, IID, ReplaceOneResult } from "./data-contracts";
+import {
+  CreatureModel,
+  DeleteResult,
+  ICreatureModel,
+  ICreatureModelFilterDefinition,
+  ReplaceOneResult,
+} from "./data-contracts";
 import { ContentType, HttpClient, HttpResponse, RequestParams } from "./http-client";
 
 export class CreatureModelController<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
@@ -33,11 +39,32 @@ export class CreatureModelController<SecurityDataType = unknown> extends HttpCli
    * No description
    *
    * @tags CreatureModelController
+   * @name GetFiltered
+   * @request GET:/models/creatures/filtered
+   * @response `200` `(ICreatureModel)[]` Success
+   */
+  public getFiltered(
+    data: ICreatureModelFilterDefinition,
+    params: RequestParams = {},
+  ): Promise<HttpResponse<ICreatureModel[], any>> {
+    return this.request<ICreatureModel[], any>({
+      path: `/models/creatures/filtered`,
+      method: "GET",
+      body: data,
+      type: ContentType.Json,
+      format: "json",
+      ...params,
+    });
+  }
+  /**
+   * No description
+   *
+   * @tags CreatureModelController
    * @name GetCreature
    * @request GET:/models/creatures/creature/{id}
    * @response `200` `ICreatureModel` Success
    */
-  public getCreature(id: IID, params: RequestParams = {}): Promise<HttpResponse<ICreatureModel, any>> {
+  public getCreature(id: string, params: RequestParams = {}): Promise<HttpResponse<ICreatureModel, any>> {
     return this.request<ICreatureModel, any>({
       path: `/models/creatures/creature/${id}`,
       method: "GET",
@@ -54,7 +81,7 @@ export class CreatureModelController<SecurityDataType = unknown> extends HttpCli
    * @response `200` `ReplaceOneResult` Success
    */
   public putCreature(
-    id: IID,
+    id: string,
     data: CreatureModel,
     params: RequestParams = {},
   ): Promise<HttpResponse<ReplaceOneResult, any>> {
@@ -75,7 +102,7 @@ export class CreatureModelController<SecurityDataType = unknown> extends HttpCli
    * @request DELETE:/models/creatures/creature/{id}
    * @response `200` `DeleteResult` Success
    */
-  public deleteCreature(id: IID, params: RequestParams = {}): Promise<HttpResponse<DeleteResult, any>> {
+  public deleteCreature(id: string, params: RequestParams = {}): Promise<HttpResponse<DeleteResult, any>> {
     return this.request<DeleteResult, any>({
       path: `/models/creatures/creature/${id}`,
       method: "DELETE",
@@ -97,6 +124,22 @@ export class CreatureModelController<SecurityDataType = unknown> extends HttpCli
       method: "POST",
       body: data,
       type: ContentType.Json,
+      format: "json",
+      ...params,
+    });
+  }
+  /**
+   * No description
+   *
+   * @tags CreatureModelController
+   * @name PostNew
+   * @request POST:/models/creatures/new
+   * @response `200` `ICreatureModel` Success
+   */
+  public postNew(params: RequestParams = {}): Promise<HttpResponse<ICreatureModel, any>> {
+    return this.request<ICreatureModel, any>({
+      path: `/models/creatures/new`,
+      method: "POST",
       format: "json",
       ...params,
     });

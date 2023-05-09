@@ -8,9 +8,9 @@ using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.objects.effects;
 using souchy.celebi.eevee.impl.util;
 using System;
-using Umbreon.vaporeon;
-using Umbreon.vaporeon.common;
-using Umbreon.vaporeon.components;
+using souchy.celebi.umbreon.vaporeon;
+using souchy.celebi.umbreon.vaporeon.common;
+using souchy.celebi.umbreon.vaporeon.components;
 
 public partial class EffectEditor : Control, IEffectNodesContainer // EditorInitiator<IEffect>, 
 {

@@ -4,13 +4,13 @@ using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.objects.effects.creature;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
-using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.values;
 using souchy.celebi.eevee.impl.shared.triggers;
 using souchy.celebi.eevee.impl.objects.effectReturn;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.entity;
+using MongoDB.Bson;
 
 namespace souchy.celebi.eevee.impl.objects.effects.creature
 {
@@ -20,8 +20,8 @@ namespace souchy.celebi.eevee.impl.objects.effects.creature
 
 
         private EffectFly() { }
-        private EffectFly(IID id) : base(id) { }
-        public static IEffectFly Create() => new EffectFly(Eevee.RegisterIID<IEffect>());
+        private EffectFly(ObjectId id) : base(id) { }
+        public static IEffectFly Create() => new EffectFly(Eevee.RegisterIIDTemporary());
 
         public override IEffectPreview preview(IAction action, IEnumerable<IBoardEntity> targets) {
             throw new NotImplementedException();

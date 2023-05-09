@@ -21,8 +21,8 @@ namespace souchy.celebi.eevee.impl.objects.effects.status
 
 
         private EffectStealStat() { }
-        private EffectStealStat(IID id) : base(id) { }
-        public static IEffectStealStat Create() => new EffectStealStat(Eevee.RegisterIID<IEffect>());
+        private EffectStealStat(ObjectId id) : base(id) { }
+        public static IEffectStealStat Create() => new EffectStealStat(Eevee.RegisterIIDTemporary());
 
         public override IEffectPreview preview(IAction action, IEnumerable<IBoardEntity> targets) {
             throw new NotImplementedException();

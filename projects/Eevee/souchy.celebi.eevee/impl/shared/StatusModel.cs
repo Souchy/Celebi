@@ -8,33 +8,35 @@ using souchy.celebi.eevee.impl.objects.effectResults;
 using souchy.celebi.eevee.impl.objects.statuses;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.impl.values;
+using MongoDB.Bson;
 
 namespace souchy.celebi.eevee.impl.shared
 {
     public class StatusModel : IStatusModel
     {
-        public IID entityUid { get; set; }
+        public ObjectId entityUid { get; set; }
+        public IID modelUid { get; set; }
 
-        public IID nameId { get; set; }
-        public IID descriptionId { get; set; }
+        public ObjectId nameId { get; set; }
+        public ObjectId descriptionId { get; set; }
         public IValue<int> delay { get; set; } = new Value<int>();
         public IValue<int> duration { get; set; } = new Value<int>();
         public IValue<bool> canBeUnbewitched { get; set; } = new Value<bool>();
         public IValue<StatusPriorityType> priority { get; set; } = new Value<StatusPriorityType>();
 
-        public IEntityList<IID> effectIds { get; set; } = new EntityList<IID>();
+        public IEntityList<ObjectId> effectIds { get; set; } = new EntityList<ObjectId>();
 
 
         private StatusModel() { }
-        private StatusModel(IID id) => entityUid = id;
-        public static IStatusModel CreatePermanent() => new StatusModel(Eevee.RegisterIID<IStatusModel>());
+        private StatusModel(ObjectId id) => entityUid = id;
+        public static IStatusModel CreatePermanent() => new StatusModel(Eevee.RegisterIIDTemporary());
 
 
         public IEnumerable<IEffect> GetEffects() => effectIds.Values.Select(i => Eevee.models.effects.Get(i));
 
         public void Dispose()
         {
-            Eevee.DisposeIID<IStatusModel>(entityUid);
+            Eevee.DisposeEventBus(this);
         }
 
     }

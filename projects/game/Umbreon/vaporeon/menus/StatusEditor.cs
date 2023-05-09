@@ -7,9 +7,9 @@ using souchy.celebi.eevee.impl.objects.effects;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.util;
 using System;
-using Umbreon.vaporeon.common;
+using souchy.celebi.umbreon.vaporeon.common;
 using souchy.celebi.eevee.face.objects;
-using Umbreon.vaporeon.components;
+using souchy.celebi.umbreon.vaporeon.components;
 
 public partial class StatusEditor : PanelContainer, EditorInitiator<IStatusModel>, IEffectNodesContainer
 {

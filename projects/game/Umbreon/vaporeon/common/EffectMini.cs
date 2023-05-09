@@ -7,9 +7,9 @@ using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects.effects;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.impl.values;
-using Umbreon.vaporeon;
-using Umbreon.vaporeon.common;
-using Umbreon.vaporeon.components;
+using souchy.celebi.umbreon.vaporeon;
+using souchy.celebi.umbreon.vaporeon.common;
+using souchy.celebi.umbreon.vaporeon.components;
 
 public partial class EffectMini : PanelContainer, IEffectNodesContainer
 {

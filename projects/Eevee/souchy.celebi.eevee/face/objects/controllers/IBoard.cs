@@ -11,11 +11,11 @@ namespace souchy.celebi.eevee.face.objects.controllers
         /// List of creatures on the board <br></br>
         /// Creatures need to be ordered in timeline order
         /// </summary>
-        public IEntityList<IID> creatureIds { get; init; }
+        public IEntityList<ObjectId> creatureIds { get; init; }
         /// <summary>
         /// List of cells on the board
         /// </summary>
-        public IEntityList<IID> cells { get; init; }
+        public IEntityList<ObjectId> cells { get; init; }
 
 
         // Board will be just a normal data object like the others.
@@ -29,13 +29,13 @@ namespace souchy.celebi.eevee.face.objects.controllers
         public IEnumerable<ICreature> GetCreatures() => creatureIds.Values.Select(crea => GetFight().creatures.Get(crea));
         public IEnumerable<ICell> GetCells() => cells.Values.Select(cell => GetFight().cells.Get(cell));
 
-        public IEnumerable<ICreature> GetCreaturesOnCell(IID targetCell)
+        public IEnumerable<ICreature> GetCreaturesOnCell(ObjectId targetCell)
         {
             var cell = this.GetFight().cells.Get(targetCell);
             return this.GetCreatures()
                     .Where(crea => crea.position == cell.position);
         }
-        public ICreature? GetCreatureOnCell(IID targetCell)
+        public ICreature? GetCreatureOnCell(ObjectId targetCell)
         {
             return GetCreaturesOnCell(targetCell).FirstOrDefault();
         }

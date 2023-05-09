@@ -5,7 +5,6 @@ using souchy.celebi.eevee.face.objects.effects.spell;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
-using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.values;
 using souchy.celebi.eevee.impl.shared.triggers;
@@ -26,8 +25,8 @@ namespace souchy.celebi.eevee.impl.objects.effects.spell
         public IValue<IZone> RangeMax { get; set; } = new Value<IZone>();
 
         private EffectChangeSpellRangeZone() { }
-        private EffectChangeSpellRangeZone(IID id) : base(id) { }
-        public static IEffectChangeSpellRangeZone Create() => new EffectChangeSpellRangeZone(Eevee.RegisterIID<IEffect>());
+        private EffectChangeSpellRangeZone(ObjectId id) : base(id) { }
+        public static IEffectChangeSpellRangeZone Create() => new EffectChangeSpellRangeZone(Eevee.RegisterIIDTemporary());
 
         public override IEffectPreview preview(IAction action, IEnumerable<IBoardEntity> targets) {
             throw new NotImplementedException();

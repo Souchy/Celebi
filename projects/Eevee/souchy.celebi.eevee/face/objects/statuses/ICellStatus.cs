@@ -4,7 +4,7 @@ namespace souchy.celebi.eevee.face.objects.statuses
 {
     public interface ICellStatus : IStatusContainer
     {
-        public IEntitySet<IID> cellIds { get; set; }
+        public IEntitySet<ObjectId> cellIds { get; set; }
 
     }
 }

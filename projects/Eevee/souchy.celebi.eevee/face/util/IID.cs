@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MongoDB.Bson;
+using Newtonsoft.Json;
 
 namespace souchy.celebi.eevee.face.util
 {
@@ -21,7 +22,6 @@ namespace souchy.celebi.eevee.face.util
             IID id = (IID) obj;
             return id.value == this.value;
         }
-
 
         public static implicit operator string(IID iid) => iid.ToString();
         public static explicit operator IID(string str) => new IID(str);

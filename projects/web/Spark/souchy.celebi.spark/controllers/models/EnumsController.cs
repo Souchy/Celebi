@@ -3,7 +3,6 @@ using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.enums.characteristics.properties;
-using Spark;
 
 namespace souchy.celebi.spark.controllers.models
 {

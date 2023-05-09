@@ -5,7 +5,6 @@ using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.objects.effects.res;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
-using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.values;
 using souchy.celebi.eevee.impl.shared.triggers;
@@ -21,8 +20,8 @@ namespace souchy.celebi.eevee.impl.objects.effects.res
         public IValue<int> Value { get; set; } = new Value<int>();
 
         private EffectIndirectDamage() { }
-        private EffectIndirectDamage(IID id) => entityUid = id;
-        public static IEffectIndirectDamage Create() => new EffectIndirectDamage(Eevee.RegisterIID<IEffect>());
+        private EffectIndirectDamage(ObjectId id) => entityUid = id;
+        public static IEffectIndirectDamage Create() => new EffectIndirectDamage(Eevee.RegisterIIDTemporary());
         public override IEffectPreview preview(IAction action, IEnumerable<IBoardEntity> targets) {
             throw new NotImplementedException();
         }

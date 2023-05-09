@@ -11,7 +11,7 @@ namespace souchy.celebi.eevee.impl.stats
 {
     public class StatSimple : IStatSimple
     {
-        public IID entityUid { get; set; }
+        public ObjectId entityUid { get; set; }
         public CharacteristicId statId { get; init; }
 
         private int _value;
@@ -31,7 +31,7 @@ namespace souchy.celebi.eevee.impl.stats
             {
                 statId = st,
                 value = value,
-                entityUid = Eevee.RegisterIID<IStatSimple>(),
+                entityUid = Eevee.RegisterIIDTemporary(),
             };
 
         public void Add(IStat s)
@@ -44,7 +44,7 @@ namespace souchy.celebi.eevee.impl.stats
 
         public void Dispose()
         {
-            Eevee.DisposeIID<IStatSimple>(entityUid);
+            Eevee.DisposeEventBus(this);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace souchy.celebi.eevee.face.shared
 {
     public interface IEffectsContainer
     {
-        public IEntityList<IID> effectIds { get; set; }
+        public IEntityList<ObjectId> effectIds { get; set; }
         public IEnumerable<IEffect> GetEffects(); // => effectIds.Values.Select(i => Eevee.models.effects.Get(i));
 
         public IEnumerable<IEffect> checkTriggers(IAction action, TriggerEvent triggerEvent) // TriggerOrderType orderType, EffectPreview e);

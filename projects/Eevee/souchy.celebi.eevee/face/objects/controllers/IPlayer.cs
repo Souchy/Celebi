@@ -7,6 +7,6 @@ namespace souchy.celebi.eevee.face.objects.controllers
     public interface IPlayer : IFightEntity
     {
         public ITeam team { get; set; }
-        public IEntityList<IID> creatures { get; set; }
+        public IEntityList<ObjectId> creatures { get; set; }
     }
 }

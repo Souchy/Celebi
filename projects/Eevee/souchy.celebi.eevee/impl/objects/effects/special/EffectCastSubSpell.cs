@@ -5,7 +5,6 @@ using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.objects.effects.special;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
-using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.values;
 using souchy.celebi.eevee.impl.shared.triggers;
@@ -32,8 +31,8 @@ namespace souchy.celebi.eevee.impl.objects.effects.special
 
 
         private EffectCastSubSpell() { }
-        private EffectCastSubSpell(IID id) : base(id) { }
-        public static IEffectCastSubSpell Create() => new EffectCastSubSpell(Eevee.RegisterIID<IEffect>());
+        private EffectCastSubSpell(ObjectId id) : base(id) { }
+        public static IEffectCastSubSpell Create() => new EffectCastSubSpell(Eevee.RegisterIIDTemporary());
 
         public override IEffectPreview preview(IAction action, IEnumerable<IBoardEntity> targets) {
             throw new NotImplementedException();

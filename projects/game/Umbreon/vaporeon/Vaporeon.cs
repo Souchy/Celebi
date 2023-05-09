@@ -10,10 +10,10 @@ using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.util;
-using Umbreon.common;
-using Umbreon.common.persistance;
-using Umbreon.src;
-using Umbreon.vaporeon.common;
+using souchy.celebi.umbreon.common;
+using souchy.celebi.umbreon.common.persistance;
+using souchy.celebi.umbreon.src;
+using souchy.celebi.umbreon.vaporeon.common;
 
 public static class VaporeonExtensions
 {

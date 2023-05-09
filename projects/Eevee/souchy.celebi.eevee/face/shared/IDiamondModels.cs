@@ -14,7 +14,6 @@ namespace souchy.celebi.eevee.face.shared
         public IEntityDictionary<IID, IMap> maps { get; init; }
 
         public IEntityDictionary<IID, ICreatureModel> creatureModels { get; init; }
-        public IEntityDictionary<IID, IStats> stats { get; init; }
         public IEntityDictionary<IID, ISpellModel> spellModels { get; init; }
         public IEntityDictionary<IID, IStatusModel> statusModels { get; init; }
         public IEntityDictionary<IID, IEffectModel> effectModels { get; init; }
@@ -22,16 +21,17 @@ namespace souchy.celebi.eevee.face.shared
         /// 
         /// /////////"Model/Static" effects for spells and static statuses (like passives, as opposed to variable things like fourberie)
         /// </summary>
-        public IEntityDictionary<IID, IEffect> effects { get; init; }
+        public IEntityDictionary<ObjectId, IEffect> effects { get; init; }
+        public IEntityDictionary<ObjectId, IStats> stats { get; init; }
 
 
-        public IEntityDictionary<IID, ICreatureSkin> creatureSkins { get; init; }
-        public IEntityDictionary<IID, ISpellSkin> spellSkins { get; init; }
-        public IEntityDictionary<IID, IEffectSkin> effectSkins { get; init; }
+        public IEntityDictionary<ObjectId, ICreatureSkin> creatureSkins { get; init; }
+        public IEntityDictionary<ObjectId, ISpellSkin> spellSkins { get; init; }
+        public IEntityDictionary<ObjectId, IEffectSkin> effectSkins { get; init; }
         /// <summary>
         /// load 1 language at a time
         /// </summary>
-        public IEntityDictionary<IID, IStringEntity> i18n { get; init; }
+        public IEntityDictionary<ObjectId, IStringEntity> i18n { get; init; }
 
 
     }

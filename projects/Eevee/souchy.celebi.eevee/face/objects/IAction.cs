@@ -12,8 +12,8 @@ namespace souchy.celebi.eevee.face.objects
     public interface IAction
     {
         public IFight fight { get; set; }
-        public IID caster { get; set; }
-        public IID targetCell { get; set; }
+        public ObjectId caster { get; set; }
+        public ObjectId targetCell { get; set; }
     }
     /// <summary>
     /// for retrieving stats whenever, for the UI
@@ -21,13 +21,13 @@ namespace souchy.celebi.eevee.face.objects
     public record EmptyAction(IFight fight) : IAction
     {
         public IFight fight { get; set; } = fight;
-        public IID caster { get; set; }
-        public IID targetCell { get; set; }
+        public ObjectId caster { get; set; }
+        public ObjectId targetCell { get; set; }
     }
 
     public interface IActionSpell : IAction
     {
-        public IID spell { get; set; }
+        public ObjectId spell { get; set; }
     }
     
     public interface ISubActionEffect : IAction
@@ -38,8 +38,8 @@ namespace souchy.celebi.eevee.face.objects
     public class SubActionEffect : ISubActionEffect
     {
         public IFight fight { get; set; }
-        public IID caster { get; set; }
-        public IID targetCell { get; set; }
+        public ObjectId caster { get; set; }
+        public ObjectId targetCell { get; set; }
         public object parent { get; set; } // could be ISpell, IEffect, ....
         public IEffect effect { get; set; }
     }

@@ -1,11 +1,12 @@
-﻿using souchy.celebi.eevee.enums;
+﻿using MongoDB.Bson;
+using souchy.celebi.eevee;
+using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.util.math;
-using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.stats;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.impl.util.math;
@@ -71,7 +72,7 @@ namespace PlayfabClientTest
     {
         public int Id { get; set; }
         public static string asdf = "";
-        public IID entityUid { get; set; } = Eevee.RegisterIID<string>();
+        public ObjectId entityUid { get; set; } = Eevee.RegisterIIDTemporary(); //Eevee.RegisterIID<string>();
         public IStats stats = Stats.Create(); //new Stats();
         public Breed()
         {
@@ -94,7 +95,10 @@ namespace PlayfabClientTest
             stats.Add(Resource.Life.Create(5));
         }
 
-        public void Dispose() => Eevee.DisposeIID<IEntity>(entityUid);
+        public void Dispose()
+        {
+            Eevee.DisposeEventBus(this);
+        }
     }
 
 }

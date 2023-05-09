@@ -4,7 +4,6 @@ using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.objects.effects.creature;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
-using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.values;
 using souchy.celebi.eevee.impl.shared.triggers;
@@ -19,8 +18,8 @@ namespace souchy.celebi.eevee.impl.objects.effects.creature
         public IValue<int> Depth { get; set; } = new Value<int>();
 
         private EffectDig() { }
-        private EffectDig(IID id) : base(id) { }
-        public static IEffectDig Create() => new EffectDig(Eevee.RegisterIID<IEffect>());
+        private EffectDig(ObjectId id) : base(id) { }
+        public static IEffectDig Create() => new EffectDig(Eevee.RegisterIIDTemporary());
 
         public override IEffectPreview preview(IAction action, IEnumerable<IBoardEntity> targets) {
             throw new NotImplementedException();

@@ -22,15 +22,15 @@ namespace souchy.celebi.eevee.face.objects.statuses
         /// <summary>
         /// Creature who applied the status
         /// </summary>
-        public IID sourceCreature { get; set; }
+        public ObjectId sourceCreature { get; set; }
         /// <summary>
         /// Entity on which the status is 
         /// </summary>
-        public IID holderEntity { get; set; }
+        public ObjectId holderEntity { get; set; }
         /// <summary>
         /// Container stats like Stacks, MaxStacks, 
         /// </summary>
-        public IID stats { get; set; }
+        public ObjectId stats { get; set; }
 
         public IStats GetStats() => this.GetFight().stats.Get(stats);
 

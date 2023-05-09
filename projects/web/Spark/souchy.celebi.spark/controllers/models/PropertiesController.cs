@@ -5,7 +5,6 @@ using souchy.celebi.eevee.enums.characteristics.properties;
 using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.impl.stats;
 using souchy.celebi.eevee.impl.values;
-using Spark;
 
 namespace souchy.celebi.spark.controllers.models
 {

@@ -1,7 +1,5 @@
-﻿using Microsoft.Extensions.Options;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using souchy.celebi.eevee.face.shared.models;
-using souchy.celebi.eevee.impl.shared;
 
 namespace souchy.celebi.spark.services.models
 {
@@ -16,6 +14,9 @@ namespace souchy.celebi.spark.services.models
 
         public async Task<List<ICreatureModel>> GetAsync() =>
             await _creatureModelsCollection.Find(_ => true).ToListAsync();
+
+        public async Task<List<ICreatureModel>> GetFilteredAsync(FilterDefinition<ICreatureModel> filter) =>
+            await _creatureModelsCollection.Find(filter).ToListAsync();
 
         public async Task<ICreatureModel?> GetAsync(string id) =>
             await _creatureModelsCollection.Find(x => x.entityUid == id).FirstOrDefaultAsync();
