@@ -1,0 +1,36 @@
+
+# Entities
+    IEntity : mongoId
+        IEntityModel : modelId
+        IEntityFight : fightId
+            IEntityModeled: modelId + fightId
+
+# Permanent Models : IEntityModel
+peut réutiliser des effects plusieurs fois dans un même spell/status ou d'autres spells
+    CreatureModel 
+        Stats
+        Strings
+    SpellModel
+        Stats
+        Effect
+        Strings
+    StatusModel
+        Stats
+        Effect
+        Strings
+    StringEntity : Model
+    CreatureSkin
+    
+
+# Temporary Instances : IEntityFight
+    Creature
+        Stats
+    Spell
+        Stats
+    StatusContainer > StatusInstance
+        Stats
+        Effect
+
+# Both
+    Stats : IEntity
+    Effect : IEntity

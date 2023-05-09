@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.face.objects.stats;
@@ -37,15 +38,15 @@ namespace souchy.celebi.spark.controllers.models
 
         [HttpGet("filtered")]
         public async Task<List<ICreatureModel>> GetFiltered(FilterDefinition<ICreatureModel> filter) 
-            => await _creatureModels.GetFilteredAsync(filter);
+            => await _creatureModels.GetAsync(filter);
 
         [HttpGet("creature/{id}")]
         public async Task<ActionResult<ICreatureModel>> Get([FromRoute] ObjectId id)
         {
-            var creatureModel = await _creatureModels.GetAsync(id);
-            if (creatureModel is null)
+            var model = await _creatureModels.GetAsync(id);
+            if (model is null)
                 return NotFound();
-            return Ok(creatureModel);
+            return Ok(model);
         }
 
         //[Authorize]
@@ -91,13 +92,14 @@ namespace souchy.celebi.spark.controllers.models
 
         [Authorize]
         [HttpPut("creature/{id}")]
-        public async Task<ActionResult<ReplaceOneResult>> Update([FromRoute] ObjectId id, [FromBody] CreatureModel updatedCreatureModel)
+        public async Task<ActionResult<ReplaceOneResult>> Update([FromRoute] ObjectId id, [FromBody] CreatureModel updateModel)
         {
-            var crea = await _creatureModels.GetAsync(id);
-            if (crea is null) 
+            var model = await _creatureModels.GetAsync(id);
+            if (model is null) 
                 return NotFound();
-            updatedCreatureModel.entityUid = crea.entityUid;
-            var result = await _creatureModels.UpdateAsync(id, updatedCreatureModel);
+            updateModel.entityUid = model.entityUid;
+            updateModel.modelUid = model.modelUid;
+            var result = await _creatureModels.UpdateAsync(id, updateModel);
             return Ok(result);
         }
 
@@ -105,10 +107,22 @@ namespace souchy.celebi.spark.controllers.models
         [HttpDelete("creature/{id}")]
         public async Task<ActionResult<DeleteResult>> Delete([FromRoute] ObjectId id)
         {
-            var crea = await _creatureModels.GetAsync(id);
-            if (crea is null) 
+            var model = await _creatureModels.GetAsync(id);
+            if (model is null)
                 return NotFound();
             var result = await _creatureModels.RemoveAsync(id);
+            return Ok(result);
+        }
+
+        [Authorize]
+        [HttpDelete("creature/{id}")]
+        public async Task<ActionResult<DeleteResult>> Delete([FromRoute] IID id)
+        {
+            var filter = Builders<ICreatureModel>.Filter.Eq(nameof(ICreatureModel.modelUid), id);
+            var crea = await _creatureModels.GetAsync(filter);
+            if (crea is null)
+                return NotFound();
+            var result = await _creatureModels.RemoveAsync(filter);
             return Ok(result);
         }
     }

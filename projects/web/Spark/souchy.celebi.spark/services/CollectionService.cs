@@ -13,12 +13,10 @@ namespace souchy.celebi.spark.services
 
         public async Task<List<T>> GetAsync() =>
             await _collection.Find(_ => true).ToListAsync();
-
+        public async Task<List<T>> GetAsync(FilterDefinition<T> filter) =>
+            await _collection.Find(filter).ToListAsync();
         public async Task<T?> GetAsync(ObjectId id) =>
             await _collection.Find(x => x.entityUid == id).FirstOrDefaultAsync();
-
-        public async Task<List<T>> GetFilteredAsync(FilterDefinition<T> filter) =>
-            await _collection.Find(filter).ToListAsync();
 
         public async Task CreateAsync(T newStats) =>
             await _collection.InsertOneAsync(newStats);
@@ -28,6 +26,8 @@ namespace souchy.celebi.spark.services
 
         public async Task<DeleteResult> RemoveAsync(ObjectId id) =>
             await _collection.DeleteOneAsync(x => x.entityUid == id);
+        public async Task<DeleteResult> RemoveAsync(FilterDefinition<T> filter) =>
+            await _collection.DeleteOneAsync(filter);
     }
 
 
