@@ -1,3 +1,11 @@
+<import from="../spells/spelllist"></import>
+<import from="../"></import>
 
+<h3>Hi Creature #${model.entityUid}</h3>
 
-<h3>Hi Creature #${model.entityUid.value}</h3>
+<div>name</div>
+<div>description</div>
+
+<div>stats</div>
+
+<spelllist data.bind="model.spellIds"></spelllist>
