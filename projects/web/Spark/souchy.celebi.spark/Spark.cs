@@ -144,7 +144,7 @@ namespace souchy.celebi.spark
             {
                 c.SchemaFilter<EnumSchemaFilter>();
                 //c.MapType<IID>(() => new OpenApiSchema() { Type = "IID" });
-                c.MapType<IID>(() => new OpenApiSchema() { Type = "string" });
+                //c.MapType<IID>(() => new OpenApiSchema() { Type = "string" });
             });
             services.AddSwaggerGenNewtonsoftSupport();
             services.AddControllers(options =>

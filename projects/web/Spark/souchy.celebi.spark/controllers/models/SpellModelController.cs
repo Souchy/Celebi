@@ -37,7 +37,7 @@ namespace souchy.celebi.spark.controllers.models
         public async Task<List<ISpellModel>> GetAll() => await _spellService.GetAsync();
 
         [HttpGet("spell/{id}")]
-        public async Task<ActionResult<ISpellModel>> Get(IID id)
+        public async Task<ActionResult<ISpellModel>> Get([FromRoute] IID id)
         {
             var filter = Builders<ISpellModel>.Filter.Eq(nameof(ISpellModel.modelUid), id);
             ISpellModel? model = await _spellService.GetOneAsync(filter);

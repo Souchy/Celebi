@@ -44,17 +44,7 @@ namespace souchy.celebi.spark.controllers.models
             => await _creatureModels.GetAsync(filter);
 
         [HttpGet("creature/{id}")]
-        public async Task<ActionResult<ICreatureModel>> Get([FromRoute][AsParameters] IID id)
-        {
-            var filter = Builders<ICreatureModel>.Filter.Eq(nameof(ICreatureModel.modelUid), id);
-            var model = await _creatureModels.GetOneAsync(filter);
-            if (model is null)
-                return NotFound();
-            return Ok(model);
-        }
-
-        [HttpGet("creature2/{id}")]
-        public async Task<ActionResult<ICreatureModel>> Get2([FromRoute] IID id)
+        public async Task<ActionResult<ICreatureModel>> Get([FromRoute] IID id)
         {
             var filter = Builders<ICreatureModel>.Filter.Eq(nameof(ICreatureModel.modelUid), id);
             var model = await _creatureModels.GetOneAsync(filter);

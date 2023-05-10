@@ -114,22 +114,6 @@ export class CreatureModelController<SecurityDataType = unknown> extends HttpCli
    * No description
    *
    * @tags CreatureModelController
-   * @name GetCreature2
-   * @request GET:/models/creatures/creature2/{id}
-   * @response `200` `ICreatureModel` Success
-   */
-  public getCreature2(id: string, params: RequestParams = {}): Promise<HttpResponse<ICreatureModel, any>> {
-    return this.request<ICreatureModel, any>({
-      path: `/models/creatures/creature2/${id}`,
-      method: "GET",
-      format: "json",
-      ...params,
-    });
-  }
-  /**
-   * No description
-   *
-   * @tags CreatureModelController
    * @name PostCreature
    * @request POST:/models/creatures/creature
    * @response `200` `ICreatureModel` Success

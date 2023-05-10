@@ -37,12 +37,10 @@ export class SpellModelController<SecurityDataType = unknown> extends HttpClient
    * @request GET:/models/spells/spell/{id}
    * @response `200` `ISpellModel` Success
    */
-  public getSpell(id: string, data: string, params: RequestParams = {}): Promise<HttpResponse<ISpellModel, any>> {
+  public getSpell(id: string, params: RequestParams = {}): Promise<HttpResponse<ISpellModel, any>> {
     return this.request<ISpellModel, any>({
       path: `/models/spells/spell/${id}`,
       method: "GET",
-      body: data,
-      type: ContentType.Json,
       format: "json",
       ...params,
     });
