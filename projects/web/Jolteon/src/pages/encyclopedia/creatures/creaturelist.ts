@@ -1,6 +1,7 @@
 import { inject } from "aurelia";
 import { CreatureModelController } from "../../../jolteon/services/api/CreatureModelController";
 import { ICreatureModel, CreatureModel, IID } from './../../../jolteon/services/api/data-contracts';
+import { IRouter } from "@aurelia/router";
 
 @inject(CreatureModelController)
 export class CreatureList {
@@ -8,8 +9,11 @@ export class CreatureList {
     public creatures: ICreatureModel[] = [];
     public selectedCreatures: ICreatureModel[] = [];
 
-    constructor(readonly http: CreatureModelController) {
-        console.log("list ctor")
+    constructor(
+        private readonly http: CreatureModelController,
+        @IRouter private router: IRouter
+    ) {
+        // console.log("list ctor")
         this.refresh();
     }
 
@@ -42,6 +46,10 @@ export class CreatureList {
             })
         }
         this.selectedCreatures = [];
+    }
+
+    public clickCreature(modelUid: IID) {
+        this.router.load("/editor/creature/" + modelUid.value);
     }
 
 }

@@ -15,17 +15,19 @@ namespace souchy.celebi.spark.services.models
     {
         private readonly IEnumerable<IMongoCollection<IStringEntity>> _collections;
 
-        public StringService(MongoModelsDbService service)
+        public StringService(MongoI18NDbService service)
             => _collections = Enum.GetNames<I18NType>().Select(lang => service.GetMongoCollection<IStringEntity>(lang));
+
+        private FilterDefinition<IStringEntity> filter(ObjectId id) => Builders<IStringEntity>.Filter.Eq("_id", id); // nameof(IStringEntity.entityUid), id);
 
         public async Task<List<IStringEntity>> GetAsync(I18NType lang) =>
             await getCollection(lang).Find(_ => true).ToListAsync();
         public async Task<List<IStringEntity>> GetAsync(I18NType lang, FilterDefinition<IStringEntity> filter) =>
             await getCollection(lang).Find(filter).ToListAsync();
         public async Task<IStringEntity?> GetAsync(I18NType lang, ObjectId id) =>
-            await getCollection(lang).Find(x => x.entityUid == id).FirstOrDefaultAsync();
+            await getCollection(lang).Find(c => c.entityUid == id).FirstOrDefaultAsync();
         public async Task<ReplaceOneResult> UpdateAsync(I18NType lang, ObjectId id, IStringEntity updatedStringEntity) =>
-            await getCollection(lang).ReplaceOneAsync(x => x.entityUid == id, updatedStringEntity);
+            await getCollection(lang).ReplaceOneAsync(filter(id), updatedStringEntity);
 
         /// <summary>
         /// Create a new string entity in all I18n collections

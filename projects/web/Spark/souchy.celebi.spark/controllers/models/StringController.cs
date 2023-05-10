@@ -17,13 +17,13 @@ namespace souchy.celebi.spark.controllers.models
         public StringController(StringService service) => _stringService = service;
 
         [HttpGet("all")]
-        public async Task<List<IStringEntity>> GetAll(I18NType lang) 
+        public async Task<List<IStringEntity>> GetAll([FromQuery] I18NType lang) 
             => await _stringService.GetAsync(lang);
         [HttpGet("filtered")]
-        public async Task<List<IStringEntity>> GetAll(I18NType lang, FilterDefinition<IStringEntity>? filter = null) 
+        public async Task<List<IStringEntity>> GetAll([FromQuery] I18NType lang, FilterDefinition<IStringEntity>? filter = null) 
             => await _stringService.GetAsync(lang, filter);
         [HttpGet("string/{id}")]
-        public async Task<ActionResult<IStringEntity>> Get(I18NType lang, ObjectId id)
+        public async Task<ActionResult<IStringEntity>> Get([FromQuery] I18NType lang, [FromRoute] ObjectId id)
         {
             IStringEntity? str = await _stringService.GetAsync(lang, id);
             if (str is null)
@@ -32,7 +32,7 @@ namespace souchy.celebi.spark.controllers.models
         }
         [Authorize]
         [HttpPut("string/{id}")]
-        public async Task<ActionResult<ReplaceOneResult>> Update(I18NType lang, ObjectId id, StringEntity updatedStringEntity)
+        public async Task<ActionResult<ReplaceOneResult>> Update([FromQuery] I18NType lang, [FromRoute] ObjectId id, StringEntity updatedStringEntity)
         {
             var str = await _stringService.GetAsync(lang, id);
             if (str is null) 

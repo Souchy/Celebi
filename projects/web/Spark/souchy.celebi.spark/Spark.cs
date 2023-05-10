@@ -30,6 +30,8 @@ using Microsoft.OpenApi.Any;
 using souchy.celebi.eevee.face.entity;
 using MongoDB.Bson.Serialization.IdGenerators;
 using MongoDB.Bson;
+using souchy.celebi.eevee.impl.objects;
+using souchy.celebi.eevee.impl.objects.effects;
 
 namespace souchy.celebi.spark
 {
@@ -184,6 +186,7 @@ namespace souchy.celebi.spark
             services.AddSingleton<MongoModelsDbService>();
             services.AddSingleton<MongoFightsDbService>();
             services.AddSingleton<MongoMetaDbService>();
+            services.AddSingleton<MongoI18NDbService>();
 
             // Meta
             services.AddSingleton<AccountService>();
@@ -263,7 +266,26 @@ namespace souchy.celebi.spark
             );
             BsonSerializer.RegisterSerializer(objectSerializer);
             BsonSerializer.RegisterSerializer<IID>(new IIDSerializer());
+
+            BsonClassMap.RegisterClassMap<Map>();
+            BsonClassMap.RegisterClassMap<StringEntity>();
+
             BsonClassMap.RegisterClassMap<CreatureModel>();
+            BsonClassMap.RegisterClassMap<SpellModel>();
+            BsonClassMap.RegisterClassMap<StatusModel>();
+
+            BsonClassMap.RegisterClassMap<Stats>();
+            BsonClassMap.RegisterClassMap<StatSimple>();
+            BsonClassMap.RegisterClassMap<StatBool>();
+
+            BsonClassMap.RegisterClassMap<EffectModel>();
+            BsonClassMap.RegisterClassMap<EffectBase>();
+
+            BsonClassMap.RegisterClassMap<CreatureSkin>();
+            BsonClassMap.RegisterClassMap<SpellSkin>();
+            BsonClassMap.RegisterClassMap<EffectSkin>();
+
+
             //BsonClassMap.RegisterClassMap<CreatureModel>(c =>
             //{
             //    c.MapIdProperty(e => e.entityUid)

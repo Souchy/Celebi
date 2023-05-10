@@ -1,11 +1,15 @@
 <import from="../spells/spelllist"></import>
-<import from="../"></import>
+<import from="../stats/statscomponent"></import>
+<import from="../strings/stringcomponent"></import>
 
-<h3>Hi Creature #${model.entityUid}</h3>
+<h3>Creature #${model.modelUid.value}</h3>
+<!-- <h3>#${model.entityUid}</h3> -->
 
-<div>name</div>
-<div>description</div>
+<stringcomponent uid.bind="model.nameId"></stringcomponent>
+<stringcomponent if.bind="!isvignette" uid.bind="model.descriptionId"></stringcomponent>
 
-<div>stats</div>
+<statscomponent if.bind="!isvignette" uid.bind="model.baseStats"></statscomponent>
+<statscomponent if.bind="!isvignette" uid.bind="model.growthStats"></statscomponent>
 
-<spelllist data.bind="model.spellIds"></spelllist>
+<!-- <div>stats</div> -->
+<!-- <spelllist data.bind="model.spellIds"></spelllist> -->

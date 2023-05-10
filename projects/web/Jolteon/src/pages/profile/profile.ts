@@ -17,8 +17,8 @@ export class Profile {
     private currency?: number | null;
     @fromState((state: GlobalState) => state.account?.ownedModels)
     private ownedModels?: IID[] | null;
-    @fromState((state: GlobalState) => state.account?.transactions)
-    private transactions?: string[] | null;
+    // @fromState((state: GlobalState) => state.account?.transactions)
+    // private transactions?: string[] | null;
     @fromState((state: GlobalState) => state.account?.accessByIp)
     private accessByIp?: IpAccess[] | null;
 

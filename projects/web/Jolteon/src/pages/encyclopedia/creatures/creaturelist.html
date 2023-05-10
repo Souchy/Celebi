@@ -7,4 +7,6 @@
 <button class="btn" click.trigger="clickCreate()">New creature</button>
 
 <!-- todo bind creature -->
-<creature repeat.for="crea of creatures" model.bind="crea"></creature>
+<div class="list">
+  <creature repeat.for="crea of creatures" model.bind="crea" isvignette.bind="true" click.trigger="clickCreature(crea.modelUid)"></creature>
+</div>

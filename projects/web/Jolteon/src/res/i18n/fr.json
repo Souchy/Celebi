@@ -1,8 +1,27 @@
-{
-    "pages": {
-        "home": {
-            "welcome": "Bienvenue",
-            "home": "Accueil"
+[
+    {
+        "_id": "web",
+        "pages": {
+            "home": {
+                "welcome": "Bienvenue",
+                "home": "Accueil"
+            }
         }
+    },
+    {
+        "_id": "creatures",
+        "1": "Amelia"
+    },
+    {
+        "_id": "spells",
+        "1": "Natural Attack"
+    },
+    {
+        "_id": "statuses",
+        "1": "Burn"
+    },
+    {
+        "_id": "effects",
+        "1": "Push"
     }
-}
+]

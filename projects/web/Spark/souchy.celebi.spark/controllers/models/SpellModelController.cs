@@ -22,13 +22,15 @@ namespace souchy.celebi.spark.controllers.models
         private readonly CollectionService<IStats> _stats;
         private readonly CollectionService<IEffect> _effects;
         private readonly StringService _strings;
+        private readonly IDCounterService _ids;
 
-        public SpellModelController(MongoModelsDbService db, StringService strings)
+        public SpellModelController(MongoModelsDbService db, StringService strings, IDCounterService ids)
         {
             _spellService = db.GetMongoService<ISpellModel>();
             _stats = db.GetMongoService<IStats>();
             _effects = db.GetMongoService<IEffect>();
             _strings = strings;
+            _ids = ids;
         }
 
         [HttpGet("all")]
@@ -57,6 +59,10 @@ namespace souchy.celebi.spark.controllers.models
         public async Task<IActionResult> PostNew()
         {
             var spellModel = Factories.newSpellModel();
+
+            spellModel.modelUid = await _ids.GetID<ICreatureModel>();
+            spellModel.GetName().modelUid = await _ids.GetID<IStringEntity>();
+            spellModel.GetDescription().modelUid = await _ids.GetID<IStringEntity>();
 
             await _stats.CreateAsync(spellModel.GetStats());
             await _strings.CreateAsync(spellModel.GetName());
