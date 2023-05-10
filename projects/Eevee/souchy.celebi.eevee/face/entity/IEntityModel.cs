@@ -17,7 +17,7 @@ namespace souchy.celebi.eevee.face.entity
         /// <summary>
         /// Numerical counter
         /// </summary>
-        [BsonSerializer(typeof(IIDSerializer))]
+        [BsonSerializer(typeof(IIDBsonSerializer))]
         public IID modelUid { get; set; }
     }
 }

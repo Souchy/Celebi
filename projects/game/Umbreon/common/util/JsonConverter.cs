@@ -15,7 +15,7 @@ namespace souchy.celebi.umbreon.common.util
         public override IID ReadJson(JsonReader reader, Type objectType, IID existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
             string s = (string) reader.Value;
-            return new IID(s);
+            return (IID) s;
         }
         public override void WriteJson(JsonWriter writer, IID value, JsonSerializer serializer)
         {
@@ -79,7 +79,7 @@ namespace souchy.celebi.umbreon.common.util
             var value = Activator.CreateInstance<EntitySet<IID>>();
             string[] arr = (string[]) reader.Value;
             foreach (var a in arr)
-                value.Add(new IID(a));
+                value.Add((IID) a);
             return value;
         }
         public override void WriteJson(JsonWriter writer, IEntitySet<IID> value, JsonSerializer serializer)
@@ -98,7 +98,7 @@ namespace souchy.celebi.umbreon.common.util
             var value = Activator.CreateInstance<EntityList<IID>>();
             string[] arr = (string[]) reader.Value;
             foreach (var a in arr)
-                value.Add(new IID(a));
+                value.Add((IID) a);
             return value;
         }
         public override void WriteJson(JsonWriter writer, IEntityList<IID> value, JsonSerializer serializer)

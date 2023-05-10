@@ -6,6 +6,7 @@ using souchy.celebi.eevee.impl.util;
 using MongoDB.Bson;
 using static souchy.celebi.eevee.face.entity.IEntity;
 using souchy.celebi.eevee;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace souchy.celebi.espeon.eevee.impl.controllers
 {

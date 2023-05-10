@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <Using Include="MongoDB.Bson" />
+	<Using Include="MongoDB.Bson.Serialization.Attributes" />
   </ItemGroup>
 
 </Project>

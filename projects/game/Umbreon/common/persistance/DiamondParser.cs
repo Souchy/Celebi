@@ -51,7 +51,7 @@ namespace souchy.celebi.umbreon.common.persistance
             Formatting = Formatting.Indented,
             ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
             Converters = new List<JsonConverter> { 
-                new IIDJsonConverter(), new IStringEntitysonConverter(),
+                new util.IIDJsonConverter(), new IStringEntitysonConverter(),
                 new IEntitySetJsonConverter(), new IEntityListJsonConverter(),
                 new IValueIntJsonConverter(), new IValueDoubleJsonConverter(), new IValueBoolJsonConverter(),
                 new CharacTypeJsonConverter(), new CharacIdJsonConverter(), new IValueElementJsonConverter()

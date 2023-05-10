@@ -20,13 +20,13 @@ namespace souchy.celebi.spark.controllers.models
         public async Task<List<IStringEntity>> GetAll([FromQuery] I18NType lang) 
             => await _stringService.GetAsync(lang);
         [HttpGet("filtered")]
-        public async Task<List<IStringEntity>> GetAll([FromQuery] I18NType lang, FilterDefinition<IStringEntity>? filter = null) 
+        public async Task<List<IStringEntity>> GetAll([FromQuery] I18NType lang, FilterDefinition<IStringEntity> filter = null) 
             => await _stringService.GetAsync(lang, filter);
         [HttpGet("string/{id}")]
         public async Task<ActionResult<IStringEntity>> Get([FromQuery] I18NType lang, [FromRoute] ObjectId id)
         {
             IStringEntity? str = await _stringService.GetAsync(lang, id);
-            if (str is null)
+             if (str is null)
                 return NotFound();
             return Ok(str);
         }

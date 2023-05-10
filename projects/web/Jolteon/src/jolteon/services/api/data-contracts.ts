@@ -17,7 +17,7 @@ export interface AccountInfo {
   picture?: string | null;
   /** @format int32 */
   currency?: number;
-  ownedModels?: IID[] | null;
+  ownedModels?: string[] | null;
 }
 
 /** @format  */
@@ -35,7 +35,7 @@ export interface Affinity {
   conditions?: ICondition[] | null;
   statValueType?: StatValueType;
   id?: CharacteristicId;
-  nameModelUid?: IID;
+  nameModelUid?: string | null;
 }
 
 /** @format  */
@@ -122,12 +122,12 @@ export interface Contextual {
   conditions?: ICondition[] | null;
   statValueType?: StatValueType;
   id?: CharacteristicId;
-  nameModelUid?: IID;
+  nameModelUid?: string | null;
 }
 
 export interface CreatureModel {
   entityUid?: string;
-  modelUid?: IID;
+  modelUid?: string | null;
   nameId?: string;
   descriptionId?: string;
   skins?: ObjectIdIEntitySet;
@@ -185,7 +185,7 @@ export enum Direction9Type {
 
 export interface Effect {
   entityUid?: string;
-  modelUid?: IID;
+  modelUid?: string | null;
   fightUid?: string;
   boardTargetType?: BoardTargetType;
   sourceCondition?: ICondition;
@@ -232,7 +232,7 @@ export interface ICreatureModel {
   growthStats?: string;
   baseSpells?: ObjectIdIEntitySet;
   baseStatusPassives?: ObjectIdIEntitySet;
-  modelUid?: IID;
+  modelUid?: string | null;
   entityUid?: string;
 }
 
@@ -243,14 +243,10 @@ export interface IEffect {
   targetFilter?: ICondition;
   zone?: IZone;
   triggers?: ITriggerIEntityList;
-  modelUid?: IID;
+  modelUid?: string | null;
   entityUid?: string;
   fightUid?: string;
   effectIds?: ObjectIdIEntityList;
-}
-
-export interface IID {
-  value?: string;
 }
 
 export interface ISpellModel {
@@ -262,7 +258,7 @@ export interface ISpellModel {
   stats?: string;
   rangeZoneMin?: IZone;
   rangeZoneMax?: IZone;
-  modelUid?: IID;
+  modelUid?: string | null;
   entityUid?: string;
   effectIds?: ObjectIdIEntityList;
 }
@@ -286,14 +282,14 @@ export interface IStatusModel {
   duration?: Int32IValue;
   canBeUnbewitched?: BooleanIValue;
   priority?: StatusPriorityTypeIValue;
-  modelUid?: IID;
+  modelUid?: string | null;
   entityUid?: string;
   effectIds?: ObjectIdIEntityList;
 }
 
 export interface IStringEntity {
   value?: string | null;
-  modelUid?: IID;
+  modelUid?: string | null;
   entityUid?: string;
 }
 
@@ -373,7 +369,7 @@ export enum LimitType {
 }
 
 export interface ModelProduct {
-  modelID?: IID;
+  modelID?: string | null;
   _id?: string;
   /** @format int32 */
   currency?: number;
@@ -415,7 +411,7 @@ export interface OtherProperty {
   conditions?: ICondition[] | null;
   statValueType?: StatValueType;
   id?: CharacteristicId;
-  nameModelUid?: IID;
+  nameModelUid?: string | null;
 }
 
 export interface ReplaceOneResult {
@@ -437,7 +433,7 @@ export interface Resistance {
   conditions?: ICondition[] | null;
   statValueType?: StatValueType;
   id?: CharacteristicId;
-  nameModelUid?: IID;
+  nameModelUid?: string | null;
 }
 
 export interface Resource {
@@ -450,7 +446,7 @@ export interface Resource {
   conditions?: ICondition[] | null;
   statValueType?: StatValueType;
   id?: CharacteristicId;
-  nameModelUid?: IID;
+  nameModelUid?: string | null;
 }
 
 /** @format  */
@@ -484,7 +480,7 @@ export enum Rotation4Type {
 
 export interface SpellModel {
   entityUid?: string;
-  modelUid?: IID;
+  modelUid?: string | null;
   nameId?: string;
   descriptionId?: string;
   sourceCondition?: ICondition;
@@ -504,7 +500,7 @@ export interface SpellModelProperty {
   conditions?: ICondition[] | null;
   statValueType?: StatValueType;
   id?: CharacteristicId;
-  nameModelUid?: IID;
+  nameModelUid?: string | null;
 }
 
 export interface SpellProperty {
@@ -515,7 +511,7 @@ export interface SpellProperty {
   conditions?: ICondition[] | null;
   statValueType?: StatValueType;
   id?: CharacteristicId;
-  nameModelUid?: IID;
+  nameModelUid?: string | null;
 }
 
 /** @format  */
@@ -533,12 +529,12 @@ export interface State {
   conditions?: ICondition[] | null;
   statValueType?: StatValueType;
   id?: CharacteristicId;
-  nameModelUid?: IID;
+  nameModelUid?: string | null;
 }
 
 export interface StatusModel {
   entityUid?: string;
-  modelUid?: IID;
+  modelUid?: string | null;
   nameId?: string;
   descriptionId?: string;
   delay?: Int32IValue;
@@ -556,7 +552,7 @@ export interface StatusModelProperty {
   conditions?: ICondition[] | null;
   statValueType?: StatValueType;
   id?: CharacteristicId;
-  nameModelUid?: IID;
+  nameModelUid?: string | null;
 }
 
 /** @format  */
@@ -572,7 +568,7 @@ export interface StatusPriorityTypeIValue {
 
 export interface StringEntity {
   entityUid?: string;
-  modelUid?: IID;
+  modelUid?: string | null;
   value?: string | null;
 }
 

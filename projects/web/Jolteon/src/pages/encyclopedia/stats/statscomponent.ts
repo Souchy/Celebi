@@ -1,8 +1,9 @@
 import { bindable } from "aurelia";
 import { StatsModelController } from "../../../jolteon/services/api/StatsModelController";
 import { IStats } from "../../../jolteon/services/api/data-contracts";
+import { IRouteableComponent } from "@aurelia/router";
 
-export class Statscomponent {
+export class Statscomponent implements IRouteableComponent {
 
     // input
     @bindable
@@ -14,7 +15,6 @@ export class Statscomponent {
     constructor(
         private readonly statsController: StatsModelController
     ) {
-        console.log("ctor stats component: " + this.uid);
     }
 
     binding() { //initiator: IHydratedController, parent: IHydratedController, flags: LifecycleFlags) {

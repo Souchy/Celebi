@@ -5,8 +5,10 @@ import { CreatureModelController } from "../../../jolteon/services/api/CreatureM
 import { SpellModelController } from "../../../jolteon/services/api/SpellModelController";
 import { StringController } from "../../../jolteon/services/api/StringController";
 import { StatsModelController } from "../../../jolteon/services/api/StatsModelController";
+import { IRouteableComponent, Navigation, Parameters, RoutingInstruction } from '@aurelia/router';
 
-export class Creature {
+
+export class Creature implements IRouteableComponent {
     
     //#region input
     @bindable
@@ -14,7 +16,7 @@ export class Creature {
     @bindable
     public isvignette: boolean = false;
     /**
-     * CreatureID from Route: https://celebi.com/creatures/{id}
+     * Creature modelID from Route: https://celebi.com/creatures/{id}
      */
     public uid: string;
     //#endregion
@@ -32,16 +34,25 @@ export class Creature {
         // private readonly spellController: SpellModelController,
         // private readonly stringController: StringController,
     ) {
-        if(this.model === null) {
-            this.creatureController
-            .getCreature({ value: this.uid })
-            .then(res => {
-                this.model = res.data;
-                // this.loadExtensions(this.model);
-            });
-        } else {
-            // this.loadExtensions(this.model);
-        }
+        
+    }
+
+    /**
+     * Hook to attribute binding
+     */
+    binding() {
+        console.log("creature binding: " + this.uid + ", " + JSON.stringify(this.model))
+    }
+    /**
+     * Hook to route loading
+     */
+    async loading?(parameters: Parameters, instruction: RoutingInstruction, navigation: Navigation): Promise<void> {
+        this.uid = parameters["uid"] as string;
+        // console.log("creature loading: " + this.uid)
+
+        let res = await this.creatureController.getCreature2(this.uid);
+        this.model = res.data;
+        console.log("creature loading: " + JSON.stringify(this.model))
     }
 
     // private async loadExtensions(crea: ICreatureModel) {

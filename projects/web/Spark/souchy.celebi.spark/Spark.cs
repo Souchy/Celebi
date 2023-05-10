@@ -144,6 +144,7 @@ namespace souchy.celebi.spark
             {
                 c.SchemaFilter<EnumSchemaFilter>();
                 //c.MapType<IID>(() => new OpenApiSchema() { Type = "IID" });
+                c.MapType<IID>(() => new OpenApiSchema() { Type = "string" });
             });
             services.AddSwaggerGenNewtonsoftSupport();
             services.AddControllers(options =>
@@ -265,7 +266,7 @@ namespace souchy.celebi.spark
                 ObjectSerializer.DefaultAllowedTypes(type) || type.FullName.StartsWith("souchy.celebi")
             );
             BsonSerializer.RegisterSerializer(objectSerializer);
-            BsonSerializer.RegisterSerializer<IID>(new IIDSerializer());
+            BsonSerializer.RegisterSerializer<IID>(new IIDBsonSerializer());
 
             BsonClassMap.RegisterClassMap<Map>();
             BsonClassMap.RegisterClassMap<StringEntity>();
@@ -286,15 +287,14 @@ namespace souchy.celebi.spark
             BsonClassMap.RegisterClassMap<EffectSkin>();
 
 
+            BsonClassMap.RegisterClassMap<EntitySet<IID>>();
+            BsonClassMap.RegisterClassMap<IID>();
             //BsonClassMap.RegisterClassMap<CreatureModel>(c =>
             //{
             //    c.MapIdProperty(e => e.entityUid)
             //        .SetIdGenerator(StringObjectIdGenerator.Instance)
             //        .SetSerializer(new StringSerializer(BsonType.ObjectId));
             //});
-            BsonClassMap.RegisterClassMap<EntitySet<IID>>();
-
-            BsonClassMap.RegisterClassMap<IID>();
             //BsonClassMap.RegisterClassMap<IID>(id => new ObjectId(id));
             //BsonClassMap.RegisterClassMap<IEntity>(e =>
             //{

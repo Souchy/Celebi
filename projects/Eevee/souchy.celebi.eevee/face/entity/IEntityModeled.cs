@@ -6,7 +6,7 @@ namespace souchy.celebi.eevee.face.entity
 {
     public interface IEntityModeled : IEntity
     {
-        [BsonSerializer(typeof(IIDSerializer))]
+        [BsonSerializer(typeof(IIDBsonSerializer))]
         public IID modelUid { get; set; }
     }
 }

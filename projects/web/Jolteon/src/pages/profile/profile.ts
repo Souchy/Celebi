@@ -1,6 +1,6 @@
 import { fromState } from "@aurelia/state";
 import { GlobalState } from "../../jolteon/initialstate";
-import { AccountInfo, IID, IpAccess } from "../../jolteon/services/api/data-contracts";
+import { AccountInfo, IpAccess } from "../../jolteon/services/api/data-contracts";
 
 export class Profile {
     
@@ -16,7 +16,7 @@ export class Profile {
     @fromState((state: GlobalState) => state.account?.currency)
     private currency?: number | null;
     @fromState((state: GlobalState) => state.account?.ownedModels)
-    private ownedModels?: IID[] | null;
+    private ownedModels?: string[] | null;
     // @fromState((state: GlobalState) => state.account?.transactions)
     // private transactions?: string[] | null;
     @fromState((state: GlobalState) => state.account?.accessByIp)

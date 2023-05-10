@@ -1,8 +1,9 @@
+import { IRouteableComponent } from '@aurelia/router';
 import { I18NType, IStringEntity } from '../../../jolteon/services/api/data-contracts';
 import { StringController } from './../../../jolteon/services/api/StringController';
 import { bindable } from "aurelia";
 
-export class Stringcomponent {
+export class Stringcomponent implements IRouteableComponent {
 
     // input
     @bindable
@@ -14,7 +15,6 @@ export class Stringcomponent {
     public entity: IStringEntity;
 
     constructor(private readonly controller: StringController) {
-        console.log("ctor string component: " + this.uid);
     }
     
     binding() { 

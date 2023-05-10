@@ -22,25 +22,33 @@ export class App implements IRouteableComponent {
 			path: 'profile',
 			component: import('./pages/profile/profile'),
 			title: 'Profile',
-			data: {
-				requiresAuth: true
-			}
+			// data: {
+			// 	requiresAuth: true
+			// }
 		},
+		// {
+		// 	path: 'profile/settings',
+		// 	component: import('./pages/profile/profileSettings'),
+		// 	title: 'Profile Settings',
+		// 	data: {
+		// 		requiresAuth: true
+		// 	}
+		// },
+		// {
+		// 	path: 'editor',
+		// 	component: import('./pages/admin/editor/editor'),
+		// 	title: 'Editor',
+		// 	data: {
+		// 		requiresAuth: true
+		// 	}
+		// },
 		{
-			path: 'profile/settings',
-			component: import('./pages/profile/profileSettings'),
-			title: 'Profile Settings',
-			data: {
-				requiresAuth: true
-			}
-		},
-		{
-			path: 'editor',
-			component: import('./pages/admin/editor/editor'),
-			title: 'Editor',
-			data: {
-				requiresAuth: true
-			}
+			path: 'editor/creature/:uid',
+			component: import('./pages/encyclopedia/creatures/creature'),
+			title: 'Creature',
+			// data: {
+			// 	requiresAuth: true
+			// }
 		}
 	];
 

@@ -2,13 +2,14 @@
 using MongoDB.Bson.Serialization;
 using souchy.celebi.eevee.face.util;
 using System.Diagnostics;
+using static souchy.celebi.eevee.face.util.IIDJsonConverter;
 
 namespace souchy.celebi.eevee.impl.util
 {
     /// <summary>
     /// This maps IIDs to a String in the Mongo database
     /// </summary>
-    public class IIDSerializer : IBsonSerializer<IID>
+    public class IIDBsonSerializer : IBsonSerializer<IID>
     {
         public Type ValueType => typeof(IID);
 

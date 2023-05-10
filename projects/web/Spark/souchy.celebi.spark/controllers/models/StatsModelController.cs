@@ -30,7 +30,7 @@ namespace souchy.celebi.spark.controllers.models
         public async Task<List<IStats>> GetAll() => await _stats.GetAsync();
 
         [HttpGet("stats/{id}")]
-        public async Task<ActionResult<IStats>> Get(ObjectId id)
+        public async Task<ActionResult<IStats>> Get([FromRoute] ObjectId id)
         {
             IStats? stats = await _stats.GetOneAsync(id);
             if (stats is null)
@@ -48,7 +48,7 @@ namespace souchy.celebi.spark.controllers.models
 
         [Authorize]
         [HttpPut("stats/{id}")]
-        public async Task<ActionResult<ReplaceOneResult>> Update(ObjectId id, Stats updatedStats)
+        public async Task<ActionResult<ReplaceOneResult>> Update([FromRoute] ObjectId id, Stats updatedStats)
         {
             var stats = await _stats.GetOneAsync(id);
             if (stats is null) 
@@ -60,7 +60,7 @@ namespace souchy.celebi.spark.controllers.models
 
         [Authorize]
         [HttpDelete("stats/{id}")]
-        public async Task<ActionResult<DeleteResult>> Delete(ObjectId id)
+        public async Task<ActionResult<DeleteResult>> Delete([FromRoute] ObjectId id)
         {
             var stats = await _stats.GetOneAsync(id);
             if (stats is null) 

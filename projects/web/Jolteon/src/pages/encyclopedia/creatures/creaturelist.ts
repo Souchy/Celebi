@@ -1,10 +1,10 @@
 import { inject } from "aurelia";
 import { CreatureModelController } from "../../../jolteon/services/api/CreatureModelController";
-import { ICreatureModel, CreatureModel, IID } from './../../../jolteon/services/api/data-contracts';
-import { IRouter } from "@aurelia/router";
+import { ICreatureModel, CreatureModel } from './../../../jolteon/services/api/data-contracts';
+import { IRouteableComponent, IRouter } from "@aurelia/router";
 
 @inject(CreatureModelController)
-export class CreatureList {
+export class CreatureList implements IRouteableComponent {
 
     public creatures: ICreatureModel[] = [];
     public selectedCreatures: ICreatureModel[] = [];
@@ -36,7 +36,7 @@ export class CreatureList {
 
     public clickDelete() {
         for (let crea of this.selectedCreatures) {
-            let id: IID = crea.modelUid;
+            let id: string = crea.modelUid; // IID
             this.http.deleteCreature(id).then(res => {
                 if (res.data.deletedCount !== 1) return;
                 let index = this.creatures.findIndex(c => c.modelUid === id);
@@ -48,8 +48,10 @@ export class CreatureList {
         this.selectedCreatures = [];
     }
 
-    public clickCreature(modelUid: IID) {
-        this.router.load("/editor/creature/" + modelUid.value);
+    public clickCreature(modelUid: string) {
+        console.log("click crea " + modelUid)
+        // this.router.load("/home")
+        this.router.load("/editor/creature/" + modelUid);
     }
 
 }
