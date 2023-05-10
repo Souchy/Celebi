@@ -2,6 +2,7 @@
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.util;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace souchy.celebi.eevee.impl.shared
 {
@@ -10,6 +11,8 @@ namespace souchy.celebi.eevee.impl.shared
         /// <summary>
         /// mongo id
         /// </summary>
+        [BsonId]
+        //[BsonElement("_id")]
         public ObjectId entityUid { get; set; }
         /// <summary>
         /// string model id / key

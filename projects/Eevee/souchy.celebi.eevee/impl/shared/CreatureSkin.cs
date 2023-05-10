@@ -4,11 +4,13 @@ using souchy.celebi.eevee.face.util;
 using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace souchy.celebi.eevee.impl.shared
 {
     public class CreatureSkin : ICreatureSkin
     {
+        [BsonId]
         public ObjectId entityUid { get; set; }
         public ObjectId nameId { get; set; }
         public ObjectId descriptionId { get; set; }

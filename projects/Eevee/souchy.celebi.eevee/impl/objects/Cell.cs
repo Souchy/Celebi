@@ -7,11 +7,13 @@ using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.impl.util.math;
 using MongoDB.Bson;
 using static souchy.celebi.eevee.face.entity.IEntity;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace souchy.celebi.eevee.impl.objects
 {
     public class Cell : ICell
     {
+        [BsonId]
         public ObjectId entityUid { get; set; }
         public IID modelUid { get; set; }
         public ObjectId fightUid { get; set; }

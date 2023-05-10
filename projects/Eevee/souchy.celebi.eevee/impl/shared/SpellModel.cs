@@ -1,4 +1,5 @@
-﻿using souchy.celebi.eevee.enums;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.face.entity;
@@ -17,6 +18,7 @@ namespace souchy.celebi.eevee.impl.shared
 {
     public class SpellModel : ISpellModel
     {
+        [BsonId]
         public ObjectId entityUid { get; set; }
         public IID modelUid { get; set; }
 

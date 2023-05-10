@@ -9,11 +9,13 @@ using souchy.celebi.eevee.impl.objects.statuses;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.impl.values;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace souchy.celebi.eevee.impl.shared
 {
     public class StatusModel : IStatusModel
     {
+        [BsonId]
         public ObjectId entityUid { get; set; }
         public IID modelUid { get; set; }
 

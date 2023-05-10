@@ -19,11 +19,13 @@ using souchy.celebi.eevee.face.util.math;
 using System.ComponentModel;
 using System.Linq;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace souchy.celebi.eevee.impl.objects
 {
     public abstract class Effect : IEffect
     {
+        [BsonId]
         public ObjectId entityUid { get; set; } //= Eevee.RegisterIID();
         public IID modelUid { get; set; }
         public ObjectId fightUid { get; set; }

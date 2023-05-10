@@ -7,11 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace souchy.celebi.eevee.impl.shared
 {
     public class EffectSkin : IEffectSkin
     {
+        [BsonId]
         public ObjectId entityUid { get; set; }
 
         public IID vfxOnTarget { get; set; }

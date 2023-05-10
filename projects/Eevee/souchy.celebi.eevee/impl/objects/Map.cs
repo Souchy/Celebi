@@ -12,6 +12,7 @@ namespace souchy.celebi.eevee.impl.objects
 {
     public class Map : IMap
     {
+        [BsonId]
         public ObjectId entityUid { get; set; }
         public IID modelUid { get; set; }
 

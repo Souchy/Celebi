@@ -11,6 +11,7 @@ namespace souchy.celebi.espeon.eevee.impl.controllers
 {
     public class Player : IPlayer
     {
+        [BsonId]
         public ObjectId entityUid { get; set; }
         public ObjectId fightUid { get; set; }
 

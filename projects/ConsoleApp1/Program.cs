@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using souchy.celebi.eevee;
 using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.enums.characteristics;
@@ -70,10 +71,11 @@ namespace PlayfabClientTest
 
     public class Breed : IEntity
     {
-        public int Id { get; set; }
-        public static string asdf = "";
+        [BsonId]
         public ObjectId entityUid { get; set; } = Eevee.RegisterIIDTemporary(); //Eevee.RegisterIID<string>();
         public IStats stats = Stats.Create(); //new Stats();
+        public int Id { get; set; }
+        public static string asdf = "";
         public Breed()
         {
             //stats.GetEventBus().subscribe(this); // register All

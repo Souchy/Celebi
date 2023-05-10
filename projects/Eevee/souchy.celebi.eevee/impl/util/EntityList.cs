@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.util;
 
@@ -18,6 +19,7 @@ namespace souchy.celebi.eevee.impl.util
         public const string EventReplace = nameof(Replace);
 
         [JsonIgnore]
+        [BsonId]
         public ObjectId entityUid { get; set; } = Eevee.RegisterIIDTemporary();
         [JsonIgnore]
         public bool allowDuplicates { get; init; } = true;

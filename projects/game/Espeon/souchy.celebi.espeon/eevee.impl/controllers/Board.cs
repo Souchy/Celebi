@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using souchy.celebi.eevee;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.controllers;
@@ -11,6 +12,7 @@ namespace souchy.celebi.espeon.eevee.impl.controllers
 {
     public class Board : IBoard
     {
+        [BsonId]
         public ObjectId entityUid { get; set; } = Eevee.RegisterIIDTemporary();
         public ObjectId fightUid { get; set; }
 

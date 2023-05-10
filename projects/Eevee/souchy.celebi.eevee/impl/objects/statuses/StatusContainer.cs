@@ -1,4 +1,5 @@
-﻿using souchy.celebi.eevee.face.objects.stats;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.objects.statuses;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.statuses;
@@ -12,8 +13,9 @@ namespace souchy.celebi.eevee.impl.objects.statuses
 {
     public class StatusContainer : IStatusContainer
     {
-        public ObjectId fightUid { get; set; }
+        [BsonId]
         public ObjectId entityUid { get; set; }
+        public ObjectId fightUid { get; set; }
         public IID modelUid { get; set; }
 
         public IID sourceSpellModel { get; set; }

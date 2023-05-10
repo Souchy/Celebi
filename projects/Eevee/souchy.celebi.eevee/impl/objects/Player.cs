@@ -1,4 +1,5 @@
-﻿using souchy.celebi.eevee.face.objects;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.util;
 using System;
@@ -11,6 +12,7 @@ namespace souchy.celebi.eevee.impl.objects
 {
     public class Player : IPlayer
     {
+        [BsonId]
         public ObjectId entityUid { get; set; }
         public ObjectId fightUid { get; set; }
         public ITeam team { get; set; }

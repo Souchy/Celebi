@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using souchy.celebi.eevee;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.controllers;
@@ -14,6 +15,7 @@ namespace souchy.celebi.espeon.eevee.impl.controllers
     {
         #region Properties
 
+        [BsonId]
         public ObjectId entityUid { get; set; } = Eevee.RegisterIIDTemporary();
 
         public ITimeline timeline { get; set; }

@@ -1,4 +1,5 @@
-﻿using souchy.celebi.eevee.enums;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.util;
@@ -9,6 +10,7 @@ namespace souchy.celebi.eevee.impl.stats
 {
     public class StatResource : IStatResource
     {
+        [BsonId]
         public ObjectId entityUid { get; set; }
         public CharacteristicId statId { get; init; }
 

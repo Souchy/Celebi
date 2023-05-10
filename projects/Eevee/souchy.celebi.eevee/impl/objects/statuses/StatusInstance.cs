@@ -12,6 +12,7 @@ namespace souchy.celebi.eevee.statuses
 {
     public class StatusInstance : IStatusInstance
     {
+        [BsonId]
         public ObjectId entityUid { get; set; }
         public IID modelUid { get; set; }
         public ObjectId fightUid { get; set; }

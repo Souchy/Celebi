@@ -7,7 +7,7 @@ namespace souchy.celebi.eevee.face.entity
 {
     public interface IFightEntity : IEntity
     {
-        [BsonSerializer(typeof(IIDSerializer))]
+        //[BsonSerializer(typeof(IIDSerializer))]
         public ObjectId fightUid { get; set; }
 
         public IFight GetFight() => Eevee.fights.Get(fightUid); 

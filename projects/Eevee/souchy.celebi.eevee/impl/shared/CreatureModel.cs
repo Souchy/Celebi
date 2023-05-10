@@ -10,6 +10,7 @@ namespace souchy.celebi.eevee.impl.shared
     public class CreatureModel : ICreatureModel
     {
         [BsonId]
+        //[BsonElement("_id")]
         public ObjectId entityUid { get; set; }
         public IID modelUid { get; set; }
 

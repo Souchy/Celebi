@@ -1,4 +1,5 @@
-﻿using souchy.celebi.eevee.face.entity;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.shared.models.skins;
 using souchy.celebi.eevee.face.util;
 
@@ -6,6 +7,7 @@ namespace souchy.celebi.eevee.impl.shared
 {
     public class SpellSkin : ISpellSkin
     {
+        [BsonId]
         public ObjectId entityUid { get; set; }
         public IID spellModelUid { get; set; }
         public IID icon { get; set; }

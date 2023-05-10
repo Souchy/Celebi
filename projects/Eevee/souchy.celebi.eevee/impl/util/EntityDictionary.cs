@@ -1,4 +1,5 @@
-﻿using souchy.celebi.eevee.face.entity;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects.statuses;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.statuses;
@@ -7,6 +8,7 @@ namespace souchy.celebi.eevee.impl.util
 {
     public class EntityDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IEntityDictionary<TKey, TValue> where TValue : IEntity
     {
+        [BsonId]
         public ObjectId entityUid { get; set; } // = Eevee.RegisterIID();
 
         IEnumerable<TValue> IEntityDictionary<TKey, TValue>.Values => Values;

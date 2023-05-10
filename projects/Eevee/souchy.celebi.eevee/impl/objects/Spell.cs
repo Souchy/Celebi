@@ -1,4 +1,5 @@
-﻿using souchy.celebi.eevee.face.entity;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.util;
@@ -13,6 +14,7 @@ namespace souchy.celebi.eevee.impl.objects
 {
     public class Spell : ISpell
     {
+        [BsonId]
         public ObjectId fightUid { get; set; }
         public IID modelUid { get; set; }
         public ObjectId entityUid { get; set; } 
