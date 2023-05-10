@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MongoDB.Bson.Serialization;
+using Newtonsoft.Json;
 using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.enums.characteristics.properties;
 using souchy.celebi.eevee.face.objects.stats;
@@ -7,6 +8,8 @@ using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.stats;
 using System;
+using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Security.AccessControl;
 
@@ -39,6 +42,8 @@ namespace souchy.celebi.eevee.enums.characteristics
         }
     }
 
+    [JsonConverter(typeof(CharacIdJsonConverter))]
+    [TypeConverter(typeof(CharacIdTypeConverter))]
     public readonly record struct CharacteristicId(int ID)
     {
         public static implicit operator int(CharacteristicId v) => v.ID;
@@ -46,6 +51,77 @@ namespace souchy.celebi.eevee.enums.characteristics
         {
             int cat = (int) Math.Floor(this.ID / 1000d);
             return (CharacteristicCategory) cat;
+        }
+    }
+    public class CharacIdJsonConverter : JsonConverter<CharacteristicId>
+    {
+        public override CharacteristicId ReadJson(JsonReader reader, Type objectType, CharacteristicId existingValue, bool hasExistingValue, JsonSerializer serializer)
+            => new CharacteristicId(reader.ReadAsInt32().Value);
+        public override void WriteJson(JsonWriter writer, CharacteristicId value, JsonSerializer serializer)
+            => writer.WriteValue(value);
+    }
+    public class CharacIdTypeConverter : TypeConverter
+    {
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) =>
+            sourceType == typeof(int);
+        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType) =>
+            destinationType == typeof(int);
+        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        {
+            return value switch
+            {
+                int s => new CharacteristicId(s),
+                null => null,
+                _ => throw new ArgumentException($"Cannot convert from {value} to IID", nameof(value))
+            };
+        }
+        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        {
+            if (destinationType == typeof(int))
+            {
+                return value switch
+                {
+                    CharacteristicId id => id.ID,
+                    null => null,
+                    _ => throw new ArgumentException($"Cannot convert {value} to string", nameof(value))
+                };
+            }
+            throw new ArgumentException($"Cannot convert {value ?? "(null)"} to {destinationType}", nameof(destinationType));
+        }
+    }
+
+    /// <summary>
+    /// This maps IIDs to a String in the Mongo database
+    /// </summary>
+    public class CharacIdBsonSerializer : IBsonSerializer<CharacteristicId>
+    {
+        public Type ValueType => typeof(CharacteristicId);
+
+        public void Serialize(BsonSerializationContext context, BsonSerializationArgs args, CharacteristicId value)
+        {
+            //if (value == null) return;
+            //var val = value.ToString();
+            //var oid = new ObjectId(val);
+            BsonSerializer.Serialize(context.Writer, value.ID.ToString());
+            //if (value == null) value = IID.GenerateOID();
+            //BsonSerializer.Serialize(context.Writer, value.ToString());
+        }
+
+        public CharacteristicId Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
+        {
+            var id = BsonSerializer.Deserialize<string>(context.Reader);
+            //var id = BsonSerializer.Deserialize<ObjectId>(context.Reader);
+            return new CharacteristicId(int.Parse(id));
+        }
+
+        public void Serialize(BsonSerializationContext context, BsonSerializationArgs args, object value)
+        {
+            this.Serialize(context, (CharacteristicId)value);
+        }
+
+        object IBsonSerializer.Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
+        {
+            return this.Deserialize(context, args);
         }
     }
 

@@ -12,6 +12,7 @@ using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.factories;
 using souchy.celebi.eevee.impl.shared;
+using souchy.celebi.eevee.impl.stats;
 using souchy.celebi.spark.services;
 using souchy.celebi.spark.services.models;
 namespace souchy.celebi.spark.controllers.models
@@ -65,6 +66,7 @@ namespace souchy.celebi.spark.controllers.models
         public async Task<ActionResult<ICreatureModel>> PostNew()
         {
             var newCreatureModel = Factories.newCreatureModel();
+            newCreatureModel.GetBaseStats().Add(StatSimple.Create(Resource.Life.ID, 50));
 
             newCreatureModel.modelUid = await _ids.GetID<ICreatureModel>();
             newCreatureModel.GetName().modelUid = await _ids.GetID<IStringEntity>();

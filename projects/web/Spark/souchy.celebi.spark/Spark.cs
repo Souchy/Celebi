@@ -32,6 +32,7 @@ using MongoDB.Bson.Serialization.IdGenerators;
 using MongoDB.Bson;
 using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.objects.effects;
+using souchy.celebi.eevee.enums.characteristics;
 
 namespace souchy.celebi.spark
 {
@@ -267,6 +268,7 @@ namespace souchy.celebi.spark
             );
             BsonSerializer.RegisterSerializer(objectSerializer);
             BsonSerializer.RegisterSerializer<IID>(new IIDBsonSerializer());
+            BsonSerializer.RegisterSerializer<CharacteristicId>(new CharacIdBsonSerializer());
 
             BsonClassMap.RegisterClassMap<Map>();
             BsonClassMap.RegisterClassMap<StringEntity>();
