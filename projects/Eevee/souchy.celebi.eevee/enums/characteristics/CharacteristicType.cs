@@ -7,6 +7,7 @@ using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.stats;
+using souchy.celebi.eevee.impl.util;
 using System;
 using System.ComponentModel;
 using System.Globalization;
@@ -53,45 +54,36 @@ namespace souchy.celebi.eevee.enums.characteristics
             return (CharacteristicCategory) cat;
         }
     }
-    public class CharacIdJsonConverter : JsonConverter<CharacteristicId>
-    {
-        public override CharacteristicId ReadJson(JsonReader reader, Type objectType, CharacteristicId existingValue, bool hasExistingValue, JsonSerializer serializer)
-            => new CharacteristicId(reader.ReadAsInt32().Value);
-        public override void WriteJson(JsonWriter writer, CharacteristicId value, JsonSerializer serializer)
-            => writer.WriteValue(value);
-    }
+
     public class CharacIdTypeConverter : TypeConverter
     {
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) =>
-            sourceType == typeof(int);
+            sourceType == typeof(int) || sourceType == typeof(string);
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType) =>
-            destinationType == typeof(int);
+            destinationType == typeof(int) || destinationType == typeof(string);
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
             return value switch
             {
+                string s => new CharacteristicId(int.Parse(s)),
                 int s => new CharacteristicId(s),
                 null => null,
-                _ => throw new ArgumentException($"Cannot convert from {value} to IID", nameof(value))
+                _ => throw new ArgumentException($"Cannot convert from {value} to CharacId", nameof(value))
             };
         }
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
-            if (destinationType == typeof(int))
+            return value switch
             {
-                return value switch
-                {
-                    CharacteristicId id => id.ID,
-                    null => null,
-                    _ => throw new ArgumentException($"Cannot convert {value} to string", nameof(value))
-                };
-            }
-            throw new ArgumentException($"Cannot convert {value ?? "(null)"} to {destinationType}", nameof(destinationType));
+                CharacteristicId id => destinationType == typeof(int) ? id.ID : id.ID.ToString(),
+                null => null,
+                _ => throw new ArgumentException($"Cannot convert {value} to int/string", nameof(value))
+            };
         }
     }
 
     /// <summary>
-    /// This maps IIDs to a String in the Mongo database
+    /// This maps CharacIds to a String in the Mongo database
     /// </summary>
     public class CharacIdBsonSerializer : IBsonSerializer<CharacteristicId>
     {
