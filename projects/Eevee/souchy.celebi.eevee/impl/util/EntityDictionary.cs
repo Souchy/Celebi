@@ -1,47 +1,53 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson.Serialization.Options;
+using Newtonsoft.Json;
 using souchy.celebi.eevee.face.entity;
-using souchy.celebi.eevee.face.objects.statuses;
 using souchy.celebi.eevee.face.util;
-using souchy.celebi.eevee.statuses;
 
 namespace souchy.celebi.eevee.impl.util
 {
-    public class EntityDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IEntityDictionary<TKey, TValue> where TValue : IEntity
+    public class EntityDictionary<TKey, TValue> : IEntityDictionary<TKey, TValue> where TValue : IEntity
     {
         [BsonId]
-        public ObjectId entityUid { get; set; } // = Eevee.RegisterIID();
+        public ObjectId entityUid { get; set; }
 
-        IEnumerable<TValue> IEntityDictionary<TKey, TValue>.Values => Values;
-        IEnumerable<TKey> IEntityDictionary<TKey, TValue>.Keys => Keys;
-        public IEnumerable<KeyValuePair<TKey, TValue>> Pairs => this;
+        [JsonIgnore]
+        public IEnumerable<TValue> Values => dic.Values;
+        [JsonIgnore]
+        public IEnumerable<TKey> Keys => dic.Keys;
+        [JsonIgnore]
+        public IEnumerable<KeyValuePair<TKey, TValue>> Pairs => dic;
 
+        [JsonProperty]
+        [BsonDictionaryOptions(Representation = DictionaryRepresentation.Document)]
+        protected Dictionary<TKey, TValue> dic { get; init; } = new();
 
         protected EntityDictionary() { }
-        protected EntityDictionary(ObjectId id) => entityUid = id;
-        public static IEntityDictionary<TKey, TValue> Create() => new EntityDictionary<TKey, TValue>(Eevee.RegisterIIDTemporary());
+        public static IEntityDictionary<TKey, TValue> Create() => new EntityDictionary<TKey, TValue>() { 
+            entityUid = Eevee.RegisterIIDTemporary()
+        };
 
         public TValue Get(TKey key)
         {
-            if (ContainsKey(key))
-                return this[key];
+            if (dic.ContainsKey(key))
+                return dic[key];
             else 
                 return default;
         }
 
         public bool Has(TKey key)
         {
-            return this.ContainsKey(key);
+            return dic.ContainsKey(key);
         }
 
         public void Set(TKey key, TValue value)
         {
-            this[key] = value;
+            dic[key] = value;
             this.GetEntityBus().publish(nameof(Set), this, key, value);
         }
 
-        public new void Add(TKey key, TValue value)
+        public void Add(TKey key, TValue value)
         {
-            base.Add(key, value);
+            dic.Add(key, value);
             this.GetEntityBus().publish(nameof(Add), this, key, value); 
         }
         public void AddAll(IEntityDictionary<TKey, TValue> dictionary)
@@ -50,13 +56,13 @@ namespace souchy.celebi.eevee.impl.util
                 Add(pair.Key, pair.Value);
         }
 
-        public new bool Remove(TKey key)
+        public bool Remove(TKey key)
         {
             TValue? val;
-            base.TryGetValue(key, out val);
+            dic.TryGetValue(key, out val);
             try
             {
-                var result = base.Remove(key);
+                var result = dic.Remove(key);
                 return result;
             } 
             finally
@@ -69,16 +75,15 @@ namespace souchy.celebi.eevee.impl.util
 
         public void Remove(Predicate<TValue> predicate)
         {
-            var toRemove = this.Where(p => predicate(p.Value)).ToList();
+            var toRemove = dic.Where(p => predicate(p.Value)).ToList();
             foreach(var rem in toRemove)
                 this.Remove(rem.Key);
         }
 
-        public new void Clear()
+        public void Clear()
         {
             foreach (var k in Keys.ToList())
                 Remove(k);
-            //base.Clear();
         }
 
         public void ForEach(Action<TValue> action)
@@ -89,7 +94,7 @@ namespace souchy.celebi.eevee.impl.util
 
         public void ForEach(Action<TKey, TValue> action)
         {
-            foreach(var pair in this)
+            foreach(var pair in dic)
                 action(pair.Key, pair.Value);
         }
 
