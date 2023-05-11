@@ -50,6 +50,7 @@
     <Folder Include="assets\creatures\chailai\" />
     <Folder Include="assets\effects\" />
     <Folder Include="assets\spells\" />
+    <Folder Include="common\util\" />
     <Folder Include="data\test\" />
     <Folder Include="sapphire\nodes\" />
     <Folder Include="sapphire\scenes\" />

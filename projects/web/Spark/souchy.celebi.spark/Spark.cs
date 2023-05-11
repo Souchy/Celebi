@@ -33,6 +33,8 @@ using MongoDB.Bson;
 using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.objects.effects;
 using souchy.celebi.eevee.enums.characteristics;
+using souchy.celebi.eevee.impl.objects.zones;
+using System.Reflection;
 
 namespace souchy.celebi.spark
 {
@@ -266,59 +268,23 @@ namespace souchy.celebi.spark
             var objectSerializer = new ObjectSerializer(type => 
                 ObjectSerializer.DefaultAllowedTypes(type) || type.FullName.StartsWith("souchy.celebi")
             );
+
             BsonSerializer.RegisterSerializer(objectSerializer);
             BsonSerializer.RegisterSerializer<IID>(new IIDBsonSerializer());
             BsonSerializer.RegisterSerializer<CharacteristicId>(new CharacIdBsonSerializer());
 
-            BsonClassMap.RegisterClassMap<Map>();
-            BsonClassMap.RegisterClassMap<StringEntity>();
-
-            BsonClassMap.RegisterClassMap<CreatureModel>();
-            BsonClassMap.RegisterClassMap<SpellModel>();
-            BsonClassMap.RegisterClassMap<StatusModel>();
-
-            BsonClassMap.RegisterClassMap<Stats>();
-            BsonClassMap.RegisterClassMap<StatSimple>();
-            BsonClassMap.RegisterClassMap<StatBool>();
-
-            BsonClassMap.RegisterClassMap<EffectModel>();
-            BsonClassMap.RegisterClassMap<EffectBase>();
-
-            BsonClassMap.RegisterClassMap<CreatureSkin>();
-            BsonClassMap.RegisterClassMap<SpellSkin>();
-            BsonClassMap.RegisterClassMap<EffectSkin>();
-
 
             BsonClassMap.RegisterClassMap<EntitySet<IID>>();
-            BsonClassMap.RegisterClassMap<IID>();
-            //BsonClassMap.RegisterClassMap<CreatureModel>(c =>
-            //{
-            //    c.MapIdProperty(e => e.entityUid)
-            //        .SetIdGenerator(StringObjectIdGenerator.Instance)
-            //        .SetSerializer(new StringSerializer(BsonType.ObjectId));
-            //});
-            //BsonClassMap.RegisterClassMap<IID>(id => new ObjectId(id));
-            //BsonClassMap.RegisterClassMap<IEntity>(e =>
-            //{
-            //    e.AutoMap();
-            //e.MapIdProperty(e => e.entityUid)
-            //    .SetIdGenerator(StringObjectIdGenerator.Instance)
-            //    .SetSerializer(new StringSerializer(BsonType.ObjectId));
-            //});
-            //BsonClassMap.RegisterClassMap<IEntityModeled>(e =>
-            //{
-            //    e.AutoMap();
-            //    e.MapIdProperty(e => e.modelUid)
-            //        .SetIdGenerator(StringObjectIdGenerator.Instance)
-            //        .SetSerializer(new StringSerializer(BsonType.ObjectId));
-            //});
-            //BsonClassMap.RegisterClassMap<IFightEntity>(e =>
-            //{
-            //    e.AutoMap();
-            //    e.MapIdProperty(e => e.fightUid)
-            //        .SetIdGenerator(StringObjectIdGenerator.Instance)
-            //        .SetSerializer(new StringSerializer(BsonType.ObjectId));
-            //});
+            BsonClassMap.RegisterClassMap<EntityDictionary<CharacteristicId, IStat>>();
+            BsonClassMap.RegisterClassMap<Dictionary<CharacteristicId, IStat>>();
+
+            foreach (var t in typeof(IEntity).Assembly.GetTypes()
+                .Where(t => !t.IsInterface && !t.IsGenericType))
+            {
+                var m = new BsonClassMap(t);
+                m.AutoMap();
+                BsonClassMap.RegisterClassMap(m);
+            }
         }
 
     }

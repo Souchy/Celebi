@@ -1,57 +1,11 @@
 ﻿using MongoDB.Bson;
 using Newtonsoft.Json;
+using souchy.celebi.eevee.impl.util;
 using System.ComponentModel;
 using System.Globalization;
 
 namespace souchy.celebi.eevee.face.util
 {
-
-    public class IIDJsonConverter : JsonConverter<IID>
-    {
-        public override IID ReadJson(JsonReader reader, Type objectType, IID existingValue, bool hasExistingValue, JsonSerializer serializer)
-        {
-            //return (IID) reader.ReadAsString();
-            string s = (string) reader.Value;
-            return (IID) s;
-        }
-        public override void WriteJson(JsonWriter writer, IID value, JsonSerializer serializer)
-        {
-            //WriteRawValue
-            writer.WriteValue(value.ToString());
-        }
-    }
-
-    public class IIDTypeConverter : TypeConverter
-    {
-        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) =>
-            sourceType == typeof(string);
-        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType) =>
-            destinationType == typeof(string);
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
-        {
-            return value switch
-            {
-                string s => new IID(s),
-                null => null,
-                _ => throw new ArgumentException($"Cannot convert from {value} to IID", nameof(value))
-            };
-        }
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
-        {
-            if (destinationType == typeof(string))
-            {
-                return value switch
-                {
-                    IID id => id.value,
-                    null => null,
-                    _ => throw new ArgumentException($"Cannot convert {value} to string", nameof(value))
-                };
-            }
-            throw new ArgumentException($"Cannot convert {value ?? "(null)"} to {destinationType}", nameof(destinationType));
-        }
-
-    }
-
     [Serializable]
     [JsonConverter(typeof(IIDJsonConverter))]
     [TypeConverter(typeof(IIDTypeConverter))]
@@ -88,6 +42,36 @@ namespace souchy.celebi.eevee.face.util
 
         //public static bool operator ==(IID leftSide, IID rightSide) => object.Equals(leftSide, rightSide);
         //public static bool operator !=(IID leftSide, IID rightSide) => !(leftSide == rightSide);
+    }
+
+    public class IIDTypeConverter : TypeConverter
+    {
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) =>
+            sourceType == typeof(string);
+        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType) =>
+            destinationType == typeof(string);
+        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        {
+            return value switch
+            {
+                string s => new IID(s),
+                null => null,
+                _ => throw new ArgumentException($"Cannot convert from {value} to IID", nameof(value))
+            };
+        }
+        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        {
+            if (destinationType == typeof(string))
+            {
+                return value switch
+                {
+                    IID id => id.value,
+                    null => null,
+                    _ => throw new ArgumentException($"Cannot convert {value} to string", nameof(value))
+                };
+            }
+            throw new ArgumentException($"Cannot convert {value ?? "(null)"} to {destinationType}", nameof(destinationType));
+        }
 
     }
 }

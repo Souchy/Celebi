@@ -7,7 +7,7 @@ namespace souchy.celebi.eevee.impl.util
 {
     public class EntitySet<T> : EntityList<T>, IEntitySet<T> //where T : IEntity
     {
-        public EntitySet() => allowDuplicates = false;
+        public override bool allowDuplicates() => false;
     }
 
     public class EntityList<T> : List<T>, IEntityList<T> //where T : IEntity
@@ -22,15 +22,15 @@ namespace souchy.celebi.eevee.impl.util
         [BsonId]
         public ObjectId entityUid { get; set; } = Eevee.RegisterIIDTemporary();
         [JsonIgnore]
-        public bool allowDuplicates { get; init; } = true;
-        [JsonIgnore]
         public List<T> Values { get => this; }
 
         public EntityList() { }
 
+        public virtual bool allowDuplicates() => true; 
+
         public new void Add(T t)
         {
-            if (!this.allowDuplicates && this.Contains(t))
+            if (!this.allowDuplicates() && this.Contains(t))
             {
                 throw new ArgumentException($"Duplicate element: {t}.");
             }

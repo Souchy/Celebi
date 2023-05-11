@@ -4,7 +4,7 @@ namespace souchy.celebi.eevee.face.util
 {
     public interface IEntityList<T> : IEntity
     {
-        public bool allowDuplicates { get; init; }
+        public bool allowDuplicates();
 
         public List<T> Values { get;  }
         public void Add(T t);

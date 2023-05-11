@@ -10,7 +10,6 @@ using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.shared.models.skins;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.util;
-using souchy.celebi.umbreon.common.util;
 using souchy.celebi.umbreon.data;
 using FileAccess = Godot.FileAccess;
 
@@ -51,7 +50,7 @@ namespace souchy.celebi.umbreon.common.persistance
             Formatting = Formatting.Indented,
             ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
             Converters = new List<JsonConverter> { 
-                new util.IIDJsonConverter(), new IStringEntitysonConverter(),
+                new IIDJsonConverter(), new IStringEntitysonConverter(),
                 new IEntitySetJsonConverter(), new IEntityListJsonConverter(),
                 new IValueIntJsonConverter(), new IValueDoubleJsonConverter(), new IValueBoolJsonConverter(),
                 new CharacTypeJsonConverter(), new CharacIdJsonConverter(), new IValueElementJsonConverter()

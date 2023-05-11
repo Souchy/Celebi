@@ -1,8 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using souchy.celebi.eevee.face.util;
-using System.Diagnostics;
-using static souchy.celebi.eevee.face.util.IIDJsonConverter;
 
 namespace souchy.celebi.eevee.impl.util
 {
