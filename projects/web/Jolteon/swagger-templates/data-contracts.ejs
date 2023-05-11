@@ -1,3 +1,5 @@
+
+
 <%
 const { modelTypes, utils, config } = it;
 const { formatDescription, require, _, Ts } = utils;
@@ -5,7 +7,10 @@ const { formatDescription, require, _, Ts } = utils;
 
 const dataContractTemplates = {
   enum: (contract) => {
-    return `enum ${contract.name} {\r\n${contract.content} \r\n }`;
+    // console.log("enum contract: ");
+    // console.log(contract);
+    includeFile('./enum-data-contract.ejs', { ...it, contract: { name: contract.name, content: contract.content} }) //data: { ...contract, ...contract.typeData } })
+    // return `enum ${contract.name} {\r\n${contract.content} \r\n }`;
   },
   interface: (contract) => {
     return `interface ${contract.name} {\r\n${contract.content}}`;
@@ -22,7 +27,7 @@ type <%~ config.Ts.CodeGenKeyword.UtilRequiredKeys %><T, K extends keyof T> = Om
 
 <% modelTypes.forEach((contract) => { %>
   <%~ includeFile('./data-contract-jsdoc.ejs', { ...it, data: { ...contract, ...contract.typeData } }) %>
-  export <%~ (dataContractTemplates[contract.typeIdentifier] || dataContractTemplates.type)(contract) %>
 
+  export <%~ (dataContractTemplates[contract.typeIdentifier] || dataContractTemplates.type)(contract) %>
 
 <% }) %>

@@ -53,6 +53,10 @@ namespace souchy.celebi.eevee.enums.characteristics
             int cat = (int) Math.Floor(this.ID / 1000d);
             return (CharacteristicCategory) cat;
         }
+        public override string ToString()
+        {
+            return ID.ToString();
+        }
     }
 
     public class CharacIdTypeConverter : TypeConverter

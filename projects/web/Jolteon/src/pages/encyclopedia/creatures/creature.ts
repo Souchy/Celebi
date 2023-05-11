@@ -50,7 +50,7 @@ export class Creature implements IRouteableComponent {
         this.uid = parameters["uid"] as string;
         // console.log("creature loading: " + this.uid)
 
-        let res = await this.creatureController.getCreature2(this.uid);
+        let res = await this.creatureController.getCreature(this.uid);
         this.model = res.data;
         console.log("creature loading: " + JSON.stringify(this.model))
     }

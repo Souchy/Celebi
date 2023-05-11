@@ -1,6 +1,7 @@
 ﻿using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.impl.shared.conditions.value;
+using souchy.celebi.eevee.impl.util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace souchy.celebi.eevee.enums.characteristics.creature
 {
+    [ClassEnum]
     public sealed record Affinity : CharacteristicType
     {
         public ElementType Element { get; init; }

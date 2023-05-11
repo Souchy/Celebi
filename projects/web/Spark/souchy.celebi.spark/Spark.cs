@@ -146,6 +146,8 @@ namespace souchy.celebi.spark
             services.AddSwaggerGen(c =>
             {
                 c.SchemaFilter<EnumSchemaFilter>();
+                c.SchemaFilter<ClassEnumSchemaFilter>();
+                //c.
                 //c.MapType<IID>(() => new OpenApiSchema() { Type = "IID" });
                 //c.MapType<IID>(() => new OpenApiSchema() { Type = "string" });
             });
@@ -153,6 +155,7 @@ namespace souchy.celebi.spark
             services.AddControllers(options =>
             {
                 options.Conventions.Add(new ControllerNamingConvention());
+                
             }).AddNewtonsoftJson();
         }
 

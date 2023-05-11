@@ -1,12 +1,23 @@
+
 <%
 const { contract, utils, config } = it;
 const { formatDescription, require, _ } = utils;
-const { name, $content } = contract;
+const { name, content } = contract;
+
+// console.log("enum-data-contract !!!!!");
 %>
 <% if (config.generateUnionEnums) { %>
-  export type <%~ name %> = <%~ _.map($content, ({ value }) => value).join(" | ") %>
+  <% 
+    console.log("enum content1:"  + content)
+    %>
+  export type <%~ name %> = <%~ _.map(content, ({ value }) => value).join(" | ") %>
 <% } else { %>
+
+  <% 
+    console.log("enum content:"  + name)
+    %>
+
   export enum <%~ name %> {
-    <%~ _.map($content, ({ key, value }) => `${key} = ${value}`).join(",\n") %>
+    <%~ _.map(content, ({ key, value }) => `${key} = ${value}`).join(",\n") %>
   }
 <% } %>
