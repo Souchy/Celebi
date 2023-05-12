@@ -36,6 +36,10 @@ using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.impl.objects.zones;
 using System.Reflection;
 using souchy.celebi.eevee.impl.util.serialization;
+using Newtonsoft.Json;
+using souchy.celebi.eevee.face.shared.zones;
+using souchy.celebi.eevee.face.shared.triggers;
+using souchy.celebi.eevee.face.shared.conditions;
 
 namespace souchy.celebi.spark
 {
@@ -148,9 +152,17 @@ namespace souchy.celebi.spark
             {
                 c.SchemaFilter<EnumSchemaFilter>();
                 c.SchemaFilter<CharacTypeSchemaFilter>();
-                //c.
+                c.SchemaFilter<AdditionalPropertiesSchemaFilter>();
+
                 //c.MapType<IID>(() => new OpenApiSchema() { Type = "IID" });
                 //c.MapType<IID>(() => new OpenApiSchema() { Type = "string" });
+                c.MapType<IEntitySet<ObjectId>>(() => mapSchemaArray<ObjectId>());
+                c.MapType<IEntityList<ObjectId>>(() => mapSchemaArray<ObjectId>());
+                c.MapType<IEntityList<IZone>>(() => mapSchemaArray<IZone>());
+                c.MapType<IEntityList<ITrigger>>(() => mapSchemaArray<ITrigger>());
+                c.MapType<IEntityList<ICondition>>(() => mapSchemaArray<ICondition>());
+
+                c.DocumentFilter<AdditionalTypesDocumentFilter>(); // adds more document types
             });
             services.AddSwaggerGenNewtonsoftSupport();
             services.AddControllers(options =>
@@ -160,7 +172,30 @@ namespace souchy.celebi.spark
             }).AddNewtonsoftJson(options =>
             {
                 //options.SerializerSettings.Converters.Add(new IEntityListJsonConverter());
+                //options.SerializerSettings.Converters.Add(new IEntitySetJsonConverter());
+                //options.SerializerSettings.Converters.Add(new ObjectIdListConverter());
             });
+        }
+
+        private static OpenApiSchema mapSchemaArray<T>()
+        {
+            var t = typeof(T);
+
+            var items = new OpenApiSchema()
+            {
+                Reference = new OpenApiReference()
+                {
+                    Type = ReferenceType.Schema,
+                    Id = t.Name
+                }
+            };
+            if (t == typeof(ObjectId)) 
+                items = new OpenApiSchema() { Type = "string" };
+            return new OpenApiSchema()
+            {
+                Type = "array",
+                Items = items
+            };
         }
 
         private static void configureApp(WebApplication app)
