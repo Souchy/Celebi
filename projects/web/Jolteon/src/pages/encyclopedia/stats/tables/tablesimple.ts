@@ -1,3 +1,5 @@
+import { IStatSimple } from './../../../../jolteon/services/api/data-contracts';
+import { Stats } from './../../../../../../../../arch/common/stats';
 import { bindable } from "aurelia";
 import { IStat, IStats } from "../../../../jolteon/services/api/data-contracts";
 
@@ -6,14 +8,13 @@ export class Tablesimple {
 
     @bindable
     public header: string = "Charac";
-    // public headers: string[] = ["Charac", "Base", "Growth"];
 
     @bindable
     public characs: any[];
     @bindable
-    public base: any //= { dic: {}};
+    public base: Stats 
     @bindable
-    public growth: any //= { dic: {}};
+    public growth: Stats
 
     constructor() {
 
@@ -23,7 +24,7 @@ export class Tablesimple {
     //     console.log("table base stats: " + this.base);
     // }
     bound() {
-        console.log("table base stats2: " + this.base);
+        console.log("table base stats: " + this.base);
     }
 
     public getBaseStat(id) {
@@ -34,7 +35,13 @@ export class Tablesimple {
             console.log(this.base);
             return this.base["dic"][id]
         }
-        else return 0;
+        else {
+            let stat: IStatSimple = {
+                statId: id,
+                value: 0
+            }
+            return stat;
+        }
     }
     public getGrowthStat(id) {
         if(!this.growth) return 1337;
@@ -43,7 +50,13 @@ export class Tablesimple {
             console.log("something gr: " + JSON.stringify(this.growth))
             return this.growth["dic"][id]
         }
-        else return 0;
+        else {
+            let stat: IStatSimple = {
+                statId: id,
+                value: 0
+            }
+            return stat;
+        }
     }
 
 

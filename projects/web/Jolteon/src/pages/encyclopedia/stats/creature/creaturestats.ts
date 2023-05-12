@@ -1,4 +1,4 @@
-import { IStats, AffinityTypes, ResourceTypes, StateTypes, ResistanceTypes, ContextualTypes, OtherPropertyTypes } from '../../../../jolteon/services/api/data-contracts';
+import { IStats, AffinityTypes, ResourceTypes, StateTypes, ResistanceTypes, ContextualTypes, OtherPropertyTypes, Stats, IStatSimple } from '../../../../jolteon/services/api/data-contracts';
 import { bindable } from "aurelia";
 import { IRouteableComponent } from "@aurelia/router";
 import { StatsModelController } from '../../../../jolteon/services/api/StatsModelController';
@@ -12,9 +12,9 @@ export class CreatureStats implements IRouteableComponent {
     public growthuid: string;
 
     // db data
-    public base: any = {}// = { dic: {}};
-    public growth: any = {} //= { dic: {}};
-
+    public base: Stats = null
+    public growth: Stats = null
+    
     // creature properties
     private affinities = Object.values(AffinityTypes);
     private resistances = Object.values(ResistanceTypes);
@@ -32,7 +32,10 @@ export class CreatureStats implements IRouteableComponent {
             .getStats(this.baseuid)
             .then(res => {
                 this.base = res.data
-                console.log("creature base stats: " + this.base["dic"][ResourceTypes.Life.id].value);
+
+                let stat: IStatSimple = (this.base.dic[ResourceTypes.Life.id]);
+                console.log("creature casted stat: " + stat.value);
+                // console.log("creature base stats: " + this.base["dic"][ResourceTypes.Life.id].value);
                 // console.log(this.base)
             });
         this.statsController
