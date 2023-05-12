@@ -8,6 +8,7 @@ using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.stats;
 using souchy.celebi.eevee.impl.util;
+using souchy.celebi.eevee.impl.util.serialization;
 using System;
 using System.ComponentModel;
 using System.Globalization;
@@ -52,6 +53,10 @@ namespace souchy.celebi.eevee.enums.characteristics
         {
             int cat = (int) Math.Floor(this.ID / 1000d);
             return (CharacteristicCategory) cat;
+        }
+        public override string ToString()
+        {
+            return ID.ToString();
         }
     }
 

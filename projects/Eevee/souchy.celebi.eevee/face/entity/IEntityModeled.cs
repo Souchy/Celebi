@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using souchy.celebi.eevee.face.util;
-using souchy.celebi.eevee.impl.util;
+using souchy.celebi.eevee.impl.util.serialization;
 
 namespace souchy.celebi.eevee.face.entity
 {

@@ -17,9 +17,6 @@ namespace souchy.celebi.spark.controllers.models
     [Route(Routes.Models + "stats")] 
     public class StatsModelController : ControllerBase
     {
-        //private readonly StatsService _statsService;
-        //public StatsModelController(StatsService service) => _statsService = service;
-
         private readonly CollectionService<IStats> _stats;
         public StatsModelController(MongoModelsDbService db)
         {
@@ -29,7 +26,11 @@ namespace souchy.celebi.spark.controllers.models
         [HttpGet("all")]
         public async Task<List<IStats>> GetAll() => await _stats.GetAsync();
 
-        [HttpGet("stats/{id}")]
+        [HttpGet("filtered")]
+        public async Task<List<IStats>> GetFiltered(FilterDefinition<IStats> filter)
+            => await _stats.GetAsync(filter);
+
+        [HttpGet("{id}")]
         public async Task<ActionResult<IStats>> Get([FromRoute] ObjectId id)
         {
             IStats? stats = await _stats.GetOneAsync(id);
@@ -39,7 +40,7 @@ namespace souchy.celebi.spark.controllers.models
         }
 
         [Authorize]
-        [HttpPost("stats")]
+        [HttpPost("")]
         public async Task<IActionResult> Post(Stats newStats)
         {
             await _stats.CreateAsync(newStats);
@@ -47,7 +48,7 @@ namespace souchy.celebi.spark.controllers.models
         }
 
         [Authorize]
-        [HttpPut("stats/{id}")]
+        [HttpPut("{id}")]
         public async Task<ActionResult<ReplaceOneResult>> Update([FromRoute] ObjectId id, Stats updatedStats)
         {
             var stats = await _stats.GetOneAsync(id);
@@ -59,7 +60,7 @@ namespace souchy.celebi.spark.controllers.models
         }
 
         [Authorize]
-        [HttpDelete("stats/{id}")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<DeleteResult>> Delete([FromRoute] ObjectId id)
         {
             var stats = await _stats.GetOneAsync(id);

@@ -19,7 +19,7 @@ export class Stringcomponent implements IRouteableComponent {
     
     binding() { 
         this.controller
-            .getString(this.uid, { lang: I18NType.Fr })
+            .getString(this.uid, { lang: I18NType.fr })
             .then(res => this.entity = res.data);
     }
 

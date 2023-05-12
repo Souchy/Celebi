@@ -1,6 +1,5 @@
-import { IStats, IStringEntity, StringEntity } from './../../../jolteon/services/api/data-contracts';
+import { IStats, IStringEntity, StringEntity, ICreatureModel, AffinityTypes, Affinity } from "../../../jolteon/services/api/data-contracts";
 import { bindable } from "aurelia";
-import { ICreatureModel } from "../../../jolteon/services/api/data-contracts";
 import { CreatureModelController } from "../../../jolteon/services/api/CreatureModelController";
 import { SpellModelController } from "../../../jolteon/services/api/SpellModelController";
 import { StringController } from "../../../jolteon/services/api/StringController";
@@ -50,7 +49,7 @@ export class Creature implements IRouteableComponent {
         this.uid = parameters["uid"] as string;
         // console.log("creature loading: " + this.uid)
 
-        let res = await this.creatureController.getCreature2(this.uid);
+        let res = await this.creatureController.getCreature(this.uid);
         this.model = res.data;
         console.log("creature loading: " + JSON.stringify(this.model))
     }

@@ -1,6 +1,7 @@
 ﻿using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.impl.shared.conditions.value;
+using souchy.celebi.eevee.impl.util;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -31,7 +31,6 @@ namespace souchy.celebi.spark.util.swagger
                     schema.Format = string.Empty;
                 }
             }
-
         }
     }
 }

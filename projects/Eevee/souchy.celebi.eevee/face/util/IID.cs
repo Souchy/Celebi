@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson;
 using Newtonsoft.Json;
 using souchy.celebi.eevee.impl.util;
+using souchy.celebi.eevee.impl.util.serialization;
 using System.ComponentModel;
 using System.Globalization;
 

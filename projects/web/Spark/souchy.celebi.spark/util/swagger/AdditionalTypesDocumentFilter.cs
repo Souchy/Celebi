@@ -1,13 +1,14 @@
 ﻿using Microsoft.OpenApi.Models;
+using souchy.celebi.eevee.face.shared.triggers;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace souchy.celebi.spark.util.swagger
 {
-    public class EeveeDocumentFilter : IDocumentFilter
+    public class AdditionalTypesDocumentFilter : IDocumentFilter
     {
         public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
         {
-            throw new NotImplementedException();
+            context.SchemaGenerator.GenerateSchema(typeof(ITrigger), context.SchemaRepository);
         }
     }
 }

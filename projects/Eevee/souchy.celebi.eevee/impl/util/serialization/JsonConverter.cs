@@ -11,7 +11,7 @@ using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.impl.values;
 
 //namespace souchy.celebi.umbreon.common.util
-namespace souchy.celebi.eevee.impl.util
+namespace souchy.celebi.eevee.impl.util.serialization
 {
     public class IIDJsonConverter : JsonConverter<IID>
     {
