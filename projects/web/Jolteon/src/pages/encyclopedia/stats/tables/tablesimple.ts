@@ -11,11 +11,9 @@ export class Tablesimple {
     @bindable
     public characs: any[];
     @bindable
-    public base: any;
+    public base: any //= { dic: {}};
     @bindable
-    public growth: any;
-    // @bindable
-    // public dic: any;
+    public growth: any //= { dic: {}};
 
     constructor() {
 
@@ -31,15 +29,20 @@ export class Tablesimple {
     public getBaseStat(id) {
         if(!this.base) return 666;
 
-        if (this.base["dic"].includes(id))
+        if (this.base["dic"]?.hasOwnProperty(id)){
+            console.log("something ba: ")
+            console.log(this.base);
             return this.base["dic"][id]
+        }
         else return 0;
     }
     public getGrowthStat(id) {
         if(!this.growth) return 1337;
 
-        if (this.growth["dic"].includes(id))
+        if (this.growth["dic"]?.hasOwnProperty(id)){
+            console.log("something gr: " + JSON.stringify(this.growth))
             return this.growth["dic"][id]
+        }
         else return 0;
     }
 

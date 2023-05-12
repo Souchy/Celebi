@@ -12,8 +12,8 @@ export class CreatureStats implements IRouteableComponent {
     public growthuid: string;
 
     // db data
-    public base: IStats = undefined;
-    public growth: IStats = undefined;
+    public base: any = {}// = { dic: {}};
+    public growth: any = {} //= { dic: {}};
 
     // creature properties
     private affinities = Object.values(AffinityTypes);
