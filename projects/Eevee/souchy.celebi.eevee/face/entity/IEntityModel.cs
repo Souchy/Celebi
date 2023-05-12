@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using souchy.celebi.eevee.face.util;
-using souchy.celebi.eevee.impl.util;
+using souchy.celebi.eevee.impl.util.serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;

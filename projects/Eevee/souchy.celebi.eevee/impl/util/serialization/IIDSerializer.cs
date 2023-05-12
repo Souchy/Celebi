@@ -2,7 +2,7 @@
 using MongoDB.Bson.Serialization;
 using souchy.celebi.eevee.face.util;
 
-namespace souchy.celebi.eevee.impl.util
+namespace souchy.celebi.eevee.impl.util.serialization
 {
     /// <summary>
     /// This maps IIDs to a String in the Mongo database
@@ -25,17 +25,17 @@ namespace souchy.celebi.eevee.impl.util
         {
             var id = BsonSerializer.Deserialize<string>(context.Reader);
             //var id = BsonSerializer.Deserialize<ObjectId>(context.Reader);
-            return (IID) id;
+            return (IID)id;
         }
 
         public void Serialize(BsonSerializationContext context, BsonSerializationArgs args, object value)
         {
-            this.Serialize(context, (IID) value);
+            this.Serialize(context, (IID)value);
         }
 
         object IBsonSerializer.Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
         {
-            return this.Deserialize(context, args);
+            return Deserialize(context, args);
         }
     }
 }

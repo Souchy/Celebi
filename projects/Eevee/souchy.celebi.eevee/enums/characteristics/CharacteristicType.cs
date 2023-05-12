@@ -8,6 +8,7 @@ using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.stats;
 using souchy.celebi.eevee.impl.util;
+using souchy.celebi.eevee.impl.util.serialization;
 using System;
 using System.ComponentModel;
 using System.Globalization;
