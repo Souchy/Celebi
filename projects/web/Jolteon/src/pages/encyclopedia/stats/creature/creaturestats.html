@@ -1,0 +1,32 @@
+<import from="../components/statsimple"></import>
+<import from="../components/statbool"></import>
+<import from="../tables/tablesimple"></import>
+<import from="../tables/tablebool"></import>
+
+<div>
+  <!-- <h5>Affinities</h5> -->
+  <div style="display: flex; width: 100%;">
+    <tablesimple header="Affinity" characs.bind="affinities" base.bind="base" growth.bind="growth"></tablesimple>
+    <tablesimple header="Resistance" characs.bind="resistances" base.bind="base" growth.bind="growth"></tablesimple>
+  </div>
+  ${base.dic["1001"].value}
+</div>
+
+<div>
+  <!-- <h5>Resource</h5> -->
+  <tablesimple header="Resource" characs.bind="resources" base.bind="base" growth.bind="growth"></tablesimple>
+</div>
+
+<div>
+  <!-- <h5>States</h5> -->
+    <tablebool header="State" characs.bind="states" base.bind="base"></tablebool>
+</div>
+
+<div>
+  <!-- <h5>Other</h5> -->
+  <tablesimple header="Other" characs.bind="others" base.bind="base" growth.bind="growth"></tablesimple>
+</div>
+
+<!-- <div>
+  <tablesimple header="Contextual" characs.bind="contextuals" base.bind="base" growth.bind="growth"></tablesimple>
+</div> -->

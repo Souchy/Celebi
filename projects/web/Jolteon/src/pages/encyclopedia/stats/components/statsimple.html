@@ -1,0 +1,13 @@
+<!-- <containerless> -->
+
+<tr>
+  <td>
+    ${characname}
+  </td>
+  <td>
+    <input type="number" value.bind="basevalue" change.trigger="onChangeBase" />
+  </td>
+  <td if.bind="hasgrowth">
+    <input type="number" value.bind="growthvalue" change.trigger="onChangGrowth" />
+  </td>
+</tr>

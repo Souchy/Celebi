@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+const fs = require('fs');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const Dotenv = require('dotenv-webpack');
 
 const cssLoader = 'css-loader';
@@ -16,7 +17,7 @@ const postcssLoader = {
   }
 };
 
-module.exports = function(env, { analyze }) {
+module.exports = function (env, { analyze }) {
   const production = env.production || process.env.NODE_ENV === 'production';
   return {
     target: 'web',
@@ -63,14 +64,20 @@ module.exports = function(env, { analyze }) {
       historyApiFallback: true,
       open: false, //!process.env.CI,
       port: 9000,
-      https: true
+      // https: true
+      http2: true,
+      https: {
+        key: fs.readFileSync('C:/Users/Blank/localCA.key'),
+        cert: fs.readFileSync('C:/Users/Blank/localCA.crt'),
+        ca: fs.readFileSync('C:/Users/Blank/localCA.pem'),
+      },
     },
     module: {
       rules: [
         { test: /\.(png|svg|jpg|jpeg|gif)$/i, type: 'asset' },
-        { test: /\.(woff|woff2|ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/i,  type: 'asset' },
-        { test: /\.css$/i, use: [ 'style-loader', cssLoader, postcssLoader ] },
-        { test: /\.less$/i, use: [ 'style-loader', cssLoader, postcssLoader, 'less-loader' ] },
+        { test: /\.(woff|woff2|ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/i, type: 'asset' },
+        { test: /\.css$/i, use: ['style-loader', cssLoader, postcssLoader] },
+        { test: /\.less$/i, use: ['style-loader', cssLoader, postcssLoader, 'less-loader'] },
         { test: /\.ts$/i, use: ['ts-loader', '@aurelia/webpack-loader'], exclude: /node_modules/ },
         {
           test: /[/\\]src[/\\].+\.html$/i,
@@ -83,7 +90,7 @@ module.exports = function(env, { analyze }) {
     plugins: [
       new HtmlWebpackPlugin({ template: 'index.html', favicon: 'flareon.png' }),
       new Dotenv({
-        path: `./.env${production ? '' :  '.' + (process.env.NODE_ENV || 'development')}`,
+        path: `./.env${production ? '' : '.' + (process.env.NODE_ENV || 'development')}`,
       }),
       analyze && new BundleAnalyzerPlugin()
     ].filter(p => p)

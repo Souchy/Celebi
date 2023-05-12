@@ -9,8 +9,11 @@ const dataContractTemplates = {
     if(JSON.stringify(contract.enum).includes("{")) {
       let output = `export class ${contract.name} {`;
       for(let e of contract.enum) {
-        output += "static readonly " + e;
+        output += `static readonly ${e}`;
       }
+      // output += `static values: ${contract.name.replace("Types", "")}[] = [`;
+      // output += contract.enum.map(e => `${contract.name}.${e.substring(0, e.indexOf(":"))}`).join(", ")
+      // output += "];";
       output += `}`;
       return output;
     } else {

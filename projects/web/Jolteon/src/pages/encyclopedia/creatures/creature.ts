@@ -1,10 +1,8 @@
-import { IStats, IStringEntity, StringEntity, ICreatureModel, AffinityTypes, Affinity } from "../../../jolteon/services/api/data-contracts";
+import { ICreatureModel } from "../../../jolteon/services/api/data-contracts";
 import { bindable } from "aurelia";
 import { CreatureModelController } from "../../../jolteon/services/api/CreatureModelController";
-import { SpellModelController } from "../../../jolteon/services/api/SpellModelController";
-import { StringController } from "../../../jolteon/services/api/StringController";
-import { StatsModelController } from "../../../jolteon/services/api/StatsModelController";
 import { IRouteableComponent, Navigation, Parameters, RoutingInstruction } from '@aurelia/router';
+import { StatsType } from "../stats/statscomponent";
 
 
 export class Creature implements IRouteableComponent {
@@ -20,27 +18,19 @@ export class Creature implements IRouteableComponent {
     public uid: string;
     //#endregion
 
-    //#region extensions
-    // public name: IStringEntity;
-    // public description: IStringEntity;
-    // public baseStats: IStats;
-    // public growthStats: IStats;
-    //#endregion
+    public statType = StatsType.Creature;
 
     constructor(
         private readonly creatureController: CreatureModelController,
-        // private readonly statsController: StatsModelController,
-        // private readonly spellController: SpellModelController,
-        // private readonly stringController: StringController,
     ) {
-        
+       
     }
 
     /**
      * Hook to attribute binding
      */
     binding() {
-        console.log("creature binding: " + this.uid + ", " + JSON.stringify(this.model))
+        // console.log("creature binding: " + this.uid + ", " + JSON.stringify(this.model))
     }
     /**
      * Hook to route loading
@@ -54,14 +44,5 @@ export class Creature implements IRouteableComponent {
         console.log("creature loading: " + JSON.stringify(this.model))
     }
 
-    // private async loadExtensions(crea: ICreatureModel) {
-    //     this.stringController.getString(crea.nameId).then(res => this.name = res.data);
-    //     this.stringController.getString(crea.descriptionId).then(res => this.description = res.data);
-
-    //     this.statsController.getStats(crea.baseStats).then(res => this.baseStats = res.data);
-    //     this.statsController.getStats(crea.growthStats).then(res => this.growthStats = res.data);
-    // }
-
-    
 
 }

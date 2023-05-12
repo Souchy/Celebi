@@ -1,7 +1,6 @@
 
-
-Hi string entity
-
 <input if.bind="editable" type="text" value.bind="entity.value"  />
 
-<div if.bind="!editable">${entity ? entity.value : "null"}</div>
+<template if.bind="!editable">${entity ? entity.value : "null"}</template>
+
+
