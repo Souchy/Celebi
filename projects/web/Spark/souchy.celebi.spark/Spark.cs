@@ -35,6 +35,7 @@ using souchy.celebi.eevee.impl.objects.effects;
 using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.impl.objects.zones;
 using System.Reflection;
+using souchy.celebi.eevee.impl.util.serialization;
 
 namespace souchy.celebi.spark
 {
@@ -146,7 +147,7 @@ namespace souchy.celebi.spark
             services.AddSwaggerGen(c =>
             {
                 c.SchemaFilter<EnumSchemaFilter>();
-                c.SchemaFilter<ClassEnumSchemaFilter>();
+                c.SchemaFilter<CharacTypeSchemaFilter>();
                 //c.
                 //c.MapType<IID>(() => new OpenApiSchema() { Type = "IID" });
                 //c.MapType<IID>(() => new OpenApiSchema() { Type = "string" });
@@ -155,8 +156,11 @@ namespace souchy.celebi.spark
             services.AddControllers(options =>
             {
                 options.Conventions.Add(new ControllerNamingConvention());
-                
-            }).AddNewtonsoftJson();
+
+            }).AddNewtonsoftJson(options =>
+            {
+                //options.SerializerSettings.Converters.Add(new IEntityListJsonConverter());
+            });
         }
 
         private static void configureApp(WebApplication app)
@@ -278,6 +282,7 @@ namespace souchy.celebi.spark
 
 
             BsonClassMap.RegisterClassMap<EntitySet<IID>>();
+            BsonClassMap.RegisterClassMap<EntitySet<ObjectId>>();
             BsonClassMap.RegisterClassMap<EntityDictionary<CharacteristicId, IStat>>();
             BsonClassMap.RegisterClassMap<Dictionary<CharacteristicId, IStat>>();
 

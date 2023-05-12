@@ -1,6 +1,5 @@
-import { IStats, IStringEntity, StringEntity } from './../../../jolteon/services/api/data-contracts';
+import { IStats, IStringEntity, StringEntity, ICreatureModel, AffinityTypes, Affinity } from "../../../jolteon/services/api/data-contracts";
 import { bindable } from "aurelia";
-import { ICreatureModel } from "../../../jolteon/services/api/data-contracts";
 import { CreatureModelController } from "../../../jolteon/services/api/CreatureModelController";
 import { SpellModelController } from "../../../jolteon/services/api/SpellModelController";
 import { StringController } from "../../../jolteon/services/api/StringController";

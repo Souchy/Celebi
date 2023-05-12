@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace souchy.celebi.eevee.enums.characteristics.creature
 {
-    [ClassEnum]
     public sealed record Affinity : CharacteristicType
     {
         public ElementType Element { get; init; }

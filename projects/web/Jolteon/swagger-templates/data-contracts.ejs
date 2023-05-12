@@ -1,5 +1,3 @@
-
-
 <%
 const { modelTypes, utils, config } = it;
 const { formatDescription, require, _, Ts } = utils;
@@ -7,10 +5,18 @@ const { formatDescription, require, _, Ts } = utils;
 
 const dataContractTemplates = {
   enum: (contract) => {
-    // console.log("enum contract: ");
-    // console.log(contract);
-    includeFile('./enum-data-contract.ejs', { ...it, contract: { name: contract.name, content: contract.content} }) //data: { ...contract, ...contract.typeData } })
-    // return `enum ${contract.name} {\r\n${contract.content} \r\n }`;
+    // CharacteristicType class enums
+    if(JSON.stringify(contract.enum).includes("{")) {
+      let output = `export class ${contract.name} {`;
+      for(let e of contract.enum) {
+        output += "static readonly " + e;
+      }
+      output += `}`;
+      return output;
+    } else {
+      // normal enums
+      return `enum ${contract.name} {\r\n${contract.enum} \r\n }`;
+    }
   },
   interface: (contract) => {
     return `interface ${contract.name} {\r\n${contract.content}}`;
@@ -23,11 +29,11 @@ const dataContractTemplates = {
 
 <% if (config.internalTemplateOptions.addUtilRequiredKeysType) { %>
 type <%~ config.Ts.CodeGenKeyword.UtilRequiredKeys %><T, K extends keyof T> = Omit<T, K> & Required<Pick<T, K>>
-<% } %>
+      <% } %>
 
-<% modelTypes.forEach((contract) => { %>
-  <%~ includeFile('./data-contract-jsdoc.ejs', { ...it, data: { ...contract, ...contract.typeData } }) %>
+      <% modelTypes.forEach((contract) => { %>
+      <%~ includeFile('./data-contract-jsdoc.ejs', { ...it, data: { ...contract, ...contract.typeData } }) %>
+      export <%~ (dataContractTemplates[contract.typeIdentifier] || dataContractTemplates.type)(contract) %>
 
-  export <%~ (dataContractTemplates[contract.typeIdentifier] || dataContractTemplates.type)(contract) %>
 
-<% }) %>
+      <% }) %>
