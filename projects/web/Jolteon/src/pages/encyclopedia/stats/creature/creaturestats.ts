@@ -1,9 +1,12 @@
-import { IStats, AffinityTypes, ResourceTypes, StateTypes, ResistanceTypes, ContextualTypes, OtherPropertyTypes, Stats, IStatSimple } from '../../../../jolteon/services/api/data-contracts';
-import { bindable } from "aurelia";
+import { Stats, IStatSimple, IStatBool } from '../../../../jolteon/services/api/data-contracts';
+import { IEventAggregator, bindable, inject } from "aurelia";
 import { IRouteableComponent } from "@aurelia/router";
 import { StatsModelController } from '../../../../jolteon/services/api/StatsModelController';
+import { Characteristics } from '../../../../jolteon/constants';
 
+@inject(IEventAggregator, StatsModelController)
 export class CreatureStats implements IRouteableComponent {
+    public readonly Characteristics: Characteristics = Characteristics; // static reference
 
     // input
     @bindable
@@ -14,16 +17,20 @@ export class CreatureStats implements IRouteableComponent {
     // db data
     public base: Stats = null
     public growth: Stats = null
-    
-    // creature properties
-    private affinities = Object.values(AffinityTypes);
-    private resistances = Object.values(ResistanceTypes);
-    private resources = Object.values(ResourceTypes);
-    private states = Object.values(StateTypes);
-    private others = Object.values(OtherPropertyTypes);
-    private contextuals = Object.values(ContextualTypes);
 
-    constructor(private readonly statsController: StatsModelController) {
+
+    constructor(private readonly ea: IEventAggregator, private readonly statsController: StatsModelController) {
+        ea.subscribe("stat:base:change", (s: IStatSimple | IStatBool) => {
+            // console.log("change base stat: " + JSON.stringify(s))
+            // console.log("on change base stat: " +  JSON.stringify(this.base.dic[s.statId]));
+            this.base.dic[s.statId] = s;
+            statsController.putStats(this.base.entityUid, this.base);
+        });
+        ea.subscribe("stat:growth:change", (s: IStatSimple | IStatBool) => {
+            // console.log("change growth stat: " + JSON.stringify(s))
+            this.growth.dic[s.statId] = s;
+            statsController.putStats(this.growth.entityUid, this.growth);
+        });
     }
     
     binding() {
@@ -32,19 +39,12 @@ export class CreatureStats implements IRouteableComponent {
             .getStats(this.baseuid)
             .then(res => {
                 this.base = res.data
-
-                let stat: IStatSimple = (this.base.dic[ResourceTypes.Life.id]);
-                console.log("creature casted stat: " + stat.value);
-                // console.log("creature base stats: " + this.base["dic"][ResourceTypes.Life.id].value);
-                // console.log(this.base)
             });
         this.statsController
             .getStats(this.growthuid)
             .then(res => this.growth = res.data);
     }
 
-    public onInputChange() {
-        console.log("onInputChange: " + JSON.stringify("{}"));
-    }
+    
 }
 

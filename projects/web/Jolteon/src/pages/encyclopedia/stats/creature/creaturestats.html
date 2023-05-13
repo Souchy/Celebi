@@ -6,27 +6,27 @@
 <div if.bind="base && growth">
   <!-- <h5>Affinities</h5> -->
   <div style="display: flex; width: 100%;">
-    <tablesimple header="Affinity" characs.bind="affinities" base.bind="base" growth.bind="growth"></tablesimple>
-    <tablesimple header="Resistance" characs.bind="resistances" base.bind="base" growth.bind="growth"></tablesimple>
+    <tablesimple header="Affinity" characs.bind="Characteristics.affinities" base.bind="base" growth.bind="growth"></tablesimple>
+    <tablesimple header="Resistance" characs.bind="Characteristics.resistances" base.bind="base" growth.bind="growth"></tablesimple>
   </div>
   ${base.dic["1001"].value}
 </div>
 
 <div if.bind="base && growth">
   <!-- <h5>Resource</h5> -->
-  <tablesimple header="Resource" characs.bind="resources" base.bind="base" growth.bind="growth"></tablesimple>
+  <tablesimple header="Resource" characs.bind="Characteristics.resources" base.bind="base" growth.bind="growth"></tablesimple>
 </div>
 
 <div if.bind="base">
   <!-- <h5>States</h5> -->
-    <tablebool header="State" characs.bind="states" base.bind="base"></tablebool>
+    <tablebool header="State" characs.bind="Characteristics.states" base.bind="base"></tablebool>
 </div>
 
 <div if.bind="base && growth">
   <!-- <h5>Other</h5> -->
-  <tablesimple header="Other" characs.bind="others" base.bind="base" growth.bind="growth"></tablesimple>
+  <tablesimple header="Other" characs.bind="Characteristics.others" base.bind="base" growth.bind="growth"></tablesimple>
 </div>
 
 <!-- <div>
-  <tablesimple header="Contextual" characs.bind="contextuals" base.bind="base" growth.bind="growth"></tablesimple>
+  <tablesimple header="Contextual" characs.bind="Characteristics.contextuals" base.bind="base" growth.bind="growth"></tablesimple>
 </div> -->

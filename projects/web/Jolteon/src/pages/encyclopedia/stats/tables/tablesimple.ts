@@ -1,9 +1,8 @@
-import { IStatSimple } from './../../../../jolteon/services/api/data-contracts';
-import { Stats } from './../../../../../../../../arch/common/stats';
-import { bindable } from "aurelia";
+import { IStatBool, IStatSimple, Stats } from './../../../../jolteon/services/api/data-contracts';
+import { IEventAggregator, bindable, inject } from "aurelia";
 import { IStat, IStats } from "../../../../jolteon/services/api/data-contracts";
 
-
+@inject(IEventAggregator)
 export class Tablesimple {
 
     @bindable
@@ -16,8 +15,7 @@ export class Tablesimple {
     @bindable
     public growth: Stats
 
-    constructor() {
-
+    constructor(private readonly ea: IEventAggregator) {
     }
 
     // binding() {
@@ -28,9 +26,9 @@ export class Tablesimple {
     }
 
     public getBaseStat(id) {
-        if(!this.base) return 666;
+        // if(!this.base) return 666;
 
-        if (this.base["dic"]?.hasOwnProperty(id)){
+        if (this.base?.dic?.hasOwnProperty(id)){
             console.log("something ba: ")
             console.log(this.base);
             return this.base["dic"][id]
@@ -44,9 +42,9 @@ export class Tablesimple {
         }
     }
     public getGrowthStat(id) {
-        if(!this.growth) return 1337;
+        // if(!this.growth) return 1337;
 
-        if (this.growth["dic"]?.hasOwnProperty(id)){
+        if (this.growth?.dic?.hasOwnProperty(id)){
             console.log("something gr: " + JSON.stringify(this.growth))
             return this.growth["dic"][id]
         }

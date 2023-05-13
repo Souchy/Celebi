@@ -2,7 +2,7 @@
 
 <h5>${header}</h5>
 
-<table class="table table-striped table-sm table-borderless table-responsive-sm">
+<table class="table table-striped table-sm table-borderless table-responsive-sm" if.bind="base">
   <thead>
     <tr>
       <th></th>
@@ -12,8 +12,9 @@
     </tr>
   </thead>
   <tbody>
-    <tr as-element="statsimple" repeat.for="charac of characs" characid.bind="charac.id" characname.bind="charac.baseName" 
-      basevalue.bind="getBaseStat(charac.id)" growthvalue.bind="getGrowthStat(charac.id)" hasgrowth="true"
+    <tr as-element="statsimple" repeat.for="charac of characs" 
+    basestat.bind="getBaseStat(charac.id)" growthstat.bind="getGrowthStat(charac.id)" hasgrowth="true"
     ></tr>
+    <!-- characid.bind="charac.id"  characname.bind="charac.baseName" -->
   </tbody>
 </table>
