@@ -1,12 +1,12 @@
-import { IStatBool, IStatSimple, Stats } from './../../../../jolteon/services/api/data-contracts';
+import { IStatBool, IStatSimple, StatSimple, Stats } from './../../../../jolteon/services/api/data-contracts';
 import { IEventAggregator, bindable, inject } from "aurelia";
 import { IStat, IStats } from "../../../../jolteon/services/api/data-contracts";
 
 @inject(IEventAggregator)
 export class Tablesimple {
 
-    @bindable
-    public header: string = "Charac";
+    // @bindable
+    // public header: string = "Charac";
 
     @bindable
     public characs: any[];
@@ -22,34 +22,27 @@ export class Tablesimple {
     //     console.log("table base stats: " + this.base);
     // }
     bound() {
-        console.log("table base stats: " + this.base);
+        // console.log("table base stats: " + this.base);
     }
 
-    public getBaseStat(id) {
-        // if(!this.base) return 666;
-
+    public getBaseStat(id): StatSimple {
         if (this.base?.dic?.hasOwnProperty(id)){
-            console.log("something ba: ")
-            console.log(this.base);
-            return this.base["dic"][id]
+            return this.base.dic[id]
         }
         else {
-            let stat: IStatSimple = {
+            let stat: StatSimple = {
                 statId: id,
                 value: 0
             }
             return stat;
         }
     }
-    public getGrowthStat(id) {
-        // if(!this.growth) return 1337;
-
+    public getGrowthStat(id): StatSimple {
         if (this.growth?.dic?.hasOwnProperty(id)){
-            console.log("something gr: " + JSON.stringify(this.growth))
-            return this.growth["dic"][id]
+            return this.growth.dic[id]
         }
         else {
-            let stat: IStatSimple = {
+            let stat: StatSimple = {
                 statId: id,
                 value: 0
             }

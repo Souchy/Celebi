@@ -10,7 +10,7 @@ namespace souchy.celebi.spark.controllers.models
 {
     [ApiController]
     [Produces("application/json")]
-    [Route(Routes.Models + "strings")] 
+    [Route(Routes.Models + "string")] 
     public class StringController : ControllerBase
     {
         private readonly StringService _stringService;
@@ -22,7 +22,7 @@ namespace souchy.celebi.spark.controllers.models
         [HttpGet("filtered")]
         public async Task<List<IStringEntity>> GetAll([FromQuery] I18NType lang, FilterDefinition<IStringEntity> filter = null) 
             => await _stringService.GetAsync(lang, filter);
-        [HttpGet("string/{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<IStringEntity>> Get([FromQuery] I18NType lang, [FromRoute] ObjectId id)
         {
             IStringEntity? str = await _stringService.GetAsync(lang, id);
@@ -30,9 +30,10 @@ namespace souchy.celebi.spark.controllers.models
                 return NotFound();
             return Ok(str);
         }
-        [Authorize]
-        [HttpPut("string/{id}")]
-        public async Task<ActionResult<ReplaceOneResult>> Update([FromQuery] I18NType lang, [FromRoute] ObjectId id, StringEntity updatedStringEntity)
+
+        //[Authorize]
+        [HttpPut("{id}")]
+        public async Task<ActionResult<ReplaceOneResult>> Update([FromRoute] ObjectId id, [FromQuery] I18NType lang, [FromBody] StringEntity updatedStringEntity)
         {
             var str = await _stringService.GetAsync(lang, id);
             if (str is null) 
@@ -45,8 +46,8 @@ namespace souchy.celebi.spark.controllers.models
         /// <summary>
         /// Creates a new string entity in all languages
         /// </summary>
-        [Authorize]
-        [HttpPost("string")]
+        //[Authorize]
+        [HttpPost("")]
         public async Task<IActionResult> Create(StringEntity newStringEntity)
         {
             await _stringService.CreateAsync(newStringEntity);
@@ -55,8 +56,8 @@ namespace souchy.celebi.spark.controllers.models
         /// <summary>
         /// Remove a string entity from all languages
         /// </summary>
-        [Authorize]
-        [HttpDelete("string/{id}")]
+        //[Authorize]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<DeleteResult>> Delete(ObjectId id)
         {
             var str = await _stringService.GetAsync(I18NType.fr, id);

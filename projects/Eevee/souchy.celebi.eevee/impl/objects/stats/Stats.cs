@@ -11,6 +11,7 @@ namespace souchy.celebi.eevee.impl.stats
 {
     public class Stats : EntityDictionary<CharacteristicId, IStat>, IStats
     {
+        public static readonly string dicName = nameof(dic);
         //[JsonIgnore]
         //public IEnumerable<IStat> Values2 => base.Values;
         //[JsonIgnore]

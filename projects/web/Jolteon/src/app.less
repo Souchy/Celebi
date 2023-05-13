@@ -20,6 +20,7 @@ body {
   --accent2: darkred; // #CF6679; // red error 
   --accent1a: #13776d7e; // teal with alpha 
   --shadow: black;
+  --input: transparent;
 
   --surface: #FFFFFF;
   --onsurface: #121212;
@@ -42,23 +43,66 @@ body {
   --accent2: darkred; // #CF6679; // red error 
   --accent1a: rgba(3, 218, 197, 0.5); // teal with alpha 
   --shadow: black;
+  --input: grey;
 
   --surface: #FFFFFF;
   --onsurface: #121212;
   --primarysurface: #3700B3;
 }
 
+h2, h3, h4, h5 {
+  color: var(--accent0);
+}
+
+input[type="number"], input[type="text"] {
+  // color: var(--front0);
+  // background-color: rgb(40, 40, 40);
+  // border-color: rgb(133, 133, 133);
+  // border-width: 1px;
+  // border-style: solid;
+  padding: 3px;
+  box-shadow: 2px 2px 2px #141414;
+  
+  color: var(--front0);
+  background: var(--bg0);
+  border: 1px solid var(--accent1a);
+  // border-color: fade(color(var( ~"--@{testcolor}" )), 60%); //rgba(var(--accent1), 0.5);
+}
+
 
 /* button */
 /* this button is accent>transparent and turns black>accent on hover */
 .btn {
-  // color: var(--bs-body-color);
   color: var(--accent1);
   background: var(--bg0);
   border: 1px solid transparent;
 }
 .btn:hover {
-  color: var(--front1) !important;
+  color: var(--front1);
   background: var(--accent1);
   border-color: var(--accent1);
+}
+.btn-check:checked+.btn {
+  color: var(--front1);
+  background: var(--accent1);
+}
+.btn-check:checked+.btn:hover {
+  color: var(--accent1);
+  background: var(--bg0);
+}
+.btn-outline {
+  border: 1px solid var(--accent1);
+}
+
+
+.toast-container {
+  // background-color: #13776d;
+}
+.toast-header {
+  background-color: green;
+  color: var(--front1);
+}
+.toast-body {
+  background-color: green;
+  color: var(--front1);
 }

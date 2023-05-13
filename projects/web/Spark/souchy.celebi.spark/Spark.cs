@@ -169,7 +169,10 @@ namespace souchy.celebi.spark
             {
                 options.Conventions.Add(new ControllerNamingConvention());
 
-            }).AddNewtonsoftJson();
+            }).AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.Converters.Add(new ObjectIdConverter());
+            });
         }
 
         private static OpenApiSchema mapSchemaArray<T>()

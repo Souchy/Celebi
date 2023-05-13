@@ -1,8 +1,10 @@
 import { IRouteableComponent } from '@aurelia/router';
-import { I18NType, IStringEntity } from '../../../jolteon/services/api/data-contracts';
+import { I18NType, IStringEntity, StringEntity } from '../../../jolteon/services/api/data-contracts';
 import { StringController } from './../../../jolteon/services/api/StringController';
-import { bindable } from "aurelia";
+import { IEventAggregator, bindable, containerless, inject } from "aurelia";
 
+@inject(IEventAggregator, StringController)
+@containerless
 export class Stringcomponent implements IRouteableComponent {
 
     // input
@@ -10,17 +12,37 @@ export class Stringcomponent implements IRouteableComponent {
     public uid: string;
     @bindable
     public editable: boolean = false;
+    @bindable
+    public lang: I18NType = I18NType.fr;
 
     // db data
-    public entity: IStringEntity;
+    private entity: StringEntity;
 
-    constructor(private readonly controller: StringController) {
+    constructor(private readonly ea: IEventAggregator, private readonly controller: StringController) {
     }
     
     binding() { 
         this.controller
-            .getString(this.uid, { lang: I18NType.fr })
+            .getString(this.uid, { lang: this.lang })
             .then(res => this.entity = res.data);
     }
+
+    public onChange() {
+        this.postUpdate(this.entity);
+    }
+    private async postUpdate(str: StringEntity) {
+        // console.log("postUpdate: " + str)
+        // console.log(stat);
+        try {
+            let res = await this.controller.putString(str.entityUid, str, { lang: this.lang });
+            if(res.data.matchedCount > 0) 
+                this.ea.publish("creature:operation:saved");
+            else 
+                this.ea.publish("creature:operation:failed");
+        } catch(rej) {
+            this.ea.publish("creature:operation:failed");
+        }
+    }
+
 
 }

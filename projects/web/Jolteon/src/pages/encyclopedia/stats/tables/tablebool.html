@@ -1,8 +1,14 @@
 <import from="../components/statbool"></import>
 
-<h5>${header}</h5>
+<!-- <h5>${header}</h5> -->
 
-<table class="table table-striped table-sm table-borderless table-responsive-sm">
+<!-- <div if.bind="base"> -->
+
+<div if.bind="true" style="display: flex; flex-wrap: wrap;">
+  <statbool repeat.for="charac of characs" basestat.bind="getBaseStat(charac.id)"></statbool>
+</div>
+
+<table else class="table table-striped table-sm table-borderless table-responsive-sm">
   <thead>
     <tr>
       <th></th>
@@ -12,7 +18,11 @@
     </tr>
   </thead>
   <tbody>
-    <tr as-element="statbool" repeat.for="charac of characs" characid.bind="charac.id" characname.bind="charac.baseName" basevalue="2"></tr>
-     <!-- hasgrowth="false"></tr> -->
+    <tr as-element="statbool" repeat.for="charac of characs" basestat.bind="getBaseStat(charac.id)"></tr>
+    <!-- basevalue="2" -->
+    <!-- characid.bind="charac.id" characname.bind="charac.baseName"  -->
+    <!-- hasgrowth="false"></tr> -->
   </tbody>
 </table>
+
+<!-- </div> -->

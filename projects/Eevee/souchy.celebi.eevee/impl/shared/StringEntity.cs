@@ -12,7 +12,6 @@ namespace souchy.celebi.eevee.impl.shared
         /// mongo id
         /// </summary>
         [BsonId]
-        //[BsonElement("_id")]
         public ObjectId entityUid { get; set; }
         /// <summary>
         /// string model id / key

@@ -1,25 +1,19 @@
 <import from="../spells/spelllist"></import>
 <import from="../strings/stringcomponent"></import>
-<!-- <import from="../stats/statscomponent"></import> -->
 <import from="../stats/creature/creaturestats"></import>
 
 
 <div if.bind="isvignette">
-    <h3>
-        #${model.modelUid}
-        <stringcomponent uid.bind="model.nameId" editable.bind="!isvignette"></stringcomponent>
-    </h3>
+  <h3>
+    #${model.modelUid}:
+    <stringcomponent uid.bind="model.nameId" editable.bind="!isvignette"></stringcomponent>
+  </h3>
 </div>
 <div else>
-    <h3>#${model.modelUid}</h3>
-    <stringcomponent uid.bind="model.nameId" editable=true></stringcomponent>
-    <stringcomponent uid.bind="model.descriptionId" editable=true></stringcomponent>
+  <h3>#${model.modelUid}</h3>
+  <stringcomponent uid.bind="model.nameId" editable=true></stringcomponent>
+  <stringcomponent uid.bind="model.descriptionId" editable=true></stringcomponent>
 
-    <creaturestats baseuid.bind="model.baseStats" growthuid.bind="model.growthStats"></creaturestats>
-    <!-- <h4>Base Stats</h4>
-    <statscomponent uid.bind="model.baseStats" type.bind="statType"></statscomponent>
-    <h4>Growth Stats</h4>
-    <statscomponent uid.bind="model.growthStats" type.bind="statType"></statscomponent> -->
-    
-    <spelllist spellids.bind="model.spellIds"></spelllist>
+  <spelllist spellids.bind="model.spellIds"></spelllist>
+  <creaturestats baseuid.bind="model.baseStats" growthuid.bind="model.growthStats"></creaturestats>
 </div>

@@ -13,6 +13,18 @@ using souchy.celebi.eevee.impl.values;
 //namespace souchy.celebi.umbreon.common.util
 namespace souchy.celebi.eevee.impl.util.serialization
 {
+    public class ObjectIdConverter : JsonConverter<ObjectId>
+    {
+        public override ObjectId ReadJson(JsonReader reader, Type objectType, ObjectId existingValue, bool hasExistingValue, JsonSerializer serializer)
+        {
+            string s = (string) reader.Value;
+            return new ObjectId(s);
+        }
+        public override void WriteJson(JsonWriter writer, ObjectId value, JsonSerializer serializer)
+        {
+            writer.WriteValue(value.ToString());
+        }
+    }
     public class IIDJsonConverter : JsonConverter<IID>
     {
         public override IID ReadJson(JsonReader reader, Type objectType, IID existingValue, bool hasExistingValue, JsonSerializer serializer)
@@ -25,7 +37,7 @@ namespace souchy.celebi.eevee.impl.util.serialization
             writer.WriteValue(value.ToString());
         }
     }
-    
+
     public class IStringEntitysonConverter : JsonConverter<IStringEntity>
     {
         public override IStringEntity ReadJson(JsonReader reader, Type objectType, IStringEntity existingValue, bool hasExistingValue, JsonSerializer serializer)
@@ -43,7 +55,16 @@ namespace souchy.celebi.eevee.impl.util.serialization
     public class CharacIdJsonConverter : JsonConverter<CharacteristicId>
     {
         public override CharacteristicId ReadJson(JsonReader reader, Type objectType, CharacteristicId existingValue, bool hasExistingValue, JsonSerializer serializer)
-            => new CharacteristicId(reader.ReadAsInt32().Value);
+        {
+            //var val2 = reader.ReadAsInt32();
+            var val = reader.Value;
+            //var val = reader.ReadAsString();
+            //var val2 = reader.ReadAsString();
+            //var val3 = reader.ReadAsString();
+            var num = 0;
+            var resul = int.TryParse(val.ToString(), out num);
+            return new CharacteristicId(num);
+        }//.ReadAsInt32().Value);
         public override void WriteJson(JsonWriter writer, CharacteristicId value, JsonSerializer serializer)
             => writer.WriteValue(value.ID.ToString());
     }

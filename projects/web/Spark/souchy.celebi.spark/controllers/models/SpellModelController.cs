@@ -15,7 +15,7 @@ namespace souchy.celebi.spark.controllers.models
 {
     [ApiController]
     [Produces("application/json")]
-    [Route(Routes.Models + "spells")]
+    [Route(Routes.Models + "spell")]
     public class SpellModelController : ControllerBase
     {
         private readonly CollectionService<ISpellModel> _spellService;
@@ -44,7 +44,7 @@ namespace souchy.celebi.spark.controllers.models
         public async Task<List<ISpellModel>> GetFiltered(FilterDefinition<ISpellModel> filter)
             => await _spellService.GetAsync(filter);
 
-        [HttpGet("spell/{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<ISpellModel>> Get([FromRoute] IID id)
         {
             var filter = Builders<ISpellModel>.Filter.Eq(nameof(ISpellModel.modelUid), id);
@@ -55,7 +55,7 @@ namespace souchy.celebi.spark.controllers.models
         }
 
         [Authorize]
-        [HttpPost("spell")]
+        [HttpPost("")]
         public async Task<IActionResult> Post(SpellModel newSpellModel)
         {
             await _spellService.CreateAsync(newSpellModel);
@@ -81,7 +81,7 @@ namespace souchy.celebi.spark.controllers.models
         }
 
         [Authorize]
-        [HttpPut("spell/{id}")]
+        [HttpPut("{id}")]
         public async Task<ActionResult<ReplaceOneResult>> Update([FromRoute] IID id, SpellModel updatedSpellModel)
         {
             var filter = Builders<ISpellModel>.Filter.Eq(nameof(ISpellModel.modelUid), id);
@@ -94,7 +94,7 @@ namespace souchy.celebi.spark.controllers.models
         }
 
         [Authorize]
-        [HttpDelete("spell/{id}")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<DeleteResult>> Delete([FromRoute] IID id)
         {
             var filter = Builders<ISpellModel>.Filter.Eq(nameof(ISpellModel.modelUid), id);
