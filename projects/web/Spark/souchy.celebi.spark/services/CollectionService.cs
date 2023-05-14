@@ -12,7 +12,9 @@ namespace souchy.celebi.spark.services
 
         public CollectionService(IMongoCollection<T> collection) => _collection = collection;
 
-        private FilterDefinition<T> filterId(ObjectId id) => Builders<T>.Filter.Eq("_id", id); // cant use entityUid on db :( 
+        public FilterDefinition<T> filterId(ObjectId id) => Builders<T>.Filter.Eq("_id", id); // cant use entityUid on db :( 
+
+        public IMongoCollection<T> Collection => _collection;
 
         public async Task<List<T>> GetAsync() =>
             await _collection.Find(_ => true).ToListAsync();

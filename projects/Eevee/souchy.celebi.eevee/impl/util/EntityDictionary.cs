@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.util;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace souchy.celebi.eevee.impl.util
 {

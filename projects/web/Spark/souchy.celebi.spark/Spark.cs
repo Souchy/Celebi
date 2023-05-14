@@ -162,7 +162,7 @@ namespace souchy.celebi.spark
                 c.MapType<IEntityList<ITrigger>>(() => mapSchemaArray<ITrigger>());
                 c.MapType<IEntityList<ICondition>>(() => mapSchemaArray<ICondition>());
 
-                c.DocumentFilter<AdditionalTypesDocumentFilter>(); // adds more document types
+                c.DocumentFilter<TypesDocumentFilter>(); // adds more document types
             });
             services.AddSwaggerGenNewtonsoftSupport();
             services.AddControllers(options =>
@@ -171,9 +171,7 @@ namespace souchy.celebi.spark
 
             }).AddNewtonsoftJson(options =>
             {
-                //options.SerializerSettings.Converters.Add(new IEntityListJsonConverter());
-                //options.SerializerSettings.Converters.Add(new IEntitySetJsonConverter());
-                //options.SerializerSettings.Converters.Add(new ObjectIdListConverter());
+                options.SerializerSettings.Converters.Add(new ObjectIdConverter());
             });
         }
 

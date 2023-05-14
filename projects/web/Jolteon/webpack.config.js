@@ -64,13 +64,13 @@ module.exports = function (env, { analyze }) {
       historyApiFallback: true,
       open: false, //!process.env.CI,
       port: 9000,
-      // https: true
-      http2: true,
-      https: {
-        key: fs.readFileSync('C:/Users/Blank/localCA.key'),
-        cert: fs.readFileSync('C:/Users/Blank/localCA.crt'),
-        ca: fs.readFileSync('C:/Users/Blank/localCA.pem'),
-      },
+      https: true
+      // http2: true,
+      // https: {
+      //   key: fs.readFileSync('C:/Users/Blank/localCA.key'),
+      //   cert: fs.readFileSync('C:/Users/Blank/localCA.crt'),
+      //   ca: fs.readFileSync('C:/Users/Blank/localCA.pem'),
+      // },
     },
     module: {
       rules: [

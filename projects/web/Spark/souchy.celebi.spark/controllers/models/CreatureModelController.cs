@@ -10,16 +10,17 @@ using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.shared.models.skins;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
-using souchy.celebi.eevee.impl.factories;
 using souchy.celebi.eevee.impl.shared;
 using souchy.celebi.eevee.impl.stats;
 using souchy.celebi.spark.services;
 using souchy.celebi.spark.services.models;
+using souchy.celebi.spark.util;
+
 namespace souchy.celebi.spark.controllers.models
 {
     [ApiController]
     [Produces("application/json")]
-    [Route(Routes.Models + "creatures")] 
+    [Route(Routes.Models + "creature")] 
     public class CreatureModelController : ControllerBase
     {
         private readonly CollectionService<ICreatureModel> _creatureModels;
@@ -44,7 +45,7 @@ namespace souchy.celebi.spark.controllers.models
         public async Task<List<ICreatureModel>> GetFiltered(FilterDefinition<ICreatureModel> filter) 
             => await _creatureModels.GetAsync(filter);
 
-        [HttpGet("creature/{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<ICreatureModel>> Get([FromRoute] IID id)
         {
             var filter = Builders<ICreatureModel>.Filter.Eq(nameof(ICreatureModel.modelUid), id);
@@ -55,7 +56,7 @@ namespace souchy.celebi.spark.controllers.models
         }
 
         //[Authorize]
-        [HttpPost("creature")]
+        [HttpPost("")]
         public async Task<ActionResult<ICreatureModel>> Post(CreatureModel newCreatureModel)
         {
             await _creatureModels.CreateAsync(newCreatureModel);
@@ -65,29 +66,26 @@ namespace souchy.celebi.spark.controllers.models
         [HttpPost("new")]
         public async Task<ActionResult<ICreatureModel>> PostNew()
         {
-            var newCreatureModel = Factories.newCreatureModel();
-            newCreatureModel.GetBaseStats().Add(StatSimple.Create(Resource.Life.ID, 50));
+            (ICreatureModel crea, IStringEntity name, IStringEntity desc, IStats baseStats, IStats growthStats, 
+                (ICreatureSkin skin, IStringEntity name, IStringEntity desc) skin)
+                model = await Factories.newCreatureModel(_ids);
 
-            newCreatureModel.modelUid = await _ids.GetID<ICreatureModel>();
-            newCreatureModel.GetName().modelUid = await _ids.GetID<IStringEntity>();
-            newCreatureModel.GetDescription().modelUid = await _ids.GetID<IStringEntity>();
+            await _creatureModels.CreateAsync(model.crea);
+            await _strings.CreateAsync(model.name);
+            await _strings.CreateAsync(model.desc);
+            await _stats.CreateAsync(model.baseStats);
+            await _stats.CreateAsync(model.growthStats);
 
-            var skin = newCreatureModel.GetBaseSkin();
-            skin.GetName().modelUid = await _ids.GetID<IStringEntity>();
-            skin.GetDescription().modelUid = await _ids.GetID<IStringEntity>();
+            await _skins.CreateAsync(model.skin.skin);
+            await _strings.CreateAsync(model.skin.name);
+            await _strings.CreateAsync(model.skin.desc);
 
-            await _stats.CreateAsync(newCreatureModel.GetBaseStats());
-            await _stats.CreateAsync(newCreatureModel.GetGrowthStats());
-            await _strings.CreateAsync(newCreatureModel.GetName());
-            await _strings.CreateAsync(newCreatureModel.GetDescription());
-            await _creatureModels.CreateAsync(newCreatureModel);
-
-            return CreatedAtAction(nameof(Get), new { id = newCreatureModel.entityUid }, newCreatureModel);
+            return CreatedAtAction(nameof(Get), new { id = model.Item1.entityUid }, model.Item1);
         }
         
 
         [Authorize]
-        [HttpPut("creature/{id}")]
+        [HttpPut("{id}")]
         public async Task<ActionResult<ReplaceOneResult>> Update([FromRoute] string id, [FromBody] CreatureModel updateModel)
         {
             var filter = Builders<ICreatureModel>.Filter.Eq(nameof(ICreatureModel.modelUid), id);
@@ -101,7 +99,7 @@ namespace souchy.celebi.spark.controllers.models
         }
 
         [Authorize]
-        [HttpDelete("creature/{id}")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<DeleteResult>> Delete([FromRoute] IID id)
         {
             var filter = Builders<ICreatureModel>.Filter.Eq(nameof(ICreatureModel.modelUid), id);

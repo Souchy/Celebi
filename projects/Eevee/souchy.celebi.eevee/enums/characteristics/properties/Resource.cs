@@ -9,33 +9,6 @@ using System.Threading.Tasks;
 
 namespace souchy.celebi.eevee.enums.characteristics.creature
 {
-    /*
-    public sealed record Resource1(int localId) : CharacteristicType(CharacteristicCategory.Resource, localId)
-    {
-        public static readonly Resource1 Life       = new((int)ResourceEnum.Life);
-        public static readonly Resource1 Mana       = new((int)ResourceEnum.Mana);
-        public static readonly Resource1 Movement   = new((int)ResourceEnum.Movement);
-        public static readonly Resource1 Summon     = new((int)ResourceEnum.Summon);
-        public static readonly Resource1 Rage       = new((int)ResourceEnum.Rage);
-        public static void generateKeys()
-        {
-            var props = Enum.GetValues<ResourceProperty>();
-            var ress = Enum.GetValues<ResourceEnum>();
-            var ids = ress.SelectMany(r => props.Select(p => (int)r * props.Length + (int)p));
-            // + categoryid * 100
-
-            //foreach (var res in ress)
-            //{
-            //    foreach (var prop in props)
-            //    {
-            //        int index = (int) res * props.Length + (int) prop;
-
-            //    }
-            //}
-        }
-    }
-    */
-
     public enum ResourceEnum
     {
         Life,

@@ -1,5 +1,5 @@
 
-<input if.bind="editable" type="text" value.bind="entity.value"  />
+<input if.bind="editable" type="text" value.bind="entity.value" change.trigger="onChange"  />
 
 <template if.bind="!editable">${entity ? entity.value : "null"}</template>
 

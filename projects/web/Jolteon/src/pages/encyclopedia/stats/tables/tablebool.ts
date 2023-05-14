@@ -1,22 +1,41 @@
-import { bindable } from "aurelia";
-import { IStat, IStats } from "../../../../jolteon/services/api/data-contracts";
+import { IEventAggregator, bindable, inject } from "aurelia";
+import { IStat, IStats, StatBool, StatSimple, Stats } from "../../../../jolteon/services/api/data-contracts";
 
 
+@inject(IEventAggregator)
 export class Tablebool {
 
-    @bindable
-    public header: string = "Charac";
-    // public headers: string[] = ["Charac", "Base", "Growth"];
+    // @bindable
+    // public header: string = "Charac";
 
     @bindable
     public characs: any[];
     @bindable
-    public base: IStats;
+    public base: Stats 
     // @bindable
-    // public growth: IStats | null;
+    // public growth: Stats
 
-    constructor() {
+    constructor(private readonly ea: IEventAggregator) {
+    }
 
+    // binding() {
+    //     console.log("table base stats: " + this.base);
+    // }
+    bound() {
+        // console.log("table base stats: " + this.base);
+    }
+
+    public getBaseStat(id): StatBool {
+        if (this.base?.dic?.hasOwnProperty(id)){
+            return this.base.dic[id]
+        }
+        else {
+            let stat: StatBool = {
+                statId: id,
+                value: false
+            }
+            return stat;
+        }
     }
 
 }

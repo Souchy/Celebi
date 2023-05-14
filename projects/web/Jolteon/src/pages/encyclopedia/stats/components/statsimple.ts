@@ -1,31 +1,35 @@
 import { IEventAggregator, bindable, containerless, inject } from "aurelia";
+import { IStatSimple, StatBool, StatSimple, Stats } from "../../../../jolteon/services/api/data-contracts";
+import { Characteristics } from "../../../../jolteon/constants";
 
 @inject(IEventAggregator)
 @containerless
 export class Statsimple {
 
     @bindable
-    public basevalue: number = 0;
+    public basestat: StatSimple
     @bindable
-    public growthvalue: number = 0;
-    @bindable
-    public hasgrowth: boolean = false;
+    public growthstat: StatSimple
 
-    @bindable
-    public characid: string; //{ id: string, baseName: string }
-    @bindable
-    public characname: string;
-
-    constructor(private readonly ea: IEventAggregator) {
-
-    }
+    constructor(private readonly ea: IEventAggregator) { }
 
     public onChangeBase() {
-        this.ea.publish("stat:base:change", { id: this.characid, value: this.basevalue });
+        // console.log("onChangeBase");
+        this.ea.publish("stat:base:change", this.basestat); //{ id: this.characid, value: this.basevalue });
     }
     public onChangGrowth() {
-        this.ea.publish("stat:growth:change", { id: this.characid, value: this.growthvalue });
+        // console.log("onChangeGrowth");
+        this.ea.publish("stat:growth:change", this.growthstat);// { id: this.characid, value: this.growthvalue });
     }
+
+    binding(){
+        // console.log("binding StatSimple: " + JSON.stringify(this.basestat))
+    }
+
+    public get characName() {
+        return Characteristics.getCharac(this.basestat.statId).baseName;
+    }
+    
 
 
 }

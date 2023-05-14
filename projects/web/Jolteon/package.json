@@ -8,12 +8,13 @@
   },
   "license": "UNLICENSED",
   "dependencies": {
-    "aurelia": "latest",
-    "@aurelia/router": "latest",
     "@aurelia/i18n": "^2.0.0-beta.5",
+    "@aurelia/router": "latest",
     "@aurelia/state": "^2.1.0-dev.202304270200",
     "@fortawesome/fontawesome-free": "^6.2.0",
+    "aurelia": "latest",
     "bootstrap": "^5.2.2",
+    "bootstrap-toaster": "^5.2.0-beta1.1",
     "i18next-fetch-backend": "^5.0.2",
     "swagger-typescript-api": "^12.0.4",
     "typescript-cookie": "^1.0.6"

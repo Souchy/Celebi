@@ -30,27 +30,27 @@ namespace souchy.celebi.eevee.impl.factories
             var creatureModel = CreatureModel.CreatePermanent();
             // Name
             var name = StringEntity.Create("CreatureName #" + creatureModel.entityUid);
-            creatureModel.nameId = name.entityUid;
-            Eevee.models.i18n.Add(creatureModel.nameId, name);
+                creatureModel.nameId = name.entityUid;
+                Eevee.models.i18n.Add(creatureModel.nameId, name);
             // Desc
             var desc = StringEntity.Create("CreatureDesc #" + creatureModel.entityUid);
-            creatureModel.descriptionId = desc.entityUid;
-            Eevee.models.i18n.Add(creatureModel.descriptionId, desc);
+                creatureModel.descriptionId = desc.entityUid;
+                Eevee.models.i18n.Add(creatureModel.descriptionId, desc);
             // Stats
             var stats = Stats.Create();
-            creatureModel.baseStats = stats.entityUid;
-            Eevee.models.stats.Add(stats.entityUid, stats);
+                creatureModel.baseStats = stats.entityUid;
+                Eevee.models.stats.Add(stats.entityUid, stats);
             //fillStats(stats, true);
             // Growth Stats
             var growthStats = Stats.Create();
-            creatureModel.growthStats = growthStats.entityUid;
-            Eevee.models.stats.Add(growthStats.entityUid, growthStats);
+                creatureModel.growthStats = growthStats.entityUid;
+                Eevee.models.stats.Add(growthStats.entityUid, growthStats);
             //fillStats(growthStats, true);
             // Skin
             var creatureSkin = newCreatureSkin();
-            creatureModel.skins.Add(creatureSkin.entityUid);
+                creatureModel.skins.Add(creatureSkin.entityUid);
             // Eevee
-            Eevee.models.creatureModels.Add(creatureModel.entityUid, creatureModel);
+                Eevee.models.creatureModels.Add(creatureModel.entityUid, creatureModel);
             return creatureModel;
         }
         public static ISpellModel newSpellModel()
