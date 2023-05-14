@@ -1,17 +1,40 @@
 <import from="../strings/stringcomponent"></import>
+<import from="../stats/spell/spellstats"></import>
 
+<template if.bind="isvignette && mode != 'search'">
+    <button class="title btn-outline" click.trigger="clickSpell()">
+      <!-- #${model.modelUid}: -->
+      <stringcomponent uid.bind="model.nameId" editable.bind="!isvignette"></stringcomponent>
+    </button>
+    <button class="btn close" click.trigger="clickRemove()">x</button>
+</template>
 
-
-
-<div if.bind="isvignette">
-  <h3>
-    #${model.modelUid}:
+<template if.bind="isvignette && mode == 'search'">
+  <div class="add">+</div>
+  <button class="title titleSearch btn-outline" click.trigger="clickSpell()">
+    <!-- #${model.modelUid}: -->
     <stringcomponent uid.bind="model.nameId" editable.bind="!isvignette"></stringcomponent>
-  </h3>
-</div>
-<div else>
-  <h3>#${model.modelUid}</h3>
+  </button>
+</template>
+
+<template if.bind="!isvignette">
+  <h3>Spell #${model.modelUid}</h3>
   <stringcomponent uid.bind="model.nameId" editable=true></stringcomponent>
   <stringcomponent uid.bind="model.descriptionId" editable=true></stringcomponent>
 
-</div>
+  <!-- costs -->
+  <h5>Costs</h5>
+  <table class="table-striped table-sm table-borderless table-responsive-sm">
+    <tbody>
+      <tr repeat.for="charac of Characteristics.resourcesSpellCosts">
+        <td>${charac.baseName}</td>
+        <td><input type="number" value.bind="model.costs[charac.id]" change.trigger="onChangeCost(charac.id)" placeholder="0" /></td>
+        <!-- <td>${charac.baseName} ${charac.id} ${model.costs[charac.id] || 0}</td> -->
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- growthuid.bind="model.growthStats" -->
+  <h5>Stats</h5>
+  <spellstats baseuid.bind="model.stats"></spellstats>
+</template>

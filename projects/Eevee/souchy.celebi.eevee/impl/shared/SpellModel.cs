@@ -25,12 +25,13 @@ namespace souchy.celebi.eevee.impl.shared
         public ObjectId nameId { get; set; }
         public ObjectId descriptionId { get; set; }
 
+        public ObjectId stats { get; set; }
+
         public ICondition sourceCondition { get; set; }
         public ICondition targetFilter { get; set; }
 
-        public Dictionary<CharacteristicId, int> costs { get; set; } = new();
         //public SpellProperties properties { get; set; } = new SpellProperties();
-        public ObjectId stats { get; set; }
+        public Dictionary<CharacteristicId, int> costs { get; set; } = new();
         public IEntityList<ObjectId> effectIds { get; set; } = new EntityList<ObjectId>(); 
 
         public IZone RangeZoneMin { get; set; } = new Zone();

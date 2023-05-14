@@ -1,23 +1,12 @@
-
-creature {
-    display: block;
-    h3 {
-        border-bottom: 1px solid #58585885; 
-    }
-    .titleSpacer {
-        margin-top: 20px;
-    }
-}
-
-
-creaturelist {
+spelllist {
     .list {
         display: flex;
         flex-flow: row wrap;
 
-        creature {
+        spell {
             cursor: pointer;
             display: flex;
+            position: relative;
             height: 70px;
             width: 150px;
             margin: 8px;
@@ -28,37 +17,52 @@ creaturelist {
             }
 
             .title {
-                padding: 8px 20px;
+                padding: 8px 30px;
                 height: 100%;
                 width: 100%;
 
                 border: 1px solid var(--accent1);
                 border-radius: 5px;
-
-                border-top-right-radius: 0px;
-                border-bottom-right-radius: 0px;
-                
             }
+            // text border radius = 0 on the left in Search mode
             .titleSearch {
-                border-radius: 5px;
                 border-top-left-radius: 0px;
                 border-bottom-left-radius: 0px;
             }
 
+            // delete button
             .close {
-                border: 1px solid var(--accent1);
-                border-radius: 5px;
+                padding: 0px;
+                height: 50%;
                 
-                border-left-width: 0px;
-                border-top-left-radius: 0px;
-                border-bottom-left-radius: 0px;
-            }
-            .add {
                 border: 1px solid var(--accent1);
                 border-radius: 5px;
-                padding: 8px;
-                background-color: var(--accent1);
+                border-top-left-radius: 0px;
+                border-bottom-right-radius: 0px;
+
+                position: absolute;
+                right: 0px;
+                width: 32px;
+            }
+            // .close:hover {
+            //     color: var(--front0);
+            //     border-left-color: var(--accent2);
+            //     border-bottom-color: var(--accent2);
+            //     background-color: var(--accent2);
+            // }
+            .title:hover+.close {
+                display: none;
+            }
+
+            // add button tag
+            .add {
+                line-height: 65px;
+                padding: 0px 8px;
                 color: var(--front1);
+                background-color: var(--accent1);
+
+                border: 1px solid var(--accent1);
+                border-radius: 5px;
                 border-right-width: 0px;
                 border-top-right-radius: 0px;
                 border-bottom-right-radius: 0px;

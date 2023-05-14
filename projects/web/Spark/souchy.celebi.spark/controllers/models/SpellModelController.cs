@@ -5,11 +5,11 @@ using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
-using souchy.celebi.eevee.impl.factories;
 using souchy.celebi.eevee.impl.shared;
 using souchy.celebi.spark.services;
 using souchy.celebi.spark.services.fights;
 using souchy.celebi.spark.services.models;
+using souchy.celebi.spark.util;
 
 namespace souchy.celebi.spark.controllers.models
 {
@@ -37,8 +37,8 @@ namespace souchy.celebi.spark.controllers.models
         public async Task<List<ISpellModel>> GetAll() => await _spellService.GetAsync();
 
         [HttpGet("list")]
-        public async Task<List<ISpellModel>> GetList(List<ObjectId> list) 
-            => await _spellService.GetAsync(Builders<ISpellModel>.Filter.In(s => s.entityUid, list));
+        public async Task<List<ISpellModel>> GetList([FromQuery] List<ObjectId> list) 
+            => await _spellService.GetAsync(Builders<ISpellModel>.Filter.In("_id", list));
 
         [HttpGet("filtered")]
         public async Task<List<ISpellModel>> GetFiltered(FilterDefinition<ISpellModel> filter)
@@ -56,7 +56,7 @@ namespace souchy.celebi.spark.controllers.models
 
         [Authorize]
         [HttpPost("")]
-        public async Task<IActionResult> Post(SpellModel newSpellModel)
+        public async Task<IActionResult> Post([FromBody] SpellModel newSpellModel)
         {
             await _spellService.CreateAsync(newSpellModel);
             return CreatedAtAction(nameof(Get), new { id = newSpellModel.entityUid }, newSpellModel);
@@ -64,25 +64,21 @@ namespace souchy.celebi.spark.controllers.models
 
         [Authorize]
         [HttpPost("new")]
-        public async Task<IActionResult> PostNew()
+        public async Task<ActionResult<ISpellModel>> PostNew()
         {
-            var spellModel = Factories.newSpellModel();
+            (ISpellModel spell, IStringEntity name, IStringEntity desc, IStats stats) model = await Factories.newSpellModel(_ids);
 
-            spellModel.modelUid = await _ids.GetID<ICreatureModel>();
-            spellModel.GetName().modelUid = await _ids.GetID<IStringEntity>();
-            spellModel.GetDescription().modelUid = await _ids.GetID<IStringEntity>();
+            await _spellService.CreateAsync(model.spell);
+            await _strings.CreateAsync(model.name);
+            await _strings.CreateAsync(model.desc);
+            await _stats.CreateAsync(model.stats);
 
-            await _stats.CreateAsync(spellModel.GetStats());
-            await _strings.CreateAsync(spellModel.GetName());
-            await _strings.CreateAsync(spellModel.GetDescription());
-            await _spellService.CreateAsync(spellModel);
-
-            return CreatedAtAction(nameof(Get), new { id = spellModel.entityUid }, spellModel);
+            return CreatedAtAction(nameof(Get), new { id = model.spell.entityUid }, model.spell);
         }
 
         [Authorize]
         [HttpPut("{id}")]
-        public async Task<ActionResult<ReplaceOneResult>> Update([FromRoute] IID id, SpellModel updatedSpellModel)
+        public async Task<ActionResult<ReplaceOneResult>> Update([FromRoute] IID id, [FromBody] SpellModel updatedSpellModel)
         {
             var filter = Builders<ISpellModel>.Filter.Eq(nameof(ISpellModel.modelUid), id);
             var model = await _spellService.GetOneAsync(filter);

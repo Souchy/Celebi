@@ -1,21 +1,14 @@
 <import from="../components/statsimple"></import>
 
-<!-- <h5>${header}</h5> -->
-
-<!-- class: table -->
 <table class="table-striped table-sm table-borderless table-responsive-sm" if.bind="base">
   <thead>
     <tr>
       <th></th>
-      <!-- <th><h5>${header}</h5></th> -->
       <th>Base</th>
-      <th>Growth</th>
+      <th if.bind="growth">Growth</th>
     </tr>
   </thead>
   <tbody>
-    <tr as-element="statsimple" repeat.for="charac of characs" 
-    basestat.bind="getBaseStat(charac.id)" growthstat.bind="getGrowthStat(charac.id)" hasgrowth="true"
-    ></tr>
-    <!-- characid.bind="charac.id"  characname.bind="charac.baseName" -->
+    <tr as-element="statsimple" repeat.for="charac of characs" basestat.bind="getBaseStat(charac.id)" growthstat.bind="getGrowthStat(charac.id)"></tr>
   </tbody>
 </table>

@@ -2,18 +2,28 @@
 <import from="../strings/stringcomponent"></import>
 <import from="../stats/creature/creaturestats"></import>
 
-
-<div if.bind="isvignette">
-  <h3>
-    #${model.modelUid}:
+<!-- <div if.bind="isvignette">
+  <h4>
     <stringcomponent uid.bind="model.nameId" editable.bind="!isvignette"></stringcomponent>
-  </h3>
-</div>
-<div else>
-  <h3>#${model.modelUid}</h3>
+  </h4>
+</div> -->
+
+<template if.bind="isvignette">
+  <button class="title btn-outline" click.trigger="clickCreature()">
+    <stringcomponent uid.bind="model.nameId" editable.bind="!isvignette"></stringcomponent>
+  </button>
+  <button class="btn close" click.trigger="clickRemove()">x</button>
+</template>
+
+
+<template else>
+  <h3>Creature #${model.modelUid}</h3>
   <stringcomponent uid.bind="model.nameId" editable=true></stringcomponent>
   <stringcomponent uid.bind="model.descriptionId" editable=true></stringcomponent>
 
-  <spelllist spellids.bind="model.spellIds"></spelllist>
+  <h3 class="titleSpacer">Spells</h3>
+  <spelllist mode="creatureSpells" spellids.bind="model.baseSpells"></spelllist>
+
+  <h3 class="titleSpacer">Stats</h3>
   <creaturestats baseuid.bind="model.baseStats" growthuid.bind="model.growthStats"></creaturestats>
-</div>
+</template>

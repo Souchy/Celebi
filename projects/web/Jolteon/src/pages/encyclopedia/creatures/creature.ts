@@ -9,12 +9,6 @@ import { TOAST_PLACEMENT, TOAST_STATUS, TOAST_THEME, Toast, ToastConfigOptions, 
 @inject(CreatureModelController, IEventAggregator, IRouter)
 export class Creature implements IRouteableComponent {
 
-    private readonly toastConfig: ToastConfigOptions = {
-        enableQueue: false,
-        placement: TOAST_PLACEMENT.TOP_CENTER,
-        maxToasts: 2
-    }
-
     //#region input
     @bindable
     public model: ICreatureModel;
@@ -26,12 +20,15 @@ export class Creature implements IRouteableComponent {
 
     constructor(
         private readonly creatureController: CreatureModelController,
-        private readonly ea: IEventAggregator, 
+        private readonly ea: IEventAggregator,
         private readonly router: IRouter
     ) {
-        ea.subscribe("creature:operation:saved", this.toastSaved);
-        ea.subscribe("creature:operation:failed", this.toastFailed);
-        Toast.configure(this.toastConfig);
+        this.ea.subscribe('spells:search:select', (spellUid: string) => {
+            console.log("creature receive add spell: " + spellUid)
+            if(!this.model.baseSpells) this.model.baseSpells = [];
+            this.model.baseSpells.push(spellUid);
+            this.creatureController.putSpells(this.model.modelUid, this.model.baseSpells);
+        });
     }
 
     /**
@@ -55,27 +52,14 @@ export class Creature implements IRouteableComponent {
         }
     }
 
-    private toastSaved() {
-        // console.log("toast saved")
-        let toast: ToastOptions = {
-            title: "Creature",
-            message: "Saved",
-            status: TOAST_STATUS.SUCCESS,
-            timeout: 2000
-        }
-        // Toast.configure(this.toastConfig);
-        Toast.create(toast);
+    
+    public clickCreature() {
+        this.router.load("/editor/creature/" + this.model.modelUid);
     }
-    private toastFailed() {
-        // console.log("toast failed")
-        let toast = {
-            title: "Creature",
-            message: "Failed",
-            status: TOAST_STATUS.WARNING,
-            timeout: 2000
-        }
-        // Toast.configure(this.toastConfig);
-        Toast.create(toast);
+
+    public clickRemove() {
+        // TODO: ask confirmation before delete, it'S too easy to missclick
+        // this.creatureController.deleteCreature(this.model.modelUid);
     }
 
 

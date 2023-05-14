@@ -63,23 +63,32 @@ namespace souchy.celebi.eevee.impl.util
         //}
         public static bool RegisterEventBus(ObjectId id)
         {
-            if (eventBuses.ContainsKey(id))
-                throw new ArgumentException("Id already exists");
-            eventBuses.Add(id, new EventBus());
+            lock(eventBuses)
+            {
+                if (eventBuses.ContainsKey(id))
+                    throw new ArgumentException("Id already exists");
+                eventBuses.Add(id, new EventBus());
+            }
             return true;
         }
         public static bool DisposeEventBus(ObjectId id)
         {
-            if(!eventBuses.ContainsKey(id)) 
-                return false;
-            eventBuses[id].Dispose();
-            eventBuses.Remove(id);
+            lock(eventBuses)
+            {
+                if (!eventBuses.ContainsKey(id))
+                    return false;
+                eventBuses[id].Dispose();
+                eventBuses.Remove(id);
+            }
             return true;
         }
         public static IEventBus GetEntityBus(this IEntity e)
         {
-            if (eventBuses.ContainsKey(e.entityUid))
-                return eventBuses[e.entityUid];
+            lock (eventBuses)
+            {
+                if (eventBuses.ContainsKey(e.entityUid))
+                    return eventBuses[e.entityUid];
+            }
             return null; // when NewtonsoftJson deserializes objects, it sets properties which calls the event bus before the entities' id are registered
             //throw new Exception("You made a mistake in type or method called. Maybe call iid.GetEventBus<T>()");
         }

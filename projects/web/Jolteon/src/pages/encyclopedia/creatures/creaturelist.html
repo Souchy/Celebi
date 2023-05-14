@@ -1,12 +1,9 @@
 <import from="./creature"></import>
 
-
-<h3>Hi Creature List</h3>
-
-<button class="btn" click.trigger="refresh()">Refresh</button>
-<button class="btn" click.trigger="clickCreate()">New creature</button>
+<button class="btn listMenu" click.trigger="refresh()">Refresh</button>
+<button class="btn listMenu" click.trigger="clickCreate()">New creature</button>
 
 <!-- todo bind creature -->
 <div class="list">
-  <creature repeat.for="crea of creatures" model.bind="crea" isvignette.bind="true" click.trigger="clickCreature(crea.modelUid)"></creature>
+  <creature repeat.for="crea of creatures" model.bind="crea" isvignette.bind="true"></creature>
 </div>

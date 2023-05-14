@@ -1,45 +1,30 @@
-
-using AspNetCore.Identity.Mongo.Model;
 using AspNetCore.Identity.Mongo;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using souchy.celebi.spark.controllers.meta;
-using souchy.celebi.spark.controllers.models;
 using souchy.celebi.spark.models;
 using souchy.celebi.spark.services;
 using souchy.celebi.spark.services.fights;
 using souchy.celebi.spark.services.meta;
 using souchy.celebi.spark.services.models;
 using souchy.celebi.spark.util.swagger;
-using System.Diagnostics;
-using System.Text;
 using Microsoft.AspNetCore.Authentication;
 using souchy.celebi.spark.models.settings;
-using souchy.celebi.eevee.face.shared.models;
-using souchy.celebi.eevee.impl.shared;
 using souchy.celebi.eevee.face.objects.stats;
-using souchy.celebi.eevee.impl.stats;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.util;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
-using Microsoft.OpenApi.Any;
 using souchy.celebi.eevee.face.entity;
-using MongoDB.Bson.Serialization.IdGenerators;
-using MongoDB.Bson;
-using souchy.celebi.eevee.impl.objects;
-using souchy.celebi.eevee.impl.objects.effects;
 using souchy.celebi.eevee.enums.characteristics;
-using souchy.celebi.eevee.impl.objects.zones;
-using System.Reflection;
 using souchy.celebi.eevee.impl.util.serialization;
-using Newtonsoft.Json;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.shared.triggers;
 using souchy.celebi.eevee.face.shared.conditions;
+using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.face.values;
+using souchy.celebi.spark.util.mongo;
+using souchy.celebi.eevee.face.util.math;
+using souchy.celebi.eevee.impl.values;
 
 namespace souchy.celebi.spark
 {
@@ -162,6 +147,14 @@ namespace souchy.celebi.spark
                 c.MapType<IEntityList<ITrigger>>(() => mapSchemaArray<ITrigger>());
                 c.MapType<IEntityList<ICondition>>(() => mapSchemaArray<ICondition>());
 
+                c.MapType<IValue<ZoneType>>(() => mapIValue<ZoneType>());
+                c.MapType<IValue<ElementType>>(() => mapIValue<ElementType>());
+                c.MapType<IValue<IVector3>>(() => mapIValue<IVector3>());
+                c.MapType<IValue<StatusPriorityType>>(() => mapIValue<StatusPriorityType>());
+                c.MapType<IValue<int>>(() => mapIValue<int>());
+                c.MapType<IValue<bool>>(() => mapIValue<bool>());
+                c.MapType<IValue<double>>(() => mapIValue<double>());
+
                 c.DocumentFilter<TypesDocumentFilter>(); // adds more document types
             });
             services.AddSwaggerGenNewtonsoftSupport();
@@ -172,13 +165,40 @@ namespace souchy.celebi.spark
             }).AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.Converters.Add(new ObjectIdConverter());
+
+                //options.SerializerSettings.Converters.Add(new IValueZoneTypeJsonConverter());
+                //options.SerializerSettings.Converters.Add(new IValueElementJsonConverter());
+                //options.SerializerSettings.Converters.Add(new IValueIntJsonConverter());
+                //options.SerializerSettings.Converters.Add(new IValueBoolJsonConverter());
+                //options.SerializerSettings.Converters.Add(new IValueDoubleJsonConverter());
             });
         }
 
+        private static OpenApiSchema mapIValue<T>()
+        {
+            var t = typeof(T);
+            if(t.IsPrimitive)
+            {
+                return new()
+                {
+                    Type = (t == typeof(int) | t == typeof(double)) ? "number" : t.Name.ToLower(),
+                    Format = t.Name.ToLower()
+                };
+            } else
+            {
+                return new()
+                {
+                    Reference = new OpenApiReference()
+                    {
+                        Type = ReferenceType.Schema,
+                        Id = t.Name
+                    }
+                };
+            }
+        }
         private static OpenApiSchema mapSchemaArray<T>()
         {
             var t = typeof(T);
-
             var items = new OpenApiSchema()
             {
                 Reference = new OpenApiReference()
@@ -312,12 +332,21 @@ namespace souchy.celebi.spark
             BsonSerializer.RegisterSerializer(objectSerializer);
             BsonSerializer.RegisterSerializer<IID>(new IIDBsonSerializer());
             BsonSerializer.RegisterSerializer<CharacteristicId>(new CharacIdBsonSerializer());
-
+            BsonSerializer.RegisterSerializer<IValue<ZoneType>>(new ValueZoneSerializer());
+            //BsonSerializer.RegisterDiscriminator(typeof(IValue<ZoneType>), new BsonValue());
 
             BsonClassMap.RegisterClassMap<EntitySet<IID>>();
             BsonClassMap.RegisterClassMap<EntitySet<ObjectId>>();
             BsonClassMap.RegisterClassMap<EntityDictionary<CharacteristicId, IStat>>();
             BsonClassMap.RegisterClassMap<Dictionary<CharacteristicId, IStat>>();
+
+            BsonClassMap.RegisterClassMap<Value<ZoneType>>();
+            BsonClassMap.RegisterClassMap<Value<ElementType>>();
+            BsonClassMap.RegisterClassMap<Value<IVector3>>();
+            BsonClassMap.RegisterClassMap<Value<StatusPriorityType>>();
+            BsonClassMap.RegisterClassMap<Value<int>>();
+            BsonClassMap.RegisterClassMap<Value<double>>();
+            BsonClassMap.RegisterClassMap<Value<bool>>();
 
             foreach (var t in typeof(IEntity).Assembly.GetTypes()
                 .Where(t => !t.IsInterface && !t.IsGenericType))

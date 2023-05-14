@@ -1,28 +1,5 @@
 <import from="../components/statbool"></import>
 
-<!-- <h5>${header}</h5> -->
-
-<!-- <div if.bind="base"> -->
-
 <div if.bind="true" style="display: flex; flex-wrap: wrap;">
   <statbool repeat.for="charac of characs" basestat.bind="getBaseStat(charac.id)"></statbool>
 </div>
-
-<table else class="table table-striped table-sm table-borderless table-responsive-sm">
-  <thead>
-    <tr>
-      <th></th>
-      <!-- <th><h5>${header}</h5></th> -->
-      <th>Base</th>
-      <!-- <th if.bind="growth">Growth</th> -->
-    </tr>
-  </thead>
-  <tbody>
-    <tr as-element="statbool" repeat.for="charac of characs" basestat.bind="getBaseStat(charac.id)"></tr>
-    <!-- basevalue="2" -->
-    <!-- characid.bind="charac.id" characname.bind="charac.baseName"  -->
-    <!-- hasgrowth="false"></tr> -->
-  </tbody>
-</table>
-
-<!-- </div> -->

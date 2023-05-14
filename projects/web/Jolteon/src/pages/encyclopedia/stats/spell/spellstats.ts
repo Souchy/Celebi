@@ -6,36 +6,34 @@ import { Characteristics } from '../../../../jolteon/constants';
 import { HttpResponse } from '../../../../jolteon/services/api/http-client';
 
 @inject(IEventAggregator, StatsModelController)
-export class CreatureStats implements IRouteableComponent {
+export class SpellStats implements IRouteableComponent {
     public readonly Characteristics: Characteristics = Characteristics; // static reference
 
     // input
     @bindable
     public baseuid: string;
-    @bindable
-    public growthuid: string;
+    // @bindable
+    // public growthuid: string;
 
     // db data
     public base: Stats = null
-    public growth: Stats = null
-
 
     constructor(private readonly ea: IEventAggregator, private readonly statsController: StatsModelController) {
         ea.subscribe("stat:base:change", (s: StatSimple | StatBool) => {
             this.postUpdate(this.base, s);
         });
-        ea.subscribe("stat:growth:change", (s: StatSimple | StatBool) => {
-            this.postUpdate(this.growth, s);
-        });
+        // ea.subscribe("stat:growth:change", (s: StatSimple | StatBool) => {
+        //     this.postUpdate(this.growth, s);
+        // });
     }
 
     binding() {
         this.statsController
             .getStats(this.baseuid)
             .then(res => this.base = res.data);
-        this.statsController
-            .getStats(this.growthuid)
-            .then(res => this.growth = res.data);
+        // this.statsController
+        //     .getStats(this.growthuid)
+        //     .then(res => this.growth = res.data);
     }
 
     private async postUpdate(stats: Stats, stat: StatSimple | StatBool) {

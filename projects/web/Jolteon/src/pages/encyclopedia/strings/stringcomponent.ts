@@ -36,11 +36,11 @@ export class Stringcomponent implements IRouteableComponent {
         try {
             let res = await this.controller.putString(str.entityUid, str, { lang: this.lang });
             if(res.data.matchedCount > 0) 
-                this.ea.publish("creature:operation:saved");
+                this.ea.publish("operation:saved");
             else 
-                this.ea.publish("creature:operation:failed");
+                this.ea.publish("operation:failed");
         } catch(rej) {
-            this.ea.publish("creature:operation:failed");
+            this.ea.publish("operation:failed");
         }
     }
 

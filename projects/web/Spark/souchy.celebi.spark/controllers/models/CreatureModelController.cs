@@ -12,6 +12,7 @@ using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.shared;
 using souchy.celebi.eevee.impl.stats;
+using souchy.celebi.eevee.impl.util;
 using souchy.celebi.spark.services;
 using souchy.celebi.spark.services.models;
 using souchy.celebi.spark.util;
@@ -86,7 +87,7 @@ namespace souchy.celebi.spark.controllers.models
 
         [Authorize]
         [HttpPut("{id}")]
-        public async Task<ActionResult<ReplaceOneResult>> Update([FromRoute] string id, [FromBody] CreatureModel updateModel)
+        public async Task<ActionResult<ReplaceOneResult>> Update([FromRoute] IID id, [FromBody] CreatureModel updateModel)
         {
             var filter = Builders<ICreatureModel>.Filter.Eq(nameof(ICreatureModel.modelUid), id);
             var model = await _creatureModels.GetOneAsync(filter);
@@ -117,5 +118,23 @@ namespace souchy.celebi.spark.controllers.models
             }
             return Ok(result);
         }
+
+        [Authorize]
+        [HttpPut("{id}/spells")]
+        public async Task<ActionResult<UpdateResult>> UpdateSpell([FromRoute] IID id, [FromBody] string[] spellIds)
+        {
+            var filter = Builders<ICreatureModel>.Filter.Eq(nameof(ICreatureModel.modelUid), id);
+            var model = await _creatureModels.GetOneAsync(filter);
+            if (model is null)
+                return NotFound();
+            //foreach (var s in spellIds)
+            //    model.baseSpells.Add(new ObjectId(s));
+            var objectIds = spellIds.Distinct().Select(s => new ObjectId(s));
+            var set = new EntitySet<ObjectId>(objectIds);
+            var update = Builders<ICreatureModel>.Update.Set(nameof(ICreatureModel.baseSpells), set);
+            var result = await _creatureModels.Collection.UpdateOneAsync(filter, update);
+            return Ok(result);
+        }
+
     }
 }

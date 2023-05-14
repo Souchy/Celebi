@@ -11,9 +11,9 @@ export class Tablesimple {
     @bindable
     public characs: any[];
     @bindable
-    public base: Stats 
+    public base: Stats = null
     @bindable
-    public growth: Stats
+    public growth: Stats = null
 
     constructor(private readonly ea: IEventAggregator) {
     }
@@ -38,6 +38,7 @@ export class Tablesimple {
         }
     }
     public getGrowthStat(id): StatSimple {
+        if(!this.growth) return null;
         if (this.growth?.dic?.hasOwnProperty(id)){
             return this.growth.dic[id]
         }

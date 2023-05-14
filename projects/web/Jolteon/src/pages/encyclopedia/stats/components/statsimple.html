@@ -7,7 +7,7 @@
   <td>
     <input type="number" value.bind="basestat.value" change.trigger="onChangeBase" />
   </td>
-  <td>
+  <td if.bind="growthstat">
     <input type="number" value.bind="growthstat.value" change.trigger="onChangGrowth" />
   </td>
 </tr>

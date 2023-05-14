@@ -1,18 +1,16 @@
 <!-- <containerless> -->
 
-<tr if.bind="false">
+<!-- <tr if.bind="false">
   <td>
     ${characName}
   </td>
   <td>
     <input type="checkbox" checked.bind="basestat.value" change.trigger="onChangeBase" />
   </td>
-  <!-- <td if.bind="hasgrowth">
-    <input type="number" value.bind="growthvalue" change.trigger="onChangGrowth" />
-  </td> -->
-</tr>
+</tr> -->
 
-<div else style="margin: 5px;">
+<!-- else -->
+<div style="margin: 5px;">
   <input type="checkbox" class="btn-check" id="btn-check-outlined ${basestat.statId}" autocomplete="off" checked.bind="basestat.value" change.trigger="onChangeBase">
   <label class="btn btn-outline shadow-none" for="btn-check-outlined ${basestat.statId}">${characName}</label><br>
 </div>

@@ -68,6 +68,13 @@ namespace souchy.celebi.eevee.impl.util.serialization
         public override void WriteJson(JsonWriter writer, CharacteristicId value, JsonSerializer serializer)
             => writer.WriteValue(value.ID.ToString());
     }
+    public class IValueZoneTypeJsonConverter : JsonConverter<IValue<ZoneType>>
+    {
+        public override IValue<ZoneType> ReadJson(JsonReader reader, Type objectType, IValue<ZoneType> existingValue, bool hasExistingValue, JsonSerializer serializer)
+            => new Value<ZoneType>(Enum.Parse<ZoneType>(reader.ReadAsString()));
+        public override void WriteJson(JsonWriter writer, IValue<ZoneType> value, JsonSerializer serializer)
+            => writer.WriteValue(Enum.GetName<ZoneType>(value.value));
+    }
     public class IValueElementJsonConverter : JsonConverter<IValue<ElementType>>
     {
         public override IValue<ElementType> ReadJson(JsonReader reader, Type objectType, IValue<ElementType> existingValue, bool hasExistingValue, JsonSerializer serializer)

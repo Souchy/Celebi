@@ -4,13 +4,14 @@ import { IStore } from '@aurelia/state';
 // import 'bootstrap/dist/css/bootstrap.css'; // Import the CSS
 import '@fortawesome/fontawesome-free';
 import '@fortawesome/fontawesome-free/css/all.css';
-import { IHttpClient, inject } from 'aurelia';
+import { IEventAggregator, IHttpClient, inject } from 'aurelia';
 import { ActionNames, LoginAction, LogoutAction } from './jolteon/action-handler';
 import { GlobalState } from './jolteon/initialstate';
 import { Constants } from './jolteon/constants';
 import { AuthController } from './jolteon/services/api/AuthController';
+import { TOAST_PLACEMENT, TOAST_STATUS, Toast, ToastConfigOptions, ToastOptions } from 'bootstrap-toaster';
 
-@inject(IHttpClient, IStore, AuthController, IRouter)
+@inject(IHttpClient, IStore, IEventAggregator, IRouter, AuthController)
 export class App implements IRouteableComponent {
 	static routes: IRoute[] = [
 		{
@@ -46,18 +47,32 @@ export class App implements IRouteableComponent {
 			path: 'editor/creature/:uid',
 			component: import('./pages/encyclopedia/creatures/creature'),
 			title: 'Creature',
-			// data: {
-			// 	requiresAuth: true
-			// }
+		},
+		{
+			path: 'editor/spell/:uid',
+			component: import('./pages/encyclopedia/spells/spell'),
+			title: 'Spell',
 		}
 	];
+
+    private readonly toastConfig: ToastConfigOptions = {
+        enableQueue: false,
+        placement: TOAST_PLACEMENT.TOP_CENTER,
+        maxToasts: 2
+    }
 
 	constructor(
 		private readonly http: IHttpClient, 
 		private readonly store: IStore<GlobalState, LogoutAction>, 
+		private readonly ea: IEventAggregator, 
+		private readonly router: IRouter,
 		private readonly auth: AuthController,
-		private readonly router: IRouter
 	) {
+		// toast on saved/failed post operations to server
+        Toast.configure(this.toastConfig);
+        ea.subscribe("operation:saved", this.toastSaved);
+        ea.subscribe("operation:failed", this.toastFailed);
+
 		// use the server url as base url
 		this.http.baseUrl = Constants.serverUrl;
 
@@ -90,6 +105,7 @@ export class App implements IRouteableComponent {
 						// console.log(req);
 						// console.log(res);
 
+						// if unauthorized: logout and return to /home
 						if (res.status == 401) { // && res.headers.has("logout")) {
 							// let body = await res.text();
 							// if (body === "logout") {
@@ -106,5 +122,29 @@ export class App implements IRouteableComponent {
 				})
 		);
 	}
+
+	
+    public toastSaved() {
+        // console.log("toast saved")
+        let toast: ToastOptions = {
+            title: "Operation",
+            message: "Saved",
+            status: TOAST_STATUS.SUCCESS,
+            timeout: 2000
+        }
+        // Toast.configure(this.toastConfig);
+        Toast.create(toast);
+    }
+    public toastFailed() {
+        // console.log("toast failed")
+        let toast = {
+            title: "Operation",
+            message: "Failed",
+            status: TOAST_STATUS.WARNING,
+            timeout: 2000
+        }
+        // Toast.configure(this.toastConfig);
+        Toast.create(toast);
+    }
 
 }

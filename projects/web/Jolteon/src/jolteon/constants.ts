@@ -1,4 +1,6 @@
-import { Affinity, AffinityTypes, Contextual, ContextualTypes, OtherProperty, OtherPropertyTypes, Resistance, ResistanceTypes, Resource, ResourceProperty, ResourceTypes, SpellModelProperty, SpellModelPropertyTypes, SpellProperty, SpellPropertyTypes, State, StateTypes, StatusModelProperty, StatusModelPropertyTypes } from "./services/api/data-contracts";
+import { Affinity, AffinityTypes, Contextual, ContextualTypes, OtherProperty, OtherPropertyTypes, 
+    Resistance, ResistanceTypes, Resource, ResourceProperty, ResourceTypes, SpellModelProperty, 
+    SpellModelPropertyTypes, SpellProperty, SpellPropertyTypes, State, StateTypes, StatusModelProperty, StatusModelPropertyTypes } from "./services/api/data-contracts";
 
 
 export class Constants {
@@ -11,7 +13,8 @@ export class Characteristics {
     public static readonly affinities: Affinity[] = Object.values(AffinityTypes)
     public static readonly resistances: Resistance[] = Object.values(ResistanceTypes);
     public static readonly resources: Resource[] = Object.values(ResourceTypes);
-    public static readonly resourcesModel: Resource[] = Object.values(ResourceTypes).filter((r: Resource) => r.resProp == ResourceProperty.InitialMax || r.resProp == ResourceProperty.Regen);
+    public static readonly resourcesCreatureModel: Resource[] = Object.values(ResourceTypes).filter((r: Resource) => r.resProp == ResourceProperty.InitialMax || r.resProp == ResourceProperty.Regen);
+    public static readonly resourcesSpellCosts: Resource[] = Object.values(ResourceTypes).filter((r: Resource) => r.resProp == ResourceProperty.Current);
     public static readonly states: State[] = Object.values(StateTypes);
     public static readonly others: OtherProperty[] = Object.values(OtherPropertyTypes);
     public static readonly contextuals: Contextual[] = Object.values(ContextualTypes);

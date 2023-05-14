@@ -9,8 +9,12 @@ export class CreatureList implements IRouteableComponent {
     public creatures: ICreatureModel[] = [];
     public selectedCreatures: ICreatureModel[] = [];
 
+    // TODO pages for Creature list and Spell list
+    public readonly numPerPage = 50;
+    public page: number = 0;
+
     constructor(
-        private readonly http: CreatureModelController,
+        private readonly creatureController: CreatureModelController,
         @IRouter private router: IRouter
     ) {
         // console.log("list ctor")
@@ -19,7 +23,11 @@ export class CreatureList implements IRouteableComponent {
 
     public refresh() {
         // TODO: limit 50 per page? add filters for name, element type...
-        this.http.getAll().then(res => this.creatures = res.data);
+        let filter = {
+            skip: this.page * this.numPerPage,
+            limit: this.numPerPage
+        }
+        this.creatureController.getAll().then(res => this.creatures = res.data);
     }
 
     public clickCreate() {
@@ -29,29 +37,9 @@ export class CreatureList implements IRouteableComponent {
         // this.http.postCreature(crea).then(res => {
         //     this.creatures.push(res.data);
         // });
-        this.http.postNew().then(res => {
+        this.creatureController.postNew().then(res => {
             this.creatures.push(res.data);
         });
-    }
-
-    public clickDelete() {
-        for (let crea of this.selectedCreatures) {
-            let id: string = crea.modelUid; // IID
-            this.http.deleteCreature(id).then(res => {
-                if (res.data.deletedCount !== 1) return;
-                let index = this.creatures.findIndex(c => c.modelUid === id);
-                if (index === -1) return;
-                this.creatures.splice(index, 1);
-
-            })
-        }
-        this.selectedCreatures = [];
-    }
-
-    public clickCreature(modelUid: string) {
-        console.log("click crea " + modelUid)
-        // this.router.load("/home")
-        this.router.load("/editor/creature/" + modelUid);
     }
 
 }

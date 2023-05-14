@@ -7,6 +7,8 @@ namespace souchy.celebi.eevee.impl.util
 {
     public class EntitySet<T> : EntityList<T>, IEntitySet<T> //where T : IEntity
     {
+        public EntitySet() { }
+        public EntitySet(IEnumerable<T> list) : base(list.Distinct()) { }
         public override bool allowDuplicates() => false;
     }
 
@@ -25,6 +27,9 @@ namespace souchy.celebi.eevee.impl.util
         public List<T> Values { get => this; }
 
         public EntityList() { }
+        public EntityList(IEnumerable<T> list) {
+            this.AddRange(list);
+        }
 
         public virtual bool allowDuplicates() => true; 
 
