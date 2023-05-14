@@ -26,9 +26,13 @@ namespace souchy.celebi.eevee.impl.objects
     public abstract class Effect : IEffect
     {
         [BsonId]
-        public ObjectId entityUid { get; set; } //= Eevee.RegisterIID();
+        public ObjectId entityUid { get; set; }
         public IID modelUid { get; set; }
-        public ObjectId fightUid { get; set; }
+        public ObjectId fightUid { get; set; } TODO two types: EffectFight, EffectPermanent
+        /*
+         * EffectFight : IEntityModeled, IFightEntity, IEffectsContainer
+         * EffectPermanent : IEntityModel, IEffectsContainer
+         */
 
 
         //#region Dynamic status creation

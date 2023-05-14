@@ -8,6 +8,60 @@ namespace souchy.celebi.eevee.enums.effects
 {
     public class EffectType
     {
+
+        /*
+         * List of Effect Model Type
+         *      DirectDamage
+         *      Swap
+         *      Teleport
+         *      ...
+         *      
+         * Effect:
+         *      modelUid
+         *      properties<string, value>
+         *          key: value
+         *          ["element": air]
+         *          ["dmg": 10]
+         *      conditions
+         *      zone
+         *      triggers
+         *      children
+         *      apply => model.apply(this)
+         *      preview => model.preview(this)
+         *      
+         *      
+         * EffectModelX:
+         *      modelUid
+         *      nameId
+         *      descriptionId
+         *      EffectModelProperty[] !!!?
+         *          [ {name = 'element', type = ElementType }, 
+         *            {name = 'dmg', type = int }
+         *          ]
+         *      scriptApply(effect) !!!
+         *      scriptPreview(effect) !!!
+         *      
+         *  EffectModelXScript:
+         *      scriptApply(effect) !!!
+         *      scriptPreview(effect) !!!
+         *      
+         * EffectDmgProperties:   // Schema
+         *      ele: Element
+         *      dmg: int
+         *      
+         *  EffectModelProperty:
+         *      string name
+         *      type classtype
+         *      
+         *      
+         *      
+         *  EffectDamage.apply -> Element ele = effect.properties.get('element')
+         *  EffectDamage.apply -> Element ele = effect.properties.get(nameof(DamageModelProperties.element))
+         *  EffectDamage.apply -> DamageModelProperties props = (DamageModelProperties) effect.properties;
+         *      EffectModel.propertiesType = typeof(DamageModelProperties)
+         */
+
+
         /*
          * Spell boosts
         public static ACTION_BOOST_SPELL_RANGE_MIN: number = 280;

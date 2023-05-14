@@ -19,6 +19,40 @@ using System.Collections.Generic;
 
 namespace souchy.celebi.eevee.impl.objects.effects.res
 {
+    public interface EffPropertiesSchema { } // Properties
+    public class EffectDirectDamagePropertiesSchema : EffPropertiesSchema
+    {
+        public IValue<ElementType> Element { get; set; } = new Value<ElementType>();
+        public IValue<int> Value { get; set; } = new Value<int>();
+    }
+    public sealed class EffModel { //<T> where T : EffProperties {
+        public ObjectId entityUid, nameId, descriptionId;
+        public Type propertiesSchemaType { get; init; } // => typeof(T); }
+    }
+    // only defined in mongo? links Effect -> ModelUid -> EffectModel -> Schema type + Name + Desc -> Scripts
+    // still need EffectType enum to refer to types directly like if(effect.modelUid == EffectType.AddStats)
+    // we can use the enum name or ordinal as string id
+    // every model is 1 action only, no ifs no buts (aka AddStatus becomes AddStatusCell + AddStatusCreature)
+    //public class EffectDirectDamageModel : EffModel //<EffectDirectDamageProperties>
+    //{
+    //    // entityUid, nameId, descriptionId, BoardTargetType
+    //    public Type propertiesType { get; init; } = typeof(EffectDirectDamageSchema);
+    //    // apply(Action, Effect)
+    //    // preview(Action, Effect)
+    //}
+    public interface EffScript<T> {
+        public Type SchemaType { get => typeof(T); }
+        public IEffectReturnValue apply(IAction action, Effect e, IEnumerable<IBoardEntity> targets);
+    }
+    public class DirectDamageScript : EffScript<EffectDirectDamagePropertiesSchema>
+    {
+        public IEffectReturnValue apply(IAction action, Effect e, IEnumerable<IBoardEntity> targets)
+        {
+            EffectDirectDamagePropertiesSchema props = null; //effect.properties as EffectDirectDamageSchema;
+            return null;
+        }
+    }
+
     public class EffectDirectDamage : Effect, IEffectDirectDamage
     {
         public IValue<ElementType> Element { get; set; } = new Value<ElementType>();

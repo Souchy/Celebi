@@ -7,6 +7,8 @@ export class Tablesimple {
 
     // @bindable
     // public header: string = "Charac";
+    @bindable
+    public hasheader: boolean = true;
 
     @bindable
     public characs: any[];

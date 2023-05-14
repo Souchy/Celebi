@@ -25,6 +25,7 @@ using souchy.celebi.eevee.face.values;
 using souchy.celebi.spark.util.mongo;
 using souchy.celebi.eevee.face.util.math;
 using souchy.celebi.eevee.impl.values;
+using souchy.celebi.eevee.impl.objects.effects.res;
 
 namespace souchy.celebi.spark
 {

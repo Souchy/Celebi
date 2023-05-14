@@ -29,6 +29,7 @@ namespace souchy.celebi.eevee.face.objects
         //public StatusProperties statusProperties { get; set; }
         //#endregion
 
+        public BoardTargetType BoardTargetType { get; set; }
         public ICondition sourceCondition { get; set; }
         public ICondition targetFilter { get; set; }
 
