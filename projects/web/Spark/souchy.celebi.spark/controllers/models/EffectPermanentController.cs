@@ -14,12 +14,12 @@ namespace souchy.celebi.spark.controllers.models
     [ApiController]
     [Produces("application/json")]
     [Route(Routes.Models + "effects")] 
-    public class EffectModelController : ControllerBase
+    public class EffectPermanentController : ControllerBase
     {
         //private readonly EffectService _effectService;
         //public EffectModelController(EffectService service) => _effectService = service;
         private readonly CollectionService<IEffect> _effects;
-        public EffectModelController(MongoModelsDbService db)
+        public EffectPermanentController(MongoModelsDbService db)
         {
             _effects = db.GetMongoService<IEffect>();
         }

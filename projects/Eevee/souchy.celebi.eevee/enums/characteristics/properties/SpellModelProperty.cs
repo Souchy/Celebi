@@ -43,6 +43,14 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
         }
 
         public static readonly SpellModelState LineOfSightRequired = new(0, nameof(LineOfSightRequired));
+        /// <summary>
+        /// Wether or not we tell every other player what was the spell's target cell <br></br>
+        /// ex: éclipse, pièges, roublardise ou lorsqu'on est invisible <br></br>
+        /// donc tous des cellStatus invisible ou des perso invisible
+        ///     roublardise peut être codé pour mettre invi avant de cast le spell
+        ///     
+        /// </summary>
+        public static readonly SpellModelState BroadcastTargetedCell = new(1, nameof(BroadcastTargetedCell));
 
 
         public static readonly Dictionary<CharacteristicId, SpellModelState> values = new();

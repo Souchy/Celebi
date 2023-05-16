@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace souchy.celebi.eevee.enums.characteristics.creature
 {
+    /// <summary>
+    /// Often states will have an icon over the creature
+    /// </summary>
     public sealed record State : CharacteristicType
     {
         public State(int localId, string name) : base(CharacteristicCategory.State, localId, name)
@@ -30,6 +33,9 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
         public static readonly State Carrying    = new(28, nameof(Carrying   ));
         public static readonly State Carried     = new(29, nameof(Carried    ));
         public static readonly State Pacifist    = new(30, nameof(Pacifist   ));
+        public static readonly State Invulnerable         = new(30, nameof(Invulnerable));
+        public static readonly State InvulnerableDistance = new(31, nameof(InvulnerableDistance));
+        public static readonly State InvulnerableMelee    = new(32, nameof(InvulnerableMelee));
 
 
         public static readonly Dictionary<CharacteristicId, State> values = new();

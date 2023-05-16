@@ -38,6 +38,6 @@ namespace souchy.celebi.spark.controllers.models
         [HttpGet("charac/state")]
         public List<State> GetState() => State.values.Values.ToList();
         [HttpGet("charac/statusmodel")]
-        public List<StatusModelProperty> GetStatusModelProperty() => StatusModelProperty.values.Values.ToList();
+        public List<StatusProperty> GetStatusModelProperty() => StatusProperty.values.Values.ToList();
     }
 }

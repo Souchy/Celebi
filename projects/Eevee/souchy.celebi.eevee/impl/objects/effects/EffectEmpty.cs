@@ -23,15 +23,15 @@ namespace souchy.celebi.eevee.impl.objects.effects
     /// Effect that doesnt do anything. <br></br>
     /// It just holds other child effects and conditions
     /// </summary>
-    public class EffectBase : Effect, IEffectBase
+    public class EffectEmpty : Effect, IEffectBase
     {
 
-        private EffectBase() { }
-        private EffectBase(ObjectId id) : base(id) { }
+        private EffectEmpty() { }
+        private EffectEmpty(ObjectId id) : base(id) { }
 
         public IID textId { get; set; }
 
-        public static IEffectBase Create() => new EffectBase(Eevee.RegisterIIDTemporary());
+        public static IEffectBase Create() => new EffectEmpty(Eevee.RegisterIIDTemporary());
 
         public override IEffectPreview preview(IAction action, IEnumerable<IBoardEntity> targets) {
             throw new NotImplementedException();

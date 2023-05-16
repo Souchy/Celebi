@@ -62,8 +62,8 @@ namespace souchy.celebi.eevee.impl.factories
                 status.modelUid = statusModel.modelUid; //entityUid;
                 status.effectIds = statusModel.effectIds;
 
-                var duration = StatusModelProperty.Duration.Create(statusModel.duration.value);
-                var delay = StatusModelProperty.Delay.Create(statusModel.delay.value);
+                var duration = StatusProperty.Duration.Create(statusModel.duration.value);
+                var delay = StatusProperty.Delay.Create(statusModel.delay.value);
                 status.GetStats().Set(duration);
                 status.GetStats().Set(delay);
             }

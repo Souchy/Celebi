@@ -2,14 +2,20 @@
 
 
 
-<button class="btn">Add Model</button>
+<!-- <button class="btn">Add Model</button>  ?? -->
 
 
 
 <div repeat.for="model of ConstantsOrDB.effectModels" click.trigger="clickEffectModel()">
-    <!-- name -->
-    <!-- description -->
-    <!-- properties -->
-        <!-- name -->
-        <!-- type -->
+    <div>
+        <!-- h6 name -->
+        <!-- effect type category -->
+    </div>
+    <div>
+        <!-- description -->
+    </div>
+    <div repeat.for="property of Object.keys(model.schema)">
+        <!-- properties[] -->
+            <!-- ° name + type-->
+    </div>
 </div>
