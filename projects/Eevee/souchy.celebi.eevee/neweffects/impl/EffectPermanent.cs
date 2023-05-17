@@ -9,6 +9,6 @@ namespace souchy.celebi.eevee.neweffects
 {
     public class EffectPermanent : Effect, IEffectPermanent
     {
-       
+        public override IEnumerable<IEffect> GetEffects() => this.EffectIds.Values.Select(i => Eevee.models.effects.Get(i));
     }
 }

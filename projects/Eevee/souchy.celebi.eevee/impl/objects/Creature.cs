@@ -4,7 +4,6 @@ using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.controllers;
-using souchy.celebi.eevee.face.objects.effects.creature;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.objects.statuses;
 using souchy.celebi.eevee.face.shared.models;
@@ -16,6 +15,8 @@ using souchy.celebi.eevee.impl.util.math;
 using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using souchy.celebi.eevee.neweffects.impl.effects.creature;
+using souchy.celebi.eevee.neweffects.face;
 
 namespace souchy.celebi.eevee.impl.objects
 {
@@ -28,13 +29,13 @@ namespace souchy.celebi.eevee.impl.objects
 
         public ObjectId originalOwnerUid { get; set; }
         public ObjectId currentOwnerUid { get; set; }
+        public ObjectId summonerCreature { get; set; }
         public IPosition position { get; init; } = new Position();
 
         public ObjectId stats { get; set; }
         public IEntitySet<ObjectId> spells { get; set; } = new EntitySet<ObjectId>();
         public IEntitySet<ObjectId> statuses { get; init; } = new EntitySet<ObjectId>();
         public Dictionary<ContextType, IContext> contexts { get; set; } = new();
-
 
         private Creature() { }
         private Creature(ObjectId id, ObjectId fightId)
@@ -54,16 +55,17 @@ namespace souchy.celebi.eevee.impl.objects
         /// <returns></returns>
         public IStats GetTotalStats(IAction action) 
         {
-            // base stats
-            var statsBag = this.GetNaturalStats().copy(true);
-            // status stats effects
+            // copy base stats
+            var naturalStats = this.GetNaturalStats().copy(true);
+            // add status stats
             foreach(IStatusInstance status in GetStatuses().SelectMany(s => s.instances))
             {
-                foreach(IEffectAddStat eff in status.GetEffects().Where(e => e is IEffectAddStat))
+                foreach(IEffect eff in status.GetEffects().Where(e => e.Schema is AddStatSchema))
                 {
                     // TODO: need to also check for triggers/filters (ex: 50% res vs summons, need the Action with the source/target/spell)
-                    var stat = statsBag.Get(eff.statId);
-                    stat.Add(eff.stat);
+                    var props = eff.GetProperties<AddStatSchema>();
+                    var naturalStat = naturalStats.Get(props.stat.statId);
+                    naturalStat.Add(props.stat);
                 }
             }
             // reset conditional stats to 0
@@ -71,7 +73,7 @@ namespace souchy.celebi.eevee.impl.objects
             {
                 var boardSource = this.GetFight().creatures.Get(action.caster);
                 var boardTarget = this.GetFight().board.GetCreatureOnCell(action.targetCell);
-                statsBag.ForEach(stat =>
+                naturalStats.ForEach(stat =>
                 {
                     if (stat is IStatSimple simple)
                     {
@@ -84,7 +86,7 @@ namespace souchy.celebi.eevee.impl.objects
                     }
                 });
             }
-            return statsBag;
+            return naturalStats;
         }
         public IEnumerable<ISpell> GetSpells() => spells.Values.Select(i => this.GetFight().spells.Get(i));
         public IEnumerable<IStatusContainer> GetStatuses() => statuses.Values.Select(i => this.GetFight().statuses.Get(i));

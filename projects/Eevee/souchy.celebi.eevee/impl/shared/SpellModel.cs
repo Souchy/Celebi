@@ -13,6 +13,7 @@ using souchy.celebi.eevee.impl.objects.effectResults;
 using souchy.celebi.eevee.impl.objects.zones;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.impl.values;
+using souchy.celebi.eevee.neweffects.face;
 
 namespace souchy.celebi.eevee.impl.shared
 {
@@ -32,7 +33,7 @@ namespace souchy.celebi.eevee.impl.shared
 
         //public SpellProperties properties { get; set; } = new SpellProperties();
         public Dictionary<CharacteristicId, int> costs { get; set; } = new();
-        public IEntityList<ObjectId> effectIds { get; set; } = new EntityList<ObjectId>(); 
+        public IEntityList<ObjectId> EffectIds { get; set; } = new EntityList<ObjectId>(); 
 
         public IZone RangeZoneMin { get; set; } = new Zone();
         public IZone RangeZoneMax { get; set; } = new Zone();
@@ -51,7 +52,7 @@ namespace souchy.celebi.eevee.impl.shared
         }
 
 
-        public IEnumerable<IEffect> GetEffects() => effectIds.Values.Select(i => Eevee.models.effects.Get(i));
+        public IEnumerable<IEffect> GetEffects() => EffectIds.Values.Select(i => Eevee.models.effects.Get(i));
 
         public void Dispose()
         {

@@ -9,6 +9,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="souchy.celebi.eevee\face\objects\effects\**" />
+    <Compile Remove="souchy.celebi.eevee\impl\objects\effects\**" />
+    <EmbeddedResource Remove="souchy.celebi.eevee\face\objects\effects\**" />
+    <EmbeddedResource Remove="souchy.celebi.eevee\impl\objects\effects\**" />
+    <None Remove="souchy.celebi.eevee\face\objects\effects\**" />
+    <None Remove="souchy.celebi.eevee\impl\objects\effects\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="souchy.celebi.eevee\impl\objects\Effect.cs" />
+    <Compile Remove="souchy.celebi.eevee\impl\shared\EffectModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="souchy.celebi.eevee\face\net\amethyst\" />
     <Folder Include="souchy.celebi.eevee\impl\net\amethyst\" />
     <Folder Include="souchy.celebi.eevee\neweffects\impl\effects\creature\" />

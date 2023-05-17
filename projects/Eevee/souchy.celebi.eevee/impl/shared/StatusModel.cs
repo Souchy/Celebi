@@ -10,6 +10,8 @@ using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.impl.values;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using souchy.celebi.eevee.neweffects.face;
+using souchy.celebi.eevee.face.shared;
 
 namespace souchy.celebi.eevee.impl.shared
 {
@@ -26,7 +28,7 @@ namespace souchy.celebi.eevee.impl.shared
         public IValue<bool> canBeUnbewitched { get; set; } = new Value<bool>();
         public IValue<StatusPriorityType> priority { get; set; } = new Value<StatusPriorityType>();
 
-        public IEntityList<ObjectId> effectIds { get; set; } = new EntityList<ObjectId>();
+        public IEntityList<ObjectId> EffectIds { get; set; } = new EntityList<ObjectId>();
 
 
         private StatusModel() { }
@@ -34,7 +36,7 @@ namespace souchy.celebi.eevee.impl.shared
         public static IStatusModel CreatePermanent() => new StatusModel(Eevee.RegisterIIDTemporary());
 
 
-        public IEnumerable<IEffect> GetEffects() => effectIds.Values.Select(i => Eevee.models.effects.Get(i));
+        public IEnumerable<IEffect> GetEffects() => EffectIds.Values.Select(i => Eevee.models.effects.Get(i));
 
         public void Dispose()
         {

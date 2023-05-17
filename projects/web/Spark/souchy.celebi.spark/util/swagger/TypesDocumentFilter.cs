@@ -26,14 +26,16 @@ namespace souchy.celebi.spark.util.swagger
             }
 
 
+            // Effect Schemas
             var schemas = typeof(IEntity).Assembly.GetTypes()
                 .Where(t => !t.IsInterface && !t.IsAbstract)
-                .Where(t => t.IsAssignableTo(typeof(EffPropertiesSchema)));
+                .Where(t => t.IsAssignableTo(typeof(IEffectSchema)));
             foreach (var schema in schemas)
             {
                 context.SchemaGenerator.GenerateSchema(schema, context.SchemaRepository);
             }
-            var scripts = GetAllTypesImplementingOpenGenericType(typeof(EffScript<>), typeof(IEntity).Assembly);
+            // Effect Scripts
+            var scripts = GetAllTypesImplementingOpenGenericType(typeof(IEffectScript), typeof(IEntity).Assembly);
             foreach (var script in scripts)
             {
                 //throw new Exception("Hey this type is funny: " + script.FullName);

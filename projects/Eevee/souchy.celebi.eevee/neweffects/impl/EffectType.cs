@@ -36,60 +36,79 @@ namespace souchy.celebi.eevee.neweffects.impl
     /// </summary>
     public enum EffT
     {
-        #region Creature
-            AddStat, // any stat bonus, in status or instant.
+        // these things don't have apply() scripts
+        // they have conditions elsewhere in the code, like GetTotalStats(), 
+        #region Status-only
+            AddStat, // any stat bonus, in status or instant.          // i think need status, nothing instant
                 // includes resource for recovery that is not a heal?
-            SetState,
-            LearnSpell,
-            ForgetSpell,
+            //SetState,     // i think need status // a state is a stat
+            LearnSpell,     // i think need status
+            ForgetSpell,    // i think need status // maybe we dont even need Script objects for status-only effects that compound like stats/spells
+            ChangeAppearance, // chance the skin model: berserk, harmonie, momification, ougi rage, transfo osa, masque zobal
+            ChangeAnimationSet, // panda saoul, forgelance en garde
+            ReduceDamageReceived, // rempart/fortification flat reduction ? 
+
+            #region Spell -> obviously status-only effects
+                AddSpellRange,
+                AddSpellEffectBaseDamage,
+                ChangeSpellRangeZone,
+                ChangeSpellEffectZone,
+            #endregion
+            #region Board
+                BuildObstacle, // maybe teraforming effects are status-only on cells?
+                DestroyObstacle,
+                DigHole,
+                FillHole,
+            #endregion
+        #endregion
+
+        #region Creature
             Kill,
             Revive,
+            EndTurn, // roublardise, holmgang, nécronyx,    // could have other effects  affect the timeline order
             SpawnSummon, // 
             UnspawnSummon, // 
             SpawnSummonDouble, // controllable sram's double, replica of caster
             SpawnSummonDoubleIllusion, // roublardise, replica of caster but unplayable and dies in 1 hit
             RevealCreatureSpells, // show the target's spells list to know what they can cast, like revealing their deck
-            EndTurn, // roublardise, holmgang, nécronyx, 
-            ChangeAppearance, // chance the skin model: berserk, harmonie, momification, ougi rage, transfo osa, masque zobal
-            ChangeAnimationSet, // panda saoul, forgelance en garde
         #endregion
         #region Move
-            SwapSelfWith,   // transpo, penitence, faille temporelle,  
-            SwapTargetWith, // méprise, déambulation
+            #region Translation
+                Walk,
+                //TranslateBy,
+                //TranslateSelfTo,
+                //TranslateTargetTo, // une poussée/attirance pourrait être codé par  { ChangeActor { TranslateTo } }
+                PushBy,
+                PullBy, // 
+                DashBy,
+                DashAwayBy,
+                PushTo, // need a SeconaryZone in the Schema properties
+                PullTo, // 
+                DashTo,
+                //DashAwayTo,
 
-            TeleportSelfTo,     // tp feca, prémonition, 
-            TeleportTargetTo,   // completely different from Self because it needs a SecondaryZone in the schema
-            TeleportSelfBy,         // 
-            TeleportTargetBy,       // 
-            TeleportSymmetricallySelfOverTarget, // tp xel
-            TeleportSymmetricallyTargetOverSelf, // frappe/perturbation
-            TeleportSymmetricallyAoeOverTarget,  // paradoxe, poussière, engrenage
-            TeleportToPreviousPosition,          // rs, gelure, 
-            TeleportToStartOfTurnPosition,       // renvoi, rembobinage // rembo peut être codé par un Status avec l'effect trigger OnTurnEnd
-        #endregion
-        #region Translate
-            Walk,
-            //TranslateBy,
-            //TranslateSelfTo,
-            //TranslateTargetTo, // une poussée/attirance pourrait être codé par  { ChangeActor { TranslateTo } }
-            PushBy,
-            PullBy, // 
-            DashBy,
-            DashAwayBy,
-            PushTo, // need a SeconaryZone in the Schema properties
-            PullTo, // 
-            DashTo,
-            //DashAwayTo,
+                // translate effects can originate from the targetCell or the sourceCell
+                // -> public ActorType reference {get; set;}
+            #endregion
+            #region Teleportation
+                SwapSelfWith,   // transpo, penitence, faille temporelle,  
+                SwapTargetWith, // méprise, déambulation
 
-            // translate effects can originate from the targetCell or the sourceCell
-            // -> public ActorType reference {get; set;}
+                TeleportSelfTo,     // tp feca, prémonition, 
+                TeleportTargetTo,   // completely different from Self because it needs a SecondaryZone in the schema
+                TeleportSelfBy,         // 
+                TeleportTargetBy,       // 
+                TeleportSymmetricallySelfOverTarget, // tp xel
+                TeleportSymmetricallyTargetOverSelf, // frappe/perturbation
+                TeleportSymmetricallyAoeOverTarget,  // paradoxe, poussière, engrenage
+                TeleportToPreviousPosition,          // rs, gelure, 
+                TeleportToStartOfTurnPosition,       // renvoi, rembobinage // rembo peut être codé par un Status avec l'effect trigger OnTurnEnd
+                TeleportToStartOfFightPosition,
+            #endregion
+
         #endregion
-        #region Spell -> obviously status-only effects
-            AddSpellRange,
-            AddSpellEffectBaseDamage,
-            ChangeSpellRangeZone,
-            ChangeSpellEffectZone,
-        #endregion
+
+
         #region Meta
             ChangeSourceActor, // change the actor of the effect 
             //ChangeSourceLocation, // Rebase, //Reposition,  // cast the effect from the target location // pas sur de voir l'intérêt vs Zone.actor
@@ -111,27 +130,26 @@ namespace souchy.celebi.eevee.neweffects.impl
 
             AddAddStatStatus, // creates a status with AddStat ? // all ap buffs should go through a Status so it's visible 
                 // mot stimu/galva, flou, 
-            //AddReduceStatStatus, // creates a status with reduced resources?
             AddStealStatStatus, // creates 2 status with stolen resources? 1 for target, 1 for caster
         #endregion
-        #region Status-only
-        #endregion
         #region Res
-            ReduceDamageReceived, // rempart/fortification flat reduction ? 
             DirectDamage, // use triggers for OnResourceUse (poison paralysant), OnResourceLost (male vaudoo), OnPushed (fleche tyra), etc
             DirectDamagePercentLifeMax,
+            DirectDamageStealLife, // bain de sang, pillage, concentration de chakra, folie sanguinaire
+
             IndirectDamage,               // poison insidieeux, injection, épidémie, brousaille, 
             IndirectDamagePercentLifeMax, // les mobs ont des poison 10%hp max
             RedirectDamage, // OnDamageReceived -> conquete, diffusion, sacrifice, (ex: répartit 50% des dégât subis en zone)
+
             Heal,   // heal flat
             HealPercentLifeMax, // heal %max
             HealPercentLifeDamageReceived, // OnReceiveEffect(damage) ->
                                              // diffusion, proie, feu de mine, supplice,
                                              // perfusion, arbre de vie, mot sacrificiel
             HealPercentLifeDamageDone, // OnApplyEffect(damage) ->
-                                         // pillage, perquisition, piege fangeux
-                                         // mot interdit, espièpgle, tournoyant
-            StealLife, // bain de sang, pillage, concentration de chakra, folie sanguinaire
+                                       // pillage, perquisition, piege fangeux
+                                       // mot interdit, espièpgle, tournoyant
+
             TransferLife,           // flat life transfer
             TransferPercentLifeMax, // 10% transfusion
             DamagePerDynamicResourceUsedForSpell, // ex: spell uses all remaining ap, could use 2 or 5. this does (x damage * 2 or * 5) etc
@@ -141,10 +159,6 @@ namespace souchy.celebi.eevee.neweffects.impl
         #region Fight
             SwapOut,
             SwapIn,
-            BuildObstacle,
-            DestroyObstacle,
-            DigHole,
-            FillHole,
         #endregion
     }
 

@@ -1,12 +1,7 @@
-﻿using souchy.celebi.eevee.enums;
-using souchy.celebi.eevee.face.objects;
-using souchy.celebi.eevee.face.objects.stats;
-using souchy.celebi.eevee.face.objects.statuses;
+﻿using souchy.celebi.eevee.face.objects.statuses;
 using souchy.celebi.eevee.face.util;
-using souchy.celebi.eevee.face.values;
-using souchy.celebi.eevee.impl.objects.effectResults;
 using souchy.celebi.eevee.impl.util;
-using souchy.celebi.eevee.impl.values;
+using souchy.celebi.eevee.neweffects.face;
 
 namespace souchy.celebi.eevee.statuses
 {
@@ -21,7 +16,7 @@ namespace souchy.celebi.eevee.statuses
         //public IValue<int> duration { get; set; } = new Value<int>();
         public ObjectId stats { get; set; }
 
-        public IEntityList<ObjectId> effectIds { get; set; } = new EntityList<ObjectId>();
+        public IEntityList<ObjectId> EffectIds { get; set; } = new EntityList<ObjectId>();
 
         protected StatusInstance() { }
         protected StatusInstance(ObjectId id, ObjectId fightUid)
@@ -33,7 +28,7 @@ namespace souchy.celebi.eevee.statuses
         public static IStatusInstance Create(ObjectId fightUid) => new StatusInstance(Eevee.RegisterIIDTemporary(), fightUid);
 
 
-        public IEnumerable<IEffect> GetEffects() => effectIds.Values.Select(i => this.GetFight().effects.Get(i));
+        public IEnumerable<IEffect> GetEffects() => EffectIds.Values.Select(i => this.GetFight().effects.Get(i));
 
         public void Dispose()
         {

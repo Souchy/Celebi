@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace souchy.celebi.eevee.neweffects.impl.effects.move
 {
-    public abstract class IMoveSchema : IEffectSchema
+    public abstract record IMoveSchema() : IEffectSchema
     {
         /// <summary>
         ///  Reference zone, usually a point on the caster or on the spell's target cell

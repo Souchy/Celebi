@@ -50,7 +50,7 @@ namespace souchy.celebi.eevee.impl.factories
 
                 IStatusInstance status = StatusInstance.Create(fightId);
                 status.modelUid = statusModel.modelUid; 
-                status.effectIds = statusModel.effectIds;
+                status.EffectIds = statusModel.EffectIds;
                 status.GetStats().Set(StatusProperty.Duration.Create(statusModel.duration.value));
                 status.GetStats().Set(StatusProperty.Delay.Create(statusModel.delay.value));
                 container.instances.Add(status);

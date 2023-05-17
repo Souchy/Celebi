@@ -42,6 +42,10 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
         });
         public static readonly Affinity Trap        = new(10, nameof(Trap));
         public static readonly Affinity Glyph       = new(11, nameof(Glyph));
+        /// <summary>
+        /// penetrates resistances (just another multiplier)
+        /// </summary>
+        public static readonly Affinity PenetrationPercent = new(12, nameof(PenetrationPercent));
 
 
         public static readonly Dictionary<CharacteristicId, Affinity> values = new();

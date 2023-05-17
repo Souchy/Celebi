@@ -15,8 +15,9 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
             this.Factory = SimpleFactory;
         }
 
+        // TODO feel like putting those contextual resource properties into Resource yaknow, then add [gained,lost,used] to ResourceProperty enum
         public static readonly Contextual LifeGained         = new(0, nameof(LifeGained));
-        public static readonly Contextual ListUsed           = new(1, nameof(LifeLost));
+        public static readonly Contextual LifeUsed           = new(1, nameof(LifeUsed));
         public static readonly Contextual LifeLost           = new(2, nameof(LifeLost));
         public static readonly Contextual ManaGained         = new(3, nameof(ManaGained));
         public static readonly Contextual ManaUsed           = new(4, nameof(ManaUsed));
@@ -27,7 +28,12 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
                                                              
         public static readonly Contextual CountHitsGiven     = new(9, nameof(CountHitsGiven));
         public static readonly Contextual CountHitsTaken     = new(10, nameof(CountHitsTaken));
-                                                             
+
+        // reduced on other targets (ralentissement, sablier...)
+        public static readonly Contextual ManaReduced = new(15, nameof(ManaReduced));
+        public static readonly Contextual MovementReduced = new(16, nameof(MovementReduced));
+
+
         /// <summary>                                        
         /// Cell ID (int = x + y * width)                    
         /// </summary>                                       

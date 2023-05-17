@@ -20,29 +20,27 @@ namespace souchy.celebi.eevee.neweffects.impl
         public ObjectId entityUid { get; set; }
         public IID modelUid { get; set; }
 
-        public IEffectSchema properties { get; set; }
+        public IEffectSchema Schema { get; set; }
         public ICondition SourceCondition { get; set; }
         public ICondition TargetFilter { get; set; }
         public IZone TargetAcquisitionZone { get; set; }
         public IEntityList<ITrigger> Triggers { get; set; }
-        public IEntityList<ObjectId> effectIds { get; set; }
+        public IEntityList<ObjectId> EffectIds { get; set; }
+
+
+        public abstract IEnumerable<IEffect> GetEffects();
 
         public void CopyBasicTo(IEffectInstance e)
         {
             throw new NotImplementedException();
         }
 
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<eevee.face.objects.IEffect> GetEffects()
-        {
-            throw new NotImplementedException();
-        }
-
         public IEnumerable<IBoardEntity> GetPossibleBoardTargets(IFight fight, IPosition targetCell)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Dispose()
         {
             throw new NotImplementedException();
         }

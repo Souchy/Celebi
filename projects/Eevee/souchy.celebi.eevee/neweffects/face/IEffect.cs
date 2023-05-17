@@ -12,7 +12,7 @@ namespace souchy.celebi.eevee.neweffects.face
 {
     public interface IEffect : IEntityModeled, IEffectsContainer
     {
-        public IEffectSchema properties { get; set; }
+        public IEffectSchema Schema { get; set; }
 
         public ICondition SourceCondition { get; set; }
         public ICondition TargetFilter { get; set; }
@@ -23,7 +23,7 @@ namespace souchy.celebi.eevee.neweffects.face
         public IEntityList<ITrigger> Triggers { get; set; }
 
 
-        public T GetProperties<T>() => (T) properties;
+        public T GetProperties<T>() => (T) Schema;
         //public IEffectModel GetModel() => Eevee.models.effectModels.Values.First(m => m.modelUid == this.modelUid);
         /// <summary>
         /// Get unfiltered entities in this effect's area
