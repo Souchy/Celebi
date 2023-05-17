@@ -25,15 +25,24 @@ namespace souchy.celebi.eevee.impl.stats
         }
 
         private StatBool() { }
+        private StatBool(CharacteristicId st, bool value = false)
+        {
+            this.statId = st;
+            this.value = value;
+        }
         public static StatBool Create(CharacteristicId st, bool value = false)
-            => new StatBool()
-            {
-                statId = st,
-                value = value,
-                entityUid = Eevee.RegisterIIDTemporary()
-            };
+           => new StatBool(st, value)
+           {
+               entityUid = Eevee.RegisterIIDTemporary()
+           };
 
-        public IStat copy() => Create(statId, value); 
+        public IStat copy(bool anonymous = false)
+        {
+            if (anonymous)
+                return new StatBool(statId, value);
+            else
+                return Create(statId, value);
+        }
 
         public void Dispose()
         {

@@ -1,55 +1,57 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using souchy.celebi.eevee.enums;
-using souchy.celebi.eevee.enums.characteristics;
-using souchy.celebi.eevee.enums.characteristics.creature;
+﻿using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.face.objects.stats;
-using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.util;
 
 namespace souchy.celebi.eevee.impl.objects.stats
 {
-    internal class StatIIDDictionary : IStatIIDDictionary
+    /// <summary>
+    /// Maps a entity's ObjectId to a Stat (ex: number of spells cast per entity)
+    /// </summary>
+    public class EntityStatDictionary : IEntityStatDictionary
     {
         [BsonId]
         public ObjectId entityUid { get; set; }
 
         public CharacteristicId statId { get; init; }
-        public Dictionary<IID, IStat> value { get; set; }
+        public Dictionary<ObjectId, IStat> value { get; set; }
 
-        public void set(IID key, IStat val)
+        public void set(ObjectId key, IStat val)
         {
             value[key] = val;
             this.GetEntityBus()?.publish(statId, this);
             this.GetEntityBus()?.publish(this);
         }
 
-        private StatIIDDictionary() { }
-        public static StatIIDDictionary Create(CharacteristicId st, Dictionary<IID, IStat> value = null)
-            => new StatIIDDictionary()
+        private EntityStatDictionary() { }
+        public EntityStatDictionary(CharacteristicId st, Dictionary<ObjectId, IStat> value = null)
+        {
+            this.statId = st;
+            this.value = value != null ? value : new Dictionary<ObjectId, IStat>();
+        }
+        public static EntityStatDictionary Create(CharacteristicId st, Dictionary<ObjectId, IStat> value = null)
+            => new EntityStatDictionary(st, value)
             {
-                statId = st,
-                value = value != null ? value : new Dictionary<IID, IStat>(),
                 entityUid = Eevee.RegisterIIDTemporary()
             };
 
         public void Add(IStat s)
         {
-            if (s is StatIIDDictionary b)
+            if (s is EntityStatDictionary b)
             {
-                foreach(var p in value)
+                foreach (var p in value)
                 {
-                    if(b.value.ContainsKey(p.Key))
+                    if (b.value.ContainsKey(p.Key))
                         p.Value.Add(b.value[p.Key]);
                 }
             }
         }
 
-        public IStat copy()
+        public IStat copy(bool anonymous = false)
         {
-            var stat = Create(statId);
-            stat.value = new Dictionary<IID, IStat>();
+            var stat = anonymous ? new EntityStatDictionary(statId) : Create(statId);
+            stat.value = new Dictionary<ObjectId, IStat>();
             foreach (var pair in value)
-                stat.value[pair.Key] = pair.Value.copy();
+                stat.value[pair.Key] = pair.Value.copy(anonymous);
             return stat;
         }
 

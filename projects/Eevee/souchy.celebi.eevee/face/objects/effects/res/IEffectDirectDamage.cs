@@ -1,4 +1,5 @@
 ﻿using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.values;
 

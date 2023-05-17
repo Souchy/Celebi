@@ -10,7 +10,10 @@ namespace souchy.celebi.eevee.face.objects.stats
 
         public CharacteristicId statId { get; init; }
 
-        public IStat copy();
+        /// <summary>
+        /// Anonymous meaning the entity will have no ObjectId
+        /// </summary>
+        public IStat copy(bool anonymous = false);
 
         public void Add(IStat s);
 

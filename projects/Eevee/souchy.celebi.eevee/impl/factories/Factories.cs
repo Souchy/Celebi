@@ -18,6 +18,7 @@ using souchy.celebi.eevee.impl.objects.statuses;
 using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.enums.characteristics;
 using System.Xml.Linq;
+using souchy.celebi.eevee.face.objects.controllers;
 
 namespace souchy.celebi.eevee.impl.factories
 {
@@ -25,49 +26,35 @@ namespace souchy.celebi.eevee.impl.factories
     {
         public static ICreature newCreatureFromModel(ICreatureModel model, ObjectId fightId)
         {
+            IFight fight = Eevee.fights.Get(fightId);
             var crea = Creature.Create(fightId);
             crea.modelUid = model.modelUid;
-            foreach (CharacteristicType st in CharacteristicType.Characteristics) //Enum.GetValues<StatType>())
-            {
-                var stat = st.Create();
-                var modelStat = model.GetBaseStats().Get(st.ID);
-                if (stat is IStatResource sr)
-                {
-                    var mss = ((IStatSimple) modelStat);
-                    sr.value = (mss.value, mss.value, mss.value);
-                }
-                else
-                if (stat is IStatSimple ss)
-                {
-                    ss.value = ((IStatSimple) modelStat).value;
-                }
-                else
-                if (stat is IStatBool sb && modelStat is IStatBool msb)
-                {
-                    sb.value = msb.value;
-                }
-                crea.GetBaseStats().Set(st.ID, stat);
-            }
+            fight.creatures.Add(crea.entityUid, crea);
+
+            IStats stats = model.GetBaseStats().copy();
+            crea.stats = stats.entityUid;
+            fight.stats.Add(stats.entityUid, stats);
+
             foreach (ISpellModel spellModel in model.GetSpells())
             {
-                var spell = Spell.Create(fightId);
+                ISpell spell = Spell.Create(fightId);
                 spell.modelUid = spellModel.modelUid; //entityUid;
+                fight.spells.Add(spell.entityUid, spell);
             }
             foreach (IStatusModel statusModel in model.GetStatusPassives())
             {
-                var container = StatusContainer.Create(fightId);
+                IStatusContainer container = StatusContainer.Create(fightId);
                 container.sourceCreature = crea.entityUid;
                 container.holderEntity = crea.entityUid;
-                var status = StatusInstance.Create(fightId);
-                status.modelUid = statusModel.modelUid; //entityUid;
-                status.effectIds = statusModel.effectIds;
+                fight.statuses.Add(container.entityUid, container);
 
-                var duration = StatusProperty.Duration.Create(statusModel.duration.value);
-                var delay = StatusProperty.Delay.Create(statusModel.delay.value);
-                status.GetStats().Set(duration);
-                status.GetStats().Set(delay);
+                IStatusInstance status = StatusInstance.Create(fightId);
+                status.modelUid = statusModel.modelUid; 
+                status.effectIds = statusModel.effectIds;
+                status.GetStats().Set(StatusProperty.Duration.Create(statusModel.duration.value));
+                status.GetStats().Set(StatusProperty.Delay.Create(statusModel.delay.value));
+                container.instances.Add(status);
             }
-            Eevee.fights.Get(fightId).creatures.Add(crea.entityUid, crea);
             return crea;
         }
 

@@ -12,6 +12,6 @@ namespace souchy.celebi.eevee.face.objects.stats
         public void Set(IStat value) => Set(value.statId, value);
         public T Get<T>(CharacteristicId statId) where T : IStat;
         public T Get<T>(CharacteristicType stat) where T : IStat => Get<T>(stat.ID);
-        public IStats anonymousCopy();
+        public IStats copy(bool anonymous = false);
     }
 }

@@ -46,16 +46,16 @@ namespace souchy.celebi.eevee.impl.objects
 
         public IPlayer GetOriginalOwner() => this.GetFight().players.Get(originalOwnerUid);
         public IPlayer GetCurrentOwner() => this.GetFight().players.Get(currentOwnerUid);
-        public IStats GetBaseStats() => this.GetFight().stats.Get(stats);
+        public IStats GetNaturalStats() => this.GetFight().stats.Get(stats);
         /// <summary>
         /// If an IAction is specified, it will filter out conditional stats that are not valid
         /// </summary>
         /// <param name="action"></param>
         /// <returns></returns>
-        public IStats GetStats(IAction action) 
+        public IStats GetTotalStats(IAction action) 
         {
             // base stats
-            var statsBag = this.GetBaseStats().anonymousCopy();
+            var statsBag = this.GetNaturalStats().copy(true);
             // status stats effects
             foreach(IStatusInstance status in GetStatuses().SelectMany(s => s.instances))
             {

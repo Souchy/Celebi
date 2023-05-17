@@ -11,6 +11,13 @@
   <ItemGroup>
     <Folder Include="souchy.celebi.eevee\face\net\amethyst\" />
     <Folder Include="souchy.celebi.eevee\impl\net\amethyst\" />
+    <Folder Include="souchy.celebi.eevee\neweffects\impl\effects\creature\" />
+    <Folder Include="souchy.celebi.eevee\neweffects\impl\effects\meta\" />
+    <Folder Include="souchy.celebi.eevee\neweffects\impl\effects\move\teleport\" />
+    <Folder Include="souchy.celebi.eevee\neweffects\impl\effects\move\translate\" />
+    <Folder Include="souchy.celebi.eevee\neweffects\impl\effects\spell\" />
+    <Folder Include="souchy.celebi.eevee\neweffects\impl\effects\status\" />
+    <Folder Include="souchy.celebi.eevee\neweffects\impl\effects\special\" />
   </ItemGroup>
 
   <ItemGroup>

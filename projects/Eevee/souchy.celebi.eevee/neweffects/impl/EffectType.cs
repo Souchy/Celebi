@@ -97,6 +97,7 @@ namespace souchy.celebi.eevee.neweffects.impl
                 // ex: poison proximité: EmptyText filter trees 64 -> AddStatus aoe2
             CastSubSpell,   // détonateur -> bombe -> explosion (changeSourceActor -> castSubSpell)
             RandomChild,
+            RandomPointsInZone, // take a acquisitionzone then take only x random targets in that zone
             EmptyText,
         #endregion
         #region Status

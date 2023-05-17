@@ -76,8 +76,8 @@ namespace souchy.celebi.eevee.impl.objects.effects.res
             var creaTarget = action.fight.board.GetCreatureOnCell(act.targetCell);
             if (creaSource == null || creaTarget == null) return null;
 
-            var sourceStats = creaSource.GetStats(action);
-            var targetStats = creaTarget.GetStats(action);
+            var sourceStats = creaSource.GetTotalStats(action);
+            var targetStats = creaTarget.GetTotalStats(action);
             int dmg = calculateDamage(sourceStats, targetStats);
 
             var shield = targetStats.Get<IStatSimple>(Resource.Shield);

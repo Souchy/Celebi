@@ -27,8 +27,8 @@ namespace souchy.celebi.eevee.neweffects.impl.effects
             var creaTarget = action.fight.board.GetCreatureOnCell(act.targetCell);
             if (creaSource == null || creaTarget == null) return null;
 
-            var sourceStats = creaSource.GetStats(action);
-            var targetStats = creaTarget.GetStats(action);
+            var sourceStats = creaSource.GetTotalStats(action);
+            var targetStats = creaTarget.GetTotalStats(action);
             int dmg = calculateDamage(props, sourceStats, targetStats);
 
             var shield = targetStats.Get<IStatSimple>(Resource.Shield);
@@ -44,7 +44,7 @@ namespace souchy.celebi.eevee.neweffects.impl.effects
 
             //var compiled = new EffectPreviewDamage(damage);
             //return compiled;
-            return new IEffectReturnValue(this, dmg);
+            return new IEffectReturnValue(e, dmg);
         }
 
         public IEffectPreview preview(IAction action, IEffect e, IEnumerable<IBoardEntity> targets)

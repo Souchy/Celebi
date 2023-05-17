@@ -33,11 +33,11 @@ namespace souchy.celebi.eevee.impl.stats
             return (T) Get(statId);
         }
 
-        public IStats anonymousCopy()
+        public IStats copy(bool anonymous = false)
         {
             var c = new Stats();
-            foreach(var s in Pairs) 
-                c.Set(s.Key, s.Value);
+            foreach (var s in Pairs)
+                c.Set(s.Key, s.Value.copy(anonymous));
             return c;
         }
 

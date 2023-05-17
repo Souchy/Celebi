@@ -35,7 +35,7 @@ namespace souchy.celebi.espeon.eevee.impl.controllers
             ISpellModel spellModel = spell.GetModel();
             ICreature sourceCrea = action.fight.creatures.Get(action.caster);
             IPosition targetPosition = action.fight.cells.Get(action.targetCell).position;
-            var sourceStats = sourceCrea.GetStats(action); //, new TriggerEvent(TriggerType.CompileStats, TriggerOrderType.Before));
+            var sourceStats = sourceCrea.GetTotalStats(action); //, new TriggerEvent(TriggerType.CompileStats, TriggerOrderType.Before));
 
             // check costs
             foreach (var cost in spellModel.costs)

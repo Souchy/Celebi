@@ -8,11 +8,11 @@ namespace souchy.celebi.eevee.impl.shared.triggers
 {
     public class Trigger : ITrigger
     {
-        public TriggerType type { get; set; }
-        public TriggerOrderType orderType { get; set; } = TriggerOrderType.After;
-        public IZone zone { get; set; }
-        public ICondition triggererFilter { get; set; }
-        public ICondition holderCondition { get; set; }
+        public TriggerType TriggerType { get; set; }
+        public TriggerOrderType TriggerOrderType { get; set; } = TriggerOrderType.After;
+        public IZone TriggerZone { get; set; }
+        public ICondition TriggererFilter { get; set; }
+        public ICondition HolderCondition { get; set; }
     }
 
     public record TriggerEvent(

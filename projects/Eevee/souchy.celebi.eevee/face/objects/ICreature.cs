@@ -18,14 +18,25 @@ namespace souchy.celebi.eevee.face.objects
         /// Current owner of the creature
         /// </summary>
         public ObjectId currentOwnerUid { get; set; }
+        /// <summary>
+        /// Natural stats: Base + Growth from model
+        /// </summary>
         public ObjectId stats { get; set; }
         public IEntitySet<ObjectId> spells { get; set; }
 
 
         public IPlayer GetOriginalOwner();
         public IPlayer GetCurrentOwner();
-        public IStats GetBaseStats();
-        public IStats GetStats(IAction action); //, TriggerEvent trigger);
+
+        /// <summary>
+        /// Base + Growth stats
+        /// </summary>
+        public IStats GetNaturalStats();
+        /// <summary>
+        /// Base + Growth + Status stats
+        /// </summary>
+        public IStats GetTotalStats(IAction action); //, TriggerEvent trigger);
+
         public IEnumerable<ISpell> GetSpells();
 
     }
