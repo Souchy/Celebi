@@ -1,6 +1,7 @@
 ﻿using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.neweffects.face;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace souchy.celebi.eevee.face.objects
     
     public interface ISubActionEffect : IAction
     {
-        public object parent { get; set; } // could be ISpell, IEffect, ....
+        public IAction parent { get; set; } // could be ISpell, IEffect, ....
         public IEffect effect { get; set; }
     }
     public class SubActionEffect : ISubActionEffect
@@ -40,7 +41,7 @@ namespace souchy.celebi.eevee.face.objects
         public IFight fight { get; set; }
         public ObjectId caster { get; set; }
         public ObjectId targetCell { get; set; }
-        public object parent { get; set; } // could be ISpell, IEffect, ....
+        public IAction parent { get; set; } // could be ISpell, IEffect, ....
         public IEffect effect { get; set; }
     }
 

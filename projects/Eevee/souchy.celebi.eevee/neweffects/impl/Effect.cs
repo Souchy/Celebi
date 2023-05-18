@@ -37,6 +37,11 @@ namespace souchy.celebi.eevee.neweffects.impl
 
         public IEnumerable<IBoardEntity> GetPossibleBoardTargets(IFight fight, IPosition targetCell)
         {
+            var model = ((IEffect) this).GetModel();
+            var boardTargetType = model.BoardTargetType;
+
+            // use board cells + effect acquisitionZone
+
             throw new NotImplementedException();
         }
 
