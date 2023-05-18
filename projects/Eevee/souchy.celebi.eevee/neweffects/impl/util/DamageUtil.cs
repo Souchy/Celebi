@@ -49,5 +49,35 @@ namespace souchy.celebi.eevee.neweffects.impl.util
             return (int) Math.Floor(damage);
         }
 
+
+        public static int calculateHeal(IStats sourceStats, IStats targetStats, int baseHeal, ElementType element = ElementType.None, bool applyOffensiveStats = true, bool applyDefensiveStats = true, int additionalMultiplier = 100)
+        {
+            // apply affinities + resistances
+            IStatSimple affEle = sourceStats.Get<IStatSimple>(element.GetAffinity());
+            IStatSimple affHeal = sourceStats.Get<IStatSimple>(Affinity.Heal);
+            int affdist = targetStats.Get<IStatSimple>(Affinity.Distance).value + targetStats.Get<IStatSimple>(Affinity.Melee).value;
+
+            IStatSimple resHeal = targetStats.Get<IStatSimple>(Resistance.Heal);
+
+            double heal = baseHeal;
+            double healMulti = 1;
+            double resMulti = 1;
+            if (applyOffensiveStats)
+            {
+                healMulti *= (100d + affEle.value) / 100d;
+                healMulti *= (100d + affHeal.value) / 100d;
+                healMulti *= (100d + affdist) / 100d;
+            }
+            if (applyDefensiveStats)
+            {
+                resMulti *= (100d - resHeal.value) / 100d;
+            }
+            heal *= healMulti;
+            heal *= resMulti;
+            heal *= additionalMultiplier / 100d;
+
+            return (int) Math.Floor(heal);
+        }
+
     }
 }

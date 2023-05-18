@@ -110,7 +110,7 @@ namespace souchy.celebi.eevee.neweffects.impl
 
 
         #region Meta
-            ChangeSourceActor, // change the actor of the effect 
+            ChangeActor, // change the actor of the effect 
             //ChangeSourceLocation, // Rebase, //Reposition,  // cast the effect from the target location // pas sur de voir l'intérêt vs Zone.actor
                 // on peut utiliser un EmptyText aussi je pense, les children vont alors sourcer à la position des target du parent
                 // ex: poison proximité: EmptyText filter trees 64 -> AddStatus aoe2
