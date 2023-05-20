@@ -8,6 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using souchy.celebi.eevee.face.shared.conditions;
+using souchy.celebi.eevee.neweffects.face;
+using souchy.celebi.eevee.neweffects.impl.effects;
+using souchy.celebi.eevee.neweffects.impl.effects.creature;
 
 namespace souchy.celebi.eevee.neweffects.impl
 {
@@ -162,17 +165,32 @@ namespace souchy.celebi.eevee.neweffects.impl
         #endregion
     }
 
-    public record EffectType(int Category, int LocalId, string BaseName) //CharacteristicCategory Category, int LocalId, string BaseName, params ICondition[] conditions)
+    public record EffectType(EffectCategory Category, int LocalId, string BaseName, IEffectSchema schemaPrototype) //CharacteristicCategory Category, int LocalId, string BaseName, params ICondition[] conditions)
     {
-        public IID ID { get; init; } = (IID) (Category * 1000 + LocalId);
+        public IID ID { get; init; } = (IID) ((int) Category * 1000 + LocalId);
         public IID nameModelUid { get; set; } = (IID) (nameof(EffectType) + "." + BaseName);
 
         public IStringEntity GetName() => Eevee.models.i18n.Values.FirstOrDefault(s => s.modelUid == nameModelUid); //i18n.Get(NameID);
     }
 
-    public record EffectTypeCreature
+    public record EffectTypeMove : EffectType
     {
-
+        private static int counter = 0;
+        public EffectTypeMove(string BaseName, IEffectSchema schemaPrototype)
+            : base(EffectCategory.Move, counter++, BaseName, schemaPrototype)
+        {
+        }
+        public static EffectTypeMove pushTo = new EffectTypeMove(nameof(pushTo), new PushTo());
     }
+    public record EffectTypeCreature : EffectType
+    {
+        private static int counter = 0;
+        public EffectTypeCreature(string BaseName, IEffectSchema schemaPrototype) 
+            : base(EffectCategory.Creature, counter++, BaseName, schemaPrototype)
+        {
+        }
+        public static EffectTypeCreature addStat = new EffectTypeCreature(nameof(addStat), new AddStatSchema());
+    }
+
 
 }

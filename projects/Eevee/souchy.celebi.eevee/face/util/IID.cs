@@ -10,8 +10,10 @@ namespace souchy.celebi.eevee.face.util
     [Serializable]
     [JsonConverter(typeof(IIDJsonConverter))]
     [TypeConverter(typeof(IIDTypeConverter))]
-    public sealed record IID(string value)
+    public record IID(string value)
     {
+        public static readonly IID Zero = new IID("0");
+
         public override string ToString() => value;
 
         public static implicit operator string(IID iid) => iid.ToString();
@@ -21,6 +23,15 @@ namespace souchy.celebi.eevee.face.util
         public static implicit operator int(IID i) => int.Parse(i.value);
         public static explicit operator IID(int i) => new IID(i.ToString());
     }
+    
+    public sealed record StringIID(string value) : IID(value) { }
+    public sealed record SpellIID(string value) : IID(value) { }
+    public sealed record StatusIID(string value) : IID(value) { }
+    public sealed record CreatureIID(string value) : IID(value) { }
+    public sealed record AnimationSetIID(string value) : IID(value) { }
+    public sealed record AnimationIID(string value) : IID(value) { }
+    public sealed record SceneIID(string value) : IID(value) { }
+    public sealed record AssetIID(string value) : IID(value) { }
 
     public class IIDTypeConverter : TypeConverter
     {

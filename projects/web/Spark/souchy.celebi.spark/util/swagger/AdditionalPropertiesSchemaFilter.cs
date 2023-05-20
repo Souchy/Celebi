@@ -2,6 +2,7 @@
 using Microsoft.OpenApi.Models;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.shared.conditions;
+using souchy.celebi.eevee.neweffects.face;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
 using System.Runtime.Serialization;

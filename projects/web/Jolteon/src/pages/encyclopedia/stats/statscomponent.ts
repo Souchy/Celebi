@@ -1,4 +1,4 @@
-import { IStats, AffinityTypes, ResourceTypes, StateTypes, ResistanceTypes, ContextualTypes, OtherPropertyTypes, SpellPropertyTypes, StatusModelPropertyTypes, SpellModelPropertyTypes } from './../../../jolteon/services/api/data-contracts';
+import { IStats, AffinityTypes, ResourceTypes, StateTypes, ResistanceTypes, ContextualTypes, OtherPropertyTypes, SpellPropertyTypes, SpellModelPropertyTypes } from './../../../jolteon/services/api/data-contracts';
 import { bindable } from "aurelia";
 import { StatsModelController } from "../../../jolteon/services/api/StatsModelController";
 import { IRouteableComponent } from "@aurelia/router";
@@ -32,7 +32,7 @@ export class Statscomponent implements IRouteableComponent {
     private spells = Object.values(SpellPropertyTypes);
     private spellModels = Object.values(SpellModelPropertyTypes);
     // status properties
-    private statuses = Object.values(StatusModelPropertyTypes);
+    // private statuses = Object.values(StatusModelPropertyTypes);
 
     constructor(
         private readonly statsController: StatsModelController

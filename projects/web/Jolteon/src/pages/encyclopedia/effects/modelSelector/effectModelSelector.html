@@ -1,21 +1,17 @@
 
 
+<input type="string" value.bind="filter" keyup.trigger="search()" placeholder="search.." autofocus/>
 
+<div class="schemalist" if.bind="schemasDescriptions">
 
-<!-- <button class="btn">Add Model</button>  ?? -->
-
-
-
-<div repeat.for="model of ConstantsOrDB.effectModels" click.trigger="clickEffectModel()">
-    <div>
-        <!-- h6 name -->
-        <!-- effect type category -->
+  <div class="schema" repeat.for="schema of filteredSchemas" click.trigger="clickEffectModel(schema)">
+    <h6>${schema.name}</h6>
+    <div if.bind="len(schema) > 0">
+      <div repeat.for="prop of props(schema)">
+        ${schema.properties[prop]} ${prop}
+      </div>
     </div>
-    <div>
-        <!-- description -->
-    </div>
-    <div repeat.for="property of Object.keys(model.schema)">
-        <!-- properties[] -->
-            <!-- ° name + type-->
-    </div>
+  </div>
+
 </div>
+

@@ -1,0 +1,59 @@
+effect-model-selector {
+    input {
+        display: block;
+        height: 45px;
+        // padding: -8px;
+        margin: 10px;
+        // margin-left: auto;
+        // margin-right: auto;
+        // margin-left: 10px;
+        // margin-right: 10px;
+        width: calc(100% - 20px);
+        // box-sizing: content-box;
+        // border-bottom: 5px dashed rgba(255, 255, 255, 0.90);
+    }
+}
+
+.schemalist {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px;
+    // width: calc(100% - 20px);
+    box-sizing: border-box;
+
+    border-top: 1px dashed rgba(255, 255, 255, 0.30);
+}
+
+.schema {
+    cursor: pointer;
+    margin: 10px;
+    padding: 8px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--accent1);
+    border-radius: 5px;
+
+    // flex-grow: 0.25;
+    // flex-basis: calc(25% - 20px);
+    width: calc(25% - 20px);
+    // min-width: 23%;
+    // width: fit-content;
+    // max-width: 25%;
+    height: 135px;
+
+    h6 {
+        word-wrap: break-word;
+        padding-bottom: 4px;
+        border-bottom: 1px dashed rgba(255, 255, 255, 0.30);
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    li {}
+}
+
+.schema:hover {
+    border-color: var(--accent0);
+}

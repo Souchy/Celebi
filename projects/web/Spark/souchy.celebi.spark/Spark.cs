@@ -25,7 +25,6 @@ using souchy.celebi.eevee.face.values;
 using souchy.celebi.spark.util.mongo;
 using souchy.celebi.eevee.face.util.math;
 using souchy.celebi.eevee.impl.values;
-using souchy.celebi.eevee.impl.objects.effects.res;
 
 namespace souchy.celebi.spark
 {
@@ -139,6 +138,7 @@ namespace souchy.celebi.spark
                 c.SchemaFilter<EnumSchemaFilter>();
                 c.SchemaFilter<CharacTypeSchemaFilter>();
                 c.SchemaFilter<AdditionalPropertiesSchemaFilter>();
+                c.SchemaFilter<EffectSchemaFilter>();
 
                 //c.MapType<IID>(() => new OpenApiSchema() { Type = "IID" });
                 //c.MapType<IID>(() => new OpenApiSchema() { Type = "string" });
@@ -155,6 +155,7 @@ namespace souchy.celebi.spark
                 c.MapType<IValue<int>>(() => mapIValue<int>());
                 c.MapType<IValue<bool>>(() => mapIValue<bool>());
                 c.MapType<IValue<double>>(() => mapIValue<double>());
+
 
                 c.DocumentFilter<TypesDocumentFilter>(); // adds more document types
             });

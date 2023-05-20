@@ -5,6 +5,8 @@ using souchy.celebi.eevee.face.shared.triggers;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.util.math;
+using souchy.celebi.eevee.impl.objects.zones;
+using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.neweffects.face;
 using System;
 using System.Collections.Generic;
@@ -23,9 +25,9 @@ namespace souchy.celebi.eevee.neweffects.impl
         public IEffectSchema Schema { get; set; }
         public ICondition SourceCondition { get; set; }
         public ICondition TargetFilter { get; set; }
-        public IZone TargetAcquisitionZone { get; set; }
-        public IEntityList<ITrigger> Triggers { get; set; }
-        public IEntityList<ObjectId> EffectIds { get; set; }
+        public IZone TargetAcquisitionZone { get; set; } = new Zone();
+        public IEntityList<ITrigger> Triggers { get; set; } = new EntityList<ITrigger>();
+        public IEntityList<ObjectId> EffectIds { get; set; } = new EntityList<ObjectId>();
 
 
         public abstract IEnumerable<IEffect> GetEffects();

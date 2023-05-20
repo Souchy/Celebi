@@ -2,9 +2,12 @@
 using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.enums.characteristics.properties;
+using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.impl.stats;
 using souchy.celebi.eevee.impl.values;
+using souchy.celebi.eevee.neweffects.face;
+using souchy.celebi.eevee.neweffects.impl;
 
 namespace souchy.celebi.spark.controllers.models
 {
@@ -39,5 +42,39 @@ namespace souchy.celebi.spark.controllers.models
         public List<State> GetState() => State.values.Values.ToList();
         [HttpGet("charac/statusmodel")]
         public List<StatusProperty> GetStatusModelProperty() => StatusProperty.values.Values.ToList();
+
+        [HttpGet("effects/schemas")]
+        public ActionResult<IEnumerable<SchemaDescription>> GetEffectSchemas()
+        {
+            var schemas = typeof(IEntity).Assembly.GetTypes()
+                .Where(t => !t.IsInterface && !t.IsAbstract)
+                .Where(t => t.IsAssignableTo(typeof(IEffectSchema)));
+            var descriptions = schemas.Select(t => SchemaDescription.GetSchemaDescription(t));
+            return Ok(descriptions);
+        }
+        [HttpGet("effects/schema/{name}")]
+        public ActionResult<SchemaDescription> GetEffectSchema(string name)
+        {
+            var type = typeof(IEntity).Assembly
+                .GetTypes().FirstOrDefault(t => t.Name == name);
+            if (type == null) return NotFound();
+            return Ok(SchemaDescription.GetSchemaDescription(type));
+        }
+
     }
+
+    public record SchemaDescription(string name, Dictionary<string, string> properties)
+    {
+        public static SchemaDescription GetSchemaDescription(Type schemaType)
+        {
+            var dic = new Dictionary<string, string>();
+            foreach (var p in schemaType.GetProperties())
+            {
+                var name = p.Name.Substring(0, 1).ToLower() + p.Name.Substring(1);
+                dic.Add(name, p.PropertyType.Name);
+            }
+            return new SchemaDescription(schemaType.Name, dic);
+        }
+    }
+
 }

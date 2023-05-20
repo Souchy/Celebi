@@ -1,5 +1,5 @@
 import { IEventAggregator, bindable, inject } from "aurelia"
-import { SpellModel } from "../../../jolteon/services/api/data-contracts"
+import { SchemaDescription, SpellModel } from "../../../jolteon/services/api/data-contracts"
 import { SpellModelController } from "../../../jolteon/services/api/SpellModelController"
 import { IRouteableComponent, IRouter, Navigation, Parameters, RoutingInstruction } from '@aurelia/router';
 import { Characteristics } from "../../../jolteon/constants";
@@ -66,15 +66,43 @@ export class Spell {
             this.ea.publish('spells:search:select', this.model.entityUid);
         }
     }
-    public clickRemove() {
+    public async clickRemove() {
         // remove from all spells
         // remove from creature spells
-        if(this.mode == 'root' || this.mode == 'creatureSpells') {
+        if(this.mode == 'root') {
+            this.controller.deleteSpell(this.model.modelUid).then(
+                res => {
+                    console.log("deleted spell from all")
+                    this.ea.publish('spells:root:remove', this.model.modelUid);
+                },
+                rej => {
+                    console.error(rej);
+                }
+            );
         } 
+        else 
+        if(this.mode == 'creatureSpells') {
+
+        }
         else 
         if (this.mode == 'search') {
             this.ea.publish('spells:search:select', this.model.entityUid);
         }
+    }
+
+    public addEffect(schema: SchemaDescription) {
+        console.log("add effect: " + schema)
+        this.controller.postEffect(this.model.modelUid, {
+            // effectParentId: "",
+            schemaName: schema.name
+        }).then(
+            res => {
+                location.reload();
+            },
+            rej => {
+                console.error(rej);
+            }
+        )
     }
 
     

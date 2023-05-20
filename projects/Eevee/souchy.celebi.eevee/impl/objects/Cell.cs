@@ -18,7 +18,7 @@ namespace souchy.celebi.eevee.impl.objects
         public IID modelUid { get; set; }
         public ObjectId fightUid { get; set; }
 
-        public bool walkable { get; set; }
+        public bool isWalkable { get; set; }
         public bool blocksLos { get; set; }
         public IPosition position { get; init; } = new Position();
         public IEntitySet<ObjectId> statuses { get; init; } = new EntitySet<ObjectId>();

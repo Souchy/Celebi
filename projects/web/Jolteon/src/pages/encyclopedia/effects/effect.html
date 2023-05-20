@@ -1,11 +1,25 @@
 <import from="./properties/propertygrid"></import>
 
+<!-- hi effect -->
+
+<div if.bind="model">
+  <!-- ${effect.modelUid} -->
+  <h6>${getModelName()}</h6>
+
+    <propertygrid data.bind="model.schema" schema.bind="schema"></propertygrid>
+
+  <div class="effectlist">
+    <effect repeat.for="effectid of model.effectIds" uid.bind="effectid"></effect>
+  </div>
+
+
+</div>
 
 <!-- modelUid -->
-    <!-- model name -->
-    <!-- model desc -->
-    <!-- model BoardTargetType -->
-    <!-- model propertySchemaType => property names -->
+<!-- model name -->
+<!-- model desc -->
+<!-- model BoardTargetType -->
+<!-- model propertySchemaType => property names -->
 
 <!-- zone -->
 <!-- conditions target -->

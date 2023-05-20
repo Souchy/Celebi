@@ -6,6 +6,8 @@ using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.shared;
+using souchy.celebi.eevee.neweffects.face;
+using souchy.celebi.eevee.neweffects.impl;
 using souchy.celebi.spark.services;
 using souchy.celebi.spark.services.models;
 

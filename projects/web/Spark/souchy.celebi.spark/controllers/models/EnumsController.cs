@@ -3,6 +3,7 @@ using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.enums.characteristics.properties;
+using souchy.celebi.eevee.neweffects.impl;
 
 namespace souchy.celebi.spark.controllers.models
 {
@@ -37,7 +38,9 @@ namespace souchy.celebi.spark.controllers.models
         public Direction8Type[] GetDirection8Type() => Enum.GetValues<Direction8Type>();
         [HttpGet("direction9Type")]
         public Direction9Type[] GetDirection9Type() => Enum.GetValues<Direction9Type>();
-        
+        [HttpGet("effectType")]
+        public EffT[] GetEffectType() => Enum.GetValues<EffT>();
+
 
     }
 }

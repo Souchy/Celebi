@@ -85,8 +85,32 @@ namespace souchy.celebi.eevee.neweffects.impl.effects.res
             throw new NotImplementedException();
         }
     }
-    public record HealPercentLifeDamageReceivedScript : IEffectScript {
+    public record HealPercentLifeDamageReceivedScript : IEffectScript
+    {
+        public Type SchemaType => throw new NotImplementedException();
+
+        public IEffectReturnValue apply(ISubActionEffect action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEffectPreview preview(ISubActionEffect action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
+        {
+            throw new NotImplementedException();
+        }
     }
-    public record HealPercentLifeDamageDoneScript : IEffectScript { 
+    public record HealPercentLifeDamageDoneScript : IEffectScript
+    {
+        public Type SchemaType => throw new NotImplementedException();
+
+        public IEffectReturnValue apply(ISubActionEffect action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEffectPreview preview(ISubActionEffect action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

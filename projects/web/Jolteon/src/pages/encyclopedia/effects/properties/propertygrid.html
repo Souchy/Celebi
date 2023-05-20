@@ -1,32 +1,59 @@
+<import from="../../zone/zone"></import>
+<import from="../../strings/stringcomponent"></import>
 
-<template if.bind="type == 'number'">
-    <!-- <input type="number" /> -->
-</template>
+<div if.bind="data && schema">
+  <!-- hi prop grid -->
 
+  <div class="property" repeat.for="prop of keys">
+    ${prop}: ${propName(prop)}
+    <!-- = ${data[prop]}
+    as ${typof(prop)} -->
 
+    <template switch.bind="propName(prop)">
 
-<template if.bind="type == 'string'">
-    <!-- who even has a string property -->
-    <!-- stringcomponent (StringEntity?) -->
-</template>
+      <zone case="IZone" zone.bind="data[prop]"></zone>
 
+      <select case='ElementType' value.bind="data[prop]">
+        <option repeat.for="ele of Enums.elements">${ele}</option>
+      </select>
 
+      <select case='ActorType' value.bind="data[prop]">
+        <option repeat.for="act of Enums.actors">${act}</option>
+      </select>
 
-<template if.bind="type == 'boolean'">
-    <!-- toggle button -->
-</template>
+      <!-- stat : select charac id + value -->
+      <!-- charac id selector -->
+      <!-- iid selector:  string, creature(summon), spell, status, animation, scene/model asset  -->
+      <input case="StringIID" type="string" value.bind="data[prop]" />
+      <input case="CreatureIID" type="string" value.bind="data[prop]" />
+      <input case="SpellIID" type="string" value.bind="data[prop]" />
+      <input case="StatusIID" type="string" value.bind="data[prop]" />
+      <input case="AssetIID" type="string" value.bind="data[prop]" />
+      <input case="AnimationSetIID" type="string" value.bind="data[prop]" />
 
+      <template default-case switch.bind="typof(prop)">
 
+        <!-- <div case="object">
+          {object}
+        </div> -->
+        <input case="number" type="number" value.bind="data[prop]" />
+        <!-- <div case="string"> -->
+          <!-- who even has a string property -->
+          <!-- and more like a string selector than a string component -->
+          <!-- stringcomponent (StringEntity?) -->
+        <!-- </div> -->
+        <div case="boolean">
+          {bool}
+          <!-- toggle button -->
+            <div style="margin: 5px;">
+                <input type="checkbox" class="btn-check" id="btn-check-outlined ${prop}" autocomplete="off" checked.bind="data[prop]">
+                <!-- change.trigger="onChangeBase" -->
+                <label class="btn btn-outline shadow-none" for="btn-check-outlined ${prop}">${characName}</label><br>
+            </div>
+        </div>
 
-<template if.bind="type == 'ElementType'">
-  <!-- select drop down? -->
-</template>
+      </template>
+    </template>
 
-
-
-<template if.bind="type == 'ActorType'">
-    <!-- select drop down? -->
-</template>
-
-
-
+  </div>
+</div>

@@ -11,6 +11,7 @@ using souchy.celebi.eevee.face.shared.models.skins;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.impl.util.serialization;
+using souchy.celebi.eevee.neweffects.face;
 using souchy.celebi.umbreon.data;
 using FileAccess = Godot.FileAccess;
 

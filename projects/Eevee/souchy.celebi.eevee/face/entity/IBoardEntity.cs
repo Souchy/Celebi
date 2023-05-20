@@ -20,7 +20,7 @@ namespace souchy.celebi.eevee.face.entity
 
 
         public IEnumerable<IStatusContainer> GetStatuses() => this.GetFight().statuses.Values.Where(s => statuses.Contains(s.entityUid));
-        public ICell GetCell() => this.GetFight().board.GetCells().First(c => c.position == position);
+        public ICell GetCell() => this.GetFight().board.GetCells().First(c => c.position == this.position);
 
     }
 }

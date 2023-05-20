@@ -70,12 +70,12 @@ namespace souchy.celebi.spark.util
             spellModel.modelUid = await _ids.GetID<ISpellModel>();
 
             // Name
-            var name = StringEntity.Create("Spell#" + spellModel.entityUid);
+            var name = StringEntity.Create("Spell#" + spellModel.modelUid);
             name.modelUid = await _ids.GetID<IStringEntity>();
             spellModel.nameId = name.entityUid;
 
             // Desc
-            var desc = StringEntity.Create("SpellDesc#" + spellModel.entityUid);
+            var desc = StringEntity.Create("SpellDesc#" + spellModel.modelUid);
             desc.modelUid = await _ids.GetID<IStringEntity>();
             spellModel.descriptionId = desc.entityUid;
 

@@ -15,7 +15,7 @@ export class SpellList {
     public spellids: string[] = []
     
     // db data
-    public spells: SpellModel[]
+    public spells: SpellModel[] = []
     public selectedSpells: SpellModel[] = [];
 
     // TODO pages for Creature list and Spell list
@@ -27,6 +27,14 @@ export class SpellList {
         private readonly ea: IEventAggregator, 
         @IRouter private router: IRouter
     ) {
+        this.ea.subscribe('spells:root:remove', (modelUid) => {
+            // this.spellids.spl
+            let idx = this.spells.findIndex(s => s.modelUid == modelUid);
+            console.log("spelllist remove: " + modelUid + " at " + idx);
+            if(idx != -1) {
+                this.spells.splice(idx, 1);
+            }
+        });
     }
 
     async binding() {

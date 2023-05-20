@@ -1,6 +1,9 @@
+<import from="../../../components/modal/modal"></import>
 <import from="../strings/stringcomponent"></import>
 <import from="../stats/spell/spellstats"></import>
 <import from="../effects/modelSelector/effectModelSelector"></import>
+<import from="../effects/effect"></import>
+
 
 <!-- vignette root/creature -->
 <template if.bind="isvignette && mode != 'search'">
@@ -46,11 +49,13 @@
 
   <!-- effects -->
   <div>
-    <button class="btn" click.trigger="addEffect()"></button>
-    <modal>
-      <effectModelSelector></effectModelSelector>
+    <h5>Effects</h5>
+    <button class="btn" data-bs-toggle="modal" data-bs-target="#effectModelModal">Add</button>
+    <modal id="effectModelModal" header="Effect Type" close.bind=false footer.bind=false>
+      <effect-model-selector onselectcallback.bind="e => addEffect(e)"></effect-model-selector>
     </modal>
-    <div>
+
+    <div class="effectlist">
       <effect repeat.for="effectid of model.effectIds" uid.bind="effectid"></effect>
     </div>
   </div>
