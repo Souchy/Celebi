@@ -94,6 +94,7 @@ export class Effect {
         this.effectController.putEffect(this.model.entityUid, this.model)
             .then(res => this.model = res.data);
     }
+    // remove of child of this
     public onRemoveEffect(e: IEffect) {
         console.log("Effect remove eff: " + e.entityUid)
         let idx = this.model.effectIds.indexOf(e.entityUid);
@@ -105,7 +106,6 @@ export class Effect {
                 this.effectController.deleteEffect(e.entityUid);
             });
     }
-
     public onAddChild(schema: SchemaDescription) {
         console.log("add child to: " + this.model.entityUid)
         // update db
@@ -114,6 +114,17 @@ export class Effect {
         })
             .then(res => this.model.effectIds.push(res.data.entityUid));
         // .then(res => location.reload())
+    }
+    public onSave() {
+        // update db
+        this.effectController.putEffect(this.model.entityUid, this.model)
+            .then(res => {
+                    this.model = res.data
+                    this.ea.publish("operation:saved");
+                },
+                rej => {
+                    this.ea.publish("operation:failed");
+                });
     }
     //#endregion
 

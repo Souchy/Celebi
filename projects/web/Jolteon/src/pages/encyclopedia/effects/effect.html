@@ -33,7 +33,7 @@
           <!-- click.trigger="clickMinimize()"  -->
           Zone
         </h6>
-        <zone zone.bind="model.targetAcquisitionZone" uid.bind="model.entityUid"></zone>
+        <zone zone.bind="model.targetAcquisitionZone" uid.bind="model.entityUid" callbacksave.bind="() => onSave()"></zone>
       </div>
 
       <div style="margin-right: 15px;">
@@ -45,7 +45,7 @@
 
       <div class="eblock" style="flex-grow: 1;">
         <h6>Schema</h6>
-        <propertygrid data.bind="model.schema" schema.bind="schema"></propertygrid>
+        <propertygrid data.bind="model.schema" schema.bind="schema" uid.bind="model.entityUid" callbacksave.bind="() => onSave()"></propertygrid>
       </div>
     </div>
 

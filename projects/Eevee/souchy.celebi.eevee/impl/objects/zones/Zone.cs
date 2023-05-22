@@ -20,7 +20,7 @@ namespace souchy.celebi.eevee.impl.objects.zones
         public IValue<ZoneType> zoneType { get; set; } = new Value<ZoneType>(ZoneType.point);
         public IValue<IVector3> size { get; set; } = new Value<IVector3>(new Vector3(1, 1, 1));
         public bool negative { get; set; } = false;
-        public ActorType worldOrigin { get; set; } = ActorType.Source;
+        public ActorType worldOrigin { get; set; } = ActorType.Target;
         public IVector2 worldOffset { get; set; } = new Vector2();
         public Direction9Type localOrigin { get; set; } = Direction9Type.center;
         public Rotation4Type rotation { get; set; } = Rotation4Type.top;

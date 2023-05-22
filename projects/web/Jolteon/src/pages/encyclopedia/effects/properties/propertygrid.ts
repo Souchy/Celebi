@@ -11,6 +11,10 @@ export default class PropertyGrid {
     public data: any;
     @bindable
     public schema: SchemaDescription;
+    @bindable
+    public uid: string;
+    @bindable
+    public callbacksave = () => {};
 
 
     constructor() {
@@ -27,6 +31,10 @@ export default class PropertyGrid {
     }
     public propName(prop: string) {
         return this.schema.properties[prop];
+    }
+
+    public onChange() {
+        this.callbacksave();
     }
 
 }

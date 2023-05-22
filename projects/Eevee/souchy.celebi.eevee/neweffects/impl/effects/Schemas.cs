@@ -28,10 +28,22 @@ namespace souchy.celebi.eevee.neweffects.impl.effects
 
     #region Move Translation
     public record Walk() : IMoveSchema { }
-    public record PushBy() : IMoveSchema { }
-    public record PullBy() : IMoveSchema { }
-    public record DashBy() : IMoveSchema { }
-    public record DashAwayBy() : IMoveSchema { }
+    public record PushBy() : IMoveSchema
+    {
+        public int distance { get; set; } = 1;
+    }
+    public record PullBy() : IMoveSchema
+    {
+        public int distance { get; set; } = 1;
+    }
+    public record DashBy() : IMoveSchema
+    {
+        public int distance { get; set; } = 1;
+    }
+    public record DashAwayBy() : IMoveSchema
+    {
+        public int distance { get; set; } = 1;
+    }
     public record PushTo() : IMoveSchema { }
     public record PullTo() : IMoveSchema { }
     public record DashTo() : IMoveSchema { }
@@ -48,8 +60,14 @@ namespace souchy.celebi.eevee.neweffects.impl.effects
     /// BoardTargetType = creature
     /// </summary>
     public record TeleportTargetTo() : IMoveSchema { }
-    public record TeleportSelfBy() : IEffectSchema { }
-    public record TeleportTargetBy() : IMoveSchema { }
+    public record TeleportSelfBy() : IEffectSchema
+    {
+        public int distance { get; set; } = 1;
+    }
+    public record TeleportTargetBy() : IMoveSchema
+    {
+        public int distance { get; set; } = 1;
+    }
     public record TeleportSymmetricallySelfOverTarget() : IEffectSchema { }
     public record TeleportSymmetricallyTargetOverSelf() : IEffectSchema { }
     public record TeleportSymmetricallyAoeOverTarget() : IMoveSchema { }

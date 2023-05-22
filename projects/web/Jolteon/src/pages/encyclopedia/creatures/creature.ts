@@ -4,9 +4,10 @@ import { ICreatureModel } from "../../../jolteon/services/api/data-contracts";
 import { CreatureModelController } from "../../../jolteon/services/api/CreatureModelController";
 import { StatsType } from "../stats/statscomponent";
 import { TOAST_PLACEMENT, TOAST_STATUS, TOAST_THEME, Toast, ToastConfigOptions, ToastOptions } from "bootstrap-toaster";
+import { SpellModelController } from "../../../jolteon/services/api/SpellModelController";
 
 
-@inject(CreatureModelController, IEventAggregator, IRouter)
+@inject(IEventAggregator, IRouter, CreatureModelController, SpellModelController)
 export class Creature implements IRouteableComponent {
 
     //#region input
@@ -19,9 +20,10 @@ export class Creature implements IRouteableComponent {
     //#endregion
 
     constructor(
-        private readonly creatureController: CreatureModelController,
         private readonly ea: IEventAggregator,
-        private readonly router: IRouter
+        private readonly router: IRouter,
+        private readonly creatureController: CreatureModelController,
+        private readonly spellController: SpellModelController
     ) {
         this.ea.subscribe('spells:search:select', (spellUid: string) => {
             console.log("creature receive add spell: " + spellUid)
@@ -60,6 +62,11 @@ export class Creature implements IRouteableComponent {
     public clickRemove() {
         // TODO: ask confirmation before delete, it'S too easy to missclick
         // this.creatureController.deleteCreature(this.model.modelUid);
+    }
+    public clickCreateSpell() {
+        this.spellController.postNew().then(res => {
+            this.model.spellIds.push(res.data.entityUid);
+        });
     }
 
 

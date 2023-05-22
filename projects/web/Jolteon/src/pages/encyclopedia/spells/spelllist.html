@@ -5,6 +5,8 @@
 
   <!-- Button trigger modal -->
   <button type="button" class="btn listMenu" data-bs-toggle="modal" data-bs-target="#spellSearchModal">Add Spell</button>
+  <button class="btn listMenu" click.trigger="clickCreate()">New Spell</button>
+
   <!-- Modal -->
   <div class="modal fade" id="spellSearchModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="spellSearchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
@@ -20,10 +22,12 @@
       </div>
     </div>
   </div>
+  
   <!-- list -->
   <div class="list">
     <spell mode.bind="mode" repeat.for="spell of spells" model.bind="spell" isvignette.bind="true"></spell>
   </div>
+
 </div>
 
 

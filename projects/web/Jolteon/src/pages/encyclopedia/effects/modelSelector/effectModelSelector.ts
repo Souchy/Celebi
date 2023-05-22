@@ -40,7 +40,7 @@ export class EffectModelSelector {
         return JSON.stringify(schema.properties);
     }
     public props(schema: SchemaDescription) {
-        return Object.keys(schema.properties);
+        return Object.keys(schema.properties).filter(k => k != "$type");
     }
 
     public search() {

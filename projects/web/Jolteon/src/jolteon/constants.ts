@@ -46,7 +46,7 @@ export class Enums {
     public static readonly direction8 = Object.keys(Direction8Type).filter(k => isNaN(+k));
     public static readonly direction9 = Object.keys(Direction9Type).filter(k => isNaN(+k));
     public static readonly rotation4 =  Object.keys(Rotation4Type).filter(k => isNaN(+k));
-    public static readonly actors = Object.keys(ActorType).filter(k => isNaN(+k));
+    public static readonly actorTypes = Object.keys(ActorType).filter(k => isNaN(+k));
 }
 
 export class Effects {

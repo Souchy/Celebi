@@ -104,26 +104,17 @@ app {
       height: calc(100% - 2px);
       margin: 1px;
       align-items: center;
-      // border-color: var(--accent1a);
-      // border-color: transparent;
       border-radius: 0px;
-      // padding-right: 8px;
-      // border-right-width: 0px;
 
       position: absolute;
       top: 0;
       left: 0px;
-      // transition: right 0.2s;
     }
 
-    input {
-      // width: 100px;
-      // margin: auto;
+    input, .input-group-input {
+      margin-left: 0px !important;
       text-align: end;
       border-width: 1px;
-      // padding-right: 10px;
-      // right: 5px;
-      // border-left-width: 0px;
     }
 
     input::-webkit-inner-spin-button {
@@ -141,6 +132,7 @@ app {
   .clickable {
     cursor: pointer;
   }
+
   .clickable:hover {
     color: var(--accent0);
   }

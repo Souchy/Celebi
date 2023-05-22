@@ -10,10 +10,12 @@ import { IRouter } from '@aurelia/router';
 export class SpellList {
 
     @bindable
-    public mode:string = 'root';
+    public mode: string = 'root';
     @bindable
     public spellids: string[] = []
-    
+    // @bindable
+    // public creatureid: string // TODO
+
     // db data
     public spells: SpellModel[] = []
     public selectedSpells: SpellModel[] = [];
@@ -24,14 +26,14 @@ export class SpellList {
 
     constructor(
         private readonly spellController: SpellModelController,
-        private readonly ea: IEventAggregator, 
+        private readonly ea: IEventAggregator,
         @IRouter private router: IRouter
     ) {
         this.ea.subscribe('spells:root:remove', (modelUid) => {
             // this.spellids.spl
             let idx = this.spells.findIndex(s => s.modelUid == modelUid);
             console.log("spelllist remove: " + modelUid + " at " + idx);
-            if(idx != -1) {
+            if (idx != -1) {
                 this.spells.splice(idx, 1);
             }
         });
@@ -41,9 +43,9 @@ export class SpellList {
         // console.log("spell list binding")
         await this.refresh();
     }
-    
+
     public async refresh() {
-        if(!this.mode) return;
+        if (!this.mode) return;
         console.log("spelllist refresh: mode=" + this.mode + ", ids=" + this.spellids)
 
         // TODO: limit 50 per page? add filters for name, element type...
@@ -52,7 +54,7 @@ export class SpellList {
             limit: this.numPerPage
         }
         let promise: Promise<HttpResponse<ISpellModel[], any>>;
-        if(this.mode == 'creatureSpells') { //this.spellids != undefined) {
+        if (this.mode == 'creatureSpells') { //this.spellids != undefined) {
             promise = this.spellController.getList({ list: this.spellids });
         } else {
             promise = this.spellController.getAll();
@@ -61,7 +63,7 @@ export class SpellList {
             let res = await promise;
             // console.log(res);
             this.spells = res.data;
-        } catch(rej) {
+        } catch (rej) {
             // console.log(rej);
             Toast.create({
                 title: "Spells",
@@ -72,10 +74,13 @@ export class SpellList {
         }
     }
 
-    public clickCreate() {
-        this.spellController.postNew().then(res => {
-            this.spells.push(res.data);
-        });
+    public async clickCreate() {
+        let res = await this.spellController.postNew();
+        this.spells.push(res.data);
+        
+        if (this.mode == 'creatureSpells') {
+            this.ea.publish('spells:search:select', res.data.entityUid);
+        }
     }
 
     public clickDelete() {

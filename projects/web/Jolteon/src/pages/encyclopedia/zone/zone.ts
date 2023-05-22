@@ -12,6 +12,8 @@ export class Zone {
     public zone: IZone;
     @bindable
     public uid: string;
+    @bindable
+    public callbacksave = () => {};
     
     // 
     public minimized: boolean = true;
@@ -20,10 +22,26 @@ export class Zone {
         // console.log("binded zone:")
         // console.log(this.zone)
     }
-    
+
+    public zoneSizeHasZ() {
+        return [
+            ZoneType.cross,
+            ZoneType.xcross,
+            ZoneType.star,
+            ZoneType.crossHalf,
+            ZoneType.xcrossHalf,
+            ZoneType.rectangle,
+            ZoneType.ellipse,
+            ZoneType.ellipseHalf,
+        ].includes(this.zone.zoneType["value"])
+    }
+    public zoneSizeHasY() {
+        return false;
+    }    
 
     public save() {
-
+        console.log("uhuh")
+        this.callbacksave();
     }
 
     public clickMinimize() {

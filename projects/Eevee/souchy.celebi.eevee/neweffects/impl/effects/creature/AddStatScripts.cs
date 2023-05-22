@@ -15,7 +15,7 @@ namespace souchy.celebi.eevee.neweffects.impl.effects.creature
 {
     public class AddStatScript : IEffectScript
     {
-        public Type SchemaType => typeof(AddStatSchema);
+        public Type SchemaType => typeof(AddStat);
 
         public IEffectReturnValue apply(ISubActionEffect action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
         {

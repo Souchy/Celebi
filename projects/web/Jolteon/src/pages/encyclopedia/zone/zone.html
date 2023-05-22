@@ -1,26 +1,81 @@
+<table class="effecttable" if.bind="zone">
+  <tbody>
+    <tr>
+      <td>
+        Type
+        <!-- ${zone.zoneType.value} -->
+      </td>
+      <!-- <td></td> -->
+      <td>
+        <select value.bind="zone.zoneType.value" change.trigger="save()">
+          <option repeat.for="type of Enums.zoneTypes" model.bind="$index">${type}</option>
+        </select>
+      </td>
+    </tr>
+    <tr if.bind="zone.zoneType.value && zone.zoneType.value !== 0">
+      <td>Size</td>
+      <td>
+        <div class="d-flex gap-1">
+          <div class="input-group">
+            <span class="input-group-text" id="basic-addon1">x</span>
+            <input class="input-group-input" type="number" aria-describedby="basic-addon1" value.bind="zone.size.value.x" change.trigger="save()">
+          </div>
+          <div if.bind="zoneSizeHasZ()" class="input-group">
+            <span class="input-group-text" id="basic-addon3">z</span>
+            <input class="input-group-input" type="number" aria-describedby="basic-addon3" value.bind="zone.size.value.z" change.trigger="save()">
+          </div>
+          <div if.bind="zoneSizeHasY()" class="input-group">
+            <span class="input-group-text" id="basic-addon2">y</span>
+            <input class="input-group-input" type="number" aria-describedby="basic-addon2" value.bind="zone.size.value.y" change.trigger="save()">
+          </div>
+        </div>
+      </td>
+    </tr>
 
-<select value.bind="zone.type">
-  <option repeat.for="type of Enums.zoneTypes">${type}</option>
-</select>
+    <!-- <tr class="collapse" id="collapseZone-${uid}"> -->
+    <tr>
+      <td>World Origin</td>
+      <td>
+        <select value.bind="zone.worldOrigin" change.trigger="save()">
+          <option repeat.for="type of Enums.actorTypes" model.bind="$index">${type}</option>
+        </select>
+      </td>
+    </tr>
 
-size:
-<div class="input-group">
-  <span class="input-group-text" id="basic-addon1">x</span>
-  <input type="number" aria-describedby="basic-addon1" value.bind="zone.size.x" change.trigger="save()">
-</div>
-<div class="input-group">
-  <span class="input-group-text" id="basic-addon2">y</span>
-  <input type="number" aria-describedby="basic-addon2" value.bind="zone.size.y" change.trigger="save()">
-</div>
-<div class="input-group">
-  <span class="input-group-text" id="basic-addon3">z</span>
-  <input type="number" aria-describedby="basic-addon3" value.bind="zone.size.z" change.trigger="save()">
-</div>
+    <tr class="collapse" id="collapseZone-${uid}">
+      <td>World Offset</td>
+      <td>
+        <div class="d-flex gap-1">
+          <input type="number" value.bind="zone.worldOffset.x" change.trigger="save()" />
+          <input type="number" value.bind="zone.worldOffset.z" change.trigger="save()" />
+        </div>
+      </td>
+    </tr>
 
-<!-- <div if.bind="!minimized">
-  hi
-</div> -->
+    <tr class="collapse" id="collapseZone-${uid}">
+      <td>Local Origin</td>
+      <td>
+        <select value.bind="zone.localOrigin" change.trigger="save()">
+          <option repeat.for="type of Enums.direction9" model.bind="$index">${type}</option>
+        </select>
+      </td>
+    </tr>
 
-<div class="collapse" id="collapseZone-${uid}">
-  uncollapsed
-</div>
+    <tr class="collapse" id="collapseZone-${uid}">
+      <td>Rotation</td>
+      <td>
+        <select value.bind="zone.rotation" change.trigger="save()">
+          <option repeat.for="type of Enums.rotation4" model.bind="$index">${type}</option>
+        </select>
+      </td>
+    </tr>
+
+<!-- 
+  TODO: 
+  - bool negative,  
+  - bool canRotate,
+  - list<zone> children
+-->
+
+  </tbody>
+</table>
