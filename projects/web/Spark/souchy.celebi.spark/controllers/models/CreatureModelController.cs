@@ -29,14 +29,16 @@ namespace souchy.celebi.spark.controllers.models
         private readonly CollectionService<ICreatureSkin> _skins;
         private readonly StringService _strings;
         private readonly IDCounterService _ids;
+        private readonly MongoFederationService _federation;
 
-        public CreatureModelController(MongoModelsDbService db, StringService strings, IDCounterService ids)
+        public CreatureModelController(MongoModelsDbService db, StringService strings, IDCounterService ids, MongoFederationService  federation)
         {
             _creatureModels = db.GetMongoService<ICreatureModel>();
             _stats = db.GetMongoService<IStats>();
             _skins = db.GetMongoService<ICreatureSkin>();   
             _strings = strings;
             _ids = ids;
+            _federation = federation;
         }
 
         [HttpGet("all")]
@@ -46,8 +48,12 @@ namespace souchy.celebi.spark.controllers.models
         public async Task<List<ICreatureModel>> GetFiltered(FilterDefinition<ICreatureModel> filter) 
             => await _creatureModels.GetAsync(filter);
 
+        [HttpGet("byString/{str}")]
+        public async Task<List<ICreatureModel>> GetByString(string str) => await _federation.FindCreaturesByString(str);
+
+
         [HttpGet("{id}")]
-        public async Task<ActionResult<ICreatureModel>> Get([FromRoute] IID id)
+        public async Task<ActionResult<ICreatureModel>> Get([FromRoute] CreatureIID id)
         {
             var filter = Builders<ICreatureModel>.Filter.Eq(nameof(ICreatureModel.modelUid), id);
             var model = await _creatureModels.GetOneAsync(filter);
@@ -84,7 +90,7 @@ namespace souchy.celebi.spark.controllers.models
 
         [Authorize]
         [HttpPut("{id}")]
-        public async Task<ActionResult<ReplaceOneResult>> Update([FromRoute] IID id, [FromBody] CreatureModel updateModel)
+        public async Task<ActionResult<ReplaceOneResult>> Update([FromRoute] CreatureIID id, [FromBody] CreatureModel updateModel)
         {
             var filter = Builders<ICreatureModel>.Filter.Eq(nameof(ICreatureModel.modelUid), id);
             var model = await _creatureModels.GetOneAsync(filter);
@@ -98,7 +104,7 @@ namespace souchy.celebi.spark.controllers.models
 
         [Authorize]
         [HttpDelete("{id}")]
-        public async Task<ActionResult<DeleteResult>> Delete([FromRoute] IID id)
+        public async Task<ActionResult<DeleteResult>> Delete([FromRoute] CreatureIID id)
         {
             var filter = Builders<ICreatureModel>.Filter.Eq(nameof(ICreatureModel.modelUid), id);
             var model = await _creatureModels.GetOneAsync(filter);
@@ -118,7 +124,7 @@ namespace souchy.celebi.spark.controllers.models
 
         [Authorize]
         [HttpPut("{id}/spells")]
-        public async Task<ActionResult<UpdateResult>> UpdateSpell([FromRoute] IID id, [FromBody] string[] spellIds)
+        public async Task<ActionResult<UpdateResult>> UpdateSpell([FromRoute] CreatureIID id, [FromBody] string[] spellIds)
         {
             var filter = Builders<ICreatureModel>.Filter.Eq(nameof(ICreatureModel.modelUid), id);
             var model = await _creatureModels.GetOneAsync(filter);

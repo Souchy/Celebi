@@ -5,20 +5,37 @@
 <import from="../effects/effect"></import>
 
 
-<!-- vignette root/creature -->
+<!-- vignette root || creature -->
 <template if.bind="isvignette && mode != 'search'">
   <!-- <a href="/editor/spell/{model.modelUid}"> -->
   <button class="btn title btn-outline" click.trigger="clickSpell()">
-    <stringcomponent uid.bind="model.nameId" editable.bind="!isvignette"></stringcomponent>
+    <stringcomponent view-model.ref="name" uid.bind="model.nameId" editable.bind="!isvignette"></stringcomponent>
   </button>
-  <button class="btn close" click.trigger="clickRemove()">x</button>
+  <!-- <button class="btn close" click.trigger="clickRemove()">x</button> -->
+  
+  <!-- delete & confirm -->
+  <template if.bind="mode == 'creature'">
+    <button class="btn close" data-bs-toggle="modal" data-bs-target="#removeSpell-${model.entityUid}">x</button>
+    <modal id="removeSpell-${model.entityUid}" header="Remove Spell?" close.bind=false footer.bind=true callbackok.bind="() => clickRemove()">
+      Confirm remove ${name.entity.value} from creature?
+    </modal>
+  </template>
+
+  <template if.bind="mode == 'root'">
+    <button class="btn close" data-bs-toggle="modal" data-bs-target="#deleteSpell-${model.entityUid}">x</button>
+    <modal id="deleteSpell-${model.entityUid}" header="Delete Spell?" close.bind=false footer.bind=true callbackok.bind="() => clickRemove()">
+      Confirm delete ${name.entity.value} entirely?
+    </modal>
+  </template>
+
+  
 </template>
 
 <!-- vignette search -->
 <template if.bind="isvignette && mode == 'search'">
   <div class="add">+</div>
   <button class="title titleSearch btn-outline" click.trigger="clickSpell()">
-    <stringcomponent uid.bind="model.nameId" editable.bind="!isvignette"></stringcomponent>
+    <stringcomponent view-model.ref="name" uid.bind="model.nameId" editable.bind="!isvignette"></stringcomponent>
   </button>
 </template>
 
@@ -26,8 +43,8 @@
 <template if.bind="!isvignette">
   <h2>Spell #${model.modelUid}</h2>
   <div class="d-flex">
-    <stringcomponent uid.bind="model.nameId" editable=true></stringcomponent>
-    <stringcomponent uid.bind="model.descriptionId" editable=true large=true class="large"></stringcomponent>
+    <stringcomponent view-model.ref="name" uid.bind="model.nameId" editable=true></stringcomponent>
+    <stringcomponent view-model.ref="desc" uid.bind="model.descriptionId" editable=true large=true class="large"></stringcomponent>
   </div>
 
   <!-- costs + stats -->
@@ -59,9 +76,7 @@
     </modal>
 
     <div class="effectlist">
-      <effect repeat.for="effectid of model.effectIds" uid.bind="effectid" 
-      callbackmoveup.bind="e => onMoveEffectUp(e)" callbackmovedown.bind="e => onMoveEffectDown(e)" callbackremove.bind="e => onRemoveEffect(e)"
-      ></effect>
+      <effect repeat.for="effectid of model.effectIds" uid.bind="effectid" callbackmoveup.bind="e => onMoveEffectUp(e)" callbackmovedown.bind="e => onMoveEffectDown(e)" callbackremove.bind="e => onRemoveEffect(e)"></effect>
     </div>
   </div>
 

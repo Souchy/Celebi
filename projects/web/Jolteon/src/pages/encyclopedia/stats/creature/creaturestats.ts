@@ -22,6 +22,7 @@ export class CreatureStats implements IRouteableComponent {
 
     constructor(private readonly ea: IEventAggregator, private readonly statsController: StatsModelController) {
         ea.subscribe("stat:base:change", (s: StatSimple | StatBool) => {
+            // console
             this.postUpdate(this.base, s);
         });
         // ea.subscribe("stat:growth:change", (s: StatSimple | StatBool) => {

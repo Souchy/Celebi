@@ -30,14 +30,16 @@ namespace souchy.celebi.spark.controllers.models
         private readonly CollectionService<IEffect> _effects;
         private readonly StringService _strings;
         private readonly IDCounterService _ids;
+        private readonly MongoFederationService _federation;
 
-        public SpellModelController(MongoModelsDbService db, StringService strings, IDCounterService ids)
+        public SpellModelController(MongoModelsDbService db, StringService strings, IDCounterService ids, MongoFederationService federation)
         {
             _spellService = db.GetMongoService<ISpellModel>();
             _stats = db.GetMongoService<IStats>();
             _effects = db.GetMongoService<IEffect>();
             _strings = strings;
             _ids = ids;
+            _federation = federation;
         }
 
         [HttpGet("all")]
@@ -55,8 +57,11 @@ namespace souchy.celebi.spark.controllers.models
         public async Task<ActionResult<List<ISpellModel>>> GetFiltered(FilterDefinition<ISpellModel> filter)
             => Ok(await _spellService.GetAsync(filter));
 
+        [HttpGet("byString/{str}")]
+        public async Task<IEnumerable<ISpellModel>> GetByString(string str) => await _federation.FindSpellsByString(str);
+
         [HttpGet("{id}")]
-        public async Task<ActionResult<ISpellModel>> Get([FromRoute] IID id)
+        public async Task<ActionResult<ISpellModel>> Get([FromRoute] SpellIID id)
         {
             var filter = Builders<ISpellModel>.Filter.Eq(nameof(ISpellModel.modelUid), id);
             ISpellModel? model = await _spellService.GetOneAsync(filter);
@@ -89,7 +94,7 @@ namespace souchy.celebi.spark.controllers.models
 
         [Authorize]
         [HttpPut("{id}")]
-        public async Task<ActionResult<ISpellModel>> Update([FromRoute] IID id, [FromBody] SpellModel updatedSpellModel)
+        public async Task<ActionResult<ISpellModel>> Update([FromRoute] SpellIID id, [FromBody] SpellModel updatedSpellModel)
         {
             var filter = Builders<ISpellModel>.Filter.Eq(nameof(ISpellModel.modelUid), id);
             var model = await _spellService.GetOneAsync(filter);
@@ -101,7 +106,7 @@ namespace souchy.celebi.spark.controllers.models
         }
 
         [HttpPost("{id}/effect")]
-        public async Task<ActionResult<ISpellModel>> AddEffect([FromRoute] IID id, [FromQuery] ObjectId? effectParentId, [FromQuery] string schemaName)
+        public async Task<ActionResult<ISpellModel>> AddEffect([FromRoute] SpellIID id, [FromQuery] ObjectId? effectParentId, [FromQuery] string schemaName)
         {
             var filter = Builders<ISpellModel>.Filter.Eq(nameof(ISpellModel.modelUid), id);
             var model = await _spellService.GetOneAsync(filter);
@@ -152,7 +157,7 @@ namespace souchy.celebi.spark.controllers.models
 
         [Authorize]
         [HttpDelete("{id}")]
-        public async Task<ActionResult<DeleteResult>> Delete([FromRoute] IID id)
+        public async Task<ActionResult<DeleteResult>> Delete([FromRoute] SpellIID id)
         {
             var filter = Builders<ISpellModel>.Filter.Eq(nameof(ISpellModel.modelUid), id);
             var model = await _spellService.GetOneAsync(filter);

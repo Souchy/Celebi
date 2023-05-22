@@ -1,10 +1,11 @@
 import { IEventAggregator, bindable, inject } from "aurelia";
 import { IRouteableComponent, IRouter, Navigation, Parameters, RoutingInstruction } from '@aurelia/router';
-import { ICreatureModel } from "../../../jolteon/services/api/data-contracts";
+import { ICreatureModel, SpellModel } from "../../../jolteon/services/api/data-contracts";
 import { CreatureModelController } from "../../../jolteon/services/api/CreatureModelController";
 import { StatsType } from "../stats/statscomponent";
 import { TOAST_PLACEMENT, TOAST_STATUS, TOAST_THEME, Toast, ToastConfigOptions, ToastOptions } from "bootstrap-toaster";
 import { SpellModelController } from "../../../jolteon/services/api/SpellModelController";
+import { Stringcomponent } from "../strings/stringcomponent";
 
 
 @inject(IEventAggregator, IRouter, CreatureModelController, SpellModelController)
@@ -19,18 +20,16 @@ export class Creature implements IRouteableComponent {
     public uid: string;
     //#endregion
 
+    // binded view-model
+    public name: Stringcomponent;
+    public desc: Stringcomponent;
+
     constructor(
         private readonly ea: IEventAggregator,
         private readonly router: IRouter,
         private readonly creatureController: CreatureModelController,
         private readonly spellController: SpellModelController
     ) {
-        this.ea.subscribe('spells:search:select', (spellUid: string) => {
-            console.log("creature receive add spell: " + spellUid)
-            if(!this.model.spellIds) this.model.spellIds = [];
-            this.model.spellIds.push(spellUid);
-            this.creatureController.putSpells(this.model.modelUid, this.model.spellIds);
-        });
     }
 
     /**
@@ -60,14 +59,23 @@ export class Creature implements IRouteableComponent {
     }
 
     public clickRemove() {
-        // TODO: ask confirmation before delete, it'S too easy to missclick
-        // this.creatureController.deleteCreature(this.model.modelUid);
-    }
-    public clickCreateSpell() {
-        this.spellController.postNew().then(res => {
-            this.model.spellIds.push(res.data.entityUid);
-        });
+        // TODO: ask confirmation before delete, it's too easy to missclick
+        this.creatureController.deleteCreature(this.model.modelUid);
     }
 
+    // callback from spell list
+    public onAddSpell(spell: SpellModel) {
+        console.log("creature onAddSpell: " + spell.modelUid)
+        this.model.spellIds.push(spell.entityUid);
+        this.creatureController.putSpells(this.model.modelUid, this.model.spellIds);
+    }
+    // callback from spell list
+    public onRemoveSpell(spell: SpellModel) {
+        console.log("creature onRemoveSpell: " + spell.modelUid)
+        let idx = this.model.spellIds.indexOf(spell.entityUid);
+        if (idx == -1) return;
+        this.model.spellIds.splice(idx, 1);
+        this.creatureController.putSpells(this.model.modelUid, this.model.spellIds);
+    }
 
 }

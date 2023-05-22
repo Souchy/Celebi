@@ -18,7 +18,7 @@ export class Stringcomponent implements IRouteableComponent {
     public large: boolean = false;
 
     // db data
-    private entity: StringEntity;
+    public entity: StringEntity;
 
     constructor(private readonly ea: IEventAggregator, private readonly controller: StringController) {
     }

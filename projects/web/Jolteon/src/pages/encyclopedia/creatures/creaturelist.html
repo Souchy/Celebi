@@ -3,7 +3,11 @@
 <button class="btn listMenu" click.trigger="refresh()">Refresh</button>
 <button class="btn listMenu" click.trigger="clickCreate()">New creature</button>
 
+<input type="string" value.bind="filter" change.trigger="onSearch()" placeholder="search..." />
+
 <!-- todo bind creature -->
 <div class="list">
-  <creature repeat.for="crea of creatures" model.bind="crea" isvignette.bind="true"></creature>
+  <creature repeat.for="crea of filteredCreatures" view-model.ref="refs[$index]" model.bind="crea" isvignette.bind="true">
+    <!-- ${$index} -->
+  </creature>
 </div>

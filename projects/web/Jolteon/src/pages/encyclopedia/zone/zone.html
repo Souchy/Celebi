@@ -5,7 +5,6 @@
         Type
         <!-- ${zone.zoneType.value} -->
       </td>
-      <!-- <td></td> -->
       <td>
         <select value.bind="zone.zoneType.value" change.trigger="save()">
           <option repeat.for="type of Enums.zoneTypes" model.bind="$index">${type}</option>

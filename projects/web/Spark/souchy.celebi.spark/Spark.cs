@@ -262,6 +262,7 @@ namespace souchy.celebi.spark
             // Mongo    
             services.Configure<MongoSettings>(configuration.GetSection(nameof(MongoSettings))); // relates to appsettings.json
             services.AddSingleton<MongoClientService>();
+            services.AddSingleton<MongoFederationService>();
             services.AddSingleton<MongoModelsDbService>();
             services.AddSingleton<MongoFightsDbService>();
             services.AddSingleton<MongoMetaDbService>();
