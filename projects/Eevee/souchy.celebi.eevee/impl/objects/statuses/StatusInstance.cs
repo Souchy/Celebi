@@ -14,7 +14,7 @@ namespace souchy.celebi.eevee.statuses
 
         //public IValue<int> delay { get; set; } = new Value<int>();
         //public IValue<int> duration { get; set; } = new Value<int>();
-        public ObjectId stats { get; set; }
+        public ObjectId statsId { get; set; }
 
         public IEntityList<ObjectId> EffectIds { get; set; } = new EntityList<ObjectId>();
 
@@ -23,7 +23,7 @@ namespace souchy.celebi.eevee.statuses
         {
             this.entityUid = id;
             this.fightUid = fightUid;
-            this.stats = Eevee.RegisterIIDTemporary();
+            //this.statsId = Eevee.RegisterIIDTemporary();
         }
         public static IStatusInstance Create(ObjectId fightUid) => new StatusInstance(Eevee.RegisterIIDTemporary(), fightUid);
 

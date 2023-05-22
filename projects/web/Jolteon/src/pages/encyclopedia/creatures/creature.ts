@@ -1,7 +1,7 @@
-import { ICreatureModel } from "../../../jolteon/services/api/data-contracts";
 import { IEventAggregator, bindable, inject } from "aurelia";
-import { CreatureModelController } from "../../../jolteon/services/api/CreatureModelController";
 import { IRouteableComponent, IRouter, Navigation, Parameters, RoutingInstruction } from '@aurelia/router';
+import { ICreatureModel } from "../../../jolteon/services/api/data-contracts";
+import { CreatureModelController } from "../../../jolteon/services/api/CreatureModelController";
 import { StatsType } from "../stats/statscomponent";
 import { TOAST_PLACEMENT, TOAST_STATUS, TOAST_THEME, Toast, ToastConfigOptions, ToastOptions } from "bootstrap-toaster";
 
@@ -25,9 +25,9 @@ export class Creature implements IRouteableComponent {
     ) {
         this.ea.subscribe('spells:search:select', (spellUid: string) => {
             console.log("creature receive add spell: " + spellUid)
-            if(!this.model.baseSpells) this.model.baseSpells = [];
-            this.model.baseSpells.push(spellUid);
-            this.creatureController.putSpells(this.model.modelUid, this.model.baseSpells);
+            if(!this.model.spellIds) this.model.spellIds = [];
+            this.model.spellIds.push(spellUid);
+            this.creatureController.putSpells(this.model.modelUid, this.model.spellIds);
         });
     }
 

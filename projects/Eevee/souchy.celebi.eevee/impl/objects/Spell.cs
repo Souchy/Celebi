@@ -19,7 +19,7 @@ namespace souchy.celebi.eevee.impl.objects
         public IID modelUid { get; set; }
         public ObjectId entityUid { get; set; } 
 
-        public ObjectId stats { get; set; }
+        public ObjectId statsId { get; set; }
         //public int chargesRemaining { get; set; }
         //public int cooldownRemaining { get; set; }
         //public int numberOfCastsThisTurn { get => numberOfCastPerEntityThisTurn.Values.Sum(); }

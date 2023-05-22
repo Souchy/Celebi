@@ -2,9 +2,11 @@
 using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.face.objects.stats;
+using souchy.celebi.eevee.face.shared.conditions.value;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
+using souchy.celebi.eevee.impl.stats;
 using souchy.celebi.eevee.neweffects.face;
 using souchy.celebi.eevee.neweffects.impl.effects.move;
 
@@ -74,14 +76,10 @@ namespace souchy.celebi.eevee.neweffects.impl.effects
     }
     #endregion
 
-    #region Status
+    #region Status Add
     public record AddStatusCreature() : IEffectSchema
     {
         public StatusIID modelId { get; set; }
-    }
-    public record RemoveStatusCreature() : IEffectSchema
-    {
-        public int durationToRemove { get; set; }
     }
     public record AddTrap() : IEffectSchema
     {
@@ -95,19 +93,54 @@ namespace souchy.celebi.eevee.neweffects.impl.effects
     {
         public StatusIID modelId { get; set; }
     }
-    public record AddAddStatStatus() : IEffectSchema
+    #endregion
+
+    #region Status Create
+    public record CreateStatusCreature() : IEffectSchema
     {
-        public IStat stat { get; set; }
+        public IStats statusStats { get; set; } = Stats.Create();
     }
-    public record AddStealStatStatus() : IEffectSchema
+    public record CreateTrap() : IEffectSchema
     {
-        public IStat stat { get; set; }
+        public IStats statusStats { get; set; } = Stats.Create();
+    }
+    public record CreateGlyph() : IEffectSchema
+    {
+        public IStats statusStats { get; set; } = Stats.Create();
+    }
+    public record CreateGlyphAura() : IEffectSchema
+    {
+        public IStats statusStats { get; set; } = Stats.Create();
+    }
+    //public record AddAddStatStatus() : IEffectSchema
+    //{
+    //    public IStat stat { get; set; }
+    //}
+    //public record AddStealStatStatus() : IEffectSchema
+    //{
+    //    public IStat stat { get; set; }
+    //}
+    #endregion
+
+    #region Status Remove
+    public record RemoveStatusCreature() : IEffectSchema
+    {
+        public IStatusCondition statusFilter { get; set; }
+        public int durationToRemove { get; set; }
+    }
+    public record RemoveTrap() : IEffectSchema
+    {
+        public IStatusCondition statusFilter { get; set; }
+    }
+    public record RemoveGlyph() : IEffectSchema
+    {
+        public IStatusCondition statusFilter { get; set; }
     }
     #endregion
 
     #region Resource
-        #region Damage 
-            public abstract record ADamageSchema() : IEffectSchema
+    #region Damage 
+    public abstract record ADamageSchema() : IEffectSchema
             {
                 public ElementType element { get; set; } = ElementType.None;
                 public int baseDamage { get; set; } = 0;

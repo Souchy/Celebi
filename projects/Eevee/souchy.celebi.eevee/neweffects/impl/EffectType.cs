@@ -124,16 +124,23 @@ namespace souchy.celebi.eevee.neweffects.impl
         #endregion
         #region Status
             AddStatusCreature,
-            RemoveStatusCreature, // dispell
             //AddStatusCell, // éclipse, prémonition
             //RemoveStatusCell,
             AddTrap,
             AddGlyph,       // glyphe d'aveuglement (partie retrait), éclipse, prémonition, // need some glyphs with skin some invisible
             AddGlyphAura,   // glyphe d'aveuglement (partie dégât)
 
-            AddAddStatStatus, // creates a status with AddStat ? // all ap buffs should go through a Status so it's visible 
+            CreateStatusCreature,
+            CreateTrap,
+            CreateGlyph,
+            CreateGlyphAura,
+
+            RemoveStatusCreature, // dispell
+            RemoveTrap,
+            RemoveGlyph,
+            //AddAddStatStatus, // creates a status with AddStat ? // all ap buffs should go through a Status so it's visible 
                 // mot stimu/galva, flou, 
-            AddStealStatStatus, // creates 2 status with stolen resources? 1 for target, 1 for caster
+            //AddStealStatStatus, // creates 2 status with stolen resources? 1 for target, 1 for caster
         #endregion
         #region Res
             DirectDamage, // use triggers for OnResourceUse (poison paralysant), OnResourceLost (male vaudoo), OnPushed (fleche tyra), etc
@@ -165,6 +172,7 @@ namespace souchy.celebi.eevee.neweffects.impl
         #endregion
     }
 
+    /*
     public record EffectType(EffectCategory Category, int LocalId, string BaseName, IEffectSchema schemaPrototype) //CharacteristicCategory Category, int LocalId, string BaseName, params ICondition[] conditions)
     {
         public IID ID { get; init; } = (IID) ((int) Category * 1000 + LocalId);
@@ -191,6 +199,6 @@ namespace souchy.celebi.eevee.neweffects.impl
         }
         public static EffectTypeCreature addStat = new EffectTypeCreature(nameof(addStat), new AddStatSchema());
     }
-
+    */
 
 }

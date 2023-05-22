@@ -25,6 +25,7 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
         Current,
         Max,
         Missing,
+        // -1 = full every turn, 0 = no regen, 1 = 1/turn, 0.25 = 1 per 4 turns // string to parse for different regens
         Regen,
         Percent,
         MissingPercent

@@ -1,6 +1,7 @@
 import { bindable, customElement, inject } from 'aurelia';
 import { PropertiesController } from './../../../../jolteon/services/api/PropertiesController';
 import { SchemaDescription } from '../../../../jolteon/services/api/data-contracts';
+import { Effects } from '../../../../jolteon/constants';
 
 // @customElement('ce-effecttype-selector')
 @inject(PropertiesController)
@@ -21,11 +22,14 @@ export class EffectModelSelector {
     public filteredSchemas: SchemaDescription[] = []
 
     constructor(private readonly propertiesController: PropertiesController) {
-        this.propertiesController.getEffectsSchemas()
-            .then(res => {
-                this.schemasDescriptions = res.data;
-                this.filteredSchemas = this.schemasDescriptions;
-            });
+        // console.log("ctor effect model selector")
+        this.schemasDescriptions = Effects.schemas;
+        this.filteredSchemas = Effects.schemas;
+        // this.propertiesController.getEffectsSchemas()
+        //     .then(res => {
+        //         this.schemasDescriptions = res.data;
+        //         this.filteredSchemas = this.schemasDescriptions;
+        //     });
     }
 
     public len(schema: SchemaDescription) {

@@ -21,8 +21,9 @@ public class CharacTypeSchemaFilter : ISchemaFilter
         if (context.Type.IsClass)
         {
             
-            if (!context.Type.IsAssignableTo(typeof(CharacteristicType)) &&
-                !context.Type.IsAssignableTo(typeof(EffectType)))
+            if (!context.Type.IsAssignableTo(typeof(CharacteristicType))
+                //&& !context.Type.IsAssignableTo(typeof(EffectType))
+            )
             {
                 return;
             }

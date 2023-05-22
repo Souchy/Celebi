@@ -23,11 +23,9 @@ namespace souchy.celebi.eevee.neweffects.impl.effects.creature
     }
     public record ChangeAppearance() : IEffectSchema
     {
-        //public SceneIID sceneId { get; set; } // .tscn
         public AssetIID modelId { get; set; } // any asset file (scene, 3d model, texture, music...)
     }
     public record ChangeAnimationSet() : IEffectSchema {
-        //animationSetId
         public AnimationSetIID modelId { get; set; } 
     }
     public record ReduceDamageReceived() : IEffectSchema

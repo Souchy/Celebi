@@ -32,8 +32,8 @@ namespace souchy.celebi.eevee.impl.objects
         public ObjectId summonerCreature { get; set; }
         public IPosition position { get; init; } = new Position();
 
-        public ObjectId stats { get; set; }
-        public IEntitySet<ObjectId> spells { get; set; } = new EntitySet<ObjectId>();
+        public ObjectId statsId { get; set; }
+        public IEntitySet<ObjectId> spellIds { get; set; } = new EntitySet<ObjectId>();
         public IEntitySet<ObjectId> statuses { get; init; } = new EntitySet<ObjectId>();
         public Dictionary<ContextType, IContext> contexts { get; set; } = new();
 
@@ -47,7 +47,7 @@ namespace souchy.celebi.eevee.impl.objects
 
         public IPlayer GetOriginalOwner() => this.GetFight().players.Get(originalOwnerUid);
         public IPlayer GetCurrentOwner() => this.GetFight().players.Get(currentOwnerUid);
-        public IStats GetNaturalStats() => this.GetFight().stats.Get(stats);
+        public IStats GetNaturalStats() => this.GetFight().stats.Get(statsId);
         /// <summary>
         /// If an IAction is specified, it will filter out conditional stats that are not valid
         /// </summary>
@@ -88,7 +88,7 @@ namespace souchy.celebi.eevee.impl.objects
             }
             return naturalStats;
         }
-        public IEnumerable<ISpell> GetSpells() => spells.Values.Select(i => this.GetFight().spells.Get(i));
+        public IEnumerable<ISpell> GetSpells() => spellIds.Values.Select(i => this.GetFight().spells.Get(i));
         public IEnumerable<IStatusContainer> GetStatuses() => statuses.Values.Select(i => this.GetFight().statuses.Get(i));
 
 

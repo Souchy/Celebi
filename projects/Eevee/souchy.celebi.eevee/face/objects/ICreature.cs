@@ -22,8 +22,8 @@ namespace souchy.celebi.eevee.face.objects
         /// <summary>
         /// Natural stats: Base + Growth from model
         /// </summary>
-        public ObjectId stats { get; set; }
-        public IEntitySet<ObjectId> spells { get; set; }
+        public ObjectId statsId { get; set; }
+        public IEntitySet<ObjectId> spellIds { get; set; }
 
 
         public IPlayer GetOriginalOwner();

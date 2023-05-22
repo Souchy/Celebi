@@ -67,15 +67,12 @@ namespace souchy.celebi.spark.controllers.models
         [HttpPost("new")]
         public async Task<ActionResult<ICreatureModel>> PostNew()
         {
-            (ICreatureModel crea, IStringEntity name, IStringEntity desc, IStats baseStats, IStats growthStats, 
-                (ICreatureSkin skin, IStringEntity name, IStringEntity desc) skin)
-                model = await Factories.newCreatureModel(_ids);
+            var model = await Factories.newCreatureModel(_ids);
 
             await _creatureModels.CreateAsync(model.crea);
             await _strings.CreateAsync(model.name);
             await _strings.CreateAsync(model.desc);
-            await _stats.CreateAsync(model.baseStats);
-            await _stats.CreateAsync(model.growthStats);
+            await _stats.CreateAsync(model.stats);
 
             await _skins.CreateAsync(model.skin.skin);
             await _strings.CreateAsync(model.skin.name);
@@ -131,7 +128,7 @@ namespace souchy.celebi.spark.controllers.models
             //    model.baseSpells.Add(new ObjectId(s));
             var objectIds = spellIds.Distinct().Select(s => new ObjectId(s));
             var set = new EntitySet<ObjectId>(objectIds);
-            var update = Builders<ICreatureModel>.Update.Set(nameof(ICreatureModel.baseSpells), set);
+            var update = Builders<ICreatureModel>.Update.Set(nameof(ICreatureModel.spellIds), set);
             var result = await _creatureModels.Collection.UpdateOneAsync(filter, update);
             return Ok(result);
         }

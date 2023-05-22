@@ -4,7 +4,7 @@ import { StringController } from './../../../jolteon/services/api/StringControll
 import { IEventAggregator, bindable, containerless, inject } from "aurelia";
 
 @inject(IEventAggregator, StringController)
-@containerless
+// @containerless
 export class Stringcomponent implements IRouteableComponent {
 
     // input
@@ -14,6 +14,8 @@ export class Stringcomponent implements IRouteableComponent {
     public editable: boolean = false;
     @bindable
     public lang: I18NType = I18NType.fr;
+    @bindable
+    public large: boolean = false;
 
     // db data
     private entity: StringEntity;

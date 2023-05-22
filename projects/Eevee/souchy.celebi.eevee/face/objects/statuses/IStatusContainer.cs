@@ -30,9 +30,9 @@ namespace souchy.celebi.eevee.face.objects.statuses
         /// <summary>
         /// Container stats like Stacks, MaxStacks, 
         /// </summary>
-        public ObjectId stats { get; set; }
+        public ObjectId statsId { get; set; }
 
-        public IStats GetStats() => this.GetFight().stats.Get(stats);
+        public IStats GetStats() => this.GetFight().stats.Get(statsId);
 
         public List<IStatusInstance> instances { get; set; }
     }

@@ -21,7 +21,7 @@ namespace souchy.celebi.eevee.impl.objects.statuses
         public IID sourceSpellModel { get; set; }
         public ObjectId sourceCreature { get; set; }
         public ObjectId holderEntity { get; set; }
-        public ObjectId stats { get; set; }
+        public ObjectId statsId { get; set; }
 
         public List<IStatusInstance> instances { get; set; } = new List<IStatusInstance>();
 
@@ -29,7 +29,7 @@ namespace souchy.celebi.eevee.impl.objects.statuses
         {
             this.entityUid = id;
             this.fightUid = fightUid;
-            this.stats = Eevee.RegisterIIDTemporary();
+            this.statsId = Eevee.RegisterIIDTemporary();
         }
         public static IStatusContainer Create(ObjectId fightUid) => new StatusContainer(Eevee.RegisterIIDTemporary(), fightUid);
 

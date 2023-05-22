@@ -48,7 +48,7 @@ namespace souchy.celebi.eevee
                         new TriggerEvent(TriggerType.OnEffect, TriggerOrderType.Before, pair.effect)
                     );
 
-                    IEffectScript script = null; // todo find script from  pair.effect.schema.GetType
+                    IEffectScript script = pair.effect.GetScript(); // todo find script from  pair.effect.schema.GetType
                     var returnValue = script.apply(subActionEffect, target, pair.targets);
 
                     // TODO how do we deal with the returnValue? 

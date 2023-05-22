@@ -1,11 +1,14 @@
 import { ActorType, Affinity, AffinityTypes, Contextual, ContextualTypes, Direction8Type, Direction9Type, EffT, ElementType, OtherProperty, OtherPropertyTypes, 
-    Resistance, ResistanceTypes, Resource, ResourceProperty, ResourceTypes, Rotation4Type, SpellModelProperty, 
+    Resistance, ResistanceTypes, Resource, ResourceProperty, ResourceTypes, Rotation4Type, SchemaDescription, SpellModelProperty, 
     SpellModelPropertyTypes, SpellProperty, SpellPropertyTypes, State, StateTypes, StatusProperty, StatusPropertyTypes, ZoneType } from "./services/api/data-contracts";
 
 
 export class Constants {
     public static readonly serverUrl = "https://localhost:7295";
     public static readonly googleClientId = "850322629277-c9fu1umd1dlk7tjv325u6s33g32fb0ea.apps.googleusercontent.com";
+
+    public static readonly MAX_INT = Math.pow(2, 31) - 1;
+    public static readonly MIN_INT = -Math.pow(2, 31);
 }
 
 export class Characteristics {
@@ -48,4 +51,5 @@ export class Enums {
 
 export class Effects {
     // public static readonly schemas: EffectSchemaTypes;
+    public static schemas: SchemaDescription[] = [];
 }

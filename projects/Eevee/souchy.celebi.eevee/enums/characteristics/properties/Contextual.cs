@@ -30,8 +30,8 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
         public static readonly Contextual CountHitsTaken     = new(10, nameof(CountHitsTaken));
 
         // reduced on other targets (ralentissement, sablier...)
-        public static readonly Contextual ManaReduced = new(15, nameof(ManaReduced));
-        public static readonly Contextual MovementReduced = new(16, nameof(MovementReduced));
+        public static readonly Contextual ManaReduced        = new(15, nameof(ManaReduced));
+        public static readonly Contextual MovementReduced    = new(16, nameof(MovementReduced));
 
 
         /// <summary>                                        

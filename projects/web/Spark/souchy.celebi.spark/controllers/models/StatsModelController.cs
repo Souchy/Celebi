@@ -45,7 +45,7 @@ namespace souchy.celebi.spark.controllers.models
 
         [Authorize]
         [HttpPost("")]
-        public async Task<IActionResult> Post([FromBody] Stats newStats)
+        public async Task<IActionResult> Post([FromBody] IStats newStats)
         {
             await _stats.CreateAsync(newStats);
             return CreatedAtAction(nameof(Get), new { id = newStats.entityUid }, newStats);
@@ -53,7 +53,7 @@ namespace souchy.celebi.spark.controllers.models
 
         //[Authorize]
         [HttpPut("{id}")]
-        public async Task<ActionResult<ReplaceOneResult>> Update([FromRoute] ObjectId id, [FromBody] Stats updatedStats)
+        public async Task<ActionResult<ReplaceOneResult>> Update([FromRoute] ObjectId id, [FromBody] IStats updatedStats)
         {
             var stats = await _stats.GetOneAsync(id);
             if (stats is null) 
@@ -79,7 +79,7 @@ namespace souchy.celebi.spark.controllers.models
         [HttpPut("{id}/bool")]
         public async Task<ActionResult<UpdateResult>> UpdateStatBool([FromRoute] ObjectId id, [FromBody] StatBool updatedStats)
         {
-            var result = await UpdateStatus(id, updatedStats);
+            var result = await UpdateStat(id, updatedStats);
             if (result == null) return NotFound("Missing Stats object");
             return Ok(result);
         }
@@ -88,11 +88,11 @@ namespace souchy.celebi.spark.controllers.models
         [HttpPut("{id}/simple")]
         public async Task<ActionResult<UpdateResult>> UpdateStatSimple([FromRoute] ObjectId id, [FromBody] StatSimple updatedStats)
         {
-            var result = await UpdateStatus(id, updatedStats);
+            var result = await UpdateStat(id, updatedStats);
             if (result == null) return NotFound("Missing Stats object");
             return Ok(result);
         }
-        private async Task<UpdateResult> UpdateStatus(ObjectId id, IStat updatedStats)
+        private async Task<UpdateResult> UpdateStat(ObjectId id, IStat updatedStats)
         {
             var stats = await _stats.GetOneAsync(id);
             if (stats is null)

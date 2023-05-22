@@ -77,7 +77,7 @@ namespace souchy.celebi.spark.controllers.models
         [HttpPost("new")]
         public async Task<ActionResult<ISpellModel>> PostNew()
         {
-            (ISpellModel spell, IStringEntity name, IStringEntity desc, IStats stats) model = await Factories.newSpellModel(_ids);
+            var model = await Factories.newSpellModel(_ids);
 
             await _spellService.CreateAsync(model.spell);
             await _strings.CreateAsync(model.name);
@@ -89,7 +89,7 @@ namespace souchy.celebi.spark.controllers.models
 
         [Authorize]
         [HttpPut("{id}")]
-        public async Task<ActionResult<ReplaceOneResult>> Update([FromRoute] IID id, [FromBody] SpellModel updatedSpellModel)
+        public async Task<ActionResult<ISpellModel>> Update([FromRoute] IID id, [FromBody] SpellModel updatedSpellModel)
         {
             var filter = Builders<ISpellModel>.Filter.Eq(nameof(ISpellModel.modelUid), id);
             var model = await _spellService.GetOneAsync(filter);
@@ -97,11 +97,11 @@ namespace souchy.celebi.spark.controllers.models
                 return NotFound();
             updatedSpellModel.entityUid = model.entityUid;
             var result = await _spellService.UpdateAsync(filter, updatedSpellModel);
-            return Ok(result);
+            return Ok(model);
         }
 
         [HttpPost("{id}/effect")]
-        public async Task<ActionResult<ReplaceOneResult>> AddEffect([FromRoute] IID id, [FromQuery] ObjectId? effectParentId, [FromQuery] string schemaName)
+        public async Task<ActionResult<ISpellModel>> AddEffect([FromRoute] IID id, [FromQuery] ObjectId? effectParentId, [FromQuery] string schemaName)
         {
             var filter = Builders<ISpellModel>.Filter.Eq(nameof(ISpellModel.modelUid), id);
             var model = await _spellService.GetOneAsync(filter);
@@ -126,7 +126,7 @@ namespace souchy.celebi.spark.controllers.models
             await _effects.CreateAsync(eff);
             var result = await _spellService.UpdateAsync(model.entityUid, model);
 
-            return Ok(result);
+            return Ok(model);
         }
         private bool addEffectToParent(IEffectsContainer container, IEffect eff, ObjectId? parentId)
         {
@@ -149,21 +149,6 @@ namespace souchy.celebi.spark.controllers.models
             return false;
         }
 
-        [HttpPut("{id}/{effectParentId}")]
-        public async Task<ActionResult<UpdateResult>> AddEffect([FromRoute] IID id, [FromRoute] ObjectId effectParentId, [FromBody] Effect effect)
-        {
-            var filter = Builders<ISpellModel>.Filter.Eq(nameof(ISpellModel.modelUid), id);
-            var model = await _spellService.GetOneAsync(filter);
-            if (model is null)
-                return NotFound();
-            if(effect.entityUid == null || effect.entityUid == ObjectId.Empty)
-            {
-                effect.entityUid = ObjectId.GenerateNewId();
-                await _effects.CreateAsync(effect);
-                model.EffectIds.Add(effect.entityUid);
-            }
-            return Ok();
-        }
 
         [Authorize]
         [HttpDelete("{id}")]
@@ -176,7 +161,7 @@ namespace souchy.celebi.spark.controllers.models
             var result = await _spellService.RemoveAsync(filter);
             await _strings.RemoveAsync(model.nameId);
             await _strings.RemoveAsync(model.descriptionId);
-            await _stats.RemoveAsync(model.stats);
+            await _stats.RemoveAsync(model.statsId);
             return Ok(result);
         }
 

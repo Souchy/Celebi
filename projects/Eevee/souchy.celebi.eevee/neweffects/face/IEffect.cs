@@ -25,6 +25,7 @@ namespace souchy.celebi.eevee.neweffects.face
 
         public T GetProperties<T>() => (T) Schema;
         public IEffectModel GetModel() => Eevee.models.effectModels.Values.First(m => m.modelUid == this.modelUid);
+        public IEffectScript GetScript() => Eevee.effectScripts[Schema.GetType()];
 
         /// <summary>
         /// Get unfiltered entities in this effect's area

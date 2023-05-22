@@ -1,5 +1,4 @@
-<!-- <containerless> -->
-
+<import from="./equation"></import>
 <tr>
   <td>
     ${characName} ${basestats.entityUid}
@@ -7,7 +6,8 @@
   <td>
     <input type="number" value.bind="basestat.value" change.trigger="onChangeBase" />
   </td>
-  <td if.bind="growthstat">
-    <input type="number" value.bind="growthstat.value" change.trigger="onChangGrowth" />
+  <td if.bind="growthequation">
+    <!-- <input type="number" value.bind="growthstat.value" change.trigger="onChangGrowth" /> -->
+    <equation characid.bind="basestats.statId" eq.bind="growthequation"></equation>
   </td>
 </tr>

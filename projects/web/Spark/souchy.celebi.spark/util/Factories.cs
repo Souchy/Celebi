@@ -19,13 +19,14 @@ using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.enums.characteristics;
 using System.Xml.Linq;
 using souchy.celebi.spark.services.models;
+using souchy.celebi.eevee.enums.characteristics.other;
 
 namespace souchy.celebi.spark.util
 {
     public class Factories
     {
 
-        public static async Task<(ICreatureModel, IStringEntity, IStringEntity, IStats, IStats, (ICreatureSkin, IStringEntity, IStringEntity))> newCreatureModel(IDCounterService _ids)
+        public static async Task<(ICreatureModel crea, IStringEntity name, IStringEntity desc, IStats stats, (ICreatureSkin skin, IStringEntity name, IStringEntity desc) skin)> newCreatureModel(IDCounterService _ids)
         {
             // Model + Skin
             var creatureModel = CreatureModel.CreatePermanent();
@@ -42,8 +43,8 @@ namespace souchy.celebi.spark.util
             creatureModel.descriptionId = desc.entityUid;
 
             // Base Stats
-            var baseStats = Stats.Create();
-            creatureModel.baseStats = baseStats.entityUid;
+            var baseStats = CreatureStats.Create();
+            creatureModel.statsId = baseStats.entityUid;
             baseStats.Add(Resource.LifeInitialMax.Create(1500));
             baseStats.Add(Resource.ManaInitialMax.Create(10));
             baseStats.Add(Resource.ManaRegen.Create(int.MaxValue));
@@ -54,16 +55,16 @@ namespace souchy.celebi.spark.util
             baseStats.Add(State.Visible.Create(true));
 
             // Growth Stats
-            var growthStats = Stats.Create();
-            creatureModel.growthStats = growthStats.entityUid;
+            //var growthStats = Stats.Create();
+            //creatureModel.growthStats = growthStats.entityUid;
 
             // Skin
             var creatureSkin = await newCreatureSkin(_ids);
-            creatureModel.skins.Add(creatureSkin.Item1.entityUid);
+            creatureModel.skinIds.Add(creatureSkin.Item1.entityUid);
 
-            return (creatureModel, name, desc, baseStats, growthStats, creatureSkin);
+            return (creatureModel, name, desc, baseStats, creatureSkin);
         }
-        public static async Task<(ISpellModel, IStringEntity, IStringEntity, IStats)> newSpellModel(IDCounterService _ids)
+        public static async Task<(ISpellModel spell, IStringEntity name, IStringEntity desc, IStats stats)> newSpellModel(IDCounterService _ids)
         {
             // Model + Skin
             var spellModel = SpellModel.CreatePermanent();
@@ -80,8 +81,8 @@ namespace souchy.celebi.spark.util
             spellModel.descriptionId = desc.entityUid;
 
             // Stats
-            var stats = Stats.Create();
-            spellModel.stats = stats.entityUid;
+            var stats = SpellModelStats.Create();
+            spellModel.statsId = stats.entityUid;
 
             return (spellModel, name, desc, stats);
         }

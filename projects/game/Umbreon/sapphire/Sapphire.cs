@@ -50,7 +50,7 @@ public partial class Sapphire : Node3D
             foreach (var model in Eevee.models.creatureModels.Values) //diamonds.creatureModelsData)
             {
                 //createCreature(model, diamonds.creatureSkinsData[model.skins[0]], team, true, map.teamStartPositions[team][i]);
-                var skin = Eevee.models.creatureSkins.Get(model.skins.Values[0]);
+                var skin = Eevee.models.creatureSkins.Get(model.skinIds.Values[0]);
                 createCreature(model, skin, team, true, map.teamStartPositions[team][i]);
                 i++;
             }

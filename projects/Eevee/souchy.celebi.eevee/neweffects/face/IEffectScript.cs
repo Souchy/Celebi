@@ -6,7 +6,8 @@ using souchy.celebi.eevee.face.objects.effectResults;
 
 namespace souchy.celebi.eevee.neweffects.face
 {
-    public interface IEffectScript //<T> where T : IEffectSchema
+
+    public interface IEffectScript 
     {
         public Type SchemaType { get; }
         /// <summary>

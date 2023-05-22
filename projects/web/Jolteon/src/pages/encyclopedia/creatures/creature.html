@@ -18,12 +18,15 @@
 
 <template else>
   <h3>Creature #${model.modelUid}</h3>
-  <stringcomponent uid.bind="model.nameId" editable=true></stringcomponent>
-  <stringcomponent uid.bind="model.descriptionId" editable=true></stringcomponent>
+  <div class="d-flex">
+    <stringcomponent uid.bind="model.nameId" editable=true></stringcomponent>
+    <stringcomponent uid.bind="model.descriptionId" editable=true large=true class="large"></stringcomponent>
+  </div>
+
 
   <h3 class="titleSpacer">Spells</h3>
-  <spelllist mode="creatureSpells" spellids.bind="model.baseSpells"></spelllist>
+  <spelllist mode="creatureSpells" spellids.bind="model.spellIds"></spelllist>
 
   <h3 class="titleSpacer">Stats</h3>
-  <creaturestats baseuid.bind="model.baseStats" growthuid.bind="model.growthStats"></creaturestats>
+  <creaturestats baseuid.bind="model.statsId" growthuid.bind="model.growthStats"></creaturestats>
 </template>

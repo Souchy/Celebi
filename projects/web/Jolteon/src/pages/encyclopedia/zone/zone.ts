@@ -10,27 +10,24 @@ export class Zone {
 
     @bindable
     public zone: IZone;
+    @bindable
+    public uid: string;
+    
+    // 
+    public minimized: boolean = true;
 
     bound() {
-        console.log("binded zone:")
-        console.log(this.zone)
+        // console.log("binded zone:")
+        // console.log(this.zone)
     }
     
-    public zoneTypes() {
-        return Object.keys(ZoneType).filter(k => isNaN(+k));
-    }
-    public direction8() {
-        return Object.keys(Direction8Type).filter(k => isNaN(+k));
-    }
-    public direction9() {
-        return Object.keys(Direction9Type).filter(k => isNaN(+k));
-    }
-    public rotation4() {
-        return Object.keys(Rotation4Type).filter(k => isNaN(+k));
-    }
-    public actors() {
-        return Object.keys(ActorType).filter(k => isNaN(+k));
+
+    public save() {
+
     }
 
+    public clickMinimize() {
+        this.minimized = !this.minimized;
+    }
 
 }

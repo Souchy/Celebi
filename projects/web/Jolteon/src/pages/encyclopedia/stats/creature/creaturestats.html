@@ -4,32 +4,27 @@
 <import from="../tables/tablebool"></import>
 
 
-<!-- <div>
-  <tablesimple header="Contextual" characs.bind="Characteristics.contextuals" base.bind="base" growth.bind="growth"></tablesimple>
-</div> -->
-
-
-<div style="display: flex; width: 100%;" if.bind="base && growth">
+<div style="display: flex; width: 100%;" if.bind="base">
 
   <!-- column -->
-  <div style="width: 100%;">
+  <div style="width: 33%;">
     <h5>Resource</h5>
-    <tablesimple header="Resource" characs.bind="Characteristics.resourcesCreatureModel" base.bind="base" growth.bind="growth"></tablesimple>
+    <tablesimple characs.bind="Characteristics.resourcesCreatureModel" base.bind="base"></tablesimple>
     <h5>Other</h5>
-    <tablesimple header="Other" characs.bind="Characteristics.others" base.bind="base" growth.bind="growth"></tablesimple>
+    <tablesimple characs.bind="Characteristics.others" base.bind="base"></tablesimple>
   </div>
   
   <!-- column -->
-  <div style="width: 100%;">
+  <div style="width: 33%;">
     <h5>Affinity</h5>
-    <tablesimple header="Affinity" characs.bind="Characteristics.affinities" base.bind="base" growth.bind="growth"></tablesimple>
+    <tablesimple characs.bind="Characteristics.affinities" base.bind="base"></tablesimple>
     <h5>State</h5>
-    <tablebool header="State" characs.bind="Characteristics.states" base.bind="base"></tablebool>
+    <tablebool characs.bind="Characteristics.states" base.bind="base"></tablebool>
   </div>
 
-  <div style="width: 100%;">
+  <div style="width: 33%;">
     <h5>Resistance</h5>
-    <tablesimple header="Resistance" characs.bind="Characteristics.resistances" base.bind="base" growth.bind="growth"></tablesimple>
+    <tablesimple characs.bind="Characteristics.resistances" base.bind="base"></tablesimple>
   </div>
 
 </div>

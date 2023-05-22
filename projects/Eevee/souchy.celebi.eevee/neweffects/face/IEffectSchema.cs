@@ -1,4 +1,5 @@
-﻿using System;
+﻿using souchy.celebi.eevee.neweffects.impl;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,12 @@ namespace souchy.celebi.eevee.neweffects.face
 {
     public interface IEffectSchema
     {
+        public EffT effType
+        {
+            get
+            {
+                return Enum.Parse<EffT>(this.GetType().Name);
+            }
+        }
     }
 }

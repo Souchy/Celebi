@@ -1,5 +1,11 @@
 <import from="../components/statbool"></import>
+<import from="../components/equation"></import>
 
-<div if.bind="true" style="display: flex; flex-wrap: wrap;">
+<div style="display: flex; flex-wrap: wrap;">
   <statbool repeat.for="charac of characs" basestat.bind="getBaseStat(charac.id)"></statbool>
+</div>
+
+
+<div>
+  <equation repeat.for="charac of characs" characid.bind="charac" eq.bind="getGrowthEquation(charac.id)"></equation>
 </div>

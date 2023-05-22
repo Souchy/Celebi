@@ -17,7 +17,7 @@ export default class PropertyGrid {
     }
 
     public get keys() {
-        return Object.keys(this.data);
+        return Object.keys(this.data).filter(k => k != "$type");
     }
     public get values() {
         return Object.values(this.data);

@@ -25,6 +25,7 @@ using souchy.celebi.eevee.face.values;
 using souchy.celebi.spark.util.mongo;
 using souchy.celebi.eevee.face.util.math;
 using souchy.celebi.eevee.impl.values;
+using Newtonsoft.Json;
 
 namespace souchy.celebi.spark
 {
@@ -57,6 +58,32 @@ namespace souchy.celebi.spark
 
             // swagger
             configureSwagger(services);
+
+            services.AddControllers(options =>
+            {
+                options.Conventions.Add(new ControllerNamingConvention());
+
+            }).AddNewtonsoftJson(options =>
+            {
+
+                options.SerializerSettings.TypeNameHandling = TypeNameHandling.Objects;
+                options.SerializerSettings.Formatting = Formatting.Indented;
+                options.SerializerSettings.ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor;
+                options.SerializerSettings.Converters = new List<JsonConverter> {
+                    //new IIDJsonConverter(), new IStringEntitysonConverter(),
+                    //new IEntitySetJsonConverter(), new IEntityListJsonConverter(),
+                    //new IValueIntJsonConverter(), new IValueDoubleJsonConverter(), new IValueBoolJsonConverter(),
+                    //new CharacTypeJsonConverter(), new CharacIdJsonConverter(), new IValueElementJsonConverter()
+                };
+                options.SerializerSettings.Converters.Add(new ObjectIdConverter());
+                //options.SerializerSettings.TypeNameAssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple;
+                //options.SerializerSettings.Converters.Add(new IValueZoneTypeJsonConverter());
+                //options.SerializerSettings.Converters.Add(new IValueElementJsonConverter());
+                //options.SerializerSettings.Converters.Add(new IValueIntJsonConverter());
+                //options.SerializerSettings.Converters.Add(new IValueBoolJsonConverter());
+                //options.SerializerSettings.Converters.Add(new IValueDoubleJsonConverter());
+            });
+
 
             // Add services to the container.
             configureServices(services, configuration);
@@ -160,20 +187,6 @@ namespace souchy.celebi.spark
                 c.DocumentFilter<TypesDocumentFilter>(); // adds more document types
             });
             services.AddSwaggerGenNewtonsoftSupport();
-            services.AddControllers(options =>
-            {
-                options.Conventions.Add(new ControllerNamingConvention());
-
-            }).AddNewtonsoftJson(options =>
-            {
-                options.SerializerSettings.Converters.Add(new ObjectIdConverter());
-
-                //options.SerializerSettings.Converters.Add(new IValueZoneTypeJsonConverter());
-                //options.SerializerSettings.Converters.Add(new IValueElementJsonConverter());
-                //options.SerializerSettings.Converters.Add(new IValueIntJsonConverter());
-                //options.SerializerSettings.Converters.Add(new IValueBoolJsonConverter());
-                //options.SerializerSettings.Converters.Add(new IValueDoubleJsonConverter());
-            });
         }
 
         private static OpenApiSchema mapIValue<T>()

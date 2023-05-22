@@ -1,5 +1,26 @@
-hi zone
 
 <select value.bind="zone.type">
   <option repeat.for="type of Enums.zoneTypes">${type}</option>
 </select>
+
+size:
+<div class="input-group">
+  <span class="input-group-text" id="basic-addon1">x</span>
+  <input type="number" aria-describedby="basic-addon1" value.bind="zone.size.x" change.trigger="save()">
+</div>
+<div class="input-group">
+  <span class="input-group-text" id="basic-addon2">y</span>
+  <input type="number" aria-describedby="basic-addon2" value.bind="zone.size.y" change.trigger="save()">
+</div>
+<div class="input-group">
+  <span class="input-group-text" id="basic-addon3">z</span>
+  <input type="number" aria-describedby="basic-addon3" value.bind="zone.size.z" change.trigger="save()">
+</div>
+
+<!-- <div if.bind="!minimized">
+  hi
+</div> -->
+
+<div class="collapse" id="collapseZone-${uid}">
+  uncollapsed
+</div>

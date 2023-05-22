@@ -6,3 +6,28 @@
 
 <creaturelist></creaturelist>
 <spelllist></spelllist>
+
+------------------<br>
+status model list
+
+<!-- some statuses can be re-used, ex: 
+    - eclat de surt 
+    - infecté
+    - portail elio
+    - mot stimu/galva
+    - 
+
+    these will use the schemas AddStatus + a StatusModel
+-->
+
+<!-- some statuses would be nice & easy to custom create in an AddStatus effect, using its children, ex:
+    - buff stat (shield, fourberie, manigance, etc)
+    - ret pa (which is buff stat too: ralentissement, sablier, horloge...)
+    - damage status (ignite, poison insi, injection, malé vaudoo, fleche tyra, )
+
+
+    these will use the schemas CreateStatus + status properties to define a new status every time (with status identifier being the spellmodel id)
+        means you can't still stack 2 manigance even if it comes from 2 srams, because they have the same spellmodel id
+-->
+
+<!-- then you could also have a button to convert a CreateStatus effect into an AddStatus + StatusModel -->
