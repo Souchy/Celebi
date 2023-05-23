@@ -7,9 +7,9 @@ namespace souchy.celebi.eevee.face.shared.models.skins
     {
         public ObjectId nameId { get; set; }
         public ObjectId descriptionId { get; set; }
+        public string icon { get; set; }
         public string meshModel { get; set; }
         public string meshName { get; set; }
-        public string icon { get; set; }
         public AnimationsData animations { get; set; }
 
         /// <summary>

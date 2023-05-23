@@ -11,6 +11,7 @@ namespace souchy.celebi.spark.services
         public CollectionService(IMongoCollection<T> collection) => _collection = collection;
 
         public FilterDefinition<T> filterId(ObjectId id) => Builders<T>.Filter.Eq("_id", id); // cant use entityUid on db :( 
+        public FilterDefinition<T> filterIds(IEnumerable<ObjectId> ids) => Builders<T>.Filter.In("_id", ids);
 
         public IMongoCollection<T> Collection => _collection;
 
@@ -20,6 +21,8 @@ namespace souchy.celebi.spark.services
             await _collection.Find(_ => true).ToListAsync();
         public async Task<List<T>> GetAsync(FilterDefinition<T> filter) =>
             await _collection.Find(filter).ToListAsync();
+        public async Task<List<T>> GetInIdsAsync(IEnumerable<ObjectId> ids) =>
+            await _collection.Find(filterIds(ids)).ToListAsync();
 
         public async Task<T?> GetOneAsync(ObjectId id) =>
             await _collection.Find(filterId(id)).FirstOrDefaultAsync();

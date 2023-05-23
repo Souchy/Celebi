@@ -21,8 +21,8 @@ export class Creature implements IRouteableComponent {
     //#endregion
 
     // binded view-model
-    public name: Stringcomponent;
-    public desc: Stringcomponent;
+    // public name: Stringcomponent;
+    // public desc: Stringcomponent;
 
     constructor(
         private readonly ea: IEventAggregator,

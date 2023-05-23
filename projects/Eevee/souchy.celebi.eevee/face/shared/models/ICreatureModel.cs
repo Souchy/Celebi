@@ -13,7 +13,6 @@ namespace souchy.celebi.eevee.face.shared.models
         public IEntitySet<ObjectId> skinIds { get; init; }
 
         public ObjectId statsId { get; set; }
-        //public ObjectId growthStats { get; set; }
         public IEntitySet<ObjectId> spellIds { get; init; }
         public IEntitySet<ObjectId> statusPassiveIds { get; init; }
 

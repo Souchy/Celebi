@@ -13,7 +13,7 @@ export class CreatureList implements IRouteableComponent {
     public filter: string = ""
 
     // view-model refs
-    public refs: Creature[] = []
+    // public refs: Creature[] = []
 
 
     // TODO pages for Creature list and Spell list
@@ -54,12 +54,12 @@ export class CreatureList implements IRouteableComponent {
         }
         let str = this.filter.toLowerCase();
         // console.log("creature search: " + str);
-        console.log(this.refs);
-        this.filteredCreatures = this.refs.filter(c => {
-            console.log("crea search: " + c?.name?.entity?.value)
-            return  c?.name?.entity?.value.toLowerCase().includes(str) ||
-                    c?.desc?.entity?.value.toLowerCase().includes(str);
-        }).map(v => this.creatures.find(c => c.modelUid == v.model.modelUid));
+        // console.log(this.refs);
+        // this.filteredCreatures = this.refs.filter(c => {
+        //     console.log("crea search: " + c?.name?.entity?.value)
+        //     return  c?.name?.entity?.value.toLowerCase().includes(str) ||
+        //             c?.desc?.entity?.value.toLowerCase().includes(str);
+        // }).map(v => this.creatures.find(c => c.modelUid == v.model.modelUid));
     }
 
 }

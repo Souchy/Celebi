@@ -8,7 +8,8 @@
 
   <template if.bind="isvignette">
     <button class="title btn-outline" click.trigger="clickCreature()">
-      <stringcomponent view-model.ref="name" uid.bind="model.nameId" editable.bind="!isvignette"></stringcomponent>
+      <stringcomponent uid.bind="model.nameId" editable.bind="!isvignette"></stringcomponent>
+      <!-- view-model.ref="name"  -->
       <!-- ${name.entity.value} -->
       <!-- <au-slot></au-slot> -->
     </button>
@@ -24,11 +25,18 @@
   <template else>
     <h3>Creature #${model.modelUid}</h3>
     <div class="d-flex">
-      <stringcomponent view-model.ref="name" uid.bind="model.nameId" editable=true></stringcomponent>
-      <stringcomponent view-model.ref="desc" uid.bind="model.descriptionId" editable=true large=true class="large"></stringcomponent>
+      <stringcomponent uid.bind="model.nameId" editable=true></stringcomponent>
+      <stringcomponent uid.bind="model.descriptionId" editable=true large=true class="large"></stringcomponent>
+      <!-- view-model.ref="name"
+           view-model.ref="desc" -->
     </div>
   
   
+    <h3 class="titleSpacer">Skins</h3>
+    <!-- <spelllist mode="creature" spellids.bind="model.spellIds" creatureid.bind="model.modelUid" 
+        callbackadd.bind="s => onAddSpell(s)" callbackremove.bind="s => onRemoveSpell(s)"
+    ></spelllist> -->
+
     <h3 class="titleSpacer">Spells</h3>
     <spelllist mode="creature" spellids.bind="model.spellIds" creatureid.bind="model.modelUid" 
         callbackadd.bind="s => onAddSpell(s)" callbackremove.bind="s => onRemoveSpell(s)"

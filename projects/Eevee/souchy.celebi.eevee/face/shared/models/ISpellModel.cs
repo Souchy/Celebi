@@ -17,6 +17,7 @@ namespace souchy.celebi.eevee.face.shared.models
     {
         public ObjectId nameId { get; set; }
         public ObjectId descriptionId { get; set; }
+        public IEntitySet<ObjectId> skinIds { get; init; }
 
         public ICondition sourceCondition { get; set; }
         public ICondition targetFilter { get; set; }

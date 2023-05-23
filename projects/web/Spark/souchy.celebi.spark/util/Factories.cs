@@ -66,7 +66,7 @@ namespace souchy.celebi.spark.util
         }
         public static async Task<(ISpellModel spell, IStringEntity name, IStringEntity desc, IStats stats)> newSpellModel(IDCounterService _ids)
         {
-            // Model + Skin
+            // Model
             var spellModel = SpellModel.CreatePermanent();
             spellModel.modelUid = await _ids.GetID<ISpellModel>();
 
@@ -84,10 +84,12 @@ namespace souchy.celebi.spark.util
             var stats = SpellModelStats.Create();
             spellModel.statsId = stats.entityUid;
 
+            // Skin
+
             return (spellModel, name, desc, stats);
         }
 
-        private static async Task<(ICreatureSkin, IStringEntity, IStringEntity)> newCreatureSkin(IDCounterService _ids)
+        public static async Task<(ICreatureSkin, IStringEntity, IStringEntity)> newCreatureSkin(IDCounterService _ids)
         {
             var creatureSkin = CreatureSkin.Create();
 
@@ -114,6 +116,13 @@ namespace souchy.celebi.spark.util
                 defeat = "Defeat"
             };
             return (creatureSkin, name, desc);
+        }
+
+
+        public static ISpellSkin newSpellSkin()
+        {
+            var skin = SpellSkin.Create();
+            return skin;
         }
 
     }
