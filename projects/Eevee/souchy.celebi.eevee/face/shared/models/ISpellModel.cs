@@ -17,6 +17,12 @@ namespace souchy.celebi.eevee.face.shared.models
     {
         public ObjectId nameId { get; set; }
         public ObjectId descriptionId { get; set; }
+        /// <summary>
+        /// Even if skins can be used on almost any spell, 
+        /// we have a list here because usually skins are made specifically for 1 spell
+        /// (ex: fireball vfx for fireball, void sphere vfx for void sphere....)
+        /// and we need a way to edit them starting from the spell
+        /// </summary>
         public IEntitySet<ObjectId> skinIds { get; init; }
 
         public ICondition sourceCondition { get; set; }

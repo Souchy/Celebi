@@ -5,8 +5,9 @@ import { IRouteableComponent, IRouter, Navigation, Parameters, RoutingInstructio
 import { Characteristics } from "../../../jolteon/constants";
 import { CreatureModelController } from "../../../jolteon/services/api/CreatureModelController";
 import { Stringcomponent } from "../strings/stringcomponent";
+import { SpellSkinController } from "../../../jolteon/services/api/SpellSkinController";
 
-@inject(IEventAggregator, IRouter, SpellModelController, CreatureModelController)
+@inject(IEventAggregator, IRouter, SpellModelController, SpellSkinController)
 export class Spell {
     public readonly Characteristics: Characteristics = Characteristics; // static reference
 
@@ -34,7 +35,8 @@ export class Spell {
         private readonly ea: IEventAggregator,
         private readonly router: IRouter,
         private readonly spellController: SpellModelController,
-        private readonly creatureController: CreatureModelController
+        // private readonly creatureController: CreatureModelController,
+        private readonly skinController: SpellSkinController
     ) {
         // ea.subscribe("operation:saved", this.toastSaved);
         // ea.subscribe("operation:failed", this.toastFailed);
@@ -82,11 +84,20 @@ export class Spell {
     }
 
     public async addEffect(schema: SchemaDescription) {
-        console.log("add effect: " + schema) // + ", " + parent?.entityUid)
-
+        // console.log("add effect: " + schema) 
         this.spellController.postEffect(this.model.modelUid, {
             schemaName: schema.name
         }).then(res => location.reload())
+    }
+
+    public async clickNewSkin() {
+        // create skin
+        let res = await this.skinController.postSkin();
+        // add to spell & update
+        this.model.skinIds.push(res.data.entityUid);
+        // let res2 = await 
+        this.spellController.putSpell(this.model.modelUid, this.model);
+        // this.model = res2.data;
     }
 
 

@@ -25,13 +25,12 @@ namespace souchy.celebi.eevee.impl.shared
 
         public ObjectId nameId { get; set; }
         public ObjectId descriptionId { get; set; }
+        public IEntitySet<ObjectId> skinIds { get; init; } = new EntitySet<ObjectId>();
 
         public ICondition sourceCondition { get; set; }
         public ICondition targetFilter { get; set; }
 
         public ObjectId statsId { get; set; }
-        //public SpellProperties properties { get; set; } = new SpellProperties();
-
         public Dictionary<CharacteristicId, int> costs { get; set; } = new();
         public IEntityList<ObjectId> EffectIds { get; set; } = new EntityList<ObjectId>(); 
 
@@ -39,17 +38,10 @@ namespace souchy.celebi.eevee.impl.shared
         public IZone RangeZoneMax { get; set; } = new Zone();
 
         private SpellModel() { }
-        private SpellModel(ObjectId id) => entityUid = id;
-        public static ISpellModel CreatePermanent()
+        public static ISpellModel CreatePermanent() => new SpellModel()
         {
-            var model = new SpellModel(Eevee.RegisterIIDTemporary());
-            //foreach (var resType in Enum.GetValues<ResourceEnum>())
-            //{
-            //    var res = Resource.getKey(resType, ResourceProperty.Current);
-            //    model.costs.Add(res.ID, 0);
-            //}
-            return model;
-        }
+            entityUid = Eevee.RegisterIIDTemporary()
+        };
 
 
         public IEnumerable<IEffect> GetEffects() => EffectIds.Values.Select(i => Eevee.models.effects.Get(i));

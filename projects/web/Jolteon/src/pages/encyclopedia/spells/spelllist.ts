@@ -8,6 +8,7 @@ import { IRouter } from '@aurelia/router';
 import { error } from 'console';
 import { CreatureModelController } from '../../../jolteon/services/api/CreatureModelController';
 import { Spell } from './spell';
+import { SpellSkinController } from '../../../jolteon/services/api/SpellSkinController';
 
 @inject(IEventAggregator, IRouter, SpellModelController, CreatureModelController)
 export class SpellList {
@@ -41,7 +42,7 @@ export class SpellList {
         private readonly ea: IEventAggregator,
         @IRouter private router: IRouter,
         private readonly spellController: SpellModelController,
-        private readonly creatureController: CreatureModelController,
+        private readonly creatureController: CreatureModelController
     ) {
     }
 
@@ -69,6 +70,7 @@ export class SpellList {
             let res = await promise;
             // console.log(res);
             this.spells = res.data;
+            this.filteredSpells = this.spells;
         } catch (rej) {
             // console.log(rej);
             Toast.create({
@@ -83,6 +85,7 @@ export class SpellList {
     public async clickCreate() {
         let res = await this.spellController.postNew();
         this.spells.push(res.data);
+        this.filteredSpells.push(res.data);
         this.callbackadd(res.data);
     }
 
@@ -92,13 +95,10 @@ export class SpellList {
             return;
         }
         let str = this.filter.toLowerCase();
-        console.log("spell search: " + str);
-        this.filteredSpells = this.refs.filter(c =>
-            c.name?.entity?.value.toLowerCase().includes(str) ||
-            c.desc?.entity?.value.toLowerCase().includes(str)
-        ).map(v => this.spells.find(c => c.entityUid == v.uid));
+        this.spellController.getByString(str).then(res => {
+            this.filteredSpells = res.data;
+        });
     }
-
     
     public async clickAddToCreature(spell: SpellModel) {
         console.log("spell list click add (creature) " + spell.modelUid)

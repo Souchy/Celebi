@@ -6,6 +6,7 @@ using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared;
 using souchy.celebi.eevee.face.shared.models;
+using souchy.celebi.eevee.face.shared.models.skins;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.objects.zones;
 using souchy.celebi.eevee.impl.shared;
@@ -28,6 +29,7 @@ namespace souchy.celebi.spark.controllers.models
         private readonly CollectionService<ISpellModel> _spellService;
         private readonly CollectionService<IStats> _stats;
         private readonly CollectionService<IEffect> _effects;
+        private readonly CollectionService<ISpellSkin> _skins;
         private readonly StringService _strings;
         private readonly IDCounterService _ids;
         private readonly MongoFederationService _federation;
@@ -37,6 +39,7 @@ namespace souchy.celebi.spark.controllers.models
             _spellService = db.GetMongoService<ISpellModel>();
             _stats = db.GetMongoService<IStats>();
             _effects = db.GetMongoService<IEffect>();
+            _skins = db.GetMongoService<ISpellSkin>();
             _strings = strings;
             _ids = ids;
             _federation = federation;
@@ -88,6 +91,7 @@ namespace souchy.celebi.spark.controllers.models
             await _strings.CreateAsync(model.name);
             await _strings.CreateAsync(model.desc);
             await _stats.CreateAsync(model.stats);
+            await _skins.CreateAsync(model.skin);
 
             return CreatedAtAction(nameof(Get), new { id = model.spell.entityUid }, model.spell);
         }

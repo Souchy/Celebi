@@ -14,14 +14,10 @@ namespace souchy.celebi.spark.controllers.models
     public class SpellSkinController : ControllerBase
     {
         private readonly CollectionService<ISpellSkin> _skins;
-        //private readonly CollectionService<IStringEntity> _strings;
-        private readonly IDCounterService _ids;
 
-        public SpellSkinController(CollectionService<ISpellSkin> skins, CollectionService<IStringEntity> strings, IDCounterService ids)
+        public SpellSkinController(MongoModelsDbService db)
         {
-            _skins = skins;
-            //_strings = strings;
-            _ids = ids;
+            _skins = db.GetMongoService<ISpellSkin>();
         }
 
         [HttpGet("all")]
@@ -35,9 +31,9 @@ namespace souchy.celebi.spark.controllers.models
             => await _skins.GetInIdsAsync(skinIds);
 
         [HttpPost]
-        public async Task<ActionResult<ISpellSkin>> PostNew()
+        public ActionResult<ISpellSkin> PostNew()
         {
-            var skin = await Factories.newCreatureSkin(_ids);
+            var skin = Factories.newSpellSkin();
             return Ok(skin);
         }
 

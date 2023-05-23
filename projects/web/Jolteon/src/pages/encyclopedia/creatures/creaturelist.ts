@@ -53,6 +53,9 @@ export class CreatureList implements IRouteableComponent {
             return;
         }
         let str = this.filter.toLowerCase();
+        this.creatureController.getByString(str).then(res => {
+            this.filteredCreatures = res.data;
+        });
         // console.log("creature search: " + str);
         // console.log(this.refs);
         // this.filteredCreatures = this.refs.filter(c => {

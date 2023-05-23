@@ -44,13 +44,13 @@
 
   <!-- root -->
   <div if.bind="mode == 'root'" class="list">
-    <spell repeat.for="spell of spells" view-model.ref="refs[$index]" mode.bind="mode" model.bind="spell" isvignette.bind="true"
+    <spell repeat.for="spell of filteredSpells" view-model.ref="refs[$index]" mode.bind="mode" model.bind="spell" isvignette.bind="true"
         callbackremove.bind="s => clickRemove(s)" 
     ></spell>
   </div>
   <!-- search (add to creature) -->
   <div if.bind="mode == 'search'" class="list">
-    <spell repeat.for="spell of spells" view-model.ref="refs[$index]" mode.bind="mode" model.bind="spell" isvignette.bind="true" data-bs-dismiss="modal" 
+    <spell repeat.for="spell of filteredSpells" view-model.ref="refs[$index]" mode.bind="mode" model.bind="spell" isvignette.bind="true" data-bs-dismiss="modal" 
         callbackadd.bind="callbackadd"
     ></spell>
   </div>

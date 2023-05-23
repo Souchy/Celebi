@@ -6,9 +6,10 @@ import { StatsType } from "../stats/statscomponent";
 import { TOAST_PLACEMENT, TOAST_STATUS, TOAST_THEME, Toast, ToastConfigOptions, ToastOptions } from "bootstrap-toaster";
 import { SpellModelController } from "../../../jolteon/services/api/SpellModelController";
 import { Stringcomponent } from "../strings/stringcomponent";
+import { CreatureSkinController } from "../../../jolteon/services/api/CreatureSkinController";
 
 
-@inject(IEventAggregator, IRouter, CreatureModelController, SpellModelController)
+@inject(IEventAggregator, IRouter, CreatureModelController, CreatureSkinController)
 export class Creature implements IRouteableComponent {
 
     //#region input
@@ -28,7 +29,8 @@ export class Creature implements IRouteableComponent {
         private readonly ea: IEventAggregator,
         private readonly router: IRouter,
         private readonly creatureController: CreatureModelController,
-        private readonly spellController: SpellModelController
+        // private readonly spellController: SpellModelController,
+        private readonly skinController: CreatureSkinController
     ) {
     }
 
@@ -63,15 +65,26 @@ export class Creature implements IRouteableComponent {
         this.creatureController.deleteCreature(this.model.modelUid);
     }
 
+    
+    public async clickNewSkin() {
+        // create skin
+        let res = await this.skinController.postSkin();
+        // add to spell & update
+        this.model.skinIds.push(res.data.entityUid);
+        // let res2 = await 
+        this.creatureController.putCreature(this.model.modelUid, this.model);
+        // this.model = res2.data;
+    }
+
     // callback from spell list
     public onAddSpell(spell: SpellModel) {
-        console.log("creature onAddSpell: " + spell.modelUid)
+        // console.log("creature onAddSpell: " + spell.modelUid)
         this.model.spellIds.push(spell.entityUid);
         this.creatureController.putSpells(this.model.modelUid, this.model.spellIds);
     }
     // callback from spell list
     public onRemoveSpell(spell: SpellModel) {
-        console.log("creature onRemoveSpell: " + spell.modelUid)
+        // console.log("creature onRemoveSpell: " + spell.modelUid)
         let idx = this.model.spellIds.indexOf(spell.entityUid);
         if (idx == -1) return;
         this.model.spellIds.splice(idx, 1);

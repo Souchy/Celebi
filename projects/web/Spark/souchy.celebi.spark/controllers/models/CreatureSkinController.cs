@@ -16,12 +16,12 @@ namespace souchy.celebi.spark.controllers.models
     public class CreatureSkinController : ControllerBase
     {
         private readonly CollectionService<ICreatureSkin> _skins;
-        private readonly CollectionService<IStringEntity> _strings;
+        private readonly StringService _strings;
         private readonly IDCounterService _ids;
 
-        public CreatureSkinController(CollectionService<ICreatureSkin> skins, CollectionService<IStringEntity> strings, IDCounterService ids)
+        public CreatureSkinController(MongoModelsDbService db, StringService strings, IDCounterService ids)
         {
-            _skins = skins;
+            _skins = db.GetMongoService<ICreatureSkin>();
             _strings = strings;
             _ids = ids;
         }
@@ -62,7 +62,7 @@ namespace souchy.celebi.spark.controllers.models
             var result = await _skins.RemoveAsync(id);
             await _strings.RemoveAsync(model.nameId);
             await _strings.RemoveAsync(model.descriptionId);
-            // remove from creature?
+            // remove from creature? -> there can be multiple creatures using it we'd need to update.
             return Ok(result);
         }
 
