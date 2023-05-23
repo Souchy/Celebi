@@ -9,7 +9,7 @@ namespace souchy.celebi.eevee.face.util
 {
     [Serializable]
     [JsonConverter(typeof(IIDJsonConverter))]
-    [TypeConverter(typeof(IIDTypeConverter))]
+    [TypeConverter(typeof(IIDTypeConverter<IID>))]
     public record IID(string value)
     {
         public static readonly IID Zero = new IID("0");
@@ -23,17 +23,32 @@ namespace souchy.celebi.eevee.face.util
         public static implicit operator int(IID i) => int.Parse(i.value);
         public static explicit operator IID(int i) => new IID(i.ToString());
     }
-    
+
+    [TypeConverter(typeof(IIDTypeConverter<StringIID>))]
     public sealed record StringIID(string value) : IID(value) { }
+
+    [TypeConverter(typeof(IIDTypeConverter<SpellIID>))]
     public sealed record SpellIID(string value) : IID(value) { }
+
+    [TypeConverter(typeof(IIDTypeConverter<StatusIID>))]
     public sealed record StatusIID(string value) : IID(value) { }
+
+    [TypeConverter(typeof(IIDTypeConverter<CreatureIID>))]
     public sealed record CreatureIID(string value) : IID(value) { }
+
+    [TypeConverter(typeof(IIDTypeConverter<AnimationSetIID>))]
     public sealed record AnimationSetIID(string value) : IID(value) { }
+
+    [TypeConverter(typeof(IIDTypeConverter<AnimationIID>))]
     public sealed record AnimationIID(string value) : IID(value) { }
+
+    [TypeConverter(typeof(IIDTypeConverter<SceneIID>))]
     public sealed record SceneIID(string value) : IID(value) { }
+
+    [TypeConverter(typeof(IIDTypeConverter<AssetIID>))]
     public sealed record AssetIID(string value) : IID(value) { }
 
-    public class IIDTypeConverter : TypeConverter
+    public class IIDTypeConverter<T> : TypeConverter
     {
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) =>
             sourceType == typeof(string);
@@ -43,7 +58,7 @@ namespace souchy.celebi.eevee.face.util
         {
             return value switch
             {
-                string s => new IID(s),
+                string s => Activator.CreateInstance(typeof(T), s),
                 null => null,
                 _ => throw new ArgumentException($"Cannot convert from {value} to IID", nameof(value))
             };
@@ -52,12 +67,10 @@ namespace souchy.celebi.eevee.face.util
         {
             if (destinationType == typeof(string))
             {
-                return value switch
+                if(typeof(T).IsAssignableFrom(value.GetType()))
                 {
-                    IID id => id.value,
-                    null => null,
-                    _ => throw new ArgumentException($"Cannot convert {value} to string", nameof(value))
-                };
+                    return value.ToString();
+                }
             }
             throw new ArgumentException($"Cannot convert {value ?? "(null)"} to {destinationType}", nameof(destinationType));
         }

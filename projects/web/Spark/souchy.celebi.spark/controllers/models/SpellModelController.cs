@@ -66,7 +66,7 @@ namespace souchy.celebi.spark.controllers.models
         [HttpGet("{id}")]
         public async Task<ActionResult<ISpellModel>> Get([FromRoute] SpellIID id)
         {
-            var filter = Builders<ISpellModel>.Filter.Eq(nameof(ISpellModel.modelUid), id);
+            var filter = Builders<ISpellModel>.Filter.Eq(nameof(ISpellModel.modelUid), id.value);
             ISpellModel? model = await _spellService.GetOneAsync(filter);
             if (model is null)
                 return NotFound();
@@ -100,7 +100,7 @@ namespace souchy.celebi.spark.controllers.models
         [HttpPut("{id}")]
         public async Task<ActionResult<ISpellModel>> Update([FromRoute] SpellIID id, [FromBody] SpellModel updatedSpellModel)
         {
-            var filter = Builders<ISpellModel>.Filter.Eq(nameof(ISpellModel.modelUid), id);
+            var filter = Builders<ISpellModel>.Filter.Eq(nameof(ISpellModel.modelUid), id.value);
             var model = await _spellService.GetOneAsync(filter);
             if (model is null)
                 return NotFound();
@@ -112,7 +112,7 @@ namespace souchy.celebi.spark.controllers.models
         [HttpPost("{id}/effect")]
         public async Task<ActionResult<ISpellModel>> AddEffect([FromRoute] SpellIID id, [FromQuery] ObjectId? effectParentId, [FromQuery] string schemaName)
         {
-            var filter = Builders<ISpellModel>.Filter.Eq(nameof(ISpellModel.modelUid), id);
+            var filter = Builders<ISpellModel>.Filter.Eq(nameof(ISpellModel.modelUid), id.value);
             var model = await _spellService.GetOneAsync(filter);
             if (model is null)
                 return NotFound();
@@ -163,7 +163,7 @@ namespace souchy.celebi.spark.controllers.models
         [HttpDelete("{id}")]
         public async Task<ActionResult<DeleteResult>> Delete([FromRoute] SpellIID id)
         {
-            var filter = Builders<ISpellModel>.Filter.Eq(nameof(ISpellModel.modelUid), id);
+            var filter = Builders<ISpellModel>.Filter.Eq(nameof(ISpellModel.modelUid), id.value);
             var model = await _spellService.GetOneAsync(filter);
             if (model is null)
                 return NotFound();

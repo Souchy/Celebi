@@ -55,7 +55,7 @@ namespace souchy.celebi.spark.controllers.models
         [HttpGet("{id}")]
         public async Task<ActionResult<ICreatureModel>> Get([FromRoute] CreatureIID id)
         {
-            var filter = Builders<ICreatureModel>.Filter.Eq(nameof(ICreatureModel.modelUid), id);
+            var filter = Builders<ICreatureModel>.Filter.Eq(nameof(ICreatureModel.modelUid), id.value);
             var model = await _creatureModels.GetOneAsync(filter);
             if (model is null)
                 return NotFound();
@@ -92,7 +92,7 @@ namespace souchy.celebi.spark.controllers.models
         [HttpPut("{id}")]
         public async Task<ActionResult<ReplaceOneResult>> Update([FromRoute] CreatureIID id, [FromBody] CreatureModel updateModel)
         {
-            var filter = Builders<ICreatureModel>.Filter.Eq(nameof(ICreatureModel.modelUid), id);
+            var filter = Builders<ICreatureModel>.Filter.Eq(nameof(ICreatureModel.modelUid), id.value);
             var model = await _creatureModels.GetOneAsync(filter);
             if (model is null) 
                 return NotFound();
@@ -106,7 +106,7 @@ namespace souchy.celebi.spark.controllers.models
         [HttpDelete("{id}")]
         public async Task<ActionResult<DeleteResult>> Delete([FromRoute] CreatureIID id)
         {
-            var filter = Builders<ICreatureModel>.Filter.Eq(nameof(ICreatureModel.modelUid), id);
+            var filter = Builders<ICreatureModel>.Filter.Eq(nameof(ICreatureModel.modelUid), id.value);
             var model = await _creatureModels.GetOneAsync(filter);
             if (model is null)
                 return NotFound();
@@ -126,7 +126,7 @@ namespace souchy.celebi.spark.controllers.models
         [HttpPut("{id}/spells")]
         public async Task<ActionResult<UpdateResult>> UpdateSpell([FromRoute] CreatureIID id, [FromBody] string[] spellIds)
         {
-            var filter = Builders<ICreatureModel>.Filter.Eq(nameof(ICreatureModel.modelUid), id);
+            var filter = Builders<ICreatureModel>.Filter.Eq(nameof(ICreatureModel.modelUid), id.value);
             var model = await _creatureModels.GetOneAsync(filter);
             if (model is null)
                 return NotFound();
