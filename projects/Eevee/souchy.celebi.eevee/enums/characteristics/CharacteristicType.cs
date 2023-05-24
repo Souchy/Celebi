@@ -67,14 +67,16 @@ namespace souchy.celebi.eevee.enums.characteristics
     public enum ElementType
     {
         None,
-        Water,
-        Fire,
-        Earth,
-        Air,
         /// <summary>
         /// True damage. Not sure if it's an element or just a EffectTrueDamage
         /// </summary>
-        True
+        True,
+        Fire,
+        Water,
+        Earth,
+        Air,
+        Dark,
+        Light,
     }
 
 
