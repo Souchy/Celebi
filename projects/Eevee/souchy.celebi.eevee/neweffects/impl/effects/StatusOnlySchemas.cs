@@ -53,6 +53,18 @@ namespace souchy.celebi.eevee.neweffects.impl.effects.creature
     {
         public IZone zone { get; set; } = new Zone();
     }
+    /// <summary>
+    /// this should replace all the other Spell effects above, or maybe it will contain them
+    /// This effect is a Meta effect, doesn't do anything on its own, just applies its children in a certain way
+    /// Its children modify a spell:
+    ///     - modify costs, range, filters, 
+    ///     - modify effect damages, zones, 
+    ///     - add effect...
+    /// </summary>
+    public record MetaAddSpellStats() : IEffectSchema
+    {
+        public SpellIID spell { get; set; }
+    }
     #endregion
 
     #region Board

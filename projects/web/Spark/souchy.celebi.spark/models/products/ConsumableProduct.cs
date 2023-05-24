@@ -7,6 +7,9 @@ namespace souchy.celebi.spark.models
     /// A consumable you can buy in the shop.
     /// It costs currency.
     /// When consumed, it gives one or all of the item models contained 
+    ///     - battlepass
+    ///     - lootbox
+    ///     - 
     /// </summary>
     public class ConsumableProduct : Product
     {
