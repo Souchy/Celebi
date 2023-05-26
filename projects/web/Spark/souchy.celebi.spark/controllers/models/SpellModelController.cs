@@ -73,7 +73,7 @@ namespace souchy.celebi.spark.controllers.models
             return Ok(model);
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost("")]
         public async Task<ActionResult<ISpellModel>> Post([FromBody] SpellModel newSpellModel)
         {
@@ -81,7 +81,7 @@ namespace souchy.celebi.spark.controllers.models
             return CreatedAtAction(nameof(Get), new { id = newSpellModel.entityUid }, newSpellModel);
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost("new")]
         public async Task<ActionResult<ISpellModel>> PostNew()
         {
@@ -96,7 +96,7 @@ namespace souchy.celebi.spark.controllers.models
             return CreatedAtAction(nameof(Get), new { id = model.spell.entityUid }, model.spell);
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPut("{id}")]
         public async Task<ActionResult<ISpellModel>> Update([FromRoute] SpellIID id, [FromBody] SpellModel updatedSpellModel)
         {
@@ -159,7 +159,7 @@ namespace souchy.celebi.spark.controllers.models
         }
 
 
-        [Authorize]
+        //[Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<DeleteResult>> Delete([FromRoute] SpellIID id)
         {

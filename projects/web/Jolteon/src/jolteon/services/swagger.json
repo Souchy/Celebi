@@ -1821,7 +1821,7 @@
         }
       }
     },
-    "/models/properties/charac/statusmodel": {
+    "/models/properties/charac/statuscontainer": {
       "get": {
         "tags": [
           "PropertiesController"
@@ -1834,7 +1834,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/StatusProperty"
+                    "$ref": "#/components/schemas/StatusContainerProperty"
                   }
                 }
               },
@@ -1842,7 +1842,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/StatusProperty"
+                    "$ref": "#/components/schemas/StatusContainerProperty"
                   }
                 }
               },
@@ -1850,7 +1850,45 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/StatusProperty"
+                    "$ref": "#/components/schemas/StatusContainerProperty"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/properties/charac/statusinstance": {
+      "get": {
+        "tags": [
+          "PropertiesController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatusInstanceProperty"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatusInstanceProperty"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatusInstanceProperty"
                   }
                 }
               }
@@ -3622,7 +3660,8 @@
           "Other",
           "Spell",
           "SpellModel",
-          "Status"
+          "StatusContainer",
+          "StatusInstance"
         ],
         "type": "string",
         "format": ""
@@ -3781,7 +3820,7 @@
         "type": "object",
         "properties": {
           "statusStats": {
-            "$ref": "#/components/schemas/StatusStats"
+            "$ref": "#/components/schemas/StatusModelStats"
           }
         },
         "additionalProperties": false
@@ -3790,7 +3829,7 @@
         "type": "object",
         "properties": {
           "statusStats": {
-            "$ref": "#/components/schemas/StatusStats"
+            "$ref": "#/components/schemas/StatusModelStats"
           }
         },
         "additionalProperties": false
@@ -3808,7 +3847,7 @@
         "type": "object",
         "properties": {
           "statusStats": {
-            "$ref": "#/components/schemas/StatusStats"
+            "$ref": "#/components/schemas/StatusModelStats"
           }
         },
         "additionalProperties": false
@@ -6122,6 +6161,137 @@
           "type": "object"
         }
       },
+      "StatusContainerProperty": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/CharacteristicCategory"
+          },
+          "localId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "baseName": {
+            "type": "string",
+            "nullable": true
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          },
+          "statValueType": {
+            "$ref": "#/components/schemas/StatValueType"
+          },
+          "id": {
+            "type": "string"
+          },
+          "nameModelUid": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StatusContainerPropertyTypes": {
+        "enum": [
+          "MergeStrategy: StatusContainerProperty = {\r\n  \"category\": 9,\r\n  \"localId\": 0,\r\n  \"baseName\": \"MergeStrategy\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"9000\",\r\n  \"nameModelUid\": \"CharacteristicType.StatusContainer.MergeStrategy\"\r\n};",
+          "UnbewitchStrategy: StatusContainerProperty = {\r\n  \"category\": 9,\r\n  \"localId\": 1,\r\n  \"baseName\": \"UnbewitchStrategy\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"9001\",\r\n  \"nameModelUid\": \"CharacteristicType.StatusContainer.UnbewitchStrategy\"\r\n};",
+          "MaxStacks: StatusContainerProperty = {\r\n  \"category\": 9,\r\n  \"localId\": 2,\r\n  \"baseName\": \"MaxStacks\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"9002\",\r\n  \"nameModelUid\": \"CharacteristicType.StatusContainer.MaxStacks\"\r\n};",
+          "MaxDelay: StatusContainerProperty = {\r\n  \"category\": 9,\r\n  \"localId\": 3,\r\n  \"baseName\": \"MaxDelay\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"9003\",\r\n  \"nameModelUid\": \"CharacteristicType.StatusContainer.MaxDelay\"\r\n};",
+          "MaxDuration: StatusContainerProperty = {\r\n  \"category\": 9,\r\n  \"localId\": 4,\r\n  \"baseName\": \"MaxDuration\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"9004\",\r\n  \"nameModelUid\": \"CharacteristicType.StatusContainer.MaxDuration\"\r\n};"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "StatusContainerStats": {
+        "type": "object",
+        "properties": {
+          "growth": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/MathEquation"
+            },
+            "nullable": true
+          },
+          "entityUid": {
+            "type": "string"
+          },
+          "dic": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/IStat"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "StatusInstanceProperty": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/CharacteristicCategory"
+          },
+          "localId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "baseName": {
+            "type": "string",
+            "nullable": true
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          },
+          "statValueType": {
+            "$ref": "#/components/schemas/StatValueType"
+          },
+          "id": {
+            "type": "string"
+          },
+          "nameModelUid": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StatusInstancePropertyTypes": {
+        "enum": [
+          "Delay: StatusInstanceProperty = {\r\n  \"category\": 10,\r\n  \"localId\": 1,\r\n  \"baseName\": \"Delay\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"10001\",\r\n  \"nameModelUid\": \"CharacteristicType.StatusInstance.Delay\"\r\n};",
+          "Duration: StatusInstanceProperty = {\r\n  \"category\": 10,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Duration\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"10002\",\r\n  \"nameModelUid\": \"CharacteristicType.StatusInstance.Duration\"\r\n};"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "StatusInstanceStats": {
+        "type": "object",
+        "properties": {
+          "growth": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/MathEquation"
+            },
+            "nullable": true
+          },
+          "entityUid": {
+            "type": "string"
+          },
+          "dic": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/IStat"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
       "StatusModel": {
         "type": "object",
         "properties": {
@@ -6158,62 +6328,7 @@
         },
         "additionalProperties": false
       },
-      "StatusPriorityType": {
-        "enum": [
-          "System",
-          "Passive",
-          "Status"
-        ],
-        "type": "string",
-        "format": ""
-      },
-      "StatusProperty": {
-        "type": "object",
-        "properties": {
-          "category": {
-            "$ref": "#/components/schemas/CharacteristicCategory"
-          },
-          "localId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "baseName": {
-            "type": "string",
-            "nullable": true
-          },
-          "conditions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ICondition"
-            },
-            "nullable": true
-          },
-          "statValueType": {
-            "$ref": "#/components/schemas/StatValueType"
-          },
-          "id": {
-            "type": "string"
-          },
-          "nameModelUid": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "StatusPropertyTypes": {
-        "enum": [
-          "Stacks: StatusProperty = {\r\n  \"category\": 4,\r\n  \"localId\": 0,\r\n  \"baseName\": \"Stacks\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"4000\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Stacks\"\r\n};",
-          "Delay: StatusProperty = {\r\n  \"category\": 4,\r\n  \"localId\": 1,\r\n  \"baseName\": \"Delay\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"4001\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Delay\"\r\n};",
-          "Duration: StatusProperty = {\r\n  \"category\": 4,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Duration\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"4002\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Duration\"\r\n};",
-          "MaxStacks: StatusProperty = {\r\n  \"category\": 4,\r\n  \"localId\": 3,\r\n  \"baseName\": \"MaxStacks\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"4003\",\r\n  \"nameModelUid\": \"CharacteristicType.State.MaxStacks\"\r\n};",
-          "MaxDelay: StatusProperty = {\r\n  \"category\": 4,\r\n  \"localId\": 4,\r\n  \"baseName\": \"MaxDelay\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"4004\",\r\n  \"nameModelUid\": \"CharacteristicType.State.MaxDelay\"\r\n};",
-          "MaxDuration: StatusProperty = {\r\n  \"category\": 4,\r\n  \"localId\": 5,\r\n  \"baseName\": \"MaxDuration\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"4005\",\r\n  \"nameModelUid\": \"CharacteristicType.State.MaxDuration\"\r\n};"
-        ],
-        "type": "string",
-        "format": ""
-      },
-      "StatusStats": {
+      "StatusModelStats": {
         "type": "object",
         "properties": {
           "growth": {
@@ -6234,6 +6349,15 @@
           }
         },
         "additionalProperties": false
+      },
+      "StatusPriorityType": {
+        "enum": [
+          "System",
+          "Passive",
+          "Status"
+        ],
+        "type": "string",
+        "format": ""
       },
       "StringEntity": {
         "type": "object",

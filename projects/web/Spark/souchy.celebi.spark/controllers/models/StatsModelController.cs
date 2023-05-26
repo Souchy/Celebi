@@ -43,7 +43,7 @@ namespace souchy.celebi.spark.controllers.models
             return Ok(stats);
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost("")]
         public async Task<IActionResult> Post([FromBody] IStats newStats)
         {
@@ -63,7 +63,7 @@ namespace souchy.celebi.spark.controllers.models
             return Ok(result);
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<DeleteResult>> Delete([FromRoute] ObjectId id)
         {

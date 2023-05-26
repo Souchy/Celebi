@@ -41,7 +41,7 @@ namespace souchy.celebi.spark.controllers.models
             return Ok(effect);
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost("effect")]
         public async Task<ActionResult<IEffect>> Post(EffectPermanent newEffect)
         {
@@ -49,7 +49,7 @@ namespace souchy.celebi.spark.controllers.models
             return CreatedAtAction(nameof(Get), new { id = newEffect.entityUid }, newEffect);
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPut("effect/{id}")]
         public async Task<ActionResult<IEffect>> Update(ObjectId id, EffectPermanent updatedEffect)
         {
@@ -62,7 +62,7 @@ namespace souchy.celebi.spark.controllers.models
             return Ok(updatedEffect);
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpDelete("effect/{id}")]
         public async Task<ActionResult<DeleteResult>> Delete(ObjectId id)
         {

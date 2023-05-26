@@ -1,4 +1,5 @@
-﻿using souchy.celebi.eevee.face.entity;
+﻿using souchy.celebi.eevee.enums.characteristics.other;
+using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared;
 using souchy.celebi.eevee.face.util;
@@ -17,7 +18,7 @@ namespace souchy.celebi.eevee.face.objects.statuses
         //public IValue<int> duration { get; set; }
 
         public ObjectId statsId { get; set; }
-        public IStats GetStats() => this.GetFight().stats.Get(statsId);
+        public StatusInstanceStats GetStats() => (StatusInstanceStats) this.GetFight().stats.Get(statsId);
     }
 
 }

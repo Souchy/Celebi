@@ -1,4 +1,5 @@
-﻿using souchy.celebi.eevee.face.entity;
+﻿using souchy.celebi.eevee.enums.characteristics.other;
+using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared;
 using souchy.celebi.eevee.face.util;
@@ -28,11 +29,11 @@ namespace souchy.celebi.eevee.face.objects.statuses
         /// </summary>
         public ObjectId holderEntity { get; set; }
         /// <summary>
-        /// Container stats like Stacks, MaxStacks, 
+        /// Container stats like MergeStrategy, MaxStacks, MaxDuration, MaxDelay, 
         /// </summary>
         public ObjectId statsId { get; set; }
 
-        public IStats GetStats() => this.GetFight().stats.Get(statsId);
+        public StatusContainerStats GetStats() => (StatusContainerStats) this.GetFight().stats.Get(statsId);
 
         public List<IStatusInstance> instances { get; set; }
     }

@@ -55,7 +55,8 @@ namespace souchy.celebi.eevee.enums.characteristics
 
         Spell = 7,
         SpellModel = 8,
-        Status = 9,
+        StatusContainer = 9,
+        StatusInstance = 10,
     }
     public enum StatValueType
     {

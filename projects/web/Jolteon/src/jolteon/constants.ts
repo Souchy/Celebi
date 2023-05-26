@@ -1,7 +1,10 @@
 import { TargetSamplingType } from "./services/api/data-contracts";
 import { ActorType, Affinity, AffinityTypes, Contextual, ContextualTypes, Direction8Type, Direction9Type, EffT, ElementType, OtherProperty, OtherPropertyTypes, 
     Resistance, ResistanceTypes, Resource, ResourceProperty, ResourceTypes, Rotation4Type, SchemaDescription, SpellModelProperty, 
-    SpellModelPropertyTypes, SpellProperty, SpellPropertyTypes, State, StateTypes, StatusProperty, StatusPropertyTypes, ZoneType } from "./services/api/data-contracts";
+    SpellModelPropertyTypes, SpellProperty, SpellPropertyTypes, State, StateTypes,
+    StatusContainerProperty, StatusContainerPropertyTypes, StatusInstanceProperty, StatusInstancePropertyTypes,
+    ZoneType
+} from "./services/api/data-contracts";
 
 
 export class Constants {
@@ -25,13 +28,14 @@ export class Characteristics {
     
     public static readonly spells: SpellProperty[] = Object.values(SpellPropertyTypes)
     public static readonly spellModels: SpellModelProperty[] = Object.values(SpellModelPropertyTypes)
-    public static readonly statusModels: StatusProperty[] = Object.values(StatusPropertyTypes)
+    public static readonly statusContainers: StatusContainerProperty[] = Object.values(StatusContainerPropertyTypes)
+    public static readonly statusInstances: StatusInstanceProperty[] = Object.values(StatusInstancePropertyTypes)
 
     public static readonly all: 
-          (Affinity | Resistance | Resource | State | OtherProperty | Contextual | SpellProperty | SpellModelProperty | StatusProperty)[]
+          (Affinity | Resistance | Resource | State | OtherProperty | Contextual | SpellProperty | SpellModelProperty | StatusContainerProperty | StatusInstanceProperty)[]
         = [ ...Characteristics.affinities, ...Characteristics.resistances, ...Characteristics.resources,
             ...Characteristics.states, ...Characteristics.others, ...Characteristics.contextuals,
-            ...Characteristics.spells, ...Characteristics.spellModels , ...Characteristics.statusModels
+            ...Characteristics.spells, ...Characteristics.spellModels , ...Characteristics.statusContainers, ...Characteristics.statusInstances
           ]
 
     public static getCharac(characId: string) {

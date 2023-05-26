@@ -7,6 +7,7 @@ using souchy.celebi.eevee.face.shared.conditions.value;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
+using souchy.celebi.eevee.impl.objects.zones;
 using souchy.celebi.eevee.impl.stats;
 using souchy.celebi.eevee.neweffects.face;
 using souchy.celebi.eevee.neweffects.impl.effects.move;
@@ -93,6 +94,23 @@ namespace souchy.celebi.eevee.neweffects.impl.effects
     public record EmptyText() : IEffectSchema {
         public StringIID modelId { get; set; } = new();
     }
+    /// <summary>
+    /// This effect applies its children to the target,  <br></br>
+    /// chains to the next target in aoe,  <br></br>
+    /// applies its children to the new target,  <br></br>
+    /// etc. <br></br>
+    /// </summary>
+    public record SpellChain() : IEffectSchema
+    {
+        /// <summary>
+        /// Maximum number of chains / depth of iteration tree (this is only vertical, the horizontal limit is the chainzone.maxSampleCount + spell.maxFork)
+        /// </summary>
+        public int maxChains { get; set; } = 1;
+        /// <summary>
+        /// Chaining zone starting from each target in the Effect zone
+        /// </summary>
+        public IZone chainZone { get; set; } = new Zone();
+    }
     #endregion
 
     #region Status Add
@@ -121,15 +139,15 @@ namespace souchy.celebi.eevee.neweffects.impl.effects
     }
     public record CreateTrap() : IEffectSchema
     {
-        public StatusStats statusStats { get; set; } = StatusStats.Create();
+        public StatusModelStats statusStats { get; set; } = StatusModelStats.Create();
     }
     public record CreateGlyph() : IEffectSchema
     {
-        public StatusStats statusStats { get; set; } = StatusStats.Create();
+        public StatusModelStats statusStats { get; set; } = StatusModelStats.Create();
     }
     public record CreateGlyphAura() : IEffectSchema
     {
-        public StatusStats statusStats { get; set; } = StatusStats.Create();
+        public StatusModelStats statusStats { get; set; } = StatusModelStats.Create();
     }
     #endregion
 

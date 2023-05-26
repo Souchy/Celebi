@@ -34,15 +34,15 @@ namespace souchy.celebi.spark.controllers.models
             return Ok(creatureModel);
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost("status")]
         public async Task<IActionResult> Post(StatusModel newSpellModel)
         {
             await _statusService.CreateAsync(newSpellModel);
             return CreatedAtAction(nameof(Get), new { id = newSpellModel.entityUid }, newSpellModel);
         }
-        [Authorize]
 
+        //[Authorize]
         [HttpPut("status/{id}")]
         public async Task<ActionResult<ReplaceOneResult>> Update(ObjectId id, StatusModel updatedSpellModel)
         {
@@ -54,7 +54,7 @@ namespace souchy.celebi.spark.controllers.models
             return Ok(result);
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpDelete("status/{id}")]
         public async Task<ActionResult<DeleteResult>> Delete(ObjectId id)
         {

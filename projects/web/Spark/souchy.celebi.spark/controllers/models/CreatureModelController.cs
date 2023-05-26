@@ -88,7 +88,7 @@ namespace souchy.celebi.spark.controllers.models
         }
         
 
-        [Authorize]
+        //[Authorize]
         [HttpPut("{id}")]
         public async Task<ActionResult<ReplaceOneResult>> Update([FromRoute] CreatureIID id, [FromBody] CreatureModel updateModel)
         {
@@ -102,7 +102,7 @@ namespace souchy.celebi.spark.controllers.models
             return Ok(result);
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<DeleteResult>> Delete([FromRoute] CreatureIID id)
         {
@@ -122,7 +122,7 @@ namespace souchy.celebi.spark.controllers.models
             return Ok(result);
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPut("{id}/spells")]
         public async Task<ActionResult<UpdateResult>> UpdateSpell([FromRoute] CreatureIID id, [FromBody] string[] spellIds)
         {

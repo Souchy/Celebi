@@ -40,8 +40,10 @@ namespace souchy.celebi.spark.controllers.models
         public List<SpellProperty> GetSpellProperty() => SpellProperty.values.Values.ToList();
         [HttpGet("charac/state")]
         public List<State> GetState() => State.values.Values.ToList();
-        [HttpGet("charac/statusmodel")]
-        public List<StatusProperty> GetStatusModelProperty() => StatusProperty.values.Values.ToList();
+        [HttpGet("charac/statuscontainer")]
+        public List<StatusContainerProperty> GetStatusContainerProperty() => StatusContainerProperty.values.Values.ToList();
+        [HttpGet("charac/statusinstance")]
+        public List<StatusInstanceProperty> GetStatusInstanceProperty() => StatusInstanceProperty.values.Values.ToList();
 
         [HttpGet("effects/schemas")]
         public ActionResult<IEnumerable<SchemaDescription>> GetEffectSchemas()

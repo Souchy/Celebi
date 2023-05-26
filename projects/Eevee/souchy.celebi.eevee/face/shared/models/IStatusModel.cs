@@ -8,6 +8,17 @@ using souchy.celebi.eevee.impl.values;
 
 namespace souchy.celebi.eevee.face.shared.models
 {
+    /// <summary>
+    /// One StatusModel creates a StatusInstance
+    /// That StatusInstance can have its own delay, duration, ...
+    /// When added to a BoardEntity, it merges:
+    ///     - if there is no StatusContainer for this, create a new one
+    ///     - if there is a StatusContainer corresponding, add the instance to it
+    ///         - merge strategies will choose what happens: 
+    ///             - new instance replaces an older one (x stack limit)
+    ///             - new instance is ignored (x stack limit)
+    ///             - new instance is added (no stack limit)
+    /// </summary>
     public interface IStatusModel : IEntityModel, IEffectsContainer
     {
         public ObjectId nameId { get; set; }
@@ -24,6 +35,6 @@ namespace souchy.celebi.eevee.face.shared.models
 
         public IStringEntity GetName() => Eevee.models.i18n.Get(nameId);
         public IStringEntity GetDescription() => Eevee.models.i18n.Get(descriptionId);
-        public StatusStats GetStats() => (StatusStats) Eevee.models.stats.Get(statsId);
+        public StatusModelStats GetStats() => (StatusModelStats) Eevee.models.stats.Get(statsId);
     }
 }
