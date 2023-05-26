@@ -32,7 +32,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'# Set always-auth in npmrc.
-        cache-dependency-path: './package-lock.json'
+        cache-dependency-path: './projects/web/Jolteon/package-lock.json'
     
     - run: npm install
     - name: Build Aurelia
