@@ -37,10 +37,18 @@ jobs:
     - run: npm install
     - name: Build Aurelia
       run: |
+        npm run swagger
         npm run build
+        
+    - run: ls
+    #- run: cd "/home/runner/work/celebi/"
+    #- run: ls
+    #- run: cd "/home/runner/work/celebi/projects/web/Jolteon/"
+    #- run: ls
 
     - name: Deploy to branch
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: "/home/runner/work/celebi/jolteon/dist"
+        publish_branch: gh-pages/jolteon
+        publish_dir: "/home/runner/work/Celebi/Celebi/projects/web/Jolteon/dist"
