@@ -51,4 +51,4 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_branch: gh-pages/jolteon
-        publish_dir: "/home/runner/work/celebi/projects/web/Jolteon/dist"
+        publish_dir: "./dist/"
