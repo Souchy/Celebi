@@ -10,7 +10,8 @@ namespace souchy.celebi.eevee.enums.characteristics.other
 {
     public class StatusStats : Stats
     {
-        public static new IStats Create() => new StatusStats()
+        private StatusStats() { }
+        public static new StatusStats Create() => new StatusStats()
         {
             entityUid = Eevee.RegisterIIDTemporary()
         };

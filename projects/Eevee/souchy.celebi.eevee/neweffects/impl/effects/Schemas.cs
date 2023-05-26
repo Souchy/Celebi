@@ -1,6 +1,7 @@
 ﻿using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.enums.characteristics.creature;
+using souchy.celebi.eevee.enums.characteristics.other;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.conditions.value;
 using souchy.celebi.eevee.face.shared.zones;
@@ -18,7 +19,7 @@ namespace souchy.celebi.eevee.neweffects.impl.effects
     public record Revive() : IEffectSchema { }
     public record EndTurn() : IEffectSchema { }
     public record SpawnSummon() : IEffectSchema {
-        public CreatureIID modelId { get; set; }
+        public CreatureIID modelId { get; set; } = new();
     }
     public record UnspawnSummon() : IEffectSchema { }
     public record SpawnSummonDouble() : IEffectSchema { }
@@ -80,7 +81,7 @@ namespace souchy.celebi.eevee.neweffects.impl.effects
     public record ChangeActor() : IEffectSchema { }
     public record CastSubSpell() : IEffectSchema
     {
-        public SpellIID modelId { get; set; }
+        public SpellIID modelId { get; set; } = new();
     }
     public record RandomChild() : IEffectSchema { }
     // this one might be thougher with Effect.GetPossibleBoardTargets then Mind.applyEffectContainer which foreaches(targets)
@@ -90,54 +91,46 @@ namespace souchy.celebi.eevee.neweffects.impl.effects
         public int percentChancePerPoint { get; set; } = 50;
     }
     public record EmptyText() : IEffectSchema {
-        public StringIID modelId { get; set; } 
+        public StringIID modelId { get; set; } = new();
     }
     #endregion
 
     #region Status Add
     public record AddStatusCreature() : IEffectSchema
     {
-        public StatusIID modelId { get; set; }
+        public StatusIID modelId { get; set; } = new();
     }
     public record AddTrap() : IEffectSchema
     {
-        public StatusIID modelId { get; set; }
+        public StatusIID modelId { get; set; } = new();
     }
     public record AddGlyph() : IEffectSchema
     {
-        public StatusIID modelId { get; set; }
+        public StatusIID modelId { get; set; } = new();
     }
     public record AddGlyphAura() : IEffectSchema
     {
-        public StatusIID modelId { get; set; }
+        public StatusIID modelId { get; set; } = new();
     }
     #endregion
 
     #region Status Create
     public record CreateStatusCreature() : IEffectSchema
     {
-        public IStats statusStats { get; set; } = Stats.Create();
+        public CreatureStats statusStats { get; set; } = CreatureStats.Create();
     }
     public record CreateTrap() : IEffectSchema
     {
-        public IStats statusStats { get; set; } = Stats.Create();
+        public StatusStats statusStats { get; set; } = StatusStats.Create();
     }
     public record CreateGlyph() : IEffectSchema
     {
-        public IStats statusStats { get; set; } = Stats.Create();
+        public StatusStats statusStats { get; set; } = StatusStats.Create();
     }
     public record CreateGlyphAura() : IEffectSchema
     {
-        public IStats statusStats { get; set; } = Stats.Create();
+        public StatusStats statusStats { get; set; } = StatusStats.Create();
     }
-    //public record AddAddStatStatus() : IEffectSchema
-    //{
-    //    public IStat stat { get; set; }
-    //}
-    //public record AddStealStatStatus() : IEffectSchema
-    //{
-    //    public IStat stat { get; set; }
-    //}
     #endregion
 
     #region Status Remove
@@ -158,7 +151,7 @@ namespace souchy.celebi.eevee.neweffects.impl.effects
 
     #region Resource
     #region Damage 
-    public abstract record ADamageSchema() : IEffectSchema
+            public abstract record ADamageSchema() : IEffectSchema
             {
                 public ElementType element { get; set; } = ElementType.None;
                 public int baseDamage { get; set; } = 0;
@@ -173,7 +166,7 @@ namespace souchy.celebi.eevee.neweffects.impl.effects
             public record IndirectDamagePercentLifeMax() : ADamageSchema() { } // no pen
 
             public record RedirectDamage() : IEffectSchema {
-                public double percentRedirect { get; set; } = 0;
+                public int percentRedirect { get; set; } = 0;
             }
 
             public record DamagePerDynamicResourceUsedForSpell() : IEffectSchema {
@@ -198,11 +191,15 @@ namespace souchy.celebi.eevee.neweffects.impl.effects
                 public int percentHeal { get; set; } = 0;
                 public ActorType percentOfWhoseLife { get; set; } = ActorType.Target;
             }
+            // child of Status 
             public record HealPercentLifeDamageReceived() : IEffectSchema
             {
                 public ElementType element { get; set; } = ElementType.None;
                 public int percentHeal { get; set; } = 0;
             }
+            // child of Status or DamageEffect
+            // (DmgEff selects targets, then the heal starts from their positions and heals according to its new TargetAcquisitionZone)
+            // That means you need to calculate Area += foreach(zone.area(target))
             public record HealPercentLifeDamageDone() : IEffectSchema
             {
                 public ElementType element { get; set; } = ElementType.None;

@@ -10,10 +10,9 @@ namespace souchy.celebi.eevee.impl.shared
         [BsonId]
         public ObjectId entityUid { get; set; }
         //public SpellIID spellModelUid { get; set; }
-        public AssetIID icon { get; set; }
-        public AssetIID sourceAnimation { get; set; }
-        public AssetIID targetAnimation { get; set; }
-        public AssetIID behaviourScript { get; set; }
+        public AssetIID sourceAnimation { get; set; } = new("");
+        public AssetIID targetAnimation { get; set; } = new("");
+        public AssetIID behaviourScript { get; set; } = new("");
 
 
         private SpellSkin() { }

@@ -12,6 +12,7 @@ using System.Reflection;
 using souchy.celebi.eevee.neweffects.impl;
 using souchy.celebi.eevee.face.util.math;
 using souchy.celebi.eevee.face.shared.conditions;
+using souchy.celebi.eevee.face.util;
 
 namespace souchy.celebi.spark.util.swagger
 {
@@ -50,6 +51,7 @@ namespace souchy.celebi.spark.util.swagger
                          || t.IsAssignableTo(typeof(IEffect))
                          || t.IsAssignableTo(typeof(IEffectSchema))
                          || t.IsAssignableTo(typeof(IEffectScript))
+                         || t.IsAssignableTo(typeof(IID))
                 );
             foreach (var t in someTypes)
             {

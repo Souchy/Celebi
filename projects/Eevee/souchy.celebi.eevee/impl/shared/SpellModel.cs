@@ -25,6 +25,7 @@ namespace souchy.celebi.eevee.impl.shared
 
         public ObjectId nameId { get; set; }
         public ObjectId descriptionId { get; set; }
+        public AssetIID icon { get; set; } = new();
         public IEntitySet<ObjectId> skinIds { get; init; } = new EntitySet<ObjectId>();
 
         public ICondition sourceCondition { get; set; }

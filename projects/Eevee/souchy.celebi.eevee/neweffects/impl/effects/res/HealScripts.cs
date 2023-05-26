@@ -87,7 +87,7 @@ namespace souchy.celebi.eevee.neweffects.impl.effects.res
     }
     public record HealPercentLifeDamageReceivedScript : IEffectScript
     {
-        public Type SchemaType => throw new NotImplementedException();
+        public Type SchemaType => typeof(HealPercentLifeDamageReceived);
 
         public IEffectReturnValue apply(ISubActionEffect action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
         {
@@ -101,7 +101,7 @@ namespace souchy.celebi.eevee.neweffects.impl.effects.res
     }
     public record HealPercentLifeDamageDoneScript : IEffectScript
     {
-        public Type SchemaType => throw new NotImplementedException();
+        public Type SchemaType => typeof(HealPercentLifeDamageDone);
 
         public IEffectReturnValue apply(ISubActionEffect action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
         {

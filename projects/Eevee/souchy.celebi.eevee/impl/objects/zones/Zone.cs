@@ -15,6 +15,16 @@ using System.Threading.Tasks;
 
 namespace souchy.celebi.eevee.impl.objects.zones
 {
+    public enum TargetSamplingType
+    {
+        // careful, the origin can be placed on Actor.Source as well as Actor.Target
+        closestToOrigin, 
+        furthestToOrigin,
+        closestToSource,
+        furthestToSource,
+        random,
+    }
+
     public class Zone : IZone
     {
         public IValue<ZoneType> zoneType { get; set; } = new Value<ZoneType>(ZoneType.point);
@@ -27,6 +37,8 @@ namespace souchy.celebi.eevee.impl.objects.zones
         public IValue<bool> canRotate { get; set; } = new Value<bool>(false);
         public int sizeIndexExtendFromSource { get; set; } = -1;
         public IEntityList<IZone> children { get; set; } = new EntityList<IZone>(); //EntityList<IZone>.Create();
+        public int maxSampleCount { get; set; } = int.MaxValue;
+        public TargetSamplingType samplingType { get; set; } = TargetSamplingType.closestToOrigin;
 
 
         // this isn't an entity and doesn't hold complex objects so it's good as public

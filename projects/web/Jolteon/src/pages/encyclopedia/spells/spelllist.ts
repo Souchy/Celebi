@@ -53,7 +53,11 @@ export class SpellList {
 
     public async refresh() {
         if (!this.mode) return;
-        console.log("spelllist refresh: mode=" + this.mode + ", ids=" + this.spellids)
+        // console.log("spelllist refresh: mode=" + this.mode + ", ids=" + this.spellids)
+        // breadcrumb navigation
+        if(this.mode == 'root') {
+            this.ea.publish("navcrumb:spell", null);
+        }
 
         // TODO: limit 50 per page? add filters for name, element type...
         let filter = {
@@ -70,7 +74,7 @@ export class SpellList {
             let res = await promise;
             // console.log(res);
             this.spells = res.data;
-            this.filteredSpells = this.spells;
+            this.filteredSpells = [...this.spells];
         } catch (rej) {
             // console.log(rej);
             Toast.create({
@@ -91,7 +95,7 @@ export class SpellList {
 
     public onSearch() {
         if (!this.filter) {
-            this.filteredSpells = this.spells;
+            this.filteredSpells = [...this.spells];
             return;
         }
         let str = this.filter.toLowerCase();
@@ -118,11 +122,15 @@ export class SpellList {
         if (this.mode == 'creature') {
             this.callbackremove(spell);
             this.spells.splice(idx, 1);
+            this.filteredSpells.splice(idx, 1)
         }
 
         if (this.mode == 'root') {
             this.spellController.deleteSpell(spell.modelUid).then(
-                res => this.spells.splice(idx, 1)
+                res => {
+                    this.spells.splice(idx, 1)
+                    this.filteredSpells.splice(idx, 1)
+                }
             );
         }
 

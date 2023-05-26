@@ -1,3 +1,4 @@
+import { TargetSamplingType } from "./services/api/data-contracts";
 import { ActorType, Affinity, AffinityTypes, Contextual, ContextualTypes, Direction8Type, Direction9Type, EffT, ElementType, OtherProperty, OtherPropertyTypes, 
     Resistance, ResistanceTypes, Resource, ResourceProperty, ResourceTypes, Rotation4Type, SchemaDescription, SpellModelProperty, 
     SpellModelPropertyTypes, SpellProperty, SpellPropertyTypes, State, StateTypes, StatusProperty, StatusPropertyTypes, ZoneType } from "./services/api/data-contracts";
@@ -47,6 +48,7 @@ export class Enums {
     public static readonly direction9 = Object.keys(Direction9Type).filter(k => isNaN(+k));
     public static readonly rotation4 =  Object.keys(Rotation4Type).filter(k => isNaN(+k));
     public static readonly actorTypes = Object.keys(ActorType).filter(k => isNaN(+k));
+    public static readonly samplingTypes = Object.keys(TargetSamplingType).filter(k => isNaN(+k));
 }
 
 export class Effects {

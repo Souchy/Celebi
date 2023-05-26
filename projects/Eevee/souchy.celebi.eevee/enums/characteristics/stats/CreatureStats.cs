@@ -14,7 +14,8 @@ namespace souchy.celebi.eevee.enums.characteristics.other
 {
     public class CreatureStats : Stats
     {
-        public static new IStats Create() => new CreatureStats()
+        private CreatureStats() { }
+        public static new CreatureStats Create() => new CreatureStats()
         {
             entityUid = Eevee.RegisterIIDTemporary()
         };

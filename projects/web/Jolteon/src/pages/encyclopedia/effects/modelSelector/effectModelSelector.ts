@@ -44,7 +44,7 @@ export class EffectModelSelector {
     }
 
     public search() {
-        console.log("search: " + this.filter);
+        // console.log("search: " + this.filter);
         let str = this.filter;
         if(!str) this.filteredSchemas = this.schemasDescriptions;
         str = str.toLowerCase();

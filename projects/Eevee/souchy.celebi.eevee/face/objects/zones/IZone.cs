@@ -3,6 +3,7 @@ using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.util.math;
 using souchy.celebi.eevee.face.values;
+using souchy.celebi.eevee.impl.objects.zones;
 
 namespace souchy.celebi.eevee.face.shared.zones
 {
@@ -57,10 +58,26 @@ namespace souchy.celebi.eevee.face.shared.zones
         /// 
         /// </summary>
         public IEntityList<IZone> children { get; set; }
+        /// <summary>
+        /// If value = 4, it will take a maximum of 4 targets among the cells in the area <br></br>
+        /// If value = 1, it will only take the first target in the area. (Good for bouncing skills) <br></br>
+        /// If value = int.MaxValue, then it can take infinite targets obviously. <br></br>
+        /// Targets are chosen/sampled in accordance to the samplingType.
+        /// </summary>
+        public int maxSampleCount { get; set; }
+        /// <summary>
+        /// If value = random, the targets in the area will be chosen at random <br></br>
+        /// If value = closestToOrigin, the targets in the area will be chosen by order of closest to origin. <br></br>
+        /// This is also the order in which effects are applied to the targets. <br></br>
+        /// This respects maxSampleCount.
+        /// </summary>
+        public TargetSamplingType samplingType { get; set; }
+
+
+
+
 
         public int GetRingWidth() => size.value.z;
-
-
         /// <summary>
         /// Get the cells touched by this area at target point
         /// </summary>

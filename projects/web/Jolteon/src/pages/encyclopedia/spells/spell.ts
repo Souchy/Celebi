@@ -31,6 +31,9 @@ export class Spell {
     public name: Stringcomponent
     public desc: Stringcomponent
 
+    // input bind
+    public iconfile: any;
+
     constructor(
         private readonly ea: IEventAggregator,
         private readonly router: IRouter,
@@ -57,13 +60,25 @@ export class Spell {
         try {
             let res = await this.spellController.getSpell(this.uid)
             this.model = res.data;
+            this.ea.publish("navcrumb:spell", {
+                modeluid: this.model.modelUid,
+                nameuid: this.model.nameId
+            })
         } catch (rej) {
             this.router.load("editor");
         }
     }
 
+    public clickFileIcon(f) {
+        // console.log("click icon")
+        // console.log(f);
+        this.model.icon = this.iconfile[0].name;
+        this.save();
+    }
+
     public onChangeCost(characid: string) {
-        this.spellController.putSpell(this.model.modelUid, this.model);
+        this.save();
+        // this.spellController.putSpell(this.model.modelUid, this.model);
     }
 
     public clickSpell() { //spell: SpellModel) {
@@ -87,7 +102,10 @@ export class Spell {
         // console.log("add effect: " + schema) 
         this.spellController.postEffect(this.model.modelUid, {
             schemaName: schema.name
-        }).then(res => location.reload())
+        }).then(res => {
+            // location.reload()
+            this.model = res.data;
+        })
     }
 
     public async clickNewSkin() {
@@ -95,11 +113,19 @@ export class Spell {
         let res = await this.skinController.postSkin();
         // add to spell & update
         this.model.skinIds.push(res.data.entityUid);
-        // let res2 = await 
-        this.spellController.putSpell(this.model.modelUid, this.model);
+        // this.spellController.putSpell(this.model.modelUid, this.model);
         // this.model = res2.data;
+        this.save();
     }
 
+    public save() {
+        this.spellController.putSpell(this.model.modelUid, this.model).then(
+            res => {
+                this.model = res.data;
+                this.ea.publish("operation:saved");
+            }
+        )
+    }
 
     public onMoveEffectUp(e: IEffect) {
         let idx = this.model.effectIds.indexOf(e.entityUid);
@@ -109,7 +135,8 @@ export class Spell {
         }
         this.model.effectIds.splice(idx, 1);
         this.model.effectIds.splice(idx - 1, 0, e.entityUid);
-        this.spellController.putSpell(this.model.modelUid, this.model);
+        // this.spellController.putSpell(this.model.modelUid, this.model);
+        this.save();
     }
     public onMoveEffectDown(e: IEffect) {
         let idx = this.model.effectIds.indexOf(e.entityUid);
@@ -120,13 +147,15 @@ export class Spell {
         }
         this.model.effectIds.splice(idx, 1);
         this.model.effectIds.splice(idx + 1, 0, e.entityUid);
-        this.spellController.putSpell(this.model.modelUid, this.model);
+        // this.spellController.putSpell(this.model.modelUid, this.model);
+        this.save();
     }
     public onRemoveEffect(e: IEffect) {
         console.log("spell remove eff")
         let idx = this.model.effectIds.indexOf(e.entityUid);
         this.model.effectIds.splice(idx, 1);
-        this.spellController.putSpell(this.model.modelUid, this.model);
+        // this.spellController.putSpell(this.model.modelUid, this.model);
+        this.save();
     }
 
 

@@ -27,8 +27,6 @@
       Confirm delete ${name.entity.value} entirely?
     </modal>
   </template>
-
-  
 </template>
 
 <!-- vignette search -->
@@ -46,6 +44,15 @@
     <stringcomponent view-model.ref="name" uid.bind="model.nameId" editable=true></stringcomponent>
     <stringcomponent view-model.ref="desc" uid.bind="model.descriptionId" editable=true large=true class="large"></stringcomponent>
   </div>
+  <div>
+    <button class="btn" click.trigger="clickFileExplorer">File</button>
+    <input type="text" value.bind="model.icon" style="width: 200px;" change.trigger="save()"/>
+  </div>
+  <label class="btn" for="inputId">file dialog</label>
+  <input id="inputId" type="file" style="position: fixed; top: -100em" files.bind="iconfile" change.trigger="f => clickFileIcon(f)">
+  <!-- <div>
+    ${filesStr}
+  </div> -->
 
   <!-- costs + stats -->
   <div style="display: flex;">
@@ -68,7 +75,7 @@
   </div>
 
   <!-- effects -->
-  <div>
+  <div if.bind="model">
     <h4>Effects</h4>
     <button class="btn" data-bs-toggle="modal" data-bs-target="#effectModelModal">Add</button>
     <modal id="effectModelModal" header="Add Spell Effect" close.bind=false footer.bind=false>

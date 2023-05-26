@@ -15,7 +15,7 @@ namespace souchy.celebi.eevee.face.objects
         public ObjectId statsId { get; set; }
 
 
-        public IStats GetStats() => (SpellStats) this.GetFight().stats.Get(statsId);
+        public SpellStats GetStats() => (SpellStats) this.GetFight().stats.Get(statsId);
         public ISpellModel GetModel() => Eevee.models.spellModels.Get(entityUid);
     }
 }

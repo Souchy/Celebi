@@ -12,6 +12,7 @@ namespace souchy.celebi.eevee.face.shared.models
     {
         public ObjectId nameId { get; set; }
         public ObjectId descriptionId { get; set; }
+        public AssetIID icon { get; set; }
         //public IValue<int> delay { get; set; }
         //public IValue<int> duration { get; set; }
         //public IValue<bool> canBeUnbewitched { get; set; }
@@ -23,6 +24,6 @@ namespace souchy.celebi.eevee.face.shared.models
 
         public IStringEntity GetName() => Eevee.models.i18n.Get(nameId);
         public IStringEntity GetDescription() => Eevee.models.i18n.Get(descriptionId);
-        public IStats GetStats() => (StatusStats) Eevee.models.stats.Get(statsId);
+        public StatusStats GetStats() => (StatusStats) Eevee.models.stats.Get(statsId);
     }
 }

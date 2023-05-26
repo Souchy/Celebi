@@ -23,7 +23,9 @@ namespace souchy.celebi.eevee.impl.stats
             entityUid = Eevee.RegisterIIDTemporary()
         };
 
-        public T Get<T>(CharacteristicType ct) where T : IStat => Get<T>(ct.ID);
+        public void Add(IStat value) => Add(value.statId, value);
+        public void Set(IStat value) => Set(value.statId, value);
+        public T Get<T>(CharacteristicType stat) where T : IStat => Get<T>(stat.ID);
         public T Get<T>(CharacteristicId statId) where T : IStat => (T) Get(statId);
 
         public void applyGrowth(int currentTurn)

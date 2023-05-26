@@ -346,9 +346,19 @@ namespace souchy.celebi.spark
             );
 
             BsonSerializer.RegisterSerializer(objectSerializer);
-            BsonSerializer.RegisterSerializer<IID>(new IIDBsonSerializer());
-            BsonSerializer.RegisterSerializer<CharacteristicId>(new CharacIdBsonSerializer());
-            BsonSerializer.RegisterSerializer<IValue<ZoneType>>(new ValueZoneSerializer());
+
+            BsonSerializer.RegisterSerializer(new IIDBsonSerializer<IID>());
+            BsonSerializer.RegisterSerializer(new IIDBsonSerializer<StringIID>());
+            BsonSerializer.RegisterSerializer(new IIDBsonSerializer<SpellIID>());
+            BsonSerializer.RegisterSerializer(new IIDBsonSerializer<StatusIID>());
+            BsonSerializer.RegisterSerializer(new IIDBsonSerializer<CreatureIID>());
+            BsonSerializer.RegisterSerializer(new IIDBsonSerializer<AnimationSetIID>());
+            BsonSerializer.RegisterSerializer(new IIDBsonSerializer<AnimationIID>());
+            BsonSerializer.RegisterSerializer(new IIDBsonSerializer<SceneIID>());
+            BsonSerializer.RegisterSerializer(new IIDBsonSerializer<AssetIID>());
+
+            BsonSerializer.RegisterSerializer(new CharacIdBsonSerializer());
+            BsonSerializer.RegisterSerializer(new ValueZoneSerializer());
             //BsonSerializer.RegisterDiscriminator(typeof(IValue<ZoneType>), new BsonValue());
 
             BsonClassMap.RegisterClassMap<EntitySet<IID>>();

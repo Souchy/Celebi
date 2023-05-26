@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using souchy.celebi.eevee.neweffects.face;
+using System.ComponentModel;
 
 namespace souchy.celebi.eevee
 {
@@ -52,15 +53,40 @@ namespace souchy.celebi.eevee
                     var returnValue = script.apply(subActionEffect, target, pair.targets);
 
                     // TODO how do we deal with the returnValue? 
-                    // -> well i think the root effect cannot be used obviously
-                    // -> but the returnValue can be useed if the effect is an implementation of IValue for example.
+                    // -> well i think the root effect's return cannot be used obviously
+                    // -> but the returnValue can be used if the effect is an implementation of IValue for example.
                     // -> or if the effect is a child of a math MetaEffect
                     procTriggers(subActionEffect, pair.effect, pair.targets,
                         new TriggerEvent(TriggerType.OnEffect, TriggerOrderType.After, pair.effect)
                     );
+
+
+                    // set the return value associated with effect in the cater's temporaries/contextuals?
+                    var caster = action.fight.creatures.Get(action.caster);
+                    //caster.GetNaturalStats().Set()
+                    // caster.contextuals.set(action.effect, returnValue)
+
+                    // sub effects
+                    // this implementation will break the TargetAcquisition principle i think, but fine for now
+                    foreach (var child in pair.effect.GetEffects())
+                    {
+                        var sub = new SubEffectAction()
+                        {
+                            fight = subActionEffect.fight,
+                            caster = subActionEffect.caster,
+                            targetCell = subActionEffect.targetCell,
+                            parent = subActionEffect,
+                            effect = child,
+                            parentBoardTargets = pair.targets
+                        };
+                        applyEffectContainer(sub, child);
+                    }
                 }
             }
         }
+
+
+
         public static void procTriggers(IAction action, IEffect effect, IEnumerable<IBoardEntity> area, TriggerEvent triggerEvent)
         {
             foreach (IStatusInstance status in action.fight.statuses.Values.SelectMany(sc => sc.instances))

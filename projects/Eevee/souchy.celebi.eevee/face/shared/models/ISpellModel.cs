@@ -17,6 +17,7 @@ namespace souchy.celebi.eevee.face.shared.models
     {
         public ObjectId nameId { get; set; }
         public ObjectId descriptionId { get; set; }
+        public AssetIID icon { get; set; }
         /// <summary>
         /// Even if skins can be used on almost any spell, 
         /// we have a list here because usually skins are made specifically for 1 spell
@@ -37,7 +38,7 @@ namespace souchy.celebi.eevee.face.shared.models
 
         public IStringEntity GetName() => Eevee.models.i18n.Get(nameId);
         public IStringEntity GetDescription() => Eevee.models.i18n.Get(descriptionId);
-        public IStats GetStats() => (SpellModelStats) Eevee.models.stats.Get(statsId);
+        public SpellModelStats GetStats() => (SpellModelStats) Eevee.models.stats.Get(statsId);
     }
 
     public struct SpellProperties

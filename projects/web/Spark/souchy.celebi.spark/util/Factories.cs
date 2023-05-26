@@ -43,7 +43,7 @@ namespace souchy.celebi.spark.util
             creatureModel.descriptionId = desc.entityUid;
 
             // Base Stats
-            var baseStats = CreatureStats.Create();
+            var baseStats = (IStats) CreatureStats.Create();
             creatureModel.statsId = baseStats.entityUid;
             baseStats.Add(Resource.LifeInitialMax.Create(1500));
             baseStats.Add(Resource.ManaInitialMax.Create(10));

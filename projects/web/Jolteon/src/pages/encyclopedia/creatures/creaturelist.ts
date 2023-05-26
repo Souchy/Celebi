@@ -1,10 +1,10 @@
-import { inject } from "aurelia";
+import { IEventAggregator, inject } from "aurelia";
 import { CreatureModelController } from "../../../jolteon/services/api/CreatureModelController";
 import { ICreatureModel, CreatureModel } from './../../../jolteon/services/api/data-contracts';
 import { IRouteableComponent, IRouter } from "@aurelia/router";
 import { Creature } from "./creature";
 
-@inject(CreatureModelController)
+@inject(IEventAggregator, IRouter, CreatureModelController)
 export class CreatureList implements IRouteableComponent {
 
     public creatures: ICreatureModel[] = [];
@@ -21,14 +21,17 @@ export class CreatureList implements IRouteableComponent {
     public page: number = 0;
 
     constructor(
+        private readonly ea: IEventAggregator,
+        @IRouter private router: IRouter,
         private readonly creatureController: CreatureModelController,
-        @IRouter private router: IRouter
     ) {
         // console.log("list ctor")
         this.refresh();
     }
 
     public refresh() {
+        // breadcrumb navigation
+        this.ea.publish("navcrumb:creature", null);
         // TODO: limit 50 per page? add filters for name, element type...
         let filter = {
             skip: this.page * this.numPerPage,
@@ -36,7 +39,7 @@ export class CreatureList implements IRouteableComponent {
         }
         this.creatureController.getAll().then(res => {
             this.creatures = res.data;
-            this.filteredCreatures = this.creatures;
+            this.filteredCreatures = [...this.creatures];
         });
     }
 
@@ -49,7 +52,7 @@ export class CreatureList implements IRouteableComponent {
 
     public onSearch() {
         if(!this.filter) {
-            this.filteredCreatures = this.creatures;
+            this.filteredCreatures = [...this.creatures];
             return;
         }
         let str = this.filter.toLowerCase();

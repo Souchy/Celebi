@@ -49,6 +49,12 @@ export class Creature implements IRouteableComponent {
         try {
             let res = await this.creatureController.getCreature(this.uid)
             this.model = res.data;
+            console.log("nav to new creature")
+            this.ea.publish("navcrumb:spell", null)
+            this.ea.publish("navcrumb:creature", {
+                modeluid: this.model.modelUid,
+                nameuid: this.model.nameId
+            })
             // console.log("creature loading: " + JSON.stringify(this.model))
         } catch (rej) {
             this.router.load("editor");
@@ -78,7 +84,7 @@ export class Creature implements IRouteableComponent {
 
     // callback from spell list
     public onAddSpell(spell: SpellModel) {
-        // console.log("creature onAddSpell: " + spell.modelUid)
+        console.log("creature onAddSpell: " + spell.modelUid)
         this.model.spellIds.push(spell.entityUid);
         this.creatureController.putSpells(this.model.modelUid, this.model.spellIds);
     }

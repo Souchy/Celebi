@@ -9,7 +9,7 @@ namespace souchy.celebi.eevee.face.shared.models.skins
     public interface ISpellSkin : IEntity
     {
         //public SpellIID spellModelUid { get; set; }
-        public AssetIID icon { get; set; }
+        //public AssetIID icon { get; set; }
         public AssetIID sourceAnimation { get; set; }
         public AssetIID targetAnimation { get; set; }
         /// <summary>

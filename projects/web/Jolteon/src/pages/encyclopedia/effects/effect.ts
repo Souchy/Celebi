@@ -111,20 +111,23 @@ export class Effect {
         // update db
         this.effectController.postChild(this.model.entityUid, {
             schemaName: schema.name
-        })
-            .then(res => this.model.effectIds.push(res.data.entityUid));
+        }).then(res => {
+            this.model.effectIds.push(res.data.entityUid)
+        });
         // .then(res => location.reload())
     }
     public onSave() {
         // update db
         this.effectController.putEffect(this.model.entityUid, this.model)
-            .then(res => {
+            .then(
+                res => {
                     this.model = res.data
                     this.ea.publish("operation:saved");
                 },
                 rej => {
                     this.ea.publish("operation:failed");
-                });
+                }
+            );
     }
     //#endregion
 

@@ -35,7 +35,7 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
         /// <summary>
         /// Poison damage
         /// </summary>
-        public static readonly Affinity IndirectDamage      = new(21,  nameof(Damage));
+        public static readonly Affinity IndirectDamage      = new(21,  nameof(IndirectDamage));
         public static readonly Affinity Heal                = new(22,  nameof(Heal));
         public static readonly Affinity Melee               = new(23,  nameof(Melee), conditions: new ICondition[]{ 
             new DistanceCondition() {

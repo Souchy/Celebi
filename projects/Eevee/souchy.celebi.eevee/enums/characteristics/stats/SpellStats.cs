@@ -15,7 +15,8 @@ namespace souchy.celebi.eevee.enums.characteristics.other
     /// </summary>
     public class SpellStats : Stats
     {
-        public static new IStats Create() => new SpellStats()
+        private SpellStats() { }
+        public static new SpellStats Create() => new SpellStats()
         {
             entityUid = Eevee.RegisterIIDTemporary()
         };

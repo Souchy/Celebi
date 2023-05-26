@@ -33,16 +33,28 @@ namespace souchy.celebi.eevee.face.objects
     
     public interface ISubActionEffect : IAction
     {
-        public IAction parent { get; set; } // could be ISpell, IEffect, ....
+        public IAction parent { get; set; } // ISpell
         public IEffect effect { get; set; }
     }
     public class SubActionEffect : ISubActionEffect
     {
         public IFight fight { get; set; }
         public ObjectId caster { get; set; }
+        // maybe the original targetcell of the spell/status holder
         public ObjectId targetCell { get; set; }
-        public IAction parent { get; set; } // could be ISpell, IEffect, ....
+        public IAction parent { get; set; } // ISpell
         public IEffect effect { get; set; }
+    }
+    public class SubEffectAction : IAction
+    {
+        public IFight fight { get; set; }
+        public ObjectId caster { get; set; }
+        // maybe the original targetcell of the spell/status holder
+        public ObjectId targetCell { get; set; } 
+        public ISubActionEffect parent { get; set; } // IEffect
+        public IEffect effect { get; set; }
+        // all targets passed down to the child effect
+        public IEnumerable<IBoardEntity> parentBoardTargets { get; set; }
     }
 
     public interface IActionMove : IAction

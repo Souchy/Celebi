@@ -68,7 +68,22 @@
         </select>
       </td>
     </tr>
-
+    
+    <tr class="collapse" id="collapseZone-${uid}">
+      <td>Sampling Count</td>
+      <td>
+        <input type="number" value.bind="zone.maxSampleCount" change.trigger="save()" />
+      </td>
+    </tr>
+    <tr class="collapse" id="collapseZone-${uid}">
+      <td>Sampling</td>
+      <td>
+        <select value.bind="zone.samplingType" change.trigger="save()">
+          <option repeat.for="type of Enums.samplingTypes" model.bind="$index">${type}</option>
+        </select>
+      </td>
+    </tr>
+    
 <!-- 
   TODO: 
   - bool negative,  

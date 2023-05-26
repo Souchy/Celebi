@@ -26,12 +26,12 @@
             <!-- stat : select charac id + value -->
             <!-- charac id selector -->
             <!-- iid selector:  string, creature(summon), spell, status, animation, scene/model asset  -->
-            <input case="StringIID" type="string" value.bind="data[prop]" change.trigger="onChange()"/>
-            <input case="CreatureIID" type="string" value.bind="data[prop]" change.trigger="onChange()"/>
-            <input case="SpellIID" type="string" value.bind="data[prop]" change.trigger="onChange()"/>
-            <input case="StatusIID" type="string" value.bind="data[prop]" change.trigger="onChange()"/>
-            <input case="AssetIID" type="string" value.bind="data[prop]" change.trigger="onChange()"/>
-            <input case="AnimationSetIID" type="string" value.bind="data[prop]" change.trigger="onChange()"/>
+            <input case="StringIID" type="text" value.bind="data[prop]" change.trigger="onChange()"/>
+            <input case="CreatureIID" type="text" value.bind="data[prop]" change.trigger="onChange()"/>
+            <input case="SpellIID" type="text" value.bind="data[prop]" change.trigger="onChange()"/>
+            <input case="StatusIID" type="text" value.bind="data[prop]" change.trigger="onChange()"/>
+            <input case="AssetIID" type="text" value.bind="data[prop]" change.trigger="onChange()"/>
+            <input case="AnimationSetIID" type="text" value.bind="data[prop]" change.trigger="onChange()"/>
       
             <template default-case switch.bind="typof(prop)">
               <input case="number" type="number" value.bind="data[prop]"  change.trigger="onChange()"/>
