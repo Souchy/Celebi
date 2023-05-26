@@ -51,7 +51,7 @@
 	</ItemGroup>
 
 	
-	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'Debug'">
 		<Exec Command="dotnet tool restore" />
 		<Exec Command="dotnet swagger tofile --output bin/swagger.json $(OutputPath)\$(AssemblyName).dll v1 " />
 		<Exec WorkingDirectory="../Jolteon" Command="npm run swagger"></Exec>
