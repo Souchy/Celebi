@@ -7,6 +7,7 @@ using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.objects.statuses;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.util;
+using souchy.celebi.eevee.neweffects.face;
 using static souchy.celebi.eevee.face.entity.IEntity;
 
 namespace souchy.celebi.espeon.eevee.impl.controllers

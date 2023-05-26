@@ -1,33 +1,63 @@
+<import from="../../../components/modal/modal"></import>
 <import from="../strings/stringcomponent"></import>
 <import from="../stats/spell/spellstats"></import>
 <import from="../effects/modelSelector/effectModelSelector"></import>
+<import from="../effects/effect"></import>
 
-<!-- vignette root/creature -->
+
+<!-- vignette root || creature -->
 <template if.bind="isvignette && mode != 'search'">
-  <button class="title btn-outline" click.trigger="clickSpell()">
-    <stringcomponent uid.bind="model.nameId" editable.bind="!isvignette"></stringcomponent>
+  <!-- <a href="/editor/spell/{model.modelUid}"> -->
+  <button class="btn title btn-outline" click.trigger="clickSpell()">
+    <stringcomponent view-model.ref="name" uid.bind="model.nameId" editable.bind="!isvignette"></stringcomponent>
   </button>
-  <button class="btn close" click.trigger="clickRemove()">x</button>
+  <!-- <button class="btn close" click.trigger="clickRemove()">x</button> -->
+  
+  <!-- delete & confirm -->
+  <template if.bind="mode == 'creature'">
+    <button class="btn close" data-bs-toggle="modal" data-bs-target="#removeSpell-${model.entityUid}">x</button>
+    <modal id="removeSpell-${model.entityUid}" header="Remove Spell?" close.bind=false footer.bind=true callbackok.bind="() => clickRemove()">
+      Confirm remove ${name.entity.value} from creature?
+    </modal>
+  </template>
+
+  <template if.bind="mode == 'root'">
+    <button class="btn close" data-bs-toggle="modal" data-bs-target="#deleteSpell-${model.entityUid}">x</button>
+    <modal id="deleteSpell-${model.entityUid}" header="Delete Spell?" close.bind=false footer.bind=true callbackok.bind="() => clickRemove()">
+      Confirm delete ${name.entity.value} entirely?
+    </modal>
+  </template>
 </template>
 
 <!-- vignette search -->
 <template if.bind="isvignette && mode == 'search'">
   <div class="add">+</div>
   <button class="title titleSearch btn-outline" click.trigger="clickSpell()">
-    <stringcomponent uid.bind="model.nameId" editable.bind="!isvignette"></stringcomponent>
+    <stringcomponent view-model.ref="name" uid.bind="model.nameId" editable.bind="!isvignette"></stringcomponent>
   </button>
 </template>
 
-<!-- not vignette, full spell ui -->
+<!-- full spell ui, not vignette -->
 <template if.bind="!isvignette">
-  <h3>Spell #${model.modelUid}</h3>
-  <stringcomponent uid.bind="model.nameId" editable=true></stringcomponent>
-  <stringcomponent uid.bind="model.descriptionId" editable=true></stringcomponent>
+  <h2>Spell #${model.modelUid}</h2>
+  <div class="d-flex">
+    <stringcomponent view-model.ref="name" uid.bind="model.nameId" editable=true></stringcomponent>
+    <stringcomponent view-model.ref="desc" uid.bind="model.descriptionId" editable=true large=true class="large"></stringcomponent>
+  </div>
+  <div>
+    <button class="btn" click.trigger="clickFileExplorer">File</button>
+    <input type="text" value.bind="model.icon" style="width: 200px;" change.trigger="save()"/>
+  </div>
+  <label class="btn" for="inputId">file dialog</label>
+  <input id="inputId" type="file" style="position: fixed; top: -100em" files.bind="iconfile" change.trigger="f => clickFileIcon(f)">
+  <!-- <div>
+    ${filesStr}
+  </div> -->
 
   <!-- costs + stats -->
   <div style="display: flex;">
     <div>
-      <h5>Costs</h5>
+      <h4>Costs</h4>
       <table class="table-striped table-sm table-borderless table-responsive-sm">
         <tbody>
           <tr repeat.for="charac of Characteristics.resourcesSpellCosts">
@@ -39,19 +69,21 @@
       </table>
     </div>
     <div>
-      <h5>Stats</h5>
-      <spellstats baseuid.bind="model.stats"></spellstats>
+      <h4>Stats</h4>
+      <spellstats baseuid.bind="model.statsId"></spellstats>
     </div>
   </div>
 
   <!-- effects -->
-  <div>
-    <button class="btn" click.trigger="addEffect()"></button>
-    <modal>
-      <effectModelSelector></effectModelSelector>
+  <div if.bind="model">
+    <h4>Effects</h4>
+    <button class="btn" data-bs-toggle="modal" data-bs-target="#effectModelModal">Add</button>
+    <modal id="effectModelModal" header="Add Spell Effect" close.bind=false footer.bind=false>
+      <effect-model-selector onselectcallback.bind="e => addEffect(e)"></effect-model-selector>
     </modal>
-    <div>
-      <effect repeat.for="effectid of model.effectIds" uid.bind="effectid"></effect>
+
+    <div class="effectlist">
+      <effect repeat.for="effectid of model.effectIds" uid.bind="effectid" callbackmoveup.bind="e => onMoveEffectUp(e)" callbackmovedown.bind="e => onMoveEffectDown(e)" callbackremove.bind="e => onRemoveEffect(e)"></effect>
     </div>
   </div>
 

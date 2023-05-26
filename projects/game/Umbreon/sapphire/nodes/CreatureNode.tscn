@@ -14,7 +14,7 @@ material = SubResource("StandardMaterial3D_y1gvy")
 inner_radius = 0.45
 outer_radius = 0.5
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_vdg3i"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_glmda"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_1bhg5"]
@@ -79,7 +79,7 @@ current = true
 [node name="Healthbar" parent="." instance=ExtResource("3_gmy82")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
-texture = SubResource("ViewportTexture_vdg3i")
+texture = SubResource("ViewportTexture_glmda")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_1bhg5")

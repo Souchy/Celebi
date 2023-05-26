@@ -1,8 +1,8 @@
-
 <import from="../pages/home/home"></import>
 <import from="../pages/auth/auth"></import>
 <import from="../pages/missing/missing-page"></import>
 <import from="./auth2/authHeader"></import>
+<import from="../pages/encyclopedia/strings/stringcomponent"></import>
 
 <nav class="navbar navbar-expand-lg">
 
@@ -16,6 +16,29 @@
       <a load="editor">Editor</a>
     </li>
 
+  </ul>
+
+  <ul class="navbar-nav ms-auto">
+    <li>
+      <a click.trigger="goBack()">
+        <i class="fa-solid fa-chevron-left"></i>
+      </a>
+    </li>
+    <li if.bind="activecreature">
+      <a load.bind="'editor/creature/' + activecreature.modeluid">
+        <stringcomponent uid.bind="activecreature.nameuid"></stringcomponent>
+      </a>
+    </li>
+    <li if.bind="activespell">
+      <a load.bind="'editor/spell/' + activespell.modeluid">
+        <stringcomponent uid.bind="activespell.nameuid"></stringcomponent>
+      </a>
+    </li>
+    <li>
+      <a click.trigger="goForward()">
+        <i class="fa-solid fa-chevron-right"></i>
+      </a>
+    </li>
   </ul>
 
   <ul class="navbar-nav ms-auto">
@@ -37,7 +60,7 @@
     </li>
 
     <!-- <auth-header></auth-header> -->
-    
+
   </ul>
 
 </nav>

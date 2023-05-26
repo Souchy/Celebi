@@ -1,5 +1,5 @@
 import { IEventAggregator, bindable, containerless, inject } from "aurelia";
-import { IStatSimple, StatBool, StatSimple, Stats } from "../../../../jolteon/services/api/data-contracts";
+import { MathEquation, StatSimple } from "../../../../jolteon/services/api/data-contracts";
 import { Characteristics } from "../../../../jolteon/constants";
 
 @inject(IEventAggregator)
@@ -9,7 +9,10 @@ export class Statsimple {
     @bindable
     public basestat: StatSimple
     @bindable
-    public growthstat: StatSimple
+    public growthequation: MathEquation
+    // @bindable
+    // public growthstat: StatSimple
+
 
     constructor(private readonly ea: IEventAggregator) { }
 
@@ -18,8 +21,7 @@ export class Statsimple {
         this.ea.publish("stat:base:change", this.basestat); //{ id: this.characid, value: this.basevalue });
     }
     public onChangGrowth() {
-        // console.log("onChangeGrowth");
-        this.ea.publish("stat:growth:change", this.growthstat);// { id: this.characid, value: this.growthvalue });
+        this.ea.publish("stat:growth:change", this.growthequation);
     }
 
     binding(){

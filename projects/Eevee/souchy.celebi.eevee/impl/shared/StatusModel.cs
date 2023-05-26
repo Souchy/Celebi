@@ -4,12 +4,9 @@ using souchy.celebi.eevee.face.objects.statuses;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
-using souchy.celebi.eevee.impl.objects.effectResults;
-using souchy.celebi.eevee.impl.objects.statuses;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.impl.values;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
+using souchy.celebi.eevee.neweffects.face;
 
 namespace souchy.celebi.eevee.impl.shared
 {
@@ -21,12 +18,15 @@ namespace souchy.celebi.eevee.impl.shared
 
         public ObjectId nameId { get; set; }
         public ObjectId descriptionId { get; set; }
-        public IValue<int> delay { get; set; } = new Value<int>();
-        public IValue<int> duration { get; set; } = new Value<int>();
-        public IValue<bool> canBeUnbewitched { get; set; } = new Value<bool>();
+        public AssetIID icon { get; set; } = new();
+
+        //public IValue<int> delay { get; set; } = new Value<int>();
+        //public IValue<int> duration { get; set; } = new Value<int>();
+        //public IValue<bool> canBeUnbewitched { get; set; } = new Value<bool>();
+        public ObjectId statsId { get; set; }
         public IValue<StatusPriorityType> priority { get; set; } = new Value<StatusPriorityType>();
 
-        public IEntityList<ObjectId> effectIds { get; set; } = new EntityList<ObjectId>();
+        public IEntityList<ObjectId> EffectIds { get; set; } = new EntityList<ObjectId>();
 
 
         private StatusModel() { }
@@ -34,7 +34,7 @@ namespace souchy.celebi.eevee.impl.shared
         public static IStatusModel CreatePermanent() => new StatusModel(Eevee.RegisterIIDTemporary());
 
 
-        public IEnumerable<IEffect> GetEffects() => effectIds.Values.Select(i => Eevee.models.effects.Get(i));
+        public IEnumerable<IEffect> GetEffects() => EffectIds.Values.Select(i => Eevee.models.effects.Get(i));
 
         public void Dispose()
         {

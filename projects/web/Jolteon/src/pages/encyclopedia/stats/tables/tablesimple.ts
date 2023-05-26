@@ -1,12 +1,11 @@
-import { IStatBool, IStatSimple, StatSimple, Stats } from './../../../../jolteon/services/api/data-contracts';
 import { IEventAggregator, bindable, inject } from "aurelia";
+import { MathEquation, StatSimple, Stats } from './../../../../jolteon/services/api/data-contracts';
 import { IStat, IStats } from "../../../../jolteon/services/api/data-contracts";
+import { Constants } from "../../../../jolteon/constants";
 
 @inject(IEventAggregator)
 export class Tablesimple {
 
-    // @bindable
-    // public header: string = "Charac";
     @bindable
     public hasheader: boolean = true;
 
@@ -14,15 +13,12 @@ export class Tablesimple {
     public characs: any[];
     @bindable
     public base: Stats = null
-    @bindable
-    public growth: Stats = null
+    // @bindable
+    // public growth: Stats = null
 
     constructor(private readonly ea: IEventAggregator) {
     }
 
-    // binding() {
-    //     console.log("table base stats: " + this.base);
-    // }
     bound() {
         // console.log("table base stats: " + this.base);
     }
@@ -39,20 +35,23 @@ export class Tablesimple {
             return stat;
         }
     }
-    public getGrowthStat(id): StatSimple {
-        if(!this.growth) return null;
-        if (this.growth?.dic?.hasOwnProperty(id)){
-            return this.growth.dic[id]
+    public getGrowthEquation(id): MathEquation {
+        if (this.base?.growth?.hasOwnProperty(id)){
+            return this.base.growth[id]
         }
         else {
-            let stat: StatSimple = {
-                statId: id,
-                value: 0
+            let equation: MathEquation = {
+                functions: [
+                    {
+                        xFromIncluded: Constants.MAX_INT,
+                        xToExcluded: Constants.MIN_INT,
+                        slopes: [0]
+                    }
+                ]
             }
-            return stat;
+            return equation;
         }
     }
-
 
 
 }

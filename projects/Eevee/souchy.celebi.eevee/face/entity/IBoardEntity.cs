@@ -4,9 +4,13 @@ using souchy.celebi.eevee.face.objects.statuses;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.util.math;
 using souchy.celebi.eevee.impl;
+using System;
 
 namespace souchy.celebi.eevee.face.entity
 {
+    /// <summary>
+    /// BoardEntities are Cells and Creatures
+    /// </summary>
     public interface IBoardEntity : IEntityModeled, IFightEntity
     {
         public IPosition position { get; init; }
@@ -16,6 +20,7 @@ namespace souchy.celebi.eevee.face.entity
 
 
         public IEnumerable<IStatusContainer> GetStatuses() => this.GetFight().statuses.Values.Where(s => statuses.Contains(s.entityUid));
+        public ICell GetCell() => this.GetFight().board.GetCells().First(c => c.position == this.position);
 
     }
 }

@@ -28,11 +28,14 @@ namespace souchy.celebi.eevee.impl.stats
         }
 
         private StatSimple() { }
+        public StatSimple(CharacteristicId st, int value = 0)
+        {
+            this.statId = st;
+            this.value = value;
+        }
         public static StatSimple Create(CharacteristicId st, int value = 0)
-            => new StatSimple() //st, value)
+            => new StatSimple(st, value)
             {
-                statId = st,
-                value = value,
                 entityUid = Eevee.RegisterIIDTemporary(),
             };
 
@@ -42,7 +45,11 @@ namespace souchy.celebi.eevee.impl.stats
                 this.value += b.value;
         }
 
-        public IStat copy() => Create(statId, value); //new StatSimple(StatType, value);
+        public IStat copy(bool anonymous = false)
+        {
+            if (anonymous) return new StatSimple(this.statId, value);
+            else return Create(statId, value);
+        }
 
         public void Dispose()
         {

@@ -34,9 +34,22 @@ namespace souchy.celebi.eevee.impl.util.serialization
         }
         public override void WriteJson(JsonWriter writer, IID value, JsonSerializer serializer)
         {
-            writer.WriteValue(value.ToString());
+            writer.WriteValue(value.value);
         }
     }
+    public class IIDJsonConverter<T> : JsonConverter<T> where T : IID
+    {
+        public override T ReadJson(JsonReader reader, Type objectType, T existingValue, bool hasExistingValue, JsonSerializer serializer)
+        {
+            string s = (string) reader.Value;
+            return (T) Activator.CreateInstance(typeof(T), s);
+        }
+        public override void WriteJson(JsonWriter writer, T value, JsonSerializer serializer)
+        {
+            writer.WriteValue(value.value);
+        }
+    }
+
 
     public class IStringEntitysonConverter : JsonConverter<IStringEntity>
     {

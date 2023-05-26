@@ -1,12 +1,15 @@
-import { ICreatureModel } from "../../../jolteon/services/api/data-contracts";
 import { IEventAggregator, bindable, inject } from "aurelia";
-import { CreatureModelController } from "../../../jolteon/services/api/CreatureModelController";
 import { IRouteableComponent, IRouter, Navigation, Parameters, RoutingInstruction } from '@aurelia/router';
+import { ICreatureModel, SpellModel } from "../../../jolteon/services/api/data-contracts";
+import { CreatureModelController } from "../../../jolteon/services/api/CreatureModelController";
 import { StatsType } from "../stats/statscomponent";
 import { TOAST_PLACEMENT, TOAST_STATUS, TOAST_THEME, Toast, ToastConfigOptions, ToastOptions } from "bootstrap-toaster";
+import { SpellModelController } from "../../../jolteon/services/api/SpellModelController";
+import { Stringcomponent } from "../strings/stringcomponent";
+import { CreatureSkinController } from "../../../jolteon/services/api/CreatureSkinController";
 
 
-@inject(CreatureModelController, IEventAggregator, IRouter)
+@inject(IEventAggregator, IRouter, CreatureModelController, CreatureSkinController)
 export class Creature implements IRouteableComponent {
 
     //#region input
@@ -18,17 +21,17 @@ export class Creature implements IRouteableComponent {
     public uid: string;
     //#endregion
 
+    // binded view-model
+    // public name: Stringcomponent;
+    // public desc: Stringcomponent;
+
     constructor(
-        private readonly creatureController: CreatureModelController,
         private readonly ea: IEventAggregator,
-        private readonly router: IRouter
+        private readonly router: IRouter,
+        private readonly creatureController: CreatureModelController,
+        // private readonly spellController: SpellModelController,
+        private readonly skinController: CreatureSkinController
     ) {
-        this.ea.subscribe('spells:search:select', (spellUid: string) => {
-            console.log("creature receive add spell: " + spellUid)
-            if(!this.model.baseSpells) this.model.baseSpells = [];
-            this.model.baseSpells.push(spellUid);
-            this.creatureController.putSpells(this.model.modelUid, this.model.baseSpells);
-        });
     }
 
     /**
@@ -46,6 +49,12 @@ export class Creature implements IRouteableComponent {
         try {
             let res = await this.creatureController.getCreature(this.uid)
             this.model = res.data;
+            console.log("nav to new creature")
+            this.ea.publish("navcrumb:spell", null)
+            this.ea.publish("navcrumb:creature", {
+                modeluid: this.model.modelUid,
+                nameuid: this.model.nameId
+            })
             // console.log("creature loading: " + JSON.stringify(this.model))
         } catch (rej) {
             this.router.load("editor");
@@ -58,9 +67,34 @@ export class Creature implements IRouteableComponent {
     }
 
     public clickRemove() {
-        // TODO: ask confirmation before delete, it'S too easy to missclick
-        // this.creatureController.deleteCreature(this.model.modelUid);
+        // TODO: ask confirmation before delete, it's too easy to missclick
+        this.creatureController.deleteCreature(this.model.modelUid);
     }
 
+    
+    public async clickNewSkin() {
+        // create skin
+        let res = await this.skinController.postSkin();
+        // add to spell & update
+        this.model.skinIds.push(res.data.entityUid);
+        // let res2 = await 
+        this.creatureController.putCreature(this.model.modelUid, this.model);
+        // this.model = res2.data;
+    }
+
+    // callback from spell list
+    public onAddSpell(spell: SpellModel) {
+        console.log("creature onAddSpell: " + spell.modelUid)
+        this.model.spellIds.push(spell.entityUid);
+        this.creatureController.putSpells(this.model.modelUid, this.model.spellIds);
+    }
+    // callback from spell list
+    public onRemoveSpell(spell: SpellModel) {
+        // console.log("creature onRemoveSpell: " + spell.modelUid)
+        let idx = this.model.spellIds.indexOf(spell.entityUid);
+        if (idx == -1) return;
+        this.model.spellIds.splice(idx, 1);
+        this.creatureController.putSpells(this.model.modelUid, this.model.spellIds);
+    }
 
 }

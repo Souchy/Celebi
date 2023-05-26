@@ -27,6 +27,10 @@ namespace souchy.celebi.espeon.eevee.impl.controllers
             //this.instances = Scopes.GetRequiredScoped<IFight>(fightUid);
         }
 
+        public ICell GetCell(IPosition pos) => this.cells.Values
+            .Select(c => this.GetFight().cells.Get(c))
+            .First(c => c.position == pos);
+
         public void Dispose()
         {
             Eevee.DisposeEventBus(this);

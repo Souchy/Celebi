@@ -16,12 +16,10 @@ namespace souchy.celebi.eevee.impl.shared
 
         public ObjectId nameId { get; set; }
         public ObjectId descriptionId { get; set; }
-        public IEntitySet<ObjectId> skins { get; init; } = new EntitySet<ObjectId>();
-
-        public ObjectId baseStats { get; set; }
-        public ObjectId growthStats { get; set; }
-        public IEntitySet<ObjectId> baseSpells { get; init; } = new EntitySet<ObjectId>();
-        public IEntitySet<ObjectId> baseStatusPassives { get; init; } = new EntitySet<ObjectId>();
+        public ObjectId statsId { get; set; }
+        public IEntitySet<ObjectId> spellIds { get; init; } = new EntitySet<ObjectId>();
+        public IEntitySet<ObjectId> statusPassiveIds { get; init; } = new EntitySet<ObjectId>();
+        public IEntitySet<ObjectId> skinIds { get; init; } = new EntitySet<ObjectId>();
 
         private CreatureModel() { }
         public static ICreatureModel CreatePermanent() => new CreatureModel() 

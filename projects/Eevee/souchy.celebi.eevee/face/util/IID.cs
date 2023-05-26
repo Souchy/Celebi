@@ -9,9 +9,11 @@ namespace souchy.celebi.eevee.face.util
 {
     [Serializable]
     [JsonConverter(typeof(IIDJsonConverter))]
-    [TypeConverter(typeof(IIDTypeConverter))]
-    public sealed record IID(string value)
+    [TypeConverter(typeof(IIDTypeConverter<IID>))]
+    public record IID(string value)
     {
+        public static readonly IID Zero = new IID("0");
+
         public override string ToString() => value;
 
         public static implicit operator string(IID iid) => iid.ToString();
@@ -22,7 +24,47 @@ namespace souchy.celebi.eevee.face.util
         public static explicit operator IID(int i) => new IID(i.ToString());
     }
 
-    public class IIDTypeConverter : TypeConverter
+    [Serializable]
+    [JsonConverter(typeof(IIDJsonConverter<StringIID>))]
+    [TypeConverter(typeof(IIDTypeConverter<StringIID>))]
+    public sealed record StringIID(string value = "") : IID(value) { }
+
+    [Serializable]
+    [JsonConverter(typeof(IIDJsonConverter<SpellIID>))]
+    [TypeConverter(typeof(IIDTypeConverter<SpellIID>))]
+    public sealed record SpellIID(string value = "") : IID(value) { }
+
+    [Serializable]
+    [JsonConverter(typeof(IIDJsonConverter<StatusIID>))]
+    [TypeConverter(typeof(IIDTypeConverter<StatusIID>))]
+    public sealed record StatusIID(string value = "") : IID(value) { }
+
+    [Serializable]
+    [JsonConverter(typeof(IIDJsonConverter<CreatureIID>))]
+    [TypeConverter(typeof(IIDTypeConverter<CreatureIID>))]
+    public sealed record CreatureIID(string value = "") : IID(value) { }
+
+    [Serializable]
+    [JsonConverter(typeof(IIDJsonConverter<AnimationSetIID>))]
+    [TypeConverter(typeof(IIDTypeConverter<AnimationSetIID>))]
+    public sealed record AnimationSetIID(string value = "") : IID(value) { }
+
+    [Serializable]
+    [JsonConverter(typeof(IIDJsonConverter<AnimationIID>))]
+    [TypeConverter(typeof(IIDTypeConverter<AnimationIID>))]
+    public sealed record AnimationIID(string value = "") : IID(value) { }
+
+    [Serializable]
+    [JsonConverter(typeof(IIDJsonConverter<SceneIID>))]
+    [TypeConverter(typeof(IIDTypeConverter<SceneIID>))]
+    public sealed record SceneIID(string value = "") : IID(value) { }
+
+    [Serializable]
+    [JsonConverter(typeof(IIDJsonConverter<AssetIID>))]
+    [TypeConverter(typeof(IIDTypeConverter<AssetIID>))]
+    public sealed record AssetIID(string value = "") : IID(value) { }
+
+    public class IIDTypeConverter<T> : TypeConverter where T : IID
     {
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) =>
             sourceType == typeof(string);
@@ -32,7 +74,7 @@ namespace souchy.celebi.eevee.face.util
         {
             return value switch
             {
-                string s => new IID(s),
+                string s => Activator.CreateInstance(typeof(T), s),
                 null => null,
                 _ => throw new ArgumentException($"Cannot convert from {value} to IID", nameof(value))
             };
@@ -41,12 +83,10 @@ namespace souchy.celebi.eevee.face.util
         {
             if (destinationType == typeof(string))
             {
-                return value switch
+                if(typeof(T).IsAssignableFrom(value.GetType()))
                 {
-                    IID id => id.value,
-                    null => null,
-                    _ => throw new ArgumentException($"Cannot convert {value} to string", nameof(value))
-                };
+                    return value.ToString();
+                }
             }
             throw new ArgumentException($"Cannot convert {value ?? "(null)"} to {destinationType}", nameof(destinationType));
         }

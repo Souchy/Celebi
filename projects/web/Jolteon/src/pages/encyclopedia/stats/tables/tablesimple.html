@@ -5,10 +5,11 @@
     <tr>
       <th></th>
       <th>Base</th>
-      <th if.bind="growth">Growth</th>
+      <th>Growth</th>
+       <!-- if.bind="growth" -->
     </tr>
   </thead>
   <tbody>
-    <tr as-element="statsimple" repeat.for="charac of characs" basestat.bind="getBaseStat(charac.id)" growthstat.bind="getGrowthStat(charac.id)"></tr>
+    <tr as-element="statsimple" repeat.for="charac of characs" basestat.bind="getBaseStat(charac.id)" growthequation.bind="getGrowthEquation(charac.id)"></tr>
   </tbody>
 </table>

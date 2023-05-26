@@ -26,7 +26,8 @@ namespace souchy.celebi.spark.util.swagger
                         ? enumName
                         : enumMemberAttribute.Value;
 
-                    schema.Enum.Add(new OpenApiString(label));
+                    schema.Enum.Add(new OpenApiString($"{label}"));
+                    //schema.Enum.Add(new OpenApiString($"{label} = '{label}'"));
                     schema.Type = "string";
                     schema.Format = string.Empty;
                 }

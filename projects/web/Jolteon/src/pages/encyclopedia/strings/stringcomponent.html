@@ -1,5 +1,8 @@
 
-<input if.bind="editable" type="text" value.bind="entity.value" change.trigger="onChange"  />
+<!-- ${large} -->
+
+<input if.bind="editable && !large" type="text" value.bind="entity.value" change.trigger="onChange" />
+<textarea if.bind="editable && large" value.bind="entity.value" change.trigger="onChange" ></textarea>
 
 <template if.bind="!editable">${entity ? entity.value : "null"}</template>
 

@@ -25,7 +25,7 @@ using souchy.celebi.eevee.face.values;
 using souchy.celebi.spark.util.mongo;
 using souchy.celebi.eevee.face.util.math;
 using souchy.celebi.eevee.impl.values;
-using souchy.celebi.eevee.impl.objects.effects.res;
+using Newtonsoft.Json;
 
 namespace souchy.celebi.spark
 {
@@ -58,6 +58,32 @@ namespace souchy.celebi.spark
 
             // swagger
             configureSwagger(services);
+
+            services.AddControllers(options =>
+            {
+                options.Conventions.Add(new ControllerNamingConvention());
+
+            }).AddNewtonsoftJson(options =>
+            {
+
+                options.SerializerSettings.TypeNameHandling = TypeNameHandling.Objects;
+                options.SerializerSettings.Formatting = Formatting.Indented;
+                options.SerializerSettings.ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor;
+                options.SerializerSettings.Converters = new List<JsonConverter> {
+                    //new IIDJsonConverter(), new IStringEntitysonConverter(),
+                    //new IEntitySetJsonConverter(), new IEntityListJsonConverter(),
+                    //new IValueIntJsonConverter(), new IValueDoubleJsonConverter(), new IValueBoolJsonConverter(),
+                    //new CharacTypeJsonConverter(), new CharacIdJsonConverter(), new IValueElementJsonConverter()
+                };
+                options.SerializerSettings.Converters.Add(new ObjectIdConverter());
+                //options.SerializerSettings.TypeNameAssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple;
+                //options.SerializerSettings.Converters.Add(new IValueZoneTypeJsonConverter());
+                //options.SerializerSettings.Converters.Add(new IValueElementJsonConverter());
+                //options.SerializerSettings.Converters.Add(new IValueIntJsonConverter());
+                //options.SerializerSettings.Converters.Add(new IValueBoolJsonConverter());
+                //options.SerializerSettings.Converters.Add(new IValueDoubleJsonConverter());
+            });
+
 
             // Add services to the container.
             configureServices(services, configuration);
@@ -139,6 +165,7 @@ namespace souchy.celebi.spark
                 c.SchemaFilter<EnumSchemaFilter>();
                 c.SchemaFilter<CharacTypeSchemaFilter>();
                 c.SchemaFilter<AdditionalPropertiesSchemaFilter>();
+                c.SchemaFilter<EffectSchemaFilter>();
 
                 //c.MapType<IID>(() => new OpenApiSchema() { Type = "IID" });
                 //c.MapType<IID>(() => new OpenApiSchema() { Type = "string" });
@@ -156,23 +183,10 @@ namespace souchy.celebi.spark
                 c.MapType<IValue<bool>>(() => mapIValue<bool>());
                 c.MapType<IValue<double>>(() => mapIValue<double>());
 
+
                 c.DocumentFilter<TypesDocumentFilter>(); // adds more document types
             });
             services.AddSwaggerGenNewtonsoftSupport();
-            services.AddControllers(options =>
-            {
-                options.Conventions.Add(new ControllerNamingConvention());
-
-            }).AddNewtonsoftJson(options =>
-            {
-                options.SerializerSettings.Converters.Add(new ObjectIdConverter());
-
-                //options.SerializerSettings.Converters.Add(new IValueZoneTypeJsonConverter());
-                //options.SerializerSettings.Converters.Add(new IValueElementJsonConverter());
-                //options.SerializerSettings.Converters.Add(new IValueIntJsonConverter());
-                //options.SerializerSettings.Converters.Add(new IValueBoolJsonConverter());
-                //options.SerializerSettings.Converters.Add(new IValueDoubleJsonConverter());
-            });
         }
 
         private static OpenApiSchema mapIValue<T>()
@@ -248,6 +262,7 @@ namespace souchy.celebi.spark
             // Mongo    
             services.Configure<MongoSettings>(configuration.GetSection(nameof(MongoSettings))); // relates to appsettings.json
             services.AddSingleton<MongoClientService>();
+            services.AddSingleton<MongoFederationService>();
             services.AddSingleton<MongoModelsDbService>();
             services.AddSingleton<MongoFightsDbService>();
             services.AddSingleton<MongoMetaDbService>();
@@ -259,7 +274,7 @@ namespace souchy.celebi.spark
             services.AddSingleton<ModelProductService>();
             services.AddSingleton<ConsumableProductService>();
             // Models
-            services.AddSingleton<SkinService>();
+            //services.AddSingleton<SkinService>();
             services.AddSingleton<StringService>();
             services.AddSingleton<IDCounterService>();
             // Fights
@@ -331,9 +346,19 @@ namespace souchy.celebi.spark
             );
 
             BsonSerializer.RegisterSerializer(objectSerializer);
-            BsonSerializer.RegisterSerializer<IID>(new IIDBsonSerializer());
-            BsonSerializer.RegisterSerializer<CharacteristicId>(new CharacIdBsonSerializer());
-            BsonSerializer.RegisterSerializer<IValue<ZoneType>>(new ValueZoneSerializer());
+
+            BsonSerializer.RegisterSerializer(new IIDBsonSerializer<IID>());
+            BsonSerializer.RegisterSerializer(new IIDBsonSerializer<StringIID>());
+            BsonSerializer.RegisterSerializer(new IIDBsonSerializer<SpellIID>());
+            BsonSerializer.RegisterSerializer(new IIDBsonSerializer<StatusIID>());
+            BsonSerializer.RegisterSerializer(new IIDBsonSerializer<CreatureIID>());
+            BsonSerializer.RegisterSerializer(new IIDBsonSerializer<AnimationSetIID>());
+            BsonSerializer.RegisterSerializer(new IIDBsonSerializer<AnimationIID>());
+            BsonSerializer.RegisterSerializer(new IIDBsonSerializer<SceneIID>());
+            BsonSerializer.RegisterSerializer(new IIDBsonSerializer<AssetIID>());
+
+            BsonSerializer.RegisterSerializer(new CharacIdBsonSerializer());
+            BsonSerializer.RegisterSerializer(new ValueZoneSerializer());
             //BsonSerializer.RegisterDiscriminator(typeof(IValue<ZoneType>), new BsonValue());
 
             BsonClassMap.RegisterClassMap<EntitySet<IID>>();

@@ -1,0 +1,32 @@
+<import from="../../../../components/modal/modal"></import>
+
+
+<!-- the Y constant -->
+<input type="number" value.bind="eq.functions[0].slopes[0]" />
+
+<!-- edit button -->
+<button class="btn" data-bs-toggle="modal" data-bs-target="#equationModal-${characid}">
+  <i class="fa-regular fa-pen-to-square"></i>
+</button>
+
+<!-- full equation editor -->
+<modal id="equationModal-${characid}" header="Edit Growth Equation" close.bind=false footer.bind=false>
+  <!-- add/delete function -->
+  <div repeat.for="func of eq.functions">
+    <!-- x range (turns range) -->
+    <div>
+      <input type="number" value.bind="func.xFromIncluded" />
+      &lt= x &lt
+      <input type="number" value.bind="func.xToExcluded" />
+    </div>
+    <!-- number of slopes (degree) -->
+    <div>
+      degree: <input type="number" value.bind="func.slopes.length" change.trigger="event => changeSlopes(event, func)" />
+    </div>
+    <!-- slopes -->
+    <div>
+      <input repeat.for="slope of func.slopes" type="number" value.bind="slope" />
+    </div>
+  </div>
+</modal>
+

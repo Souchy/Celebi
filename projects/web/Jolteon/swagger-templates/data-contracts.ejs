@@ -22,7 +22,16 @@ const dataContractTemplates = {
     }
   },
   interface: (contract) => {
-    return `interface ${contract.name} {\r\n${contract.content}}`;
+    if(contract.format === 'specialClass') { // || contract.name == 'EffectSchemaTypes') {
+      console.log(contract.name);
+    }
+    if(contract.format === 'specialClass') {
+      while(contract.content.includes(','))
+        contract.content.replace(',', ' = null;')
+      return `class ${contract.name} {\r\n${contract.content}}`; // interface
+    }
+    else 
+      return `interface ${contract.name} {\r\n${contract.content}}`; // interface
   },
   type: (contract) => {
     return `type ${contract.name} = ${contract.content}`;

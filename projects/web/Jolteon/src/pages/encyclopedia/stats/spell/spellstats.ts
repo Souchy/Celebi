@@ -1,6 +1,6 @@
-import { Stats, IStatSimple, IStatBool, StatSimple, StatBool, ReplaceOneResult, UpdateResult } from '../../../../jolteon/services/api/data-contracts';
 import { IEventAggregator, bindable, inject } from "aurelia";
 import { IRouteableComponent } from "@aurelia/router";
+import { Stats, StatSimple, StatBool, ReplaceOneResult, UpdateResult } from '../../../../jolteon/services/api/data-contracts';
 import { StatsModelController } from '../../../../jolteon/services/api/StatsModelController';
 import { Characteristics } from '../../../../jolteon/constants';
 import { HttpResponse } from '../../../../jolteon/services/api/http-client';

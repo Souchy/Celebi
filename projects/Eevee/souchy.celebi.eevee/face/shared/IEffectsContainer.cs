@@ -1,22 +1,20 @@
-﻿using souchy.celebi.eevee.enums;
-using souchy.celebi.eevee.face.objects;
+﻿using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.util;
-using souchy.celebi.eevee.impl;
-using souchy.celebi.eevee.impl.objects.effectResults;
 using souchy.celebi.eevee.impl.shared.triggers;
+using souchy.celebi.eevee.neweffects.face;
 
 namespace souchy.celebi.eevee.face.shared
 {
     public interface IEffectsContainer
     {
-        public IEntityList<ObjectId> effectIds { get; set; }
+        public IEntityList<ObjectId> EffectIds { get; set; }
         public IEnumerable<IEffect> GetEffects(); // => effectIds.Values.Select(i => Eevee.models.effects.Get(i));
 
         public IEnumerable<IEffect> checkTriggers(IAction action, TriggerEvent triggerEvent) // TriggerOrderType orderType, EffectPreview e);
         {
             return GetEffects()
                 .Where(effect =>
-                    effect.triggers.Values.Any(t => 
+                    effect.Triggers.Values.Any(t => 
                         t.checkTrigger(action, triggerEvent)
                     )
                 );

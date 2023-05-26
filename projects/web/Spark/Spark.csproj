@@ -15,8 +15,10 @@
 	  <Compile Remove="souchy.celebi.spark\services\fights\StatsService.cs" />
 	  <Compile Remove="souchy.celebi.spark\services\fights\StatusService.cs" />
 	  <Compile Remove="souchy.celebi.spark\services\models\CreatureModelService.cs" />
+	  <Compile Remove="souchy.celebi.spark\services\models\SkinService.cs" />
 	  <Compile Remove="souchy.celebi.spark\services\models\SpellModelService.cs" />
 	  <Compile Remove="souchy.celebi.spark\services\models\StatusModelService.cs" />
+	  <Compile Remove="souchy.celebi.spark\util\swagger\EffectTypeSchemaFilter.cs" />
 	</ItemGroup>
 
 	<ItemGroup>

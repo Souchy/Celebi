@@ -62,7 +62,7 @@ namespace souchy.celebi.espeon
 
         private void addStats(ICreature creature)
         {
-            var stats = fight.stats.Get(creature.stats);
+            var stats = fight.stats.Get(creature.statsId);
             stats.Set(Resource.Life.Create(90));
             stats.Set(Resource.LifeMax.Create(150));
             //stats.Set(Resource.Life.Create(0));
@@ -85,7 +85,7 @@ namespace souchy.celebi.espeon
             //spell.cooldownRemaining = rng.Next(1, 5);
             spell.GetStats().Set(SpellProperty.RemainingCharges.Create(5));
             spell.GetStats().Set(SpellProperty.RemainingCooldown.Create(3));
-            creature.spells.Add(spell.entityUid);
+            creature.spellIds.Add(spell.entityUid);
         }
     }
 }

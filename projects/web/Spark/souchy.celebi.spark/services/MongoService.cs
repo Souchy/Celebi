@@ -2,16 +2,111 @@
 using MongoDB.Driver;
 using MongoDB.Driver.Core.Configuration;
 using souchy.celebi.eevee.face.entity;
+using souchy.celebi.eevee.face.shared.models;
+using souchy.celebi.eevee.impl.shared;
+using System.Security.Cryptography.Xml;
+using System.Text.RegularExpressions;
 
 namespace souchy.celebi.spark.services
 {
     public class MongoSettings
     {
         public string ConnectionString { get; set; } = null!;
+        public string Federation { get; set; } = null!;
         public string ModelsDB { get; set; } = null!;
         public string FightsDB { get; set; } = null!;
         public string MetaDB { get; set; } = null!;
         public string I18NDB { get; set; } = null!;
+    }
+    public class MongoFederationService
+    {
+        private readonly IMongoClient _client;
+        private readonly IMongoDatabase db;
+        private readonly IMongoCollection<IStringEntity> strings;
+        private readonly IMongoCollection<ICreatureModel> creatures;
+        private readonly IMongoCollection<ISpellModel> spells;
+        //private readonly IMongoCollection<IStatusModel> statuses; // TODO
+
+        private readonly ProjectionDefinition<BsonDocument> projection = Builders<BsonDocument>.Projection.Include("_id");
+        private FilterDefinition<BsonDocument> filter(string str) => Builders<BsonDocument>.Filter.Or(
+                    Builders<BsonDocument>.Filter.Regex("name.value", str),
+                    Builders<BsonDocument>.Filter.Regex("desc.value", str)
+            );
+        public MongoFederationService(IOptions<MongoSettings> settings)
+        {
+            _client = new MongoClient(settings.Value.Federation);
+            this.db = _client.GetDatabase("VirtualDatabase0");
+            this.strings = db.GetCollection<IStringEntity>(nameof(IStringEntity));
+            this.creatures = db.GetCollection<ICreatureModel>(nameof(ICreatureModel));
+            this.spells = db.GetCollection<ISpellModel>(nameof(ISpellModel));
+            //this.statuses = db.GetCollection<IStatusModel>(nameof(IStatusModel));
+        }
+        private BsonDocument?[] pipelineStrings(string str) => new[]
+            {
+                new BsonDocument("$lookup",
+                new BsonDocument
+                    {
+                        { "from", "strings" },
+                        { "localField", nameof(ICreatureModel.nameId) },
+                        { "foreignField", "_id" },
+                        { "as", "name" }
+                    }),
+                new BsonDocument("$lookup",
+                new BsonDocument
+                    {
+                        { "from", "strings" },
+                        { "localField", nameof(ICreatureModel.descriptionId) },
+                        { "foreignField", "_id" },
+                        { "as", "desc" }
+                    }),
+                new BsonDocument("$unwind",
+                new BsonDocument("path", "$name")),
+                new BsonDocument("$unwind",
+                new BsonDocument("path", "$desc")),
+                new BsonDocument("$match",
+                new BsonDocument("$or",
+                new BsonArray
+                        {
+                            new BsonDocument("name.value", new Regex($"(?i){str}")),
+                            new BsonDocument("desc.value", new Regex($"(?i){str}"))
+                        })),
+                new BsonDocument("$project", new BsonDocument
+                    {
+                        { "name", 0 },
+                        { "desc", 0 }
+                    }
+                )
+            };
+        public async Task<List<ICreatureModel>> FindCreaturesByString(string str)
+        {
+            //var pipeline = new EmptyPipelineDefinition<ICreatureModel>()
+            //    .Lookup<ICreatureModel, ICreatureModel, IStringEntity, BsonDocument>(strings, nameof(ICreatureModel.nameId), "_id", "name")
+            //    .Lookup<ICreatureModel, BsonDocument, IStringEntity, BsonDocument>(strings, nameof(ICreatureModel.descriptionId), "_id", "desc")
+            //    .Unwind("name")
+            //    .Unwind("desc")
+            //    .Match(filter(str))
+            //    //.Project(projection)
+            //    .Project(Builders<BsonDocument>.Projection.Exclude("name").Exclude("desc"))
+            //    .Project(Builders<BsonDocument>.Projection.As<ICreatureModel>())
+            //    ;
+
+            var list = await creatures.Aggregate<ICreatureModel>(pipelineStrings(str)).ToListAsync();
+            return list;
+        }
+        public async Task<IEnumerable<ISpellModel>> FindSpellsByString(string str)
+        {
+            //var pipeline = new EmptyPipelineDefinition<ISpellModel>()
+            //    .Lookup<ISpellModel, ISpellModel,  IStringEntity, BsonDocument>(strings, nameof(ISpellModel.nameId), "_id", "name")
+            //    .Lookup<ISpellModel, BsonDocument, IStringEntity, BsonDocument>(strings, nameof(ISpellModel.descriptionId), "_id", "desc")
+            //    .Unwind("name")
+            //    .Unwind("desc")
+            //    .Match(filter(str))
+            //    //.Project(projection)
+            //    .Project(Builders<BsonDocument>.Projection.As<ISpellModel>())
+            //    ;
+            var list = await spells.Aggregate<ISpellModel>(pipelineStrings(str)).ToListAsync();
+            return list;
+        }
     }
     public class MongoClientService
     {

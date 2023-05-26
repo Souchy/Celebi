@@ -16,8 +16,8 @@ namespace souchy.celebi.eevee.face.objects.statuses
         //public IValue<int> delay { get; set; } // IStatSimple
         //public IValue<int> duration { get; set; }
 
-        public ObjectId stats { get; set; }
-        public IStats GetStats() => this.GetFight().stats.Get(stats);
+        public ObjectId statsId { get; set; }
+        public IStats GetStats() => this.GetFight().stats.Get(statsId);
     }
 
 }

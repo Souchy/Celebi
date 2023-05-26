@@ -1,5 +1,6 @@
 import { IEventAggregator, bindable, inject } from "aurelia";
-import { IStat, IStats, StatBool, StatSimple, Stats } from "../../../../jolteon/services/api/data-contracts";
+import { MathEquation, StatBool, Stats } from "../../../../jolteon/services/api/data-contracts";
+import { Constants } from "../../../../jolteon/constants";
 
 
 @inject(IEventAggregator)
@@ -18,9 +19,6 @@ export class Tablebool {
     constructor(private readonly ea: IEventAggregator) {
     }
 
-    // binding() {
-    //     console.log("table base stats: " + this.base);
-    // }
     bound() {
         // console.log("table base stats: " + this.base);
     }
@@ -35,6 +33,23 @@ export class Tablebool {
                 value: false
             }
             return stat;
+        }
+    }
+    public getGrowthEquation(id): MathEquation {
+        if (this.base?.growth?.hasOwnProperty(id)){
+            return this.base.growth[id]
+        }
+        else {
+            let equation: MathEquation = {
+                functions: [
+                    {
+                        xFromIncluded: Constants.MAX_INT,
+                        xToExcluded: Constants.MIN_INT,
+                        slopes: [0]
+                    }
+                ]
+            }
+            return equation;
         }
     }
 

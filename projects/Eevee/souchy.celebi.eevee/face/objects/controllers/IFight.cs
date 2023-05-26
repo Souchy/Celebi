@@ -2,6 +2,7 @@
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.objects.statuses;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.neweffects.face;
 
 namespace souchy.celebi.eevee.face.objects.controllers
 {

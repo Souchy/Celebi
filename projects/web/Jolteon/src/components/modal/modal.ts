@@ -16,5 +16,11 @@ export class Modal {
     public footer: boolean = true;
     @bindable
     public buttons: ModalButtons;
+    @bindable
+    public callbackok = () => {}
+
+    public clickOk() {
+        this.callbackok();
+    }
 
 }

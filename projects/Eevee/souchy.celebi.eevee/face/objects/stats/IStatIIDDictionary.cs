@@ -8,7 +8,10 @@ using System.Threading.Tasks;
 
 namespace souchy.celebi.eevee.face.objects.stats
 {
-    public interface IStatIIDDictionary : IStat, IValue<Dictionary<IID, IStat>>
+    /// <summary>
+    /// Maps a entity's ObjectId to a Stat (ex: number of spells cast per entity)
+    /// </summary>
+    public interface IEntityStatDictionary : IStat, IValue<Dictionary<ObjectId, IStat>>
     {
     }
 }
