@@ -30,7 +30,7 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
         /// </summary>
         public static readonly SpellModelProperty MaxChains         = new(8, nameof(MaxChains));
         /// <summary>
-        /// Adds to the SpellChainSchema.zone.size.x prop
+        /// Adds to the SpellChainSchema.chainZone.size.x prop
         /// </summary>
         public static readonly SpellModelProperty ChainRange        = new(9, nameof(ChainRange));
         /// <summary>
