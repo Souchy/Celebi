@@ -41,10 +41,10 @@ jobs:
         npm run build
         
     - run: ls
-    - run: cd "/home/runner/work/celebi/"
-    - run: ls
-    - run: cd "/home/runner/work/celebi/projects/web/Jolteon/"
-    - run: ls
+    #- run: cd "/home/runner/work/celebi/"
+    #- run: ls
+    #- run: cd "/home/runner/work/celebi/projects/web/Jolteon/"
+    #- run: ls
 
     - name: Deploy to branch
       uses: peaceiris/actions-gh-pages@v3
