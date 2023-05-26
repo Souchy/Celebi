@@ -37,6 +37,7 @@ jobs:
     - run: npm install
     - name: Build Aurelia
       run: |
+        npm run swagger
         npm run build
 
     - name: Deploy to branch
