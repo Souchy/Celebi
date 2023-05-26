@@ -44,4 +44,5 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: "/home/runner/work/celebi/jolteon/dist"
+        publish_branch: gh-pages/jolteon
+        publish_dir: "/home/runner/work/celebi/projects/web/jolteon/dist"
