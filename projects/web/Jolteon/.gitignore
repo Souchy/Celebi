@@ -35,4 +35,4 @@ node_modules
 /.nyc_output
 /coverage
 
-src/jolteon/services/api/
+src/jolteon/services/api/*.ts

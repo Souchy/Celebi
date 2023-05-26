@@ -1,0 +1,6515 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Spark, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "version": "1.0"
+  },
+  "paths": {
+    "/meta/auth/mammoth": {
+      "get": {
+        "tags": [
+          "AuthController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/meta/auth/ping": {
+      "get": {
+        "tags": [
+          "AuthController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/meta/auth/privatePing": {
+      "get": {
+        "tags": [
+          "AuthController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/meta/auth/displayName": {
+      "post": {
+        "tags": [
+          "AuthController"
+        ],
+        "parameters": [
+          {
+            "name": "displayname",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/meta/auth/accountInfo": {
+      "get": {
+        "tags": [
+          "AuthController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/meta/auth/identitySignup": {
+      "post": {
+        "tags": [
+          "AuthController"
+        ],
+        "parameters": [
+          {
+            "name": "displayName",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "format": "email"
+            }
+          },
+          {
+            "name": "pass",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/meta/auth/identitySignin": {
+      "post": {
+        "tags": [
+          "AuthController"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "format": "email"
+            }
+          },
+          {
+            "name": "pass",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/meta/auth/identitySignout": {
+      "post": {
+        "tags": [
+          "AuthController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/meta/auth/identitySigninExternal": {
+      "post": {
+        "tags": [
+          "AuthController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/meta/auth/verify": {
+      "get": {
+        "tags": [
+          "AuthController"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/models/creature/all": {
+      "get": {
+        "tags": [
+          "CreatureModelController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ICreatureModel"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/creature/filtered": {
+      "get": {
+        "tags": [
+          "CreatureModelController"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ICreatureModelFilterDefinition"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ICreatureModelFilterDefinition"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ICreatureModelFilterDefinition"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ICreatureModelFilterDefinition"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ICreatureModel"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/creature/byString/{str}": {
+      "get": {
+        "tags": [
+          "CreatureModelController"
+        ],
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ICreatureModel"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/creature/{id}": {
+      "get": {
+        "tags": [
+          "CreatureModelController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ICreatureModel"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CreatureModelController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatureModel"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatureModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatureModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatureModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReplaceOneResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "CreatureModelController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/creature": {
+      "post": {
+        "tags": [
+          "CreatureModelController"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatureModel"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatureModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatureModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatureModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ICreatureModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/creature/new": {
+      "post": {
+        "tags": [
+          "CreatureModelController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ICreatureModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/creature/{id}/spells": {
+      "put": {
+        "tags": [
+          "CreatureModelController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/creature/skin/all": {
+      "get": {
+        "tags": [
+          "CreatureSkinController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ICreatureSkin"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/creature/skin/{id}": {
+      "get": {
+        "tags": [
+          "CreatureSkinController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ICreatureSkin"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CreatureSkinController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ICreatureSkin"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ICreatureSkin"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ICreatureSkin"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ICreatureSkin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ICreatureSkin"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "CreatureSkinController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/creature/skin/{ids}": {
+      "get": {
+        "tags": [
+          "CreatureSkinController"
+        ],
+        "parameters": [
+          {
+            "name": "skinIds",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "ids",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ICreatureSkin"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/creature/skin": {
+      "post": {
+        "tags": [
+          "CreatureSkinController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ICreatureSkin"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/effects/all": {
+      "get": {
+        "tags": [
+          "EffectPermanentController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IEffect"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/effects/effect/{id}": {
+      "get": {
+        "tags": [
+          "EffectPermanentController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IEffect"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "EffectPermanentController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EffectPermanent"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EffectPermanent"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EffectPermanent"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EffectPermanent"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IEffect"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "EffectPermanentController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/effects/effect": {
+      "post": {
+        "tags": [
+          "EffectPermanentController"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EffectPermanent"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EffectPermanent"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EffectPermanent"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EffectPermanent"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IEffect"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/effects/{id}/child": {
+      "post": {
+        "tags": [
+          "EffectPermanentController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "schemaName",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IEffect"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/enums/charac/characteristicCategory": {
+      "get": {
+        "tags": [
+          "EnumsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CharacteristicCategory"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CharacteristicCategory"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CharacteristicCategory"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/enums/charac/resourceType": {
+      "get": {
+        "tags": [
+          "EnumsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResourceProperty"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResourceProperty"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResourceProperty"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/enums/charac/resourceProperty": {
+      "get": {
+        "tags": [
+          "EnumsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResourceEnum"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResourceEnum"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResourceEnum"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/enums/actorType": {
+      "get": {
+        "tags": [
+          "EnumsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ActorType"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ActorType"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ActorType"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/enums/boardTargetType": {
+      "get": {
+        "tags": [
+          "EnumsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BoardTargetType"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BoardTargetType"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BoardTargetType"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/enums/moveType": {
+      "get": {
+        "tags": [
+          "EnumsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MoveType"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MoveType"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MoveType"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/enums/teamRelationType": {
+      "get": {
+        "tags": [
+          "EnumsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TeamRelationType"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TeamRelationType"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TeamRelationType"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/enums/zoneType": {
+      "get": {
+        "tags": [
+          "EnumsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ZoneType"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ZoneType"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ZoneType"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/enums/triggerType": {
+      "get": {
+        "tags": [
+          "EnumsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TriggerType"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TriggerType"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TriggerType"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/enums/towerDirectionType": {
+      "get": {
+        "tags": [
+          "EnumsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TowerDirectionType"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TowerDirectionType"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TowerDirectionType"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/enums/statusPriorityType": {
+      "get": {
+        "tags": [
+          "EnumsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatusPriorityType"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatusPriorityType"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatusPriorityType"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/enums/direction8Type": {
+      "get": {
+        "tags": [
+          "EnumsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Direction8Type"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Direction8Type"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Direction8Type"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/enums/direction9Type": {
+      "get": {
+        "tags": [
+          "EnumsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Direction9Type"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Direction9Type"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Direction9Type"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/enums/effectType": {
+      "get": {
+        "tags": [
+          "EnumsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EffT"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EffT"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EffT"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/properties/charac/resource": {
+      "get": {
+        "tags": [
+          "PropertiesController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Resource"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Resource"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Resource"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/properties/charac/affinity": {
+      "get": {
+        "tags": [
+          "PropertiesController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Affinity"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Affinity"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Affinity"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/properties/charac/resistance": {
+      "get": {
+        "tags": [
+          "PropertiesController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Resistance"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Resistance"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Resistance"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/properties/charac/contextual": {
+      "get": {
+        "tags": [
+          "PropertiesController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Contextual"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Contextual"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Contextual"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/properties/charac/other": {
+      "get": {
+        "tags": [
+          "PropertiesController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OtherProperty"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OtherProperty"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OtherProperty"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/properties/charac/spellmodel": {
+      "get": {
+        "tags": [
+          "PropertiesController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpellModelProperty"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpellModelProperty"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpellModelProperty"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/properties/charac/spell": {
+      "get": {
+        "tags": [
+          "PropertiesController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpellProperty"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpellProperty"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpellProperty"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/properties/charac/state": {
+      "get": {
+        "tags": [
+          "PropertiesController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/State"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/State"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/State"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/properties/charac/statusmodel": {
+      "get": {
+        "tags": [
+          "PropertiesController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatusProperty"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatusProperty"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatusProperty"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/properties/effects/schemas": {
+      "get": {
+        "tags": [
+          "PropertiesController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SchemaDescription"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SchemaDescription"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SchemaDescription"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/properties/effects/schema/{name}": {
+      "get": {
+        "tags": [
+          "PropertiesController"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SchemaDescription"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SchemaDescription"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SchemaDescription"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/meta/shop/modelProducts": {
+      "get": {
+        "tags": [
+          "ShopController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ModelProduct"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/meta/shop/consumableProducts": {
+      "get": {
+        "tags": [
+          "ShopController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ConsumableProduct"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/meta/shop/currencyProducts": {
+      "get": {
+        "tags": [
+          "ShopController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CurrencyProduct"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/meta/shop/buyModel": {
+      "post": {
+        "tags": [
+          "ShopController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelProduct"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/meta/shop/buyConsumable": {
+      "post": {
+        "tags": [
+          "ShopController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelProduct"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/spell/all": {
+      "get": {
+        "tags": [
+          "SpellModelController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ISpellModel"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/spell/list": {
+      "get": {
+        "tags": [
+          "SpellModelController"
+        ],
+        "parameters": [
+          {
+            "name": "list",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ISpellModel"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/spell/filtered": {
+      "get": {
+        "tags": [
+          "SpellModelController"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ISpellModelFilterDefinition"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ISpellModelFilterDefinition"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ISpellModelFilterDefinition"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ISpellModelFilterDefinition"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ISpellModel"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/spell/byString/{str}": {
+      "get": {
+        "tags": [
+          "SpellModelController"
+        ],
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ISpellModel"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/spell/{id}": {
+      "get": {
+        "tags": [
+          "SpellModelController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISpellModel"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SpellModelController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpellModel"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpellModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpellModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpellModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISpellModel"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SpellModelController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/spell": {
+      "post": {
+        "tags": [
+          "SpellModelController"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpellModel"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpellModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpellModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpellModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISpellModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/spell/new": {
+      "post": {
+        "tags": [
+          "SpellModelController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISpellModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/spell/{id}/effect": {
+      "post": {
+        "tags": [
+          "SpellModelController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "effectParentId",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "schemaName",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISpellModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/spell/skin/all": {
+      "get": {
+        "tags": [
+          "SpellSkinController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ISpellSkin"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/spell/skin/{id}": {
+      "get": {
+        "tags": [
+          "SpellSkinController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISpellSkin"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SpellSkinController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ISpellSkin"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ISpellSkin"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ISpellSkin"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ISpellSkin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISpellSkin"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SpellSkinController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/spell/skin/{ids}": {
+      "get": {
+        "tags": [
+          "SpellSkinController"
+        ],
+        "parameters": [
+          {
+            "name": "skinIds",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "ids",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ISpellSkin"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/spell/skin": {
+      "post": {
+        "tags": [
+          "SpellSkinController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISpellSkin"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/stats/all": {
+      "get": {
+        "tags": [
+          "StatsModelController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IStats"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/stats/filtered": {
+      "get": {
+        "tags": [
+          "StatsModelController"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IStatsFilterDefinition"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IStatsFilterDefinition"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IStatsFilterDefinition"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IStatsFilterDefinition"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IStats"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/stats/{id}": {
+      "get": {
+        "tags": [
+          "StatsModelController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IStats"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "StatsModelController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IStats"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IStats"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IStats"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IStats"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReplaceOneResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "StatsModelController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/stats": {
+      "post": {
+        "tags": [
+          "StatsModelController"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IStats"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IStats"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IStats"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IStats"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/models/stats/{id}/bool": {
+      "put": {
+        "tags": [
+          "StatsModelController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatBool"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatBool"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatBool"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatBool"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/stats/{id}/simple": {
+      "put": {
+        "tags": [
+          "StatsModelController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatSimple"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatSimple"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatSimple"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatSimple"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/status/all": {
+      "get": {
+        "tags": [
+          "StatusModelController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IStatusModel"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/status/status/{id}": {
+      "get": {
+        "tags": [
+          "StatusModelController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IStatusModel"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "StatusModelController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatusModel"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatusModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatusModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatusModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReplaceOneResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "StatusModelController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/status/status": {
+      "post": {
+        "tags": [
+          "StatusModelController"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatusModel"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatusModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatusModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatusModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/models/string/all": {
+      "get": {
+        "tags": [
+          "StringController"
+        ],
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "$ref": "#/components/schemas/I18NType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IStringEntity"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/string/filtered": {
+      "get": {
+        "tags": [
+          "StringController"
+        ],
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "$ref": "#/components/schemas/I18NType"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IStringEntityFilterDefinition"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IStringEntityFilterDefinition"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IStringEntityFilterDefinition"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IStringEntityFilterDefinition"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IStringEntity"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/string/{id}": {
+      "get": {
+        "tags": [
+          "StringController"
+        ],
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "$ref": "#/components/schemas/I18NType"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IStringEntity"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "StringController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "$ref": "#/components/schemas/I18NType"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StringEntity"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StringEntity"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StringEntity"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StringEntity"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReplaceOneResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "StringController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/string": {
+      "post": {
+        "tags": [
+          "StringController"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StringEntity"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StringEntity"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StringEntity"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StringEntity"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AccountInfo": {
+        "type": "object",
+        "properties": {
+          "accessByIp": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IpAccess"
+            },
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "familyName": {
+            "type": "string",
+            "nullable": true
+          },
+          "picture": {
+            "type": "string",
+            "nullable": true
+          },
+          "currency": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ownedModels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ActorType": {
+        "enum": [
+          "Source",
+          "Target"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "AddGlyph": {
+        "type": "object",
+        "properties": {
+          "modelId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddGlyphAura": {
+        "type": "object",
+        "properties": {
+          "modelId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddStat": {
+        "type": "object",
+        "properties": {
+          "stat": {
+            "$ref": "#/components/schemas/IStat"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddStatScript": {
+        "type": "object",
+        "properties": {
+          "schemaType": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddStatusCreature": {
+        "type": "object",
+        "properties": {
+          "modelId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddTrap": {
+        "type": "object",
+        "properties": {
+          "modelId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Affinity": {
+        "type": "object",
+        "properties": {
+          "element": {
+            "$ref": "#/components/schemas/ElementType"
+          },
+          "category": {
+            "$ref": "#/components/schemas/CharacteristicCategory"
+          },
+          "localId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "baseName": {
+            "type": "string",
+            "nullable": true
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          },
+          "statValueType": {
+            "$ref": "#/components/schemas/StatValueType"
+          },
+          "id": {
+            "type": "string"
+          },
+          "nameModelUid": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AffinityTypes": {
+        "enum": [
+          "True: Affinity = {\r\n  \"element\": 1,\r\n  \"category\": 2,\r\n  \"localId\": 1,\r\n  \"baseName\": \"True\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2001\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.True\"\r\n};",
+          "Fire: Affinity = {\r\n  \"element\": 2,\r\n  \"category\": 2,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Fire\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2002\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Fire\"\r\n};",
+          "Water: Affinity = {\r\n  \"element\": 3,\r\n  \"category\": 2,\r\n  \"localId\": 3,\r\n  \"baseName\": \"Water\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2003\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Water\"\r\n};",
+          "Earth: Affinity = {\r\n  \"element\": 4,\r\n  \"category\": 2,\r\n  \"localId\": 4,\r\n  \"baseName\": \"Earth\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2004\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Earth\"\r\n};",
+          "Air: Affinity = {\r\n  \"element\": 5,\r\n  \"category\": 2,\r\n  \"localId\": 5,\r\n  \"baseName\": \"Air\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2005\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Air\"\r\n};",
+          "Dark: Affinity = {\r\n  \"element\": 6,\r\n  \"category\": 2,\r\n  \"localId\": 6,\r\n  \"baseName\": \"Dark\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2006\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Dark\"\r\n};",
+          "Light: Affinity = {\r\n  \"element\": 7,\r\n  \"category\": 2,\r\n  \"localId\": 7,\r\n  \"baseName\": \"Light\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2007\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Light\"\r\n};",
+          "Damage: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 20,\r\n  \"baseName\": \"Damage\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2020\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Damage\"\r\n};",
+          "IndirectDamage: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 21,\r\n  \"baseName\": \"IndirectDamage\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2021\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.IndirectDamage\"\r\n};",
+          "Heal: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 22,\r\n  \"baseName\": \"Heal\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2022\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Heal\"\r\n};",
+          "Melee: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 23,\r\n  \"baseName\": \"Melee\",\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 5,\r\n      \"groupType\": 0,\r\n      \"children\": []\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2023\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Melee\"\r\n};",
+          "Distance: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 24,\r\n  \"baseName\": \"Distance\",\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 2,\r\n      \"groupType\": 0,\r\n      \"children\": []\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2024\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Distance\"\r\n};",
+          "Trap: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 25,\r\n  \"baseName\": \"Trap\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2025\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Trap\"\r\n};",
+          "Glyph: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 26,\r\n  \"baseName\": \"Glyph\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2026\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Glyph\"\r\n};",
+          "PenetrationPercent: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 27,\r\n  \"baseName\": \"PenetrationPercent\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2027\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.PenetrationPercent\"\r\n};"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "AnimationsData": {
+        "type": "object",
+        "properties": {
+          "idle": {
+            "type": "string",
+            "nullable": true
+          },
+          "run": {
+            "type": "string",
+            "nullable": true
+          },
+          "walk": {
+            "type": "string",
+            "nullable": true
+          },
+          "receiveHit": {
+            "type": "string",
+            "nullable": true
+          },
+          "victory": {
+            "type": "string",
+            "nullable": true
+          },
+          "defeat": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BoardTargetType": {
+        "enum": [
+          "Cell",
+          "Creature"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "BuildObstacle": {
+        "type": "object",
+        "properties": {
+          "modelId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CastSubSpell": {
+        "type": "object",
+        "properties": {
+          "modelId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ChangeActor": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ChangeActorScript": {
+        "type": "object",
+        "properties": {
+          "schemaType": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ChangeAnimationSet": {
+        "type": "object",
+        "properties": {
+          "modelId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ChangeAppearance": {
+        "type": "object",
+        "properties": {
+          "modelId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CharacteristicCategory": {
+        "enum": [
+          "Resource",
+          "Affinity",
+          "Resistance",
+          "State",
+          "Contextual",
+          "Other",
+          "Spell",
+          "SpellModel",
+          "Status"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "CharacteristicIdIStatKeyValuePair": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "$ref": "#/components/schemas/IStat"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConditionComparatorType": {
+        "enum": [
+          "EQ",
+          "NE",
+          "GT",
+          "GE",
+          "LT",
+          "LE"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "ConditionGroupType": {
+        "enum": [
+          "AND",
+          "OR"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "ConsumableDrop": {
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "string"
+          },
+          "weight": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConsumableProduct": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ConsumableType"
+          },
+          "drops": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConsumableDrop"
+            },
+            "nullable": true
+          },
+          "_id": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isAvailableInShop": {
+            "type": "boolean"
+          },
+          "isAvailableInDrop": {
+            "type": "boolean"
+          },
+          "dropWeight": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "limitType": {
+            "$ref": "#/components/schemas/LimitType"
+          },
+          "limitPerAccount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConsumableType": {
+        "enum": [
+          "All",
+          "Random"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "Contextual": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/CharacteristicCategory"
+          },
+          "localId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "baseName": {
+            "type": "string",
+            "nullable": true
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          },
+          "statValueType": {
+            "$ref": "#/components/schemas/StatValueType"
+          },
+          "id": {
+            "type": "string"
+          },
+          "nameModelUid": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContextualTypes": {
+        "enum": [
+          "LifeGained: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 0,\r\n  \"baseName\": \"LifeGained\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5000\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.LifeGained\"\r\n};",
+          "LifeUsed: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 1,\r\n  \"baseName\": \"LifeUsed\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5001\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.LifeUsed\"\r\n};",
+          "LifeLost: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 2,\r\n  \"baseName\": \"LifeLost\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5002\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.LifeLost\"\r\n};",
+          "ManaGained: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 3,\r\n  \"baseName\": \"ManaGained\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5003\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.ManaGained\"\r\n};",
+          "ManaUsed: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 4,\r\n  \"baseName\": \"ManaUsed\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5004\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.ManaUsed\"\r\n};",
+          "ManaLost: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 5,\r\n  \"baseName\": \"ManaLost\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5005\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.ManaLost\"\r\n};",
+          "MovementGained: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 6,\r\n  \"baseName\": \"MovementGained\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5006\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.MovementGained\"\r\n};",
+          "MovementUsed: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 7,\r\n  \"baseName\": \"MovementUsed\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5007\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.MovementUsed\"\r\n};",
+          "MovementLost: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 8,\r\n  \"baseName\": \"MovementLost\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5008\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.MovementLost\"\r\n};",
+          "CountHitsGiven: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 9,\r\n  \"baseName\": \"CountHitsGiven\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5009\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.CountHitsGiven\"\r\n};",
+          "CountHitsTaken: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 10,\r\n  \"baseName\": \"CountHitsTaken\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5010\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.CountHitsTaken\"\r\n};",
+          "ManaReduced: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 15,\r\n  \"baseName\": \"ManaReduced\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5015\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.ManaReduced\"\r\n};",
+          "MovementReduced: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 16,\r\n  \"baseName\": \"MovementReduced\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5016\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.MovementReduced\"\r\n};",
+          "StartTurnPosition: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 11,\r\n  \"baseName\": \"StartTurnPosition\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5011\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.StartTurnPosition\"\r\n};",
+          "StartFightPosition: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 12,\r\n  \"baseName\": \"StartFightPosition\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5012\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.StartFightPosition\"\r\n};",
+          "PreviousPositions: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 13,\r\n  \"baseName\": \"PreviousPositions\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 3,\r\n  \"id\": \"5013\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.PreviousPositions\"\r\n};",
+          "NextPositions: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 14,\r\n  \"baseName\": \"NextPositions\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 3,\r\n  \"id\": \"5014\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.NextPositions\"\r\n};"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "CreateGlyph": {
+        "type": "object",
+        "properties": {
+          "statusStats": {
+            "$ref": "#/components/schemas/StatusStats"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateGlyphAura": {
+        "type": "object",
+        "properties": {
+          "statusStats": {
+            "$ref": "#/components/schemas/StatusStats"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateStatusCreature": {
+        "type": "object",
+        "properties": {
+          "statusStats": {
+            "$ref": "#/components/schemas/CreatureStats"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateTrap": {
+        "type": "object",
+        "properties": {
+          "statusStats": {
+            "$ref": "#/components/schemas/StatusStats"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreatureModel": {
+        "type": "object",
+        "properties": {
+          "entityUid": {
+            "type": "string"
+          },
+          "modelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "nameId": {
+            "type": "string"
+          },
+          "descriptionId": {
+            "type": "string"
+          },
+          "statsId": {
+            "type": "string"
+          },
+          "spellIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "statusPassiveIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "skinIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreatureModelCondition": {
+        "type": "object",
+        "properties": {
+          "creatureModelId": {
+            "type": "string",
+            "nullable": true
+          },
+          "actorType": {
+            "$ref": "#/components/schemas/ActorType"
+          },
+          "comparator": {
+            "$ref": "#/components/schemas/ConditionComparatorType"
+          },
+          "groupType": {
+            "$ref": "#/components/schemas/ConditionGroupType"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
+      "CreatureStats": {
+        "type": "object",
+        "properties": {
+          "growth": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/MathEquation"
+            },
+            "nullable": true
+          },
+          "entityUid": {
+            "type": "string"
+          },
+          "dic": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/IStat"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "CurrencyProduct": {
+        "type": "object",
+        "properties": {
+          "price": {
+            "type": "number",
+            "format": "float"
+          },
+          "_id": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isAvailableInShop": {
+            "type": "boolean"
+          },
+          "isAvailableInDrop": {
+            "type": "boolean"
+          },
+          "dropWeight": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "limitType": {
+            "$ref": "#/components/schemas/LimitType"
+          },
+          "limitPerAccount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DamagePerDynamicResourceUsedForSpell": {
+        "type": "object",
+        "properties": {
+          "charId": {
+            "type": "string"
+          },
+          "baseDamagePerCharacUsed": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DamagePerManaReducedInTurn": {
+        "type": "object",
+        "properties": {
+          "baseDamagePerCharacReduced": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DamagePerMovementReducedInTurn": {
+        "type": "object",
+        "properties": {
+          "baseDamagePerCharacReduced": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DashAwayBy": {
+        "type": "object",
+        "properties": {
+          "distance": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "moveTargetZone": {
+            "$ref": "#/components/schemas/IZone"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DashBy": {
+        "type": "object",
+        "properties": {
+          "distance": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "moveTargetZone": {
+            "$ref": "#/components/schemas/IZone"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DashTo": {
+        "type": "object",
+        "properties": {
+          "moveTargetZone": {
+            "$ref": "#/components/schemas/IZone"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeleteResult": {
+        "type": "object",
+        "properties": {
+          "deletedCount": {
+            "type": "integer",
+            "format": "int64",
+            "readOnly": true
+          },
+          "isAcknowledged": {
+            "type": "boolean",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DestroyObstacle": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "DigHole": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "DirectDamage": {
+        "type": "object",
+        "properties": {
+          "element": {
+            "$ref": "#/components/schemas/ElementType"
+          },
+          "baseDamage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "percentPenetration": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DirectDamagePercentLifeMax": {
+        "type": "object",
+        "properties": {
+          "element": {
+            "$ref": "#/components/schemas/ElementType"
+          },
+          "baseDamage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "percentPenetration": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DirectDamagePercentLifeMaxScript": {
+        "type": "object",
+        "properties": {
+          "schemaType": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DirectDamageScript": {
+        "type": "object",
+        "properties": {
+          "schemaType": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DirectDamageStealLife": {
+        "type": "object",
+        "properties": {
+          "element": {
+            "$ref": "#/components/schemas/ElementType"
+          },
+          "baseDamage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "percentPenetration": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DirectDamageStealLifeScript": {
+        "type": "object",
+        "properties": {
+          "schemaType": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Direction8Type": {
+        "enum": [
+          "top",
+          "topright",
+          "right",
+          "bottomright",
+          "bottom",
+          "bottomleft",
+          "left",
+          "topleft"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "Direction9Type": {
+        "enum": [
+          "center",
+          "top",
+          "topright",
+          "right",
+          "bottomright",
+          "bottom",
+          "bottomleft",
+          "left",
+          "topleft"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "DistanceCondition": {
+        "type": "object",
+        "properties": {
+          "distance": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "actorType": {
+            "$ref": "#/components/schemas/ActorType"
+          },
+          "comparator": {
+            "$ref": "#/components/schemas/ConditionComparatorType"
+          },
+          "groupType": {
+            "$ref": "#/components/schemas/ConditionGroupType"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
+      "EffT": {
+        "enum": [
+          "AddStat",
+          "LearnSpell",
+          "ForgetSpell",
+          "ChangeAppearance",
+          "ChangeAnimationSet",
+          "ReduceDamageReceived",
+          "AddSpellRange",
+          "AddSpellEffectBaseDamage",
+          "ChangeSpellRangeZone",
+          "ChangeSpellEffectZone",
+          "BuildObstacle",
+          "DestroyObstacle",
+          "DigHole",
+          "FillHole",
+          "Kill",
+          "Revive",
+          "EndTurn",
+          "SpawnSummon",
+          "UnspawnSummon",
+          "SpawnSummonDouble",
+          "SpawnSummonDoubleIllusion",
+          "RevealCreatureSpells",
+          "Walk",
+          "PushBy",
+          "PullBy",
+          "DashBy",
+          "DashAwayBy",
+          "PushTo",
+          "PullTo",
+          "DashTo",
+          "SwapSelfWith",
+          "SwapTargetWith",
+          "TeleportSelfTo",
+          "TeleportTargetTo",
+          "TeleportSelfBy",
+          "TeleportTargetBy",
+          "TeleportSymmetricallySelfOverTarget",
+          "TeleportSymmetricallyTargetOverSelf",
+          "TeleportSymmetricallyAoeOverTarget",
+          "TeleportToPreviousPosition",
+          "TeleportToStartOfTurnPosition",
+          "TeleportToStartOfFightPosition",
+          "ChangeActor",
+          "CastSubSpell",
+          "RandomChild",
+          "RandomPointsInZone",
+          "EmptyText",
+          "AddStatusCreature",
+          "AddTrap",
+          "AddGlyph",
+          "AddGlyphAura",
+          "CreateStatusCreature",
+          "CreateTrap",
+          "CreateGlyph",
+          "CreateGlyphAura",
+          "RemoveStatusCreature",
+          "RemoveTrap",
+          "RemoveGlyph",
+          "DirectDamage",
+          "DirectDamagePercentLifeMax",
+          "DirectDamageStealLife",
+          "IndirectDamage",
+          "IndirectDamagePercentLifeMax",
+          "RedirectDamage",
+          "Heal",
+          "HealPercentLifeMax",
+          "HealPercentLifeDamageReceived",
+          "HealPercentLifeDamageDone",
+          "TransferLife",
+          "TransferPercentLifeMax",
+          "DamagePerDynamicResourceUsedForSpell",
+          "DamagePerManaReducedInTurn",
+          "DamagePerMovementReducedInTurn",
+          "SwapOut",
+          "SwapIn"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "EffectInstance": {
+        "type": "object",
+        "properties": {
+          "fightUid": {
+            "type": "string"
+          },
+          "entityUid": {
+            "type": "string"
+          },
+          "modelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "schema": {
+            "$ref": "#/components/schemas/IEffectSchema"
+          },
+          "sourceCondition": {
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "targetFilter": {
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "targetAcquisitionZone": {
+            "$ref": "#/components/schemas/IZone"
+          },
+          "triggers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ITrigger"
+            },
+            "nullable": true
+          },
+          "effectIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
+      "EffectPermanent": {
+        "type": "object",
+        "properties": {
+          "entityUid": {
+            "type": "string"
+          },
+          "modelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "schema": {
+            "$ref": "#/components/schemas/IEffectSchema"
+          },
+          "sourceCondition": {
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "targetFilter": {
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "targetAcquisitionZone": {
+            "$ref": "#/components/schemas/IZone"
+          },
+          "triggers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ITrigger"
+            },
+            "nullable": true
+          },
+          "effectIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
+      "ElementType": {
+        "enum": [
+          "None",
+          "True",
+          "Fire",
+          "Water",
+          "Earth",
+          "Air",
+          "Dark",
+          "Light"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "EmptyText": {
+        "type": "object",
+        "properties": {
+          "modelId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EndTurn": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "EntityStatDictionary": {
+        "type": "object",
+        "properties": {
+          "entityUid": {
+            "type": "string"
+          },
+          "statId": {
+            "type": "string"
+          },
+          "value": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/IStat"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FillHole": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ForgetSpell": {
+        "type": "object",
+        "properties": {
+          "modelId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Heal": {
+        "type": "object",
+        "properties": {
+          "element": {
+            "$ref": "#/components/schemas/ElementType"
+          },
+          "baseHeal": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "HealPercentLifeDamageDone": {
+        "type": "object",
+        "properties": {
+          "element": {
+            "$ref": "#/components/schemas/ElementType"
+          },
+          "percentHeal": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "HealPercentLifeDamageDoneScript": {
+        "type": "object",
+        "properties": {
+          "schemaType": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "HealPercentLifeDamageReceived": {
+        "type": "object",
+        "properties": {
+          "element": {
+            "$ref": "#/components/schemas/ElementType"
+          },
+          "percentHeal": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "HealPercentLifeDamageReceivedScript": {
+        "type": "object",
+        "properties": {
+          "schemaType": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "HealPercentLifeMax": {
+        "type": "object",
+        "properties": {
+          "element": {
+            "$ref": "#/components/schemas/ElementType"
+          },
+          "percentHeal": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "percentOfWhoseLife": {
+            "$ref": "#/components/schemas/ActorType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "HealPercentLifeMaxScript": {
+        "type": "object",
+        "properties": {
+          "schemaType": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "HealScript": {
+        "type": "object",
+        "properties": {
+          "schemaType": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "I18NType": {
+        "enum": [
+          "fr",
+          "en"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "ICondition": {
+        "type": "object",
+        "properties": {
+          "actorType": {
+            "$ref": "#/components/schemas/ActorType"
+          },
+          "comparator": {
+            "$ref": "#/components/schemas/ConditionComparatorType"
+          },
+          "groupType": {
+            "$ref": "#/components/schemas/ConditionGroupType"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
+      "ICreatureModel": {
+        "type": "object",
+        "properties": {
+          "nameId": {
+            "type": "string"
+          },
+          "descriptionId": {
+            "type": "string"
+          },
+          "skinIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "statsId": {
+            "type": "string"
+          },
+          "spellIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "statusPassiveIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "modelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "entityUid": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ICreatureModelFilterDefinition": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ICreatureSkin": {
+        "type": "object",
+        "properties": {
+          "nameId": {
+            "type": "string"
+          },
+          "descriptionId": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string",
+            "nullable": true
+          },
+          "meshModel": {
+            "type": "string",
+            "nullable": true
+          },
+          "meshName": {
+            "type": "string",
+            "nullable": true
+          },
+          "animations": {
+            "$ref": "#/components/schemas/AnimationsData"
+          },
+          "spellSkins": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          },
+          "effectSkins": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          },
+          "entityUid": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IEffect": {
+        "type": "object",
+        "properties": {
+          "schema": {
+            "$ref": "#/components/schemas/IEffectSchema"
+          },
+          "sourceCondition": {
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "targetFilter": {
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "targetAcquisitionZone": {
+            "$ref": "#/components/schemas/IZone"
+          },
+          "triggers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ITrigger"
+            },
+            "nullable": true
+          },
+          "modelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "entityUid": {
+            "type": "string"
+          },
+          "effectIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
+      "IEffectSchema": {
+        "type": "object",
+        "properties": {
+          "effType": {
+            "$ref": "#/components/schemas/EffT"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ISpellModel": {
+        "type": "object",
+        "properties": {
+          "nameId": {
+            "type": "string"
+          },
+          "descriptionId": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string",
+            "nullable": true
+          },
+          "skinIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "sourceCondition": {
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "targetFilter": {
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "costs": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            },
+            "nullable": true
+          },
+          "statsId": {
+            "type": "string"
+          },
+          "rangeZoneMin": {
+            "$ref": "#/components/schemas/IZone"
+          },
+          "rangeZoneMax": {
+            "$ref": "#/components/schemas/IZone"
+          },
+          "modelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "entityUid": {
+            "type": "string"
+          },
+          "effectIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ISpellModelFilterDefinition": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ISpellSkin": {
+        "type": "object",
+        "properties": {
+          "sourceAnimation": {
+            "type": "string",
+            "nullable": true
+          },
+          "targetAnimation": {
+            "type": "string",
+            "nullable": true
+          },
+          "behaviourScript": {
+            "type": "string",
+            "nullable": true
+          },
+          "entityUid": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IStat": {
+        "type": "object",
+        "properties": {
+          "statId": {
+            "type": "string"
+          },
+          "entityUid": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IStats": {
+        "type": "object",
+        "properties": {
+          "entityUid": {
+            "type": "string"
+          },
+          "keys": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IStat"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "pairs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CharacteristicIdIStatKeyValuePair"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "IStatsFilterDefinition": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "IStatusCondition": {
+        "type": "object",
+        "properties": {
+          "statusModelId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "statId": {
+            "type": "string"
+          },
+          "value": {
+            "nullable": true
+          },
+          "actorType": {
+            "$ref": "#/components/schemas/ActorType"
+          },
+          "comparator": {
+            "$ref": "#/components/schemas/ConditionComparatorType"
+          },
+          "groupType": {
+            "$ref": "#/components/schemas/ConditionGroupType"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
+      "IStatusModel": {
+        "type": "object",
+        "properties": {
+          "nameId": {
+            "type": "string"
+          },
+          "descriptionId": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string",
+            "nullable": true
+          },
+          "statsId": {
+            "type": "string"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/StatusPriorityType"
+          },
+          "modelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "entityUid": {
+            "type": "string"
+          },
+          "effectIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "IStringEntity": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "modelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "entityUid": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IStringEntityFilterDefinition": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ITrigger": {
+        "type": "object",
+        "properties": {
+          "triggerType": {
+            "$ref": "#/components/schemas/TriggerType"
+          },
+          "triggerOrderType": {
+            "$ref": "#/components/schemas/TriggerOrderType"
+          },
+          "triggerZone": {
+            "$ref": "#/components/schemas/IZone"
+          },
+          "triggererFilter": {
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "holderCondition": {
+            "$ref": "#/components/schemas/ICondition"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IVector2": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "z": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IVector3": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "z": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "y": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IZone": {
+        "type": "object",
+        "properties": {
+          "zoneType": {
+            "$ref": "#/components/schemas/ZoneType"
+          },
+          "size": {
+            "$ref": "#/components/schemas/IVector3"
+          },
+          "negative": {
+            "type": "boolean"
+          },
+          "worldOrigin": {
+            "$ref": "#/components/schemas/ActorType"
+          },
+          "worldOffset": {
+            "$ref": "#/components/schemas/IVector2"
+          },
+          "localOrigin": {
+            "$ref": "#/components/schemas/Direction9Type"
+          },
+          "rotation": {
+            "$ref": "#/components/schemas/Rotation4Type"
+          },
+          "canRotate": {
+            "type": "boolean",
+            "format": "boolean",
+            "nullable": true
+          },
+          "sizeIndexExtendFromSource": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IZone"
+            },
+            "nullable": true
+          },
+          "maxSampleCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "samplingType": {
+            "$ref": "#/components/schemas/TargetSamplingType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IndirectDamage": {
+        "type": "object",
+        "properties": {
+          "element": {
+            "$ref": "#/components/schemas/ElementType"
+          },
+          "baseDamage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "percentPenetration": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IndirectDamagePercentLifeMax": {
+        "type": "object",
+        "properties": {
+          "element": {
+            "$ref": "#/components/schemas/ElementType"
+          },
+          "baseDamage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "percentPenetration": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IndirectDamagePercentLifeMaxScript": {
+        "type": "object",
+        "properties": {
+          "schemaType": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "IndirectDamageScript": {
+        "type": "object",
+        "properties": {
+          "schemaType": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "IpAccess": {
+        "type": "object",
+        "properties": {
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastAccess": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "verified": {
+            "type": "boolean"
+          },
+          "refreshToken": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Kill": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "LearnSpell": {
+        "type": "object",
+        "properties": {
+          "modelId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LimitType": {
+        "enum": [
+          "Owned",
+          "Bought"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "MathEquation": {
+        "type": "object",
+        "properties": {
+          "functions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MathFunction"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "MathFunction": {
+        "type": "object",
+        "properties": {
+          "xFromIncluded": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "xToExcluded": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "slopes": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "MetaSpell": {
+        "type": "object",
+        "properties": {
+          "spell": {
+            "type": "string",
+            "nullable": true
+          },
+          "spellMods": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpellMetaSchema"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ModelProduct": {
+        "type": "object",
+        "properties": {
+          "modelID": {
+            "type": "string",
+            "nullable": true
+          },
+          "_id": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isAvailableInShop": {
+            "type": "boolean"
+          },
+          "isAvailableInDrop": {
+            "type": "boolean"
+          },
+          "dropWeight": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "limitType": {
+            "$ref": "#/components/schemas/LimitType"
+          },
+          "limitPerAccount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MoveType": {
+        "enum": [
+          "Walk",
+          "Translate",
+          "Teleport",
+          "Carry",
+          "Throw"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "OtherProperty": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/CharacteristicCategory"
+          },
+          "localId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "baseName": {
+            "type": "string",
+            "nullable": true
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          },
+          "statValueType": {
+            "$ref": "#/components/schemas/StatValueType"
+          },
+          "id": {
+            "type": "string"
+          },
+          "nameModelUid": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OtherPropertyTypes": {
+        "enum": [
+          "Range: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 0,\r\n  \"baseName\": \"Range\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6000\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.Range\"\r\n};",
+          "Speed: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 1,\r\n  \"baseName\": \"Speed\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6001\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.Speed\"\r\n};",
+          "Erosion: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Erosion\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6002\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.Erosion\"\r\n};",
+          "Echo: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 3,\r\n  \"baseName\": \"Echo\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6003\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.Echo\"\r\n};"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "PullBy": {
+        "type": "object",
+        "properties": {
+          "distance": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "moveTargetZone": {
+            "$ref": "#/components/schemas/IZone"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PullTo": {
+        "type": "object",
+        "properties": {
+          "moveTargetZone": {
+            "$ref": "#/components/schemas/IZone"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PushBy": {
+        "type": "object",
+        "properties": {
+          "distance": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "moveTargetZone": {
+            "$ref": "#/components/schemas/IZone"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PushTo": {
+        "type": "object",
+        "properties": {
+          "moveTargetZone": {
+            "$ref": "#/components/schemas/IZone"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RandomChild": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "RandomPointsInZone": {
+        "type": "object",
+        "properties": {
+          "maximumPointsCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "percentChancePerPoint": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RedirectDamage": {
+        "type": "object",
+        "properties": {
+          "percentRedirect": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReduceDamageReceived": {
+        "type": "object",
+        "properties": {
+          "reduction": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RemoveGlyph": {
+        "type": "object",
+        "properties": {
+          "statusFilter": {
+            "$ref": "#/components/schemas/IStatusCondition"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RemoveStatusCreature": {
+        "type": "object",
+        "properties": {
+          "statusFilter": {
+            "$ref": "#/components/schemas/IStatusCondition"
+          },
+          "durationToRemove": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RemoveTrap": {
+        "type": "object",
+        "properties": {
+          "statusFilter": {
+            "$ref": "#/components/schemas/IStatusCondition"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReplaceOneResult": {
+        "type": "object",
+        "properties": {
+          "isAcknowledged": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "isModifiedCountAvailable": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "matchedCount": {
+            "type": "integer",
+            "format": "int64",
+            "readOnly": true
+          },
+          "modifiedCount": {
+            "type": "integer",
+            "format": "int64",
+            "readOnly": true
+          },
+          "upsertedId": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Resistance": {
+        "type": "object",
+        "properties": {
+          "element": {
+            "$ref": "#/components/schemas/ElementType"
+          },
+          "category": {
+            "$ref": "#/components/schemas/CharacteristicCategory"
+          },
+          "localId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "baseName": {
+            "type": "string",
+            "nullable": true
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          },
+          "statValueType": {
+            "$ref": "#/components/schemas/StatValueType"
+          },
+          "id": {
+            "type": "string"
+          },
+          "nameModelUid": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResistanceTypes": {
+        "enum": [
+          "Fire: Resistance = {\r\n  \"element\": 2,\r\n  \"category\": 3,\r\n  \"localId\": 1,\r\n  \"baseName\": \"Fire\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3001\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Fire\"\r\n};",
+          "Water: Resistance = {\r\n  \"element\": 3,\r\n  \"category\": 3,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Water\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3002\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Water\"\r\n};",
+          "Earth: Resistance = {\r\n  \"element\": 4,\r\n  \"category\": 3,\r\n  \"localId\": 3,\r\n  \"baseName\": \"Earth\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3003\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Earth\"\r\n};",
+          "Air: Resistance = {\r\n  \"element\": 5,\r\n  \"category\": 3,\r\n  \"localId\": 4,\r\n  \"baseName\": \"Air\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3004\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Air\"\r\n};",
+          "True: Resistance = {\r\n  \"element\": 1,\r\n  \"category\": 3,\r\n  \"localId\": 5,\r\n  \"baseName\": \"True\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3005\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.True\"\r\n};",
+          "Damage: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 6,\r\n  \"baseName\": \"Damage\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3006\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Damage\"\r\n};",
+          "Heal: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 7,\r\n  \"baseName\": \"Heal\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3007\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Heal\"\r\n};",
+          "Melee: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 8,\r\n  \"baseName\": \"Melee\",\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 5,\r\n      \"groupType\": 0,\r\n      \"children\": []\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3008\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Melee\"\r\n};",
+          "Distance: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 9,\r\n  \"baseName\": \"Distance\",\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 2,\r\n      \"groupType\": 0,\r\n      \"children\": []\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3009\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Distance\"\r\n};",
+          "Trap: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 10,\r\n  \"baseName\": \"Trap\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3010\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Trap\"\r\n};",
+          "Glyph: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 11,\r\n  \"baseName\": \"Glyph\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3011\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Glyph\"\r\n};"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "Resource": {
+        "type": "object",
+        "properties": {
+          "resType": {
+            "$ref": "#/components/schemas/ResourceEnum"
+          },
+          "resProp": {
+            "$ref": "#/components/schemas/ResourceProperty"
+          },
+          "category": {
+            "$ref": "#/components/schemas/CharacteristicCategory"
+          },
+          "localId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "baseName": {
+            "type": "string",
+            "nullable": true
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          },
+          "statValueType": {
+            "$ref": "#/components/schemas/StatValueType"
+          },
+          "id": {
+            "type": "string"
+          },
+          "nameModelUid": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResourceEnum": {
+        "enum": [
+          "Life",
+          "Mana",
+          "Movement",
+          "Summon",
+          "Rage",
+          "Shield"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "ResourceProperty": {
+        "enum": [
+          "InitialMax",
+          "Current",
+          "Max",
+          "Missing",
+          "Regen",
+          "Percent",
+          "MissingPercent"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "ResourceTypes": {
+        "enum": [
+          "LifeInitialMax: Resource = {\r\n  \"resType\": 0,\r\n  \"resProp\": 0,\r\n  \"category\": 1,\r\n  \"localId\": 0,\r\n  \"baseName\": \"LifeInitialMax\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1000\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.LifeInitialMax\"\r\n};",
+          "Life: Resource = {\r\n  \"resType\": 0,\r\n  \"resProp\": 1,\r\n  \"category\": 1,\r\n  \"localId\": 1,\r\n  \"baseName\": \"Life\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1001\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.Life\"\r\n};",
+          "LifeMax: Resource = {\r\n  \"resType\": 0,\r\n  \"resProp\": 2,\r\n  \"category\": 1,\r\n  \"localId\": 2,\r\n  \"baseName\": \"LifeMax\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1002\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.LifeMax\"\r\n};",
+          "LifeRegen: Resource = {\r\n  \"resType\": 0,\r\n  \"resProp\": 4,\r\n  \"category\": 1,\r\n  \"localId\": 3,\r\n  \"baseName\": \"LifeRegen\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1003\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.LifeRegen\"\r\n};",
+          "LifeMissing: Resource = {\r\n  \"resType\": 0,\r\n  \"resProp\": 3,\r\n  \"category\": 1,\r\n  \"localId\": 4,\r\n  \"baseName\": \"LifeMissing\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1004\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.LifeMissing\"\r\n};",
+          "LifePercent: Resource = {\r\n  \"resType\": 0,\r\n  \"resProp\": 5,\r\n  \"category\": 1,\r\n  \"localId\": 5,\r\n  \"baseName\": \"LifePercent\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1005\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.LifePercent\"\r\n};",
+          "LifeMissingPercent: Resource = {\r\n  \"resType\": 0,\r\n  \"resProp\": 6,\r\n  \"category\": 1,\r\n  \"localId\": 6,\r\n  \"baseName\": \"LifeMissingPercent\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1006\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.LifeMissingPercent\"\r\n};",
+          "ManaInitialMax: Resource = {\r\n  \"resType\": 1,\r\n  \"resProp\": 0,\r\n  \"category\": 1,\r\n  \"localId\": 7,\r\n  \"baseName\": \"ManaInitialMax\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1007\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.ManaInitialMax\"\r\n};",
+          "Mana: Resource = {\r\n  \"resType\": 1,\r\n  \"resProp\": 1,\r\n  \"category\": 1,\r\n  \"localId\": 8,\r\n  \"baseName\": \"Mana\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1008\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.Mana\"\r\n};",
+          "ManaMax: Resource = {\r\n  \"resType\": 1,\r\n  \"resProp\": 2,\r\n  \"category\": 1,\r\n  \"localId\": 9,\r\n  \"baseName\": \"ManaMax\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1009\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.ManaMax\"\r\n};",
+          "ManaRegen: Resource = {\r\n  \"resType\": 1,\r\n  \"resProp\": 4,\r\n  \"category\": 1,\r\n  \"localId\": 10,\r\n  \"baseName\": \"ManaRegen\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1010\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.ManaRegen\"\r\n};",
+          "ManaMissing: Resource = {\r\n  \"resType\": 1,\r\n  \"resProp\": 3,\r\n  \"category\": 1,\r\n  \"localId\": 11,\r\n  \"baseName\": \"ManaMissing\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1011\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.ManaMissing\"\r\n};",
+          "ManaPercent: Resource = {\r\n  \"resType\": 1,\r\n  \"resProp\": 5,\r\n  \"category\": 1,\r\n  \"localId\": 12,\r\n  \"baseName\": \"ManaPercent\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1012\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.ManaPercent\"\r\n};",
+          "ManaMissingPercent: Resource = {\r\n  \"resType\": 1,\r\n  \"resProp\": 6,\r\n  \"category\": 1,\r\n  \"localId\": 13,\r\n  \"baseName\": \"ManaMissingPercent\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1013\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.ManaMissingPercent\"\r\n};",
+          "MovementInitialMax: Resource = {\r\n  \"resType\": 2,\r\n  \"resProp\": 0,\r\n  \"category\": 1,\r\n  \"localId\": 14,\r\n  \"baseName\": \"MovementInitialMax\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1014\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.MovementInitialMax\"\r\n};",
+          "Movement: Resource = {\r\n  \"resType\": 2,\r\n  \"resProp\": 1,\r\n  \"category\": 1,\r\n  \"localId\": 15,\r\n  \"baseName\": \"Movement\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1015\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.Movement\"\r\n};",
+          "MovementMax: Resource = {\r\n  \"resType\": 2,\r\n  \"resProp\": 2,\r\n  \"category\": 1,\r\n  \"localId\": 16,\r\n  \"baseName\": \"MovementMax\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1016\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.MovementMax\"\r\n};",
+          "MovementRegen: Resource = {\r\n  \"resType\": 2,\r\n  \"resProp\": 4,\r\n  \"category\": 1,\r\n  \"localId\": 17,\r\n  \"baseName\": \"MovementRegen\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1017\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.MovementRegen\"\r\n};",
+          "MovementMissing: Resource = {\r\n  \"resType\": 2,\r\n  \"resProp\": 3,\r\n  \"category\": 1,\r\n  \"localId\": 18,\r\n  \"baseName\": \"MovementMissing\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1018\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.MovementMissing\"\r\n};",
+          "MovementPercent: Resource = {\r\n  \"resType\": 2,\r\n  \"resProp\": 5,\r\n  \"category\": 1,\r\n  \"localId\": 19,\r\n  \"baseName\": \"MovementPercent\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1019\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.MovementPercent\"\r\n};",
+          "MovementMissingPercent: Resource = {\r\n  \"resType\": 2,\r\n  \"resProp\": 6,\r\n  \"category\": 1,\r\n  \"localId\": 20,\r\n  \"baseName\": \"MovementMissingPercent\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1020\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.MovementMissingPercent\"\r\n};",
+          "SummonInitialMax: Resource = {\r\n  \"resType\": 3,\r\n  \"resProp\": 0,\r\n  \"category\": 1,\r\n  \"localId\": 21,\r\n  \"baseName\": \"SummonInitialMax\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1021\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.SummonInitialMax\"\r\n};",
+          "Summon: Resource = {\r\n  \"resType\": 3,\r\n  \"resProp\": 1,\r\n  \"category\": 1,\r\n  \"localId\": 22,\r\n  \"baseName\": \"Summon\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1022\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.Summon\"\r\n};",
+          "SummonMax: Resource = {\r\n  \"resType\": 3,\r\n  \"resProp\": 2,\r\n  \"category\": 1,\r\n  \"localId\": 23,\r\n  \"baseName\": \"SummonMax\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1023\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.SummonMax\"\r\n};",
+          "SummonRegen: Resource = {\r\n  \"resType\": 3,\r\n  \"resProp\": 4,\r\n  \"category\": 1,\r\n  \"localId\": 24,\r\n  \"baseName\": \"SummonRegen\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1024\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.SummonRegen\"\r\n};",
+          "SummonMissing: Resource = {\r\n  \"resType\": 3,\r\n  \"resProp\": 3,\r\n  \"category\": 1,\r\n  \"localId\": 25,\r\n  \"baseName\": \"SummonMissing\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1025\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.SummonMissing\"\r\n};",
+          "SummonPercent: Resource = {\r\n  \"resType\": 3,\r\n  \"resProp\": 5,\r\n  \"category\": 1,\r\n  \"localId\": 26,\r\n  \"baseName\": \"SummonPercent\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1026\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.SummonPercent\"\r\n};",
+          "SummonMissingPercent: Resource = {\r\n  \"resType\": 3,\r\n  \"resProp\": 6,\r\n  \"category\": 1,\r\n  \"localId\": 27,\r\n  \"baseName\": \"SummonMissingPercent\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1027\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.SummonMissingPercent\"\r\n};",
+          "RageInitialMax: Resource = {\r\n  \"resType\": 4,\r\n  \"resProp\": 0,\r\n  \"category\": 1,\r\n  \"localId\": 28,\r\n  \"baseName\": \"RageInitialMax\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1028\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.RageInitialMax\"\r\n};",
+          "Rage: Resource = {\r\n  \"resType\": 4,\r\n  \"resProp\": 1,\r\n  \"category\": 1,\r\n  \"localId\": 29,\r\n  \"baseName\": \"Rage\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1029\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.Rage\"\r\n};",
+          "RageMax: Resource = {\r\n  \"resType\": 4,\r\n  \"resProp\": 2,\r\n  \"category\": 1,\r\n  \"localId\": 30,\r\n  \"baseName\": \"RageMax\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1030\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.RageMax\"\r\n};",
+          "RageRegen: Resource = {\r\n  \"resType\": 4,\r\n  \"resProp\": 4,\r\n  \"category\": 1,\r\n  \"localId\": 31,\r\n  \"baseName\": \"RageRegen\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1031\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.RageRegen\"\r\n};",
+          "RageMissing: Resource = {\r\n  \"resType\": 4,\r\n  \"resProp\": 3,\r\n  \"category\": 1,\r\n  \"localId\": 34,\r\n  \"baseName\": \"RageMissing\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1034\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.RageMissing\"\r\n};",
+          "RagePercent: Resource = {\r\n  \"resType\": 4,\r\n  \"resProp\": 5,\r\n  \"category\": 1,\r\n  \"localId\": 35,\r\n  \"baseName\": \"RagePercent\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1035\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.RagePercent\"\r\n};",
+          "RageMissingPercent: Resource = {\r\n  \"resType\": 4,\r\n  \"resProp\": 6,\r\n  \"category\": 1,\r\n  \"localId\": 36,\r\n  \"baseName\": \"RageMissingPercent\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1036\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.RageMissingPercent\"\r\n};",
+          "Shield: Resource = {\r\n  \"resType\": 5,\r\n  \"resProp\": 1,\r\n  \"category\": 1,\r\n  \"localId\": 38,\r\n  \"baseName\": \"Shield\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1038\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.Shield\"\r\n};",
+          "ShieldRegen: Resource = {\r\n  \"resType\": 5,\r\n  \"resProp\": 4,\r\n  \"category\": 1,\r\n  \"localId\": 39,\r\n  \"baseName\": \"ShieldRegen\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1039\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.ShieldRegen\"\r\n};"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "RevealCreatureSpells": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "Revive": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "Rotation4Type": {
+        "enum": [
+          "top",
+          "right",
+          "bottom",
+          "left"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "SchemaDescription": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpawnSummon": {
+        "type": "object",
+        "properties": {
+          "modelId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpawnSummonDouble": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "SpawnSummonDoubleIllusion": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "SpellAddtats": {
+        "type": "object",
+        "properties": {
+          "stats": {
+            "$ref": "#/components/schemas/SpellStats"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpellCondition": {
+        "type": "object",
+        "properties": {
+          "spellModelId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "statId": {
+            "type": "string"
+          },
+          "value": {
+            "nullable": true
+          },
+          "actorType": {
+            "$ref": "#/components/schemas/ActorType"
+          },
+          "comparator": {
+            "$ref": "#/components/schemas/ConditionComparatorType"
+          },
+          "groupType": {
+            "$ref": "#/components/schemas/ConditionGroupType"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
+      "SpellMetaAddChildEffects": {
+        "type": "object",
+        "properties": {
+          "effectParent": {
+            "type": "string"
+          },
+          "order": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpellMetaAddtats": {
+        "type": "object",
+        "properties": {
+          "stats": {
+            "$ref": "#/components/schemas/SpellModelStats"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpellMetaChangeMaxRangeZone": {
+        "type": "object",
+        "properties": {
+          "maxRange": {
+            "$ref": "#/components/schemas/IZone"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpellMetaChangeMinRangeZone": {
+        "type": "object",
+        "properties": {
+          "minRange": {
+            "$ref": "#/components/schemas/IZone"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpellMetaEffectAddBaseDamage": {
+        "type": "object",
+        "properties": {
+          "effectId": {
+            "type": "string"
+          },
+          "dmg": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpellMetaEffectAddBaseHeal": {
+        "type": "object",
+        "properties": {
+          "effectId": {
+            "type": "string"
+          },
+          "heal": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpellMetaEffectChangeElement": {
+        "type": "object",
+        "properties": {
+          "effectId": {
+            "type": "string"
+          },
+          "element": {
+            "$ref": "#/components/schemas/ElementType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpellMetaEffectChangeZone": {
+        "type": "object",
+        "properties": {
+          "effectId": {
+            "type": "string"
+          },
+          "zone": {
+            "$ref": "#/components/schemas/IZone"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpellMetaSchema": {
+        "type": "object",
+        "properties": {
+          "effType": {
+            "$ref": "#/components/schemas/EffT"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpellModel": {
+        "type": "object",
+        "properties": {
+          "entityUid": {
+            "type": "string"
+          },
+          "modelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "nameId": {
+            "type": "string"
+          },
+          "descriptionId": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string",
+            "nullable": true
+          },
+          "skinIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "sourceCondition": {
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "targetFilter": {
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "statsId": {
+            "type": "string"
+          },
+          "costs": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            },
+            "nullable": true
+          },
+          "effectIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "rangeZoneMin": {
+            "$ref": "#/components/schemas/IZone"
+          },
+          "rangeZoneMax": {
+            "$ref": "#/components/schemas/IZone"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpellModelProperty": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/CharacteristicCategory"
+          },
+          "localId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "baseName": {
+            "type": "string",
+            "nullable": true
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          },
+          "statValueType": {
+            "$ref": "#/components/schemas/StatValueType"
+          },
+          "id": {
+            "type": "string"
+          },
+          "nameModelUid": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpellModelPropertyTypes": {
+        "enum": [
+          "MaxCharges: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 1,\r\n  \"baseName\": \"MaxCharges\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8001\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.MaxCharges\"\r\n};",
+          "MaxCastPerTarget: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 2,\r\n  \"baseName\": \"MaxCastPerTarget\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8002\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.MaxCastPerTarget\"\r\n};",
+          "MaxCastPerTurn: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 3,\r\n  \"baseName\": \"MaxCastPerTurn\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8003\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.MaxCastPerTurn\"\r\n};",
+          "Cooldown: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 4,\r\n  \"baseName\": \"Cooldown\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8004\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.Cooldown\"\r\n};",
+          "CooldownInitial: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 5,\r\n  \"baseName\": \"CooldownInitial\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8005\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.CooldownInitial\"\r\n};",
+          "CooldownGlobal: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 6,\r\n  \"baseName\": \"CooldownGlobal\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8006\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.CooldownGlobal\"\r\n};"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "SpellModelStats": {
+        "type": "object",
+        "properties": {
+          "growth": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/MathEquation"
+            },
+            "nullable": true
+          },
+          "entityUid": {
+            "type": "string"
+          },
+          "dic": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/IStat"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpellProperty": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/CharacteristicCategory"
+          },
+          "localId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "baseName": {
+            "type": "string",
+            "nullable": true
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          },
+          "statValueType": {
+            "$ref": "#/components/schemas/StatValueType"
+          },
+          "id": {
+            "type": "string"
+          },
+          "nameModelUid": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpellPropertyTypes": {
+        "enum": [
+          "RemainingCharges: SpellProperty = {\r\n  \"category\": 7,\r\n  \"localId\": 0,\r\n  \"baseName\": \"RemainingCharges\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"7000\",\r\n  \"nameModelUid\": \"CharacteristicType.Spell.RemainingCharges\"\r\n};",
+          "RemainingCooldown: SpellProperty = {\r\n  \"category\": 7,\r\n  \"localId\": 1,\r\n  \"baseName\": \"RemainingCooldown\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"7001\",\r\n  \"nameModelUid\": \"CharacteristicType.Spell.RemainingCooldown\"\r\n};",
+          "NumberOfCastsThisTurn: SpellProperty = {\r\n  \"category\": 7,\r\n  \"localId\": 2,\r\n  \"baseName\": \"NumberOfCastsThisTurn\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"7002\",\r\n  \"nameModelUid\": \"CharacteristicType.Spell.NumberOfCastsThisTurn\"\r\n};",
+          "NumberOfCastsThisTurnPerEntity: SpellProperty = {\r\n  \"category\": 7,\r\n  \"localId\": 3,\r\n  \"baseName\": \"NumberOfCastsThisTurnPerEntity\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 2,\r\n  \"id\": \"7003\",\r\n  \"nameModelUid\": \"CharacteristicType.Spell.NumberOfCastsThisTurnPerEntity\"\r\n};"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "SpellStats": {
+        "type": "object",
+        "properties": {
+          "growth": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/MathEquation"
+            },
+            "nullable": true
+          },
+          "entityUid": {
+            "type": "string"
+          },
+          "dic": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/IStat"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "StatBool": {
+        "type": "object",
+        "properties": {
+          "entityUid": {
+            "type": "string"
+          },
+          "statId": {
+            "type": "string"
+          },
+          "value": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "StatCondition": {
+        "type": "object",
+        "properties": {
+          "statId": {
+            "type": "string"
+          },
+          "value": {
+            "nullable": true
+          },
+          "actorType": {
+            "$ref": "#/components/schemas/ActorType"
+          },
+          "comparator": {
+            "$ref": "#/components/schemas/ConditionComparatorType"
+          },
+          "groupType": {
+            "$ref": "#/components/schemas/ConditionGroupType"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
+      "StatSimple": {
+        "type": "object",
+        "properties": {
+          "entityUid": {
+            "type": "string"
+          },
+          "statId": {
+            "type": "string"
+          },
+          "value": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "StatValueType": {
+        "enum": [
+          "Simple",
+          "Bool",
+          "EntityStatDictionary",
+          "List"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "State": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/CharacteristicCategory"
+          },
+          "localId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "baseName": {
+            "type": "string",
+            "nullable": true
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          },
+          "statValueType": {
+            "$ref": "#/components/schemas/StatValueType"
+          },
+          "id": {
+            "type": "string"
+          },
+          "nameModelUid": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StateTypes": {
+        "enum": [
+          "Visible: State = {\r\n  \"category\": 4,\r\n  \"localId\": 0,\r\n  \"baseName\": \"Visible\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4000\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Visible\"\r\n};",
+          "Ghosted: State = {\r\n  \"category\": 4,\r\n  \"localId\": 1,\r\n  \"baseName\": \"Ghosted\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4001\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Ghosted\"\r\n};",
+          "Flying: State = {\r\n  \"category\": 4,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Flying\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4002\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Flying\"\r\n};",
+          "Underground: State = {\r\n  \"category\": 4,\r\n  \"localId\": 3,\r\n  \"baseName\": \"Underground\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4003\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Underground\"\r\n};",
+          "Drenched: State = {\r\n  \"category\": 4,\r\n  \"localId\": 4,\r\n  \"baseName\": \"Drenched\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4004\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Drenched\"\r\n};",
+          "Shocked: State = {\r\n  \"category\": 4,\r\n  \"localId\": 5,\r\n  \"baseName\": \"Shocked\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4005\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Shocked\"\r\n};",
+          "Hot: State = {\r\n  \"category\": 4,\r\n  \"localId\": 6,\r\n  \"baseName\": \"Hot\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4006\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Hot\"\r\n};",
+          "Grounded: State = {\r\n  \"category\": 4,\r\n  \"localId\": 7,\r\n  \"baseName\": \"Grounded\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4007\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Grounded\"\r\n};",
+          "Unmoveable: State = {\r\n  \"category\": 4,\r\n  \"localId\": 8,\r\n  \"baseName\": \"Unmoveable\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4008\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Unmoveable\"\r\n};",
+          "Rooted: State = {\r\n  \"category\": 4,\r\n  \"localId\": 9,\r\n  \"baseName\": \"Rooted\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4009\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Rooted\"\r\n};",
+          "Gravity: State = {\r\n  \"category\": 4,\r\n  \"localId\": 10,\r\n  \"baseName\": \"Gravity\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4010\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Gravity\"\r\n};",
+          "Heavy: State = {\r\n  \"category\": 4,\r\n  \"localId\": 11,\r\n  \"baseName\": \"Heavy\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4011\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Heavy\"\r\n};",
+          "Carrying: State = {\r\n  \"category\": 4,\r\n  \"localId\": 12,\r\n  \"baseName\": \"Carrying\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4012\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Carrying\"\r\n};",
+          "Carried: State = {\r\n  \"category\": 4,\r\n  \"localId\": 13,\r\n  \"baseName\": \"Carried\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4013\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Carried\"\r\n};",
+          "Pacifist: State = {\r\n  \"category\": 4,\r\n  \"localId\": 14,\r\n  \"baseName\": \"Pacifist\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4014\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Pacifist\"\r\n};",
+          "Invulnerable: State = {\r\n  \"category\": 4,\r\n  \"localId\": 15,\r\n  \"baseName\": \"Invulnerable\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4015\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Invulnerable\"\r\n};",
+          "InvulnerableDistance: State = {\r\n  \"category\": 4,\r\n  \"localId\": 16,\r\n  \"baseName\": \"InvulnerableDistance\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4016\",\r\n  \"nameModelUid\": \"CharacteristicType.State.InvulnerableDistance\"\r\n};",
+          "InvulnerableMelee: State = {\r\n  \"category\": 4,\r\n  \"localId\": 17,\r\n  \"baseName\": \"InvulnerableMelee\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4017\",\r\n  \"nameModelUid\": \"CharacteristicType.State.InvulnerableMelee\"\r\n};"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "Stats": {
+        "type": "object",
+        "properties": {
+          "growth": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/MathEquation"
+            },
+            "nullable": true
+          },
+          "entityUid": {
+            "type": "string"
+          },
+          "dic": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/IStat"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "StatusCondition": {
+        "type": "object",
+        "properties": {
+          "statusModelId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "statId": {
+            "type": "string"
+          },
+          "value": {
+            "nullable": true
+          },
+          "boardTargetType": {
+            "$ref": "#/components/schemas/BoardTargetType"
+          },
+          "actorType": {
+            "$ref": "#/components/schemas/ActorType"
+          },
+          "comparator": {
+            "$ref": "#/components/schemas/ConditionComparatorType"
+          },
+          "groupType": {
+            "$ref": "#/components/schemas/ConditionGroupType"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
+      "StatusModel": {
+        "type": "object",
+        "properties": {
+          "entityUid": {
+            "type": "string"
+          },
+          "modelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "nameId": {
+            "type": "string"
+          },
+          "descriptionId": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string",
+            "nullable": true
+          },
+          "statsId": {
+            "type": "string"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/StatusPriorityType"
+          },
+          "effectIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StatusPriorityType": {
+        "enum": [
+          "System",
+          "Passive",
+          "Status"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "StatusProperty": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/CharacteristicCategory"
+          },
+          "localId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "baseName": {
+            "type": "string",
+            "nullable": true
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          },
+          "statValueType": {
+            "$ref": "#/components/schemas/StatValueType"
+          },
+          "id": {
+            "type": "string"
+          },
+          "nameModelUid": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StatusPropertyTypes": {
+        "enum": [
+          "Stacks: StatusProperty = {\r\n  \"category\": 4,\r\n  \"localId\": 0,\r\n  \"baseName\": \"Stacks\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"4000\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Stacks\"\r\n};",
+          "Delay: StatusProperty = {\r\n  \"category\": 4,\r\n  \"localId\": 1,\r\n  \"baseName\": \"Delay\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"4001\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Delay\"\r\n};",
+          "Duration: StatusProperty = {\r\n  \"category\": 4,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Duration\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"4002\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Duration\"\r\n};",
+          "MaxStacks: StatusProperty = {\r\n  \"category\": 4,\r\n  \"localId\": 3,\r\n  \"baseName\": \"MaxStacks\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"4003\",\r\n  \"nameModelUid\": \"CharacteristicType.State.MaxStacks\"\r\n};",
+          "MaxDelay: StatusProperty = {\r\n  \"category\": 4,\r\n  \"localId\": 4,\r\n  \"baseName\": \"MaxDelay\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"4004\",\r\n  \"nameModelUid\": \"CharacteristicType.State.MaxDelay\"\r\n};",
+          "MaxDuration: StatusProperty = {\r\n  \"category\": 4,\r\n  \"localId\": 5,\r\n  \"baseName\": \"MaxDuration\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"4005\",\r\n  \"nameModelUid\": \"CharacteristicType.State.MaxDuration\"\r\n};"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "StatusStats": {
+        "type": "object",
+        "properties": {
+          "growth": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/MathEquation"
+            },
+            "nullable": true
+          },
+          "entityUid": {
+            "type": "string"
+          },
+          "dic": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/IStat"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "StringEntity": {
+        "type": "object",
+        "properties": {
+          "entityUid": {
+            "type": "string"
+          },
+          "modelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SwapIn": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "SwapOut": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "SwapSelfWith": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "SwapTargetWith": {
+        "type": "object",
+        "properties": {
+          "moveTargetZone": {
+            "$ref": "#/components/schemas/IZone"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TargetSamplingType": {
+        "enum": [
+          "closestToOrigin",
+          "furthestToOrigin",
+          "closestToSource",
+          "furthestToSource",
+          "random"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "TeamRelationType": {
+        "enum": [
+          "Ally",
+          "Enemy",
+          "Self"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "TeleportSelfBy": {
+        "type": "object",
+        "properties": {
+          "distance": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TeleportSelfTo": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "TeleportSelfToScript": {
+        "type": "object",
+        "properties": {
+          "schemaType": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TeleportSymmetricallyAoeOverTarget": {
+        "type": "object",
+        "properties": {
+          "moveTargetZone": {
+            "$ref": "#/components/schemas/IZone"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TeleportSymmetricallySelfOverTarget": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "TeleportSymmetricallyTargetOverSelf": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "TeleportTargetBy": {
+        "type": "object",
+        "properties": {
+          "distance": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "moveTargetZone": {
+            "$ref": "#/components/schemas/IZone"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TeleportTargetTo": {
+        "type": "object",
+        "properties": {
+          "moveTargetZone": {
+            "$ref": "#/components/schemas/IZone"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TeleportTargetToScript": {
+        "type": "object",
+        "properties": {
+          "schemaType": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TeleportToPreviousPosition": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "TeleportToStartOfFightPosition": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "TeleportToStartOfTurnPosition": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "TowerDirectionType": {
+        "enum": [
+          "up",
+          "down",
+          "both"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "TransferLife": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TransferLifeScript": {
+        "type": "object",
+        "properties": {
+          "schemaType": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TransferPercentLifeMax": {
+        "type": "object",
+        "properties": {
+          "percentValue": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TriggerOrderType": {
+        "enum": [
+          "Before",
+          "Apply",
+          "After"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "TriggerType": {
+        "enum": [
+          "OnFightStart",
+          "OnFightEnd",
+          "OnRoundStart",
+          "OnRoundEnd",
+          "OnTurnStart",
+          "OnTurnEnd",
+          "OnTurnPass",
+          "OnCreatureSpellCast",
+          "OnEffect",
+          "OnCreatureWalkEnterCell",
+          "OnCreatureWalkExitCell",
+          "OnCreatureWalkStopCell"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "UnspawnSummon": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "UpdateResult": {
+        "type": "object",
+        "properties": {
+          "isAcknowledged": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "isModifiedCountAvailable": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "matchedCount": {
+            "type": "integer",
+            "format": "int64",
+            "readOnly": true
+          },
+          "modifiedCount": {
+            "type": "integer",
+            "format": "int64",
+            "readOnly": true
+          },
+          "upsertedId": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Walk": {
+        "type": "object",
+        "properties": {
+          "moveTargetZone": {
+            "$ref": "#/components/schemas/IZone"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ZoneType": {
+        "enum": [
+          "point",
+          "line",
+          "diagonal",
+          "cross",
+          "xcross",
+          "star",
+          "crossHalf",
+          "xcrossHalf",
+          "circle",
+          "circleHalf",
+          "square",
+          "squareHalf",
+          "rectangle",
+          "ellipse",
+          "ellipseHalf"
+        ],
+        "type": "string",
+        "format": ""
+      }
+    }
+  }
+}

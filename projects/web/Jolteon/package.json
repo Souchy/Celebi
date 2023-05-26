@@ -62,7 +62,7 @@
     "build": "rimraf dist && webpack --env production",
     "analyze": "rimraf dist && webpack --env production --analyze",
     "test": "jest",
-    "swagger": "npx swagger-typescript-api -p ../Spark/bin/swagger.json -o src/jolteon/services/api --templates ./swagger-templates --responses --modular --module-name-first-tag --clean-output"
+    "swagger": "npx swagger-typescript-api -p ./src/jolteon/services/swagger.json -o src/jolteon/services/api --templates ./swagger-templates --responses --modular --module-name-first-tag --clean-output"
   },
   "jest": {
     "testMatch": [
