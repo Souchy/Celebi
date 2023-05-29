@@ -5,7 +5,7 @@
     "version": "1.0"
   },
   "paths": {
-    "/meta/auth/mammoth": {
+    "/api/meta/auth/mammoth": {
       "get": {
         "tags": [
           "AuthController"
@@ -17,7 +17,7 @@
         }
       }
     },
-    "/meta/auth/ping": {
+    "/api/meta/auth/ping": {
       "get": {
         "tags": [
           "AuthController"
@@ -36,7 +36,7 @@
         }
       }
     },
-    "/meta/auth/privatePing": {
+    "/api/meta/auth/privatePing": {
       "get": {
         "tags": [
           "AuthController"
@@ -55,7 +55,7 @@
         }
       }
     },
-    "/meta/auth/displayName": {
+    "/api/meta/auth/displayName": {
       "post": {
         "tags": [
           "AuthController"
@@ -84,7 +84,7 @@
         }
       }
     },
-    "/meta/auth/accountInfo": {
+    "/api/meta/auth/accountInfo": {
       "get": {
         "tags": [
           "AuthController"
@@ -103,7 +103,7 @@
         }
       }
     },
-    "/meta/auth/identitySignup": {
+    "/api/meta/auth/identitySignup": {
       "post": {
         "tags": [
           "AuthController"
@@ -152,7 +152,7 @@
         }
       }
     },
-    "/meta/auth/identitySignin": {
+    "/api/meta/auth/identitySignin": {
       "post": {
         "tags": [
           "AuthController"
@@ -192,7 +192,7 @@
         }
       }
     },
-    "/meta/auth/identitySignout": {
+    "/api/meta/auth/identitySignout": {
       "post": {
         "tags": [
           "AuthController"
@@ -204,7 +204,7 @@
         }
       }
     },
-    "/meta/auth/identitySigninExternal": {
+    "/api/meta/auth/identitySigninExternal": {
       "post": {
         "tags": [
           "AuthController"
@@ -216,7 +216,7 @@
         }
       }
     },
-    "/meta/auth/verify": {
+    "/api/meta/auth/verify": {
       "get": {
         "tags": [
           "AuthController"
@@ -238,7 +238,7 @@
         }
       }
     },
-    "/models/creature/all": {
+    "/api/models/creature/all": {
       "get": {
         "tags": [
           "CreatureModelController"
@@ -260,7 +260,7 @@
         }
       }
     },
-    "/models/creature/filtered": {
+    "/api/models/creature/filtered": {
       "get": {
         "tags": [
           "CreatureModelController"
@@ -306,7 +306,7 @@
         }
       }
     },
-    "/models/creature/byString/{str}": {
+    "/api/models/creature/byString/{str}": {
       "get": {
         "tags": [
           "CreatureModelController"
@@ -339,7 +339,7 @@
         }
       }
     },
-    "/models/creature/{id}": {
+    "/api/models/creature/{id}": {
       "get": {
         "tags": [
           "CreatureModelController"
@@ -449,7 +449,7 @@
         }
       }
     },
-    "/models/creature": {
+    "/api/models/creature": {
       "post": {
         "tags": [
           "CreatureModelController"
@@ -492,7 +492,7 @@
         }
       }
     },
-    "/models/creature/new": {
+    "/api/models/creature/new": {
       "post": {
         "tags": [
           "CreatureModelController"
@@ -511,7 +511,7 @@
         }
       }
     },
-    "/models/creature/{id}/spells": {
+    "/api/models/creature/{id}/spells": {
       "put": {
         "tags": [
           "CreatureModelController"
@@ -577,7 +577,7 @@
         }
       }
     },
-    "/models/creature/skin/all": {
+    "/api/models/creature/skin/all": {
       "get": {
         "tags": [
           "CreatureSkinController"
@@ -599,7 +599,7 @@
         }
       }
     },
-    "/models/creature/skin/{id}": {
+    "/api/models/creature/skin/{id}": {
       "get": {
         "tags": [
           "CreatureSkinController"
@@ -709,7 +709,7 @@
         }
       }
     },
-    "/models/creature/skin/{ids}": {
+    "/api/models/creature/skin/{ids}": {
       "get": {
         "tags": [
           "CreatureSkinController"
@@ -753,7 +753,7 @@
         }
       }
     },
-    "/models/creature/skin": {
+    "/api/models/creature/skin": {
       "post": {
         "tags": [
           "CreatureSkinController"
@@ -772,7 +772,7 @@
         }
       }
     },
-    "/models/effects/all": {
+    "/api/models/effects/all": {
       "get": {
         "tags": [
           "EffectPermanentController"
@@ -794,7 +794,7 @@
         }
       }
     },
-    "/models/effects/effect/{id}": {
+    "/api/models/effects/effect/{id}": {
       "get": {
         "tags": [
           "EffectPermanentController"
@@ -904,7 +904,7 @@
         }
       }
     },
-    "/models/effects/effect": {
+    "/api/models/effects/effect": {
       "post": {
         "tags": [
           "EffectPermanentController"
@@ -947,7 +947,7 @@
         }
       }
     },
-    "/models/effects/{id}/child": {
+    "/api/models/effects/{id}/child": {
       "post": {
         "tags": [
           "EffectPermanentController"
@@ -985,7 +985,7 @@
         }
       }
     },
-    "/models/enums/charac/characteristicCategory": {
+    "/api/models/enums/charac/characteristicCategory": {
       "get": {
         "tags": [
           "EnumsController"
@@ -1023,7 +1023,7 @@
         }
       }
     },
-    "/models/enums/charac/resourceType": {
+    "/api/models/enums/charac/resourceType": {
       "get": {
         "tags": [
           "EnumsController"
@@ -1061,7 +1061,7 @@
         }
       }
     },
-    "/models/enums/charac/resourceProperty": {
+    "/api/models/enums/charac/resourceProperty": {
       "get": {
         "tags": [
           "EnumsController"
@@ -1099,7 +1099,7 @@
         }
       }
     },
-    "/models/enums/actorType": {
+    "/api/models/enums/actorType": {
       "get": {
         "tags": [
           "EnumsController"
@@ -1137,7 +1137,7 @@
         }
       }
     },
-    "/models/enums/boardTargetType": {
+    "/api/models/enums/boardTargetType": {
       "get": {
         "tags": [
           "EnumsController"
@@ -1175,7 +1175,7 @@
         }
       }
     },
-    "/models/enums/moveType": {
+    "/api/models/enums/moveType": {
       "get": {
         "tags": [
           "EnumsController"
@@ -1213,7 +1213,7 @@
         }
       }
     },
-    "/models/enums/teamRelationType": {
+    "/api/models/enums/teamRelationType": {
       "get": {
         "tags": [
           "EnumsController"
@@ -1251,7 +1251,7 @@
         }
       }
     },
-    "/models/enums/zoneType": {
+    "/api/models/enums/zoneType": {
       "get": {
         "tags": [
           "EnumsController"
@@ -1289,7 +1289,7 @@
         }
       }
     },
-    "/models/enums/triggerType": {
+    "/api/models/enums/triggerType": {
       "get": {
         "tags": [
           "EnumsController"
@@ -1327,7 +1327,7 @@
         }
       }
     },
-    "/models/enums/towerDirectionType": {
+    "/api/models/enums/towerDirectionType": {
       "get": {
         "tags": [
           "EnumsController"
@@ -1365,7 +1365,7 @@
         }
       }
     },
-    "/models/enums/statusPriorityType": {
+    "/api/models/enums/statusPriorityType": {
       "get": {
         "tags": [
           "EnumsController"
@@ -1403,7 +1403,7 @@
         }
       }
     },
-    "/models/enums/direction8Type": {
+    "/api/models/enums/direction8Type": {
       "get": {
         "tags": [
           "EnumsController"
@@ -1441,7 +1441,7 @@
         }
       }
     },
-    "/models/enums/direction9Type": {
+    "/api/models/enums/direction9Type": {
       "get": {
         "tags": [
           "EnumsController"
@@ -1479,7 +1479,7 @@
         }
       }
     },
-    "/models/enums/effectType": {
+    "/api/models/enums/effectType": {
       "get": {
         "tags": [
           "EnumsController"
@@ -1517,7 +1517,7 @@
         }
       }
     },
-    "/models/properties/charac/resource": {
+    "/api/models/properties/charac/resource": {
       "get": {
         "tags": [
           "PropertiesController"
@@ -1555,7 +1555,7 @@
         }
       }
     },
-    "/models/properties/charac/affinity": {
+    "/api/models/properties/charac/affinity": {
       "get": {
         "tags": [
           "PropertiesController"
@@ -1593,7 +1593,7 @@
         }
       }
     },
-    "/models/properties/charac/resistance": {
+    "/api/models/properties/charac/resistance": {
       "get": {
         "tags": [
           "PropertiesController"
@@ -1631,7 +1631,7 @@
         }
       }
     },
-    "/models/properties/charac/contextual": {
+    "/api/models/properties/charac/contextual": {
       "get": {
         "tags": [
           "PropertiesController"
@@ -1669,7 +1669,7 @@
         }
       }
     },
-    "/models/properties/charac/other": {
+    "/api/models/properties/charac/other": {
       "get": {
         "tags": [
           "PropertiesController"
@@ -1707,7 +1707,7 @@
         }
       }
     },
-    "/models/properties/charac/spellmodel": {
+    "/api/models/properties/charac/spellmodel": {
       "get": {
         "tags": [
           "PropertiesController"
@@ -1745,7 +1745,7 @@
         }
       }
     },
-    "/models/properties/charac/spell": {
+    "/api/models/properties/charac/spell": {
       "get": {
         "tags": [
           "PropertiesController"
@@ -1783,7 +1783,7 @@
         }
       }
     },
-    "/models/properties/charac/state": {
+    "/api/models/properties/charac/state": {
       "get": {
         "tags": [
           "PropertiesController"
@@ -1821,7 +1821,7 @@
         }
       }
     },
-    "/models/properties/charac/statuscontainer": {
+    "/api/models/properties/charac/statuscontainer": {
       "get": {
         "tags": [
           "PropertiesController"
@@ -1859,7 +1859,7 @@
         }
       }
     },
-    "/models/properties/charac/statusinstance": {
+    "/api/models/properties/charac/statusinstance": {
       "get": {
         "tags": [
           "PropertiesController"
@@ -1897,7 +1897,7 @@
         }
       }
     },
-    "/models/properties/effects/schemas": {
+    "/api/models/properties/effects/schemas": {
       "get": {
         "tags": [
           "PropertiesController"
@@ -1935,7 +1935,7 @@
         }
       }
     },
-    "/models/properties/effects/schema/{name}": {
+    "/api/models/properties/effects/schema/{name}": {
       "get": {
         "tags": [
           "PropertiesController"
@@ -1975,7 +1975,7 @@
         }
       }
     },
-    "/meta/shop/modelProducts": {
+    "/api/meta/shop/modelProducts": {
       "get": {
         "tags": [
           "ShopController"
@@ -1997,7 +1997,7 @@
         }
       }
     },
-    "/meta/shop/consumableProducts": {
+    "/api/meta/shop/consumableProducts": {
       "get": {
         "tags": [
           "ShopController"
@@ -2019,7 +2019,7 @@
         }
       }
     },
-    "/meta/shop/currencyProducts": {
+    "/api/meta/shop/currencyProducts": {
       "get": {
         "tags": [
           "ShopController"
@@ -2041,7 +2041,7 @@
         }
       }
     },
-    "/meta/shop/buyModel": {
+    "/api/meta/shop/buyModel": {
       "post": {
         "tags": [
           "ShopController"
@@ -2070,7 +2070,7 @@
         }
       }
     },
-    "/meta/shop/buyConsumable": {
+    "/api/meta/shop/buyConsumable": {
       "post": {
         "tags": [
           "ShopController"
@@ -2099,7 +2099,7 @@
         }
       }
     },
-    "/models/spell/all": {
+    "/api/models/spell/all": {
       "get": {
         "tags": [
           "SpellModelController"
@@ -2121,7 +2121,7 @@
         }
       }
     },
-    "/models/spell/list": {
+    "/api/models/spell/list": {
       "get": {
         "tags": [
           "SpellModelController"
@@ -2156,7 +2156,7 @@
         }
       }
     },
-    "/models/spell/filtered": {
+    "/api/models/spell/filtered": {
       "get": {
         "tags": [
           "SpellModelController"
@@ -2202,7 +2202,7 @@
         }
       }
     },
-    "/models/spell/byString/{str}": {
+    "/api/models/spell/byString/{str}": {
       "get": {
         "tags": [
           "SpellModelController"
@@ -2235,7 +2235,7 @@
         }
       }
     },
-    "/models/spell/{id}": {
+    "/api/models/spell/{id}": {
       "get": {
         "tags": [
           "SpellModelController"
@@ -2345,7 +2345,7 @@
         }
       }
     },
-    "/models/spell": {
+    "/api/models/spell": {
       "post": {
         "tags": [
           "SpellModelController"
@@ -2388,7 +2388,7 @@
         }
       }
     },
-    "/models/spell/new": {
+    "/api/models/spell/new": {
       "post": {
         "tags": [
           "SpellModelController"
@@ -2407,7 +2407,7 @@
         }
       }
     },
-    "/models/spell/{id}/effect": {
+    "/api/models/spell/{id}/effect": {
       "post": {
         "tags": [
           "SpellModelController"
@@ -2453,7 +2453,7 @@
         }
       }
     },
-    "/models/spell/skin/all": {
+    "/api/models/spell/skin/all": {
       "get": {
         "tags": [
           "SpellSkinController"
@@ -2475,7 +2475,7 @@
         }
       }
     },
-    "/models/spell/skin/{id}": {
+    "/api/models/spell/skin/{id}": {
       "get": {
         "tags": [
           "SpellSkinController"
@@ -2585,7 +2585,7 @@
         }
       }
     },
-    "/models/spell/skin/{ids}": {
+    "/api/models/spell/skin/{ids}": {
       "get": {
         "tags": [
           "SpellSkinController"
@@ -2629,7 +2629,7 @@
         }
       }
     },
-    "/models/spell/skin": {
+    "/api/models/spell/skin": {
       "post": {
         "tags": [
           "SpellSkinController"
@@ -2648,7 +2648,7 @@
         }
       }
     },
-    "/models/stats/all": {
+    "/api/models/stats/all": {
       "get": {
         "tags": [
           "StatsModelController"
@@ -2670,7 +2670,7 @@
         }
       }
     },
-    "/models/stats/filtered": {
+    "/api/models/stats/filtered": {
       "get": {
         "tags": [
           "StatsModelController"
@@ -2716,7 +2716,7 @@
         }
       }
     },
-    "/models/stats/{id}": {
+    "/api/models/stats/{id}": {
       "get": {
         "tags": [
           "StatsModelController"
@@ -2826,7 +2826,7 @@
         }
       }
     },
-    "/models/stats": {
+    "/api/models/stats": {
       "post": {
         "tags": [
           "StatsModelController"
@@ -2862,7 +2862,7 @@
         }
       }
     },
-    "/models/stats/{id}/bool": {
+    "/api/models/stats/{id}/bool": {
       "put": {
         "tags": [
           "StatsModelController"
@@ -2916,7 +2916,7 @@
         }
       }
     },
-    "/models/stats/{id}/simple": {
+    "/api/models/stats/{id}/simple": {
       "put": {
         "tags": [
           "StatsModelController"
@@ -2970,7 +2970,7 @@
         }
       }
     },
-    "/models/status/all": {
+    "/api/models/status/all": {
       "get": {
         "tags": [
           "StatusModelController"
@@ -2992,7 +2992,7 @@
         }
       }
     },
-    "/models/status/status/{id}": {
+    "/api/models/status/status/{id}": {
       "get": {
         "tags": [
           "StatusModelController"
@@ -3102,7 +3102,7 @@
         }
       }
     },
-    "/models/status/status": {
+    "/api/models/status/status": {
       "post": {
         "tags": [
           "StatusModelController"
@@ -3138,7 +3138,7 @@
         }
       }
     },
-    "/models/string/all": {
+    "/api/models/string/all": {
       "get": {
         "tags": [
           "StringController"
@@ -3170,7 +3170,7 @@
         }
       }
     },
-    "/models/string/filtered": {
+    "/api/models/string/filtered": {
       "get": {
         "tags": [
           "StringController"
@@ -3226,7 +3226,7 @@
         }
       }
     },
-    "/models/string/{id}": {
+    "/api/models/string/{id}": {
       "get": {
         "tags": [
           "StringController"
@@ -3352,7 +3352,7 @@
         }
       }
     },
-    "/models/string": {
+    "/api/models/string": {
       "post": {
         "tags": [
           "StringController"
@@ -3838,7 +3838,7 @@
         "type": "object",
         "properties": {
           "statusStats": {
-            "$ref": "#/components/schemas/CreatureStats"
+            "$ref": "#/components/schemas/StatusModelStats"
           }
         },
         "additionalProperties": false

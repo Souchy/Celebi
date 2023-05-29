@@ -70,14 +70,16 @@ export class App implements IRouteableComponent {
 		private readonly auth: AuthController,
 		private readonly propertiesController: PropertiesController
 	) {
-		console.log("APP CTOR")
+		console.log("JOLTEON APP CTOR " + location.hostname)
 		// toast on saved/failed post operations to server
 		Toast.configure(this.toastConfig);
 		ea.subscribe("operation:saved", this.toastSaved);
 		ea.subscribe("operation:failed", this.toastFailed);
 
 		// use the server url as base url
-		this.http.baseUrl = Constants.serverUrl;
+		if(location.hostname == 'localhost') {
+			this.http.baseUrl = Constants.serverUrl;
+		}
 
 		// load server data
 		this.loadServerData();

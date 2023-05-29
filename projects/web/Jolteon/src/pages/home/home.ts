@@ -3,18 +3,17 @@ import { Constants } from "../../jolteon/constants";
 import { AuthController } from "../../jolteon/services/api/AuthController";
 
 
-@inject(IEventAggregator, IHttpClient)
+@inject(IEventAggregator, AuthController)
 export class Home {
     
 	public responseValue: string = "";
 	// public readonly auth = new AuthController();
-	public auth:AuthController = null;
+	// public auth:AuthController = null;
 
-	constructor(readonly ea: IEventAggregator, readonly http: IHttpClient) {
-		this.auth = new AuthController(http);
-		this.auth.aureliaClient.baseUrl = Constants.serverUrl;
+	constructor(readonly ea: IEventAggregator, readonly auth: AuthController) {
+		// this.auth = new AuthController(http);
 
-		console.log("ctor auth: " + this.auth);
+		console.log("ctor home auth: " + this.auth);
 	}
     
 	public testRequest() {

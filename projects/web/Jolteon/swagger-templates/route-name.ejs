@@ -22,6 +22,8 @@ const methodAliases = {
 };
 
 const createCustomOperationId = (method, route, moduleName) => {
+  // console.log("route: " + route);
+  route = route.replace("api/", "");
   const hasPathInserts = /\{(\w){1,}\}/g.test(route);
   const splitedRouteBySlash = _.compact(_.replace(route, /\{(\w){1,}\}/g, "").split("/"));
   const routeParts = (

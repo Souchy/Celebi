@@ -26,21 +26,36 @@ using souchy.celebi.spark.util.mongo;
 using souchy.celebi.eevee.face.util.math;
 using souchy.celebi.eevee.impl.values;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Hosting;
 
 namespace souchy.celebi.spark
 {
     public static class Routes
     {
-        public const string Models = "models/";
-        public const string Fights = "fights/";
-        public const string Meta = "meta/";
+        public const string Models = "api/models/";
+        public const string Fights = "api/fights/";
+        public const string Meta = "api/meta/";
     }
 
     public class Spark
     {
         public static void Main(string[] args)
         {
+#if DEBUG
             var builder = WebApplication.CreateBuilder(args);
+#else
+            var opts = new WebApplicationOptions()
+            {
+                Args = args,
+                ApplicationName = "Spark",
+                ContentRootPath = "./",
+                EnvironmentName = "Production",
+                WebRootPath = "./",
+            };
+            var builder = WebApplication.CreateBuilder(opts);
+#endif
+
             var services = builder.Services;
             var configuration = builder.Configuration;
             // Register types
@@ -111,7 +126,12 @@ namespace souchy.celebi.spark
                 mongo =>
                 {
                     var settings = configuration.GetSection(nameof(MongoSettings)).Get<MongoSettings>();
-                    if (settings == null) return; // for swashbuckle 'dotnet swagger' generator. secrets aren't included at that moment
+                    Console.WriteLine($"Mongo settings2: {settings}: {{ {settings?.ConnectionString}, {settings?.Federation} }}");
+                    if (settings == null) // for swashbuckle 'dotnet swagger' generator. secrets aren't included at that moment
+                    {
+                        Console.WriteLine("Warning: No MongoSettings to configure services.AddIdentityMongoDbProvider.");
+                        return;
+                    }
                     mongo.ConnectionString = settings.ConnectionString + "/" + settings.MetaDB; 
                     mongo.UsersCollection = nameof(Account);
                 }
@@ -238,6 +258,12 @@ namespace souchy.celebi.spark
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+            } else
+            {
+                app.UseForwardedHeaders(new ForwardedHeadersOptions
+                {
+                    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+                });
             }
 
             app.UseHttpsRedirection();
@@ -249,7 +275,6 @@ namespace souchy.celebi.spark
             app.UseAuthorization();
 
             app.MapControllers();
-            //app.UseStaticFiles("/../Jolteon/dist");
 
             app.Run();
         }

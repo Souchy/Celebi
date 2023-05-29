@@ -10,7 +10,7 @@ declare global {
 }
 
 
-@inject(IEventAggregator, IHttpClient)
+@inject(IEventAggregator, AuthController)
 export class Auth2 {
 
 	// public http = new HttpClient();
@@ -19,11 +19,10 @@ export class Auth2 {
 	public gapi_uri = "https://accounts.google.com/o/oauth2/v2/auth";
 	public responseValue: string = "";
 	// public readonly auth = new AuthController();
-	public auth:AuthController = null;
+	// public auth:AuthController = null;
 
-	constructor(readonly ea: IEventAggregator, readonly http: IHttpClient) {
-		this.auth = new AuthController(http);
-		this.auth.aureliaClient.baseUrl = Constants.serverUrl;
+	constructor(readonly ea: IEventAggregator, readonly auth: AuthController) {
+		// this.auth = new AuthController(http);
 
 		console.log("ctor auth: " + this.auth);
 		ea.subscribe("googleCallback", this.googleCallback);
