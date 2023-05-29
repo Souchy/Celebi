@@ -57,6 +57,12 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: 'Spark'
+          
+      #- name: Extract some files
+        #run: 7z x 'Spark.zip'
+      - uses: montudor/action-zip@v1
+        with:
+          args: unzip -qq 'Spark.zip' -d 'spark'
       - name: SFTP Deploy to DeathShadows server
         # You may pin to the exact commit or the version.
         # uses: wlixcc/SFTP-Deploy-Action@da88a4dbe95286266bbac3c0b2b8284048d20c8f
@@ -67,11 +73,11 @@ jobs:
           # your sftp server
           server: ${{ secrets.FTP_SERVER }}
           # your sftp server port, default to 22
-          port: ${{ secrets.FTP_PORT }} # default is 22
+          #port: ${{ secrets.FTP_PORT }} # default is 22
           # you can copy private_key from your *.pem file, keep format
           #ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           # will put all file under this path
-          local_path: './publish' # default is ./*      # example has './static/*'
+          local_path: 'spark' # default is ./*      # example has './static/*'
           # files will copy to under remote_path
           remote_path: ${{ secrets.SPARK_PATH }} 
           # connection via sftp protocol only
