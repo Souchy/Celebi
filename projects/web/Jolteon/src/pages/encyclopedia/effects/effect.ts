@@ -112,7 +112,9 @@ export class Effect {
         this.effectController.postChild(this.model.entityUid, {
             schemaName: schema.name
         }).then(res => {
-            this.model.effectIds.push(res.data.entityUid)
+            // this.model.effectIds.push(res.data.entityUid)
+            this.model = res.data;
+            console.log("effect addChild result: " + JSON.stringify(this.model.effectIds))
         });
         // .then(res => location.reload())
     }

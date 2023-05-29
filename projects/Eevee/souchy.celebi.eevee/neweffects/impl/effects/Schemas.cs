@@ -3,6 +3,7 @@ using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.enums.characteristics.other;
 using souchy.celebi.eevee.face.objects.stats;
+using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.shared.conditions.value;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
@@ -110,6 +111,7 @@ namespace souchy.celebi.eevee.neweffects.impl.effects
         /// Chaining zone starting from each target in the Effect zone
         /// </summary>
         public IZone chainZone { get; set; } = new Zone();
+        public ICondition TargetFilter { get; set; }
     }
     #endregion
 
@@ -135,7 +137,7 @@ namespace souchy.celebi.eevee.neweffects.impl.effects
     #region Status Create
     public record CreateStatusCreature() : IEffectSchema
     {
-        public CreatureStats statusStats { get; set; } = CreatureStats.Create();
+        public StatusModelStats statusStats { get; set; } = StatusModelStats.Create();
     }
     public record CreateTrap() : IEffectSchema
     {

@@ -98,15 +98,16 @@ namespace souchy.celebi.spark.controllers.models
 
         //[Authorize]
         [HttpPut("{id}")]
-        public async Task<ActionResult<ISpellModel>> Update([FromRoute] SpellIID id, [FromBody] SpellModel updatedSpellModel)
+        public async Task<ActionResult<ISpellModel>> Update([FromRoute] SpellIID id, [FromBody] SpellModel updatedModel)
         {
             var filter = Builders<ISpellModel>.Filter.Eq(nameof(ISpellModel.modelUid), id.value);
             var model = await _spellService.GetOneAsync(filter);
             if (model is null)
                 return NotFound();
-            updatedSpellModel.entityUid = model.entityUid;
-            var result = await _spellService.UpdateAsync(filter, updatedSpellModel);
-            return Ok(model);
+            updatedModel.entityUid = model.entityUid;
+            var result = await _spellService.UpdateAsync(filter, updatedModel);
+            if(result.MatchedCount > 0) return Ok(updatedModel);
+            else return Ok(model);
         }
 
         [HttpPost("{id}/effect")]

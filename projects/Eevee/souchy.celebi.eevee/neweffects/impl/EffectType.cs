@@ -170,6 +170,10 @@ namespace souchy.celebi.eevee.neweffects.impl
             SwapOut,
             SwapIn,
         #endregion
+
+        #region Go on
+        SpellChain,
+        #endregion
     }
 
     /*

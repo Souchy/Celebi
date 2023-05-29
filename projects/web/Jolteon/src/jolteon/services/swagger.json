@@ -4287,7 +4287,8 @@
           "DamagePerManaReducedInTurn",
           "DamagePerMovementReducedInTurn",
           "SwapOut",
-          "SwapIn"
+          "SwapIn",
+          "SpellChain"
         ],
         "type": "string",
         "format": ""
@@ -5645,6 +5646,22 @@
         },
         "additionalProperties": false
       },
+      "SpellChain": {
+        "type": "object",
+        "properties": {
+          "maxChains": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "chainZone": {
+            "$ref": "#/components/schemas/IZone"
+          },
+          "targetFilter": {
+            "$ref": "#/components/schemas/ICondition"
+          }
+        },
+        "additionalProperties": false
+      },
       "SpellCondition": {
         "type": "object",
         "properties": {
@@ -5880,7 +5897,11 @@
           "MaxCastPerTurn: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 3,\r\n  \"baseName\": \"MaxCastPerTurn\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8003\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.MaxCastPerTurn\"\r\n};",
           "Cooldown: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 4,\r\n  \"baseName\": \"Cooldown\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8004\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.Cooldown\"\r\n};",
           "CooldownInitial: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 5,\r\n  \"baseName\": \"CooldownInitial\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8005\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.CooldownInitial\"\r\n};",
-          "CooldownGlobal: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 6,\r\n  \"baseName\": \"CooldownGlobal\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8006\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.CooldownGlobal\"\r\n};"
+          "CooldownGlobal: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 6,\r\n  \"baseName\": \"CooldownGlobal\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8006\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.CooldownGlobal\"\r\n};",
+          "MaxPierces: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 7,\r\n  \"baseName\": \"MaxPierces\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8007\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.MaxPierces\"\r\n};",
+          "MaxChains: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 8,\r\n  \"baseName\": \"MaxChains\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8008\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.MaxChains\"\r\n};",
+          "ChainRange: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 9,\r\n  \"baseName\": \"ChainRange\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8009\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.ChainRange\"\r\n};",
+          "MaxForks: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 10,\r\n  \"baseName\": \"MaxForks\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8010\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.MaxForks\"\r\n};"
         ],
         "type": "string",
         "format": ""

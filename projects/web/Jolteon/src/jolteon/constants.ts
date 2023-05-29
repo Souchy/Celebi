@@ -32,11 +32,18 @@ export class Characteristics {
     public static readonly statusInstances: StatusInstanceProperty[] = Object.values(StatusInstancePropertyTypes)
 
     public static readonly all: 
-          (Affinity | Resistance | Resource | State | OtherProperty | Contextual | SpellProperty | SpellModelProperty | StatusContainerProperty | StatusInstanceProperty)[]
-        = [ ...Characteristics.affinities, ...Characteristics.resistances, ...Characteristics.resources,
+          (Resource | Affinity | Resistance | State | OtherProperty | Contextual | SpellModelProperty | SpellProperty | StatusContainerProperty | StatusInstanceProperty)[]
+        = [ ...Characteristics.resources, ...Characteristics.affinities, ...Characteristics.resistances, 
             ...Characteristics.states, ...Characteristics.others, ...Characteristics.contextuals,
-            ...Characteristics.spells, ...Characteristics.spellModels , ...Characteristics.statusContainers, ...Characteristics.statusInstances
+            ...Characteristics.spellModels , ...Characteristics.spells, ...Characteristics.statusContainers, ...Characteristics.statusInstances
           ]
+
+    public static readonly sectioned: 
+        (Resource[] | Affinity[] | Resistance[] | State[] | OtherProperty[] | Contextual[] | SpellModelProperty[] | SpellProperty[] | StatusContainerProperty[] | StatusInstanceProperty[])[]
+        = [ Characteristics.resources, Characteristics.affinities, Characteristics.resistances, 
+            Characteristics.states, Characteristics.others, Characteristics.contextuals,
+            Characteristics.spellModels , Characteristics.spells, Characteristics.statusContainers, Characteristics.statusInstances
+        ]
 
     public static getCharac(characId: string) {
         return Characteristics.all.find(c => c.id == characId);

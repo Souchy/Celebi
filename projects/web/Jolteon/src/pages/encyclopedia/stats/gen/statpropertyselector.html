@@ -1,0 +1,36 @@
+
+hi stat selector
+
+<!-- <input type="string" value.bind="filter" keyup.trigger="search()" placeholder="search.." /> -->
+
+<!-- <div class="schemalist" if.bind="schemasDescriptions">
+  <div class="schema" repeat.for="schema of filteredSchemas" click.trigger="clickEffectModel(schema)" data-bs-dismiss="modal">
+    <h6>${schema.name}</h6>
+    <div if.bind="len(schema) > 0">
+      <div repeat.for="prop of props(schema)">
+        ${schema.properties[prop]} ${prop}
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- ${Characteristics.sectioned} -->
+<div class="schemalist" repeat.for="type of Characteristics.sectioned">
+    ${type}
+    <h6>${getSectionName(type)}</h6>
+    <div class="schema" repeat.for="property of type" click.trigger="clickCharacteristic(property)" data-bs-dismiss="modal">
+        ${property.baseName}: ${getValueType(property)}
+    </div>
+</div>
+
+<!-- resources -->
+<!-- affinities -->
+<!-- resistances -->
+<!-- other -->
+<!-- state -->
+
+<!-- contextuals -->
+<!-- statuscontainer -->
+<!-- statusinstance -->
+<!-- spellmodel -->
+<!-- spell -->

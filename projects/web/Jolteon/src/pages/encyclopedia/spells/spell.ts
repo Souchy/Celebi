@@ -151,7 +151,7 @@ export class Spell {
         this.save();
     }
     public onRemoveEffect(e: IEffect) {
-        console.log("spell remove eff")
+        console.log("spell remove eff: " + e.entityUid)
         let idx = this.model.effectIds.indexOf(e.entityUid);
         this.model.effectIds.splice(idx, 1);
         // this.spellController.putSpell(this.model.modelUid, this.model);

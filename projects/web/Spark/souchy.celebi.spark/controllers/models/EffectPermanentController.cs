@@ -59,7 +59,8 @@ namespace souchy.celebi.spark.controllers.models
             updatedEffect.entityUid = effect.entityUid;
             var result = await _effects.UpdateAsync(id, updatedEffect);
 
-            return Ok(updatedEffect);
+            if (result.MatchedCount > 0) return Ok(updatedEffect);
+            else return Ok(effect);
         }
 
         //[Authorize]
