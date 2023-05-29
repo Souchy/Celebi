@@ -8,7 +8,10 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
-    
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'Manual build'  
 
 defaults:
   run:
@@ -32,13 +35,16 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Publish
-      run: dotnet publish --no-build -c Release -o ${{env.DOTNET_ROOT}}/myapp
+      run: dotnet publish --no-build -c Release -o 'publish/'
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v3
       with:
         name: .net-app
-        path: ${{env.DOTNET_ROOT}}/myapp      
-      
+        path: 'publish/'      
+    - run: ls
+    - run: cd 'publish'
+    - run: ls
+    
   deployment:
     runs-on: ubuntu-latest
     needs: build
@@ -67,7 +73,7 @@ jobs:
           # you can copy private_key from your *.pem file, keep format
           #ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           # will put all file under this path
-          local_path: './myapp' # default is ./*      # example has './static/*'
+          local_path: './publish' # default is ./*      # example has './static/*'
           # files will copy to under remote_path
           remote_path: ${{ secrets.SPARK_PATH }} 
           # connection via sftp protocol only
