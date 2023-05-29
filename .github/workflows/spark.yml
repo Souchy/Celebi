@@ -5,7 +5,7 @@ name: .NET
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "Souchy-patch-1" ]
   pull_request:
     branches: [ "master" ]
   workflow_dispatch:
@@ -57,7 +57,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: 'Spark'
-      - run: ls
+      #- run: ls
       #- name: Extract some files
         #run: 7z x 'Spark.zip'
       #- uses: montudor/action-zip@v1
