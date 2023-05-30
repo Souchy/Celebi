@@ -17,7 +17,6 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
         {
             this.Element = ele;
             this.StatValueType = StatValueType.Simple;
-            this.Factory = SimpleFactory;
         }
 
         public static readonly Resistance Fire      = new(1,  nameof(Fire),  ElementType.Fire);

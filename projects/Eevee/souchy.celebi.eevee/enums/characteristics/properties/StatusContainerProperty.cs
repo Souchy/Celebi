@@ -10,15 +10,24 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
 {
     public sealed record StatusContainerProperty : CharacteristicType
     {
-        public StatusContainerProperty(int localId, string name) : base(CharacteristicCategory.StatusContainer, localId, name)
+        public StatusContainerProperty(int localId, string name, int defaultValue = 0) : base(CharacteristicCategory.StatusContainer, localId, name, defaultValue)
         {
             this.StatValueType = StatValueType.Simple;
-            this.Factory = SimpleFactory;
+        }
+        public StatusContainerProperty(int localId, string name, object defaultValue) : base(CharacteristicCategory.StatusContainer, localId, name, defaultValue)
+        {
+            this.StatValueType = StatValueType.Simple;
         }
 
         //public static readonly StatusContainerProperty Stacks       = new(0, nameof(Stacks     )); 
-        public static readonly StatusContainerProperty MergeStrategy    = new(0, nameof(MergeStrategy)); // StatusMergeStrategy enum
-        public static readonly StatusContainerProperty UnbewitchStrategy= new(1, nameof(UnbewitchStrategy)); // StatusUnbewitchStrategy
+        public static readonly StatusContainerProperty MergeStrategy = new(0, nameof(MergeStrategy), defaultValue: StatusMergeStrategy.Ignore) // StatusMergeStrategy enum
+        {
+            enumValueConstraint = typeof(StatusMergeStrategy)
+        };
+        public static readonly StatusContainerProperty UnbewitchStrategy = new(1, nameof(UnbewitchStrategy), defaultValue: StatusUnbewitchStrategy.Dispellable) // StatusUnbewitchStrategy
+        {
+            enumValueConstraint = typeof(StatusUnbewitchStrategy)
+        };
         public static readonly StatusContainerProperty MaxStacks        = new(2, nameof(MaxStacks  )); 
         public static readonly StatusContainerProperty MaxDelay         = new(3, nameof(MaxDelay   )); 
         public static readonly StatusContainerProperty MaxDuration      = new(4, nameof(MaxDuration)); 
@@ -41,7 +50,6 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
         public StatusInstanceProperty(int localId, string name) : base(CharacteristicCategory.StatusInstance, localId, name)
         {
             this.StatValueType = StatValueType.Simple;
-            this.Factory = SimpleFactory;
         }
 
         public static readonly StatusInstanceProperty Delay = new(1, nameof(Delay)); // instance

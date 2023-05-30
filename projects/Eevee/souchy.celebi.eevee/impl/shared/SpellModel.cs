@@ -40,9 +40,9 @@ namespace souchy.celebi.eevee.impl.shared
         public IZone RangeZoneMin { get; set; } = new Zone()
         {
             zoneType = new Value<ZoneType>(ZoneType.circle),
-            size = new Value<IVector3>(new Vector3(0, 0, 0)),
             worldOrigin = ActorType.Source,
             negative = true
+            //size = new Value<IVector3>(new Vector3(0, 0, 0)),
         };
         public IZone RangeZoneMax { get; set; } = new Zone()
         {

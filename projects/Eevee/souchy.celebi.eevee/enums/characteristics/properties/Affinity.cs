@@ -1,12 +1,5 @@
-﻿using souchy.celebi.eevee.face.objects.stats;
-using souchy.celebi.eevee.face.shared.conditions;
+﻿using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.impl.shared.conditions.value;
-using souchy.celebi.eevee.impl.util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace souchy.celebi.eevee.enums.characteristics.creature
 {
@@ -17,7 +10,6 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
         {
             this.Element = ele;
             this.StatValueType = StatValueType.Simple;
-            this.Factory = SimpleFactory;
         }
 
         public static readonly Affinity True                = new(1, nameof(True),  ElementType.True);

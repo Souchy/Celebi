@@ -1,11 +1,12 @@
 import { bindable } from "aurelia";
 import { SchemaDescription } from "../../../../jolteon/services/api/data-contracts";
-import { Enums } from '../../../../jolteon/constants';
+import { Characteristics, Enums } from '../../../../jolteon/constants';
 
 
 export default class PropertyGrid {
     // hook enums
     public readonly Enums: Enums = Enums;
+    public readonly Characteristics: Characteristics = Characteristics;
 
     @bindable
     public data: any;

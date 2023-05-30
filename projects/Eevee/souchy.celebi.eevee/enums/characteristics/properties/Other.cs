@@ -1,11 +1,4 @@
-﻿using souchy.celebi.eevee.enums.characteristics.creature;
-using souchy.celebi.eevee.face.objects.stats;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace souchy.celebi.eevee.enums.characteristics.properties
 {
     public sealed record OtherProperty: CharacteristicType
@@ -13,7 +6,6 @@ namespace souchy.celebi.eevee.enums.characteristics.properties
         public OtherProperty(int localId, string name) : base(CharacteristicCategory.Other, localId, name)
         {
             this.StatValueType = StatValueType.Simple;
-            this.Factory = SimpleFactory;
         }
 
         public static readonly OtherProperty Range      = new(0, nameof(Range));

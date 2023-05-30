@@ -83,6 +83,12 @@ namespace souchy.celebi.spark.util
 
             // Stats
             var stats = SpellModelStats.Create();
+            stats.Add(SpellModelProperty.MaxCastPerTarget.Create(int.MaxValue));
+            stats.Add(SpellModelProperty.MaxCastPerTurn.Create(int.MaxValue));
+            stats.Add(SpellModelProperty.Cooldown.Create(0));
+            stats.Add(SpellModelProperty.MaxCharges.Create(0));
+            stats.Add(SpellModelProperty.LineOfSightRequired.Create(true));
+            stats.Add(SpellModelProperty.BroadcastTargetedCell.Create(true));
             spellModel.statsId = stats.entityUid;
 
             // Skin

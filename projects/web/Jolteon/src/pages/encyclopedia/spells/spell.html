@@ -4,6 +4,8 @@
 <import from="../effects/modelSelector/effectModelSelector"></import>
 <import from="../effects/effect"></import>
 <import from="../zone/zone"></import>
+<import from="../stats/gen/statsmini"></import>
+
 
 <!-- vignette root || creature -->
 <template if.bind="isvignette && mode != 'search'">
@@ -70,7 +72,8 @@
     </div>
     <div>
       <h4>Stats</h4>
-      <spellstats baseuid.bind="model.statsId"></spellstats>
+      <!-- <spellstats baseuid.bind="model.statsId"></spellstats> -->
+      <statsmini statsuid.bind="model.statsId" characsallowed.bind="Characteristics.spellModels" hasadddelete.bind="true" hasgrowth.bind="true"></statsmini>
     </div>
     <div>
       <h4>Range</h4>

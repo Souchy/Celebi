@@ -1308,44 +1308,6 @@
         }
       }
     },
-    "/api/models/enums/statusPriorityType": {
-      "get": {
-        "tags": [
-          "EnumsController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/StatusPriorityType"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/StatusPriorityType"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/StatusPriorityType"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/models/enums/direction8Type": {
       "get": {
         "tags": [
@@ -1414,6 +1376,120 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/Direction9Type"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/enums/statusPriorityType": {
+      "get": {
+        "tags": [
+          "EnumsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatusPriorityType"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatusPriorityType"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatusPriorityType"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/enums/statusMergeStrategy": {
+      "get": {
+        "tags": [
+          "EnumsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatusMergeStrategy"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatusMergeStrategy"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatusMergeStrategy"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/enums/statusUnbewitchStrategy": {
+      "get": {
+        "tags": [
+          "EnumsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatusUnbewitchStrategy"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatusUnbewitchStrategy"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatusUnbewitchStrategy"
                   }
                 }
               }
@@ -3471,6 +3547,9 @@
             "type": "string",
             "nullable": true
           },
+          "defaultValue": {
+            "nullable": true
+          },
           "conditions": {
             "type": "array",
             "items": {
@@ -3487,27 +3566,31 @@
           "nameModelUid": {
             "type": "string",
             "nullable": true
+          },
+          "enumValueConstraint": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
       },
       "AffinityTypes": {
         "enum": [
-          "True: Affinity = {\r\n  \"element\": 1,\r\n  \"category\": 2,\r\n  \"localId\": 1,\r\n  \"baseName\": \"True\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2001\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.True\"\r\n};",
-          "Fire: Affinity = {\r\n  \"element\": 2,\r\n  \"category\": 2,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Fire\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2002\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Fire\"\r\n};",
-          "Water: Affinity = {\r\n  \"element\": 3,\r\n  \"category\": 2,\r\n  \"localId\": 3,\r\n  \"baseName\": \"Water\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2003\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Water\"\r\n};",
-          "Earth: Affinity = {\r\n  \"element\": 4,\r\n  \"category\": 2,\r\n  \"localId\": 4,\r\n  \"baseName\": \"Earth\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2004\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Earth\"\r\n};",
-          "Air: Affinity = {\r\n  \"element\": 5,\r\n  \"category\": 2,\r\n  \"localId\": 5,\r\n  \"baseName\": \"Air\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2005\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Air\"\r\n};",
-          "Dark: Affinity = {\r\n  \"element\": 6,\r\n  \"category\": 2,\r\n  \"localId\": 6,\r\n  \"baseName\": \"Dark\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2006\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Dark\"\r\n};",
-          "Light: Affinity = {\r\n  \"element\": 7,\r\n  \"category\": 2,\r\n  \"localId\": 7,\r\n  \"baseName\": \"Light\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2007\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Light\"\r\n};",
-          "Damage: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 20,\r\n  \"baseName\": \"Damage\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2020\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Damage\"\r\n};",
-          "IndirectDamage: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 21,\r\n  \"baseName\": \"IndirectDamage\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2021\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.IndirectDamage\"\r\n};",
-          "Heal: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 22,\r\n  \"baseName\": \"Heal\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2022\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Heal\"\r\n};",
-          "Melee: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 23,\r\n  \"baseName\": \"Melee\",\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 5,\r\n      \"groupType\": 0,\r\n      \"children\": []\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2023\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Melee\"\r\n};",
-          "Distance: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 24,\r\n  \"baseName\": \"Distance\",\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 2,\r\n      \"groupType\": 0,\r\n      \"children\": []\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2024\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Distance\"\r\n};",
-          "Trap: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 25,\r\n  \"baseName\": \"Trap\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2025\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Trap\"\r\n};",
-          "Glyph: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 26,\r\n  \"baseName\": \"Glyph\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2026\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Glyph\"\r\n};",
-          "PenetrationPercent: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 27,\r\n  \"baseName\": \"PenetrationPercent\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2027\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.PenetrationPercent\"\r\n};"
+          "True: Affinity = {\r\n  \"element\": 1,\r\n  \"category\": 2,\r\n  \"localId\": 1,\r\n  \"baseName\": \"True\",\r\n  \"defaultValue\": [],\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2001\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.True\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Fire: Affinity = {\r\n  \"element\": 2,\r\n  \"category\": 2,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Fire\",\r\n  \"defaultValue\": [],\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2002\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Fire\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Water: Affinity = {\r\n  \"element\": 3,\r\n  \"category\": 2,\r\n  \"localId\": 3,\r\n  \"baseName\": \"Water\",\r\n  \"defaultValue\": [],\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2003\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Water\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Earth: Affinity = {\r\n  \"element\": 4,\r\n  \"category\": 2,\r\n  \"localId\": 4,\r\n  \"baseName\": \"Earth\",\r\n  \"defaultValue\": [],\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2004\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Earth\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Air: Affinity = {\r\n  \"element\": 5,\r\n  \"category\": 2,\r\n  \"localId\": 5,\r\n  \"baseName\": \"Air\",\r\n  \"defaultValue\": [],\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2005\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Air\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Dark: Affinity = {\r\n  \"element\": 6,\r\n  \"category\": 2,\r\n  \"localId\": 6,\r\n  \"baseName\": \"Dark\",\r\n  \"defaultValue\": [],\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2006\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Dark\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Light: Affinity = {\r\n  \"element\": 7,\r\n  \"category\": 2,\r\n  \"localId\": 7,\r\n  \"baseName\": \"Light\",\r\n  \"defaultValue\": [],\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2007\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Light\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Damage: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 20,\r\n  \"baseName\": \"Damage\",\r\n  \"defaultValue\": [],\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2020\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Damage\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "IndirectDamage: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 21,\r\n  \"baseName\": \"IndirectDamage\",\r\n  \"defaultValue\": [],\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2021\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.IndirectDamage\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Heal: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 22,\r\n  \"baseName\": \"Heal\",\r\n  \"defaultValue\": [],\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2022\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Heal\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Melee: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 23,\r\n  \"baseName\": \"Melee\",\r\n  \"defaultValue\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 5,\r\n      \"groupType\": 0,\r\n      \"children\": []\r\n    }\r\n  ],\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2023\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Melee\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Distance: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 24,\r\n  \"baseName\": \"Distance\",\r\n  \"defaultValue\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 2,\r\n      \"groupType\": 0,\r\n      \"children\": []\r\n    }\r\n  ],\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2024\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Distance\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Trap: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 25,\r\n  \"baseName\": \"Trap\",\r\n  \"defaultValue\": [],\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2025\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Trap\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Glyph: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 26,\r\n  \"baseName\": \"Glyph\",\r\n  \"defaultValue\": [],\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2026\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Glyph\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "PenetrationPercent: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 27,\r\n  \"baseName\": \"PenetrationPercent\",\r\n  \"defaultValue\": [],\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2027\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.PenetrationPercent\",\r\n  \"enumValueConstraint\": null\r\n};"
         ],
         "type": "string",
         "format": ""
@@ -3633,6 +3716,51 @@
         },
         "additionalProperties": false
       },
+      "CharacteristicType": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/CharacteristicCategory"
+          },
+          "localId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "baseName": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultValue": {
+            "nullable": true
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          },
+          "statValueType": {
+            "$ref": "#/components/schemas/StatValueType"
+          },
+          "id": {
+            "type": "string"
+          },
+          "nameModelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "enumValueConstraint": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CharacteristicTypeTypes": {
+        "type": "string",
+        "format": ""
+      },
       "ConditionComparatorType": {
         "enum": [
           "EQ",
@@ -3728,6 +3856,9 @@
             "type": "string",
             "nullable": true
           },
+          "defaultValue": {
+            "nullable": true
+          },
           "conditions": {
             "type": "array",
             "items": {
@@ -3744,29 +3875,33 @@
           "nameModelUid": {
             "type": "string",
             "nullable": true
+          },
+          "enumValueConstraint": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
       },
       "ContextualTypes": {
         "enum": [
-          "LifeGained: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 0,\r\n  \"baseName\": \"LifeGained\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5000\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.LifeGained\"\r\n};",
-          "LifeUsed: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 1,\r\n  \"baseName\": \"LifeUsed\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5001\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.LifeUsed\"\r\n};",
-          "LifeLost: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 2,\r\n  \"baseName\": \"LifeLost\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5002\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.LifeLost\"\r\n};",
-          "ManaGained: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 3,\r\n  \"baseName\": \"ManaGained\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5003\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.ManaGained\"\r\n};",
-          "ManaUsed: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 4,\r\n  \"baseName\": \"ManaUsed\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5004\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.ManaUsed\"\r\n};",
-          "ManaLost: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 5,\r\n  \"baseName\": \"ManaLost\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5005\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.ManaLost\"\r\n};",
-          "MovementGained: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 6,\r\n  \"baseName\": \"MovementGained\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5006\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.MovementGained\"\r\n};",
-          "MovementUsed: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 7,\r\n  \"baseName\": \"MovementUsed\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5007\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.MovementUsed\"\r\n};",
-          "MovementLost: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 8,\r\n  \"baseName\": \"MovementLost\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5008\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.MovementLost\"\r\n};",
-          "CountHitsGiven: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 9,\r\n  \"baseName\": \"CountHitsGiven\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5009\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.CountHitsGiven\"\r\n};",
-          "CountHitsTaken: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 10,\r\n  \"baseName\": \"CountHitsTaken\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5010\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.CountHitsTaken\"\r\n};",
-          "ManaReduced: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 15,\r\n  \"baseName\": \"ManaReduced\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5015\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.ManaReduced\"\r\n};",
-          "MovementReduced: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 16,\r\n  \"baseName\": \"MovementReduced\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5016\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.MovementReduced\"\r\n};",
-          "StartTurnPosition: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 11,\r\n  \"baseName\": \"StartTurnPosition\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5011\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.StartTurnPosition\"\r\n};",
-          "StartFightPosition: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 12,\r\n  \"baseName\": \"StartFightPosition\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5012\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.StartFightPosition\"\r\n};",
-          "PreviousPositions: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 13,\r\n  \"baseName\": \"PreviousPositions\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 3,\r\n  \"id\": \"5013\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.PreviousPositions\"\r\n};",
-          "NextPositions: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 14,\r\n  \"baseName\": \"NextPositions\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 3,\r\n  \"id\": \"5014\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.NextPositions\"\r\n};"
+          "LifeGained: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 0,\r\n  \"baseName\": \"LifeGained\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5000\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.LifeGained\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "LifeUsed: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 1,\r\n  \"baseName\": \"LifeUsed\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5001\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.LifeUsed\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "LifeLost: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 2,\r\n  \"baseName\": \"LifeLost\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5002\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.LifeLost\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "ManaGained: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 3,\r\n  \"baseName\": \"ManaGained\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5003\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.ManaGained\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "ManaUsed: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 4,\r\n  \"baseName\": \"ManaUsed\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5004\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.ManaUsed\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "ManaLost: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 5,\r\n  \"baseName\": \"ManaLost\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5005\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.ManaLost\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MovementGained: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 6,\r\n  \"baseName\": \"MovementGained\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5006\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.MovementGained\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MovementUsed: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 7,\r\n  \"baseName\": \"MovementUsed\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5007\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.MovementUsed\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MovementLost: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 8,\r\n  \"baseName\": \"MovementLost\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5008\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.MovementLost\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "CountHitsGiven: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 9,\r\n  \"baseName\": \"CountHitsGiven\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5009\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.CountHitsGiven\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "CountHitsTaken: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 10,\r\n  \"baseName\": \"CountHitsTaken\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5010\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.CountHitsTaken\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "ManaReduced: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 15,\r\n  \"baseName\": \"ManaReduced\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5015\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.ManaReduced\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MovementReduced: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 16,\r\n  \"baseName\": \"MovementReduced\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5016\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.MovementReduced\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "StartTurnPosition: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 11,\r\n  \"baseName\": \"StartTurnPosition\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5011\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.StartTurnPosition\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "StartFightPosition: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 12,\r\n  \"baseName\": \"StartFightPosition\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5012\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.StartFightPosition\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "PreviousPositions: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 13,\r\n  \"baseName\": \"PreviousPositions\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 3,\r\n  \"id\": \"5013\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.PreviousPositions\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "NextPositions: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 14,\r\n  \"baseName\": \"NextPositions\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 3,\r\n  \"id\": \"5014\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.NextPositions\",\r\n  \"enumValueConstraint\": null\r\n};"
         ],
         "type": "string",
         "format": ""
@@ -5257,6 +5392,9 @@
             "type": "string",
             "nullable": true
           },
+          "defaultValue": {
+            "nullable": true
+          },
           "conditions": {
             "type": "array",
             "items": {
@@ -5273,16 +5411,20 @@
           "nameModelUid": {
             "type": "string",
             "nullable": true
+          },
+          "enumValueConstraint": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
       },
       "OtherPropertyTypes": {
         "enum": [
-          "Range: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 0,\r\n  \"baseName\": \"Range\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6000\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.Range\"\r\n};",
-          "Speed: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 1,\r\n  \"baseName\": \"Speed\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6001\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.Speed\"\r\n};",
-          "Erosion: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Erosion\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6002\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.Erosion\"\r\n};",
-          "Echo: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 3,\r\n  \"baseName\": \"Echo\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6003\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.Echo\"\r\n};"
+          "Range: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 0,\r\n  \"baseName\": \"Range\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6000\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.Range\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Speed: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 1,\r\n  \"baseName\": \"Speed\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6001\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.Speed\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Erosion: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Erosion\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6002\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.Erosion\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Echo: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 3,\r\n  \"baseName\": \"Echo\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6003\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.Echo\",\r\n  \"enumValueConstraint\": null\r\n};"
         ],
         "type": "string",
         "format": ""
@@ -5446,6 +5588,9 @@
             "type": "string",
             "nullable": true
           },
+          "defaultValue": {
+            "nullable": true
+          },
           "conditions": {
             "type": "array",
             "items": {
@@ -5462,23 +5607,27 @@
           "nameModelUid": {
             "type": "string",
             "nullable": true
+          },
+          "enumValueConstraint": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
       },
       "ResistanceTypes": {
         "enum": [
-          "Fire: Resistance = {\r\n  \"element\": 2,\r\n  \"category\": 3,\r\n  \"localId\": 1,\r\n  \"baseName\": \"Fire\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3001\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Fire\"\r\n};",
-          "Water: Resistance = {\r\n  \"element\": 3,\r\n  \"category\": 3,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Water\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3002\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Water\"\r\n};",
-          "Earth: Resistance = {\r\n  \"element\": 4,\r\n  \"category\": 3,\r\n  \"localId\": 3,\r\n  \"baseName\": \"Earth\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3003\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Earth\"\r\n};",
-          "Air: Resistance = {\r\n  \"element\": 5,\r\n  \"category\": 3,\r\n  \"localId\": 4,\r\n  \"baseName\": \"Air\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3004\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Air\"\r\n};",
-          "True: Resistance = {\r\n  \"element\": 1,\r\n  \"category\": 3,\r\n  \"localId\": 5,\r\n  \"baseName\": \"True\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3005\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.True\"\r\n};",
-          "Damage: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 6,\r\n  \"baseName\": \"Damage\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3006\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Damage\"\r\n};",
-          "Heal: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 7,\r\n  \"baseName\": \"Heal\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3007\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Heal\"\r\n};",
-          "Melee: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 8,\r\n  \"baseName\": \"Melee\",\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 5,\r\n      \"groupType\": 0,\r\n      \"children\": []\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3008\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Melee\"\r\n};",
-          "Distance: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 9,\r\n  \"baseName\": \"Distance\",\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 2,\r\n      \"groupType\": 0,\r\n      \"children\": []\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3009\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Distance\"\r\n};",
-          "Trap: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 10,\r\n  \"baseName\": \"Trap\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3010\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Trap\"\r\n};",
-          "Glyph: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 11,\r\n  \"baseName\": \"Glyph\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3011\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Glyph\"\r\n};"
+          "Fire: Resistance = {\r\n  \"element\": 2,\r\n  \"category\": 3,\r\n  \"localId\": 1,\r\n  \"baseName\": \"Fire\",\r\n  \"defaultValue\": [],\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3001\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Fire\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Water: Resistance = {\r\n  \"element\": 3,\r\n  \"category\": 3,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Water\",\r\n  \"defaultValue\": [],\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3002\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Water\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Earth: Resistance = {\r\n  \"element\": 4,\r\n  \"category\": 3,\r\n  \"localId\": 3,\r\n  \"baseName\": \"Earth\",\r\n  \"defaultValue\": [],\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3003\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Earth\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Air: Resistance = {\r\n  \"element\": 5,\r\n  \"category\": 3,\r\n  \"localId\": 4,\r\n  \"baseName\": \"Air\",\r\n  \"defaultValue\": [],\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3004\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Air\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "True: Resistance = {\r\n  \"element\": 1,\r\n  \"category\": 3,\r\n  \"localId\": 5,\r\n  \"baseName\": \"True\",\r\n  \"defaultValue\": [],\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3005\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.True\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Damage: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 6,\r\n  \"baseName\": \"Damage\",\r\n  \"defaultValue\": [],\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3006\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Damage\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Heal: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 7,\r\n  \"baseName\": \"Heal\",\r\n  \"defaultValue\": [],\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3007\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Heal\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Melee: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 8,\r\n  \"baseName\": \"Melee\",\r\n  \"defaultValue\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 5,\r\n      \"groupType\": 0,\r\n      \"children\": []\r\n    }\r\n  ],\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3008\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Melee\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Distance: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 9,\r\n  \"baseName\": \"Distance\",\r\n  \"defaultValue\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 2,\r\n      \"groupType\": 0,\r\n      \"children\": []\r\n    }\r\n  ],\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3009\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Distance\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Trap: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 10,\r\n  \"baseName\": \"Trap\",\r\n  \"defaultValue\": [],\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3010\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Trap\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Glyph: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 11,\r\n  \"baseName\": \"Glyph\",\r\n  \"defaultValue\": [],\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3011\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Glyph\",\r\n  \"enumValueConstraint\": null\r\n};"
         ],
         "type": "string",
         "format": ""
@@ -5503,6 +5652,9 @@
             "type": "string",
             "nullable": true
           },
+          "defaultValue": {
+            "nullable": true
+          },
           "conditions": {
             "type": "array",
             "items": {
@@ -5517,6 +5669,10 @@
             "type": "string"
           },
           "nameModelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "enumValueConstraint": {
             "type": "string",
             "nullable": true
           }
@@ -5550,43 +5706,43 @@
       },
       "ResourceTypes": {
         "enum": [
-          "LifeInitialMax: Resource = {\r\n  \"resType\": 0,\r\n  \"resProp\": 0,\r\n  \"category\": 1,\r\n  \"localId\": 0,\r\n  \"baseName\": \"LifeInitialMax\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1000\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.LifeInitialMax\"\r\n};",
-          "Life: Resource = {\r\n  \"resType\": 0,\r\n  \"resProp\": 1,\r\n  \"category\": 1,\r\n  \"localId\": 1,\r\n  \"baseName\": \"Life\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1001\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.Life\"\r\n};",
-          "LifeMax: Resource = {\r\n  \"resType\": 0,\r\n  \"resProp\": 2,\r\n  \"category\": 1,\r\n  \"localId\": 2,\r\n  \"baseName\": \"LifeMax\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1002\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.LifeMax\"\r\n};",
-          "LifeRegen: Resource = {\r\n  \"resType\": 0,\r\n  \"resProp\": 4,\r\n  \"category\": 1,\r\n  \"localId\": 3,\r\n  \"baseName\": \"LifeRegen\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1003\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.LifeRegen\"\r\n};",
-          "LifeMissing: Resource = {\r\n  \"resType\": 0,\r\n  \"resProp\": 3,\r\n  \"category\": 1,\r\n  \"localId\": 4,\r\n  \"baseName\": \"LifeMissing\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1004\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.LifeMissing\"\r\n};",
-          "LifePercent: Resource = {\r\n  \"resType\": 0,\r\n  \"resProp\": 5,\r\n  \"category\": 1,\r\n  \"localId\": 5,\r\n  \"baseName\": \"LifePercent\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1005\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.LifePercent\"\r\n};",
-          "LifeMissingPercent: Resource = {\r\n  \"resType\": 0,\r\n  \"resProp\": 6,\r\n  \"category\": 1,\r\n  \"localId\": 6,\r\n  \"baseName\": \"LifeMissingPercent\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1006\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.LifeMissingPercent\"\r\n};",
-          "ManaInitialMax: Resource = {\r\n  \"resType\": 1,\r\n  \"resProp\": 0,\r\n  \"category\": 1,\r\n  \"localId\": 7,\r\n  \"baseName\": \"ManaInitialMax\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1007\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.ManaInitialMax\"\r\n};",
-          "Mana: Resource = {\r\n  \"resType\": 1,\r\n  \"resProp\": 1,\r\n  \"category\": 1,\r\n  \"localId\": 8,\r\n  \"baseName\": \"Mana\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1008\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.Mana\"\r\n};",
-          "ManaMax: Resource = {\r\n  \"resType\": 1,\r\n  \"resProp\": 2,\r\n  \"category\": 1,\r\n  \"localId\": 9,\r\n  \"baseName\": \"ManaMax\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1009\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.ManaMax\"\r\n};",
-          "ManaRegen: Resource = {\r\n  \"resType\": 1,\r\n  \"resProp\": 4,\r\n  \"category\": 1,\r\n  \"localId\": 10,\r\n  \"baseName\": \"ManaRegen\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1010\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.ManaRegen\"\r\n};",
-          "ManaMissing: Resource = {\r\n  \"resType\": 1,\r\n  \"resProp\": 3,\r\n  \"category\": 1,\r\n  \"localId\": 11,\r\n  \"baseName\": \"ManaMissing\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1011\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.ManaMissing\"\r\n};",
-          "ManaPercent: Resource = {\r\n  \"resType\": 1,\r\n  \"resProp\": 5,\r\n  \"category\": 1,\r\n  \"localId\": 12,\r\n  \"baseName\": \"ManaPercent\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1012\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.ManaPercent\"\r\n};",
-          "ManaMissingPercent: Resource = {\r\n  \"resType\": 1,\r\n  \"resProp\": 6,\r\n  \"category\": 1,\r\n  \"localId\": 13,\r\n  \"baseName\": \"ManaMissingPercent\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1013\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.ManaMissingPercent\"\r\n};",
-          "MovementInitialMax: Resource = {\r\n  \"resType\": 2,\r\n  \"resProp\": 0,\r\n  \"category\": 1,\r\n  \"localId\": 14,\r\n  \"baseName\": \"MovementInitialMax\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1014\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.MovementInitialMax\"\r\n};",
-          "Movement: Resource = {\r\n  \"resType\": 2,\r\n  \"resProp\": 1,\r\n  \"category\": 1,\r\n  \"localId\": 15,\r\n  \"baseName\": \"Movement\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1015\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.Movement\"\r\n};",
-          "MovementMax: Resource = {\r\n  \"resType\": 2,\r\n  \"resProp\": 2,\r\n  \"category\": 1,\r\n  \"localId\": 16,\r\n  \"baseName\": \"MovementMax\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1016\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.MovementMax\"\r\n};",
-          "MovementRegen: Resource = {\r\n  \"resType\": 2,\r\n  \"resProp\": 4,\r\n  \"category\": 1,\r\n  \"localId\": 17,\r\n  \"baseName\": \"MovementRegen\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1017\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.MovementRegen\"\r\n};",
-          "MovementMissing: Resource = {\r\n  \"resType\": 2,\r\n  \"resProp\": 3,\r\n  \"category\": 1,\r\n  \"localId\": 18,\r\n  \"baseName\": \"MovementMissing\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1018\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.MovementMissing\"\r\n};",
-          "MovementPercent: Resource = {\r\n  \"resType\": 2,\r\n  \"resProp\": 5,\r\n  \"category\": 1,\r\n  \"localId\": 19,\r\n  \"baseName\": \"MovementPercent\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1019\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.MovementPercent\"\r\n};",
-          "MovementMissingPercent: Resource = {\r\n  \"resType\": 2,\r\n  \"resProp\": 6,\r\n  \"category\": 1,\r\n  \"localId\": 20,\r\n  \"baseName\": \"MovementMissingPercent\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1020\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.MovementMissingPercent\"\r\n};",
-          "SummonInitialMax: Resource = {\r\n  \"resType\": 3,\r\n  \"resProp\": 0,\r\n  \"category\": 1,\r\n  \"localId\": 21,\r\n  \"baseName\": \"SummonInitialMax\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1021\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.SummonInitialMax\"\r\n};",
-          "Summon: Resource = {\r\n  \"resType\": 3,\r\n  \"resProp\": 1,\r\n  \"category\": 1,\r\n  \"localId\": 22,\r\n  \"baseName\": \"Summon\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1022\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.Summon\"\r\n};",
-          "SummonMax: Resource = {\r\n  \"resType\": 3,\r\n  \"resProp\": 2,\r\n  \"category\": 1,\r\n  \"localId\": 23,\r\n  \"baseName\": \"SummonMax\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1023\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.SummonMax\"\r\n};",
-          "SummonRegen: Resource = {\r\n  \"resType\": 3,\r\n  \"resProp\": 4,\r\n  \"category\": 1,\r\n  \"localId\": 24,\r\n  \"baseName\": \"SummonRegen\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1024\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.SummonRegen\"\r\n};",
-          "SummonMissing: Resource = {\r\n  \"resType\": 3,\r\n  \"resProp\": 3,\r\n  \"category\": 1,\r\n  \"localId\": 25,\r\n  \"baseName\": \"SummonMissing\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1025\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.SummonMissing\"\r\n};",
-          "SummonPercent: Resource = {\r\n  \"resType\": 3,\r\n  \"resProp\": 5,\r\n  \"category\": 1,\r\n  \"localId\": 26,\r\n  \"baseName\": \"SummonPercent\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1026\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.SummonPercent\"\r\n};",
-          "SummonMissingPercent: Resource = {\r\n  \"resType\": 3,\r\n  \"resProp\": 6,\r\n  \"category\": 1,\r\n  \"localId\": 27,\r\n  \"baseName\": \"SummonMissingPercent\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1027\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.SummonMissingPercent\"\r\n};",
-          "RageInitialMax: Resource = {\r\n  \"resType\": 4,\r\n  \"resProp\": 0,\r\n  \"category\": 1,\r\n  \"localId\": 28,\r\n  \"baseName\": \"RageInitialMax\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1028\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.RageInitialMax\"\r\n};",
-          "Rage: Resource = {\r\n  \"resType\": 4,\r\n  \"resProp\": 1,\r\n  \"category\": 1,\r\n  \"localId\": 29,\r\n  \"baseName\": \"Rage\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1029\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.Rage\"\r\n};",
-          "RageMax: Resource = {\r\n  \"resType\": 4,\r\n  \"resProp\": 2,\r\n  \"category\": 1,\r\n  \"localId\": 30,\r\n  \"baseName\": \"RageMax\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1030\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.RageMax\"\r\n};",
-          "RageRegen: Resource = {\r\n  \"resType\": 4,\r\n  \"resProp\": 4,\r\n  \"category\": 1,\r\n  \"localId\": 31,\r\n  \"baseName\": \"RageRegen\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1031\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.RageRegen\"\r\n};",
-          "RageMissing: Resource = {\r\n  \"resType\": 4,\r\n  \"resProp\": 3,\r\n  \"category\": 1,\r\n  \"localId\": 34,\r\n  \"baseName\": \"RageMissing\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1034\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.RageMissing\"\r\n};",
-          "RagePercent: Resource = {\r\n  \"resType\": 4,\r\n  \"resProp\": 5,\r\n  \"category\": 1,\r\n  \"localId\": 35,\r\n  \"baseName\": \"RagePercent\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1035\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.RagePercent\"\r\n};",
-          "RageMissingPercent: Resource = {\r\n  \"resType\": 4,\r\n  \"resProp\": 6,\r\n  \"category\": 1,\r\n  \"localId\": 36,\r\n  \"baseName\": \"RageMissingPercent\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1036\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.RageMissingPercent\"\r\n};",
-          "Shield: Resource = {\r\n  \"resType\": 5,\r\n  \"resProp\": 1,\r\n  \"category\": 1,\r\n  \"localId\": 38,\r\n  \"baseName\": \"Shield\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1038\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.Shield\"\r\n};",
-          "ShieldRegen: Resource = {\r\n  \"resType\": 5,\r\n  \"resProp\": 4,\r\n  \"category\": 1,\r\n  \"localId\": 39,\r\n  \"baseName\": \"ShieldRegen\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1039\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.ShieldRegen\"\r\n};"
+          "LifeInitialMax: Resource = {\r\n  \"resType\": 0,\r\n  \"resProp\": 0,\r\n  \"category\": 1,\r\n  \"localId\": 0,\r\n  \"baseName\": \"LifeInitialMax\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1000\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.LifeInitialMax\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Life: Resource = {\r\n  \"resType\": 0,\r\n  \"resProp\": 1,\r\n  \"category\": 1,\r\n  \"localId\": 1,\r\n  \"baseName\": \"Life\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1001\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.Life\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "LifeMax: Resource = {\r\n  \"resType\": 0,\r\n  \"resProp\": 2,\r\n  \"category\": 1,\r\n  \"localId\": 2,\r\n  \"baseName\": \"LifeMax\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1002\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.LifeMax\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "LifeRegen: Resource = {\r\n  \"resType\": 0,\r\n  \"resProp\": 4,\r\n  \"category\": 1,\r\n  \"localId\": 3,\r\n  \"baseName\": \"LifeRegen\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1003\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.LifeRegen\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "LifeMissing: Resource = {\r\n  \"resType\": 0,\r\n  \"resProp\": 3,\r\n  \"category\": 1,\r\n  \"localId\": 4,\r\n  \"baseName\": \"LifeMissing\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1004\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.LifeMissing\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "LifePercent: Resource = {\r\n  \"resType\": 0,\r\n  \"resProp\": 5,\r\n  \"category\": 1,\r\n  \"localId\": 5,\r\n  \"baseName\": \"LifePercent\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1005\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.LifePercent\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "LifeMissingPercent: Resource = {\r\n  \"resType\": 0,\r\n  \"resProp\": 6,\r\n  \"category\": 1,\r\n  \"localId\": 6,\r\n  \"baseName\": \"LifeMissingPercent\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1006\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.LifeMissingPercent\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "ManaInitialMax: Resource = {\r\n  \"resType\": 1,\r\n  \"resProp\": 0,\r\n  \"category\": 1,\r\n  \"localId\": 7,\r\n  \"baseName\": \"ManaInitialMax\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1007\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.ManaInitialMax\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Mana: Resource = {\r\n  \"resType\": 1,\r\n  \"resProp\": 1,\r\n  \"category\": 1,\r\n  \"localId\": 8,\r\n  \"baseName\": \"Mana\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1008\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.Mana\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "ManaMax: Resource = {\r\n  \"resType\": 1,\r\n  \"resProp\": 2,\r\n  \"category\": 1,\r\n  \"localId\": 9,\r\n  \"baseName\": \"ManaMax\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1009\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.ManaMax\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "ManaRegen: Resource = {\r\n  \"resType\": 1,\r\n  \"resProp\": 4,\r\n  \"category\": 1,\r\n  \"localId\": 10,\r\n  \"baseName\": \"ManaRegen\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1010\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.ManaRegen\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "ManaMissing: Resource = {\r\n  \"resType\": 1,\r\n  \"resProp\": 3,\r\n  \"category\": 1,\r\n  \"localId\": 11,\r\n  \"baseName\": \"ManaMissing\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1011\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.ManaMissing\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "ManaPercent: Resource = {\r\n  \"resType\": 1,\r\n  \"resProp\": 5,\r\n  \"category\": 1,\r\n  \"localId\": 12,\r\n  \"baseName\": \"ManaPercent\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1012\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.ManaPercent\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "ManaMissingPercent: Resource = {\r\n  \"resType\": 1,\r\n  \"resProp\": 6,\r\n  \"category\": 1,\r\n  \"localId\": 13,\r\n  \"baseName\": \"ManaMissingPercent\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1013\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.ManaMissingPercent\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MovementInitialMax: Resource = {\r\n  \"resType\": 2,\r\n  \"resProp\": 0,\r\n  \"category\": 1,\r\n  \"localId\": 14,\r\n  \"baseName\": \"MovementInitialMax\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1014\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.MovementInitialMax\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Movement: Resource = {\r\n  \"resType\": 2,\r\n  \"resProp\": 1,\r\n  \"category\": 1,\r\n  \"localId\": 15,\r\n  \"baseName\": \"Movement\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1015\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.Movement\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MovementMax: Resource = {\r\n  \"resType\": 2,\r\n  \"resProp\": 2,\r\n  \"category\": 1,\r\n  \"localId\": 16,\r\n  \"baseName\": \"MovementMax\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1016\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.MovementMax\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MovementRegen: Resource = {\r\n  \"resType\": 2,\r\n  \"resProp\": 4,\r\n  \"category\": 1,\r\n  \"localId\": 17,\r\n  \"baseName\": \"MovementRegen\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1017\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.MovementRegen\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MovementMissing: Resource = {\r\n  \"resType\": 2,\r\n  \"resProp\": 3,\r\n  \"category\": 1,\r\n  \"localId\": 18,\r\n  \"baseName\": \"MovementMissing\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1018\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.MovementMissing\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MovementPercent: Resource = {\r\n  \"resType\": 2,\r\n  \"resProp\": 5,\r\n  \"category\": 1,\r\n  \"localId\": 19,\r\n  \"baseName\": \"MovementPercent\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1019\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.MovementPercent\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MovementMissingPercent: Resource = {\r\n  \"resType\": 2,\r\n  \"resProp\": 6,\r\n  \"category\": 1,\r\n  \"localId\": 20,\r\n  \"baseName\": \"MovementMissingPercent\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1020\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.MovementMissingPercent\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "SummonInitialMax: Resource = {\r\n  \"resType\": 3,\r\n  \"resProp\": 0,\r\n  \"category\": 1,\r\n  \"localId\": 21,\r\n  \"baseName\": \"SummonInitialMax\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1021\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.SummonInitialMax\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Summon: Resource = {\r\n  \"resType\": 3,\r\n  \"resProp\": 1,\r\n  \"category\": 1,\r\n  \"localId\": 22,\r\n  \"baseName\": \"Summon\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1022\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.Summon\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "SummonMax: Resource = {\r\n  \"resType\": 3,\r\n  \"resProp\": 2,\r\n  \"category\": 1,\r\n  \"localId\": 23,\r\n  \"baseName\": \"SummonMax\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1023\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.SummonMax\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "SummonRegen: Resource = {\r\n  \"resType\": 3,\r\n  \"resProp\": 4,\r\n  \"category\": 1,\r\n  \"localId\": 24,\r\n  \"baseName\": \"SummonRegen\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1024\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.SummonRegen\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "SummonMissing: Resource = {\r\n  \"resType\": 3,\r\n  \"resProp\": 3,\r\n  \"category\": 1,\r\n  \"localId\": 25,\r\n  \"baseName\": \"SummonMissing\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1025\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.SummonMissing\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "SummonPercent: Resource = {\r\n  \"resType\": 3,\r\n  \"resProp\": 5,\r\n  \"category\": 1,\r\n  \"localId\": 26,\r\n  \"baseName\": \"SummonPercent\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1026\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.SummonPercent\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "SummonMissingPercent: Resource = {\r\n  \"resType\": 3,\r\n  \"resProp\": 6,\r\n  \"category\": 1,\r\n  \"localId\": 27,\r\n  \"baseName\": \"SummonMissingPercent\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1027\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.SummonMissingPercent\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "RageInitialMax: Resource = {\r\n  \"resType\": 4,\r\n  \"resProp\": 0,\r\n  \"category\": 1,\r\n  \"localId\": 28,\r\n  \"baseName\": \"RageInitialMax\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1028\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.RageInitialMax\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Rage: Resource = {\r\n  \"resType\": 4,\r\n  \"resProp\": 1,\r\n  \"category\": 1,\r\n  \"localId\": 29,\r\n  \"baseName\": \"Rage\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1029\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.Rage\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "RageMax: Resource = {\r\n  \"resType\": 4,\r\n  \"resProp\": 2,\r\n  \"category\": 1,\r\n  \"localId\": 30,\r\n  \"baseName\": \"RageMax\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1030\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.RageMax\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "RageRegen: Resource = {\r\n  \"resType\": 4,\r\n  \"resProp\": 4,\r\n  \"category\": 1,\r\n  \"localId\": 31,\r\n  \"baseName\": \"RageRegen\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1031\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.RageRegen\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "RageMissing: Resource = {\r\n  \"resType\": 4,\r\n  \"resProp\": 3,\r\n  \"category\": 1,\r\n  \"localId\": 34,\r\n  \"baseName\": \"RageMissing\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1034\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.RageMissing\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "RagePercent: Resource = {\r\n  \"resType\": 4,\r\n  \"resProp\": 5,\r\n  \"category\": 1,\r\n  \"localId\": 35,\r\n  \"baseName\": \"RagePercent\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1035\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.RagePercent\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "RageMissingPercent: Resource = {\r\n  \"resType\": 4,\r\n  \"resProp\": 6,\r\n  \"category\": 1,\r\n  \"localId\": 36,\r\n  \"baseName\": \"RageMissingPercent\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1036\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.RageMissingPercent\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Shield: Resource = {\r\n  \"resType\": 5,\r\n  \"resProp\": 1,\r\n  \"category\": 1,\r\n  \"localId\": 38,\r\n  \"baseName\": \"Shield\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1038\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.Shield\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "ShieldRegen: Resource = {\r\n  \"resType\": 5,\r\n  \"resProp\": 4,\r\n  \"category\": 1,\r\n  \"localId\": 39,\r\n  \"baseName\": \"ShieldRegen\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1039\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.ShieldRegen\",\r\n  \"enumValueConstraint\": null\r\n};"
         ],
         "type": "string",
         "format": ""
@@ -5877,6 +6033,9 @@
             "type": "string",
             "nullable": true
           },
+          "defaultValue": {
+            "nullable": true
+          },
           "conditions": {
             "type": "array",
             "items": {
@@ -5893,22 +6052,29 @@
           "nameModelUid": {
             "type": "string",
             "nullable": true
+          },
+          "enumValueConstraint": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
       },
       "SpellModelPropertyTypes": {
         "enum": [
-          "MaxCharges: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 1,\r\n  \"baseName\": \"MaxCharges\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8001\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.MaxCharges\"\r\n};",
-          "MaxCastPerTarget: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 2,\r\n  \"baseName\": \"MaxCastPerTarget\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8002\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.MaxCastPerTarget\"\r\n};",
-          "MaxCastPerTurn: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 3,\r\n  \"baseName\": \"MaxCastPerTurn\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8003\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.MaxCastPerTurn\"\r\n};",
-          "Cooldown: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 4,\r\n  \"baseName\": \"Cooldown\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8004\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.Cooldown\"\r\n};",
-          "CooldownInitial: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 5,\r\n  \"baseName\": \"CooldownInitial\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8005\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.CooldownInitial\"\r\n};",
-          "CooldownGlobal: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 6,\r\n  \"baseName\": \"CooldownGlobal\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8006\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.CooldownGlobal\"\r\n};",
-          "MaxPierces: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 7,\r\n  \"baseName\": \"MaxPierces\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8007\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.MaxPierces\"\r\n};",
-          "MaxChains: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 8,\r\n  \"baseName\": \"MaxChains\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8008\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.MaxChains\"\r\n};",
-          "ChainRange: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 9,\r\n  \"baseName\": \"ChainRange\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8009\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.ChainRange\"\r\n};",
-          "MaxForks: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 10,\r\n  \"baseName\": \"MaxForks\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8010\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.MaxForks\"\r\n};"
+          "MaxCharges: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 1,\r\n  \"baseName\": \"MaxCharges\",\r\n  \"defaultValue\": 0,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8001\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.MaxCharges\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MaxCastPerTarget: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 2,\r\n  \"baseName\": \"MaxCastPerTarget\",\r\n  \"defaultValue\": 2147483647,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8002\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.MaxCastPerTarget\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MaxCastPerTurn: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 3,\r\n  \"baseName\": \"MaxCastPerTurn\",\r\n  \"defaultValue\": 2147483647,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8003\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.MaxCastPerTurn\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Cooldown: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 4,\r\n  \"baseName\": \"Cooldown\",\r\n  \"defaultValue\": 0,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8004\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.Cooldown\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "CooldownInitial: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 5,\r\n  \"baseName\": \"CooldownInitial\",\r\n  \"defaultValue\": 0,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8005\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.CooldownInitial\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "CooldownGlobal: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 6,\r\n  \"baseName\": \"CooldownGlobal\",\r\n  \"defaultValue\": 0,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8006\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.CooldownGlobal\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MaxPierces: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 7,\r\n  \"baseName\": \"MaxPierces\",\r\n  \"defaultValue\": 0,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8007\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.MaxPierces\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MaxChains: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 8,\r\n  \"baseName\": \"MaxChains\",\r\n  \"defaultValue\": 0,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8008\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.MaxChains\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "ChainRange: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 9,\r\n  \"baseName\": \"ChainRange\",\r\n  \"defaultValue\": 0,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8009\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.ChainRange\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MaxForks: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 10,\r\n  \"baseName\": \"MaxForks\",\r\n  \"defaultValue\": 0,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"8010\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.MaxForks\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "LineOfSightRequired: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 20,\r\n  \"baseName\": \"LineOfSightRequired\",\r\n  \"defaultValue\": true,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"8020\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.LineOfSightRequired\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "BroadcastTargetedCell: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 21,\r\n  \"baseName\": \"BroadcastTargetedCell\",\r\n  \"defaultValue\": true,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"8021\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.BroadcastTargetedCell\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "IsRangeModifiable: SpellModelProperty = {\r\n  \"category\": 8,\r\n  \"localId\": 22,\r\n  \"baseName\": \"IsRangeModifiable\",\r\n  \"defaultValue\": true,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"8022\",\r\n  \"nameModelUid\": \"CharacteristicType.SpellModel.IsRangeModifiable\",\r\n  \"enumValueConstraint\": null\r\n};"
         ],
         "type": "string",
         "format": ""
@@ -5949,6 +6115,9 @@
             "type": "string",
             "nullable": true
           },
+          "defaultValue": {
+            "nullable": true
+          },
           "conditions": {
             "type": "array",
             "items": {
@@ -5965,16 +6134,20 @@
           "nameModelUid": {
             "type": "string",
             "nullable": true
+          },
+          "enumValueConstraint": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
       },
       "SpellPropertyTypes": {
         "enum": [
-          "RemainingCharges: SpellProperty = {\r\n  \"category\": 7,\r\n  \"localId\": 0,\r\n  \"baseName\": \"RemainingCharges\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"7000\",\r\n  \"nameModelUid\": \"CharacteristicType.Spell.RemainingCharges\"\r\n};",
-          "RemainingCooldown: SpellProperty = {\r\n  \"category\": 7,\r\n  \"localId\": 1,\r\n  \"baseName\": \"RemainingCooldown\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"7001\",\r\n  \"nameModelUid\": \"CharacteristicType.Spell.RemainingCooldown\"\r\n};",
-          "NumberOfCastsThisTurn: SpellProperty = {\r\n  \"category\": 7,\r\n  \"localId\": 2,\r\n  \"baseName\": \"NumberOfCastsThisTurn\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"7002\",\r\n  \"nameModelUid\": \"CharacteristicType.Spell.NumberOfCastsThisTurn\"\r\n};",
-          "NumberOfCastsThisTurnPerEntity: SpellProperty = {\r\n  \"category\": 7,\r\n  \"localId\": 3,\r\n  \"baseName\": \"NumberOfCastsThisTurnPerEntity\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 2,\r\n  \"id\": \"7003\",\r\n  \"nameModelUid\": \"CharacteristicType.Spell.NumberOfCastsThisTurnPerEntity\"\r\n};"
+          "RemainingCharges: SpellProperty = {\r\n  \"category\": 7,\r\n  \"localId\": 0,\r\n  \"baseName\": \"RemainingCharges\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"7000\",\r\n  \"nameModelUid\": \"CharacteristicType.Spell.RemainingCharges\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "RemainingCooldown: SpellProperty = {\r\n  \"category\": 7,\r\n  \"localId\": 1,\r\n  \"baseName\": \"RemainingCooldown\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"7001\",\r\n  \"nameModelUid\": \"CharacteristicType.Spell.RemainingCooldown\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "NumberOfCastsThisTurn: SpellProperty = {\r\n  \"category\": 7,\r\n  \"localId\": 2,\r\n  \"baseName\": \"NumberOfCastsThisTurn\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"7002\",\r\n  \"nameModelUid\": \"CharacteristicType.Spell.NumberOfCastsThisTurn\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "NumberOfCastsThisTurnPerEntity: SpellProperty = {\r\n  \"category\": 7,\r\n  \"localId\": 3,\r\n  \"baseName\": \"NumberOfCastsThisTurnPerEntity\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 2,\r\n  \"id\": \"7003\",\r\n  \"nameModelUid\": \"CharacteristicType.Spell.NumberOfCastsThisTurnPerEntity\",\r\n  \"enumValueConstraint\": null\r\n};"
         ],
         "type": "string",
         "format": ""
@@ -6086,6 +6259,9 @@
             "type": "string",
             "nullable": true
           },
+          "defaultValue": {
+            "nullable": true
+          },
           "conditions": {
             "type": "array",
             "items": {
@@ -6102,30 +6278,34 @@
           "nameModelUid": {
             "type": "string",
             "nullable": true
+          },
+          "enumValueConstraint": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
       },
       "StateTypes": {
         "enum": [
-          "Visible: State = {\r\n  \"category\": 4,\r\n  \"localId\": 1,\r\n  \"baseName\": \"Visible\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4001\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Visible\"\r\n};",
-          "Ghosted: State = {\r\n  \"category\": 4,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Ghosted\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4002\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Ghosted\"\r\n};",
-          "Flying: State = {\r\n  \"category\": 4,\r\n  \"localId\": 3,\r\n  \"baseName\": \"Flying\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4003\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Flying\"\r\n};",
-          "Underground: State = {\r\n  \"category\": 4,\r\n  \"localId\": 4,\r\n  \"baseName\": \"Underground\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4004\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Underground\"\r\n};",
-          "Drenched: State = {\r\n  \"category\": 4,\r\n  \"localId\": 5,\r\n  \"baseName\": \"Drenched\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4005\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Drenched\"\r\n};",
-          "Shocked: State = {\r\n  \"category\": 4,\r\n  \"localId\": 6,\r\n  \"baseName\": \"Shocked\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4006\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Shocked\"\r\n};",
-          "Hot: State = {\r\n  \"category\": 4,\r\n  \"localId\": 7,\r\n  \"baseName\": \"Hot\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4007\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Hot\"\r\n};",
-          "Grounded: State = {\r\n  \"category\": 4,\r\n  \"localId\": 8,\r\n  \"baseName\": \"Grounded\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4008\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Grounded\"\r\n};",
-          "Unmoveable: State = {\r\n  \"category\": 4,\r\n  \"localId\": 9,\r\n  \"baseName\": \"Unmoveable\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4009\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Unmoveable\"\r\n};",
-          "Rooted: State = {\r\n  \"category\": 4,\r\n  \"localId\": 10,\r\n  \"baseName\": \"Rooted\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4010\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Rooted\"\r\n};",
-          "Gravity: State = {\r\n  \"category\": 4,\r\n  \"localId\": 11,\r\n  \"baseName\": \"Gravity\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4011\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Gravity\"\r\n};",
-          "Heavy: State = {\r\n  \"category\": 4,\r\n  \"localId\": 12,\r\n  \"baseName\": \"Heavy\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4012\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Heavy\"\r\n};",
-          "Carrying: State = {\r\n  \"category\": 4,\r\n  \"localId\": 13,\r\n  \"baseName\": \"Carrying\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4013\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Carrying\"\r\n};",
-          "Carried: State = {\r\n  \"category\": 4,\r\n  \"localId\": 14,\r\n  \"baseName\": \"Carried\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4014\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Carried\"\r\n};",
-          "Pacifist: State = {\r\n  \"category\": 4,\r\n  \"localId\": 15,\r\n  \"baseName\": \"Pacifist\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4015\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Pacifist\"\r\n};",
-          "Invulnerable: State = {\r\n  \"category\": 4,\r\n  \"localId\": 16,\r\n  \"baseName\": \"Invulnerable\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4016\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Invulnerable\"\r\n};",
-          "InvulnerableDistance: State = {\r\n  \"category\": 4,\r\n  \"localId\": 17,\r\n  \"baseName\": \"InvulnerableDistance\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4017\",\r\n  \"nameModelUid\": \"CharacteristicType.State.InvulnerableDistance\"\r\n};",
-          "InvulnerableMelee: State = {\r\n  \"category\": 4,\r\n  \"localId\": 18,\r\n  \"baseName\": \"InvulnerableMelee\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4018\",\r\n  \"nameModelUid\": \"CharacteristicType.State.InvulnerableMelee\"\r\n};"
+          "Visible: State = {\r\n  \"category\": 4,\r\n  \"localId\": 1,\r\n  \"baseName\": \"Visible\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4001\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Visible\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Ghosted: State = {\r\n  \"category\": 4,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Ghosted\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4002\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Ghosted\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Flying: State = {\r\n  \"category\": 4,\r\n  \"localId\": 3,\r\n  \"baseName\": \"Flying\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4003\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Flying\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Underground: State = {\r\n  \"category\": 4,\r\n  \"localId\": 4,\r\n  \"baseName\": \"Underground\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4004\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Underground\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Drenched: State = {\r\n  \"category\": 4,\r\n  \"localId\": 5,\r\n  \"baseName\": \"Drenched\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4005\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Drenched\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Shocked: State = {\r\n  \"category\": 4,\r\n  \"localId\": 6,\r\n  \"baseName\": \"Shocked\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4006\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Shocked\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Hot: State = {\r\n  \"category\": 4,\r\n  \"localId\": 7,\r\n  \"baseName\": \"Hot\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4007\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Hot\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Grounded: State = {\r\n  \"category\": 4,\r\n  \"localId\": 8,\r\n  \"baseName\": \"Grounded\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4008\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Grounded\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Unmoveable: State = {\r\n  \"category\": 4,\r\n  \"localId\": 9,\r\n  \"baseName\": \"Unmoveable\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4009\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Unmoveable\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Rooted: State = {\r\n  \"category\": 4,\r\n  \"localId\": 10,\r\n  \"baseName\": \"Rooted\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4010\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Rooted\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Gravity: State = {\r\n  \"category\": 4,\r\n  \"localId\": 11,\r\n  \"baseName\": \"Gravity\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4011\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Gravity\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Heavy: State = {\r\n  \"category\": 4,\r\n  \"localId\": 12,\r\n  \"baseName\": \"Heavy\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4012\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Heavy\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Carrying: State = {\r\n  \"category\": 4,\r\n  \"localId\": 13,\r\n  \"baseName\": \"Carrying\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4013\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Carrying\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Carried: State = {\r\n  \"category\": 4,\r\n  \"localId\": 14,\r\n  \"baseName\": \"Carried\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4014\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Carried\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Pacifist: State = {\r\n  \"category\": 4,\r\n  \"localId\": 15,\r\n  \"baseName\": \"Pacifist\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4015\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Pacifist\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Invulnerable: State = {\r\n  \"category\": 4,\r\n  \"localId\": 16,\r\n  \"baseName\": \"Invulnerable\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4016\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Invulnerable\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "InvulnerableDistance: State = {\r\n  \"category\": 4,\r\n  \"localId\": 17,\r\n  \"baseName\": \"InvulnerableDistance\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4017\",\r\n  \"nameModelUid\": \"CharacteristicType.State.InvulnerableDistance\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "InvulnerableMelee: State = {\r\n  \"category\": 4,\r\n  \"localId\": 18,\r\n  \"baseName\": \"InvulnerableMelee\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4018\",\r\n  \"nameModelUid\": \"CharacteristicType.State.InvulnerableMelee\",\r\n  \"enumValueConstraint\": null\r\n};"
         ],
         "type": "string",
         "format": ""
@@ -6203,6 +6383,9 @@
             "type": "string",
             "nullable": true
           },
+          "defaultValue": {
+            "nullable": true
+          },
           "conditions": {
             "type": "array",
             "items": {
@@ -6219,17 +6402,21 @@
           "nameModelUid": {
             "type": "string",
             "nullable": true
+          },
+          "enumValueConstraint": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
       },
       "StatusContainerPropertyTypes": {
         "enum": [
-          "MergeStrategy: StatusContainerProperty = {\r\n  \"category\": 9,\r\n  \"localId\": 0,\r\n  \"baseName\": \"MergeStrategy\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"9000\",\r\n  \"nameModelUid\": \"CharacteristicType.StatusContainer.MergeStrategy\"\r\n};",
-          "UnbewitchStrategy: StatusContainerProperty = {\r\n  \"category\": 9,\r\n  \"localId\": 1,\r\n  \"baseName\": \"UnbewitchStrategy\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"9001\",\r\n  \"nameModelUid\": \"CharacteristicType.StatusContainer.UnbewitchStrategy\"\r\n};",
-          "MaxStacks: StatusContainerProperty = {\r\n  \"category\": 9,\r\n  \"localId\": 2,\r\n  \"baseName\": \"MaxStacks\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"9002\",\r\n  \"nameModelUid\": \"CharacteristicType.StatusContainer.MaxStacks\"\r\n};",
-          "MaxDelay: StatusContainerProperty = {\r\n  \"category\": 9,\r\n  \"localId\": 3,\r\n  \"baseName\": \"MaxDelay\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"9003\",\r\n  \"nameModelUid\": \"CharacteristicType.StatusContainer.MaxDelay\"\r\n};",
-          "MaxDuration: StatusContainerProperty = {\r\n  \"category\": 9,\r\n  \"localId\": 4,\r\n  \"baseName\": \"MaxDuration\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"9004\",\r\n  \"nameModelUid\": \"CharacteristicType.StatusContainer.MaxDuration\"\r\n};"
+          "MergeStrategy: StatusContainerProperty = {\r\n  \"category\": 9,\r\n  \"localId\": 0,\r\n  \"baseName\": \"MergeStrategy\",\r\n  \"defaultValue\": 0,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"9000\",\r\n  \"nameModelUid\": \"CharacteristicType.StatusContainer.MergeStrategy\",\r\n  \"enumValueConstraint\": \"souchy.celebi.eevee.enums.StatusMergeStrategy, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "UnbewitchStrategy: StatusContainerProperty = {\r\n  \"category\": 9,\r\n  \"localId\": 1,\r\n  \"baseName\": \"UnbewitchStrategy\",\r\n  \"defaultValue\": 0,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"9001\",\r\n  \"nameModelUid\": \"CharacteristicType.StatusContainer.UnbewitchStrategy\",\r\n  \"enumValueConstraint\": \"souchy.celebi.eevee.enums.StatusUnbewitchStrategy, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "MaxStacks: StatusContainerProperty = {\r\n  \"category\": 9,\r\n  \"localId\": 2,\r\n  \"baseName\": \"MaxStacks\",\r\n  \"defaultValue\": 0,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"9002\",\r\n  \"nameModelUid\": \"CharacteristicType.StatusContainer.MaxStacks\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MaxDelay: StatusContainerProperty = {\r\n  \"category\": 9,\r\n  \"localId\": 3,\r\n  \"baseName\": \"MaxDelay\",\r\n  \"defaultValue\": 0,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"9003\",\r\n  \"nameModelUid\": \"CharacteristicType.StatusContainer.MaxDelay\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MaxDuration: StatusContainerProperty = {\r\n  \"category\": 9,\r\n  \"localId\": 4,\r\n  \"baseName\": \"MaxDuration\",\r\n  \"defaultValue\": 0,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"9004\",\r\n  \"nameModelUid\": \"CharacteristicType.StatusContainer.MaxDuration\",\r\n  \"enumValueConstraint\": null\r\n};"
         ],
         "type": "string",
         "format": ""
@@ -6270,6 +6457,9 @@
             "type": "string",
             "nullable": true
           },
+          "defaultValue": {
+            "nullable": true
+          },
           "conditions": {
             "type": "array",
             "items": {
@@ -6286,14 +6476,18 @@
           "nameModelUid": {
             "type": "string",
             "nullable": true
+          },
+          "enumValueConstraint": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
       },
       "StatusInstancePropertyTypes": {
         "enum": [
-          "Delay: StatusInstanceProperty = {\r\n  \"category\": 10,\r\n  \"localId\": 1,\r\n  \"baseName\": \"Delay\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"10001\",\r\n  \"nameModelUid\": \"CharacteristicType.StatusInstance.Delay\"\r\n};",
-          "Duration: StatusInstanceProperty = {\r\n  \"category\": 10,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Duration\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"10002\",\r\n  \"nameModelUid\": \"CharacteristicType.StatusInstance.Duration\"\r\n};"
+          "Delay: StatusInstanceProperty = {\r\n  \"category\": 10,\r\n  \"localId\": 1,\r\n  \"baseName\": \"Delay\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"10001\",\r\n  \"nameModelUid\": \"CharacteristicType.StatusInstance.Delay\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Duration: StatusInstanceProperty = {\r\n  \"category\": 10,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Duration\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"10002\",\r\n  \"nameModelUid\": \"CharacteristicType.StatusInstance.Duration\",\r\n  \"enumValueConstraint\": null\r\n};"
         ],
         "type": "string",
         "format": ""
@@ -6319,6 +6513,14 @@
           }
         },
         "additionalProperties": false
+      },
+      "StatusMergeStrategy": {
+        "enum": [
+          "Ignore",
+          "ReplaceLast"
+        ],
+        "type": "string",
+        "format": ""
       },
       "StatusModel": {
         "type": "object",
@@ -6390,6 +6592,15 @@
           "System",
           "Passive",
           "Status"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "StatusUnbewitchStrategy": {
+        "enum": [
+          "Dispellable",
+          "DispellableOnDeath",
+          "NonDispellable"
         ],
         "type": "string",
         "format": ""

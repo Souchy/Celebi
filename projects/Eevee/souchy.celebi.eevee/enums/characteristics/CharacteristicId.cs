@@ -38,8 +38,8 @@ namespace souchy.celebi.eevee.enums.characteristics
             CharacteristicCategory.Contextual => Enumerable.OfType<CharacteristicType>(Contextual.values.Values),
             CharacteristicCategory.Other => Enumerable.OfType<CharacteristicType>(OtherProperty.values.Values),
             CharacteristicCategory.State => Enumerable.OfType<CharacteristicType>(State.values.Values),
-
-            CharacteristicCategory.SpellModel => Enumerable.Concat<CharacteristicType>(SpellModelProperty.values.Values, SpellModelState.values.Values),
+            
+            CharacteristicCategory.SpellModel => Enumerable.OfType<CharacteristicType>(SpellModelProperty.values.Values), //, SpellModelState.values.Values),
             CharacteristicCategory.Spell => Enumerable.OfType<CharacteristicType>(SpellProperty.values.Values),
             CharacteristicCategory.StatusContainer => Enumerable.OfType<CharacteristicType>(StatusContainerProperty.values.Values),
             CharacteristicCategory.StatusInstance => Enumerable.OfType<CharacteristicType>(StatusInstanceProperty.values.Values),
@@ -47,7 +47,6 @@ namespace souchy.celebi.eevee.enums.characteristics
         };
         public static CharacteristicType GetCharactType(this CharacteristicId id) =>
             id.GetCategory().GetCharacs().FirstOrDefault(v => v.ID == id);
-        public static IStat Create(this CharacteristicType type, object value = null) => type.Factory(type.ID, value);
     }
 
 }

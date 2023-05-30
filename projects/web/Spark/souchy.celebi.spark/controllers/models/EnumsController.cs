@@ -32,12 +32,18 @@ namespace souchy.celebi.spark.controllers.models
         public TriggerType[] GetTriggerType() => Enum.GetValues<TriggerType>();
         [HttpGet("towerDirectionType")]
         public TowerDirectionType[] GetTowerDirectionType() => Enum.GetValues<TowerDirectionType>();
-        [HttpGet("statusPriorityType")]
-        public StatusPriorityType[] GetStatusPriorityType() => Enum.GetValues<StatusPriorityType>();
         [HttpGet("direction8Type")]
         public Direction8Type[] GetDirection8Type() => Enum.GetValues<Direction8Type>();
         [HttpGet("direction9Type")]
         public Direction9Type[] GetDirection9Type() => Enum.GetValues<Direction9Type>();
+
+        [HttpGet("statusPriorityType")]
+        public StatusPriorityType[] GetStatusPriorityType() => Enum.GetValues<StatusPriorityType>();
+        [HttpGet("statusMergeStrategy")]
+        public StatusMergeStrategy[] GetStatusMergeStrategy() => Enum.GetValues<StatusMergeStrategy>();
+        [HttpGet("statusUnbewitchStrategy")]
+        public StatusUnbewitchStrategy[] GetStatusUnbewitchStrategy() => Enum.GetValues<StatusUnbewitchStrategy>();
+
         [HttpGet("effectType")]
         public EffT[] GetEffectType() => Enum.GetValues<EffT>();
 

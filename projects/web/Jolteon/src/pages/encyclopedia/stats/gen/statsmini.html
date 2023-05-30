@@ -1,27 +1,57 @@
-
 <import from="./statpropertyselector"></import>
 <import from="../../effects/modelSelector/effectModelSelector"></import>
 <import from="../../../../components/modal/modal"></import>
 
 
-<button class="btn btn-outline btn-icon" data-bs-toggle="modal" data-bs-target="#statSelector-${stats.entityUid}">+</button>
+<button if.bind="hasadddelete" class="btn btn-outline btn-icon" data-bs-toggle="modal" data-bs-target="#statSelector-${stats.entityUid}">+</button>
 
 <modal if.bind="stats" id="statSelector-${stats.entityUid}" header="Add Stat" close.bind=false footer.bind=false>
-  <statpropertyselector callbackselect.bind="s => onAddStat(s)"></statpropertyselector>
+  <statpropertyselector characs.bind="characsallowed" callbackselect.bind="s => onAddStat(s)"></statpropertyselector>
 </modal>
 
 <table class="table-striped table-sm table-borderless table-responsive-sm" if.bind="stats">
   <tbody>
-    <tr repeat.for="stat of getDicValues()">
+    <tr repeat.for="stat of getDicValues">
       <td>${getCharacName(stat.statId)}</td>
+
+
+
       <td if.bind="isSimple(stat)">
         <input type="number" value.bind="stat.value" change.trigger="onChangeStatValue" />
       </td>
+      <td if.bind="isSimple(stat) && hasgrowth">
+        (growth)
+        <!-- ${stat.statId} ${getGrowth(statId)} -->
+      </td>
+
+
       <td if.bind="isBool(stat)">
         <input type="checkbox" class="btn-check" id="btn-check-outlined ${stat.statId}" autocomplete="off" checked.bind="stat.value" change.trigger="onChangeStatValue">
         <label class="btn btn-outline shadow-none" for="btn-check-outlined ${stat.statId}">${stat.value ? 'True' : 'False'}</label><br>
       </td>
-      <td>
+      <td if.bind="isBool(stat) && hasgrowth">
+        (growth)
+        <!-- ${stat.statId} ${getGrowth(statId)} -->
+      </td>
+
+
+      <td if.bind="isEnum(stat)">
+        <!-- (${getEnum(stat)}: ${stat.value}) -->
+        <template switch.bind="getEnum(stat)">
+          <select case='StatusMergeStrategy' value.bind="stat.value" change.trigger="onChangeStatValue">
+            <option repeat.for="val of Enums.statusMergeStrategies" model.bind="$index">${val}</option>
+          </select>
+          <select case='StatusUnbewitchStrategy' value.bind="stat.value" change.trigger="onChangeStatValue">
+            <option repeat.for="val of Enums.statusUnbewitchStrategies" model.bind="$index">${val}</option>
+          </select>
+        </template>
+      </td>
+      <td if.bind="isEnum(stat) && hasgrowth">
+        (growth)
+      </td>
+
+
+      <td if.bind="hasadddelete">
         <button class="btn btn-outline btn-icon" click.trigger="clickRemoveStat(stat)">x</button>
       </td>
     </tr>

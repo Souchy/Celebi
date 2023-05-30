@@ -1,10 +1,4 @@
-﻿using souchy.celebi.eevee.face.objects.stats;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace souchy.celebi.eevee.enums.characteristics.creature
 {
     public sealed record Contextual : CharacteristicType
@@ -12,10 +6,10 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
         public Contextual(int localId, string name, StatValueType valueType = StatValueType.Simple) : base(CharacteristicCategory.Contextual, localId, name)
         {
             this.StatValueType = valueType;
-            this.Factory = SimpleFactory;
         }
 
         // TODO feel like putting those contextual resource properties into Resource yaknow, then add [gained,lost,used] to ResourceProperty enum
+        // nah nah nah, it's context, it's just annoying to repeat for all resources
         public static readonly Contextual LifeGained         = new(0, nameof(LifeGained));
         public static readonly Contextual LifeUsed           = new(1, nameof(LifeUsed));
         public static readonly Contextual LifeLost           = new(2, nameof(LifeLost));

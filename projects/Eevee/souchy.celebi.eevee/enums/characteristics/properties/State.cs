@@ -15,7 +15,6 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
         public State(int localId, string name) : base(CharacteristicCategory.State, localId, name)
         {
             this.StatValueType = StatValueType.Bool;
-            this.Factory = BoolFactory;
         }
 
         public static readonly State Visible              = new(1,  nameof(Visible    ));
@@ -27,7 +26,7 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
         public static readonly State Hot                  = new(7,  nameof(Hot        )); // burning
         public static readonly State Grounded             = new(8,  nameof(Grounded   )); // Muddy
         public static readonly State Unmoveable           = new(9,  nameof(Unmoveable )); // everything 
-        public static readonly State Rooted               = new(10,  nameof(Rooted     )); // can't translate (dash/push/pull)
+        public static readonly State Rooted               = new(10, nameof(Rooted     )); // can't translate (dash/push/pull)
         public static readonly State Gravity              = new(11, nameof(Gravity    )); // can't teleport
         public static readonly State Heavy                = new(12, nameof(Heavy      )); // carry/throw
         public static readonly State Carrying             = new(13, nameof(Carrying   ));

@@ -41,7 +41,6 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
             this.resProp = resProp;
             this.resType = resType;
             this.StatValueType = StatValueType.Simple;
-            this.Factory = SimpleFactory;
         }
 
         // peut-être comme ça à la place (IStatSimple pour chaque valeur)
