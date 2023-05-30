@@ -1,28 +1,29 @@
 
 <import from="./statpropertyselector"></import>
+<import from="../../effects/modelSelector/effectModelSelector"></import>
+<import from="../../../../components/modal/modal"></import>
 
 
-hi stats mini
+<button class="btn btn-outline btn-icon" data-bs-toggle="modal" data-bs-target="#statSelector-${stats.entityUid}">+</button>
 
-<!-- <button class="btn-outline">+</button> -->
+<modal if.bind="stats" id="statSelector-${stats.entityUid}" header="Add Stat" close.bind=false footer.bind=false>
+  <statpropertyselector callbackselect.bind="s => onAddStat(s)"></statpropertyselector>
+</modal>
 
-
-<!-- <button class="btn-outline" data-bs-toggle="modal" data-bs-target="#stats-${stats.entityUid}">+</button>
-<modal id="stats-${stats.entityUid}" header="Add Stat" close.bind=false footer.bind=false>
-    <statpropertyselector></statpropertyselector>
-</modal> -->
-
-
-
-<!-- <button class="btn-outline" data-bs-toggle="modal" data-bs-target="#stats-${stats.entityUid}">Add</button>
-<modal id="stats-${stats.entityUid}" header="Add Spell Effect" close.bind=false footer.bind=false>
-    <effect-model-selector onselectcallback.bind="e => addEffect(e)"></effect-model-selector>
-    <statpropertyselector></statpropertyselector>
-</modal> -->
-
-
-
-<button class="btn" data-bs-toggle="modal" data-bs-target="#statSelector">Add</button>
-<!-- <modal id="effectModelModal" header="Add Spell Effect" close.bind=false footer.bind=false>
-  <effect-model-selector onselectcallback.bind="e => addEffect(e)"></effect-model-selector>
-</modal> -->
+<table class="table-striped table-sm table-borderless table-responsive-sm" if.bind="stats">
+  <tbody>
+    <tr repeat.for="stat of getDicValues()">
+      <td>${getCharacName(stat.statId)}</td>
+      <td if.bind="isSimple(stat)">
+        <input type="number" value.bind="stat.value" change.trigger="onChangeStatValue" />
+      </td>
+      <td if.bind="isBool(stat)">
+        <input type="checkbox" class="btn-check" id="btn-check-outlined ${stat.statId}" autocomplete="off" checked.bind="stat.value" change.trigger="onChangeStatValue">
+        <label class="btn btn-outline shadow-none" for="btn-check-outlined ${stat.statId}">${stat.value ? 'True' : 'False'}</label><br>
+      </td>
+      <td>
+        <button class="btn btn-outline btn-icon" click.trigger="clickRemoveStat(stat)">x</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

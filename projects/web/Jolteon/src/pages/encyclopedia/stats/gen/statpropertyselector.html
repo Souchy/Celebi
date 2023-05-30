@@ -1,6 +1,4 @@
 
-hi stat selector
-
 <!-- <input type="string" value.bind="filter" keyup.trigger="search()" placeholder="search.." /> -->
 
 <!-- <div class="schemalist" if.bind="schemasDescriptions">
@@ -15,11 +13,13 @@ hi stat selector
 </div> -->
 
 <!-- ${Characteristics.sectioned} -->
-<div class="schemalist" repeat.for="type of Characteristics.sectioned">
-    ${type}
+<div repeat.for="type of Characteristics.sectioned">
+    <!-- ${type} -->
     <h6>${getSectionName(type)}</h6>
-    <div class="schema" repeat.for="property of type" click.trigger="clickCharacteristic(property)" data-bs-dismiss="modal">
-        ${property.baseName}: ${getValueType(property)}
+    <div class="schemalist">
+      <div class="btn btn-outline" style="margin: 5px;" repeat.for="property of type" click.trigger="clickCharacteristic(property)" data-bs-dismiss="modal">
+          ${property.baseName}: ${getValueType(property)}
+      </div>
     </div>
 </div>
 

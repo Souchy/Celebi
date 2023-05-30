@@ -34,6 +34,7 @@ export default class PropertyGrid {
     }
 
     public onChange() {
+        // console.log("propertygrid onchange")
         this.callbacksave();
     }
 

@@ -37,12 +37,12 @@ namespace souchy.celebi.eevee.enums.characteristics
 
             CharacteristicCategory.Contextual => Enumerable.OfType<CharacteristicType>(Contextual.values.Values),
             CharacteristicCategory.Other => Enumerable.OfType<CharacteristicType>(OtherProperty.values.Values),
-            CharacteristicCategory.State => Enumerable.OfType<CharacteristicType>(SpellProperty.values.Values),
+            CharacteristicCategory.State => Enumerable.OfType<CharacteristicType>(State.values.Values),
 
             CharacteristicCategory.SpellModel => Enumerable.Concat<CharacteristicType>(SpellModelProperty.values.Values, SpellModelState.values.Values),
             CharacteristicCategory.Spell => Enumerable.OfType<CharacteristicType>(SpellProperty.values.Values),
             CharacteristicCategory.StatusContainer => Enumerable.OfType<CharacteristicType>(StatusContainerProperty.values.Values),
-            CharacteristicCategory.StatusInstance => Enumerable.OfType<CharacteristicType>(StatusContainerProperty.values.Values),
+            CharacteristicCategory.StatusInstance => Enumerable.OfType<CharacteristicType>(StatusInstanceProperty.values.Values),
             _ => throw new NotImplementedException(),
         };
         public static CharacteristicType GetCharactType(this CharacteristicId id) =>

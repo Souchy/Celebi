@@ -119,6 +119,7 @@ export class Effect {
         // .then(res => location.reload())
     }
     public onSave() {
+        // console.log("effect save")
         // update db
         this.effectController.putEffect(this.model.entityUid, this.model)
             .then(

@@ -18,7 +18,7 @@ namespace souchy.celebi.eevee.impl.util
         [JsonIgnore]
         public IEnumerable<KeyValuePair<TKey, TValue>> Pairs => dic;
 
-        [JsonProperty]
+        [JsonProperty(TypeNameHandling = TypeNameHandling.None)]
         [BsonDictionaryOptions(Representation = DictionaryRepresentation.Document)]
         protected Dictionary<TKey, TValue> dic { get; init; } = new();
 

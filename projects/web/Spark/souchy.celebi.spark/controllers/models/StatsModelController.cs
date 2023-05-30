@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using souchy.celebi.eevee;
+using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.models;
@@ -9,6 +10,7 @@ using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.shared;
 using souchy.celebi.eevee.impl.stats;
 using souchy.celebi.eevee.impl.util;
+using souchy.celebi.eevee.neweffects.impl;
 using souchy.celebi.spark.services;
 using souchy.celebi.spark.services.fights;
 using souchy.celebi.spark.services.models;
@@ -44,23 +46,34 @@ namespace souchy.celebi.spark.controllers.models
         }
 
         //[Authorize]
-        [HttpPost("")]
-        public async Task<IActionResult> Post([FromBody] IStats newStats)
+        //[HttpPost("")]
+        //public async Task<IActionResult> Post([FromBody] IStats newStats)
+        //{
+        //    await _stats.CreateAsync(newStats);
+        //    return CreatedAtAction(nameof(Get), new { id = newStats.entityUid }, newStats);
+        //}
+
+        //[Authorize]
+        [HttpPost("stat")]
+        public ActionResult<IStat> Post([FromQuery] CharacteristicId characID) // CharacteristicId
         {
-            await _stats.CreateAsync(newStats);
-            return CreatedAtAction(nameof(Get), new { id = newStats.entityUid }, newStats);
+            var type = characID.GetCharactType();
+            var stat = type.Create();
+            return Ok(stat);
         }
+
 
         //[Authorize]
         [HttpPut("{id}")]
-        public async Task<ActionResult<ReplaceOneResult>> Update([FromRoute] ObjectId id, [FromBody] IStats updatedStats)
+        public async Task<ActionResult<IStats>> Update([FromRoute] ObjectId id, [FromBody] IStats updated)
         {
-            var stats = await _stats.GetOneAsync(id);
-            if (stats is null) 
+            var old = await _stats.GetOneAsync(id);
+            if (old is null) 
                 return NotFound();
-            updatedStats.entityUid = stats.entityUid;
-            var result = await _stats.UpdateAsync(id, updatedStats);
-            return Ok(result);
+            updated.entityUid = old.entityUid;
+            var result = await _stats.UpdateAsync(id, updated);
+            if (result.MatchedCount > 0) return Ok(updated);
+            else return Ok(old);
         }
 
         //[Authorize]

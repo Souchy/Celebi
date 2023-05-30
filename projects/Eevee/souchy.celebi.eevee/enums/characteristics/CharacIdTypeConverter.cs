@@ -11,6 +11,7 @@ namespace souchy.celebi.eevee.enums.characteristics
             destinationType == typeof(int) || destinationType == typeof(string);
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
+            if (value != null && value.ToString() == "$type") return null;
             return value switch
             {
                 string s => new CharacteristicId(int.Parse(s)),

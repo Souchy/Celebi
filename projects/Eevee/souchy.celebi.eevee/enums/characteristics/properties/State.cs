@@ -18,24 +18,24 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
             this.Factory = BoolFactory;
         }
 
-        public static readonly State Visible              = new(0,  nameof(Visible    ));
-        public static readonly State Ghosted              = new(1,  nameof(Ghosted    )); // phasing // is 30% opacity, unlocks line of sight, but blocks movement
-        public static readonly State Flying               = new(2,  nameof(Flying     )); // slash Hovering
-        public static readonly State Underground          = new(3,  nameof(Underground));
-        public static readonly State Drenched             = new(4,  nameof(Drenched   )); // wet
-        public static readonly State Shocked              = new(5,  nameof(Shocked    )); // 
-        public static readonly State Hot                  = new(6,  nameof(Hot        )); // burning
-        public static readonly State Grounded             = new(7,  nameof(Grounded   )); // Muddy
-        public static readonly State Unmoveable           = new(8,  nameof(Unmoveable )); // everything 
-        public static readonly State Rooted               = new(9,  nameof(Rooted     )); // can't translate (dash/push/pull)
-        public static readonly State Gravity              = new(10, nameof(Gravity    )); // can't teleport
-        public static readonly State Heavy                = new(11, nameof(Heavy      )); // carry/throw
-        public static readonly State Carrying             = new(12, nameof(Carrying   ));
-        public static readonly State Carried              = new(13, nameof(Carried    ));
-        public static readonly State Pacifist             = new(14, nameof(Pacifist   ));
-        public static readonly State Invulnerable         = new(15, nameof(Invulnerable));
-        public static readonly State InvulnerableDistance = new(16, nameof(InvulnerableDistance));
-        public static readonly State InvulnerableMelee    = new(17, nameof(InvulnerableMelee));
+        public static readonly State Visible              = new(1,  nameof(Visible    ));
+        public static readonly State Ghosted              = new(2,  nameof(Ghosted    )); // phasing // is 30% opacity, unlocks line of sight, but blocks movement
+        public static readonly State Flying               = new(3,  nameof(Flying     )); // slash Hovering
+        public static readonly State Underground          = new(4,  nameof(Underground));
+        public static readonly State Drenched             = new(5,  nameof(Drenched   )); // wet
+        public static readonly State Shocked              = new(6,  nameof(Shocked    )); // 
+        public static readonly State Hot                  = new(7,  nameof(Hot        )); // burning
+        public static readonly State Grounded             = new(8,  nameof(Grounded   )); // Muddy
+        public static readonly State Unmoveable           = new(9,  nameof(Unmoveable )); // everything 
+        public static readonly State Rooted               = new(10,  nameof(Rooted     )); // can't translate (dash/push/pull)
+        public static readonly State Gravity              = new(11, nameof(Gravity    )); // can't teleport
+        public static readonly State Heavy                = new(12, nameof(Heavy      )); // carry/throw
+        public static readonly State Carrying             = new(13, nameof(Carrying   ));
+        public static readonly State Carried              = new(14, nameof(Carried    ));
+        public static readonly State Pacifist             = new(15, nameof(Pacifist   ));
+        public static readonly State Invulnerable         = new(16, nameof(Invulnerable));
+        public static readonly State InvulnerableDistance = new(17, nameof(InvulnerableDistance));
+        public static readonly State InvulnerableMelee    = new(18, nameof(InvulnerableMelee));
 
 
         public static readonly Dictionary<CharacteristicId, State> values = new();

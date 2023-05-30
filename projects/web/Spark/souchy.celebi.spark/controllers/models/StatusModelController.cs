@@ -7,6 +7,7 @@ using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.shared.models.skins;
 using souchy.celebi.eevee.impl.shared;
+using souchy.celebi.eevee.neweffects.impl;
 using souchy.celebi.spark.services;
 using souchy.celebi.spark.services.fights;
 using souchy.celebi.spark.services.models;
@@ -82,12 +83,13 @@ namespace souchy.celebi.spark.controllers.models
         [HttpPut("{id}")]
         public async Task<ActionResult<IStatusModel>> Update([FromRoute] ObjectId id, [FromBody] StatusModel updatedModel)
         {
-            var crea = await _statusService.GetOneAsync(id);
-            if (crea is null)
+            var oldModel = await _statusService.GetOneAsync(id);
+            if (oldModel is null)
                 return NotFound();
-            updatedModel.entityUid = crea.entityUid;
+            updatedModel.entityUid = oldModel.entityUid;
             var result = await _statusService.UpdateAsync(id, updatedModel);
-            return Ok(updatedModel);
+            if (result.MatchedCount > 0) return Ok(updatedModel);
+            else return Ok(oldModel);
         }
 
         //[Authorize]

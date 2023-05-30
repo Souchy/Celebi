@@ -25,10 +25,10 @@
               <option repeat.for="act of Enums.actors" model.bind="$index">${act}</option>
             </select>
       
-            <statsmini case="CreatureStats" type="CreatureStats" stats.bind="data[prop]"></statsmini>
-            <!-- <statsmini case="StatusModelStats" type="StatusModelStats" stats.bind="data[prop]"></statsmini>
-            <statsmini case="SpellModelStats" type="SpellModelStats" stats.bind="data[prop]"></statsmini>
-            <statsmini case="SpellStats" type="SpellStats" stats.bind="data[prop]"></statsmini> -->
+            <statsmini case="CreatureStats" type="CreatureStats" stats.bind="data[prop]" callbacksavestat.bind="() => onChange()"></statsmini>
+            <statsmini case="StatusModelStats" type="StatusModelStats" stats.bind="data[prop]" callbacksavestat.bind="() =>onChange()"></statsmini>
+            <statsmini case="SpellModelStats" type="SpellModelStats" stats.bind="data[prop]" callbacksavestat.bind="() =>onChange()"></statsmini>
+            <statsmini case="SpellStats" type="SpellStats" stats.bind="data[prop]" callbacksavestat.bind="() => onChange()"></statsmini>
 
 
             <!-- stat : select charac id + value -->

@@ -8,10 +8,12 @@ using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.face.util.math;
 using souchy.celebi.eevee.face.values;
 using souchy.celebi.eevee.impl.objects.effectResults;
 using souchy.celebi.eevee.impl.objects.zones;
 using souchy.celebi.eevee.impl.util;
+using souchy.celebi.eevee.impl.util.math;
 using souchy.celebi.eevee.impl.values;
 using souchy.celebi.eevee.neweffects.face;
 
@@ -33,10 +35,19 @@ namespace souchy.celebi.eevee.impl.shared
 
         public ObjectId statsId { get; set; }
         public Dictionary<CharacteristicId, int> costs { get; set; } = new();
-        public IEntityList<ObjectId> EffectIds { get; set; } = new EntityList<ObjectId>(); 
+        public IEntityList<ObjectId> EffectIds { get; set; } = new EntityList<ObjectId>();
 
-        public IZone RangeZoneMin { get; set; } = new Zone();
-        public IZone RangeZoneMax { get; set; } = new Zone();
+        public IZone RangeZoneMin { get; set; } = new Zone()
+        {
+            zoneType = new Value<ZoneType>(ZoneType.circle),
+            size = new Value<IVector3>(new Vector3(0, 0, 0)),
+            negative = true
+        };
+        public IZone RangeZoneMax { get; set; } = new Zone()
+        {
+            zoneType = new Value<ZoneType>(ZoneType.circle)
+        };
+
 
         private SpellModel() { }
         public static ISpellModel CreatePermanent() => new SpellModel()

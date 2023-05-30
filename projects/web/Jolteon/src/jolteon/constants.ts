@@ -1,14 +1,15 @@
-import { TargetSamplingType } from "./services/api/data-contracts";
+import { StatValueType, TargetSamplingType } from "./services/api/data-contracts";
 import { ActorType, Affinity, AffinityTypes, Contextual, ContextualTypes, Direction8Type, Direction9Type, EffT, ElementType, OtherProperty, OtherPropertyTypes, 
     Resistance, ResistanceTypes, Resource, ResourceProperty, ResourceTypes, Rotation4Type, SchemaDescription, SpellModelProperty, 
     SpellModelPropertyTypes, SpellProperty, SpellPropertyTypes, State, StateTypes,
     StatusContainerProperty, StatusContainerPropertyTypes, StatusInstanceProperty, StatusInstancePropertyTypes,
     ZoneType
 } from "./services/api/data-contracts";
+import jolteon from "../../jolteon.json"
 
 
 export class Constants {
-    public static readonly serverUrl = "https://localhost:7295";
+    public static readonly serverUrl = jolteon.serverUrl; //"https://localhost:7295";
     // public static readonly serverUrl = "https://192.168.2.15";
     public static readonly googleClientId = "850322629277-c9fu1umd1dlk7tjv325u6s33g32fb0ea.apps.googleusercontent.com";
 
@@ -61,6 +62,7 @@ export class Enums {
     public static readonly rotation4 =  Object.keys(Rotation4Type).filter(k => isNaN(+k));
     public static readonly actorTypes = Object.keys(ActorType).filter(k => isNaN(+k));
     public static readonly samplingTypes = Object.keys(TargetSamplingType).filter(k => isNaN(+k));
+    public static readonly statValueTypes = Object.keys(StatValueType).filter(k => isNaN(+k));
 }
 
 export class Effects {

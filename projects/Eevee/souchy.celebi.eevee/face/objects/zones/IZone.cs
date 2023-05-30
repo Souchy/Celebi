@@ -50,7 +50,8 @@ namespace souchy.celebi.eevee.face.shared.zones
         /// </summary>
         public IValue<bool> canRotate { get; set; }
         /// <summary>
-        /// This overrides a size variable like length/radius to make them equal to .distance(target,source)
+        /// This overrides a size variable like length/radius to make them equal to .distance(target,source) <br></br>
+        /// Example: iop fracture, sacri fulguration, ... ça créé une zone partant du lanceur jusqu'à la cible <br></br>
         /// The index given is the {1,2,3} value overriden in the vector.
         /// </summary>
         public int sizeIndexExtendFromSource { get; set; }

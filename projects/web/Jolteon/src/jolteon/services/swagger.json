@@ -2690,7 +2690,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReplaceOneResult"
+                  "$ref": "#/components/schemas/IStats"
                 }
               }
             }
@@ -2726,38 +2726,31 @@
         }
       }
     },
-    "/api/models/stats": {
+    "/api/models/stats/stat": {
       "post": {
         "tags": [
           "StatsModelController"
         ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/IStats"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/IStats"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/IStats"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/IStats"
-              }
+        "parameters": [
+          {
+            "name": "characID",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IStat"
+                }
+              }
+            }
           }
         }
       }
@@ -6115,24 +6108,24 @@
       },
       "StateTypes": {
         "enum": [
-          "Visible: State = {\r\n  \"category\": 4,\r\n  \"localId\": 0,\r\n  \"baseName\": \"Visible\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4000\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Visible\"\r\n};",
-          "Ghosted: State = {\r\n  \"category\": 4,\r\n  \"localId\": 1,\r\n  \"baseName\": \"Ghosted\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4001\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Ghosted\"\r\n};",
-          "Flying: State = {\r\n  \"category\": 4,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Flying\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4002\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Flying\"\r\n};",
-          "Underground: State = {\r\n  \"category\": 4,\r\n  \"localId\": 3,\r\n  \"baseName\": \"Underground\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4003\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Underground\"\r\n};",
-          "Drenched: State = {\r\n  \"category\": 4,\r\n  \"localId\": 4,\r\n  \"baseName\": \"Drenched\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4004\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Drenched\"\r\n};",
-          "Shocked: State = {\r\n  \"category\": 4,\r\n  \"localId\": 5,\r\n  \"baseName\": \"Shocked\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4005\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Shocked\"\r\n};",
-          "Hot: State = {\r\n  \"category\": 4,\r\n  \"localId\": 6,\r\n  \"baseName\": \"Hot\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4006\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Hot\"\r\n};",
-          "Grounded: State = {\r\n  \"category\": 4,\r\n  \"localId\": 7,\r\n  \"baseName\": \"Grounded\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4007\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Grounded\"\r\n};",
-          "Unmoveable: State = {\r\n  \"category\": 4,\r\n  \"localId\": 8,\r\n  \"baseName\": \"Unmoveable\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4008\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Unmoveable\"\r\n};",
-          "Rooted: State = {\r\n  \"category\": 4,\r\n  \"localId\": 9,\r\n  \"baseName\": \"Rooted\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4009\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Rooted\"\r\n};",
-          "Gravity: State = {\r\n  \"category\": 4,\r\n  \"localId\": 10,\r\n  \"baseName\": \"Gravity\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4010\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Gravity\"\r\n};",
-          "Heavy: State = {\r\n  \"category\": 4,\r\n  \"localId\": 11,\r\n  \"baseName\": \"Heavy\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4011\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Heavy\"\r\n};",
-          "Carrying: State = {\r\n  \"category\": 4,\r\n  \"localId\": 12,\r\n  \"baseName\": \"Carrying\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4012\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Carrying\"\r\n};",
-          "Carried: State = {\r\n  \"category\": 4,\r\n  \"localId\": 13,\r\n  \"baseName\": \"Carried\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4013\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Carried\"\r\n};",
-          "Pacifist: State = {\r\n  \"category\": 4,\r\n  \"localId\": 14,\r\n  \"baseName\": \"Pacifist\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4014\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Pacifist\"\r\n};",
-          "Invulnerable: State = {\r\n  \"category\": 4,\r\n  \"localId\": 15,\r\n  \"baseName\": \"Invulnerable\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4015\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Invulnerable\"\r\n};",
-          "InvulnerableDistance: State = {\r\n  \"category\": 4,\r\n  \"localId\": 16,\r\n  \"baseName\": \"InvulnerableDistance\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4016\",\r\n  \"nameModelUid\": \"CharacteristicType.State.InvulnerableDistance\"\r\n};",
-          "InvulnerableMelee: State = {\r\n  \"category\": 4,\r\n  \"localId\": 17,\r\n  \"baseName\": \"InvulnerableMelee\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4017\",\r\n  \"nameModelUid\": \"CharacteristicType.State.InvulnerableMelee\"\r\n};"
+          "Visible: State = {\r\n  \"category\": 4,\r\n  \"localId\": 1,\r\n  \"baseName\": \"Visible\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4001\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Visible\"\r\n};",
+          "Ghosted: State = {\r\n  \"category\": 4,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Ghosted\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4002\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Ghosted\"\r\n};",
+          "Flying: State = {\r\n  \"category\": 4,\r\n  \"localId\": 3,\r\n  \"baseName\": \"Flying\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4003\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Flying\"\r\n};",
+          "Underground: State = {\r\n  \"category\": 4,\r\n  \"localId\": 4,\r\n  \"baseName\": \"Underground\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4004\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Underground\"\r\n};",
+          "Drenched: State = {\r\n  \"category\": 4,\r\n  \"localId\": 5,\r\n  \"baseName\": \"Drenched\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4005\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Drenched\"\r\n};",
+          "Shocked: State = {\r\n  \"category\": 4,\r\n  \"localId\": 6,\r\n  \"baseName\": \"Shocked\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4006\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Shocked\"\r\n};",
+          "Hot: State = {\r\n  \"category\": 4,\r\n  \"localId\": 7,\r\n  \"baseName\": \"Hot\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4007\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Hot\"\r\n};",
+          "Grounded: State = {\r\n  \"category\": 4,\r\n  \"localId\": 8,\r\n  \"baseName\": \"Grounded\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4008\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Grounded\"\r\n};",
+          "Unmoveable: State = {\r\n  \"category\": 4,\r\n  \"localId\": 9,\r\n  \"baseName\": \"Unmoveable\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4009\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Unmoveable\"\r\n};",
+          "Rooted: State = {\r\n  \"category\": 4,\r\n  \"localId\": 10,\r\n  \"baseName\": \"Rooted\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4010\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Rooted\"\r\n};",
+          "Gravity: State = {\r\n  \"category\": 4,\r\n  \"localId\": 11,\r\n  \"baseName\": \"Gravity\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4011\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Gravity\"\r\n};",
+          "Heavy: State = {\r\n  \"category\": 4,\r\n  \"localId\": 12,\r\n  \"baseName\": \"Heavy\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4012\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Heavy\"\r\n};",
+          "Carrying: State = {\r\n  \"category\": 4,\r\n  \"localId\": 13,\r\n  \"baseName\": \"Carrying\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4013\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Carrying\"\r\n};",
+          "Carried: State = {\r\n  \"category\": 4,\r\n  \"localId\": 14,\r\n  \"baseName\": \"Carried\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4014\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Carried\"\r\n};",
+          "Pacifist: State = {\r\n  \"category\": 4,\r\n  \"localId\": 15,\r\n  \"baseName\": \"Pacifist\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4015\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Pacifist\"\r\n};",
+          "Invulnerable: State = {\r\n  \"category\": 4,\r\n  \"localId\": 16,\r\n  \"baseName\": \"Invulnerable\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4016\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Invulnerable\"\r\n};",
+          "InvulnerableDistance: State = {\r\n  \"category\": 4,\r\n  \"localId\": 17,\r\n  \"baseName\": \"InvulnerableDistance\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4017\",\r\n  \"nameModelUid\": \"CharacteristicType.State.InvulnerableDistance\"\r\n};",
+          "InvulnerableMelee: State = {\r\n  \"category\": 4,\r\n  \"localId\": 18,\r\n  \"baseName\": \"InvulnerableMelee\",\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4018\",\r\n  \"nameModelUid\": \"CharacteristicType.State.InvulnerableMelee\"\r\n};"
         ],
         "type": "string",
         "format": ""

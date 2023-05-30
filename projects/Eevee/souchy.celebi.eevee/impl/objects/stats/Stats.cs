@@ -15,6 +15,8 @@ namespace souchy.celebi.eevee.impl.stats
     {
         public static readonly string dicName = nameof(dic);
 
+        [JsonProperty(TypeNameHandling = TypeNameHandling.None)]
+        [BsonDictionaryOptions(Representation = DictionaryRepresentation.Document)]
         public Dictionary<CharacteristicId, MathEquation> growth { get; set; } = new();
 
         protected Stats() { }
