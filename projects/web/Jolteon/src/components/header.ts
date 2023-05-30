@@ -14,32 +14,32 @@ export class Header {
     //     url: "editor/spell/19",
     //     name: "Gungnir"
     // }
-    
+
 
     constructor(
         private readonly ea: IEventAggregator,
     ) {
-        let theme = this.themeDark;
-        this.themeDark = theme;
+        let theme = this.themeLight;
+        this.themeLight = theme;
         this.ea.subscribe("navcrumb:creature", (c: any) => this.activecreature = c);
         this.ea.subscribe("navcrumb:spell", (s: any) => this.activespell = s);
     }
 
     public changeTheme() {
-        this.themeDark = !this.themeDark;
+        this.themeLight = !this.themeLight;
     }
 
-    public get themeDark(): boolean {
-        if(localStorage.getItem("theme") === null) this.themeDark = true;
-        let theme = localStorage.getItem("theme");
+    public get themeLight(): boolean {
+        if (localStorage.getItem("jolteon:themeLight") === null) this.themeLight = false;
+        let theme = localStorage.getItem("jolteon:themeLight");
         return theme == "true";
     }
-    public set themeDark(dark: boolean) {
-        localStorage.setItem("theme", dark.toString())
-        if (this.themeDark)
-            document.documentElement.className = "theme-dark"
-        else
+    public set themeLight(dark: boolean) {
+        localStorage.setItem("jolteon:themeLight", dark.toString())
+        if (this.themeLight)
             document.documentElement.className = "theme-light"
+        else
+            document.documentElement.className = "theme-dark"
     }
 
 
