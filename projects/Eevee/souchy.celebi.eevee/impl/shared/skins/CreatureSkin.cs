@@ -6,7 +6,7 @@ using MongoDB.Bson;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace souchy.celebi.eevee.impl.shared
+namespace souchy.celebi.eevee.impl.shared.skins
 {
     public class CreatureSkin : ICreatureSkin
     {

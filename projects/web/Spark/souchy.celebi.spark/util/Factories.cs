@@ -20,6 +20,7 @@ using souchy.celebi.eevee.enums.characteristics;
 using System.Xml.Linq;
 using souchy.celebi.spark.services.models;
 using souchy.celebi.eevee.enums.characteristics.other;
+using souchy.celebi.eevee.impl.shared.skins;
 
 namespace souchy.celebi.spark.util
 {
@@ -89,6 +90,38 @@ namespace souchy.celebi.spark.util
             spellModel.skinIds.Add(skin.entityUid);
 
             return (spellModel, name, desc, stats, skin);
+        }
+
+        public static async Task<(IStatusModel status, IStringEntity name, IStringEntity desc, IStats stats, IStatusSkin skin)> newStatusModel(IDCounterService _ids)
+        {
+            // Model
+            var model = StatusModel.CreatePermanent();
+            model.modelUid = await _ids.GetID<IStatusModel>();
+
+            // Name
+            var name = StringEntity.Create("Status#" + model.modelUid);
+            name.modelUid = await _ids.GetID<IStringEntity>();
+            model.nameId = name.entityUid;
+
+            // Desc
+            var desc = StringEntity.Create("StatusDesc#" + model.modelUid);
+            desc.modelUid = await _ids.GetID<IStringEntity>();
+            model.descriptionId = desc.entityUid;
+
+            // Stats
+            var stats = StatusModelStats.Create();
+            model.statsId = stats.entityUid;
+
+            // Skin
+            var skin = newStatusSkin();
+            model.skinIds.Add(skin.entityUid);
+
+            return (model, name, desc, stats, skin);
+        }
+        public static IStatusSkin newStatusSkin()
+        {
+            var skin = StatusSkin.Create();
+            return skin;
         }
 
         public static async Task<(ICreatureSkin, IStringEntity, IStringEntity)> newCreatureSkin(IDCounterService _ids)

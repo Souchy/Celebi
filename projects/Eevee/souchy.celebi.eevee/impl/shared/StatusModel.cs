@@ -19,10 +19,8 @@ namespace souchy.celebi.eevee.impl.shared
         public ObjectId nameId { get; set; }
         public ObjectId descriptionId { get; set; }
         public AssetIID icon { get; set; } = new();
+        public IEntitySet<ObjectId> skinIds { get; init; } = new EntitySet<ObjectId>();
 
-        //public IValue<int> delay { get; set; } = new Value<int>();
-        //public IValue<int> duration { get; set; } = new Value<int>();
-        //public IValue<bool> canBeUnbewitched { get; set; } = new Value<bool>();
         public ObjectId statsId { get; set; }
         public IValue<StatusPriorityType> priority { get; set; } = new Value<StatusPriorityType>();
 

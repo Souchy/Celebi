@@ -449,49 +449,6 @@
         }
       }
     },
-    "/api/models/creature": {
-      "post": {
-        "tags": [
-          "CreatureModelController"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreatureModel"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreatureModel"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreatureModel"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreatureModel"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ICreatureModel"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/models/creature/new": {
       "post": {
         "tags": [
@@ -772,7 +729,7 @@
         }
       }
     },
-    "/api/models/effects/all": {
+    "/api/models/effect/all": {
       "get": {
         "tags": [
           "EffectPermanentController"
@@ -794,7 +751,7 @@
         }
       }
     },
-    "/api/models/effects/effect/{id}": {
+    "/api/models/effect/{id}": {
       "get": {
         "tags": [
           "EffectPermanentController"
@@ -904,42 +861,28 @@
         }
       }
     },
-    "/api/models/effects/effect": {
+    "/api/models/effect/new": {
       "post": {
         "tags": [
           "EffectPermanentController"
         ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/EffectPermanent"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/EffectPermanent"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/EffectPermanent"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/EffectPermanent"
-              }
+        "parameters": [
+          {
+            "name": "schemaName",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/IEffect"
+                  "$ref": "#/components/schemas/IEffectPermanent"
                 }
               }
             }
@@ -947,7 +890,7 @@
         }
       }
     },
-    "/api/models/effects/{id}/child": {
+    "/api/models/effect/{id}/child": {
       "post": {
         "tags": [
           "EffectPermanentController"
@@ -2345,49 +2288,6 @@
         }
       }
     },
-    "/api/models/spell": {
-      "post": {
-        "tags": [
-          "SpellModelController"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/SpellModel"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SpellModel"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SpellModel"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/SpellModel"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ISpellModel"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/models/spell/new": {
       "post": {
         "tags": [
@@ -2992,7 +2892,86 @@
         }
       }
     },
-    "/api/models/status/status/{id}": {
+    "/api/models/status/filtered": {
+      "get": {
+        "tags": [
+          "StatusModelController"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IStatusModelFilterDefinition"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IStatusModelFilterDefinition"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IStatusModelFilterDefinition"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IStatusModelFilterDefinition"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IStatusModel"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/status/byString/{str}": {
+      "get": {
+        "tags": [
+          "StatusModelController"
+        ],
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IStatusModel"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/status/{id}": {
       "get": {
         "tags": [
           "StatusModelController"
@@ -3066,7 +3045,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReplaceOneResult"
+                  "$ref": "#/components/schemas/IStatusModel"
                 }
               }
             }
@@ -3102,38 +3081,21 @@
         }
       }
     },
-    "/api/models/status/status": {
+    "/api/models/status/new": {
       "post": {
         "tags": [
           "StatusModelController"
         ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/StatusModel"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/StatusModel"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/StatusModel"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/StatusModel"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IStatusModel"
+                }
+              }
+            }
           }
         }
       }
@@ -4704,6 +4666,47 @@
           "type": "object"
         }
       },
+      "IEffectPermanent": {
+        "type": "object",
+        "properties": {
+          "schema": {
+            "$ref": "#/components/schemas/IEffectSchema"
+          },
+          "sourceCondition": {
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "targetFilter": {
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "targetAcquisitionZone": {
+            "$ref": "#/components/schemas/IZone"
+          },
+          "triggers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ITrigger"
+            },
+            "nullable": true
+          },
+          "modelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "entityUid": {
+            "type": "string"
+          },
+          "effectIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
       "IEffectSchema": {
         "type": "object",
         "properties": {
@@ -4895,6 +4898,13 @@
             "type": "string",
             "nullable": true
           },
+          "skinIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
           "statsId": {
             "type": "string"
           },
@@ -4916,6 +4926,10 @@
             "nullable": true
           }
         },
+        "additionalProperties": false
+      },
+      "IStatusModelFilterDefinition": {
+        "type": "object",
         "additionalProperties": false
       },
       "IStringEntity": {
@@ -6331,6 +6345,13 @@
           },
           "icon": {
             "type": "string",
+            "nullable": true
+          },
+          "skinIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
             "nullable": true
           },
           "statsId": {

@@ -63,12 +63,12 @@ namespace souchy.celebi.spark.controllers.models
         }
 
         //[Authorize]
-        [HttpPost("")]
-        public async Task<ActionResult<ICreatureModel>> Post(CreatureModel newCreatureModel)
-        {
-            await _creatureModels.CreateAsync(newCreatureModel);
-            return CreatedAtAction(nameof(Get), new { id = newCreatureModel.entityUid }, newCreatureModel);
-        }
+        //[HttpPost("")]
+        //public async Task<ActionResult<ICreatureModel>> Post(CreatureModel newCreatureModel)
+        //{
+        //    await _creatureModels.CreateAsync(newCreatureModel);
+        //    return CreatedAtAction(nameof(Get), new { id = newCreatureModel.entityUid }, newCreatureModel);
+        //}
 
         [HttpPost("new")]
         public async Task<ActionResult<ICreatureModel>> PostNew()

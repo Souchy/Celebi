@@ -61,7 +61,8 @@ namespace souchy.celebi.spark.controllers.models
             => Ok(await _spellService.GetAsync(filter));
 
         [HttpGet("byString/{str}")]
-        public async Task<IEnumerable<ISpellModel>> GetByString(string str) => await _federation.FindSpellsByString(str);
+        public async Task<List<ISpellModel>> GetByString(string str) => await _federation.FindSpellsByString(str);
+
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ISpellModel>> Get([FromRoute] SpellIID id)
@@ -74,12 +75,12 @@ namespace souchy.celebi.spark.controllers.models
         }
 
         //[Authorize]
-        [HttpPost("")]
-        public async Task<ActionResult<ISpellModel>> Post([FromBody] SpellModel newSpellModel)
-        {
-            await _spellService.CreateAsync(newSpellModel);
-            return CreatedAtAction(nameof(Get), new { id = newSpellModel.entityUid }, newSpellModel);
-        }
+        //[HttpPost("")]
+        //public async Task<ActionResult<ISpellModel>> Post([FromBody] SpellModel newSpellModel)
+        //{
+        //    await _spellService.CreateAsync(newSpellModel);
+        //    return CreatedAtAction(nameof(Get), new { id = newSpellModel.entityUid }, newSpellModel);
+        //}
 
         //[Authorize]
         [HttpPost("new")]

@@ -13,12 +13,13 @@ using souchy.celebi.eevee.neweffects.face;
 using souchy.celebi.eevee.neweffects.impl;
 using souchy.celebi.spark.services;
 using souchy.celebi.spark.services.models;
+using System.Data;
 
 namespace souchy.celebi.spark.controllers.models
 {
     [ApiController]
     [Produces("application/json")]
-    [Route(Routes.Models + "effects")] 
+    [Route(Routes.Models + "effect")] 
     public class EffectPermanentController : ControllerBase
     {
         //private readonly EffectService _effectService;
@@ -32,7 +33,7 @@ namespace souchy.celebi.spark.controllers.models
         [HttpGet("all")]
         public async Task<List<IEffect>> GetAll() => await _effects.GetAsync();
 
-        [HttpGet("effect/{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<IEffect>> Get(ObjectId id)
         {
             IEffect? effect = await _effects.GetOneAsync(id);
@@ -42,15 +43,33 @@ namespace souchy.celebi.spark.controllers.models
         }
 
         //[Authorize]
-        [HttpPost("effect")]
-        public async Task<ActionResult<IEffect>> Post(EffectPermanent newEffect)
+        //[HttpPost("effect")]
+        //public async Task<ActionResult<IEffect>> Post(EffectPermanent newEffect)
+        //{
+        //    await _effects.CreateAsync(newEffect);
+        //    return CreatedAtAction(nameof(Get), new { id = newEffect.entityUid }, newEffect);
+        //}
+
+        [HttpPost("new")]
+        public async Task<ActionResult<IEffectPermanent>> PostNew([FromQuery] string schemaName)
         {
-            await _effects.CreateAsync(newEffect);
-            return CreatedAtAction(nameof(Get), new { id = newEffect.entityUid }, newEffect);
+            var schemaType = typeof(IEntity).Assembly
+                .GetTypes().FirstOrDefault(t => t.Name == schemaName);
+            if (schemaType == null)
+                return NotFound();
+
+            var eff = new EffectPermanent();
+            eff.entityUid = ObjectId.GenerateNewId();
+            eff.Schema = (IEffectSchema) Activator.CreateInstance(schemaType)!;
+            eff.modelUid = (IID) (int) Enum.Parse<EffT>(schemaName);
+
+            await _effects.CreateAsync(eff);
+            return CreatedAtAction(nameof(Get), new { id = eff.entityUid }, eff);
         }
 
+
         //[Authorize]
-        [HttpPut("effect/{id}")]
+        [HttpPut("{id}")]
         public async Task<ActionResult<IEffect>> Update(ObjectId id, EffectPermanent updatedEffect)
         {
             var effect = await _effects.GetOneAsync(id);
@@ -64,7 +83,7 @@ namespace souchy.celebi.spark.controllers.models
         }
 
         //[Authorize]
-        [HttpDelete("effect/{id}")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<DeleteResult>> Delete(ObjectId id)
         {
             var effect = await _effects.GetOneAsync(id);

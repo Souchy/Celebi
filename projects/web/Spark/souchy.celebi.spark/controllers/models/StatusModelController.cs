@@ -3,11 +3,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.models;
+using souchy.celebi.eevee.face.shared.models.skins;
 using souchy.celebi.eevee.impl.shared;
 using souchy.celebi.spark.services;
 using souchy.celebi.spark.services.fights;
 using souchy.celebi.spark.services.models;
+using souchy.celebi.spark.util;
 
 namespace souchy.celebi.spark.controllers.models
 {
@@ -17,15 +20,33 @@ namespace souchy.celebi.spark.controllers.models
     public class StatusModelController : ControllerBase
     {
         private readonly CollectionService<IStatusModel> _statusService;
-        public StatusModelController(MongoModelsDbService db)
+        private readonly CollectionService<IStatusSkin> _skins;
+        private readonly CollectionService<IStats> _stats;
+        private readonly StringService _strings;
+        private readonly IDCounterService _ids;
+        private readonly MongoFederationService _federation;
+        public StatusModelController(MongoModelsDbService db, StringService strings, IDCounterService ids, MongoFederationService federation)
         {
             _statusService = db.GetMongoService<IStatusModel>();
+            _skins = db.GetMongoService<IStatusSkin>();
+            _stats = db.GetMongoService<IStats>();
+            _strings = strings;
+            _ids = ids;
+            _federation = federation;
         }
 
         [HttpGet("all")]
         public async Task<List<IStatusModel>> GetAll() => await _statusService.GetAsync();
 
-        [HttpGet("status/{id}")]
+        [HttpGet("filtered")]
+        public async Task<List<IStatusModel>> GetFiltered(FilterDefinition<IStatusModel> filter)
+            => await _statusService.GetAsync(filter);
+
+        [HttpGet("byString/{str}")]
+        public async Task<List<IStatusModel>> GetByString(string str) => await _federation.FindStatusesByString(str);
+
+
+        [HttpGet("{id}")]
         public async Task<ActionResult<IStatusModel>> Get(ObjectId id)
         {
             IStatusModel? creatureModel = await _statusService.GetOneAsync(id);
@@ -35,27 +56,42 @@ namespace souchy.celebi.spark.controllers.models
         }
 
         //[Authorize]
-        [HttpPost("status")]
-        public async Task<IActionResult> Post(StatusModel newSpellModel)
+        //[HttpPost("")]
+        //public async Task<IActionResult> Post(StatusModel newSpellModel)
+        //{
+        //    await _statusService.CreateAsync(newSpellModel);
+        //    return CreatedAtAction(nameof(Get), new { id = newSpellModel.entityUid }, newSpellModel);
+        //}
+
+        //[Authorize]
+        [HttpPost("new")]
+        public async Task<ActionResult<IStatusModel>> PostNew()
         {
-            await _statusService.CreateAsync(newSpellModel);
-            return CreatedAtAction(nameof(Get), new { id = newSpellModel.entityUid }, newSpellModel);
+            var model = await Factories.newStatusModel(_ids);
+
+            await _statusService.CreateAsync(model.status);
+            await _strings.CreateAsync(model.name);
+            await _strings.CreateAsync(model.desc);
+            await _stats.CreateAsync(model.stats);
+            await _skins.CreateAsync(model.skin);
+
+            return CreatedAtAction(nameof(Get), new { id = model.status.entityUid }, model.status);
         }
 
         //[Authorize]
-        [HttpPut("status/{id}")]
-        public async Task<ActionResult<ReplaceOneResult>> Update(ObjectId id, StatusModel updatedSpellModel)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<IStatusModel>> Update([FromRoute] ObjectId id, [FromBody] StatusModel updatedModel)
         {
             var crea = await _statusService.GetOneAsync(id);
             if (crea is null)
                 return NotFound();
-            updatedSpellModel.entityUid = crea.entityUid;
-            var result = await _statusService.UpdateAsync(id, updatedSpellModel);
-            return Ok(result);
+            updatedModel.entityUid = crea.entityUid;
+            var result = await _statusService.UpdateAsync(id, updatedModel);
+            return Ok(updatedModel);
         }
 
         //[Authorize]
-        [HttpDelete("status/{id}")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<DeleteResult>> Delete(ObjectId id)
         {
             var crea = await _statusService.GetOneAsync(id);

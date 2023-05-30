@@ -25,7 +25,7 @@ namespace souchy.celebi.spark.services
         private readonly IMongoCollection<IStringEntity> strings;
         private readonly IMongoCollection<ICreatureModel> creatures;
         private readonly IMongoCollection<ISpellModel> spells;
-        //private readonly IMongoCollection<IStatusModel> statuses; // TODO
+        private readonly IMongoCollection<IStatusModel> statuses; // TODO
 
         private readonly ProjectionDefinition<BsonDocument> projection = Builders<BsonDocument>.Projection.Include("_id");
         private FilterDefinition<BsonDocument> filter(string str) => Builders<BsonDocument>.Filter.Or(
@@ -39,7 +39,7 @@ namespace souchy.celebi.spark.services
             this.strings = db.GetCollection<IStringEntity>(nameof(IStringEntity));
             this.creatures = db.GetCollection<ICreatureModel>(nameof(ICreatureModel));
             this.spells = db.GetCollection<ISpellModel>(nameof(ISpellModel));
-            //this.statuses = db.GetCollection<IStatusModel>(nameof(IStatusModel));
+            this.statuses = db.GetCollection<IStatusModel>(nameof(IStatusModel));
         }
         private BsonDocument?[] pipelineStrings(string str) => new[]
             {
@@ -79,33 +79,15 @@ namespace souchy.celebi.spark.services
             };
         public async Task<List<ICreatureModel>> FindCreaturesByString(string str)
         {
-            //var pipeline = new EmptyPipelineDefinition<ICreatureModel>()
-            //    .Lookup<ICreatureModel, ICreatureModel, IStringEntity, BsonDocument>(strings, nameof(ICreatureModel.nameId), "_id", "name")
-            //    .Lookup<ICreatureModel, BsonDocument, IStringEntity, BsonDocument>(strings, nameof(ICreatureModel.descriptionId), "_id", "desc")
-            //    .Unwind("name")
-            //    .Unwind("desc")
-            //    .Match(filter(str))
-            //    //.Project(projection)
-            //    .Project(Builders<BsonDocument>.Projection.Exclude("name").Exclude("desc"))
-            //    .Project(Builders<BsonDocument>.Projection.As<ICreatureModel>())
-            //    ;
-
-            var list = await creatures.Aggregate<ICreatureModel>(pipelineStrings(str)).ToListAsync();
-            return list;
+            return await creatures.Aggregate<ICreatureModel>(pipelineStrings(str)).ToListAsync();
         }
-        public async Task<IEnumerable<ISpellModel>> FindSpellsByString(string str)
+        public async Task<List<ISpellModel>> FindSpellsByString(string str)
         {
-            //var pipeline = new EmptyPipelineDefinition<ISpellModel>()
-            //    .Lookup<ISpellModel, ISpellModel,  IStringEntity, BsonDocument>(strings, nameof(ISpellModel.nameId), "_id", "name")
-            //    .Lookup<ISpellModel, BsonDocument, IStringEntity, BsonDocument>(strings, nameof(ISpellModel.descriptionId), "_id", "desc")
-            //    .Unwind("name")
-            //    .Unwind("desc")
-            //    .Match(filter(str))
-            //    //.Project(projection)
-            //    .Project(Builders<BsonDocument>.Projection.As<ISpellModel>())
-            //    ;
-            var list = await spells.Aggregate<ISpellModel>(pipelineStrings(str)).ToListAsync();
-            return list;
+            return await spells.Aggregate<ISpellModel>(pipelineStrings(str)).ToListAsync();
+        }
+        public async Task<List<IStatusModel>> FindStatusesByString(string str)
+        {
+            return await spells.Aggregate<IStatusModel>(pipelineStrings(str)).ToListAsync();
         }
     }
     public class MongoClientService
