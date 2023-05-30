@@ -40,7 +40,7 @@ export class Zone {
     }    
 
     public save() {
-        console.log("uhuh")
+        console.log("Zone save")
         this.callbacksave();
     }
 

@@ -41,11 +41,13 @@ namespace souchy.celebi.eevee.impl.shared
         {
             zoneType = new Value<ZoneType>(ZoneType.circle),
             size = new Value<IVector3>(new Vector3(0, 0, 0)),
+            worldOrigin = ActorType.Source,
             negative = true
         };
         public IZone RangeZoneMax { get; set; } = new Zone()
         {
-            zoneType = new Value<ZoneType>(ZoneType.circle)
+            zoneType = new Value<ZoneType>(ZoneType.circle),
+            worldOrigin = ActorType.Source
         };
 
 

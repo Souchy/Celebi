@@ -3,7 +3,7 @@
 <import from="../stats/spell/spellstats"></import>
 <import from="../effects/modelSelector/effectModelSelector"></import>
 <import from="../effects/effect"></import>
-
+<import from="../zone/zone"></import>
 
 <!-- vignette root || creature -->
 <template if.bind="isvignette && mode != 'search'">
@@ -55,7 +55,7 @@
   </div> -->
 
   <!-- costs + stats -->
-  <div style="display: flex;">
+  <div class="mainSpellProperties">
     <div>
       <h4>Costs</h4>
       <table class="table-striped table-sm table-borderless table-responsive-sm">
@@ -71,6 +71,14 @@
     <div>
       <h4>Stats</h4>
       <spellstats baseuid.bind="model.statsId"></spellstats>
+    </div>
+    <div>
+      <h4>Range</h4>
+      <h6 class="clickable" data-bs-toggle="collapse" data-bs-target="#collapseZone-rangeMin">Zone Min</h6>
+      <zone zone.bind="model.rangeZoneMin" uid="rangeMin" callbacksave.bind="() => save()"></zone>
+      
+      <h6 class="clickable" data-bs-toggle="collapse" data-bs-target="#collapseZone-rangeMax">Zone Max</h6>
+      <zone zone.bind="model.rangeZoneMax" uid="rangeMax" callbacksave.bind="() => save()"></zone>
     </div>
   </div>
 

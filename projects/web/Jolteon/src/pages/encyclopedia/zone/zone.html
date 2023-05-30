@@ -68,6 +68,17 @@
         </select>
       </td>
     </tr>
+
+    <tr class="collapse" id="collapseZone-${uid}">
+      <td>Negative</td>
+      <td>
+        <input type="checkbox" class="btn-check" id="btn-check-outlined isnegative ${uid}" autocomplete="off" checked.bind="zone.negative" change.trigger="onChangeStatValue">
+        <label class="btn btn-outline shadow-none" for="btn-check-outlined isnegative ${uid}">${zone.negative ? 'True' : 'False'}</label><br>
+        <!-- <select value.bind="zone.rotation" change.trigger="save()">
+          <option repeat.for="type of Enums.rotation4" model.bind="$index">${type}</option>
+        </select> -->
+      </td>
+    </tr>
     
     <tr class="collapse" id="collapseZone-${uid}">
       <td>Sampling Count</td>

@@ -63,6 +63,9 @@ h4,
 h5 {
   color: var(--accent0);
 }
+h6 {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
 
 input[type="number"],
 input[type="text"],
@@ -91,13 +94,20 @@ select:focus {
   box-shadow: 2px 2px 2px #563d7477;
 }
 
-.btn-icon {
-  width: 32px;
-  height: 32px;
-  padding: 0px;
-}
+
 
 app {
+
+  td>.btn {
+    height: 32px;
+    padding-top: 2px;
+    padding-bottom: 0px;
+  }
+  .btn-icon {
+    width: 32px;
+    height: 32px;
+    padding: 0px !important;
+  }
   .input-group {
     position: relative;
     display: inline-block;
