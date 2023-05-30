@@ -6,14 +6,8 @@ import {
     StatusContainerProperty, StatusContainerPropertyTypes, StatusInstanceProperty, StatusInstancePropertyTypes,
     ZoneType, StatusMergeStrategy, StatusUnbewitchStrategy
 } from "./services/api/data-contracts";
-// import jolteon from "../../jolteon.json"
-
 
 export class Constants {
-
-    // public static readonly serverUrl = jolteon.serverUrl;
-    public static readonly serverUrl = "https://localhost:7295";
-    public static readonly remoteServerUrl = "https://192.168.2.15";
 
     public static readonly googleClientId = "850322629277-c9fu1umd1dlk7tjv325u6s33g32fb0ea.apps.googleusercontent.com";
 

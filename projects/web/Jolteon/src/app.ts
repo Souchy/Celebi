@@ -12,6 +12,7 @@ import { AuthController } from './jolteon/services/api/AuthController';
 import { TOAST_PLACEMENT, TOAST_STATUS, Toast, ToastConfigOptions, ToastOptions } from 'bootstrap-toaster';
 import { PropertiesController } from './jolteon/services/api/PropertiesController';
 
+
 @inject(IHttpClient, IStore, IEventAggregator, IRouter, AuthController)
 export class App implements IRouteableComponent {
 	static routes: IRoute[] = [
@@ -70,18 +71,14 @@ export class App implements IRouteableComponent {
 		private readonly auth: AuthController,
 		private readonly propertiesController: PropertiesController
 	) {
-		console.log("JOLTEON APP CTOR " + location.hostname)
+		console.log("JOLTEON APP CTOR " + location.hostname + ", " + process.env.SERVER_URL + ", " + process.env.useUrlFragmentHash);
 		// toast on saved/failed post operations to server
 		Toast.configure(this.toastConfig);
 		ea.subscribe("operation:saved", this.toastSaved);
 		ea.subscribe("operation:failed", this.toastFailed);
 
 		// use the server url as base url
-		if(location.hostname == 'localhost') {
-			this.http.baseUrl = Constants.serverUrl;
-		} else {
-			this.http.baseUrl = Constants.remoteServerUrl;
-		}
+		this.http.baseUrl = process.env.SERVER_URL; 
 
 		// load server data
 		this.loadServerData();

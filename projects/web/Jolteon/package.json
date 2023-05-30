@@ -15,6 +15,7 @@
     "aurelia": "latest",
     "bootstrap": "^5.2.2",
     "bootstrap-toaster": "^5.2.0-beta1.1",
+    "dotenv": "^16.1.0",
     "i18next-fetch-backend": "^5.0.2",
     "swagger-typescript-api": "^12.0.4",
     "typescript-cookie": "^1.0.6"
