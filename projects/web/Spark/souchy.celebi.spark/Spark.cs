@@ -107,7 +107,7 @@ namespace souchy.celebi.spark
             {
                 options.AddDefaultPolicy(
                     builder => builder
-                        .WithOrigins("https://localhost:9000", "http://localhost:9000")
+                        .WithOrigins("https://localhost:9000", "http://localhost:9000", "https://souchy.github.io")
                         .AllowAnyHeader()
                         .AllowAnyMethod()
                         .AllowCredentials()
