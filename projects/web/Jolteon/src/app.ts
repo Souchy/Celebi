@@ -79,6 +79,8 @@ export class App implements IRouteableComponent {
 		// use the server url as base url
 		if(location.hostname == 'localhost') {
 			this.http.baseUrl = Constants.serverUrl;
+		} else {
+			this.http.baseUrl = Constants.remoteServerUrl;
 		}
 
 		// load server data
