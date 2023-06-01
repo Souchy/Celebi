@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.shared.models.skins;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.shared;
+using souchy.celebi.spark.models;
 using souchy.celebi.spark.services;
 using souchy.celebi.spark.services.models;
 using souchy.celebi.spark.util;
+using System.Data;
 
 namespace souchy.celebi.spark.controllers.models
 {
@@ -36,6 +39,7 @@ namespace souchy.celebi.spark.controllers.models
         public async Task<List<ICreatureSkin>> GetCreatureSkins([FromQuery] IEnumerable<ObjectId> skinIds)
             => await _skins.GetInIdsAsync(skinIds);
 
+        [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPost]
         public async Task<ActionResult<ICreatureSkin>> PostNew()
         {
@@ -43,6 +47,7 @@ namespace souchy.celebi.spark.controllers.models
             return Ok(skin);
         }
 
+        [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPut("{id}")]
         public async Task<ActionResult<ICreatureSkin>> Update([FromRoute] ObjectId id, [FromBody] ICreatureSkin skin)
         {
@@ -53,6 +58,7 @@ namespace souchy.celebi.spark.controllers.models
             return Ok(skin);
         }
 
+        [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpDelete("{id}")]
         public async Task<ActionResult<DeleteResult>> Delete([FromRoute] ObjectId id)
         {

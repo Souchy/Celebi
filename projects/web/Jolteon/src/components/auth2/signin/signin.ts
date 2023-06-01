@@ -7,6 +7,8 @@ import { AuthController } from '../../../jolteon/services/api/AuthController';
 import { LoginAction, LogoutAction } from '../../../jolteon/action-handler';
 import { GlobalState } from '../../../jolteon/initialstate';
 import { IStore } from '@aurelia/state';
+import { HttpResponse } from '../../../jolteon/services/api/http-client';
+import { AccountInfo } from '../../../jolteon/services/api/data-contracts';
 
 
 declare global {
@@ -32,30 +34,36 @@ export class Signin {
 	https://localhost:9000/redirect/signin-microsoft
 	https://localhost:7295/api/auth/signin-microsoft
 	*/
-	constructor(private readonly auth: AuthController, private readonly store: IStore<GlobalState, LoginAction>) { 
+	constructor(private readonly auth: AuthController, private readonly store: IStore<GlobalState, LoginAction>) {
 		window.signinGoogleCallback = (token) => this.googleCallback(token);
 		window.signinTwitterCallback = (token) => this.twitterCallback(token);
 		window.signinFacebookCallback = (token) => this.facebookCallback(token);
 	}
 
 	public clickSignin() {
-		
+
 	}
 
 	public submitSignin() {
 		console.log("submit signin: " + this.identifier + ", " + this.password)
-		this.auth.postIdentitySignin({
-			// displayName: "souchy",
-			email: this.identifier,
-			pass: this.password
-		}).then(
-			res => {
-				this.store.dispatch(new LoginAction(res.data));
-			},
-			rej => {
-				console.log(rej);
-			}
-		)
+
+		let handler = (res: HttpResponse<AccountInfo, any>) => {
+			this.store.dispatch(new LoginAction(res.data));
+		};
+		let errorHandler = rej => {
+			console.log(rej);
+		};
+		if (this.identifier.includes("@")) {
+			this.auth.postIdentitySigninEmail({
+				email: this.identifier,
+				pass: this.password
+			}).then(handler, errorHandler);
+		} else {
+			this.auth.postIdentitySigninUsername({
+				username: this.identifier,
+				pass: this.password
+			}).then(handler, errorHandler);
+		}
 	}
 
 
@@ -75,16 +83,16 @@ export class Signin {
 		// console.log('Family Name: ' + responsePayload.family_name);
 		// console.log("Image URL: " + responsePayload.picture);
 		// console.log("Email: " + responsePayload.email);
-		
+
 		// document.cookie = token;
 		// setCookie('googleToken', token);
 		// location.href = "home";
 		// fetch()
 
 		// this.auth.getMammoth();
-		
-		this.auth.postIdentitySigninGoogle({ idToken: token.credential}).then(
-		// this.auth.postIdentitySigninGoogle().then(
+
+		this.auth.postIdentitySigninGoogle({ idToken: token.credential }).then(
+			// this.auth.postIdentitySigninGoogle().then(
 			res => {
 				console.log("recv signinGoogle:");
 				console.log(res);

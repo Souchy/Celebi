@@ -5,6 +5,9 @@ using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.spark.services.models;
 using souchy.celebi.spark.services;
 using souchy.celebi.spark.util;
+using Microsoft.AspNetCore.Authorization;
+using souchy.celebi.spark.models;
+using System.Data;
 
 namespace souchy.celebi.spark.controllers.models
 {
@@ -30,6 +33,7 @@ namespace souchy.celebi.spark.controllers.models
         public async Task<List<ISpellSkin>> GetSkins([FromQuery] IEnumerable<ObjectId> skinIds)
             => await _skins.GetInIdsAsync(skinIds);
 
+        [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPost]
         public ActionResult<ISpellSkin> PostNew()
         {
@@ -37,6 +41,7 @@ namespace souchy.celebi.spark.controllers.models
             return Ok(skin);
         }
 
+        [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPut("{id}")]
         public async Task<ActionResult<ISpellSkin>> Update([FromRoute] ObjectId id, [FromBody] ISpellSkin skin)
         {
@@ -47,6 +52,7 @@ namespace souchy.celebi.spark.controllers.models
             return Ok(skin);
         }
 
+        [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpDelete("{id}")]
         public async Task<ActionResult<DeleteResult>> Delete([FromRoute] ObjectId id)
         {

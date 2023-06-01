@@ -7,7 +7,7 @@
 
   <div class="effecttitle">
     <!-- title -->
-    <div class="effecttitletitle clickable"  data-bs-toggle="collapse" data-bs-target="#collapseEffectContent-${model.entityUid}">
+    <div class="effecttitletitle clickable" data-bs-toggle="collapse" data-bs-target="#collapseEffectContent-${model.entityUid}">
       <h5 click.trigger="clickMinimize()">${getModelName()}</h5>
       <h5 click.trigger="clickMinimize()">(${model.effectIds.length})</h5>
       <h5 click.trigger="clickMinimize()">${model.entityUid}</h5>
@@ -38,9 +38,10 @@
 
       <div style="margin-right: 15px;">
         <h6>Caster Condition</h6>
-        <div>
-          <h6>Target Filter</h6>
-        </div>
+        <h6>Target Filter</h6>
+      </div>
+      <div style="margin-right: 15px;">
+        <h6>Triggers</h6>
       </div>
 
       <div class="eblock" style="flex-grow: 1;">
@@ -52,7 +53,7 @@
     <!-- children section -->
     <div class="effectSection">
       <h6 class="clickable" data-bs-toggle="collapse" data-bs-target="#collapseEffects-${model.entityUid}">
-        Effects 
+        Effects
         <!-- (${model.effectIds.length}) -->
       </h6>
       <button class="btn" data-bs-toggle="modal" data-bs-target="#effectChildModal-${model.entityUid}">+</button>

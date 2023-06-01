@@ -11,6 +11,7 @@ using souchy.celebi.eevee.impl.shared;
 using souchy.celebi.eevee.impl.stats;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.neweffects.impl;
+using souchy.celebi.spark.models;
 using souchy.celebi.spark.services;
 using souchy.celebi.spark.services.fights;
 using souchy.celebi.spark.services.models;
@@ -53,7 +54,7 @@ namespace souchy.celebi.spark.controllers.models
         //    return CreatedAtAction(nameof(Get), new { id = newStats.entityUid }, newStats);
         //}
 
-        //[Authorize]
+        [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPost("stat")]
         public ActionResult<IStat> Post([FromQuery] CharacteristicId characID) // CharacteristicId
         {
@@ -63,7 +64,7 @@ namespace souchy.celebi.spark.controllers.models
         }
 
 
-        //[Authorize]
+        [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPut("{id}")]
         public async Task<ActionResult<IStats>> Update([FromRoute] ObjectId id, [FromBody] IStats updated)
         {
@@ -76,7 +77,7 @@ namespace souchy.celebi.spark.controllers.models
             else return Ok(old);
         }
 
-        //[Authorize]
+        [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpDelete("{id}")]
         public async Task<ActionResult<DeleteResult>> Delete([FromRoute] ObjectId id)
         {
@@ -87,8 +88,7 @@ namespace souchy.celebi.spark.controllers.models
             return Ok(result);
         }
 
-
-        //[Authorize]
+        [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPut("{id}/bool")]
         public async Task<ActionResult<UpdateResult>> UpdateStatBool([FromRoute] ObjectId id, [FromBody] StatBool updatedStats)
         {
@@ -97,7 +97,7 @@ namespace souchy.celebi.spark.controllers.models
             return Ok(result);
         }
 
-        //[Authorize]
+        [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPut("{id}/simple")]
         public async Task<ActionResult<UpdateResult>> UpdateStatSimple([FromRoute] ObjectId id, [FromBody] StatSimple updatedStats)
         {

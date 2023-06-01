@@ -14,6 +14,7 @@ using souchy.celebi.eevee.neweffects;
 using souchy.celebi.eevee.neweffects.face;
 using souchy.celebi.eevee.neweffects.impl;
 using souchy.celebi.eevee.neweffects.impl.effects;
+using souchy.celebi.spark.models;
 using souchy.celebi.spark.services;
 using souchy.celebi.spark.services.fights;
 using souchy.celebi.spark.services.models;
@@ -82,7 +83,7 @@ namespace souchy.celebi.spark.controllers.models
         //    return CreatedAtAction(nameof(Get), new { id = newSpellModel.entityUid }, newSpellModel);
         //}
 
-        //[Authorize]
+        [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPost("new")]
         public async Task<ActionResult<ISpellModel>> PostNew()
         {
@@ -97,7 +98,7 @@ namespace souchy.celebi.spark.controllers.models
             return CreatedAtAction(nameof(Get), new { id = model.spell.entityUid }, model.spell);
         }
 
-        //[Authorize]
+        [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPut("{id}")]
         public async Task<ActionResult<ISpellModel>> Update([FromRoute] SpellIID id, [FromBody] SpellModel updatedModel)
         {
@@ -111,6 +112,7 @@ namespace souchy.celebi.spark.controllers.models
             else return Ok(model);
         }
 
+        [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPost("{id}/effect")]
         public async Task<ActionResult<ISpellModel>> AddEffect([FromRoute] SpellIID id, [FromQuery] ObjectId? effectParentId, [FromQuery] string schemaName)
         {
@@ -160,8 +162,7 @@ namespace souchy.celebi.spark.controllers.models
             return false;
         }
 
-
-        //[Authorize]
+        [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpDelete("{id}")]
         public async Task<ActionResult<DeleteResult>> Delete([FromRoute] SpellIID id)
         {

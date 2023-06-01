@@ -171,18 +171,31 @@ namespace souchy.celebi.spark.controllers.meta
             if (!result.Succeeded)
                 return BadRequest(result.Errors.ToList()); // Problem("User creation failed: " + string.Join(", ", result.Errors));
 
+            await accountManager.AddToRoleAsync(account, nameof(AccountType.User));
             await this.signinManager.SignInAsync(account, false);
             return Ok(account.Info);
         }
 
         [AllowAnonymous]
         //[ValidateAntiForgeryToken]
-        [HttpPost("identitySignin")]
-        public async Task<ActionResult<AccountInfo>> identitySignin([Required][EmailAddress] string email, [Required] string pass)
+        [HttpPost("identitySigninUsername")]
+        public async Task<ActionResult<AccountInfo>> identitySigninUsername([Required] string username, [Required] string pass)
+        {
+            var account = await accountManager.FindByNameAsync(username);
+            if (account == null) return this.NoContent();
+            SignInResult result = await this.signinManager.PasswordSignInAsync(account, pass, true, false);
+            if (result.Succeeded) return Ok(account.Info);
+            else return Unauthorized(result.IsNotAllowed);
+        }
+
+        [AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        [HttpPost("identitySigninEmail")]
+        public async Task<ActionResult<AccountInfo>> identitySigninEmail([Required][EmailAddress] string email, [Required] string pass)
         {
             var account = await accountManager.FindByEmailAsync(email);
             if (account == null) return this.NoContent();
-            SignInResult result = await this.signinManager.PasswordSignInAsync(account, pass, false, false);
+            SignInResult result = await this.signinManager.PasswordSignInAsync(account, pass, true, false);
             if(result.Succeeded) return Ok(account.Info);
             else return Unauthorized(result.IsNotAllowed);
         }
@@ -248,6 +261,10 @@ namespace souchy.celebi.spark.controllers.meta
                 var result = await this.accountManager.CreateAsync(account);
                 if (result.Succeeded)
                 {
+                    if (account.EmailConfirmed)
+                        await accountManager.AddToRoleAsync(account, nameof(AccountType.VerifiedUser));
+                    else
+                        await accountManager.AddToRoleAsync(account, nameof(AccountType.User));
                     await this.signinManager.SignInAsync(account, true);
                     //await this.signinManager.ExternalLoginSignInAsync("loginProvider", "providerKey", true);
                     return Ok(account.Info);
@@ -269,6 +286,7 @@ namespace souchy.celebi.spark.controllers.meta
         }
 
         [AllowAnonymous]
+        [HttpPost("signinMicrosoft")]
         public async Task signinMicrosoft()
         {
 

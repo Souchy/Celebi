@@ -4,6 +4,7 @@ using MongoDB.Driver;
 using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.impl.shared;
+using souchy.celebi.spark.models;
 using souchy.celebi.spark.services.models;
 
 namespace souchy.celebi.spark.controllers.models
@@ -31,7 +32,7 @@ namespace souchy.celebi.spark.controllers.models
             return Ok(str);
         }
 
-        //[Authorize]
+        [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPut("{id}")]
         public async Task<ActionResult<ReplaceOneResult>> Update([FromRoute] ObjectId id, [FromQuery] I18NType lang, [FromBody] StringEntity updatedStringEntity)
         {
@@ -46,7 +47,7 @@ namespace souchy.celebi.spark.controllers.models
         /// <summary>
         /// Creates a new string entity in all languages
         /// </summary>
-        //[Authorize]
+        [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPost("")]
         public async Task<IActionResult> Create(StringEntity newStringEntity)
         {
@@ -56,7 +57,7 @@ namespace souchy.celebi.spark.controllers.models
         /// <summary>
         /// Remove a string entity from all languages
         /// </summary>
-        //[Authorize]
+        [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpDelete("{id}")]
         public async Task<ActionResult<DeleteResult>> Delete(ObjectId id)
         {

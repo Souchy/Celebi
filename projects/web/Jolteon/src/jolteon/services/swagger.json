@@ -152,7 +152,46 @@
         }
       }
     },
-    "/api/meta/auth/identitySignin": {
+    "/api/meta/auth/identitySigninUsername": {
+      "post": {
+        "tags": [
+          "AuthController"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pass",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/meta/auth/identitySigninEmail": {
       "post": {
         "tags": [
           "AuthController"
@@ -217,6 +256,18 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/meta/auth/signinMicrosoft": {
+      "post": {
+        "tags": [
+          "AuthController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
           }
         }
       }

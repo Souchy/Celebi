@@ -13,6 +13,7 @@ using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.shared;
 using souchy.celebi.eevee.impl.stats;
 using souchy.celebi.eevee.impl.util;
+using souchy.celebi.spark.models;
 using souchy.celebi.spark.services;
 using souchy.celebi.spark.services.models;
 using souchy.celebi.spark.util;
@@ -70,6 +71,7 @@ namespace souchy.celebi.spark.controllers.models
         //    return CreatedAtAction(nameof(Get), new { id = newCreatureModel.entityUid }, newCreatureModel);
         //}
 
+        [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPost("new")]
         public async Task<ActionResult<ICreatureModel>> PostNew()
         {
@@ -88,7 +90,7 @@ namespace souchy.celebi.spark.controllers.models
         }
         
 
-        //[Authorize]
+        [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPut("{id}")]
         public async Task<ActionResult<ReplaceOneResult>> Update([FromRoute] CreatureIID id, [FromBody] CreatureModel updateModel)
         {
@@ -102,7 +104,7 @@ namespace souchy.celebi.spark.controllers.models
             return Ok(result);
         }
 
-        //[Authorize]
+        [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpDelete("{id}")]
         public async Task<ActionResult<DeleteResult>> Delete([FromRoute] CreatureIID id)
         {
@@ -122,7 +124,7 @@ namespace souchy.celebi.spark.controllers.models
             return Ok(result);
         }
 
-        //[Authorize]
+        [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPut("{id}/spells")]
         public async Task<ActionResult<UpdateResult>> UpdateSpell([FromRoute] CreatureIID id, [FromBody] string[] spellIds)
         {

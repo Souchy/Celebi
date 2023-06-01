@@ -21,6 +21,7 @@ using System.Xml.Linq;
 using souchy.celebi.spark.services.models;
 using souchy.celebi.eevee.enums.characteristics.other;
 using souchy.celebi.eevee.impl.shared.skins;
+using souchy.celebi.eevee.enums.characteristics.properties;
 
 namespace souchy.celebi.spark.util
 {
@@ -46,13 +47,15 @@ namespace souchy.celebi.spark.util
             // Base Stats
             var baseStats = (IStats) CreatureStats.Create();
             creatureModel.statsId = baseStats.entityUid;
-            baseStats.Add(Resource.LifeInitialMax.Create(1500));
-            baseStats.Add(Resource.ManaInitialMax.Create(10));
+            baseStats.Add(Resource.LifeInitialMax.Create(2000));
+            baseStats.Add(Resource.ManaInitialMax.Create(11));
             baseStats.Add(Resource.ManaRegen.Create(int.MaxValue));
-            baseStats.Add(Resource.MovementInitialMax.Create(5));
+            baseStats.Add(Resource.MovementInitialMax.Create(6));
             baseStats.Add(Resource.MovementRegen.Create(int.MaxValue));
             baseStats.Add(Resource.SummonInitialMax.Create(1));
-            baseStats.Add(Resource.RageRegen.Create(int.MaxValue));
+            baseStats.Add(Resource.RageInitialMax.Create(20));
+            baseStats.Add(Resource.RageRegen.Create(0));
+            baseStats.Add(OtherProperty.Speed.Create(100));
             baseStats.Add(State.Visible.Create(true));
 
             // Growth Stats
@@ -89,6 +92,7 @@ namespace souchy.celebi.spark.util
             stats.Add(SpellModelProperty.MaxCharges.Create(0));
             stats.Add(SpellModelProperty.LineOfSightRequired.Create(true));
             stats.Add(SpellModelProperty.BroadcastTargetedCell.Create(true));
+            stats.Add(SpellModelProperty.IsRangeModifiable.Create(true));
             spellModel.statsId = stats.entityUid;
 
             // Skin

@@ -95,6 +95,10 @@ namespace souchy.celebi.eevee.enums.characteristics
         Air,
         Dark,
         Light,
+        /// <summary>
+        /// Takes the best scaling affinity of the creature
+        /// </summary>
+        Best,
     }
 
 

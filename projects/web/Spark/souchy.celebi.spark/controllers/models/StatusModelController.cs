@@ -8,6 +8,7 @@ using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.shared.models.skins;
 using souchy.celebi.eevee.impl.shared;
 using souchy.celebi.eevee.neweffects.impl;
+using souchy.celebi.spark.models;
 using souchy.celebi.spark.services;
 using souchy.celebi.spark.services.fights;
 using souchy.celebi.spark.services.models;
@@ -64,7 +65,7 @@ namespace souchy.celebi.spark.controllers.models
         //    return CreatedAtAction(nameof(Get), new { id = newSpellModel.entityUid }, newSpellModel);
         //}
 
-        //[Authorize]
+        [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPost("new")]
         public async Task<ActionResult<IStatusModel>> PostNew()
         {
@@ -79,7 +80,7 @@ namespace souchy.celebi.spark.controllers.models
             return CreatedAtAction(nameof(Get), new { id = model.status.entityUid }, model.status);
         }
 
-        //[Authorize]
+        [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPut("{id}")]
         public async Task<ActionResult<IStatusModel>> Update([FromRoute] ObjectId id, [FromBody] StatusModel updatedModel)
         {
@@ -92,7 +93,7 @@ namespace souchy.celebi.spark.controllers.models
             else return Ok(oldModel);
         }
 
-        //[Authorize]
+        [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpDelete("{id}")]
         public async Task<ActionResult<DeleteResult>> Delete(ObjectId id)
         {

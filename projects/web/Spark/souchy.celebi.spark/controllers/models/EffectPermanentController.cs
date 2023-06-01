@@ -11,6 +11,7 @@ using souchy.celebi.eevee.impl.shared;
 using souchy.celebi.eevee.neweffects;
 using souchy.celebi.eevee.neweffects.face;
 using souchy.celebi.eevee.neweffects.impl;
+using souchy.celebi.spark.models;
 using souchy.celebi.spark.services;
 using souchy.celebi.spark.services.models;
 using System.Data;
@@ -50,6 +51,7 @@ namespace souchy.celebi.spark.controllers.models
         //    return CreatedAtAction(nameof(Get), new { id = newEffect.entityUid }, newEffect);
         //}
 
+        [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPost("new")]
         public async Task<ActionResult<IEffectPermanent>> PostNew([FromQuery] string schemaName)
         {
@@ -68,7 +70,7 @@ namespace souchy.celebi.spark.controllers.models
         }
 
 
-        //[Authorize]
+        [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPut("{id}")]
         public async Task<ActionResult<IEffect>> Update(ObjectId id, EffectPermanent updatedEffect)
         {
@@ -82,7 +84,7 @@ namespace souchy.celebi.spark.controllers.models
             else return Ok(effect);
         }
 
-        //[Authorize]
+        [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpDelete("{id}")]
         public async Task<ActionResult<DeleteResult>> Delete(ObjectId id)
         {
@@ -94,6 +96,7 @@ namespace souchy.celebi.spark.controllers.models
         }
 
 
+        [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPost("{id}/child")]
         public async Task<ActionResult<IEffect>> AddEffect([FromRoute] ObjectId id, [FromQuery] string schemaName)
         {

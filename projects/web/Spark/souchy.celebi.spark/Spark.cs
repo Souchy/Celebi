@@ -382,7 +382,7 @@ namespace souchy.celebi.spark
         private static void configureMongo()
         {
             var objectSerializer = new ObjectSerializer(type => 
-                ObjectSerializer.DefaultAllowedTypes(type) || type.FullName.StartsWith("souchy.celebi")
+                ObjectSerializer.DefaultAllowedTypes(type) || type.FullName!.StartsWith("souchy.celebi")
             );
 
             BsonSerializer.RegisterSerializer(objectSerializer);
