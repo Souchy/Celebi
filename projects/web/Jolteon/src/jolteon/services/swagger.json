@@ -3658,7 +3658,8 @@
           "Distance: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 24,\r\n  \"baseName\": \"Distance\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 2,\r\n      \"groupType\": 0,\r\n      \"children\": []\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2024\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Distance\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Trap: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 25,\r\n  \"baseName\": \"Trap\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2025\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Trap\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Glyph: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 26,\r\n  \"baseName\": \"Glyph\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2026\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Glyph\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "PenetrationPercent: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 27,\r\n  \"baseName\": \"PenetrationPercent\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2027\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.PenetrationPercent\",\r\n  \"enumValueConstraint\": null\r\n};"
+          "PenetrationPercent: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 27,\r\n  \"baseName\": \"PenetrationPercent\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2027\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.PenetrationPercent\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "VariancePercent: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 28,\r\n  \"baseName\": \"VariancePercent\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2028\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.VariancePercent\",\r\n  \"enumValueConstraint\": null\r\n};"
         ],
         "type": "string",
         "format": ""
@@ -4241,6 +4242,10 @@
           "percentPenetration": {
             "type": "integer",
             "format": "int32"
+          },
+          "percentVariance": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -4256,6 +4261,10 @@
             "format": "int32"
           },
           "percentPenetration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "percentVariance": {
             "type": "integer",
             "format": "int32"
           }
@@ -4295,6 +4304,10 @@
             "format": "int32"
           },
           "percentPenetration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "percentVariance": {
             "type": "integer",
             "format": "int32"
           }
@@ -4545,7 +4558,9 @@
           "Earth",
           "Air",
           "Dark",
-          "Light"
+          "Light",
+          "Best",
+          "Worst"
         ],
         "type": "string",
         "format": ""
@@ -4604,6 +4619,10 @@
             "$ref": "#/components/schemas/ElementType"
           },
           "baseHeal": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "percentVariance": {
             "type": "integer",
             "format": "int32"
           }
@@ -5265,6 +5284,10 @@
           "percentPenetration": {
             "type": "integer",
             "format": "int32"
+          },
+          "percentVariance": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -5280,6 +5303,10 @@
             "format": "int32"
           },
           "percentPenetration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "percentVariance": {
             "type": "integer",
             "format": "int32"
           }
@@ -5685,17 +5712,20 @@
       },
       "ResistanceTypes": {
         "enum": [
-          "Fire: Resistance = {\r\n  \"element\": 2,\r\n  \"category\": 3,\r\n  \"localId\": 1,\r\n  \"baseName\": \"Fire\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3001\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Fire\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Water: Resistance = {\r\n  \"element\": 3,\r\n  \"category\": 3,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Water\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3002\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Water\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Earth: Resistance = {\r\n  \"element\": 4,\r\n  \"category\": 3,\r\n  \"localId\": 3,\r\n  \"baseName\": \"Earth\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3003\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Earth\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Air: Resistance = {\r\n  \"element\": 5,\r\n  \"category\": 3,\r\n  \"localId\": 4,\r\n  \"baseName\": \"Air\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3004\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Air\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "True: Resistance = {\r\n  \"element\": 1,\r\n  \"category\": 3,\r\n  \"localId\": 5,\r\n  \"baseName\": \"True\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3005\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.True\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Damage: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 6,\r\n  \"baseName\": \"Damage\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3006\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Damage\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Heal: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 7,\r\n  \"baseName\": \"Heal\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3007\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Heal\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Melee: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 8,\r\n  \"baseName\": \"Melee\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 5,\r\n      \"groupType\": 0,\r\n      \"children\": []\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3008\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Melee\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Distance: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 9,\r\n  \"baseName\": \"Distance\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 2,\r\n      \"groupType\": 0,\r\n      \"children\": []\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3009\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Distance\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Trap: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 10,\r\n  \"baseName\": \"Trap\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3010\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Trap\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Glyph: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 11,\r\n  \"baseName\": \"Glyph\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3011\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Glyph\",\r\n  \"enumValueConstraint\": null\r\n};"
+          "True: Resistance = {\r\n  \"element\": 1,\r\n  \"category\": 3,\r\n  \"localId\": 1,\r\n  \"baseName\": \"True\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3001\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.True\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Fire: Resistance = {\r\n  \"element\": 2,\r\n  \"category\": 3,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Fire\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3002\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Fire\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Water: Resistance = {\r\n  \"element\": 3,\r\n  \"category\": 3,\r\n  \"localId\": 3,\r\n  \"baseName\": \"Water\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3003\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Water\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Earth: Resistance = {\r\n  \"element\": 4,\r\n  \"category\": 3,\r\n  \"localId\": 4,\r\n  \"baseName\": \"Earth\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3004\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Earth\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Air: Resistance = {\r\n  \"element\": 5,\r\n  \"category\": 3,\r\n  \"localId\": 5,\r\n  \"baseName\": \"Air\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3005\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Air\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Dark: Resistance = {\r\n  \"element\": 6,\r\n  \"category\": 3,\r\n  \"localId\": 6,\r\n  \"baseName\": \"Dark\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3006\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Dark\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Light: Resistance = {\r\n  \"element\": 7,\r\n  \"category\": 3,\r\n  \"localId\": 7,\r\n  \"baseName\": \"Light\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3007\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Light\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Damage: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 20,\r\n  \"baseName\": \"Damage\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3020\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Damage\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "IndirectDamage: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 21,\r\n  \"baseName\": \"IndirectDamage\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3021\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.IndirectDamage\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Heal: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 22,\r\n  \"baseName\": \"Heal\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3022\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Heal\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Melee: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 23,\r\n  \"baseName\": \"Melee\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 5,\r\n      \"groupType\": 0,\r\n      \"children\": []\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3023\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Melee\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Distance: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 24,\r\n  \"baseName\": \"Distance\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 2,\r\n      \"groupType\": 0,\r\n      \"children\": []\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3024\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Distance\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Trap: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 25,\r\n  \"baseName\": \"Trap\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3025\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Trap\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Glyph: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 26,\r\n  \"baseName\": \"Glyph\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3026\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Glyph\",\r\n  \"enumValueConstraint\": null\r\n};"
         ],
         "type": "string",
         "format": ""
@@ -6831,6 +6861,10 @@
         "type": "object",
         "properties": {
           "value": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "percentVariance": {
             "type": "integer",
             "format": "int32"
           }

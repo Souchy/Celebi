@@ -48,6 +48,10 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
         /// applies to defenses rather than offenses
         /// </summary>
         public static readonly Affinity PenetrationPercent  = new(27, nameof(PenetrationPercent));
+        /// <summary>
+        /// Adds to randomness of rolls on damage, heals..
+        /// </summary>
+        public static readonly Affinity VariancePercent     = new(28, nameof(VariancePercent));
 
 
         public static readonly Dictionary<CharacteristicId, Affinity> values = new();

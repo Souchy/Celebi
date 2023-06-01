@@ -99,6 +99,11 @@ namespace souchy.celebi.eevee.enums.characteristics
         /// Takes the best scaling affinity of the creature
         /// </summary>
         Best,
+        /// <summary>
+        /// Takes the worst elemental affinity scaling of the creature. <br></br>
+        /// We can use this as a negative spell status, like a curse from the swamp witch
+        /// </summary>
+        Worst
     }
 
 

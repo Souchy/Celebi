@@ -176,6 +176,7 @@ namespace souchy.celebi.eevee.neweffects.impl.effects
                 public ElementType element { get; set; } = ElementType.None;
                 public int baseDamage { get; set; } = 0;
                 public int percentPenetration { get; set; } = 0;
+                public int percentVariance { get; set; } = 0;
             }
             public record DirectDamage() : ADamageSchema() { }
             // Indirect Damage ignore defensive stats so they can't have penetration either
@@ -204,6 +205,7 @@ namespace souchy.celebi.eevee.neweffects.impl.effects
             public record Heal() : IEffectSchema {
                 public ElementType element { get; set; } = ElementType.None;
                 public int baseHeal { get; set; } = 0;
+                public int percentVariance { get; set; } = 0;
             }
             public record HealPercentLifeMax() : IEffectSchema
             {
@@ -231,6 +233,7 @@ namespace souchy.celebi.eevee.neweffects.impl.effects
 
             public record TransferLife() : IEffectSchema { 
                 public int value { get; set; } = 0;
+                public int percentVariance { get; set; } = 0;
             }
             public record TransferPercentLifeMax() : IEffectSchema { 
                 public int percentValue { get; set; } = 0;

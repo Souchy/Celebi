@@ -19,28 +19,32 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
             this.StatValueType = StatValueType.Simple;
         }
 
-        public static readonly Resistance Fire      = new(1,  nameof(Fire),  ElementType.Fire);
-        public static readonly Resistance Water     = new(2,  nameof(Water), ElementType.Water);
-        public static readonly Resistance Earth     = new(3,  nameof(Earth), ElementType.Earth);
-        public static readonly Resistance Air       = new(4,  nameof(Air),   ElementType.Air);
-        public static readonly Resistance True      = new(5,  nameof(True),  ElementType.True);
+        public static readonly Resistance True      = new(1,  nameof(True),  ElementType.True);
+        public static readonly Resistance Fire      = new(2,  nameof(Fire),  ElementType.Fire);
+        public static readonly Resistance Water     = new(3,  nameof(Water), ElementType.Water);
+        public static readonly Resistance Earth     = new(4,  nameof(Earth), ElementType.Earth);
+        public static readonly Resistance Air       = new(5,  nameof(Air),   ElementType.Air);
+        public static readonly Resistance Dark      = new(6,  nameof(Dark),  ElementType.Dark);
+        public static readonly Resistance Light     = new(7,  nameof(Light), ElementType.Light);
 
-        public static readonly Resistance Damage    = new(6,  nameof(Damage));
-        public static readonly Resistance Heal      = new(7,  nameof(Heal));
-        public static readonly Resistance Melee     = new(8,  nameof(Melee), conditions: new ICondition[]{
+
+        public static readonly Resistance Damage    = new(20,  nameof(Damage));
+        public static readonly Resistance IndirectDamage = new(21, nameof(IndirectDamage));
+        public static readonly Resistance Heal      = new(22,  nameof(Heal));
+        public static readonly Resistance Melee     = new(23,  nameof(Melee), conditions: new ICondition[]{
             new DistanceCondition() {
                 distance = Constants.MELEE_RANGE,
                 comparator = ConditionComparatorType.LE,
             }
         });
-        public static readonly Resistance Distance  = new(9,  nameof(Distance), conditions: new ICondition[]{
+        public static readonly Resistance Distance  = new(24,  nameof(Distance), conditions: new ICondition[]{
             new DistanceCondition() {
                 distance = Constants.MELEE_RANGE,
                 comparator = ConditionComparatorType.GT,
             }
         });
-        public static readonly Resistance Trap      = new(10, nameof(Trap));
-        public static readonly Resistance Glyph     = new(11, nameof(Glyph));
+        public static readonly Resistance Trap      = new(25, nameof(Trap));
+        public static readonly Resistance Glyph     = new(26, nameof(Glyph));
 
 
         public static readonly Dictionary<CharacteristicId, Resistance> values = new();
