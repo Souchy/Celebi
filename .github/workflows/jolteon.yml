@@ -35,10 +35,9 @@ jobs:
         cache-dependency-path: './projects/web/Jolteon/package-lock.json'
     
     - run: npm install
+    - run: npm install dotenv --save
     - name: Build Aurelia
       run: |
-        npm install
-        npm install dotenv --save
         npm run swagger
         npm run build
         
