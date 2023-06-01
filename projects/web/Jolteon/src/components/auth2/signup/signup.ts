@@ -41,8 +41,8 @@ export class Signup {
 
 	public submitSignup() {
 		// console.log("submit signup: " + this.email + ", " + this.password)
-		this.auth.postIdentitySignin({
-			// displayName: "souchy",
+		this.auth.postIdentitySignup({
+			displayName: "Souchy",
 			email: this.email,
 			pass: this.password
 		}).then(

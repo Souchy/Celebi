@@ -28,6 +28,10 @@ export class Signin {
 	 */
 	private password: string;
 
+	/*
+	https://localhost:9000/redirect/signin-microsoft
+	https://localhost:7295/api/auth/signin-microsoft
+	*/
 	constructor(private readonly auth: AuthController, private readonly store: IStore<GlobalState, LoginAction>) { 
 		window.signinGoogleCallback = (token) => this.googleCallback(token);
 		window.signinTwitterCallback = (token) => this.twitterCallback(token);
@@ -63,17 +67,46 @@ export class Signin {
 		// to decode the credential response.
 		// setCookie("". "m");
 		let responsePayload = JwtUtil.decodeJwtResponse(token.credential)
+		console.log(token);
 		console.log(responsePayload);
-		console.log("ID: " + responsePayload.sub);
-		console.log('Full Name: ' + responsePayload.name);
-		console.log('Given Name: ' + responsePayload.given_name);
-		console.log('Family Name: ' + responsePayload.family_name);
-		console.log("Image URL: " + responsePayload.picture);
-		console.log("Email: " + responsePayload.email);
+		// console.log("ID: " + responsePayload.sub);
+		// console.log('Full Name: ' + responsePayload.name);
+		// console.log('Given Name: ' + responsePayload.given_name);
+		// console.log('Family Name: ' + responsePayload.family_name);
+		// console.log("Image URL: " + responsePayload.picture);
+		// console.log("Email: " + responsePayload.email);
+		
 		// document.cookie = token;
-		setCookie('googleToken', token);
+		// setCookie('googleToken', token);
 		// location.href = "home";
 		// fetch()
+
+		// this.auth.getMammoth();
+		
+		this.auth.postIdentitySigninGoogle({ idToken: token.credential}).then(
+		// this.auth.postIdentitySigninGoogle().then(
+			res => {
+				console.log("recv signinGoogle:");
+				console.log(res);
+			},
+			rej => {
+				console.log("recv signinGoogle:");
+				console.log(rej);
+			}
+		)
+		// this.submitSignin();
+		// this.auth.postIdentitySignin({
+		// 	// displayName: "souchy",
+		// 	email: this.identifier,
+		// 	pass: this.password
+		// }).then(
+		// 	res => {
+		// 		this.store.dispatch(new LoginAction(res.data));
+		// 	},
+		// 	rej => {
+		// 		console.log(rej);
+		// 	}
+		// )
 	}
 	public twitterCallback(token) {
 

@@ -22,9 +22,9 @@ namespace souchy.celebi.spark.models
         /// Pseudo
         /// </summary>
         public string DisplayName { get; set; }
-        public string Name { get; set; }
-        public string FamilyName { get; set; }
-        public string Picture { get; set; }
+        //public string Name { get; set; }
+        //public string FamilyName { get; set; }
+        //public string Picture { get; set; }
         /// <summary>
         /// Only 1 access object per ip. Update the LastAccess when using the same ip.
         /// Ask for verification when using a new IP (ex: poe asks email confirmation).
@@ -65,7 +65,7 @@ namespace souchy.celebi.spark.models
         }
         public void AddAccess()
         {
-
+            
         }
     }
 
@@ -78,7 +78,11 @@ namespace souchy.celebi.spark.models
 
     public class AccountRole : MongoRole
     {
-
+        public AccountType type { get; set; } = AccountType.User;
+        public AccountRole(AccountType type) : base(Enum.GetName(type))
+        {
+            this.type = type;
+        }
     }
 
     public class IpAccess

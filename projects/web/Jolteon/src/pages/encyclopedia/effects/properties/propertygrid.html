@@ -11,7 +11,7 @@
       <tr class="property" repeat.for="prop of keys">
         <td style="padding-right: 8px; color: var(--accent2);" data-bs-toggle="collapse" data-bs-target="#collapseZone-${uid}-schema">
           ${prop}: 
-          <!-- ${propName(prop)} -->
+          ${propName(prop)}
         </td>
         <td>
           <template switch.bind="propName(prop)">
@@ -26,10 +26,11 @@
               <option repeat.for="act of Enums.actors" model.bind="$index">${act}</option>
             </select>
       
-            <statsmini case="CreatureStats"    type="CreatureStats"     stats.bind="data[prop]" callbacksavestat.bind="() => onChange()" characsallowed.bind="Characteristics.creatures"></statsmini>
-            <statsmini case="StatusModelStats" type="StatusModelStats"  stats.bind="data[prop]" callbacksavestat.bind="() => onChange()" characsallowed.bind="Characteristics.statusModels"></statsmini>
-            <statsmini case="SpellModelStats"  type="SpellModelStats"   stats.bind="data[prop]" callbacksavestat.bind="() => onChange()" characsallowed.bind="Characteristics.spellModels"></statsmini>
-            <statsmini case="SpellStats"       type="SpellStats"        stats.bind="data[prop]" callbacksavestat.bind="() => onChange()" characsallowed.bind="Characteristics.spells"></statsmini>
+            <statsmini case="IStats"           stats.bind="data[prop]" callbacksavestat.bind="() => onChange()" characsallowed.bind="Characteristics.allSectioned"></statsmini>
+            <statsmini case="CreatureStats"    stats.bind="data[prop]" callbacksavestat.bind="() => onChange()" characsallowed.bind="Characteristics.creatures"></statsmini>
+            <statsmini case="StatusModelStats" stats.bind="data[prop]" callbacksavestat.bind="() => onChange()" characsallowed.bind="Characteristics.statusModels"></statsmini>
+            <statsmini case="SpellModelStats"  stats.bind="data[prop]" callbacksavestat.bind="() => onChange()" characsallowed.bind="Characteristics.spellModels"></statsmini>
+            <statsmini case="SpellStats"       stats.bind="data[prop]" callbacksavestat.bind="() => onChange()" characsallowed.bind="Characteristics.spells"></statsmini>
 
 
             <!-- stat : select charac id + value -->

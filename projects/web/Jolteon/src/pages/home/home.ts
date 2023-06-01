@@ -10,6 +10,8 @@ export class Home {
 	// public readonly auth = new AuthController();
 	// public auth:AuthController = null;
 
+	public name: string = "myname";
+
 	constructor(readonly ea: IEventAggregator, readonly auth: AuthController) {
 		// this.auth = new AuthController(http);
 

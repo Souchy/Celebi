@@ -28,6 +28,8 @@ using souchy.celebi.eevee.impl.values;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 
 namespace souchy.celebi.spark
 {
@@ -176,7 +178,9 @@ namespace souchy.celebi.spark
                     }
                 };
             });
+
         }
+
 
         private static void configureSwagger(IServiceCollection services)
         {
@@ -266,6 +270,7 @@ namespace souchy.celebi.spark
                 });
             }
 
+            
             app.UseHttpsRedirection();
 
             // cors must be after useRouting but before useAuthorization https://learn.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-7.0
@@ -281,7 +286,9 @@ namespace souchy.celebi.spark
 
         private static void configureServices(IServiceCollection services, ConfigurationManager configuration)
         {
-            // Jwt 
+            // Secrets Settings
+            services.Configure<AdminUserSettings>(configuration.GetSection(nameof(AdminUserSettings)));
+            services.Configure<GoogleSettings>(configuration.GetSection(nameof(GoogleSettings)));
             services.Configure<JwtSettings>(configuration.GetSection(nameof(JwtSettings)));
 
             // Mongo    
@@ -313,8 +320,21 @@ namespace souchy.celebi.spark
 
         private static void configureAuthentication(IServiceCollection services, ConfigurationManager configuration)
         {
+            var google = configuration.GetSection(nameof(GoogleSettings)).Get<GoogleSettings>();
+            if (google == null) return;
 
-            services.AddAuthentication() //JwtBearerDefaults.AuthenticationScheme)
+            services.AddAuthentication();
+            /*
+                .AddGoogle(googleOptions =>
+                {
+                    //googleOptions.CallbackPath = "api/signin-google";
+                    googleOptions.ReturnUrlParameter = "https://localhost:9000/home";
+                    googleOptions.ClientId = google.ClientId; //configuration["google:clientId"]!;
+                    googleOptions.ClientSecret = google.ClientSecret; //configuration["google:clientSecret"]!;
+                });
+            */
+            /*
+                //JwtBearerDefaults.AuthenticationScheme)
                 //.AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
                 //{
                 //    var settings = configuration.GetSection(nameof(JwtSettings)).Get<JwtSettings>();
@@ -342,11 +362,6 @@ namespace souchy.celebi.spark
                 //    options.SlidingExpiration = true;
                 //    options.ReturnUrlParameter = "challenged";
                 //})
-                .AddGoogle(googleOptions =>
-                {
-                    googleOptions.ClientId = configuration["google:clientId"]!;
-                    googleOptions.ClientSecret = configuration["google:clientSecret"]!;
-                });
 
             //services
             //    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -361,7 +376,7 @@ namespace souchy.celebi.spark
             //        options.MetadataAddress = "https://accounts.google.com/.well-known/openid-configuration";
             //        options.TokenValidationParameters = tokenValidationParameters;
             //    });
-
+            */
         }
 
         private static void configureMongo()

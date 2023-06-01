@@ -6,12 +6,12 @@ export class Profile {
     
     @fromState((state: GlobalState) => state.account?.displayName)
     public displayName?: string | null;
-    @fromState((state: GlobalState) => state.account?.name)
-    private name?: string | null;
-    @fromState((state: GlobalState) => state.account?.familyName)
-    private familyName?: string | null;
-    @fromState((state: GlobalState) => state.account?.picture)
-    private picture?: string | null;
+    // @fromState((state: GlobalState) => state.account?.name)
+    // private name?: string | null;
+    // @fromState((state: GlobalState) => state.account?.familyName)
+    // private familyName?: string | null;
+    // @fromState((state: GlobalState) => state.account?.picture)
+    // private picture?: string | null;
 
     @fromState((state: GlobalState) => state.account?.currency)
     private currency?: number | null;

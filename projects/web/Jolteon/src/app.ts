@@ -78,19 +78,22 @@ export class App implements IRouteableComponent {
 		ea.subscribe("operation:failed", this.toastFailed);
 
 		// use the server url as base url
-		this.http.baseUrl = process.env.SERVER_URL; 
+		this.http.baseUrl = process.env.SERVER_URL;
 
 		// load server data
 		this.loadServerData();
 
 		// automatically load account info from the server
-		this.auth.getAccountInfo().then(res => {
-			let action: LoginAction = { type: ActionNames.login, value: res.data };
-			console.log("getAccountInfo dispatch account info: " + JSON.stringify(action));
-			this.store.dispatch(action);
-		}, rej => {
-			console.log("rejected app.getAccount")
-		})
+		this.auth.getAccountInfo().then(
+			res => {
+				let action: LoginAction = { type: ActionNames.login, value: res.data };
+				console.log("getAccountInfo dispatch account info: " + JSON.stringify(action));
+				this.store.dispatch(action);
+			},
+			rej => {
+				console.log("rejected app.getAccount")
+			}
+		)
 
 		// this.store.subscribe({
 		// 	handleStateChange(state, prevState) {
