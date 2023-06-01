@@ -13,7 +13,7 @@ Aurelia
 	// .register(RouterConfiguration)
 	// To use HTML5 pushState routes, replace previous line with the following
 	// customized router config.
-	.register(RouterConfiguration.customize({ useUrlFragmentHash: !!!process.env.useUrlFragmentHash }))
+	.register(RouterConfiguration.customize({ useUrlFragmentHash: process.env.useUrlFragmentHash ? !!!process.env.useUrlFragmentHash : true }))
 	.register(
 		I18nConfiguration.customize((options) => {
 			options.initOptions = {
