@@ -12,8 +12,13 @@ using souchy.celebi.eevee.neweffects.face;
 namespace souchy.celebi.eevee.neweffects.impl.effects.creature
 {
     #region Creature
-    public record AddStat() : IEffectSchema {
-        public IStat stat { get; set; } = Affinity.Fire.Create(0);
+    //public record AddStat() : IEffectSchema {
+    //    public IStat stat { get; set; } = Affinity.Fire.Create(0);
+    //    //public IStats stats { get; set; }
+    //}
+    public record AddStats() : IEffectSchema
+    {
+        public IStats stats { get; set; } = Stats.Create();
     }
     public record LearnSpell() : IEffectSchema
     {

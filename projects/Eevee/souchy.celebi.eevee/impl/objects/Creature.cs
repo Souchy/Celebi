@@ -60,12 +60,16 @@ namespace souchy.celebi.eevee.impl.objects
             // add status stats
             foreach(IStatusInstance status in GetStatuses().SelectMany(s => s.instances))
             {
-                foreach(IEffect eff in status.GetEffects().Where(e => e.Schema is AddStat))
+                foreach(IEffect eff in status.GetEffects().Where(e => e.Schema is AddStats))
                 {
                     // TODO: need to also check for triggers/filters (ex: 50% res vs summons, need the Action with the source/target/spell)
-                    var props = eff.GetProperties<AddStat>();
-                    var naturalStat = naturalStats.Get(props.stat.statId);
-                    naturalStat.Add(props.stat);
+                    var props = eff.GetProperties<AddStats>();
+                    foreach(var st in props.stats.Values)
+                    {
+                        naturalStats.Add(st);
+                    }
+                    //var naturalStat = naturalStats.Get(props.stat.statId);
+                    //naturalStat.Add(props.stat);
                 }
             }
             // reset conditional stats to 0

@@ -6,7 +6,7 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
     public sealed record Affinity : CharacteristicType
     {
         public ElementType Element { get; init; }
-        public Affinity(int localId, string name, ElementType ele = ElementType.None, params ICondition[] conditions) : base(CharacteristicCategory.Affinity, localId, name, conditions)
+        public Affinity(int localId, string name, ElementType ele = ElementType.None, params ICondition[] conditions) : base(CharacteristicCategory.Affinity, localId, name, conditions: conditions)
         {
             this.Element = ele;
             this.StatValueType = StatValueType.Simple;

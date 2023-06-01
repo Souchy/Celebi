@@ -13,9 +13,9 @@ using System.Threading.Tasks;
 
 namespace souchy.celebi.eevee.neweffects.impl.effects.creature
 {
-    public class AddStatScript : IEffectScript
+    public class AddStatsScript : IEffectScript
     {
-        public Type SchemaType => typeof(AddStat);
+        public Type SchemaType => typeof(AddStats);
 
         public IEffectReturnValue apply(ISubActionEffect action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
         {

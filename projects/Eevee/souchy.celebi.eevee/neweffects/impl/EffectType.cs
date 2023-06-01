@@ -42,7 +42,7 @@ namespace souchy.celebi.eevee.neweffects.impl
         // these things don't have apply() scripts
         // they have conditions elsewhere in the code, like GetTotalStats(), 
         #region Status-only
-            AddStat, // any stat bonus, in status or instant.          // i think need status, nothing instant
+            AddStats, // any stat bonus, in status or instant.          // i think need status, nothing instant
                 // includes resource for recovery that is not a heal?
             //SetState,     // i think need status // a state is a stat
             LearnSpell,     // i think need status
