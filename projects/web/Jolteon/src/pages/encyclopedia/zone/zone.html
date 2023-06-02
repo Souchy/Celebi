@@ -19,11 +19,11 @@
             <span class="input-group-text" id="basic-addon1">x</span>
             <input class="input-group-input" type="number" aria-describedby="basic-addon1" value.bind="zone.size.value.x" change.trigger="save()">
           </div>
-          <div if.bind="zoneSizeHasZ()" class="input-group">
-            <span class="input-group-text" id="basic-addon3">z</span>
+          <div class="input-group collapse" id="collapseZone-${uid}">
+            <span class="input-group-text" id="basic-addon3">r</span>
             <input class="input-group-input" type="number" aria-describedby="basic-addon3" value.bind="zone.size.value.z" change.trigger="save()">
           </div>
-          <div if.bind="zoneSizeHasY()" class="input-group">
+          <div if.bind="zoneSizeHasY" class="input-group">
             <span class="input-group-text" id="basic-addon2">y</span>
             <input class="input-group-input" type="number" aria-describedby="basic-addon2" value.bind="zone.size.value.y" change.trigger="save()">
           </div>

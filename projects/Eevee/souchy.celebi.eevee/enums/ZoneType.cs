@@ -85,7 +85,7 @@ namespace souchy.celebi.eevee.enums
     public abstract class IZoneSize
     {
         public IVector3 sizeParams;
-        public int ringWidth { get => sizeParams.z; set => sizeParams.z = value; }
+        public int ringWidth { get => sizeParams.y; set => sizeParams.y = value; }
     }
     public class ZoneSizePoint : IZoneSize
     {

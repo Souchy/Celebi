@@ -7,6 +7,16 @@ import { Enums } from "../../../jolteon/constants";
 export class Zone {
     // hook enums
     public readonly Enums: Enums = Enums;
+    public readonly zones2d = [
+        ZoneType.cross,
+        ZoneType.xcross,
+        ZoneType.star,
+        ZoneType.crossHalf,
+        ZoneType.xcrossHalf,
+        ZoneType.rectangle,
+        ZoneType.ellipse,
+        ZoneType.ellipseHalf,
+    ];
 
     @bindable
     public zone: IZone;
@@ -23,20 +33,17 @@ export class Zone {
         // console.log(this.zone)
     }
 
-    public zoneSizeHasZ() {
-        return [
-            ZoneType.cross,
-            ZoneType.xcross,
-            ZoneType.star,
-            ZoneType.crossHalf,
-            ZoneType.xcrossHalf,
-            ZoneType.rectangle,
-            ZoneType.ellipse,
-            ZoneType.ellipseHalf,
-        ].includes(this.zone.zoneType["value"])
+    /**
+     * @returns side length
+     */
+    public get zoneSizeHasY() {
+        return this.zones2d.includes(this.zone.zoneType["value"])
     }
-    public zoneSizeHasY() {
-        return false;
+    /**
+     * @returns ring width
+     */
+    public get zoneSizeHasZ() {
+        return true;
     }    
 
     public save() {

@@ -14,9 +14,9 @@ namespace souchy.celebi.eevee.face.shared.zones
         /// </summary>
         public IValue<ZoneType> zoneType { get; set; }
         /// <summary>
-        /// 1) lengthMin
-        /// 2) lengthMax
-        /// 3) Ring width: 0 = full shape, x = actual ring width
+        /// 1) x = lengthMin (forward length)
+        /// 2) z = lengthMax (side length)
+        /// 3) y = ring width: 0 = full shape, y = actual ring width
         /// </summary>
         public IValue<IVector3> size { get; set; }
         /// <summary>
@@ -77,8 +77,9 @@ namespace souchy.celebi.eevee.face.shared.zones
 
 
 
-
-        public int GetRingWidth() => size.value.z;
+        public int GetLengthForward() => size.value.x;
+        public int GetLengthSide() => size.value.z;
+        public int GetRingWidth() => size.value.y;
         /// <summary>
         /// Get the cells touched by this area at target point
         /// </summary>
