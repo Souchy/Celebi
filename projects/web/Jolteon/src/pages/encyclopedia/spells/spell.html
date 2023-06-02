@@ -5,6 +5,7 @@
 <import from="../effects/effect"></import>
 <import from="../zone/zone"></import>
 <import from="../stats/gen/statsmini"></import>
+<import from="../condition/condition"></import>
 
 
 <!-- vignette root || creature -->
@@ -89,7 +90,9 @@
     <div>
       <h5>Conditions</h5>
       <h6>Caster Condition</h6>
+      <condition model.bind="model.sourceCondition" callbacksave.bind="() => save()"></condition>
       <h6>Target Filter</h6>
+      <condition model.bind="model.targetFilter" callbacksave.bind="() => save()"></condition>
     </div>
   </div>
 

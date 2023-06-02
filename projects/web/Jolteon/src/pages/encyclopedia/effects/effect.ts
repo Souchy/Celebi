@@ -1,4 +1,4 @@
-import { SchemaDescription } from './../../../jolteon/services/api/data-contracts';
+import { SchemaDescription, ITrigger, TriggerOrderType, TriggerType, IZone } from './../../../jolteon/services/api/data-contracts';
 import { IRouter } from "@aurelia/router";
 import { IEventAggregator, bindable, inject } from "aurelia";
 import { EffT, IEffect } from "../../../jolteon/services/api/data-contracts";
@@ -74,6 +74,15 @@ export class Effect {
     public clickRemove() {
         console.log("Effect.remove: " + this.model.entityUid);
         this.callbackremove(this.model);
+    }
+    public clickAddTrigger() {
+        // this.model.triggers.push({
+        //     holderCondition: null,
+        //     triggererFilter: null,
+        //     triggerOrderType: TriggerOrderType.After,
+        //     triggerType: TriggerType.OnTurnEnd,
+        //     triggerZone: {}
+        // });
     }
     //#endregion
 

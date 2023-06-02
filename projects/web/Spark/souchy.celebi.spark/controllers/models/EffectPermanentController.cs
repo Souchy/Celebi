@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata;
 using MongoDB.Driver;
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects;
@@ -8,6 +9,7 @@ using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.shared;
+using souchy.celebi.eevee.impl.shared.triggers;
 using souchy.celebi.eevee.neweffects;
 using souchy.celebi.eevee.neweffects.face;
 using souchy.celebi.eevee.neweffects.impl;
@@ -119,6 +121,22 @@ namespace souchy.celebi.spark.controllers.models
             var result = await _effects.UpdateAsync(model.entityUid, model);
 
             return Ok(model);
+        }
+
+        [Authorize(Roles = nameof(AccountType.Admin))]
+        [HttpPost("{id}/trigger")]
+        public async Task<ActionResult<ITrigger>> CreateTrigger() //[FromRoute] ObjectId id)
+        {
+            //var model = await _effects.GetOneAsync(id);
+            //if (model is null)
+            //    return NotFound();
+
+            var trigger = new Trigger();
+            //model.Triggers.Add(trigger);
+
+            //var result = await _effects.UpdateAsync(model.entityUid, model);
+            //return Ok(model);
+            return Ok(trigger);
         }
 
     }
