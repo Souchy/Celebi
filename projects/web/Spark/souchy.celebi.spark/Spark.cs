@@ -144,7 +144,7 @@ namespace souchy.celebi.spark
                 //configuration.Bind("CookieSettings", options);
                 options.Cookie.Name = "squid";
                 options.ExpireTimeSpan = TimeSpan.FromDays(14); //TimeSpan.FromSeconds(30);
-                options.Cookie.SameSite = SameSiteMode.Strict;
+                options.Cookie.SameSite = SameSiteMode.None;
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
                 //options.Cookie.Expiration = TimeSpan.FromSeconds(30);
 
