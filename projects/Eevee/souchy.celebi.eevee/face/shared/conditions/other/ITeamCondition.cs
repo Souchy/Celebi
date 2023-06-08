@@ -1,6 +1,6 @@
 ﻿using souchy.celebi.eevee.enums;
 
-namespace souchy.celebi.eevee.face.shared.conditions.value
+namespace souchy.celebi.eevee.face.shared.conditions.other
 {
     public interface ITeamCondition : ICondition //: IIntCondition
     {

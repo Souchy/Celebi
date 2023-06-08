@@ -12,6 +12,15 @@ namespace souchy.celebi.eevee.enums.characteristics.properties
         public static readonly OtherProperty Speed      = new(1, nameof(Speed)); // initiative
         public static readonly OtherProperty Erosion    = new(2, nameof(Erosion));
         public static readonly OtherProperty Echo       = new(3, nameof(Echo)); // number of times it echoes
+        /// <summary>
+        /// 
+        /// </summary>
+        public static readonly OtherProperty Lock       = new(4, nameof(Lock)); 
+        public static readonly OtherProperty Evasion    = new(5, nameof(Evasion)); 
+        /// <summary>
+        /// Ap/Mp reduction and parry (retrait & esquive pa/pm)
+        /// </summary>
+        public static readonly OtherProperty MindPower  = new(6, nameof(MindPower)); 
 
 
         public static readonly Dictionary<CharacteristicId, OtherProperty> values = new();

@@ -123,21 +123,5 @@ namespace souchy.celebi.spark.controllers.models
             return Ok(model);
         }
 
-        [Authorize(Roles = nameof(AccountType.Admin))]
-        [HttpPost("{id}/trigger")]
-        public async Task<ActionResult<ITrigger>> CreateTrigger() //[FromRoute] ObjectId id)
-        {
-            //var model = await _effects.GetOneAsync(id);
-            //if (model is null)
-            //    return NotFound();
-
-            var trigger = new Trigger();
-            //model.Triggers.Add(trigger);
-
-            //var result = await _effects.UpdateAsync(model.entityUid, model);
-            //return Ok(model);
-            return Ok(trigger);
-        }
-
     }
 }

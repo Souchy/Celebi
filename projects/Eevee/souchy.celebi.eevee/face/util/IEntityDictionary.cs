@@ -1,4 +1,5 @@
 ﻿using souchy.celebi.eevee.face.entity;
+using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.models;
 
 namespace souchy.celebi.eevee.face.util
@@ -9,6 +10,8 @@ namespace souchy.celebi.eevee.face.util
         public IEnumerable<TValue> Values { get; }
         public IEnumerable<KeyValuePair<TKey, TValue>> Pairs { get; }
 
+
+        //public IEntityDictionary<TKey, TValue> copy(bool anonymous = true);
         public bool Has(TKey key);
         public TValue Get(TKey key);
         public void Add(TKey key, TValue value);

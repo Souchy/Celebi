@@ -11,6 +11,7 @@ namespace souchy.celebi.eevee.enums.characteristics.other
     /// <summary>
     /// Spells could also have growth and evolutions by themselves
     /// ex: pick fireball, it turns into fireburst at lvl 6 (turn 6)
+    /// Also includes resource costs
     /// </summary>
     public class SpellModelStats : Stats
     {

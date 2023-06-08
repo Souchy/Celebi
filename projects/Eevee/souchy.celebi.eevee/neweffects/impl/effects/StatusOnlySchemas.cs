@@ -12,14 +12,77 @@ using souchy.celebi.eevee.neweffects.face;
 namespace souchy.celebi.eevee.neweffects.impl.effects.creature
 {
     #region Creature
-    //public record AddStat() : IEffectSchema {
-    //    public IStat stat { get; set; } = Affinity.Fire.Create(0);
-    //    //public IStats stats { get; set; }
-    //}
     public record AddStats() : IEffectSchema
     {
         public IStats stats { get; set; } = Stats.Create();
     }
+    public record AddStatsPercent() : IEffectSchema
+    {
+        public IStats statsPercent { get; set; } = Stats.Create();
+    }
+    /// <summary>
+    /// Take x% of "from" stats and add them as y% of "to" stats.
+    /// Ex: for each 2 of (% missing life) -> +1 (resistance) <br></br>
+    ///     gain 100% of damage taken as shield
+    ///     
+    /// </summary>
+    public record AddStatsPerStat() : IEffectSchema
+    {
+        public IStats statsFrom { get; set; } = Stats.Create();
+        public IStats statsTo { get; set; } = Stats.Create();
+    }
+    
+    // maybe?
+    //public record SetStats() : IEffectSchema
+    //{
+    //    public IStats stats { get; set; } = Stats.Create();
+    //}
+    // maybe?
+    /// <summary>
+    /// Ex: 
+    ///     input: life = 100%               (prend 100% de la vie)
+    ///     output: life = 50%, mana = 50%   (converti 50% de la valeur prise en life et 50% en mana)
+    ///     
+    /// i guess ce serait égal à faire ça:
+    ///     input: life = 50%    (prend 50% de la vie)
+    ///     output: mana = 100%  (converti 100% de la valeur prise en mana)
+    ///     
+    /// Pour annuler une stat:
+    ///     input: life = 100%
+    ///     output: life = 0 ou juste pas besoin de rien? 
+    ///     
+    /// This could be useful to convert spell costs 
+    /// or a creature that switches its affinities to different elements? (solvable with swapping the creature model? (Transformation effect)) 
+    /// 
+    /// </summary>
+    //public record ConvertStats() : IEffectSchema
+    //{
+    //    public IStats inputPercent { get; set; } = Stats.Create();
+    //    public IStats outputPercent { get; set; } = Stats.Create();
+    //}
+
+    /// <summary>
+    /// Heal targets in AcquisitionZone when the status holder receives damage. <br></br>
+    /// Heals a percent of the damage taken <br></br>
+    /// If you want to heal a percent of creature's life, then just do HealPercent with a trigger for damage received <br></br>
+    /// (ex: proie, feu de mine, supplice, diffusion, perfusion, arbre de vie, mot sacrificiel)
+    /// </summary>
+    public record HealPercentDamageReceivedByEffect() : IEffectSchema
+    {
+        public ElementType element { get; set; } = ElementType.None;
+        public int percentHeal { get; set; } = 0;
+    }
+
+    /// <summary>
+    /// POE's "take 10% phys as fir damage"
+    /// </summary>
+    public record TakeDamageAsElement() : IEffectSchema
+    {
+        public ElementType input { get; set; } = ElementType.All;
+        public ElementType output { get; set; } = ElementType.None;
+        public int percentConversion { get; set; } = 100;
+    }
+
     public record LearnSpell() : IEffectSchema
     {
         public SpellIID modelId { get; set; } = new();
@@ -37,107 +100,6 @@ namespace souchy.celebi.eevee.neweffects.impl.effects.creature
     public record ReduceDamageReceived() : IEffectSchema
     {
         public int reduction { get; set; } = 0;
-    }
-    #endregion
-
-    #region Spell
-
-    /// <summary>
-    /// This is instanced SpellStats <br></br>
-    /// As opposed to SpellMeta's  SpellModelStats <br></br>
-    /// Can be used to refresh the current cooldown, add charges..
-    /// </summary>
-    public record SpellAddtats() : IEffectSchema
-    {
-        public SpellStats stats { get; set; } = SpellStats.Create();
-    }
-
-    public interface SpellMetaSchema : IEffectSchema {}
-
-    /// <summary>
-    /// this should replace all the other Spell effects above, or maybe it will contain them
-    /// This effect is a Meta effect, doesn't do anything on its own, just applies its children in a certain way
-    /// Its children modify a spell:
-    ///     - modify costs, range, filters, 
-    ///     - modifly cooldown remaining
-    ///     - add effect...
-    ///     - modify effect damages, zones, 
-    /// </summary>
-    public record MetaSpell() : SpellMetaSchema
-    {
-        public SpellIID spell { get; set; } = new();
-        public List<SpellMetaSchema> spellMods { get; set; } = new();
-
-        // SpellStats have a range stat
-        //public record AddSpellRange() : IEffectSchema
-        //{
-        //    public int range { get; set; } = 0;
-        //}
-        // LoS is definitely handled by SpellStats
-        //public record SetSpellLineOfSight() : IEffectSchema {
-        //    public bool value { get; set; } = false;
-        //}
-        public record SpellMetaEffectAddBaseDamage() : SpellMetaSchema
-        {
-            public ObjectId effectId { get; set; } = ObjectId.Empty;
-            public int dmg { get; set; } = 0;
-        }
-        public record SpellMetaEffectAddBaseHeal() : SpellMetaSchema
-        {
-            public ObjectId effectId { get; set; } = ObjectId.Empty;
-            public int heal { get; set; } = 0;
-        }
-        public record SpellMetaEffectChangeElement() : SpellMetaSchema
-        {
-            public ObjectId effectId { get; set; } = ObjectId.Empty;
-            public ElementType element { get; set; } = ElementType.None;
-        }
-        public record SpellMetaEffectChangeZone() : SpellMetaSchema
-        {
-            public ObjectId effectId { get; set; } = ObjectId.Empty;
-            public IZone zone { get; set; } = new Zone();
-        }
-        public record SpellMetaChangeMinRangeZone() : SpellMetaSchema
-        {
-            public IZone minRange { get; set; } = new Zone();
-        }
-        public record SpellMetaChangeMaxRangeZone() : SpellMetaSchema
-        {
-            public IZone maxRange { get; set; } = new Zone();
-        }
-        public record SpellMetaAddtats() : SpellMetaSchema
-        {
-            public SpellModelStats stats { get; set; } = SpellModelStats.Create();
-        }
-        /// <summary>
-        /// will add the children of this effect to the spell
-        /// </summary>
-        public record SpellMetaAddChildEffects() : SpellMetaSchema
-        {
-            /// <summary>
-            /// If the parent is the spell, then leave it at 0
-            /// </summary>
-            public ObjectId effectParent = ObjectId.Empty;
-            /// <summary>
-            /// where to insert the effects in the spell's list <br></br>
-            /// 0 to insert at the start.
-            /// int.max to insert at the end
-            /// </summary>
-            public int order = int.MaxValue;
-            // actually just addd the children to the spell effects
-            //public ObjectId newEffect { get; set; } = ObjectId.Empty;
-        }
-
-        //public record MetaAddEffectValue() : IEffectSchema
-        //{
-        //    //public SpellIID spell { get; set; } = new();
-        //    public ObjectId effectId { get; set; } = ObjectId.Empty;
-        //    /// <summary>
-        //    /// ex: "schema.dmg", "schema.element", "zone.size.x", "zone.maxSampleCount"
-        //    /// </summary>
-        //    public string propertyPath { get; set; } = "";
-        //    public object value { get; set; } = null;
-        //}
     }
     #endregion
 

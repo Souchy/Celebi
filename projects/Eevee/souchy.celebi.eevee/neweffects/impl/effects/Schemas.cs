@@ -4,7 +4,7 @@ using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.enums.characteristics.other;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.conditions;
-using souchy.celebi.eevee.face.shared.conditions.value;
+using souchy.celebi.eevee.face.shared.conditions.status;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
@@ -27,6 +27,15 @@ namespace souchy.celebi.eevee.neweffects.impl.effects
     public record SpawnSummonDouble() : IEffectSchema { }
     public record SpawnSummonDoubleIllusion() : IEffectSchema { }
     public record RevealCreatureSpells() : IEffectSchema { }
+    /// <summary>
+    /// This is instanced SpellStats <br></br>
+    /// As opposed to SpellMeta's  SpellModelStats <br></br>
+    /// Can be used to refresh the current cooldown, add charges..
+    /// </summary>
+    public record SpellAddtats() : SpellMetaSchema
+    {
+        public SpellStats stats { get; set; } = SpellStats.Create();
+    }
     #endregion
 
     #region Move Translation
@@ -194,11 +203,30 @@ namespace souchy.celebi.eevee.neweffects.impl.effects
                 public CharacteristicId charId { get; set; } = Resource.Life.ID;
                 public int baseDamagePerCharacUsed { get; set; } = 0;
             }
-            public record DamagePerManaReducedInTurn() : IEffectSchema {
-                    public int baseDamagePerCharacReduced { get; set; } = 0;
+            
+            public record DamagePerContextualStat() : ADamageSchema
+            {
+                public CharacteristicId statId { get; set; } = Contextual.DamageTaken.ID;
+                /// <summary>
+                /// multiplies the damageTaken or whatever ContextualStat
+                /// </summary>
+                public int multiplier => this.baseDamage;
+                /// <summary>
+                /// Ex: take 1000 damage, deal 100% of that back
+                /// </summary>
+                public bool isMultiplierPercentage = false;
             }
-            public record DamagePerMovementReducedInTurn() : IEffectSchema {
-                public int baseDamagePerCharacReduced { get; set; } = 0;
+            public record HealPerContextualStat() : Heal
+            {
+                public CharacteristicId statId { get; set; } = Contextual.DamageTaken.ID;
+                /// <summary>
+                /// multiplies the damageTaken or whatever ContextualStat
+                /// </summary>
+                public int multiplier => this.baseHeal;
+                /// <summary>
+                /// Ex: take 1000 damage, heal 100% of that
+                /// </summary>
+                public bool isMultiplierPercentage = false;
             }
         #endregion
         #region Heal
@@ -213,16 +241,13 @@ namespace souchy.celebi.eevee.neweffects.impl.effects
                 public int percentHeal { get; set; } = 0;
                 public ActorType percentOfWhoseLife { get; set; } = ActorType.Target;
             }
-            // child of Status 
-            public record HealPercentLifeDamageReceived() : IEffectSchema
-            {
-                public ElementType element { get; set; } = ElementType.None;
-                public int percentHeal { get; set; } = 0;
-            }
-            // child of Status or DamageEffect
-            // (DmgEff selects targets, then the heal starts from their positions and heals according to its new TargetAcquisitionZone)
-            // That means you need to calculate Area += foreach(zone.area(target))
-            public record HealPercentLifeDamageDone() : IEffectSchema
+            /// <summary>
+            ///  child of DamageEffect
+            ///  (ex: pillage, piège fangeux, mot interdit..)
+            ///  (DmgEff selects targets, then the heal starts from their positions and heals according to its new TargetAcquisitionZone)
+            ///  That means you need to calculate Area += foreach(zone.area(target))
+            /// </summary>
+            public record HealPercentDamageDoneByEffect() : IEffectSchema
             {
                 public ElementType element { get; set; } = ElementType.None;
                 public int percentHeal { get; set; } = 0;
@@ -231,11 +256,15 @@ namespace souchy.celebi.eevee.neweffects.impl.effects
         #region Both
             public record DirectDamageStealLife() : ADamageSchema() { }
 
-            public record TransferLife() : IEffectSchema { 
+            public record TransferLife() : IEffectSchema 
+            { 
+                public IZone transferFrom = new Zone();
                 public int value { get; set; } = 0;
                 public int percentVariance { get; set; } = 0;
             }
-            public record TransferPercentLifeMax() : IEffectSchema { 
+            public record TransferPercentLifeMax() : IEffectSchema 
+            { 
+                public IZone transferFrom = new Zone();
                 public int percentValue { get; set; } = 0;
             }
         #endregion

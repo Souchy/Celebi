@@ -86,6 +86,7 @@ namespace souchy.celebi.spark.util
 
             // Stats
             var stats = SpellModelStats.Create();
+            stats.Add(Resource.Mana.Create(3)); // base cost
             stats.Add(SpellModelProperty.MaxCastPerTarget.Create(int.MaxValue));
             stats.Add(SpellModelProperty.MaxCastPerTurn.Create(int.MaxValue));
             stats.Add(SpellModelProperty.Cooldown.Create(0));

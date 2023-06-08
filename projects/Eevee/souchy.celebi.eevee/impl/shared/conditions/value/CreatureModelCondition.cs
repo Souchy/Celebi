@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects;
-using souchy.celebi.eevee.face.shared.conditions.value;
+using souchy.celebi.eevee.face.shared.conditions.creature;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.shared.triggers;
 
@@ -14,6 +14,7 @@ namespace souchy.celebi.eevee.impl.shared.conditions.value
 {
     public class CreatureModelCondition : Condition, ICreatureModelCondition
     {
+        public bool sameAsSource { get; set; } = false;
         public string creatureModelId { get; set; }
 
         public override bool check(IAction action, TriggerEvent trigger, ICreature boardSource, IBoardEntity boardTarget)
@@ -22,7 +23,7 @@ namespace souchy.celebi.eevee.impl.shared.conditions.value
                 return false;
 
             var fight = action.fight; // Eevee.fights.Get(fightId);
-            if(creatureModelId == "S") { // take the source as the "reference" id to compare with
+            if(sameAsSource){ //creatureModelId == "sameAsSource") { // take the source as the "reference" id to compare with
                 var targetCrea = fight.board.GetCreatureOnCell(action.targetCell);
                 var model1 = targetCrea.modelUid;
                 var model2 = fight.creatures.Get(action.caster).modelUid;

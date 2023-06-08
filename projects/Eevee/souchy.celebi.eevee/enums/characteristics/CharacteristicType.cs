@@ -86,7 +86,7 @@ namespace souchy.celebi.eevee.enums.characteristics
     {
         None,
         /// <summary>
-        /// True damage. Not sure if it's an element or just a EffectTrueDamage
+        /// True damage. Not sure if it's an element or just a EffectTrueDamage that can't be resisted
         /// </summary>
         True,
         Fire,
@@ -103,7 +103,11 @@ namespace souchy.celebi.eevee.enums.characteristics
         /// Takes the worst elemental affinity scaling of the creature. <br></br>
         /// We can use this as a negative spell status, like a curse from the swamp witch
         /// </summary>
-        Worst
+        Worst,
+        /// <summary>
+        /// Scales with every elemental affinity
+        /// </summary>
+        All
     }
 
 

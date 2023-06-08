@@ -1,12 +1,10 @@
 ﻿using MongoDB.Bson.Serialization.Options;
 using Newtonsoft.Json;
-using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.util;
-using Swashbuckle.AspNetCore.Annotations;
 
 namespace souchy.celebi.eevee.impl.util
 {
-    public class EntityDictionary<TKey, TValue> : IEntityDictionary<TKey, TValue> where TValue : IEntity
+    public class EntityDictionary<TKey, TValue> : IEntityDictionary<TKey, TValue> // where TValue : IEntity
     {
         [BsonId]
         public ObjectId entityUid { get; set; }
@@ -22,7 +20,7 @@ namespace souchy.celebi.eevee.impl.util
         [BsonDictionaryOptions(Representation = DictionaryRepresentation.Document)]
         protected Dictionary<TKey, TValue> dic { get; init; } = new();
 
-        protected EntityDictionary() { }
+        private EntityDictionary() { }
         public static IEntityDictionary<TKey, TValue> Create() => new EntityDictionary<TKey, TValue>() { 
             entityUid = Eevee.RegisterIIDTemporary()
         };
@@ -53,8 +51,7 @@ namespace souchy.celebi.eevee.impl.util
         }
         public void AddAll(IEntityDictionary<TKey, TValue> dictionary)
         {
-            foreach(var pair in dictionary.Pairs)
-                Add(pair.Key, pair.Value);
+            dictionary.ForEach((key, value) => this.Add(key, value));
         }
 
         public bool Remove(TKey key)
@@ -83,13 +80,13 @@ namespace souchy.celebi.eevee.impl.util
 
         public void Clear()
         {
-            foreach (var k in Keys.ToList())
+            foreach (var k in this.dic.Keys.ToList())
                 Remove(k);
         }
 
         public void ForEach(Action<TValue> action)
         {
-            foreach (var v in Values)
+            foreach (var v in this.dic.Values)
                 action(v);
         }
 
@@ -97,6 +94,14 @@ namespace souchy.celebi.eevee.impl.util
         {
             foreach(var pair in dic)
                 action(pair.Key, pair.Value);
+        }
+
+        public IEntityDictionary<TKey, TValue> copy(bool anonymous = true)
+        {
+            var copy = anonymous ? new EntityDictionary<TKey, TValue>() : EntityDictionary<TKey, TValue>.Create();
+            foreach (var p in Pairs)
+                copy.Add(p.Key, p.Value);
+            return copy;
         }
 
         public void Dispose()

@@ -1,3 +1,4 @@
+import { ICondition } from "../../../jolteon/services/api/data-contracts";
 
 /*
 Conditions:
@@ -46,6 +47,7 @@ Conditions:
 */
 export class Condition {
 
+    public model: ICondition;
 
     constructor() {
         

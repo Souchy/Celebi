@@ -46,6 +46,11 @@
     <statuslist mode="creaturePassives" passiveids.bind="model.statusPasiveIds"></statuslist>
   
     <h3 class="titleSpacer">Stats</h3>
+    <!-- TODO un stats mini pour les affinities, un pour les resources, etc? 
+      p-e aussi un paramètre statsmini pour qu'il affiche tous les champs de characsAllowed, même s'il n'existent pas dans le dictionnaire 
+      serait pratique pour les SpellCost p.ex.
+    -->
+    <!-- <statsmini statsuid.bind="model.statsId" characsallowed.bind="Characteristics.creatures" hasadddelete.bind="true" hasgrowth.bind="true"></statsmini> -->
     <creaturestats baseuid.bind="model.statsId" growthuid.bind="model.growthStats"></creaturestats>
   </template>
   

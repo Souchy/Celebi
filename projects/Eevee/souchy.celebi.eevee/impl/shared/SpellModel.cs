@@ -2,6 +2,7 @@
 using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.enums.characteristics.creature;
+using souchy.celebi.eevee.enums.characteristics.stats;
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.shared.conditions;
@@ -34,7 +35,6 @@ namespace souchy.celebi.eevee.impl.shared
         public ICondition targetFilter { get; set; }
 
         public ObjectId statsId { get; set; }
-        public Dictionary<CharacteristicId, int> costs { get; set; } = new();
         public IEntityList<ObjectId> EffectIds { get; set; } = new EntityList<ObjectId>();
 
         public IZone RangeZoneMin { get; set; } = new Zone()

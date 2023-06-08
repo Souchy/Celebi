@@ -8,7 +8,7 @@ using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.objects.stats;
-using souchy.celebi.eevee.face.shared.conditions.value;
+using souchy.celebi.eevee.face.shared.conditions.spell;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.shared.conditions;
 using souchy.celebi.eevee.impl.shared.triggers;

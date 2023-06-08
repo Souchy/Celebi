@@ -61,15 +61,15 @@
   <div class="mainSpellProperties">
     <div>
       <h4>Costs</h4>
-      <table class="table-striped table-sm table-borderless table-responsive-sm">
+      <statsmini statsuid.bind="model.statsId" characsallowed.bind="Characteristics.resourcesSpellCosts" hasadddelete.bind="true" hasgrowth.bind="true"></statsmini>
+      <!-- <table class="table-striped table-sm table-borderless table-responsive-sm">
         <tbody>
           <tr repeat.for="charac of Characteristics.resourcesSpellCosts">
             <td>${charac.baseName}</td>
             <td><input type="number" value.bind="model.costs[charac.id]" change.trigger="onChangeCost(charac.id)" placeholder="0" /></td>
-            <!-- <td>${charac.baseName} ${charac.id} ${model.costs[charac.id] || 0}</td> -->
           </tr>
         </tbody>
-      </table>
+      </table> -->
     </div>
     <!-- Stats -->
     <div>
