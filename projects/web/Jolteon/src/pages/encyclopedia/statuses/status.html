@@ -1,0 +1,66 @@
+<import from="../strings/stringcomponent"></import>
+<import from="../effects/effect"></import>
+<import from="../effects/modelSelector/effectModelSelector"></import>
+<import from="../effects/effectlist"></import>
+
+
+<!-- vignette root || creature -->
+<template if.bind="isvignette && mode != 'search'">
+  <!-- <a href="/editor/spell/{model.modelUid}"> -->
+  <button class="btn title btn-outline" click.trigger="clickStatus()">
+    <stringcomponent view-model.ref="name" uid.bind="model.nameId" editable.bind="!isvignette"></stringcomponent>
+  </button>
+  <!-- <button class="btn close" click.trigger="clickRemove()">x</button> -->
+
+  <!-- remove passive from creature -->
+  <template if.bind="mode == 'creature'">
+      <button class="btn close" data-bs-toggle="modal" data-bs-target="#removeSpell-${model.entityUid}">x</button>
+      <modal id="removeSpell-${model.entityUid}" header="Remove Status?" close.bind=false footer.bind=true callbackok.bind="() => clickRemove()">
+          Confirm remove ${name.entity.value} from creature?
+        </modal>
+    </template>
+    
+    <!-- delete status entirely -->
+  <template if.bind="mode == 'root'">
+    <button class="btn close" data-bs-toggle="modal" data-bs-target="#deleteSpell-${model.entityUid}">x</button>
+    <modal id="deleteSpell-${model.entityUid}" header="Delete Status?" close.bind=false footer.bind=true callbackok.bind="() => clickRemove()">
+      Confirm delete ${name.entity.value} entirely?
+    </modal>
+  </template>
+</template>
+
+
+
+<template>
+  <div>
+    <h2>Status #${model.modelUid}</h2>
+    <div class="d-flex">
+      <stringcomponent uid.bind="model.nameId" editable=true></stringcomponent>
+      <stringcomponent uid.bind="model.descriptionId" editable=true large=true class="large"></stringcomponent>
+    </div>
+  </div>
+
+  <!-- status properties -->
+  <div>
+    <h4>Stats</h4>
+    <statsmini case="StatusModelStats" stats.bind="data[prop]" callbacksavestat.bind="() => onChange()" characsallowed.bind="Characteristics.statusModels"></statsmini>
+  </div>
+
+  <!-- children section -->
+  <effeclist effectids.bind="model.effectIds" modaluid.bind="model.entityUid"
+    callbacksave.bind="() => onChange()"
+  ></effeclist>
+  <!-- <div class="effectSection">
+    <h6 class="clickable" data-bs-toggle="collapse" data-bs-target="#collapseEffects-${model.entityUid}">
+      Effects
+    </h6>
+    <button class="btn" data-bs-toggle="modal" data-bs-target="#effectChildModal-${model.entityUid}">+</button>
+    <modal id="effectChildModal-${model.entityUid}" header="Add Effect Child" close.bind=false footer.bind=false>
+      <effect-model-selector onselectcallback.bind="e => onAddChild(e)"></effect-model-selector>
+    </modal>
+
+    <div class="effectlist collapse show" id="collapseEffects-${model.entityUid}">
+      <effect repeat.for="effectid of model.effectIds" uid.bind="effectid" callbackmoveup.bind="e => onMoveEffectUp(e)" callbackmovedown.bind="e => onMoveEffectDown(e)" callbackremove.bind="e => onRemoveEffect(e)"></effect>
+    </div>
+  </div> -->
+</template>

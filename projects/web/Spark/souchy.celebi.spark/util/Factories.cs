@@ -121,6 +121,9 @@ namespace souchy.celebi.spark.util
 
             // Stats
             var stats = StatusModelStats.Create();
+            stats.Add(StatusContainerProperty.MergeStrategy.Create(StatusMergeStrategy.ReplaceLast));
+            stats.Add(StatusContainerProperty.UnbewitchStrategy.Create(StatusUnbewitchStrategy.Dispellable));
+            stats.Add(StatusInstanceProperty.Duration.Create(1));
             model.statsId = stats.entityUid;
 
             // Skin

@@ -30,7 +30,7 @@ namespace souchy.celebi.spark.controllers.models
         [HttpPost("condition")]
         public async Task<ActionResult<ICondition>> CreateCondition([FromQuery] ConditionType conditionType) //[FromRoute] ObjectId id)
         {
-            var condition = new StatCondition();
+            var condition = new StatsCondition();
             return Ok(condition);
         }
 

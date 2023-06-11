@@ -1,5 +1,6 @@
 <import from="../../encyclopedia/creatures/creaturelist"></import>
 <import from="../../encyclopedia/spells/spelllist"></import>
+<import from="../../encyclopedia/statuses/statuslist"></import>
 
 <h3>Hi Editor</h3>
 
@@ -9,6 +10,8 @@
 
 ------------------<br>
 status model list
+
+<statuslist></statuslist>
 
 <!-- some statuses can be re-used, ex: 
     - eclat de surt 
@@ -27,7 +30,7 @@ status model list
 
 
     these will use the schemas CreateStatus + status properties to define a new status every time (with status identifier being the spellmodel id)
-        means you can't still stack 2 manigance even if it comes from 2 srams, because they have the same spellmodel id
+        means you still can't stack 2 manigance even if it comes from 2 srams, because they have the same spellmodel id
 -->
 
 <!-- then you could also have a button to convert a CreateStatus effect into an AddStatus + StatusModel -->

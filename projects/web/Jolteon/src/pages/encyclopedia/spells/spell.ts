@@ -38,11 +38,8 @@ export class Spell {
         private readonly ea: IEventAggregator,
         private readonly router: IRouter,
         private readonly spellController: SpellModelController,
-        // private readonly creatureController: CreatureModelController,
         private readonly skinController: SpellSkinController
     ) {
-        // ea.subscribe("operation:saved", this.toastSaved);
-        // ea.subscribe("operation:failed", this.toastFailed);
     }
 
     /**
@@ -60,6 +57,7 @@ export class Spell {
         try {
             let res = await this.spellController.getSpell(this.uid)
             this.model = res.data;
+            this.ea.publish("navcrumb:status", null)
             this.ea.publish("navcrumb:spell", {
                 modeluid: this.model.modelUid,
                 nameuid: this.model.nameId

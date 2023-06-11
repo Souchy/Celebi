@@ -1,20 +1,10 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using souchy.celebi.eevee.enums;
-using souchy.celebi.eevee.enums.characteristics;
-using souchy.celebi.eevee.enums.characteristics.creature;
-using souchy.celebi.eevee.enums.characteristics.stats;
-using souchy.celebi.eevee.face.entity;
-using souchy.celebi.eevee.face.objects;
+﻿using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
-using souchy.celebi.eevee.face.util.math;
-using souchy.celebi.eevee.face.values;
-using souchy.celebi.eevee.impl.objects.effectResults;
 using souchy.celebi.eevee.impl.objects.zones;
 using souchy.celebi.eevee.impl.util;
-using souchy.celebi.eevee.impl.util.math;
 using souchy.celebi.eevee.impl.values;
 using souchy.celebi.eevee.neweffects.face;
 

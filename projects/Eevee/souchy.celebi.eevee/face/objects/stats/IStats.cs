@@ -15,7 +15,7 @@ namespace souchy.celebi.eevee.face.objects.stats
         public void Add(IStat value);
         public void Set(IStat value);
         public T Get<T>(CharacteristicType stat) where T : IStat;
-        public T Get<T>(CharacteristicId statId) where T : IStat;
+        //public T Get<T>(CharacteristicId statId) where T : IStat;
 
         /// <summary>
         /// If anonymous: create an instance with new() without ObjectId and bus

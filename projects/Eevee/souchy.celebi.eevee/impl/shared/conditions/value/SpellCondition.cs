@@ -19,8 +19,9 @@ namespace souchy.celebi.eevee.impl.shared.conditions.value
     public class SpellCondition : Condition, ISpellCondition
     {
         public int spellModelId { get; set; }
-        public CharacteristicId statId { get; set; }
-        public object value { get; set; }
+        public IStats conditionStats { get; set; }
+        //public CharacteristicId statId { get; set; }
+        //public object value { get; set; }
 
         public override bool check(IAction action, TriggerEvent trigger, ICreature boardSource, IBoardEntity boardTarget)
         {
@@ -33,17 +34,29 @@ namespace souchy.celebi.eevee.impl.shared.conditions.value
             //IFight fight = Eevee.fights.Get(fightId);
             //ICreature creature = action.fight.creatures.Get(checkable);
             ISpell spell = creature.GetSpells().FirstOrDefault(s => s.modelUid == spellModelId);
-            IStat stat = spell.GetStats().Get(statId);
-            // var stat = creature.GetStats().Get((StatType) statId);
+
+            var spellStats = spell.GetStats(); //TODO .GetTotalStats(action); //.@base;
+
+            foreach (var conditionPair in conditionStats.@base.Pairs)
+            {
+                if (!spellStats.Has(conditionPair.Key)) return false;
+                var stat = spellStats.Get(conditionPair.Key);
+                if (!this.comparator.check(stat.genericValue, conditionPair.Value.genericValue))
+                    return false;
+            }
+            return true;
+
+            //IStat stat = spell.GetStats().Get(statId);
+            //// var stat = creature.GetStats().Get((StatType) statId);
             
-            object fetchedValue = null;
-            if(stat is StatSimple statSimple) {
-                fetchedValue = statSimple.value;
-            }
-            if(stat is StatBool statBool) {
-                fetchedValue = statBool.value;
-            }
-            return this.comparator.check(fetchedValue, value);
+            //object fetchedValue = null;
+            //if(stat is StatSimple statSimple) {
+            //    fetchedValue = statSimple.value;
+            //}
+            //if(stat is StatBool statBool) {
+            //    fetchedValue = statBool.value;
+            //}
+            //return this.comparator.check(fetchedValue, value);
         }
     }
 }

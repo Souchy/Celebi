@@ -1,5 +1,6 @@
 using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.enums.characteristics;
+using souchy.celebi.eevee.enums.characteristics.other;
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.stats;
@@ -12,9 +13,9 @@ using souchy.celebi.eevee.impl.stats;
 
 namespace souchy.celebi.eevee.impl.shared.conditions.value
 {
-    public class StatCondition : Condition, IStatCondition
+    public class StatsCondition : Condition, IStatsCondition
     {
-        public IStats stats { get; set; } = Stats.Create();
+        public IStats conditionStats { get; set; } = Stats.Create();
 
         public override bool check(IAction action, TriggerEvent trigger, ICreature boardSource, IBoardEntity boardTarget)
         {
@@ -23,11 +24,13 @@ namespace souchy.celebi.eevee.impl.shared.conditions.value
 
             ObjectId checkable = this.actorType == ActorType.Source ? action.caster : action.targetCell;
             var creature = action.fight.creatures.Get(checkable);
+            var creatureStats = creature.GetTotalStats(action); //.@base;
 
-            foreach(var pair in stats.@base.Pairs)
+            foreach (var conditionPair in conditionStats.@base.Pairs)
             {
-                var creaStat = creature.GetTotalStats(action).@base.Get(pair.Key);
-                if (!this.comparator.check(creaStat.genericValue, pair.Value.genericValue))
+                if (!creatureStats.Has(conditionPair.Key)) return false;
+                var stat = creatureStats.Get(conditionPair.Key);
+                if (!this.comparator.check(stat.genericValue, conditionPair.Value.genericValue))
                     return false;
             }
 

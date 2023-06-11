@@ -11,48 +11,48 @@
 
 <table class="table-striped table-sm table-borderless table-responsive-sm" if.bind="stats">
   <tbody>
-    <tr repeat.for="stat of getDicValues">
-      <td>${getCharacName(stat.statId)}</td>
+    <!-- getDicValues -->
+    <tr repeat.for="statid of getDicKeys">
+      <td>${getCharacName(statid)}</td>
 
 
-
-      <td if.bind="isSimple(stat)">
-        <input type="number" value.bind="stat.value" change.trigger="onChangeStatValue" />
+      <td if.bind="isSimple(statid)">
+        <input type="number" value.bind="getBase(statid).value" change.trigger="onChangeStatValue" />
       </td>
-      <td if.bind="isSimple(stat) && hasgrowth">
+      <td if.bind="isSimple(statid) && hasgrowth">
         (growth)
-        <!-- ${stat.statId} ${getGrowth(statId)} -->
+        <!-- ${statid.statId} ${getGrowth(statId)} -->
       </td>
 
 
-      <td if.bind="isBool(stat)">
-        <input type="checkbox" class="btn-check" id="btn-check-outlined ${stat.statId}" autocomplete="off" checked.bind="stat.value" change.trigger="onChangeStatValue">
-        <label class="btn btn-outline shadow-none" for="btn-check-outlined ${stat.statId}">${stat.value ? 'True' : 'False'}</label><br>
+      <td if.bind="isBool(statid)">
+        <input type="checkbox" class="btn-check" id="btn-check-outlined ${statid}" autocomplete="off" checked.bind="getBase(statid).value" change.trigger="onChangeStatValue">
+        <label class="btn btn-outline shadow-none" for="btn-check-outlined ${statid}">${getBase(statid).value ? 'True' : 'False'}</label><br>
       </td>
-      <td if.bind="isBool(stat) && hasgrowth">
+      <td if.bind="isBool(statid) && hasgrowth">
         (growth)
-        <!-- ${stat.statId} ${getGrowth(statId)} -->
+        <!-- ${statid.statId} ${getGrowth(statId)} -->
       </td>
 
 
-      <td if.bind="isEnum(stat)">
-        <!-- (${getEnum(stat)}: ${stat.value}) -->
-        <template switch.bind="getEnum(stat)">
-          <select case='StatusMergeStrategy' value.bind="stat.value" change.trigger="onChangeStatValue">
+      <td if.bind="isEnum(statid)">
+        <!-- (${getEnum(statid)}: ${statid.value}) -->
+        <template switch.bind="getEnum(statid)">
+          <select case='StatusMergeStrategy' value.bind="getBase(statid).value" change.trigger="onChangeStatValue">
             <option repeat.for="val of Enums.statusMergeStrategies" model.bind="$index">${val}</option>
           </select>
-          <select case='StatusUnbewitchStrategy' value.bind="stat.value" change.trigger="onChangeStatValue">
+          <select case='StatusUnbewitchStrategy' value.bind="getBase(statid).value" change.trigger="onChangeStatValue">
             <option repeat.for="val of Enums.statusUnbewitchStrategies" model.bind="$index">${val}</option>
           </select>
         </template>
       </td>
-      <td if.bind="isEnum(stat) && hasgrowth">
+      <td if.bind="isEnum(statid) && hasgrowth">
         (growth)
       </td>
 
 
       <td if.bind="hasadddelete">
-        <button class="btn btn-outline btn-icon" click.trigger="clickRemoveStat(stat)">x</button>
+        <button class="btn btn-outline btn-icon" click.trigger="clickRemoveStat(statid)">x</button>
       </td>
     </tr>
   </tbody>

@@ -17,6 +17,8 @@ export class Statsmini {
     @bindable
     public hasadddelete: boolean = true;
     @bindable
+    public showall: boolean = false;
+    @bindable
     public callbacksavestat = () => { };
 
     @bindable @observable
@@ -26,7 +28,7 @@ export class Statsmini {
 
 
     constructor(private readonly statsController: StatsModelController) {
-        
+
     }
 
     /**
@@ -51,11 +53,23 @@ export class Statsmini {
     // @watch("stats.dic")
     public get getDicValues() {
         // console.log("sdf: " + JSON.stringify(sdf))
-        return Object.values(this.stats.dic);
+        return Object.values(this.stats.base);
     }
+
+    public get getDicKeys() {
+        if (this.showall) {
+            return this.characsallowed;
+        } else {
+            return Object.keys(this.stats.base);
+        }
+    }
+
     // public get getGrowthValues() {
     //     return Object.values(this.stats.growth);
     // }
+    public getBase(statid: string) {
+        return this.stats.base[statid];
+    }
     public getGrowth(statId) {
         return this.stats.growth[statId];
     }
@@ -69,24 +83,28 @@ export class Statsmini {
         return Characteristics.getCharac(statId);
     }
 
-    public isSimple(stat: IStat) {
+    public isSimple(statid: string) {
+        let stat = this.getBase(statid);
         if (!stat) return;
         let characType = this.getCharacType(stat.statId);
         return characType.statValueType == StatValueType.Simple && characType.enumValueConstraint == null
     }
-    public isBool(stat: IStat) {
+    public isBool(statid: string) {
+        let stat = this.getBase(statid);
         if (!stat) return;
         return this.getCharacType(stat.statId).statValueType == StatValueType.Bool
     }
-    public isEnum(stat: IStat) {
+    public isEnum(statid: string) {
+        let stat = this.getBase(statid);
         if (!stat) return;
         let characType = this.getCharacType(stat.statId);
         return characType.statValueType == StatValueType.Simple && characType.enumValueConstraint != null
     }
-    public getEnum(stat: IStat) {
+    public getEnum(statid: string) {
+        let stat = this.getBase(statid);
         if (!stat) return;
         let characType = this.getCharacType(stat.statId);
-        if(!characType.enumValueConstraint) return "";
+        if (!characType.enumValueConstraint) return "";
         let data = characType.enumValueConstraint.split(",")[0];
         let data2 = data.split(".");
         return data2[data2.length - 1].trim();
@@ -96,8 +114,8 @@ export class Statsmini {
         // console.log("Statsmini onChangeStatValue: save effect");
         this.save();
     }
-    public clickRemoveStat(stat: IStat) {
-        delete this.stats.dic[stat.statId];
+    public clickRemoveStat(statid: string) {
+        delete this.stats.base[statid];
         // console.log("Statsmini clickRemoveStat: save effect");
         this.save();
     }
@@ -106,9 +124,9 @@ export class Statsmini {
         // console.log("Statsmini.onAddStat: " + JSON.stringify(property))
         this.statsController.postStat({ characID: property.id }).then(
             res => {
-                this.stats.dic[res.data.statId] = res.data;
-                
-                if(this.hasgrowth) {
+                this.stats.base[res.data.statId] = res.data;
+
+                if (this.hasgrowth) {
                     let equation: MathEquation = {
                         functions: [
                             {
@@ -129,7 +147,7 @@ export class Statsmini {
 
     public save() {
         this.callbacksavestat();
-        if(this.statsuid) {
+        if (this.statsuid) {
             this.statsController.putStats(this.statsuid, this.stats).then(
                 res => this.stats = res.data
             )

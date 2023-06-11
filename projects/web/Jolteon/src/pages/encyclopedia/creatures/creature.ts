@@ -1,6 +1,6 @@
 import { IEventAggregator, bindable, inject } from "aurelia";
 import { IRouteableComponent, IRouter, Navigation, Parameters, RoutingInstruction } from '@aurelia/router';
-import { ICreatureModel, SpellModel } from "../../../jolteon/services/api/data-contracts";
+import { ICreatureModel, IStatusModel, SpellModel } from "../../../jolteon/services/api/data-contracts";
 import { CreatureModelController } from "../../../jolteon/services/api/CreatureModelController";
 import { StatsType } from "../stats/statscomponent";
 import { TOAST_PLACEMENT, TOAST_STATUS, TOAST_THEME, Toast, ToastConfigOptions, ToastOptions } from "bootstrap-toaster";
@@ -51,6 +51,7 @@ export class Creature implements IRouteableComponent {
             this.model = res.data;
             console.log("nav to new creature")
             this.ea.publish("navcrumb:spell", null)
+            this.ea.publish("navcrumb:status", null)
             this.ea.publish("navcrumb:creature", {
                 modeluid: this.model.modelUid,
                 nameuid: this.model.nameId
@@ -95,6 +96,21 @@ export class Creature implements IRouteableComponent {
         if (idx == -1) return;
         this.model.spellIds.splice(idx, 1);
         this.creatureController.putSpells(this.model.modelUid, this.model.spellIds);
+    }
+    
+    // callback from status list
+    public onAddStatus(status: SpellModel) {
+        console.log("creature onAddStatus: " + status.modelUid)
+        this.model.statusPassiveIds.push(status.entityUid);
+        this.creatureController.putCreature(this.model.modelUid, this.model);
+    }
+    // callback from status list
+    public onRemoveStatus(status: IStatusModel) {
+        // console.log("creature onRemoveStatus: " + status.modelUid)
+        let idx = this.model.statusPassiveIds.indexOf(status.entityUid);
+        if (idx == -1) return;
+        this.model.statusPassiveIds.splice(idx, 1);
+        this.creatureController.putCreature(this.model.modelUid, this.model);
     }
 
 }

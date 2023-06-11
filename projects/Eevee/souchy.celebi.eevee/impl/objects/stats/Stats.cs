@@ -76,13 +76,13 @@ namespace souchy.celebi.eevee.impl.stats
 
         public bool Has(CharacteristicId key) => @base.Has(key);
         public IStat Get(CharacteristicId key) => @base.Get(key);
-        public void Add(CharacteristicId key, IStat value) => @base.Add(key, value);
-        public void AddAll(IEntityDictionary<CharacteristicId, IStat> dictionary) => @base.AddAll(dictionary);
-        public void Set(CharacteristicId key, IStat value) => @base.Set(key, value);
+        public IEntityDictionary<CharacteristicId, IStat> Add(CharacteristicId key, IStat value) => @base.Add(key, value);
+        public IEntityDictionary<CharacteristicId, IStat> AddAll(IEntityDictionary<CharacteristicId, IStat> dictionary) => @base.AddAll(dictionary);
+        public IEntityDictionary<CharacteristicId, IStat> Set(CharacteristicId key, IStat value) => @base.Set(key, value);
         public bool Remove(CharacteristicId key) => @base.Remove(key);
         public void Remove(Predicate<IStat> predicate) => @base.Remove(predicate);  
-        public void ForEach(Action<IStat> action) => @base.ForEach(action);
-        public void ForEach(Action<CharacteristicId, IStat> action) => @base.ForEach(action);
+        public IEntityDictionary<CharacteristicId, IStat> ForEach(Action<IStat> action) => @base.ForEach(action);
+        public IEntityDictionary<CharacteristicId, IStat> ForEach(Action<CharacteristicId, IStat> action) => @base.ForEach(action);
         public void Clear() => @base.Clear();
 
         public void Dispose()

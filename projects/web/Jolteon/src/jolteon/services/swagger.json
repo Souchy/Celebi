@@ -1616,6 +1616,54 @@
         }
       }
     },
+    "/api/models/factory/trigger": {
+      "post": {
+        "tags": [
+          "FactoryController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITrigger"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/factory/condition": {
+      "post": {
+        "tags": [
+          "FactoryController"
+        ],
+        "parameters": [
+          {
+            "name": "conditionType",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ICondition"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/models/properties/charac/resource": {
       "get": {
         "tags": [
@@ -3567,6 +3615,27 @@
         },
         "additionalProperties": false
       },
+      "AddStatsPerStat": {
+        "type": "object",
+        "properties": {
+          "statsFrom": {
+            "$ref": "#/components/schemas/IStats"
+          },
+          "statsTo": {
+            "$ref": "#/components/schemas/IStats"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddStatsPercent": {
+        "type": "object",
+        "properties": {
+          "statsPercent": {
+            "$ref": "#/components/schemas/IStats"
+          }
+        },
+        "additionalProperties": false
+      },
       "AddStatsScript": {
         "type": "object",
         "properties": {
@@ -3773,6 +3842,39 @@
         "type": "string",
         "format": ""
       },
+      "CharacteristicIdIStatIEntityDictionary": {
+        "type": "object",
+        "properties": {
+          "keys": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IStat"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "pairs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CharacteristicIdIStatKeyValuePair"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "entityUid": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
       "CharacteristicIdIStatKeyValuePair": {
         "type": "object",
         "properties": {
@@ -3781,6 +3883,51 @@
           },
           "value": {
             "$ref": "#/components/schemas/IStat"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CharacteristicIdMathEquationIEntityDictionary": {
+        "type": "object",
+        "properties": {
+          "keys": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MathEquation"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "pairs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CharacteristicIdMathEquationKeyValuePair"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "entityUid": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CharacteristicIdMathEquationKeyValuePair": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "$ref": "#/components/schemas/MathEquation"
           }
         },
         "additionalProperties": false
@@ -3954,23 +4101,32 @@
       },
       "ContextualTypes": {
         "enum": [
-          "LifeGained: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 0,\r\n  \"baseName\": \"LifeGained\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5000\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.LifeGained\",\r\n  \"enumValueConstraint\": null\r\n};",
           "LifeUsed: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 1,\r\n  \"baseName\": \"LifeUsed\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5001\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.LifeUsed\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "LifeLost: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 2,\r\n  \"baseName\": \"LifeLost\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5002\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.LifeLost\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "ManaGained: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 3,\r\n  \"baseName\": \"ManaGained\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5003\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.ManaGained\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "ManaUsed: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 4,\r\n  \"baseName\": \"ManaUsed\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5004\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.ManaUsed\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "ManaLost: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 5,\r\n  \"baseName\": \"ManaLost\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5005\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.ManaLost\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "MovementGained: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 6,\r\n  \"baseName\": \"MovementGained\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5006\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.MovementGained\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "MovementUsed: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 7,\r\n  \"baseName\": \"MovementUsed\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5007\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.MovementUsed\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "MovementLost: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 8,\r\n  \"baseName\": \"MovementLost\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5008\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.MovementLost\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "CountHitsGiven: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 9,\r\n  \"baseName\": \"CountHitsGiven\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5009\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.CountHitsGiven\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "CountHitsTaken: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 10,\r\n  \"baseName\": \"CountHitsTaken\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5010\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.CountHitsTaken\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "HealReceived: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 2,\r\n  \"baseName\": \"HealReceived\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5002\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.HealReceived\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "HealDone: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 3,\r\n  \"baseName\": \"HealReceived\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5003\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.HealReceived\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "DamageTaken: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 4,\r\n  \"baseName\": \"DamageTaken\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5004\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.DamageTaken\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "DamageDone: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 5,\r\n  \"baseName\": \"DamageDone\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5005\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.DamageDone\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "ManaUsed: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 11,\r\n  \"baseName\": \"ManaUsed\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5011\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.ManaUsed\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "ManaGained: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 12,\r\n  \"baseName\": \"ManaGained\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5012\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.ManaGained\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "ManaGiven: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 13,\r\n  \"baseName\": \"ManaGained\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5013\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.ManaGained\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "ManaLost: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 14,\r\n  \"baseName\": \"ManaLost\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5014\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.ManaLost\",\r\n  \"enumValueConstraint\": null\r\n};",
           "ManaReduced: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 15,\r\n  \"baseName\": \"ManaReduced\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5015\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.ManaReduced\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "MovementReduced: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 16,\r\n  \"baseName\": \"MovementReduced\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5016\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.MovementReduced\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "StartTurnPosition: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 11,\r\n  \"baseName\": \"StartTurnPosition\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5011\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.StartTurnPosition\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "StartFightPosition: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 12,\r\n  \"baseName\": \"StartFightPosition\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5012\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.StartFightPosition\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "PreviousPositions: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 13,\r\n  \"baseName\": \"PreviousPositions\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 3,\r\n  \"id\": \"5013\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.PreviousPositions\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "NextPositions: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 14,\r\n  \"baseName\": \"NextPositions\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 3,\r\n  \"id\": \"5014\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.NextPositions\",\r\n  \"enumValueConstraint\": null\r\n};"
+          "MovementUsed: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 21,\r\n  \"baseName\": \"MovementUsed\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5021\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.MovementUsed\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MovementGained: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 22,\r\n  \"baseName\": \"MovementGained\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5022\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.MovementGained\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MovementGiven: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 23,\r\n  \"baseName\": \"MovementGained\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5023\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.MovementGained\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MovementLost: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 24,\r\n  \"baseName\": \"MovementLost\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5024\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.MovementLost\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MovementReduced: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 25,\r\n  \"baseName\": \"MovementReduced\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5025\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.MovementReduced\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "RageUsed: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 31,\r\n  \"baseName\": \"RageUsed\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5031\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.RageUsed\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "RageGained: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 32,\r\n  \"baseName\": \"RageGained\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5032\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.RageGained\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "RageGiven: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 33,\r\n  \"baseName\": \"RageGained\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5033\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.RageGained\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "RageLost: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 34,\r\n  \"baseName\": \"RageLost\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5034\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.RageLost\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "RageReduced: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 35,\r\n  \"baseName\": \"RageReduced\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5035\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.RageReduced\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "CountHitsGiven: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 100,\r\n  \"baseName\": \"CountHitsGiven\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5100\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.CountHitsGiven\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "CountHitsTaken: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 101,\r\n  \"baseName\": \"CountHitsTaken\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5101\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.CountHitsTaken\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "StartTurnPosition: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 200,\r\n  \"baseName\": \"StartTurnPosition\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5200\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.StartTurnPosition\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "StartFightPosition: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 201,\r\n  \"baseName\": \"StartFightPosition\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5201\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.StartFightPosition\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "PreviousPositions: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 202,\r\n  \"baseName\": \"PreviousPositions\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 3,\r\n  \"id\": \"5202\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.PreviousPositions\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "NextPositions: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 203,\r\n  \"baseName\": \"NextPositions\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 3,\r\n  \"id\": \"5203\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.NextPositions\",\r\n  \"enumValueConstraint\": null\r\n};"
         ],
         "type": "string",
         "format": ""
@@ -4057,6 +4213,9 @@
       "CreatureModelCondition": {
         "type": "object",
         "properties": {
+          "sameAsSource": {
+            "type": "boolean"
+          },
           "creatureModelId": {
             "type": "string",
             "nullable": true
@@ -4085,21 +4244,14 @@
       "CreatureStats": {
         "type": "object",
         "properties": {
-          "growth": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/MathEquation"
-            },
-            "nullable": true
-          },
           "entityUid": {
             "type": "string"
           },
-          "dic": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/IStat"
-            }
+          "base": {
+            "$ref": "#/components/schemas/CharacteristicIdIStatIEntityDictionary"
+          },
+          "growth": {
+            "$ref": "#/components/schemas/CharacteristicIdMathEquationIEntityDictionary"
           }
         },
         "additionalProperties": false
@@ -4138,6 +4290,38 @@
         },
         "additionalProperties": false
       },
+      "DamagePerContextualStat": {
+        "type": "object",
+        "properties": {
+          "isMultiplierPercentage": {
+            "type": "boolean"
+          },
+          "statId": {
+            "type": "string"
+          },
+          "multiplier": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "element": {
+            "$ref": "#/components/schemas/ElementType"
+          },
+          "baseDamage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "percentPenetration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "percentVariance": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "DamagePerDynamicResourceUsedForSpell": {
         "type": "object",
         "properties": {
@@ -4145,26 +4329,6 @@
             "type": "string"
           },
           "baseDamagePerCharacUsed": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
-      "DamagePerManaReducedInTurn": {
-        "type": "object",
-        "properties": {
-          "baseDamagePerCharacReduced": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
-      "DamagePerMovementReducedInTurn": {
-        "type": "object",
-        "properties": {
-          "baseDamagePerCharacReduced": {
             "type": "integer",
             "format": "int32"
           }
@@ -4390,10 +4554,6 @@
           "ChangeAppearance",
           "ChangeAnimationSet",
           "ReduceDamageReceived",
-          "AddSpellRange",
-          "AddSpellEffectBaseDamage",
-          "ChangeSpellRangeZone",
-          "ChangeSpellEffectZone",
           "BuildObstacle",
           "DestroyObstacle",
           "DigHole",
@@ -4450,16 +4610,35 @@
           "RedirectDamage",
           "Heal",
           "HealPercentLifeMax",
-          "HealPercentLifeDamageReceived",
-          "HealPercentLifeDamageDone",
+          "HealPercentDamageReceivedByEffect",
+          "HealPercentDamageDoneByEffect",
           "TransferLife",
           "TransferPercentLifeMax",
           "DamagePerDynamicResourceUsedForSpell",
-          "DamagePerManaReducedInTurn",
-          "DamagePerMovementReducedInTurn",
+          "DamagePerContextualStat",
+          "HealPerContextualStat",
+          "AddStatsPerStat",
           "SwapOut",
           "SwapIn",
-          "SpellChain"
+          "TakeDamageAsElement",
+          "AddStatsPercent",
+          "Chain",
+          "SpellAddStats",
+          "SpellMetaModifySpell",
+          "SpellMetaDeactivate",
+          "SpellMetaAddCosts",
+          "SpellMetaConvertCosts",
+          "SpellMetaChangeMinRangeZone",
+          "SpellMetaChangeMaxRangeZone",
+          "SpellMetaAddSpellModelStats",
+          "SpellMetaAddChildEffects",
+          "SpellMetaEffectChangeZone",
+          "SpellMetaEffectChangeTargetFilter",
+          "SpellMetaEffectAddBaseDamage",
+          "SpellMetaEffectAddBaseHeal",
+          "SpellMetaEffectChangeElement",
+          "SpellMetaEffectChangeVariance",
+          "SpellMetaEffectChangePenetration"
         ],
         "type": "string",
         "format": ""
@@ -4560,7 +4739,8 @@
           "Dark",
           "Light",
           "Best",
-          "Worst"
+          "Worst",
+          "All"
         ],
         "type": "string",
         "format": ""
@@ -4629,7 +4809,35 @@
         },
         "additionalProperties": false
       },
-      "HealPercentLifeDamageDone": {
+      "HealPerContextualStat": {
+        "type": "object",
+        "properties": {
+          "isMultiplierPercentage": {
+            "type": "boolean"
+          },
+          "statId": {
+            "type": "string"
+          },
+          "multiplier": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "element": {
+            "$ref": "#/components/schemas/ElementType"
+          },
+          "baseHeal": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "percentVariance": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "HealPercentDamageDoneByEffect": {
         "type": "object",
         "properties": {
           "element": {
@@ -4642,7 +4850,7 @@
         },
         "additionalProperties": false
       },
-      "HealPercentLifeDamageDoneScript": {
+      "HealPercentDamageDoneByEffectScript": {
         "type": "object",
         "properties": {
           "schemaType": {
@@ -4653,7 +4861,7 @@
         },
         "additionalProperties": false
       },
-      "HealPercentLifeDamageReceived": {
+      "HealPercentDamageReceivedByEffect": {
         "type": "object",
         "properties": {
           "element": {
@@ -4666,7 +4874,7 @@
         },
         "additionalProperties": false
       },
-      "HealPercentLifeDamageReceivedScript": {
+      "HealPercentDamageReceivedByEffectScript": {
         "type": "object",
         "properties": {
           "schemaType": {
@@ -4957,15 +5165,6 @@
           "targetFilter": {
             "$ref": "#/components/schemas/ICondition"
           },
-          "costs": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "integer",
-              "format": "int32",
-              "nullable": true
-            },
-            "nullable": true
-          },
           "statsId": {
             "type": "string"
           },
@@ -5032,6 +5231,12 @@
       "IStats": {
         "type": "object",
         "properties": {
+          "base": {
+            "$ref": "#/components/schemas/CharacteristicIdIStatIEntityDictionary"
+          },
+          "growth": {
+            "$ref": "#/components/schemas/CharacteristicIdMathEquationIEntityDictionary"
+          },
           "entityUid": {
             "type": "string"
           },
@@ -5073,11 +5278,8 @@
             "type": "integer",
             "format": "int32"
           },
-          "statId": {
-            "type": "string"
-          },
-          "value": {
-            "nullable": true
+          "conditionStats": {
+            "$ref": "#/components/schemas/IStats"
           },
           "actorType": {
             "$ref": "#/components/schemas/ActorType"
@@ -5411,23 +5613,6 @@
         },
         "additionalProperties": false
       },
-      "MetaSpell": {
-        "type": "object",
-        "properties": {
-          "spell": {
-            "type": "string",
-            "nullable": true
-          },
-          "spellMods": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SpellMetaSchema"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "ModelProduct": {
         "type": "object",
         "properties": {
@@ -5519,7 +5704,10 @@
           "Range: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 0,\r\n  \"baseName\": \"Range\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6000\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.Range\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Speed: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 1,\r\n  \"baseName\": \"Speed\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6001\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.Speed\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Erosion: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Erosion\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6002\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.Erosion\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Echo: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 3,\r\n  \"baseName\": \"Echo\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6003\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.Echo\",\r\n  \"enumValueConstraint\": null\r\n};"
+          "Echo: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 3,\r\n  \"baseName\": \"Echo\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6003\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.Echo\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Lock: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 4,\r\n  \"baseName\": \"Lock\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6004\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.Lock\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Evasion: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 5,\r\n  \"baseName\": \"Evasion\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6005\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.Evasion\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MindPower: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 6,\r\n  \"baseName\": \"MindPower\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6006\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.MindPower\",\r\n  \"enumValueConstraint\": null\r\n};"
         ],
         "type": "string",
         "format": ""
@@ -5930,11 +6118,8 @@
             "type": "integer",
             "format": "int32"
           },
-          "statId": {
-            "type": "string"
-          },
-          "value": {
-            "nullable": true
+          "conditionStats": {
+            "$ref": "#/components/schemas/IStats"
           },
           "actorType": {
             "$ref": "#/components/schemas/ActorType"
@@ -5963,9 +6148,18 @@
           "effectParent": {
             "type": "string"
           },
-          "order": {
+          "index": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpellMetaAddCosts": {
+        "type": "object",
+        "properties": {
+          "stats": {
+            "$ref": "#/components/schemas/IStats"
           }
         },
         "additionalProperties": false
@@ -5997,13 +6191,26 @@
         },
         "additionalProperties": false
       },
+      "SpellMetaConvertCosts": {
+        "type": "object",
+        "properties": {
+          "input": {
+            "$ref": "#/components/schemas/IStats"
+          },
+          "output": {
+            "$ref": "#/components/schemas/IStats"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpellMetaDeactivate": {
+        "type": "object",
+        "additionalProperties": false
+      },
       "SpellMetaEffectAddBaseDamage": {
         "type": "object",
         "properties": {
-          "effectId": {
-            "type": "string"
-          },
-          "dmg": {
+          "addDmg": {
             "type": "integer",
             "format": "int32"
           }
@@ -6013,10 +6220,7 @@
       "SpellMetaEffectAddBaseHeal": {
         "type": "object",
         "properties": {
-          "effectId": {
-            "type": "string"
-          },
-          "heal": {
+          "addHeal": {
             "type": "integer",
             "format": "int32"
           }
@@ -6026,11 +6230,32 @@
       "SpellMetaEffectChangeElement": {
         "type": "object",
         "properties": {
-          "effectId": {
-            "type": "string"
-          },
-          "element": {
+          "output": {
             "$ref": "#/components/schemas/ElementType"
+          },
+          "percentConversion": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpellMetaEffectChangePenetration": {
+        "type": "object",
+        "properties": {
+          "percentPenetration": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpellMetaEffectChangeVariance": {
+        "type": "object",
+        "properties": {
+          "percentVariance": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -6038,20 +6263,27 @@
       "SpellMetaEffectChangeZone": {
         "type": "object",
         "properties": {
-          "effectId": {
-            "type": "string"
-          },
           "zone": {
             "$ref": "#/components/schemas/IZone"
           }
         },
         "additionalProperties": false
       },
-      "SpellMetaSchema": {
+      "SpellMetaModifyEffect": {
         "type": "object",
         "properties": {
-          "effType": {
-            "$ref": "#/components/schemas/EffT"
+          "effectId": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpellMetaModifySpell": {
+        "type": "object",
+        "properties": {
+          "spell": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -6091,15 +6323,6 @@
           },
           "statsId": {
             "type": "string"
-          },
-          "costs": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "integer",
-              "format": "int32",
-              "nullable": true
-            },
-            "nullable": true
           },
           "effectIds": {
             "type": "array",
@@ -6180,21 +6403,14 @@
       "SpellModelStats": {
         "type": "object",
         "properties": {
-          "growth": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/MathEquation"
-            },
-            "nullable": true
-          },
           "entityUid": {
             "type": "string"
           },
-          "dic": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/IStat"
-            }
+          "base": {
+            "$ref": "#/components/schemas/CharacteristicIdIStatIEntityDictionary"
+          },
+          "growth": {
+            "$ref": "#/components/schemas/CharacteristicIdMathEquationIEntityDictionary"
           }
         },
         "additionalProperties": false
@@ -6245,7 +6461,11 @@
           "RemainingCharges: SpellProperty = {\r\n  \"category\": 7,\r\n  \"localId\": 0,\r\n  \"baseName\": \"RemainingCharges\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"7000\",\r\n  \"nameModelUid\": \"CharacteristicType.Spell.RemainingCharges\",\r\n  \"enumValueConstraint\": null\r\n};",
           "RemainingCooldown: SpellProperty = {\r\n  \"category\": 7,\r\n  \"localId\": 1,\r\n  \"baseName\": \"RemainingCooldown\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"7001\",\r\n  \"nameModelUid\": \"CharacteristicType.Spell.RemainingCooldown\",\r\n  \"enumValueConstraint\": null\r\n};",
           "NumberOfCastsThisTurn: SpellProperty = {\r\n  \"category\": 7,\r\n  \"localId\": 2,\r\n  \"baseName\": \"NumberOfCastsThisTurn\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"7002\",\r\n  \"nameModelUid\": \"CharacteristicType.Spell.NumberOfCastsThisTurn\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "NumberOfCastsThisTurnPerEntity: SpellProperty = {\r\n  \"category\": 7,\r\n  \"localId\": 3,\r\n  \"baseName\": \"NumberOfCastsThisTurnPerEntity\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 2,\r\n  \"id\": \"7003\",\r\n  \"nameModelUid\": \"CharacteristicType.Spell.NumberOfCastsThisTurnPerEntity\",\r\n  \"enumValueConstraint\": null\r\n};"
+          "NumberOfCastsThisTurnPerEntity: SpellProperty = {\r\n  \"category\": 7,\r\n  \"localId\": 3,\r\n  \"baseName\": \"NumberOfCastsThisTurnPerEntity\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 2,\r\n  \"id\": \"7003\",\r\n  \"nameModelUid\": \"CharacteristicType.Spell.NumberOfCastsThisTurnPerEntity\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "DamageDoneThisCast: SpellProperty = {\r\n  \"category\": 7,\r\n  \"localId\": 101,\r\n  \"baseName\": \"DamageDoneThisCast\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"7101\",\r\n  \"nameModelUid\": \"CharacteristicType.Spell.DamageDoneThisCast\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "HealDoneThisCast: SpellProperty = {\r\n  \"category\": 7,\r\n  \"localId\": 102,\r\n  \"baseName\": \"HealDoneThisCast\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"7102\",\r\n  \"nameModelUid\": \"CharacteristicType.Spell.HealDoneThisCast\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "ManaReducedThisCast: SpellProperty = {\r\n  \"category\": 7,\r\n  \"localId\": 103,\r\n  \"baseName\": \"ManaReducedThisCast\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"7103\",\r\n  \"nameModelUid\": \"CharacteristicType.Spell.ManaReducedThisCast\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MovementReducedThisCast: SpellProperty = {\r\n  \"category\": 7,\r\n  \"localId\": 104,\r\n  \"baseName\": \"MovementReducedThisCast\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"7104\",\r\n  \"nameModelUid\": \"CharacteristicType.Spell.MovementReducedThisCast\",\r\n  \"enumValueConstraint\": null\r\n};"
         ],
         "type": "string",
         "format": ""
@@ -6253,21 +6473,14 @@
       "SpellStats": {
         "type": "object",
         "properties": {
-          "growth": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/MathEquation"
-            },
-            "nullable": true
-          },
           "entityUid": {
             "type": "string"
           },
-          "dic": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/IStat"
-            }
+          "base": {
+            "$ref": "#/components/schemas/CharacteristicIdIStatIEntityDictionary"
+          },
+          "growth": {
+            "$ref": "#/components/schemas/CharacteristicIdMathEquationIEntityDictionary"
           }
         },
         "additionalProperties": false
@@ -6286,36 +6499,6 @@
           }
         },
         "additionalProperties": false
-      },
-      "StatCondition": {
-        "type": "object",
-        "properties": {
-          "statId": {
-            "type": "string"
-          },
-          "value": {
-            "nullable": true
-          },
-          "actorType": {
-            "$ref": "#/components/schemas/ActorType"
-          },
-          "comparator": {
-            "$ref": "#/components/schemas/ConditionComparatorType"
-          },
-          "groupType": {
-            "$ref": "#/components/schemas/ConditionGroupType"
-          },
-          "children": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ICondition"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": {
-          "type": "object"
-        }
       },
       "StatSimple": {
         "type": "object",
@@ -6403,7 +6586,11 @@
           "Pacifist: State = {\r\n  \"category\": 4,\r\n  \"localId\": 15,\r\n  \"baseName\": \"Pacifist\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4015\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Pacifist\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Invulnerable: State = {\r\n  \"category\": 4,\r\n  \"localId\": 16,\r\n  \"baseName\": \"Invulnerable\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4016\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Invulnerable\",\r\n  \"enumValueConstraint\": null\r\n};",
           "InvulnerableDistance: State = {\r\n  \"category\": 4,\r\n  \"localId\": 17,\r\n  \"baseName\": \"InvulnerableDistance\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4017\",\r\n  \"nameModelUid\": \"CharacteristicType.State.InvulnerableDistance\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "InvulnerableMelee: State = {\r\n  \"category\": 4,\r\n  \"localId\": 18,\r\n  \"baseName\": \"InvulnerableMelee\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4018\",\r\n  \"nameModelUid\": \"CharacteristicType.State.InvulnerableMelee\",\r\n  \"enumValueConstraint\": null\r\n};"
+          "InvulnerableMelee: State = {\r\n  \"category\": 4,\r\n  \"localId\": 18,\r\n  \"baseName\": \"InvulnerableMelee\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4018\",\r\n  \"nameModelUid\": \"CharacteristicType.State.InvulnerableMelee\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "UnlockLoS: State = {\r\n  \"category\": 4,\r\n  \"localId\": 19,\r\n  \"baseName\": \"UnlockLoS\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4019\",\r\n  \"nameModelUid\": \"CharacteristicType.State.UnlockLoS\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "LockLoS: State = {\r\n  \"category\": 4,\r\n  \"localId\": 20,\r\n  \"baseName\": \"LockLoS\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4020\",\r\n  \"nameModelUid\": \"CharacteristicType.State.LockLoS\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Unlockable: State = {\r\n  \"category\": 4,\r\n  \"localId\": 21,\r\n  \"baseName\": \"Unlockable\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4021\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Unlockable\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Unlocker: State = {\r\n  \"category\": 4,\r\n  \"localId\": 22,\r\n  \"baseName\": \"Unlocker\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4022\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Unlocker\",\r\n  \"enumValueConstraint\": null\r\n};"
         ],
         "type": "string",
         "format": ""
@@ -6411,24 +6598,44 @@
       "Stats": {
         "type": "object",
         "properties": {
-          "growth": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/MathEquation"
-            },
-            "nullable": true
-          },
           "entityUid": {
             "type": "string"
           },
-          "dic": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/IStat"
-            }
+          "base": {
+            "$ref": "#/components/schemas/CharacteristicIdIStatIEntityDictionary"
+          },
+          "growth": {
+            "$ref": "#/components/schemas/CharacteristicIdMathEquationIEntityDictionary"
           }
         },
         "additionalProperties": false
+      },
+      "StatsCondition": {
+        "type": "object",
+        "properties": {
+          "conditionStats": {
+            "$ref": "#/components/schemas/IStats"
+          },
+          "actorType": {
+            "$ref": "#/components/schemas/ActorType"
+          },
+          "comparator": {
+            "$ref": "#/components/schemas/ConditionComparatorType"
+          },
+          "groupType": {
+            "$ref": "#/components/schemas/ConditionGroupType"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
       },
       "StatusCondition": {
         "type": "object",
@@ -6437,14 +6644,11 @@
             "type": "integer",
             "format": "int32"
           },
-          "statId": {
-            "type": "string"
-          },
-          "value": {
-            "nullable": true
-          },
           "boardTargetType": {
             "$ref": "#/components/schemas/BoardTargetType"
+          },
+          "conditionStats": {
+            "$ref": "#/components/schemas/IStats"
           },
           "actorType": {
             "$ref": "#/components/schemas/ActorType"
@@ -6522,21 +6726,14 @@
       "StatusContainerStats": {
         "type": "object",
         "properties": {
-          "growth": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/MathEquation"
-            },
-            "nullable": true
-          },
           "entityUid": {
             "type": "string"
           },
-          "dic": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/IStat"
-            }
+          "base": {
+            "$ref": "#/components/schemas/CharacteristicIdIStatIEntityDictionary"
+          },
+          "growth": {
+            "$ref": "#/components/schemas/CharacteristicIdMathEquationIEntityDictionary"
           }
         },
         "additionalProperties": false
@@ -6593,21 +6790,14 @@
       "StatusInstanceStats": {
         "type": "object",
         "properties": {
-          "growth": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/MathEquation"
-            },
-            "nullable": true
-          },
           "entityUid": {
             "type": "string"
           },
-          "dic": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/IStat"
-            }
+          "base": {
+            "$ref": "#/components/schemas/CharacteristicIdIStatIEntityDictionary"
+          },
+          "growth": {
+            "$ref": "#/components/schemas/CharacteristicIdMathEquationIEntityDictionary"
           }
         },
         "additionalProperties": false
@@ -6666,21 +6856,14 @@
       "StatusModelStats": {
         "type": "object",
         "properties": {
-          "growth": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/MathEquation"
-            },
-            "nullable": true
-          },
           "entityUid": {
             "type": "string"
           },
-          "dic": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/IStat"
-            }
+          "base": {
+            "$ref": "#/components/schemas/CharacteristicIdIStatIEntityDictionary"
+          },
+          "growth": {
+            "$ref": "#/components/schemas/CharacteristicIdMathEquationIEntityDictionary"
           }
         },
         "additionalProperties": false
@@ -6737,6 +6920,22 @@
         "properties": {
           "moveTargetZone": {
             "$ref": "#/components/schemas/IZone"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TakeDamageAsElement": {
+        "type": "object",
+        "properties": {
+          "input": {
+            "$ref": "#/components/schemas/ElementType"
+          },
+          "output": {
+            "$ref": "#/components/schemas/ElementType"
+          },
+          "percentConversion": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -6860,6 +7059,9 @@
       "TransferLife": {
         "type": "object",
         "properties": {
+          "transferFrom": {
+            "$ref": "#/components/schemas/IZone"
+          },
           "value": {
             "type": "integer",
             "format": "int32"
@@ -6885,6 +7087,9 @@
       "TransferPercentLifeMax": {
         "type": "object",
         "properties": {
+          "transferFrom": {
+            "$ref": "#/components/schemas/IZone"
+          },
           "percentValue": {
             "type": "integer",
             "format": "int32"
@@ -6977,7 +7182,10 @@
           "squareHalf",
           "rectangle",
           "ellipse",
-          "ellipseHalf"
+          "ellipseHalf",
+          "board",
+          "offboard",
+          "all"
         ],
         "type": "string",
         "format": ""

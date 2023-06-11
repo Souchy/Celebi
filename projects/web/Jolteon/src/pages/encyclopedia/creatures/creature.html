@@ -43,7 +43,9 @@
     ></spelllist>
   
     <h3 class="titleSpacer">Passives</h3>
-    <statuslist mode="creaturePassives" passiveids.bind="model.statusPasiveIds"></statuslist>
+    <statuslist mode="creature" passiveids.bind="model.statusPassiveIds"
+      callbackadd.bind="s => onAddPassive(s)" callbackremove.bind="s => onRemovePassive(s)"
+    ></statuslist>
   
     <h3 class="titleSpacer">Stats</h3>
     <!-- TODO un stats mini pour les affinities, un pour les resources, etc? 

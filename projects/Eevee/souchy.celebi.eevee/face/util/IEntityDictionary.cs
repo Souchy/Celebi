@@ -14,9 +14,10 @@ namespace souchy.celebi.eevee.face.util
         //public IEntityDictionary<TKey, TValue> copy(bool anonymous = true);
         public bool Has(TKey key);
         public TValue Get(TKey key);
-        public void Add(TKey key, TValue value);
-        public void AddAll(IEntityDictionary<TKey, TValue> dictionary);
-        public void Set(TKey key, TValue value);
+        public T Get<T>(TKey key) where T : TValue;
+        public IEntityDictionary<TKey, TValue> Add(TKey key, TValue value);
+        public IEntityDictionary<TKey, TValue> AddAll(IEntityDictionary<TKey, TValue> dictionary);
+        public IEntityDictionary<TKey, TValue> Set(TKey key, TValue value);
         /// <summary>
         /// Remove pair and Dispose value if possible
         /// </summary>
@@ -25,8 +26,8 @@ namespace souchy.celebi.eevee.face.util
         /// Remove pair and Dispose value if possible
         /// </summary>
         public void Remove(Predicate<TValue> predicate);
-        public void ForEach(Action<TValue> action);
-        public void ForEach(Action<TKey, TValue> action);
+        public IEntityDictionary<TKey, TValue> ForEach(Action<TValue> action);
+        public IEntityDictionary<TKey, TValue> ForEach(Action<TKey, TValue> action);
         public void Clear();
     }
 }

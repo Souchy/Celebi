@@ -1,0 +1,52 @@
+<import from='./status'></import>
+
+<!-- creature statuss -->
+<div if.bind="mode == 'creature'">
+
+  <!-- Button trigger modal -->
+  <button type="button" class="btn listMenu" data-bs-toggle="modal" data-bs-target="#statusSearchModal">Add Status</button>
+  <button class="btn listMenu" click.trigger="clickCreate()">New Status</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="statusSearchModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="statusSearchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="statusSearchModalLabel">Status select</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <statuslist mode="search" creatureid.bind="creatureid" callbackadd.bind="s => clickAddToCreature(s)"></statuslist>
+        </div>
+        <div class="modal-footer"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- creature status list -->
+  <div class="list">
+    <status repeat.for="status of statuss" view-model.ref="refs[$index]" mode.bind="mode" model.bind="status" isvignette.bind="true" callbackremove.bind="s => clickRemove(s)"></status>
+  </div>
+
+</div>
+
+
+<!-- root or search -->
+<div if.bind="mode == 'root' || mode == 'search'">
+
+  <div>
+    <button class="btn listMenu" click.trigger="refresh()">Refresh</button>
+    <button class="btn listMenu" click.trigger="clickCreate()">New Status</button>
+    <input type="string" value.bind="filter" change.trigger="onSearch()" placeholder="search..." />
+  </div>
+
+  <!-- root -->
+  <div if.bind="mode == 'root'" class="list">
+    <status repeat.for="status of filteredStatuss" view-model.ref="refs[$index]" mode.bind="mode" model.bind="status" isvignette.bind="true" callbackremove.bind="s => clickRemove(s)"></status>
+  </div>
+  <!-- search (add to creature) -->
+  <div if.bind="mode == 'search'" class="list">
+    <status repeat.for="status of filteredStatuss" view-model.ref="refs[$index]" mode.bind="mode" model.bind="status" isvignette.bind="true" data-bs-dismiss="modal" callbackadd.bind="callbackadd"></status>
+  </div>
+
+</div>

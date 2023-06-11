@@ -42,13 +42,13 @@ namespace souchy.celebi.eevee.enums.characteristics
         public IStat Create() => this.GetFactory()(ID, this.defaultValue);
         public IStat Create(object value = null) => this.GetFactory()(ID, value);
 
-        public static IEnumerable<CharacteristicType> Characteristics = Enum.GetValues<CharacteristicCategory>().SelectMany(c => c.GetCharacs());
-        public static StatFactory SimpleFactory = (id, value) => StatSimple.Create(id, value == null ? 0 : (int) value);
+        public static readonly IEnumerable<CharacteristicType> Characteristics = Enum.GetValues<CharacteristicCategory>().SelectMany(c => c.GetCharacs());
+        public static readonly StatFactory SimpleFactory = (id, value) => StatSimple.Create(id, value == null ? 0 : (int) value);
         //public static StatFactory EnumFactory = (id, value) => StatBool.Create(id, value == null ? false : (bool) value);
-        public static StatFactory BoolFactory = (id, value) => StatBool.Create(id, value == null ? false : (bool) value);
+        public static readonly StatFactory BoolFactory = (id, value) => StatBool.Create(id, value == null ? false : (bool) value);
         //TODO ListStat public static StatFactory ListFactory = (id, value)
         //    => EntityStatDictionary.Create(id, value == null ? new() : (Dictionary<ObjectId, IStat>) value);
-        public static StatFactory EntityStatDictionaryFactory = (id, value) 
+        public static readonly StatFactory EntityStatDictionaryFactory = (id, value) 
             => EntityStatDictionary.Create(id, value == null ? new() : (Dictionary<ObjectId, IStat>) value);
 
         public static IEnumerable<T> iterate<T>() where T : CharacteristicType

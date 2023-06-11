@@ -1,5 +1,7 @@
 ﻿using MongoDB.Bson.Serialization.Options;
 using Newtonsoft.Json;
+using souchy.celebi.eevee.enums.characteristics;
+using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.util;
 
 namespace souchy.celebi.eevee.impl.util
@@ -32,26 +34,33 @@ namespace souchy.celebi.eevee.impl.util
             else 
                 return default;
         }
+        public T Get<T>(TKey key) where T : TValue
+        {
+            return (T) Get(key);
+        }
 
         public bool Has(TKey key)
         {
             return dic.ContainsKey(key);
         }
 
-        public void Set(TKey key, TValue value)
+        public IEntityDictionary<TKey, TValue> Set(TKey key, TValue value)
         {
             dic[key] = value;
             this.GetEntityBus().publish(nameof(Set), this, key, value);
+            return this;
         }
 
-        public void Add(TKey key, TValue value)
+        public IEntityDictionary<TKey, TValue> Add(TKey key, TValue value)
         {
             dic.Add(key, value);
-            this.GetEntityBus().publish(nameof(Add), this, key, value); 
+            this.GetEntityBus().publish(nameof(Add), this, key, value);
+            return this;
         }
-        public void AddAll(IEntityDictionary<TKey, TValue> dictionary)
+        public IEntityDictionary<TKey, TValue> AddAll(IEntityDictionary<TKey, TValue> dictionary)
         {
             dictionary.ForEach((key, value) => this.Add(key, value));
+            return this;
         }
 
         public bool Remove(TKey key)
@@ -84,16 +93,18 @@ namespace souchy.celebi.eevee.impl.util
                 Remove(k);
         }
 
-        public void ForEach(Action<TValue> action)
+        public IEntityDictionary<TKey, TValue> ForEach(Action<TValue> action)
         {
             foreach (var v in this.dic.Values)
                 action(v);
+            return this;
         }
 
-        public void ForEach(Action<TKey, TValue> action)
+        public IEntityDictionary<TKey, TValue> ForEach(Action<TKey, TValue> action)
         {
             foreach(var pair in dic)
                 action(pair.Key, pair.Value);
+            return this;
         }
 
         public IEntityDictionary<TKey, TValue> copy(bool anonymous = true)

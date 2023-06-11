@@ -1,16 +1,8 @@
-﻿using Newtonsoft.Json;
-using souchy.celebi.eevee.enums;
-using souchy.celebi.eevee.enums.characteristics;
-using souchy.celebi.eevee.enums.characteristics.creature;
-using souchy.celebi.eevee.enums.characteristics.other;
-using souchy.celebi.eevee.enums.characteristics.stats;
+﻿using souchy.celebi.eevee.enums.characteristics.other;
 using souchy.celebi.eevee.face.entity;
-using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
-using souchy.celebi.eevee.face.values;
-using souchy.celebi.eevee.impl.values;
 
 namespace souchy.celebi.eevee.face.shared.models
 {
@@ -40,7 +32,7 @@ namespace souchy.celebi.eevee.face.shared.models
         /// <summary>
         /// Costs are included in the stats for easier modification by statuses
         /// </summary>
-        public SpellModelStats GetStats => (SpellModelStats) Eevee.models.stats.Get(statsId);
+        public SpellModelStats GetStats() => (SpellModelStats) Eevee.models.stats.Get(statsId);
     }
 
 

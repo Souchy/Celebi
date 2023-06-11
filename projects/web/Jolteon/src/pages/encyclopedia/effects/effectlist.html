@@ -1,0 +1,23 @@
+
+<import from="./modelSelector/effectModelSelector"></import>
+
+
+<!-- children section -->
+<div class="effectSection">
+  <h6 class="clickable" data-bs-toggle="collapse" data-bs-target="#collapseEffects-${modaluid}">
+    Effects
+    <!-- (${model.effectIds.length}) -->
+  </h6>
+  <button class="btn" data-bs-toggle="modal" data-bs-target="#effectChildModal-${modaluid}">+</button>
+  <modal id="effectChildModal-${modaluid}" header="Add Effect Child" close.bind=false footer.bind=false>
+    <effect-model-selector onselectcallback.bind="e => onAddChild(e)"></effect-model-selector>
+  </modal>
+
+  <div class="effectlist collapse show" id="collapseEffects-${modaluid}">
+    <effect repeat.for="effectid of effectIds" uid.bind="effectid" 
+        callbackmoveup.bind="e => onMoveEffectUp(e)" 
+        callbackmovedown.bind="e => onMoveEffectDown(e)" 
+        callbackremove.bind="e => onRemoveEffect(e)"
+    ></effect>
+  </div>
+</div>

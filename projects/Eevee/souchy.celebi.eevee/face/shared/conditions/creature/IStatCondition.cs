@@ -5,8 +5,8 @@ using souchy.celebi.eevee.impl.objects.stats;
 
 namespace souchy.celebi.eevee.face.shared.conditions.creature
 {
-    public interface IStatCondition : ICondition
+    public interface IStatsCondition : ICondition
     {
-        public IStats stats { get; set; }
+        public IStats conditionStats { get; set; }
     }
 }

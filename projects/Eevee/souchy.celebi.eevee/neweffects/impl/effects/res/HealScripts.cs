@@ -5,6 +5,7 @@ using souchy.celebi.eevee.face.objects.effectResults;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.impl.objects.effectReturn;
 using souchy.celebi.eevee.neweffects.face;
+using souchy.celebi.eevee.neweffects.impl.effects.creature;
 using souchy.celebi.eevee.neweffects.impl.util;
 using System;
 using System.Collections.Generic;
@@ -85,9 +86,9 @@ namespace souchy.celebi.eevee.neweffects.impl.effects.res
             throw new NotImplementedException();
         }
     }
-    public record HealPercentLifeDamageReceivedScript : IEffectScript
+    public record HealPercentDamageReceivedByEffectScript : IEffectScript
     {
-        public Type SchemaType => typeof(HealPercentLifeDamageReceived);
+        public Type SchemaType => typeof(HealPercentDamageReceivedByEffectScript);
 
         public IEffectReturnValue apply(ISubActionEffect action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
         {
@@ -99,9 +100,9 @@ namespace souchy.celebi.eevee.neweffects.impl.effects.res
             throw new NotImplementedException();
         }
     }
-    public record HealPercentLifeDamageDoneScript : IEffectScript
+    public record HealPercentDamageDoneByEffectScript : IEffectScript
     {
-        public Type SchemaType => typeof(HealPercentLifeDamageDone);
+        public Type SchemaType => typeof(HealPercentDamageDoneByEffect);
 
         public IEffectReturnValue apply(ISubActionEffect action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
         {

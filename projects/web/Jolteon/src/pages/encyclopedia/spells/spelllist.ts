@@ -133,36 +133,6 @@ export class SpellList {
                 }
             );
         }
-
-        // let promise;
-        // if (this.mode == 'root') {
-        //     promise = this.spellController.deleteSpell(spell.modelUid);
-        // }
-        // if (this.mode == 'creature') {
-        //     let copy = [...this.spellids];
-        //     promise = this.creatureController.putSpells(this.creatureid, copy);
-        // }
-        // try {
-        //     let res = await promise;
-        //     // console.log("spelllist remove: " + spell.modelUid + " at " + idx);
-        //     this.spells.splice(idx, 1);
-        // } catch (ex) {
-        //     console.error(ex);
-        // }
     }
-
-    // public clickDelete() {
-    //     for (let spell of this.selectedSpells) {
-    //         let id: string = spell.modelUid; // IID
-    //         this.spellController.deleteSpell(id).then(res => {
-    //             if (res.data.deletedCount !== 1) return;
-    //             let index = this.spells.findIndex(c => c.modelUid === id);
-    //             if (index === -1) return;
-    //             this.spells.splice(index, 1);
-    //         })
-    //     }
-    //     this.selectedSpells = [];
-    // }
-
 
 }

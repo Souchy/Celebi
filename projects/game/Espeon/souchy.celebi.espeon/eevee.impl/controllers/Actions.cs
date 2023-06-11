@@ -17,6 +17,7 @@ using souchy.celebi.eevee.face.shared;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.entity;
 using Microsoft.AspNetCore.Hosting;
+using souchy.celebi.eevee.enums.characteristics.creature;
 
 namespace souchy.celebi.espeon.eevee.impl.controllers
 {
@@ -37,21 +38,26 @@ namespace souchy.celebi.espeon.eevee.impl.controllers
             IPosition targetPosition = action.fight.cells.Get(action.targetCell).position;
             var sourceStats = sourceCrea.GetTotalStats(action); //, new TriggerEvent(TriggerType.CompileStats, TriggerOrderType.Before));
 
+            var spellStats = spell.GetStats().AddAll(spellModel.GetStats());
+            var costs = Resource.values
+                .Where(p => p.Value.resProp == ResourceProperty.Current)
+                .Select(p =>
+                    spellStats.Has(p.Key) ? null : spellStats.Get<IStatSimple>(p.Key)
+                ).Where(c => c != null);
+
             // check costs
-            foreach (var cost in spellModel.costs)
+            foreach (var cost in costs)
             {
-                if (cost.Value > sourceStats.Get<IStatSimple>(cost.Key).value)
-                {
-                    return;
-                }
+                if (!sourceStats.Has(cost.statId)) return;
+                if (cost.value > sourceStats.Get<IStatSimple>(cost.statId).value) return;
             }
             // check line of sight
             // check target cell filter
 
             // spend costs
-            foreach (var cost in spellModel.costs)
+            foreach (var cost in costs)
             {
-                sourceStats.Get<IStatSimple>(cost.Key).value -= cost.Value;
+                sourceStats.Get<IStatSimple>(cost.statId).value -= cost.value;
             }
 
             EffectPreviewPipeline pipeline = new EffectPreviewPipeline();
