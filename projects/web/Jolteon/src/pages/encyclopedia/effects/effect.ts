@@ -1,11 +1,12 @@
-import { SchemaDescription, ITrigger, TriggerOrderType, TriggerType, IZone } from './../../../jolteon/services/api/data-contracts';
+import { HttpResponse } from './../../../jolteon/services/api/http-client';
+import { SchemaDescription, ITrigger, TriggerOrderType, TriggerType, IZone, IEffect, EffT } from './../../../jolteon/services/api/data-contracts';
 import { IRouter } from "@aurelia/router";
-import { IEventAggregator, bindable, inject } from "aurelia";
-import { EffT, IEffect } from "../../../jolteon/services/api/data-contracts";
+import { watch } from '@aurelia/runtime-html';
+import { IEventAggregator, bindable, inject, observable } from "aurelia";
 import { EffectPermanentController } from "../../../jolteon/services/api/EffectPermanentController";
 import { PropertiesController } from "../../../jolteon/services/api/PropertiesController";
-import { SpellModelController } from '../../../jolteon/services/api/SpellModelController';
 import { Effects } from '../../../jolteon/constants';
+import { TOAST_STATUS, Toast } from 'bootstrap-toaster';
 
 @inject(IEventAggregator, IRouter) //, EffectPermanentController, PropertiesController) //, SpellModelController)
 export class Effect {
@@ -23,8 +24,8 @@ export class Effect {
 
     // db data
     private model: IEffect;
-    // db data
-    private schema: SchemaDescription
+    // db data, important for propertygrid
+    // private schema: SchemaDescription
 
     constructor(
         private readonly ea: IEventAggregator,
@@ -40,7 +41,7 @@ export class Effect {
                 this.model = res.data;
                 // console.log("binded effect: ")
                 // console.log(this.model);
-                this.schema = Effects.schemas.find(s => s.name == this.getModelName());
+                // this.schema = Effects.schemas.find(s => s.name == this.modelName);
                 // this.propertiesController.getEffectsSchema(this.getModelName())
                 //     .then(res => this.schema = res.data);
             },
@@ -50,12 +51,17 @@ export class Effect {
         )
     }
 
-    public getModelName() {
+    // @watch(eff => eff?.model?.modelUid)
+    public get modelName() {
         let id: number = +this.model.modelUid;
         let enu = EffT[id]; //id as EffT;
-        // console.log("enu: " + enu.toString())
+        // console.log("enu: " + id + ": " + enu.toString())
         return enu.toString();
         // let key = Object.keys(EffT)[id];
+    }
+    public get schema(): SchemaDescription {
+        let desc = Effects.schemas.find(s => s.name == this.modelName);
+        return desc;
     }
 
     //#region click handlers
@@ -72,9 +78,10 @@ export class Effect {
         this.callbackmovedown(this.model);
     }
     public clickRemove() {
-        console.log("Effect.remove: " + this.model.entityUid);
+        // console.log("Effect.remove: " + this.model.entityUid);
         this.callbackremove(this.model);
     }
+    // TODO add triggers
     public clickAddTrigger() {
         // this.model.triggers.push({
         //     holderCondition: null,
@@ -84,49 +91,33 @@ export class Effect {
         //     triggerZone: {}
         // });
     }
+    public clickCopy() {
+        navigator.clipboard.writeText(JSON.stringify(this.model));
+        Toast.create({
+            title: "Effect",
+            message: "Copied",
+            status: TOAST_STATUS.INFO,
+            timeout: 1000
+        })
+    }
+    public async clickPaste() {
+        let text = await navigator.clipboard.readText();
+        let eff: IEffect = JSON.parse(text);
+        this.effectController.putEffect(this.model.entityUid, eff)
+            .then(res => this.model = res.data)
+            .then(f => this.ea.publish("operation:saved"))
+            // .then(this.handleUpdate);
+    }
+    public onChangeSchemaType(schema: SchemaDescription) {
+        this.effectController.putSchema(this.model.entityUid, { schemaName: schema.name })
+            .then(res => this.model = res.data)
+            .then(f => this.ea.publish("operation:saved"))
+            // .then(this.handleUpdate);
+    }
     //#endregion
 
+
     //#region callback handlers
-    public onMoveEffectUp(e: IEffect) {
-        let idx = this.model.effectIds.indexOf(e.entityUid);
-        this.model.effectIds.splice(idx, 1);
-        this.model.effectIds.splice(idx - 1, 0, e.entityUid);
-        // update db
-        this.effectController.putEffect(this.model.entityUid, this.model)
-            .then(res => this.model = res.data);
-    }
-    public onMoveEffectDown(e: IEffect) {
-        let idx = this.model.effectIds.indexOf(e.entityUid);
-        this.model.effectIds.splice(idx, 1);
-        this.model.effectIds.splice(idx + 1, 0, e.entityUid);
-        // update db
-        this.effectController.putEffect(this.model.entityUid, this.model)
-            .then(res => this.model = res.data);
-    }
-    // remove of child of this
-    public onRemoveEffect(e: IEffect) {
-        console.log("Effect remove eff: " + e.entityUid)
-        let idx = this.model.effectIds.indexOf(e.entityUid);
-        this.model.effectIds.splice(idx, 1);
-        // update db
-        this.effectController.putEffect(this.model.entityUid, this.model)
-            .then(res => {
-                this.model = res.data
-                this.effectController.deleteEffect(e.entityUid);
-            });
-    }
-    public onAddChild(schema: SchemaDescription) {
-        console.log("add child to: " + this.model.entityUid)
-        // update db
-        this.effectController.postChild(this.model.entityUid, {
-            schemaName: schema.name
-        }).then(res => {
-            // this.model.effectIds.push(res.data.entityUid)
-            this.model = res.data;
-            console.log("effect addChild result: " + JSON.stringify(this.model.effectIds))
-        });
-        // .then(res => location.reload())
-    }
     public onSave() {
         // console.log("effect save")
         // update db

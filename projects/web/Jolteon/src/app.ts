@@ -54,6 +54,11 @@ export class App implements IRouteableComponent {
 			path: 'editor/spell/:uid',
 			component: import('./pages/encyclopedia/spells/spell'),
 			title: 'Spell',
+		},
+		{
+			path: 'editor/status/:uid',
+			component: import('./pages/encyclopedia/statuses/status'),
+			title: 'Status',
 		}
 	];
 

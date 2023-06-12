@@ -11,6 +11,7 @@ using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.neweffects.face;
 using souchy.celebi.eevee.neweffects.impl.effects;
 using souchy.celebi.eevee.neweffects.impl.effects.creature;
+using souchy.celebi.eevee.face.entity;
 
 namespace souchy.celebi.eevee.neweffects.impl
 {
@@ -23,6 +24,16 @@ namespace souchy.celebi.eevee.neweffects.impl
         Status,
         Meta, 
         Special,
+    }
+
+    public static class EffTExtensions
+    {
+        public static IEffectSchema CreateSchema(this EffT type)
+        {
+            var name = Enum.GetName(type);
+            var schemaType = typeof(IEntity).Assembly.GetTypes().FirstOrDefault(t => t.Name == name);
+            return (IEffectSchema) Activator.CreateInstance(schemaType)!;
+        }
     }
 
     /// <summary>

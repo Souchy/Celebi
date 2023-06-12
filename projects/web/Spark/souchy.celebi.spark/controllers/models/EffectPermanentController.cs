@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using MongoDB.Driver;
+using souchy.celebi.eevee;
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.stats;
+using souchy.celebi.eevee.face.shared;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.objects;
@@ -23,14 +26,13 @@ namespace souchy.celebi.spark.controllers.models
     [ApiController]
     [Produces("application/json")]
     [Route(Routes.Models + "effect")] 
-    public class EffectPermanentController : ControllerBase
+    public class EffectPermanentController : EffectContainerControllerBase<IEffect> // ControllerBase // 
     {
-        //private readonly EffectService _effectService;
-        //public EffectModelController(EffectService service) => _effectService = service;
-        private readonly CollectionService<IEffect> _effects;
-        public EffectPermanentController(MongoModelsDbService db)
+
+        //protected readonly CollectionService<IEffect> _effects;
+        public EffectPermanentController(MongoModelsDbService db): base(db)
         {
-            _effects = db.GetMongoService<IEffect>();
+            //_effects = db.GetMongoService<IEffect>();
         }
 
         [HttpGet("all")]
@@ -41,49 +43,44 @@ namespace souchy.celebi.spark.controllers.models
         {
             IEffect? effect = await _effects.GetOneAsync(id);
             if (effect is null)
-                return NotFound();
+                return NoContent();
             return Ok(effect);
         }
-
-        //[Authorize]
-        //[HttpPost("effect")]
-        //public async Task<ActionResult<IEffect>> Post(EffectPermanent newEffect)
-        //{
-        //    await _effects.CreateAsync(newEffect);
-        //    return CreatedAtAction(nameof(Get), new { id = newEffect.entityUid }, newEffect);
-        //}
 
         [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPost("new")]
         public async Task<ActionResult<IEffectPermanent>> PostNew([FromQuery] string schemaName)
         {
-            var schemaType = typeof(IEntity).Assembly
-                .GetTypes().FirstOrDefault(t => t.Name == schemaName);
-            if (schemaType == null)
-                return NotFound();
-
             var eff = new EffectPermanent();
             eff.entityUid = ObjectId.GenerateNewId();
-            eff.Schema = (IEffectSchema) Activator.CreateInstance(schemaType)!;
+            eff.Schema = Enum.Parse<EffT>(schemaName).CreateSchema();
             eff.modelUid = (IID) (int) Enum.Parse<EffT>(schemaName);
-
             await _effects.CreateAsync(eff);
+            //var eff = await base.newEffect(schemaName);
             return CreatedAtAction(nameof(Get), new { id = eff.entityUid }, eff);
         }
 
+        [Authorize(Roles = nameof(AccountType.Admin))]
+        [HttpPost("copy")]
+        public async Task<ActionResult<IEffect>> pasteNew([FromBody] IEffect effect)
+        {
+            effect.entityUid = Eevee.RegisterIIDTemporary();
+            await _effects.CreateAsync(effect);
+            return CreatedAtAction(nameof(Get), new { id = effect.entityUid }, effect);
+        }
 
         [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPut("{id}")]
-        public async Task<ActionResult<IEffect>> Update(ObjectId id, EffectPermanent updatedEffect)
+        public async Task<ActionResult<IEffect>> Update(ObjectId id, IEffect effect)
         {
-            var effect = await _effects.GetOneAsync(id);
-            if (effect is null) 
-                return NotFound();
-            updatedEffect.entityUid = effect.entityUid;
-            var result = await _effects.UpdateAsync(id, updatedEffect);
-
-            if (result.MatchedCount > 0) return Ok(updatedEffect);
-            else return Ok(effect);
+            var model = await _effects.GetOneAsync(id);
+            if (model is null) 
+                return NoContent();
+            effect.entityUid = model.entityUid;
+            var result = await _effects.UpdateAsync(id, effect);
+            if (result.MatchedCount > 0) 
+                return Ok(effect);
+            return BadRequest();
         }
 
         [Authorize(Roles = nameof(AccountType.Admin))]
@@ -92,36 +89,29 @@ namespace souchy.celebi.spark.controllers.models
         {
             var effect = await _effects.GetOneAsync(id);
             if (effect is null) 
-                return NotFound();
+                return NoContent();
             var result = await _effects.RemoveAsync(id);
             return Ok(result);
         }
 
 
+
         [Authorize(Roles = nameof(AccountType.Admin))]
-        [HttpPost("{id}/child")]
-        public async Task<ActionResult<IEffect>> AddEffect([FromRoute] ObjectId id, [FromQuery] string schemaName)
+        [HttpPut("{id}/schema")]
+        public async Task<ActionResult<IEffect>> ChangeSchema([FromRoute] ObjectId id, [FromQuery] string schemaName)
         {
             var model = await _effects.GetOneAsync(id);
             if (model is null)
-                return NotFound();
+                return NoContent();
 
-            var schemaType = typeof(IEntity).Assembly
-                .GetTypes().FirstOrDefault(t => t.Name == schemaName);
-            if (schemaType == null)
-                return NotFound();
-
-            var eff = new EffectPermanent();
-            eff.entityUid = ObjectId.GenerateNewId();
-            eff.Schema = (IEffectSchema) Activator.CreateInstance(schemaType)!;
-            eff.modelUid = (IID) (int) Enum.Parse<EffT>(schemaName);
-
-            model.EffectIds.Add(eff.entityUid);
-            await _effects.CreateAsync(eff);
+            model.Schema =  Enum.Parse<EffT>(schemaName).CreateSchema();
+            model.modelUid = (IID) (int) Enum.Parse<EffT>(schemaName);
             var result = await _effects.UpdateAsync(model.entityUid, model);
-
-            return Ok(model);
+            if (result.ModifiedCount > 0)
+                return Ok(model);
+            return BadRequest();
         }
+
 
     }
 }

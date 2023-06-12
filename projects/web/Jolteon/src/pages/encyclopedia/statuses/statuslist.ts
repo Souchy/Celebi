@@ -5,19 +5,14 @@ import { StatusModelController } from "../../../jolteon/services/api/StatusModel
 import { IStatusModel, StatusModel } from "../../../jolteon/services/api/data-contracts";
 import { HttpResponse } from "../../../jolteon/services/api/http-client";
 import { IRouter } from '@aurelia/router';
-import { error } from 'console';
-import { CreatureModelController } from '../../../jolteon/services/api/CreatureModelController';
-import { Status } from './status';
 
-@inject(IEventAggregator, IRouter, StatusModelController, CreatureModelController)
-export class StatusList {
+@inject(IEventAggregator, IRouter, StatusModelController)
+export class Statuslist {
 
     @bindable
     public mode: string = 'root';
     @bindable
     public statusids: string[] = []
-    @bindable
-    public creatureid: string // TODO
 
     @bindable
     public callbackremove = (status: StatusModel) => { };
@@ -27,11 +22,8 @@ export class StatusList {
     // db data
     public statuses: StatusModel[] = []
     public filteredStatuses: StatusModel[] = [];
-    public selectedStatuses: StatusModel[] = [];
 
     public filter: string = "";
-    // view-model refs
-    public refs: Status[] = []
 
     // TODO pages for Creature list and Status list
     public readonly numPerPage = 50;
@@ -45,13 +37,13 @@ export class StatusList {
     }
 
     async binding() {
-        // console.log("status list binding")
+        console.log("status list binding")
         await this.refresh();
     }
 
     public async refresh() {
         if (!this.mode) return;
-        // console.log("statuslist refresh: mode=" + this.mode + ", ids=" + this.statusids)
+        console.log("statuslist refresh: mode=" + this.mode + ", ids=" + this.statusids)
         // breadcrumb navigation
         if (this.mode == 'root') {
             this.ea.publish("navcrumb:status", null);
@@ -76,6 +68,7 @@ export class StatusList {
             // console.log(res);
             this.statuses = res.data;
             this.filteredStatuses = [...this.statuses];
+            console.log(this.filteredStatuses);
         } catch (rej) {
             // console.log(rej);
             Toast.create({
@@ -89,6 +82,7 @@ export class StatusList {
 
     public async clickCreate() {
         let res = await this.statusController.postNew();
+        console.log("status list click create : " + JSON.stringify(res.data))
         this.statuses.push(res.data);
         this.filteredStatuses.push(res.data);
         this.callbackadd(res.data);
@@ -116,7 +110,7 @@ export class StatusList {
     }
 
     public async clickRemove(status: StatusModel) {
-        let idx = this.statuses.findIndex(s => s.modelUid == status.modelUid);
+        let idx = this.statuses.findIndex(s => s.entityUid == status.entityUid);
         // console.log("status list click remove idx: " + idx);
         if (idx == -1) return;
 
@@ -127,7 +121,7 @@ export class StatusList {
         }
 
         if (this.mode == 'root') {
-            this.statusController.deleteStatus(status.modelUid).then(
+            this.statusController.deleteStatus(status.entityUid).then(
                 res => {
                     this.statuses.splice(idx, 1)
                     this.filteredStatuses.splice(idx, 1)

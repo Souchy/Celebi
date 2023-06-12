@@ -22,6 +22,17 @@ namespace souchy.celebi.eevee.enums.characteristics.properties
         /// </summary>
         public static readonly OtherProperty MindPower  = new(6, nameof(MindPower)); 
 
+        /// <summary>
+        /// When swapped out, can't be swapped IN right away. <br></br>
+        /// Need to wait x turns before swap in
+        /// </summary>
+        public static readonly OtherProperty SwapInBaseCooldown = new(7, nameof(SwapInBaseCooldown));
+        /// <summary>
+        /// When swapped in, can't be swapped OUT right away.
+        /// Need to wait x turns before swap out
+        /// </summary>
+        public static readonly OtherProperty SwapOutBaseCooldown = new(8, nameof(SwapOutBaseCooldown));
+
 
         public static readonly Dictionary<CharacteristicId, OtherProperty> values = new();
         static OtherProperty()

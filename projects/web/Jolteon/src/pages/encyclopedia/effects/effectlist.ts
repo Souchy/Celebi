@@ -1,11 +1,13 @@
-import { bindable } from "aurelia";
+import { IEventAggregator, bindable, inject } from "aurelia";
 import { IEffect, SchemaDescription } from "../../../jolteon/services/api/data-contracts";
 import { EffectPermanentController } from "../../../jolteon/services/api/EffectPermanentController";
+import { IRouter } from "@aurelia/router";
 
 
 /**
  * TODO
  */
+@inject(IEventAggregator, IRouter, EffectPermanentController)
 export class Effectlist {
 
     @bindable
@@ -14,33 +16,39 @@ export class Effectlist {
     public modaluid = ""
 
     @bindable
-    public callbacksave = () => {}
+    public callbacksave = () => { }
     // public callbackaddeffect = (schemaName: string) => {}
 
-    constructor(private readonly con: EffectPermanentController) {
-
+    constructor(
+        private readonly ea: IEventAggregator,
+        private readonly router: IRouter,
+        private readonly effectController: EffectPermanentController
+    ) {
     }
 
-    public async addEffect(schema: SchemaDescription) {
-        // this.callbackaddeffect(schema.name);
-        this.con.postNew({
-            schemaName: schema.name
-        }).then(res => {
-            let eff = res.data;
-            this.effectids.push(eff.entityUid);
-            this.save();
-        })
-        // console.log("add effect: " + schema) 
-        // this.spellController.postEffect(this.model.modelUid, {
-        //     schemaName: schema.name
-        // }).then(res => {
-        //     // location.reload()
-        //     this.model = res.data;
-        // })
+    binding() {
+        console.log("effectlist binding: " + this.effectids);
     }
+
     public save() {
         this.callbacksave();
     }
+
+    public async onAddChild(schema: SchemaDescription) {
+        // this.callbackaddeffect(schema.name);
+        this.effectController.postNew({ schemaName: schema.name })
+            .then(res => this.effectids.push(res.data.entityUid)) 
+            .then(f =>  this.save())
+    }
+
+    public async clickPasteNewEffect() {
+        let text = await navigator.clipboard.readText();
+        let eff: IEffect = JSON.parse(text);
+        this.effectController.postCopy(eff)
+            .then(res => this.effectids.push(res.data.entityUid)) 
+            .then(f =>  this.save())
+    }
+
 
     public onMoveEffectUp(e: IEffect) {
         let idx = this.effectids.indexOf(e.entityUid);
@@ -73,5 +81,33 @@ export class Effectlist {
         this.save();
     }
 
+    // public onDrag(ev, effectid) {
+    //     console.log("drag:")
+    //     console.log(ev)
+    //     ev.dataTransfer.setData("text", JSON.stringify({
+    //         parent: "effect",
+    //         id: this.model.entityUid
+    //     }));
+    // }
+    // public onDragOver(ev, effectid) {
+    //     ev.preventDefault();
+    // }
+    // public onDrop(ev, effectid) {
+    //     console.log("drop:")
+    //     console.log(ev)
+
+    //     ev.preventDefault();
+    //     let data: { parent: string, id: string } = JSON.parse(ev.dataTransfer.getData("text"));
+    //     // dont drag & drop into itself
+    //     if(data.id == this.model.entityUid) return;
+    //     // remove from all parents, then add as child to this
+    //     this.effectController.putRemoveEffect(data.id);
+    //     this.effectController.putAddEffect(this.model.entityUid, data.id)
+    //         .then(res => this.model = res.data)
+    //         .then(eff => this.ea.publish("operation:saved"))
+    //     // .then(this.handleUpdate);
+        
+    // }
     
+
 }

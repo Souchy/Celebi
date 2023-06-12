@@ -3,6 +3,7 @@
 <import from="../stats/spell/spellstats"></import>
 <import from="../effects/modelSelector/effectModelSelector"></import>
 <import from="../effects/effect"></import>
+<import from="../effects/effectlist"></import>
 <import from="../zone/zone"></import>
 <import from="../stats/gen/statsmini"></import>
 <import from="../condition/condition"></import>
@@ -97,17 +98,7 @@
   </div>
 
   <!-- effects -->
-  <div if.bind="model">
-    <h4>Effects</h4>
-    <button class="btn" data-bs-toggle="modal" data-bs-target="#effectModelModal">Add</button>
-    <modal id="effectModelModal" header="Add Spell Effect" close.bind=false footer.bind=false>
-      <effect-model-selector onselectcallback.bind="e => addEffect(e)"></effect-model-selector>
-    </modal>
-
-    <div class="effectlist">
-      <effect repeat.for="effectid of model.effectIds" uid.bind="effectid" callbackmoveup.bind="e => onMoveEffectUp(e)" callbackmovedown.bind="e => onMoveEffectDown(e)" callbackremove.bind="e => onRemoveEffect(e)"></effect>
-    </div>
-  </div>
+  <effectlist if.bind="model.effectIds" effectids.bind="model.effectIds" modaluid.bind="model.entityUid" callbacksave.bind="() => save()"></effectlist>
 
 
 </template>

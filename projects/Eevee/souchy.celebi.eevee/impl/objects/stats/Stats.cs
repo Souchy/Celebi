@@ -1,4 +1,6 @@
-﻿using MongoDB.Bson.Serialization.Options;
+﻿using Microsoft.AspNetCore.DataProtection.KeyManagement;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.Options;
 using Newtonsoft.Json;
 using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.enums.characteristics;
@@ -8,23 +10,21 @@ using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.impl.util.math;
+using souchy.celebi.eevee.impl.util.serialization;
+using System.ComponentModel;
 
 namespace souchy.celebi.eevee.impl.stats
 {
-    public class Stats : IStats //, IEntityDictionary<CharacteristicId, IStat>
+    public class Stats : IStats 
     {
-        //public static readonly string dicName = nameof(dic);
         [BsonId]
         public ObjectId entityUid { get; set; }
 
+        [BsonSerializer(typeof(EntityDictionarySerializer<CharacteristicId, IStat>))]
+        public EntityDictionary<CharacteristicId, IStat> @base { get; set; } = (EntityDictionary<CharacteristicId, IStat>) EntityDictionary<CharacteristicId, IStat>.Create();
 
-        //[JsonProperty(TypeNameHandling = TypeNameHandling.None)]
-        //[BsonDictionaryOptions(Representation = DictionaryRepresentation.Document)]
-        //public Dictionary<CharacteristicId, MathEquation> growth { get; set; } = new();
-
-        public IEntityDictionary<CharacteristicId, IStat> @base { get; set; } = EntityDictionary<CharacteristicId, IStat>.Create();
-        public IEntityDictionary<CharacteristicId, MathEquation> growth { get; set; } = EntityDictionary<CharacteristicId, MathEquation>.Create();
-
+        [BsonSerializer(typeof(EntityDictionarySerializer<CharacteristicId, MathEquation>))]
+        public EntityDictionary<CharacteristicId, MathEquation> growth { get; set; } = (EntityDictionary<CharacteristicId, MathEquation>) EntityDictionary<CharacteristicId, MathEquation>.Create();
 
         [JsonIgnore]
         public IEnumerable<CharacteristicId> Keys => @base.Keys;
@@ -32,7 +32,7 @@ namespace souchy.celebi.eevee.impl.stats
         public IEnumerable<IStat> Values => @base.Values;
         [JsonIgnore]
         public IEnumerable<KeyValuePair<CharacteristicId, IStat>> Pairs => @base.Pairs;
-
+        
         protected Stats() { }
         public static IStats Create() => new Stats()
         {
@@ -78,6 +78,12 @@ namespace souchy.celebi.eevee.impl.stats
         public IStat Get(CharacteristicId key) => @base.Get(key);
         public IEntityDictionary<CharacteristicId, IStat> Add(CharacteristicId key, IStat value) => @base.Add(key, value);
         public IEntityDictionary<CharacteristicId, IStat> AddAll(IEntityDictionary<CharacteristicId, IStat> dictionary) => @base.AddAll(dictionary);
+        public IEntityDictionary<CharacteristicId, IStat> AddAll(Dictionary<CharacteristicId, IStat> dictionary)
+        {
+            foreach (var pair in dictionary)
+                Add(pair.Key, pair.Value);
+            return this;
+        }
         public IEntityDictionary<CharacteristicId, IStat> Set(CharacteristicId key, IStat value) => @base.Set(key, value);
         public bool Remove(CharacteristicId key) => @base.Remove(key);
         public void Remove(Predicate<IStat> predicate) => @base.Remove(predicate);  
@@ -90,6 +96,13 @@ namespace souchy.celebi.eevee.impl.stats
             Eevee.DisposeEventBus(this);
             @base.Dispose();
             growth.Dispose();
+        }
+
+        public void serialize(BsonSerializationContext context)
+        {
+            // c'est voulu, on veut pas serializer stats en un dictionaire
+            // on veut plutot insérer les 2 dictionnaires dedans (base, growth) 
+            throw new NotImplementedException(); 
         }
     }
 }

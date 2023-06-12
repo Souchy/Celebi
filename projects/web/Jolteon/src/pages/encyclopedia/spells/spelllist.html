@@ -1,4 +1,6 @@
 <import from='./spell'></import>
+<import from="../../../components/modal/modal"></import>
+<import from="../entitylist.less"></import>
 
 <!-- creature spells -->
 <div if.bind="mode == 'creature'">
@@ -8,20 +10,9 @@
   <button class="btn listMenu" click.trigger="clickCreate()">New Spell</button>
 
   <!-- Modal -->
-  <div class="modal fade" id="spellSearchModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="spellSearchModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="spellSearchModalLabel">Spell select</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <spelllist mode="search" creatureid.bind="creatureid" callbackadd.bind="s => clickAddToCreature(s)"></spelllist>
-        </div>
-        <div class="modal-footer"></div>
-      </div>
-    </div>
-  </div>
+  <modal id="spellSearchModal" header="Spell select" close.bind=false footer.bind=false>
+    <spelllist mode="search" callbackadd.bind="s => clickAddToCreature(s)"></spelllist>
+  </modal>
 
   <!-- creature spell list -->
   <div class="list">

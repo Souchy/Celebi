@@ -1,8 +1,10 @@
-﻿using MongoDB.Bson.Serialization.Options;
+﻿using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.Options;
 using Newtonsoft.Json;
 using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.impl.util.serialization;
 
 namespace souchy.celebi.eevee.impl.util
 {
@@ -25,6 +27,11 @@ namespace souchy.celebi.eevee.impl.util
         private EntityDictionary() { }
         public static IEntityDictionary<TKey, TValue> Create() => new EntityDictionary<TKey, TValue>() { 
             entityUid = Eevee.RegisterIIDTemporary()
+        };
+        public static IEntityDictionary<TKey, TValue> Create(Dictionary<TKey, TValue> data) => new EntityDictionary<TKey, TValue>()
+        {
+            entityUid = Eevee.RegisterIIDTemporary(),
+            dic = data
         };
 
         public TValue Get(TKey key)
@@ -60,6 +67,12 @@ namespace souchy.celebi.eevee.impl.util
         public IEntityDictionary<TKey, TValue> AddAll(IEntityDictionary<TKey, TValue> dictionary)
         {
             dictionary.ForEach((key, value) => this.Add(key, value));
+            return this;
+        }
+        public IEntityDictionary<TKey, TValue> AddAll(Dictionary<TKey, TValue> dictionary)
+        {
+            foreach (var pair in dictionary)
+                Add(pair.Key, pair.Value);
             return this;
         }
 
@@ -121,5 +134,9 @@ namespace souchy.celebi.eevee.impl.util
             this.Clear();
         }
 
+        public void serialize(BsonSerializationContext context)
+        {
+            BsonSerializer.Serialize(context.Writer, dic);
+        }
     }
 }

@@ -75,6 +75,14 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
         //
         public static readonly Contextual CountHitsGiven     = new(100, nameof(CountHitsGiven));
         public static readonly Contextual CountHitsTaken     = new(101, nameof(CountHitsTaken));
+        /// <summary>
+        /// See Other.SwapInCooldown. This needs to go down -1 every turn
+        /// </summary>
+        public static readonly Contextual SwapInRemainingCooldown  = new(102, nameof(SwapInRemainingCooldown));
+        /// <summary>
+        /// See Other.SwapOutCooldown. This needs to go down -1 every turn
+        /// </summary>
+        public static readonly Contextual SwapOutRemainingCooldown = new(103, nameof(SwapOutRemainingCooldown));
 
 
 
@@ -92,6 +100,8 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
         // spells cast? list<(spellid, cell)>
         // damage done by current spell 
         // 
+
+        
 
 
         public static readonly Dictionary<CharacteristicId, Contextual> values = new();

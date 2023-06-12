@@ -30,6 +30,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using souchy.celebi.eevee.impl.util.math;
 
 namespace souchy.celebi.spark
 {
@@ -404,7 +405,9 @@ namespace souchy.celebi.spark
             BsonClassMap.RegisterClassMap<EntitySet<IID>>();
             BsonClassMap.RegisterClassMap<EntitySet<ObjectId>>();
             BsonClassMap.RegisterClassMap<EntityDictionary<CharacteristicId, IStat>>();
+            BsonClassMap.RegisterClassMap<EntityDictionary<CharacteristicId, MathEquation>>();
             BsonClassMap.RegisterClassMap<Dictionary<CharacteristicId, IStat>>();
+            BsonClassMap.RegisterClassMap<Dictionary<CharacteristicId, MathEquation>>();
 
             BsonClassMap.RegisterClassMap<Value<ZoneType>>();
             BsonClassMap.RegisterClassMap<Value<ElementType>>();
@@ -420,6 +423,7 @@ namespace souchy.celebi.spark
                 var m = new BsonClassMap(t);
                 m.AutoMap();
                 BsonClassMap.RegisterClassMap(m);
+                m.SetIgnoreExtraElements(true);
             }
         }
 

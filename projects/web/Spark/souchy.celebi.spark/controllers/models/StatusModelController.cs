@@ -19,17 +19,17 @@ namespace souchy.celebi.spark.controllers.models
     [ApiController]
     [Produces("application/json")]
     [Route(Routes.Models + "status")]
-    public class StatusModelController : ControllerBase
+    public class StatusModelController : EffectContainerControllerBase<IStatusModel>
     {
-        private readonly CollectionService<IStatusModel> _statusService;
+        private readonly CollectionService<IStatusModel> statuses;
         private readonly CollectionService<IStatusSkin> _skins;
         private readonly CollectionService<IStats> _stats;
         private readonly StringService _strings;
         private readonly IDCounterService _ids;
         private readonly MongoFederationService _federation;
-        public StatusModelController(MongoModelsDbService db, StringService strings, IDCounterService ids, MongoFederationService federation)
+        public StatusModelController(MongoModelsDbService db, StringService strings, IDCounterService ids, MongoFederationService federation) : base(db)
         {
-            _statusService = db.GetMongoService<IStatusModel>();
+            statuses = db.GetMongoService<IStatusModel>();
             _skins = db.GetMongoService<IStatusSkin>();
             _stats = db.GetMongoService<IStats>();
             _strings = strings;
@@ -38,11 +38,11 @@ namespace souchy.celebi.spark.controllers.models
         }
 
         [HttpGet("all")]
-        public async Task<List<IStatusModel>> GetAll() => await _statusService.GetAsync();
+        public async Task<List<IStatusModel>> GetAll() => await statuses.GetAsync();
 
         [HttpGet("filtered")]
         public async Task<List<IStatusModel>> GetFiltered(FilterDefinition<IStatusModel> filter)
-            => await _statusService.GetAsync(filter);
+            => await statuses.GetAsync(filter);
 
         [HttpGet("byString/{str}")]
         public async Task<List<IStatusModel>> GetByString(string str) => await _federation.FindStatusesByString(str);
@@ -51,19 +51,12 @@ namespace souchy.celebi.spark.controllers.models
         [HttpGet("{id}")]
         public async Task<ActionResult<IStatusModel>> Get(ObjectId id)
         {
-            IStatusModel? creatureModel = await _statusService.GetOneAsync(id);
+            IStatusModel? creatureModel = await statuses.GetOneAsync(id);
             if (creatureModel is null)
                 return NotFound();
             return Ok(creatureModel);
         }
 
-        //[Authorize]
-        //[HttpPost("")]
-        //public async Task<IActionResult> Post(StatusModel newSpellModel)
-        //{
-        //    await _statusService.CreateAsync(newSpellModel);
-        //    return CreatedAtAction(nameof(Get), new { id = newSpellModel.entityUid }, newSpellModel);
-        //}
 
         [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPost("new")]
@@ -71,7 +64,7 @@ namespace souchy.celebi.spark.controllers.models
         {
             var model = await Factories.newStatusModel(_ids);
 
-            await _statusService.CreateAsync(model.status);
+            await statuses.CreateAsync(model.status);
             await _strings.CreateAsync(model.name);
             await _strings.CreateAsync(model.desc);
             await _stats.CreateAsync(model.stats);
@@ -84,11 +77,11 @@ namespace souchy.celebi.spark.controllers.models
         [HttpPut("{id}")]
         public async Task<ActionResult<IStatusModel>> Update([FromRoute] ObjectId id, [FromBody] StatusModel updatedModel)
         {
-            var oldModel = await _statusService.GetOneAsync(id);
+            var oldModel = await statuses.GetOneAsync(id);
             if (oldModel is null)
                 return NotFound();
             updatedModel.entityUid = oldModel.entityUid;
-            var result = await _statusService.UpdateAsync(id, updatedModel);
+            var result = await statuses.UpdateAsync(id, updatedModel);
             if (result.MatchedCount > 0) return Ok(updatedModel);
             else return Ok(oldModel);
         }
@@ -97,10 +90,10 @@ namespace souchy.celebi.spark.controllers.models
         [HttpDelete("{id}")]
         public async Task<ActionResult<DeleteResult>> Delete(ObjectId id)
         {
-            var crea = await _statusService.GetOneAsync(id);
+            var crea = await statuses.GetOneAsync(id);
             if (crea is null)
                 return NotFound();
-            var result = await _statusService.RemoveAsync(id);
+            var result = await statuses.RemoveAsync(id);
             return Ok(result);
         }
     }

@@ -96,16 +96,6 @@ export class Spell {
         this.callbackremove(this.model);
     }
 
-    public async addEffect(schema: SchemaDescription) {
-        // console.log("add effect: " + schema) 
-        this.spellController.postEffect(this.model.modelUid, {
-            schemaName: schema.name
-        }).then(res => {
-            // location.reload()
-            this.model = res.data;
-        })
-    }
-
     public async clickNewSkin() {
         // create skin
         let res = await this.skinController.postSkin();
@@ -123,37 +113,6 @@ export class Spell {
                 this.ea.publish("operation:saved");
             }
         )
-    }
-
-    public onMoveEffectUp(e: IEffect) {
-        let idx = this.model.effectIds.indexOf(e.entityUid);
-        if (idx == -1) {
-            console.error("Spell.moveEffectUp: effect not found: " + JSON.stringify(e));
-            return;
-        }
-        this.model.effectIds.splice(idx, 1);
-        this.model.effectIds.splice(idx - 1, 0, e.entityUid);
-        // this.spellController.putSpell(this.model.modelUid, this.model);
-        this.save();
-    }
-    public onMoveEffectDown(e: IEffect) {
-        let idx = this.model.effectIds.indexOf(e.entityUid);
-        console.log("effect ids: " + idx + ", " + JSON.stringify(this.model.effectIds));
-        if (idx == -1) {
-            console.error("Spell.moveEffectDown: effect not found: " + JSON.stringify(e));
-            return;
-        }
-        this.model.effectIds.splice(idx, 1);
-        this.model.effectIds.splice(idx + 1, 0, e.entityUid);
-        // this.spellController.putSpell(this.model.modelUid, this.model);
-        this.save();
-    }
-    public onRemoveEffect(e: IEffect) {
-        console.log("spell remove eff: " + e.entityUid)
-        let idx = this.model.effectIds.indexOf(e.entityUid);
-        this.model.effectIds.splice(idx, 1);
-        // this.spellController.putSpell(this.model.modelUid, this.model);
-        this.save();
     }
 
 

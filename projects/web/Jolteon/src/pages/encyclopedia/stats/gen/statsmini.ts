@@ -36,12 +36,14 @@ export class Statsmini {
      */
     binding() {
         if (this.statsuid && !this.stats) {
+            // console.log("load stats " + this.statsuid)
             this.statsController.getStats(this.statsuid).then(
                 res => {
+                    console.log("got stats: ")
+                    console.log( res.data)
                     this.stats = res.data;
-                    // console.log("stats: ")
-                    // console.log(this.stats)
-                }
+                },
+                rej => console.log("no stats error")
             )
         }
         // console.log("stats mini stats: ");
@@ -53,14 +55,14 @@ export class Statsmini {
     // @watch("stats.dic")
     public get getDicValues() {
         // console.log("sdf: " + JSON.stringify(sdf))
-        return Object.values(this.stats.base);
+        return Object.values(this.stats.base.dic);
     }
 
     public get getDicKeys() {
         if (this.showall) {
             return this.characsallowed;
         } else {
-            return Object.keys(this.stats.base);
+            return Object.keys(this.stats.base.dic).filter(k => k != "$type" && k != "entityUid");
         }
     }
 
@@ -68,14 +70,14 @@ export class Statsmini {
     //     return Object.values(this.stats.growth);
     // }
     public getBase(statid: string) {
-        return this.stats.base[statid];
+        return this.stats.base.dic[statid];
     }
     public getGrowth(statId) {
-        return this.stats.growth[statId];
+        return this.stats.growth.dic[statId];
     }
 
     public getCharacName(statId: string) {
-        // console.log("getCharacName for: " + statId)
+        console.log("getCharacName for: " + statId)
         return Characteristics.getCharac(statId).baseName;
     }
     public getCharacType(statId: string) {
@@ -115,7 +117,7 @@ export class Statsmini {
         this.save();
     }
     public clickRemoveStat(statid: string) {
-        delete this.stats.base[statid];
+        delete this.stats.base.dic[statid];
         // console.log("Statsmini clickRemoveStat: save effect");
         this.save();
     }
@@ -124,7 +126,7 @@ export class Statsmini {
         // console.log("Statsmini.onAddStat: " + JSON.stringify(property))
         this.statsController.postStat({ characID: property.id }).then(
             res => {
-                this.stats.base[res.data.statId] = res.data;
+                this.stats.base.dic[res.data.statId] = res.data;
 
                 if (this.hasgrowth) {
                     let equation: MathEquation = {
@@ -136,7 +138,7 @@ export class Statsmini {
                             }
                         ]
                     }
-                    this.stats.growth[res.data.statId] = equation; //res.data;
+                    this.stats.growth.dic[res.data.statId] = equation; //res.data;
                 }
                 console.log("Statsmini bubble up callback: ")
                 console.log(this.stats)

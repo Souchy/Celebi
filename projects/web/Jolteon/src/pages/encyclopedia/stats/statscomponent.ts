@@ -48,7 +48,7 @@ export class Statscomponent implements IRouteableComponent {
     public keys(types) {
         // let asdf: keyof typeof AffinityTypes = 'Air'
         // let t = AffinityTypes;
-        console.log("asdf: " + Object.values(types));
+        // console.log("asdf: " + Object.values(types));
         // console.log(typeof AffinityTypes)
         // console.log("keys: " + JSON.stringify(AffinityTypes['Air']))
         // return Object.keys(types);

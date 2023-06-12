@@ -879,22 +879,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/EffectPermanent"
+                "$ref": "#/components/schemas/IEffect"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/EffectPermanent"
+                "$ref": "#/components/schemas/IEffect"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/EffectPermanent"
+                "$ref": "#/components/schemas/IEffect"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/EffectPermanent"
+                "$ref": "#/components/schemas/IEffect"
               }
             }
           }
@@ -970,8 +970,51 @@
         }
       }
     },
-    "/api/models/effect/{id}/child": {
+    "/api/models/effect/copy": {
       "post": {
+        "tags": [
+          "EffectPermanentController"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IEffect"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IEffect"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IEffect"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IEffect"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IEffect"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/effect/{id}/schema": {
+      "put": {
         "tags": [
           "EffectPermanentController"
         ],
@@ -989,6 +1032,75 @@
             "name": "schemaName",
             "in": "query",
             "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IEffect"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/effect/{id}/addEffect/{addid}": {
+      "put": {
+        "tags": [
+          "EffectPermanentController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "addid",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IEffect"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/effect/removeEffect/{id}": {
+      "put": {
+        "tags": [
+          "EffectPermanentController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
             "schema": {
               "type": "string"
             }
@@ -2511,8 +2623,8 @@
         }
       }
     },
-    "/api/models/spell/{id}/effect": {
-      "post": {
+    "/api/models/spell/{id}/addEffect/{addid}": {
+      "put": {
         "tags": [
           "SpellModelController"
         ],
@@ -2527,17 +2639,10 @@
             }
           },
           {
-            "name": "effectParentId",
-            "in": "query",
-            "style": "form",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "schemaName",
-            "in": "query",
-            "style": "form",
+            "name": "addid",
+            "in": "path",
+            "required": true,
+            "style": "simple",
             "schema": {
               "type": "string"
             }
@@ -2549,7 +2654,37 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ISpellModel"
+                  "$ref": "#/components/schemas/IEffect"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/spell/removeEffect/{id}": {
+      "put": {
+        "tags": [
+          "SpellModelController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IEffect"
                 }
               }
             }
@@ -3297,6 +3432,75 @@
         }
       }
     },
+    "/api/models/status/{id}/addEffect/{addid}": {
+      "put": {
+        "tags": [
+          "StatusModelController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "addid",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IEffect"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/status/removeEffect/{id}": {
+      "put": {
+        "tags": [
+          "StatusModelController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IEffect"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/models/string/all": {
       "get": {
         "tags": [
@@ -3580,8 +3784,8 @@
       },
       "ActorType": {
         "enum": [
-          "Source",
-          "Target"
+          "Source = 0",
+          "Target = 1"
         ],
         "type": "string",
         "format": ""
@@ -3765,8 +3969,8 @@
       },
       "BoardTargetType": {
         "enum": [
-          "Cell",
-          "Creature"
+          "Cell = 0",
+          "Creature = 1"
         ],
         "type": "string",
         "format": ""
@@ -3828,49 +4032,31 @@
       },
       "CharacteristicCategory": {
         "enum": [
-          "Resource",
-          "Affinity",
-          "Resistance",
-          "State",
-          "Contextual",
-          "Other",
-          "Spell",
-          "SpellModel",
-          "StatusContainer",
-          "StatusInstance"
+          "Resource = 1",
+          "Affinity = 2",
+          "Resistance = 3",
+          "State = 4",
+          "Contextual = 5",
+          "Other = 6",
+          "Spell = 7",
+          "SpellModel = 8",
+          "StatusContainer = 9",
+          "StatusInstance = 10"
         ],
         "type": "string",
         "format": ""
       },
-      "CharacteristicIdIStatIEntityDictionary": {
+      "CharacteristicIdIStatEntityDictionary": {
         "type": "object",
         "properties": {
-          "keys": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true,
-            "readOnly": true
-          },
-          "values": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/IStat"
-            },
-            "nullable": true,
-            "readOnly": true
-          },
-          "pairs": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CharacteristicIdIStatKeyValuePair"
-            },
-            "nullable": true,
-            "readOnly": true
-          },
           "entityUid": {
             "type": "string"
+          },
+          "dic": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/IStat"
+            }
           }
         },
         "additionalProperties": false
@@ -3887,47 +4073,17 @@
         },
         "additionalProperties": false
       },
-      "CharacteristicIdMathEquationIEntityDictionary": {
+      "CharacteristicIdMathEquationEntityDictionary": {
         "type": "object",
         "properties": {
-          "keys": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true,
-            "readOnly": true
-          },
-          "values": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MathEquation"
-            },
-            "nullable": true,
-            "readOnly": true
-          },
-          "pairs": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CharacteristicIdMathEquationKeyValuePair"
-            },
-            "nullable": true,
-            "readOnly": true
-          },
           "entityUid": {
             "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "CharacteristicIdMathEquationKeyValuePair": {
-        "type": "object",
-        "properties": {
-          "key": {
-            "type": "string"
           },
-          "value": {
-            "$ref": "#/components/schemas/MathEquation"
+          "dic": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/MathEquation"
+            }
           }
         },
         "additionalProperties": false
@@ -3979,20 +4135,20 @@
       },
       "ConditionComparatorType": {
         "enum": [
-          "EQ",
-          "NE",
-          "GT",
-          "GE",
-          "LT",
-          "LE"
+          "EQ = 0",
+          "NE = 1",
+          "GT = 2",
+          "GE = 3",
+          "LT = 4",
+          "LE = 5"
         ],
         "type": "string",
         "format": ""
       },
       "ConditionGroupType": {
         "enum": [
-          "AND",
-          "OR"
+          "AND = 0",
+          "OR = 1"
         ],
         "type": "string",
         "format": ""
@@ -4052,8 +4208,8 @@
       },
       "ConsumableType": {
         "enum": [
-          "All",
-          "Random"
+          "All = 0",
+          "Random = 1"
         ],
         "type": "string",
         "format": ""
@@ -4123,6 +4279,8 @@
           "RageReduced: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 35,\r\n  \"baseName\": \"RageReduced\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5035\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.RageReduced\",\r\n  \"enumValueConstraint\": null\r\n};",
           "CountHitsGiven: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 100,\r\n  \"baseName\": \"CountHitsGiven\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5100\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.CountHitsGiven\",\r\n  \"enumValueConstraint\": null\r\n};",
           "CountHitsTaken: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 101,\r\n  \"baseName\": \"CountHitsTaken\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5101\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.CountHitsTaken\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "SwapInRemainingCooldown: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 102,\r\n  \"baseName\": \"SwapInRemainingCooldown\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5102\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.SwapInRemainingCooldown\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "SwapOutRemainingCooldown: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 103,\r\n  \"baseName\": \"SwapOutRemainingCooldown\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5103\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.SwapOutRemainingCooldown\",\r\n  \"enumValueConstraint\": null\r\n};",
           "StartTurnPosition: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 200,\r\n  \"baseName\": \"StartTurnPosition\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5200\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.StartTurnPosition\",\r\n  \"enumValueConstraint\": null\r\n};",
           "StartFightPosition: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 201,\r\n  \"baseName\": \"StartFightPosition\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5201\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.StartFightPosition\",\r\n  \"enumValueConstraint\": null\r\n};",
           "PreviousPositions: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 202,\r\n  \"baseName\": \"PreviousPositions\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 3,\r\n  \"id\": \"5202\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.PreviousPositions\",\r\n  \"enumValueConstraint\": null\r\n};",
@@ -4248,10 +4406,10 @@
             "type": "string"
           },
           "base": {
-            "$ref": "#/components/schemas/CharacteristicIdIStatIEntityDictionary"
+            "$ref": "#/components/schemas/CharacteristicIdIStatEntityDictionary"
           },
           "growth": {
-            "$ref": "#/components/schemas/CharacteristicIdMathEquationIEntityDictionary"
+            "$ref": "#/components/schemas/CharacteristicIdMathEquationEntityDictionary"
           }
         },
         "additionalProperties": false
@@ -4491,29 +4649,29 @@
       },
       "Direction8Type": {
         "enum": [
-          "top",
-          "topright",
-          "right",
-          "bottomright",
-          "bottom",
-          "bottomleft",
-          "left",
-          "topleft"
+          "top = 0",
+          "topright = 1",
+          "right = 2",
+          "bottomright = 3",
+          "bottom = 4",
+          "bottomleft = 5",
+          "left = 6",
+          "topleft = 7"
         ],
         "type": "string",
         "format": ""
       },
       "Direction9Type": {
         "enum": [
-          "center",
-          "top",
-          "topright",
-          "right",
-          "bottomright",
-          "bottom",
-          "bottomleft",
-          "left",
-          "topleft"
+          "center = 0",
+          "top = 1",
+          "topright = 2",
+          "right = 3",
+          "bottomright = 4",
+          "bottom = 5",
+          "bottomleft = 6",
+          "left = 7",
+          "topleft = 8"
         ],
         "type": "string",
         "format": ""
@@ -4548,97 +4706,97 @@
       },
       "EffT": {
         "enum": [
-          "AddStats",
-          "LearnSpell",
-          "ForgetSpell",
-          "ChangeAppearance",
-          "ChangeAnimationSet",
-          "ReduceDamageReceived",
-          "BuildObstacle",
-          "DestroyObstacle",
-          "DigHole",
-          "FillHole",
-          "Kill",
-          "Revive",
-          "EndTurn",
-          "SpawnSummon",
-          "UnspawnSummon",
-          "SpawnSummonDouble",
-          "SpawnSummonDoubleIllusion",
-          "RevealCreatureSpells",
-          "Walk",
-          "PushBy",
-          "PullBy",
-          "DashBy",
-          "DashAwayBy",
-          "PushTo",
-          "PullTo",
-          "DashTo",
-          "SwapSelfWith",
-          "SwapTargetWith",
-          "TeleportSelfTo",
-          "TeleportTargetTo",
-          "TeleportSelfBy",
-          "TeleportTargetBy",
-          "TeleportSymmetricallySelfOverTarget",
-          "TeleportSymmetricallyTargetOverSelf",
-          "TeleportSymmetricallyAoeOverTarget",
-          "TeleportToPreviousPosition",
-          "TeleportToStartOfTurnPosition",
-          "TeleportToStartOfFightPosition",
-          "ChangeActor",
-          "CastSubSpell",
-          "RandomChild",
-          "RandomPointsInZone",
-          "EmptyText",
-          "AddStatusCreature",
-          "AddTrap",
-          "AddGlyph",
-          "AddGlyphAura",
-          "CreateStatusCreature",
-          "CreateTrap",
-          "CreateGlyph",
-          "CreateGlyphAura",
-          "RemoveStatusCreature",
-          "RemoveTrap",
-          "RemoveGlyph",
-          "DirectDamage",
-          "DirectDamagePercentLifeMax",
-          "DirectDamageStealLife",
-          "IndirectDamage",
-          "IndirectDamagePercentLifeMax",
-          "RedirectDamage",
-          "Heal",
-          "HealPercentLifeMax",
-          "HealPercentDamageReceivedByEffect",
-          "HealPercentDamageDoneByEffect",
-          "TransferLife",
-          "TransferPercentLifeMax",
-          "DamagePerDynamicResourceUsedForSpell",
-          "DamagePerContextualStat",
-          "HealPerContextualStat",
-          "AddStatsPerStat",
-          "SwapOut",
-          "SwapIn",
-          "TakeDamageAsElement",
-          "AddStatsPercent",
-          "Chain",
-          "SpellAddStats",
-          "SpellMetaModifySpell",
-          "SpellMetaDeactivate",
-          "SpellMetaAddCosts",
-          "SpellMetaConvertCosts",
-          "SpellMetaChangeMinRangeZone",
-          "SpellMetaChangeMaxRangeZone",
-          "SpellMetaAddSpellModelStats",
-          "SpellMetaAddChildEffects",
-          "SpellMetaEffectChangeZone",
-          "SpellMetaEffectChangeTargetFilter",
-          "SpellMetaEffectAddBaseDamage",
-          "SpellMetaEffectAddBaseHeal",
-          "SpellMetaEffectChangeElement",
-          "SpellMetaEffectChangeVariance",
-          "SpellMetaEffectChangePenetration"
+          "AddStats = 0",
+          "LearnSpell = 1",
+          "ForgetSpell = 2",
+          "ChangeAppearance = 3",
+          "ChangeAnimationSet = 4",
+          "ReduceDamageReceived = 5",
+          "BuildObstacle = 10",
+          "DestroyObstacle = 11",
+          "DigHole = 12",
+          "FillHole = 13",
+          "Kill = 14",
+          "Revive = 15",
+          "EndTurn = 16",
+          "SpawnSummon = 17",
+          "UnspawnSummon = 18",
+          "SpawnSummonDouble = 19",
+          "SpawnSummonDoubleIllusion = 20",
+          "RevealCreatureSpells = 21",
+          "Walk = 22",
+          "PushBy = 23",
+          "PullBy = 24",
+          "DashBy = 25",
+          "DashAwayBy = 26",
+          "PushTo = 27",
+          "PullTo = 28",
+          "DashTo = 29",
+          "SwapSelfWith = 30",
+          "SwapTargetWith = 31",
+          "TeleportSelfTo = 32",
+          "TeleportTargetTo = 33",
+          "TeleportSelfBy = 34",
+          "TeleportTargetBy = 35",
+          "TeleportSymmetricallySelfOverTarget = 36",
+          "TeleportSymmetricallyTargetOverSelf = 37",
+          "TeleportSymmetricallyAoeOverTarget = 38",
+          "TeleportToPreviousPosition = 39",
+          "TeleportToStartOfTurnPosition = 40",
+          "TeleportToStartOfFightPosition = 41",
+          "ChangeActor = 42",
+          "CastSubSpell = 43",
+          "RandomChild = 44",
+          "RandomPointsInZone = 45",
+          "EmptyText = 46",
+          "AddStatusCreature = 47",
+          "AddTrap = 48",
+          "AddGlyph = 49",
+          "AddGlyphAura = 50",
+          "CreateStatusCreature = 51",
+          "CreateTrap = 52",
+          "CreateGlyph = 53",
+          "CreateGlyphAura = 54",
+          "RemoveStatusCreature = 55",
+          "RemoveTrap = 56",
+          "RemoveGlyph = 57",
+          "DirectDamage = 58",
+          "DirectDamagePercentLifeMax = 59",
+          "DirectDamageStealLife = 60",
+          "IndirectDamage = 61",
+          "IndirectDamagePercentLifeMax = 62",
+          "RedirectDamage = 63",
+          "Heal = 64",
+          "HealPercentLifeMax = 65",
+          "HealPercentDamageReceivedByEffect = 66",
+          "HealPercentDamageDoneByEffect = 67",
+          "TransferLife = 68",
+          "TransferPercentLifeMax = 69",
+          "DamagePerDynamicResourceUsedForSpell = 70",
+          "DamagePerContextualStat = 71",
+          "HealPerContextualStat = 72",
+          "AddStatsPerStat = 73",
+          "SwapOut = 100",
+          "SwapIn = 101",
+          "TakeDamageAsElement = 102",
+          "AddStatsPercent = 103",
+          "Chain = 104",
+          "SpellAddStats = 150",
+          "SpellMetaModifySpell = 200",
+          "SpellMetaDeactivate = 201",
+          "SpellMetaAddCosts = 202",
+          "SpellMetaConvertCosts = 203",
+          "SpellMetaChangeMinRangeZone = 204",
+          "SpellMetaChangeMaxRangeZone = 205",
+          "SpellMetaAddSpellModelStats = 206",
+          "SpellMetaAddChildEffects = 207",
+          "SpellMetaEffectChangeZone = 250",
+          "SpellMetaEffectChangeTargetFilter = 251",
+          "SpellMetaEffectAddBaseDamage = 300",
+          "SpellMetaEffectAddBaseHeal = 301",
+          "SpellMetaEffectChangeElement = 302",
+          "SpellMetaEffectChangeVariance = 303",
+          "SpellMetaEffectChangePenetration = 304"
         ],
         "type": "string",
         "format": ""
@@ -4730,17 +4888,17 @@
       },
       "ElementType": {
         "enum": [
-          "None",
-          "True",
-          "Fire",
-          "Water",
-          "Earth",
-          "Air",
-          "Dark",
-          "Light",
-          "Best",
-          "Worst",
-          "All"
+          "None = 0",
+          "True = 1",
+          "Fire = 2",
+          "Water = 3",
+          "Earth = 4",
+          "Air = 5",
+          "Dark = 6",
+          "Light = 7",
+          "Best = 8",
+          "Worst = 9",
+          "All = 10"
         ],
         "type": "string",
         "format": ""
@@ -4925,8 +5083,8 @@
       },
       "I18NType": {
         "enum": [
-          "fr",
-          "en"
+          "fr = 0",
+          "en = 1"
         ],
         "type": "string",
         "format": ""
@@ -5232,10 +5390,10 @@
         "type": "object",
         "properties": {
           "base": {
-            "$ref": "#/components/schemas/CharacteristicIdIStatIEntityDictionary"
+            "$ref": "#/components/schemas/CharacteristicIdIStatEntityDictionary"
           },
           "growth": {
-            "$ref": "#/components/schemas/CharacteristicIdMathEquationIEntityDictionary"
+            "$ref": "#/components/schemas/CharacteristicIdMathEquationEntityDictionary"
           },
           "entityUid": {
             "type": "string"
@@ -5574,8 +5732,8 @@
       },
       "LimitType": {
         "enum": [
-          "Owned",
-          "Bought"
+          "Owned = 0",
+          "Bought = 1"
         ],
         "type": "string",
         "format": ""
@@ -5649,11 +5807,11 @@
       },
       "MoveType": {
         "enum": [
-          "Walk",
-          "Translate",
-          "Teleport",
-          "Carry",
-          "Throw"
+          "Walk = 0",
+          "Translate = 1",
+          "Teleport = 2",
+          "Carry = 3",
+          "Throw = 4"
         ],
         "type": "string",
         "format": ""
@@ -5707,7 +5865,9 @@
           "Echo: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 3,\r\n  \"baseName\": \"Echo\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6003\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.Echo\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Lock: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 4,\r\n  \"baseName\": \"Lock\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6004\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.Lock\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Evasion: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 5,\r\n  \"baseName\": \"Evasion\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6005\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.Evasion\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "MindPower: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 6,\r\n  \"baseName\": \"MindPower\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6006\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.MindPower\",\r\n  \"enumValueConstraint\": null\r\n};"
+          "MindPower: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 6,\r\n  \"baseName\": \"MindPower\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6006\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.MindPower\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "SwapInBaseCooldown: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 7,\r\n  \"baseName\": \"SwapInBaseCooldown\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6007\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.SwapInBaseCooldown\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "SwapOutBaseCooldown: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 8,\r\n  \"baseName\": \"SwapOutBaseCooldown\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6008\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.SwapOutBaseCooldown\",\r\n  \"enumValueConstraint\": null\r\n};"
         ],
         "type": "string",
         "format": ""
@@ -5967,25 +6127,25 @@
       },
       "ResourceEnum": {
         "enum": [
-          "Life",
-          "Mana",
-          "Movement",
-          "Summon",
-          "Rage",
-          "Shield"
+          "Life = 0",
+          "Mana = 1",
+          "Movement = 2",
+          "Summon = 3",
+          "Rage = 4",
+          "Shield = 5"
         ],
         "type": "string",
         "format": ""
       },
       "ResourceProperty": {
         "enum": [
-          "InitialMax",
-          "Current",
-          "Max",
-          "Missing",
-          "Regen",
-          "Percent",
-          "MissingPercent"
+          "InitialMax = 0",
+          "Current = 1",
+          "Max = 2",
+          "Missing = 3",
+          "Regen = 4",
+          "Percent = 5",
+          "MissingPercent = 6"
         ],
         "type": "string",
         "format": ""
@@ -6043,10 +6203,10 @@
       },
       "Rotation4Type": {
         "enum": [
-          "top",
-          "right",
-          "bottom",
-          "left"
+          "top = 0",
+          "right = 1",
+          "bottom = 2",
+          "left = 3"
         ],
         "type": "string",
         "format": ""
@@ -6086,7 +6246,7 @@
         "type": "object",
         "additionalProperties": false
       },
-      "SpellAddtats": {
+      "SpellAddStats": {
         "type": "object",
         "properties": {
           "stats": {
@@ -6407,10 +6567,10 @@
             "type": "string"
           },
           "base": {
-            "$ref": "#/components/schemas/CharacteristicIdIStatIEntityDictionary"
+            "$ref": "#/components/schemas/CharacteristicIdIStatEntityDictionary"
           },
           "growth": {
-            "$ref": "#/components/schemas/CharacteristicIdMathEquationIEntityDictionary"
+            "$ref": "#/components/schemas/CharacteristicIdMathEquationEntityDictionary"
           }
         },
         "additionalProperties": false
@@ -6477,10 +6637,10 @@
             "type": "string"
           },
           "base": {
-            "$ref": "#/components/schemas/CharacteristicIdIStatIEntityDictionary"
+            "$ref": "#/components/schemas/CharacteristicIdIStatEntityDictionary"
           },
           "growth": {
-            "$ref": "#/components/schemas/CharacteristicIdMathEquationIEntityDictionary"
+            "$ref": "#/components/schemas/CharacteristicIdMathEquationEntityDictionary"
           }
         },
         "additionalProperties": false
@@ -6518,10 +6678,10 @@
       },
       "StatValueType": {
         "enum": [
-          "Simple",
-          "Bool",
-          "EntityStatDictionary",
-          "List"
+          "Simple = 0",
+          "Bool = 1",
+          "EntityStatDictionary = 2",
+          "List = 3"
         ],
         "type": "string",
         "format": ""
@@ -6602,10 +6762,10 @@
             "type": "string"
           },
           "base": {
-            "$ref": "#/components/schemas/CharacteristicIdIStatIEntityDictionary"
+            "$ref": "#/components/schemas/CharacteristicIdIStatEntityDictionary"
           },
           "growth": {
-            "$ref": "#/components/schemas/CharacteristicIdMathEquationIEntityDictionary"
+            "$ref": "#/components/schemas/CharacteristicIdMathEquationEntityDictionary"
           }
         },
         "additionalProperties": false
@@ -6730,10 +6890,10 @@
             "type": "string"
           },
           "base": {
-            "$ref": "#/components/schemas/CharacteristicIdIStatIEntityDictionary"
+            "$ref": "#/components/schemas/CharacteristicIdIStatEntityDictionary"
           },
           "growth": {
-            "$ref": "#/components/schemas/CharacteristicIdMathEquationIEntityDictionary"
+            "$ref": "#/components/schemas/CharacteristicIdMathEquationEntityDictionary"
           }
         },
         "additionalProperties": false
@@ -6794,18 +6954,18 @@
             "type": "string"
           },
           "base": {
-            "$ref": "#/components/schemas/CharacteristicIdIStatIEntityDictionary"
+            "$ref": "#/components/schemas/CharacteristicIdIStatEntityDictionary"
           },
           "growth": {
-            "$ref": "#/components/schemas/CharacteristicIdMathEquationIEntityDictionary"
+            "$ref": "#/components/schemas/CharacteristicIdMathEquationEntityDictionary"
           }
         },
         "additionalProperties": false
       },
       "StatusMergeStrategy": {
         "enum": [
-          "Ignore",
-          "ReplaceLast"
+          "Ignore = 0",
+          "ReplaceLast = 1"
         ],
         "type": "string",
         "format": ""
@@ -6860,28 +7020,28 @@
             "type": "string"
           },
           "base": {
-            "$ref": "#/components/schemas/CharacteristicIdIStatIEntityDictionary"
+            "$ref": "#/components/schemas/CharacteristicIdIStatEntityDictionary"
           },
           "growth": {
-            "$ref": "#/components/schemas/CharacteristicIdMathEquationIEntityDictionary"
+            "$ref": "#/components/schemas/CharacteristicIdMathEquationEntityDictionary"
           }
         },
         "additionalProperties": false
       },
       "StatusPriorityType": {
         "enum": [
-          "System",
-          "Passive",
-          "Status"
+          "System = 0",
+          "Passive = 1",
+          "Status = 2"
         ],
         "type": "string",
         "format": ""
       },
       "StatusUnbewitchStrategy": {
         "enum": [
-          "Dispellable",
-          "DispellableOnDeath",
-          "NonDispellable"
+          "Dispellable = 0",
+          "DispellableOnDeath = 1",
+          "NonDispellable = 2"
         ],
         "type": "string",
         "format": ""
@@ -6905,10 +7065,34 @@
       },
       "SwapIn": {
         "type": "object",
+        "properties": {
+          "ignoreInCooldown": {
+            "type": "boolean"
+          },
+          "overrideOutCooldown": {
+            "type": "boolean"
+          },
+          "setOutCooldown": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
         "additionalProperties": false
       },
       "SwapOut": {
         "type": "object",
+        "properties": {
+          "ignoreOutCooldown": {
+            "type": "boolean"
+          },
+          "overrideInCooldown": {
+            "type": "boolean"
+          },
+          "setInCooldown": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
         "additionalProperties": false
       },
       "SwapSelfWith": {
@@ -6942,20 +7126,20 @@
       },
       "TargetSamplingType": {
         "enum": [
-          "closestToOrigin",
-          "furthestToOrigin",
-          "closestToSource",
-          "furthestToSource",
-          "random"
+          "closestToOrigin = 0",
+          "furthestToOrigin = 1",
+          "closestToSource = 2",
+          "furthestToSource = 3",
+          "random = 4"
         ],
         "type": "string",
         "format": ""
       },
       "TeamRelationType": {
         "enum": [
-          "Ally",
-          "Enemy",
-          "Self"
+          "Ally = 0",
+          "Enemy = 1",
+          "Self = 2"
         ],
         "type": "string",
         "format": ""
@@ -7049,9 +7233,9 @@
       },
       "TowerDirectionType": {
         "enum": [
-          "up",
-          "down",
-          "both"
+          "up = 0",
+          "down = 1",
+          "both = 2"
         ],
         "type": "string",
         "format": ""
@@ -7099,27 +7283,27 @@
       },
       "TriggerOrderType": {
         "enum": [
-          "Before",
-          "Apply",
-          "After"
+          "Before = 0",
+          "Apply = 1",
+          "After = 2"
         ],
         "type": "string",
         "format": ""
       },
       "TriggerType": {
         "enum": [
-          "OnFightStart",
-          "OnFightEnd",
-          "OnRoundStart",
-          "OnRoundEnd",
-          "OnTurnStart",
-          "OnTurnEnd",
-          "OnTurnPass",
-          "OnCreatureSpellCast",
-          "OnEffect",
-          "OnCreatureWalkEnterCell",
-          "OnCreatureWalkExitCell",
-          "OnCreatureWalkStopCell"
+          "OnFightStart = 0",
+          "OnFightEnd = 1",
+          "OnRoundStart = 2",
+          "OnRoundEnd = 3",
+          "OnTurnStart = 4",
+          "OnTurnEnd = 5",
+          "OnTurnPass = 6",
+          "OnCreatureSpellCast = 7",
+          "OnEffect = 8",
+          "OnCreatureWalkEnterCell = 9",
+          "OnCreatureWalkExitCell = 10",
+          "OnCreatureWalkStopCell = 11"
         ],
         "type": "string",
         "format": ""
@@ -7168,24 +7352,24 @@
       },
       "ZoneType": {
         "enum": [
-          "point",
-          "line",
-          "diagonal",
-          "cross",
-          "xcross",
-          "star",
-          "crossHalf",
-          "xcrossHalf",
-          "circle",
-          "circleHalf",
-          "square",
-          "squareHalf",
-          "rectangle",
-          "ellipse",
-          "ellipseHalf",
-          "board",
-          "offboard",
-          "all"
+          "point = 0",
+          "line = 1",
+          "diagonal = 2",
+          "cross = 3",
+          "xcross = 4",
+          "star = 5",
+          "crossHalf = 6",
+          "xcrossHalf = 7",
+          "circle = 8",
+          "circleHalf = 9",
+          "square = 10",
+          "squareHalf = 11",
+          "rectangle = 12",
+          "ellipse = 13",
+          "ellipseHalf = 14",
+          "board = 15",
+          "offboard = 16",
+          "all = 17"
         ],
         "type": "string",
         "format": ""

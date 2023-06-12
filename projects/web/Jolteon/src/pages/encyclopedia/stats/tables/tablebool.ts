@@ -24,8 +24,8 @@ export class Tablebool {
     }
 
     public getBaseStat(id): StatBool {
-        if (this.base?.dic?.hasOwnProperty(id)){
-            return this.base.dic[id]
+        if (this.base?.base?.hasOwnProperty(id)){
+            return this.base.base[id]
         }
         else {
             let stat: StatBool = {

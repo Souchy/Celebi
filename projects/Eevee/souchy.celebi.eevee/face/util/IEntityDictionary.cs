@@ -1,4 +1,5 @@
-﻿using souchy.celebi.eevee.face.entity;
+﻿using MongoDB.Bson.Serialization;
+using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.models;
 
@@ -11,12 +12,12 @@ namespace souchy.celebi.eevee.face.util
         public IEnumerable<KeyValuePair<TKey, TValue>> Pairs { get; }
 
 
-        //public IEntityDictionary<TKey, TValue> copy(bool anonymous = true);
         public bool Has(TKey key);
         public TValue Get(TKey key);
         public T Get<T>(TKey key) where T : TValue;
         public IEntityDictionary<TKey, TValue> Add(TKey key, TValue value);
         public IEntityDictionary<TKey, TValue> AddAll(IEntityDictionary<TKey, TValue> dictionary);
+        public IEntityDictionary<TKey, TValue> AddAll(Dictionary<TKey, TValue> dictionary);
         public IEntityDictionary<TKey, TValue> Set(TKey key, TValue value);
         /// <summary>
         /// Remove pair and Dispose value if possible
@@ -29,5 +30,7 @@ namespace souchy.celebi.eevee.face.util
         public IEntityDictionary<TKey, TValue> ForEach(Action<TValue> action);
         public IEntityDictionary<TKey, TValue> ForEach(Action<TKey, TValue> action);
         public void Clear();
+
+        public void serialize(BsonSerializationContext context);
     }
 }

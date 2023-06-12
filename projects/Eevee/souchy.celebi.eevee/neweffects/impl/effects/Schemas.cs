@@ -32,7 +32,7 @@ namespace souchy.celebi.eevee.neweffects.impl.effects
     /// As opposed to SpellMeta's  SpellModelStats <br></br>
     /// Can be used to refresh the current cooldown, add charges..
     /// </summary>
-    public record SpellAddtats() : SpellMetaSchema
+    public record SpellAddStats() : SpellMetaSchema
     {
         public SpellStats stats { get; set; } = SpellStats.Create();
     }
@@ -271,8 +271,24 @@ namespace souchy.celebi.eevee.neweffects.impl.effects
     #endregion
 
     #region Fight
-    public record SwapOut() : IEffectSchema { }
-    public record SwapIn() : IEffectSchema { }
+    public record SwapOut() : IEffectSchema
+    {
+        /// <summary>
+        /// if true, will swap out even if creature.stats.contextual.swapOutRemainingCooldown > 0
+        /// </summary>
+        public bool ignoreOutCooldown { get; set; } = false;
+        /// <summary>
+        /// if true, will override creature.stats.other.swapInBaseCooldown
+        /// </summary>
+        public bool overrideInCooldown { get; set; } = false;
+        public int setInCooldown { get; set; } = 0;
+    }
+    public record SwapIn() : IEffectSchema
+    {
+        public bool ignoreInCooldown { get; set; } = false;
+        public bool overrideOutCooldown { get; set; } = false;
+        public int setOutCooldown { get; set; } = 0;
+    }
     #endregion
 
 }
