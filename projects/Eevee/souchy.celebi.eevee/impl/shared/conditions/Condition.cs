@@ -41,6 +41,5 @@ namespace souchy.celebi.eevee.impl.shared.conditions
             }
             return true;
         }
-
     }
 }

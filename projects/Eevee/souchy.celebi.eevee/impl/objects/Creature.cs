@@ -29,7 +29,7 @@ namespace souchy.celebi.eevee.impl.objects
 
         public ObjectId originalOwnerUid { get; set; }
         public ObjectId currentOwnerUid { get; set; }
-        public ObjectId summonerCreature { get; set; }
+        public ObjectId? summoner { get; set; }
         public IPosition position { get; init; } = new Position();
 
         public ObjectId statsId { get; set; }
@@ -45,6 +45,8 @@ namespace souchy.celebi.eevee.impl.objects
         }
         public static ICreature Create(ObjectId fightId) => new Creature(Eevee.RegisterIIDTemporary(), fightId);
 
+        public bool isSummon() => this.summoner != null;
+        public ICreature? GetSummoner() => isSummon() ? null : this.GetFight().creatures.Get(this.summoner.Value);
         public IPlayer GetOriginalOwner() => this.GetFight().players.Get(originalOwnerUid);
         public IPlayer GetCurrentOwner() => this.GetFight().players.Get(currentOwnerUid);
         public IStats GetNaturalStats() => this.GetFight().stats.Get(statsId);

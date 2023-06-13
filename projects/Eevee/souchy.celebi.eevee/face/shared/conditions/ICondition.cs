@@ -15,6 +15,7 @@ namespace souchy.celebi.eevee.face.shared.conditions
 
     public interface ICondition
     {
+        //public ConditionType conditionType { get; }
         public ActorType actorType { get; set; }
         public ConditionComparatorType comparator { get; set; }
         public ConditionGroupType groupType { get; set; }

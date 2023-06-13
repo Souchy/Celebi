@@ -1,4 +1,9 @@
 using Intellenum;
+using souchy.celebi.eevee.impl.shared.conditions;
+using souchy.celebi.eevee.impl.shared.conditions.creature;
+using souchy.celebi.eevee.impl.shared.conditions.other;
+using souchy.celebi.eevee.impl.shared.conditions.spell;
+using souchy.celebi.eevee.impl.shared.conditions.status;
 
 namespace souchy.celebi.eevee.face.shared.conditions
 {
@@ -20,38 +25,43 @@ namespace souchy.celebi.eevee.face.shared.conditions
     //    Moment, // momentEnumId = val
     //}
 
-    
+
     // (SchemaFactory, Script)
-    [Intellenum]
+    [Intellenum<ConditionEnumType>]
     public partial class ConditionType
     {
         // Other / relations
-        public static readonly ConditionType LineOfSight            = new(001);
-        public static readonly ConditionType DistanceManhattan      = new(002);
-        public static readonly ConditionType DistanceX              = new(003);
-        public static readonly ConditionType DistanceZ              = new(004);
-        public static readonly ConditionType DistancePath           = new(005);
+        public static readonly ConditionType LineOfSight            = new(new ConditionEnumType(001, typeof(LineOfSightCondition)));
+        public static readonly ConditionType Distance               = new(new ConditionEnumType(002, typeof(DistanceCondition)));
+        //public static readonly ConditionType DistanceX              = new(new ConditionEnumType(003, typeof(StatsCondition)));
+        //public static readonly ConditionType DistanceZ              = new(new ConditionEnumType(004, typeof(StatsCondition)));
+        //public static readonly ConditionType DistancePath           = new(new ConditionEnumType(005, typeof(StatsCondition)));
 
         // Creature
-        public static readonly ConditionType CreatureModel          = new(101);
-        public static readonly ConditionType CreatureModelSame      = new(102);
-        public static readonly ConditionType CreatureCurrentTeam    = new(103);
-        public static readonly ConditionType CreatureOriginalTeam   = new(104);
-        public static readonly ConditionType CreatureIsSummon       = new(105);
-        public static readonly ConditionType CreatureStats          = new(106); // IStats object and use the Condition.comparator
-        public static readonly ConditionType CreatureBaseStats      = new(107);
-        public static readonly ConditionType CreatureStatsDifference= new(108); // compare caster stats with the target
-
+        // creature.stats.other -> isSummon, //currentTeam, originalTeam -> creatures dont rly have a team, just an owner, it's up to the condition to determine wether that owner is ally or enemy
+        public static readonly ConditionType CreatureModel          = new(new ConditionEnumType(101, typeof(CreatureModelCondition)));
+        public static readonly ConditionType CreatureModelSame      = new(new ConditionEnumType(102, typeof(CreatureModelCondition)));
+        public static readonly ConditionType CreatureCurrentTeam    = new(new ConditionEnumType(103, typeof(CreatureCurrentTeamCondition)));
+        public static readonly ConditionType CreatureOriginalTeam   = new(new ConditionEnumType(104, typeof(CreatureOriginalTeamCondition)));
+        public static readonly ConditionType CreatureIsSummon       = new(new ConditionEnumType(105, typeof(CreatureOriginalTeamCondition)));
+        public static readonly ConditionType CreatureStats          = new(new ConditionEnumType(106, typeof(CreatureStatsCondition))); // IStats object and use the Condition.comparator
+        //public static readonly ConditionType CreatureNaturalStats   = new(new ConditionEnumType(107, typeof(StatsCondition)));
+        //public static readonly ConditionType CreatureStatsDifference= new(new ConditionEnumType(108, typeof(StatsCondition))); // compare caster stats with the target
 
         // Status
-        public static readonly ConditionType StatusModel            = new(201); // statusID / spellID
-        public static readonly ConditionType StatusTeam             = new(202);
-        public static readonly ConditionType StatusStats            = new(203); // stacks, duration..
+        public static readonly ConditionType StatusModel            = new(new ConditionEnumType(201, typeof(StatusModelCondition))); // statusID / spellID
+        public static readonly ConditionType StatusTeam             = new(new ConditionEnumType(202, typeof(todo)));
+        public static readonly ConditionType StatusStats            = new(new ConditionEnumType(203, typeof(StatusStatsCondition))); // stacks, duration..
 
         // Spell
-        public static readonly ConditionType SpellModel             = new(301);
-        public static readonly ConditionType SpellTeam              = new(302);
-        public static readonly ConditionType SpellStats             = new(303);
+        public static readonly ConditionType SpellModel             = new(new ConditionEnumType(301, typeof(SpellModelCondition)));
+        //public static readonly ConditionType SpellTeam              = new(new ConditionEnumType(302, typeof(Condition))); // what?how?why?
+        public static readonly ConditionType SpellStats             = new(new ConditionEnumType(303, typeof(SpellStatsCondition)));
+    }
+
+    public record class ConditionEnumType(int id, Type conditionType) : IComparable<ConditionEnumType>
+    {
+        public int CompareTo(ConditionEnumType other) => id - other.id;
     }
 
 }
