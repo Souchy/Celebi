@@ -1,0 +1,67 @@
+<import from="../strings/stringcomponent"></import>
+<import from="../effects/effect"></import>
+<import from="../effects/modelSelector/effectModelSelector"></import>
+<import from="../effects/effectlist"></import>
+<import from="../../../../components/modal/modal"></import>
+<import from="../stats/gen/statsmini"></import>
+
+
+<!-- vignette root || creature -->
+<template if.bind="isvignette && mode != 'search'">
+  <!-- <a href="/editor/status/{model.modelUid}"> -->
+  <button class="btn title btn-outline" click.trigger="clickStatus()">
+    <stringcomponent view-model.ref="name" uid.bind="model.nameId" editable.bind="!isvignette"></stringcomponent>
+  </button>
+  <!-- <button class="btn close" click.trigger="clickRemove()">x</button> -->
+
+  <!-- remove passive from creature -->
+  <template if.bind="mode == 'creature'">
+    <button class="btn close" data-bs-toggle="modal" data-bs-target="#removeStatus-${model.entityUid}">x</button>
+    <modal id="removeStatus-${model.entityUid}" header="Remove Status?" close.bind=false footer.bind=true callbackok.bind="() => clickRemove()">
+      Confirm remove ${name.entity.value} from creature?
+    </modal>
+  </template>
+
+  <!-- delete status entirely -->
+  <template if.bind="mode == 'root'">
+    <button class="btn close" data-bs-toggle="modal" data-bs-target="#deleteStatus-${model.entityUid}">x</button>
+    <modal id="deleteStatus-${model.entityUid}" header="Delete Status?" close.bind=false footer.bind=true callbackok.bind="() => clickRemove()">
+      Confirm delete ${name.entity.value} entirely?
+    </modal>
+  </template>
+</template>
+
+
+<!-- vignette search -->
+<template if.bind="isvignette && mode == 'search'">
+  <div class="add">+</div>
+  <button class="title titleSearch btn-outline" click.trigger="clickStatus()">
+    <stringcomponent view-model.ref="name" uid.bind="model.nameId" editable.bind="!isvignette"></stringcomponent>
+  </button>
+</template>
+
+<!-- full status ui, not vignette -->
+<template if.bind="!isvignette">
+  <div>
+    <h2>Status #${model.modelUid}</h2>
+    <div class="d-flex">
+      <stringcomponent uid.bind="model.nameId" editable=true></stringcomponent>
+      <stringcomponent uid.bind="model.descriptionId" editable=true large=true class="large"></stringcomponent>
+    </div>
+  </div>
+
+  <!-- status properties -->
+  <div>
+    <h4>Stats</h4>
+    <!-- showall=true -->
+    <statsmini statsuid.bind="model.statsId" 
+        callbacksavestat.bind="() => onChange()" 
+        characsallowed.bind="Characteristics.statusModels"
+        hasadddelete.bind="true" hasgrowth.bind="true"
+    ></statsmini>
+  </div>
+
+  <!-- children section -->
+  <effectlist effectids.bind="model.effectIds" modaluid.bind="model.entityUid" callbacksave.bind="() => onSave()"></effectlist>
+
+</template>

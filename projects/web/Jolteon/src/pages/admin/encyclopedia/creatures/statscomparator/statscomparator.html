@@ -1,0 +1,31 @@
+<table>
+
+  <thead>
+    <th>Resources / Others</th>
+    <th>Affinities / Resistances</th>
+    <th>States</th>
+  </thead>
+
+  <tbody>
+
+
+    <tr repeat.for="creature of creatures">
+      <td>
+        <!-- creature name -->
+      </td>
+      <td>
+        <!-- repeat.for="resource of creature.stats.resources" -->
+        <statsmini showall="true" hasadddelete="false" callbacksavestat.bind="()= > onSave()">Resources</statsmini>
+      </td>
+      <td>
+        <statsmini showall="true" hasadddelete="false" callbacksavestat.bind="()= > onSave()">Affinities</statsmini>
+        <statsmini showall="true" hasadddelete="false" callbacksavestat.bind="()= > onSave()">Resistances</statsmini>
+      </td>
+      <td>
+        <statsmini showall="true" hasadddelete="false" callbacksavestat.bind="()= > onSave()">States</statsmini>
+      </td>
+    </tr>
+
+  </tbody>
+
+</table>

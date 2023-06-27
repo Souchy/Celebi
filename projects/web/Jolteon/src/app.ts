@@ -47,17 +47,17 @@ export class App implements IRouteableComponent {
 		},
 		{
 			path: 'editor/creature/:uid',
-			component: import('./pages/encyclopedia/creatures/creature'),
+			component: import('./pages/admin/encyclopedia/creatures/creature'),
 			title: 'Creature',
 		},
 		{
 			path: 'editor/spell/:uid',
-			component: import('./pages/encyclopedia/spells/spell'),
+			component: import('./pages/admin/encyclopedia/spells/spell'),
 			title: 'Spell',
 		},
 		{
 			path: 'editor/status/:uid',
-			component: import('./pages/encyclopedia/statuses/status'),
+			component: import('./pages/admin/encyclopedia/statuses/status'),
 			title: 'Status',
 		}
 	];
