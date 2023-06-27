@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://phmyfo2a1rlj"]
+
+[ext_resource type="PackedScene" uid="uid://xndqql0mweba" path="res://examples/explode_ball.tscn" id="2_2ed4i"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ujdsi"]
+sky_top_color = Color(0.054902, 0.0627451, 0.0784314, 1)
+sky_horizon_color = Color(0, 0, 0, 1)
+ground_bottom_color = Color(0.0980392, 0.109804, 0.2, 1)
+ground_horizon_color = Color(0.0470588, 0.0470588, 0.0470588, 1)
+
+[sub_resource type="Sky" id="Sky_t2cga"]
+sky_material = SubResource("ProceduralSkyMaterial_ujdsi")
+
+[sub_resource type="Environment" id="Environment_bvq06"]
+background_mode = 2
+sky = SubResource("Sky_t2cga")
+ambient_light_color = Color(0.858824, 0.858824, 0.858824, 1)
+ambient_light_sky_contribution = 0.54
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6um6q"]
+albedo_color = Color(0.129412, 0.607843, 0.25098, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_o5le2"]
+material = SubResource("StandardMaterial3D_6um6q")
+size = Vector2(12, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6d04h"]
+size = Vector3(0.1, 1, 1)
+
+[node name="game" type="Node3D"]
+
+[node name="env" type="Node" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="env"]
+transform = Transform3D(0.998761, 0.0297395, -0.0398924, 0, 0.801731, 0.597685, 0.0497578, -0.596944, 0.800738, 4.43343, 3.34918, 5.68109)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="env"]
+environment = SubResource("Environment_bvq06")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="env"]
+transform = Transform3D(-0.938313, 0.16126, 0.305883, 0.25484, -0.275414, 0.926932, 0.233722, 0.947704, 0.217329, -5.78259, 0, 5.19506)
+shadow_enabled = true
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="env"]
+transform = Transform3D(-0.558573, -0.824406, -0.091384, 0.25484, -0.275414, 0.926932, -0.789337, 0.494471, 0.363931, -4.83369, 0, 5.19506)
+visible = false
+shadow_enabled = true
+
+[node name="world" type="Node" parent="."]
+
+[node name="floor" type="MeshInstance3D" parent="world"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65284, -0.553366, 0)
+mesh = SubResource("PlaneMesh_o5le2")
+skeleton = NodePath("../../env")
+
+[node name="obstacle" type="MeshInstance3D" parent="world"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+mesh = SubResource("BoxMesh_6d04h")
+skeleton = NodePath("../..")
+
+[node name="entities" type="Node" parent="."]
+
+[node name="explode_ball" parent="entities" instance=ExtResource("2_2ed4i")]

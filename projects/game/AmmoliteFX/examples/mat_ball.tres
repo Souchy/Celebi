@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bnwibu5vkykui"]
+
+[ext_resource type="Material" uid="uid://du6b0udw2miin" path="res://examples/mat_dissolve.tres" id="1_dghjk"]
+
+[resource]
+next_pass = ExtResource("1_dghjk")
+transparency = 1
+albedo_color = Color(1, 0.188235, 0.215686, 1)

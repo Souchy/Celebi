@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://du6b0udw2miin"]
+
+[ext_resource type="Shader" uid="uid://3e815jt1b4o0" path="res://assets/shaders/shader_dissolve.tres" id="1_0kmk4"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_pc73f"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_le6uv"]
+seamless = true
+noise = SubResource("FastNoiseLite_pc73f")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_0kmk4")
+shader_parameter/alpha_mask = SubResource("NoiseTexture2D_le6uv")

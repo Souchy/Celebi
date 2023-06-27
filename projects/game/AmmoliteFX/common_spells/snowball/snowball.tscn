@@ -1,0 +1,119 @@
+[gd_scene load_steps=17 format=3 uid="uid://s7ab7auosw78"]
+
+[ext_resource type="Texture2D" uid="uid://csiur73jkkyvh" path="res://assets/fx/Particle04_clear_soft.png" id="1_8byel"]
+
+[sub_resource type="Gradient" id="Gradient_2v0m1"]
+colors = PackedColorArray(1, 1, 1, 1, 0.229758, 0.877712, 0.980469, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_c6q8e"]
+gradient = SubResource("Gradient_2v0m1")
+
+[sub_resource type="Curve" id="Curve_k3sbj"]
+_data = [Vector2(0, 0.7), 0.0, 0.0, 0, 0, Vector2(0.206897, 0.7), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_fetmd"]
+curve = SubResource("Curve_k3sbj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hnv60"]
+emission_shape = 1
+emission_sphere_radius = 0.1
+direction = Vector3(0, -1, 0)
+gravity = Vector3(0, 2, 0)
+initial_velocity_min = 0.5
+initial_velocity_max = 0.5
+angular_velocity_min = 0.5
+angular_velocity_max = 0.5
+scale_min = 0.3
+scale_curve = SubResource("CurveTexture_fetmd")
+color_initial_ramp = SubResource("GradientTexture1D_c6q8e")
+turbulence_influence_min = 0.01
+turbulence_influence_max = 0.04
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t35f0"]
+transparency = 1
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_8byel")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_rxxs5"]
+lightmap_size_hint = Vector2i(4, 4)
+material = SubResource("StandardMaterial3D_t35f0")
+size = Vector2(0.2, 0.2)
+
+[sub_resource type="Gradient" id="Gradient_2bvqx"]
+colors = PackedColorArray(1, 1, 1, 1, 0.229758, 0.877712, 0.980469, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gm2kr"]
+gradient = SubResource("Gradient_2bvqx")
+
+[sub_resource type="Curve" id="Curve_jpqeb"]
+_data = [Vector2(0, 0.7), 0.0, 0.0, 0, 0, Vector2(0.206897, 0.7), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_tg53i"]
+curve = SubResource("Curve_jpqeb")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2tfgd"]
+emission_shape = 1
+emission_sphere_radius = 0.1
+direction = Vector3(0, -1, 0)
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.5
+initial_velocity_max = 0.5
+angular_velocity_min = 0.5
+angular_velocity_max = 0.5
+scale_min = 0.3
+scale_curve = SubResource("CurveTexture_tg53i")
+color_initial_ramp = SubResource("GradientTexture1D_gm2kr")
+turbulence_influence_min = 0.01
+turbulence_influence_max = 0.04
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_js0vu"]
+load_path = "res://.godot/imported/Particle04_clear_soft.png-08487dd547d7fa0f0b746816ffc00fcd.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1h45o"]
+transparency = 1
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("CompressedTexture2D_js0vu")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_p3vp3"]
+lightmap_size_hint = Vector2i(4, 4)
+material = SubResource("StandardMaterial3D_1h45o")
+size = Vector2(0.2, 0.2)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="projectile" type="Node3D" parent="."]
+visible = false
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="projectile"]
+amount = 50
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_hnv60")
+draw_pass_1 = SubResource("QuadMesh_rxxs5")
+
+[node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="projectile"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.128414, 0)
+strength = 2.46
+radius = 0.3
+
+[node name="proj2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0206279, 0, 0)
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="proj2"]
+amount = 50
+lifetime = 0.5
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_2tfgd")
+draw_pass_1 = SubResource("QuadMesh_p3vp3")
+
+[node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="proj2/GPUParticles3D2"]
+strength = 5.0

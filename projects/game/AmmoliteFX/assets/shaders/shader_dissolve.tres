@@ -1,0 +1,60 @@
+[gd_resource type="VisualShader" load_steps=7 format=3 uid="uid://3e815jt1b4o0"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_wmout"]
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_jr0f0"]
+parameter_name = "FloatParameter"
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_mgwni"]
+parameter_name = "alpha_mask"
+color_default = 2
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_n17gk"]
+source = 5
+
+[sub_resource type="VisualShaderNodeColorFunc" id="VisualShaderNodeColorFunc_6uw16"]
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_auipk"]
+constant = Color(0.766597, 1, 0.156757, 1)
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform sampler2D alpha_mask : hint_default_transparent;
+
+
+
+void fragment() {
+// Input:2
+	vec4 n_out2p0 = COLOR;
+
+
+	vec4 n_out7p0;
+// Texture2D:7
+	n_out7p0 = texture(alpha_mask, UV);
+
+
+// Output:0
+	ALBEDO = vec3(n_out2p0.xyz);
+	ALPHA = n_out7p0.x;
+
+
+}
+"
+graph_offset = Vector2(-197.848, 16.3658)
+nodes/fragment/0/position = Vector2(320, 200)
+nodes/fragment/2/node = SubResource("VisualShaderNodeInput_wmout")
+nodes/fragment/2/position = Vector2(-80, 160)
+nodes/fragment/5/node = SubResource("VisualShaderNodeFloatParameter_jr0f0")
+nodes/fragment/5/position = Vector2(-140, 740)
+nodes/fragment/6/node = SubResource("VisualShaderNodeTexture2DParameter_mgwni")
+nodes/fragment/6/position = Vector2(-480, 360)
+nodes/fragment/7/node = SubResource("VisualShaderNodeTexture_n17gk")
+nodes/fragment/7/position = Vector2(-120, 420)
+nodes/fragment/8/node = SubResource("VisualShaderNodeColorFunc_6uw16")
+nodes/fragment/8/position = Vector2(-140, 320)
+nodes/fragment/9/node = SubResource("VisualShaderNodeColorConstant_auipk")
+nodes/fragment/9/position = Vector2(120, 60)
+nodes/fragment/connections = PackedInt32Array(6, 0, 7, 2, 7, 0, 0, 1, 2, 0, 0, 0)

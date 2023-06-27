@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7bps03jujfgo"]
+
+[ext_resource type="Texture2D" uid="uid://cacmynjul3a61" path="res://assets/photos_2018_10_1_fst_texture-lava-volcano.jpg" id="2_edeep"]
+[ext_resource type="PackedScene" uid="uid://phmyfo2a1rlj" path="res://game.tscn" id="2_xlvdi"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_soe43"]
+viewport_path = NodePath("GameViewport")
+
+[node name="Node3D" type="Node2D"]
+
+[node name="GameViewport" type="SubViewport" parent="."]
+transparent_bg = true
+msaa_3d = 3
+
+[node name="game" parent="GameViewport" instance=ExtResource("2_xlvdi")]
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("2_edeep")
+
+[node name="Game Render" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(2.25, 1.26563)
+texture = SubResource("ViewportTexture_soe43")

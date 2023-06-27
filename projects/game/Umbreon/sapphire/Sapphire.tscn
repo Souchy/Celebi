@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://70xwfuyjqk5k"]
+[gd_scene load_steps=10 format=3 uid="uid://70xwfuyjqk5k"]
 
 [ext_resource type="Script" path="res://sapphire/Sapphire.cs" id="1_axpwp"]
-[ext_resource type="PackedScene" uid="uid://cj17xap1x2dhg" path="res://assets/maps/mapDofus6/map6_toonwater.tscn" id="2_cj6ch"]
 [ext_resource type="PackedScene" uid="uid://bxel5q1htlcm4" path="res://assets/maps/mapDofus6/map_6.tscn" id="2_kls1v"]
 [ext_resource type="PackedScene" uid="uid://btnc3cc0avyqg" path="res://assets/maps/celebi/map_celebi.tscn" id="4_3dy4y"]
 [ext_resource type="PackedScene" uid="uid://cbsy6uf5j02c5" path="res://sapphire/controls/Controls.tscn" id="5_oq2ih"]
@@ -42,9 +41,6 @@ shadow_opacity = 0.55
 directional_shadow_blend_splits = true
 directional_shadow_max_distance = 25.0
 
-[node name="Node3D" parent="Environment" instance=ExtResource("2_cj6ch")]
-visible = false
-
 [node name="Map" parent="Environment" instance=ExtResource("2_kls1v")]
 
 [node name="MapCelebi" parent="Environment" instance=ExtResource("4_3dy4y")]
@@ -61,4 +57,4 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 1)
 
 [node name="ybot_packed" parent="Creatures" instance=ExtResource("8_mkduh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.67085, 0, 1.39378)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 1)

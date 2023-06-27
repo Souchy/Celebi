@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://bg63dmt6udsdl"]
+
+[ext_resource type="Texture2D" uid="uid://csiur73jkkyvh" path="res://assets/fx/Particle04_clear_soft.png" id="1_cfqjr"]
+
+[sub_resource type="Curve" id="Curve_k3sbj"]
+_data = [Vector2(0.0125392, 0.2), 0.0, 0.0, 0, 0, Vector2(0.282132, 0.7), 0.0, 0.0, 0, 0, Vector2(1, 0.118182), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_fetmd"]
+curve = SubResource("Curve_k3sbj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hnv60"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3(0, 1, 0)
+scale_curve = SubResource("CurveTexture_fetmd")
+color = Color(0.337255, 0.901961, 1, 1)
+hue_variation_max = 0.04
+turbulence_enabled = true
+turbulence_influence_min = 0.01
+turbulence_influence_max = 0.04
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t35f0"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_cfqjr")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_rxxs5"]
+lightmap_size_hint = Vector2i(4, 4)
+material = SubResource("StandardMaterial3D_t35f0")
+size = Vector2(0.1, 0.1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="projectile" type="Node3D" parent="."]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="projectile"]
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_hnv60")
+draw_pass_1 = SubResource("QuadMesh_rxxs5")
