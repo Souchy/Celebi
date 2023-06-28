@@ -1,5 +1,5 @@
 ﻿using souchy.celebi.eevee.face.shared.conditions;
-using souchy.celebi.eevee.impl.shared.conditions.value;
+using souchy.celebi.eevee.impl.shared.conditions.other;
 
 namespace souchy.celebi.eevee.enums.characteristics.creature
 {

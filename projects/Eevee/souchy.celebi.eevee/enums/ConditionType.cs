@@ -50,7 +50,7 @@ namespace souchy.celebi.eevee.face.shared.conditions
 
         // Status
         public static readonly ConditionType StatusModel            = new(new ConditionEnumType(201, typeof(StatusModelCondition))); // statusID / spellID
-        public static readonly ConditionType StatusTeam             = new(new ConditionEnumType(202, typeof(todo)));
+        public static readonly ConditionType StatusTeam             = new(new ConditionEnumType(202, typeof(StatusTeamCondition)));
         public static readonly ConditionType StatusStats            = new(new ConditionEnumType(203, typeof(StatusStatsCondition))); // stacks, duration..
 
         // Spell

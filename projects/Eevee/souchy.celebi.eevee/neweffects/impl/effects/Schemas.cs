@@ -4,7 +4,6 @@ using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.enums.characteristics.other;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.conditions;
-using souchy.celebi.eevee.face.shared.conditions.status;
 using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
@@ -165,16 +164,18 @@ namespace souchy.celebi.eevee.neweffects.impl.effects
     #region Status Remove
     public record RemoveStatusCreature() : IEffectSchema
     {
-        public IStatusCondition statusFilter { get; set; }
+        public ICondition statusFilter { get; set; }
         public int durationToRemove { get; set; }
     }
     public record RemoveTrap() : IEffectSchema
     {
-        public IStatusCondition statusFilter { get; set; }
+        public ICondition statusFilter { get; set; }
+        public int durationToRemove { get; set; }
     }
     public record RemoveGlyph() : IEffectSchema
     {
-        public IStatusCondition statusFilter { get; set; }
+        public ICondition statusFilter { get; set; } // IStatusCondition
+        public int durationToRemove { get; set; }
     }
     #endregion
 

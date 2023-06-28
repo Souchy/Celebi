@@ -8,14 +8,13 @@ using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.objects.stats;
-using souchy.celebi.eevee.face.shared.conditions.spell;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.shared.triggers;
 using souchy.celebi.eevee.impl.stats;
 
 namespace souchy.celebi.eevee.impl.shared.conditions.spell
 {
-    public class SpellStatsCondition : Condition, ISpellCondition
+    public class SpellStatsCondition : Condition //, ISpellCondition
     {
         public int spellModelId { get; set; }
         public IStats conditionStats { get; set; }

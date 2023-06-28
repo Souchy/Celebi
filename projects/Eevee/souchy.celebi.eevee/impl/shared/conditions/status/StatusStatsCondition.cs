@@ -10,7 +10,6 @@ using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.objects.statuses;
-using souchy.celebi.eevee.face.shared.conditions.status;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.shared.triggers;
@@ -18,7 +17,7 @@ using souchy.celebi.eevee.impl.stats;
 
 namespace souchy.celebi.eevee.impl.shared.conditions.status
 {
-    public class StatusStatsCondition : Condition, IStatusCondition
+    public class StatusStatsCondition : Condition //, IStatusCondition
     {
         public int statusModelId { get; set; }
         public BoardTargetType boardTargetType { get; set; }
