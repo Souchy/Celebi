@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://frs8dejcy364"]
+
+[ext_resource type="PackedScene" uid="uid://cml0nj1bgulxv" path="res://assets/effects/test/fx_beam_path_advanced.tscn" id="1_7m02d"]
+
+[node name="testdisplay" type="Node3D"]
+
+[node name="Env" type="Node" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Env"]
+transform = Transform3D(0.935765, -0.283999, 0.209017, 0, 0.592746, 0.805389, -0.352624, -0.753655, 0.554671, 2.07784, 3.42217, 2.27111)
+
+[node name="Content" type="Node" parent="."]
+
+[node name="fx_beam_path_advanced" parent="Content" instance=ExtResource("1_7m02d")]

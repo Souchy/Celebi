@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=6 format=3 uid="uid://rtha6a76ly4r"]
 
 [ext_resource type="PackedScene" uid="uid://cw07lno3sb7y" path="res://sapphire/fx/fx_projectile_path.tscn" id="1_kc70l"]
 [ext_resource type="Texture2D" uid="uid://csqg7vrcfmr83" path="res://addons/kenney_particle_pack/spark_01.png" id="2_jcfyk"]
@@ -24,7 +24,7 @@ angle_max = 360.0
 [node name="fx_projectile_path" instance=ExtResource("1_kc70l")]
 
 [node name="PathFollow3D" parent="Path3D" index="0"]
-transform = Transform3D(-1.62648e-07, 0.0728765, 0.99719, 3.72528e-09, 0.99719, -0.0728765, -0.999998, -8.13842e-09, -1.62463e-07, 0, 1, 0)
+transform = Transform3D(-4.37113e-08, 0, 0.999849, 0, 0.999849, 0, -0.999998, 0, -4.37048e-08, 0, 1, 0)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Path3D/PathFollow3D" index="0"]
 material_override = SubResource("StandardMaterial3D_3kv5r")

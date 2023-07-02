@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Umbreon"
-run/main_scene="res://vaporeon/Vaporeon.tscn"
+run/main_scene="res://testdisplay.tscn"
 config/features=PackedStringArray("4.0", "C#")
 
 [autoload]
