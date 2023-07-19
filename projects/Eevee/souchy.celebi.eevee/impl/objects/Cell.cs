@@ -8,6 +8,7 @@ using souchy.celebi.eevee.impl.util.math;
 using MongoDB.Bson;
 using static souchy.celebi.eevee.face.entity.IEntity;
 using MongoDB.Bson.Serialization.Attributes;
+using souchy.celebi.eevee.face.shared.models;
 
 namespace souchy.celebi.eevee.impl.objects
 {
@@ -18,8 +19,10 @@ namespace souchy.celebi.eevee.impl.objects
         public IID modelUid { get; set; }
         public ObjectId fightUid { get; set; }
 
-        public bool isWalkable { get; set; }
-        public bool blocksLos { get; set; }
+        public CellType type { get; set; }
+        public IMapAsset assetOverride { get; set; }
+        //public bool isWalkable { get; set; }
+        //public bool blocksLos { get; set; }
         public IPosition position { get; init; } = new Position();
         public IEntitySet<ObjectId> statuses { get; init; } = new EntitySet<ObjectId>();
         public Dictionary<ContextType, IContext> contexts { get; set; } = new();

@@ -7,6 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.impl.shared;
+using souchy.celebi.eevee.enums;
+using System.Drawing;
 
 namespace souchy.celebi.eevee.impl.objects
 {
@@ -16,9 +19,17 @@ namespace souchy.celebi.eevee.impl.objects
         public ObjectId entityUid { get; set; }
         public IID modelUid { get; set; }
 
-        public IID name { get; set; }
+        public ObjectId nameId { get; set; }
+        public AssetIID? mapAsset { get; set; }
+        public Dictionary<CellType, IMapAsset>? defaultAssets { get; set; } = new();
         public IVector3[][] teamsStartPositions { get; set; }
         public ICell[] cells { get; set; }
+
+        private Map() { }
+        public static IMap Create() => new Map()
+        {
+            entityUid = Eevee.RegisterIIDTemporary(),
+        };
 
         public void Dispose()
         {
@@ -26,4 +37,12 @@ namespace souchy.celebi.eevee.impl.objects
             throw new NotImplementedException();
         }
     }
+
+    public class MapAsset : IMapAsset
+    {
+        public AssetIID path { get; set; }
+        public IVector3[] transform { get; set; }
+        public Color color { get; set; }
+    }
+
 }
