@@ -53,13 +53,23 @@ jobs:
       #- name: deploy
       #/home/souchy/release/celebi/spark
     steps:
-      - name: Test connectivity
-        run: curl -v telnet://${{ secrets.FTP_SERVER }}:22
+      #- name: Test connectivity
+      #  run: curl -v telnet://${{ secrets.FTP_SERVER }}:22
         
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
           name: 'Spark'
+          
+      - name: FTP-Deploy-Action test SamKirkLand
+        uses: SamKirkland/FTP-Deploy-Action@3.1.1
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWD }}
+          port: 22
+          local-dir: './*' # '/home/runner/work/Celebi/Celebi/'
+          server-dir: ${{ secrets.SPARK_PATH }}
       #- run: ls
       #- name: Extract some files
         #run: 7z x 'Spark.zip'
