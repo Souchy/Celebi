@@ -68,7 +68,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWD }}
           port: 22
-          local-dir: './*' # '/home/runner/work/Celebi/Celebi/'
+          local-dir: './' # '/home/runner/work/Celebi/Celebi/'
           server-dir: ${{ secrets.SPARK_PATH }}
       #- run: ls
       #- name: Extract some files
