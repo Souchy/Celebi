@@ -53,6 +53,9 @@ jobs:
       #- name: deploy
       #/home/souchy/release/celebi/spark
     steps:
+      - name: Test connectivity
+        run: curl -v telnet://${{ secrets.FTP_SERVER }}:22
+        
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
