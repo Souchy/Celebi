@@ -8,6 +8,7 @@ using souchy.celebi.eevee.enums.characteristics;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using souchy.celebi.eevee.neweffects.impl;
+using souchy.celebi.eevee.face.shared.conditions;
 
 namespace souchy.celebi.spark.util.swagger;
 
@@ -22,6 +23,7 @@ public class CharacTypeSchemaFilter : ISchemaFilter
         {
             
             if (!context.Type.IsAssignableTo(typeof(CharacteristicType))
+                && !context.Type.IsAssignableTo(typeof(ConditionType))
                 //&& !context.Type.IsAssignableTo(typeof(EffectType))
             )
             {

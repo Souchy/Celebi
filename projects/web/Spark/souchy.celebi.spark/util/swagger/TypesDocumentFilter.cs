@@ -49,6 +49,7 @@ namespace souchy.celebi.spark.util.swagger
                 .Where(t => t.IsAssignableTo(typeof(IStats))
                          || t.IsAssignableTo(typeof(IStat))
                          || t.IsAssignableTo(typeof(ICondition))
+                         || t.IsAssignableTo(typeof(ITrigger))
                          || t.IsAssignableTo(typeof(IEffect))
                          || t.IsAssignableTo(typeof(IEffectSchema))
                          || t.IsAssignableTo(typeof(IEffectScript))
