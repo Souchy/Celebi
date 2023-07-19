@@ -1752,11 +1752,53 @@
         "tags": [
           "FactoryController"
         ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ICondition"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/map/all": {
+      "get": {
+        "tags": [
+          "MapModelController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IMap"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/map/{id}": {
+      "get": {
+        "tags": [
+          "MapModelController"
+        ],
         "parameters": [
           {
-            "name": "conditionType",
-            "in": "query",
-            "style": "form",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
             "schema": {
               "type": "string"
             }
@@ -1768,7 +1810,106 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ICondition"
+                  "$ref": "#/components/schemas/IMap"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MapModelController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Map"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Map"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Map"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Map"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReplaceOneResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MapModelController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/map/new": {
+      "post": {
+        "tags": [
+          "MapModelController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IMap"
                 }
               }
             }
@@ -3995,6 +4136,19 @@
         },
         "additionalProperties": false
       },
+      "CellMovedHistory": {
+        "type": "object",
+        "properties": {
+          "cellID": {
+            "type": "string",
+            "nullable": true
+          },
+          "moveType": {
+            "$ref": "#/components/schemas/MoveType"
+          }
+        },
+        "additionalProperties": false
+      },
       "ChangeActor": {
         "type": "object",
         "additionalProperties": false
@@ -4214,6 +4368,17 @@
         "type": "string",
         "format": ""
       },
+      "ContextType": {
+        "enum": [
+          "Fight = 0",
+          "Round = 1",
+          "Turn = 2",
+          "Action = 3",
+          "Effect = 4"
+        ],
+        "type": "string",
+        "format": ""
+      },
       "Contextual": {
         "type": "object",
         "properties": {
@@ -4325,6 +4490,60 @@
         },
         "additionalProperties": false
       },
+      "CreatureCurrentTeamCondition": {
+        "type": "object",
+        "properties": {
+          "team": {
+            "$ref": "#/components/schemas/TeamRelationType"
+          },
+          "actorType": {
+            "$ref": "#/components/schemas/ActorType"
+          },
+          "comparator": {
+            "$ref": "#/components/schemas/ConditionComparatorType"
+          },
+          "groupType": {
+            "$ref": "#/components/schemas/ConditionGroupType"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
+      "CreatureIsSummonCondition": {
+        "type": "object",
+        "properties": {
+          "isSummon": {
+            "type": "boolean"
+          },
+          "actorType": {
+            "$ref": "#/components/schemas/ActorType"
+          },
+          "comparator": {
+            "$ref": "#/components/schemas/ConditionComparatorType"
+          },
+          "groupType": {
+            "$ref": "#/components/schemas/ConditionGroupType"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
       "CreatureModel": {
         "type": "object",
         "properties": {
@@ -4399,6 +4618,33 @@
           "type": "object"
         }
       },
+      "CreatureOriginalTeamCondition": {
+        "type": "object",
+        "properties": {
+          "team": {
+            "$ref": "#/components/schemas/TeamRelationType"
+          },
+          "actorType": {
+            "$ref": "#/components/schemas/ActorType"
+          },
+          "comparator": {
+            "$ref": "#/components/schemas/ConditionComparatorType"
+          },
+          "groupType": {
+            "$ref": "#/components/schemas/ConditionGroupType"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
       "CreatureStats": {
         "type": "object",
         "properties": {
@@ -4413,6 +4659,39 @@
           }
         },
         "additionalProperties": false
+      },
+      "CreatureStatsCondition": {
+        "type": "object",
+        "properties": {
+          "useNaturalStats": {
+            "type": "boolean"
+          },
+          "compareWithTarget": {
+            "type": "boolean"
+          },
+          "conditionStats": {
+            "$ref": "#/components/schemas/IStats"
+          },
+          "actorType": {
+            "$ref": "#/components/schemas/ActorType"
+          },
+          "comparator": {
+            "$ref": "#/components/schemas/ConditionComparatorType"
+          },
+          "groupType": {
+            "$ref": "#/components/schemas/ConditionGroupType"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
       },
       "CurrencyProduct": {
         "type": "object",
@@ -5089,6 +5368,60 @@
         "type": "string",
         "format": ""
       },
+      "ICell": {
+        "type": "object",
+        "properties": {
+          "isWalkable": {
+            "type": "boolean"
+          },
+          "blocksLos": {
+            "type": "boolean"
+          },
+          "position": {
+            "$ref": "#/components/schemas/IPosition"
+          },
+          "statuses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "contexts": {
+            "type": "object",
+            "properties": {
+              "Fight": {
+                "$ref": "#/components/schemas/IContext"
+              },
+              "Round": {
+                "$ref": "#/components/schemas/IContext"
+              },
+              "Turn": {
+                "$ref": "#/components/schemas/IContext"
+              },
+              "Action": {
+                "$ref": "#/components/schemas/IContext"
+              },
+              "Effect": {
+                "$ref": "#/components/schemas/IContext"
+              }
+            },
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "modelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "entityUid": {
+            "type": "string"
+          },
+          "fightUid": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
       "ICondition": {
         "type": "object",
         "properties": {
@@ -5112,6 +5445,47 @@
         "additionalProperties": {
           "type": "object"
         }
+      },
+      "IContext": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ContextType"
+          },
+          "valuesStored": {
+            "type": "object",
+            "additionalProperties": {
+              "nullable": true
+            },
+            "nullable": true
+          },
+          "spellsCast": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpellCastHistory"
+            },
+            "nullable": true
+          },
+          "cellsMoved": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CellMovedHistory"
+            },
+            "nullable": true
+          },
+          "compiledEffects": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/IEffectPreview"
+              },
+              "nullable": true
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "ICreatureModel": {
         "type": "object",
@@ -5288,11 +5662,102 @@
           "type": "object"
         }
       },
+      "IEffectPreview": {
+        "type": "object",
+        "properties": {
+          "sourceID": {
+            "type": "string",
+            "nullable": true
+          },
+          "targetID": {
+            "type": "string",
+            "nullable": true
+          },
+          "spellID": {
+            "type": "string",
+            "nullable": true
+          },
+          "effectModelID": {
+            "type": "string",
+            "nullable": true
+          },
+          "effectInstanceID": {
+            "type": "string",
+            "nullable": true
+          },
+          "triggeredBefore": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IEffectPreview"
+            },
+            "nullable": true
+          },
+          "triggeredAfter": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IEffectPreview"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "IEffectSchema": {
         "type": "object",
         "properties": {
           "effType": {
             "$ref": "#/components/schemas/EffT"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IMap": {
+        "type": "object",
+        "properties": {
+          "nameId": {
+            "type": "string"
+          },
+          "teamsStartPositions": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/IVector3"
+              }
+            },
+            "nullable": true
+          },
+          "cells": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICell"
+            },
+            "nullable": true
+          },
+          "modelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "entityUid": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IPosition": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "z": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "y": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -5428,37 +5893,6 @@
       "IStatsFilterDefinition": {
         "type": "object",
         "additionalProperties": false
-      },
-      "IStatusCondition": {
-        "type": "object",
-        "properties": {
-          "statusModelId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "conditionStats": {
-            "$ref": "#/components/schemas/IStats"
-          },
-          "actorType": {
-            "$ref": "#/components/schemas/ActorType"
-          },
-          "comparator": {
-            "$ref": "#/components/schemas/ConditionComparatorType"
-          },
-          "groupType": {
-            "$ref": "#/components/schemas/ConditionGroupType"
-          },
-          "children": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ICondition"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": {
-          "type": "object"
-        }
       },
       "IStatusModel": {
         "type": "object",
@@ -5738,6 +6172,66 @@
         "type": "string",
         "format": ""
       },
+      "LineOfSightCondition": {
+        "type": "object",
+        "properties": {
+          "lineOfSight": {
+            "type": "boolean"
+          },
+          "actorType": {
+            "$ref": "#/components/schemas/ActorType"
+          },
+          "comparator": {
+            "$ref": "#/components/schemas/ConditionComparatorType"
+          },
+          "groupType": {
+            "$ref": "#/components/schemas/ConditionGroupType"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
+      "Map": {
+        "type": "object",
+        "properties": {
+          "entityUid": {
+            "type": "string"
+          },
+          "modelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "nameId": {
+            "type": "string"
+          },
+          "teamsStartPositions": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/IVector3"
+              }
+            },
+            "nullable": true
+          },
+          "cells": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICell"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "MathEquation": {
         "type": "object",
         "properties": {
@@ -5958,7 +6452,11 @@
         "type": "object",
         "properties": {
           "statusFilter": {
-            "$ref": "#/components/schemas/IStatusCondition"
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "durationToRemove": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -5967,7 +6465,7 @@
         "type": "object",
         "properties": {
           "statusFilter": {
-            "$ref": "#/components/schemas/IStatusCondition"
+            "$ref": "#/components/schemas/ICondition"
           },
           "durationToRemove": {
             "type": "integer",
@@ -5980,7 +6478,11 @@
         "type": "object",
         "properties": {
           "statusFilter": {
-            "$ref": "#/components/schemas/IStatusCondition"
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "durationToRemove": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -6255,6 +6757,20 @@
         },
         "additionalProperties": false
       },
+      "SpellCastHistory": {
+        "type": "object",
+        "properties": {
+          "spellID": {
+            "type": "string",
+            "nullable": true
+          },
+          "cellID": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "SpellChain": {
         "type": "object",
         "properties": {
@@ -6270,37 +6786,6 @@
           }
         },
         "additionalProperties": false
-      },
-      "SpellCondition": {
-        "type": "object",
-        "properties": {
-          "spellModelId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "conditionStats": {
-            "$ref": "#/components/schemas/IStats"
-          },
-          "actorType": {
-            "$ref": "#/components/schemas/ActorType"
-          },
-          "comparator": {
-            "$ref": "#/components/schemas/ConditionComparatorType"
-          },
-          "groupType": {
-            "$ref": "#/components/schemas/ConditionGroupType"
-          },
-          "children": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ICondition"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": {
-          "type": "object"
-        }
       },
       "SpellMetaAddChildEffects": {
         "type": "object",
@@ -6500,6 +6985,34 @@
         },
         "additionalProperties": false
       },
+      "SpellModelCondition": {
+        "type": "object",
+        "properties": {
+          "spellModelId": {
+            "type": "string",
+            "nullable": true
+          },
+          "actorType": {
+            "$ref": "#/components/schemas/ActorType"
+          },
+          "comparator": {
+            "$ref": "#/components/schemas/ConditionComparatorType"
+          },
+          "groupType": {
+            "$ref": "#/components/schemas/ConditionGroupType"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
       "SpellModelProperty": {
         "type": "object",
         "properties": {
@@ -6645,6 +7158,37 @@
         },
         "additionalProperties": false
       },
+      "SpellStatsCondition": {
+        "type": "object",
+        "properties": {
+          "spellModelId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "conditionStats": {
+            "$ref": "#/components/schemas/IStats"
+          },
+          "actorType": {
+            "$ref": "#/components/schemas/ActorType"
+          },
+          "comparator": {
+            "$ref": "#/components/schemas/ConditionComparatorType"
+          },
+          "groupType": {
+            "$ref": "#/components/schemas/ConditionGroupType"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
       "StatBool": {
         "type": "object",
         "properties": {
@@ -6769,67 +7313,6 @@
           }
         },
         "additionalProperties": false
-      },
-      "StatsCondition": {
-        "type": "object",
-        "properties": {
-          "conditionStats": {
-            "$ref": "#/components/schemas/IStats"
-          },
-          "actorType": {
-            "$ref": "#/components/schemas/ActorType"
-          },
-          "comparator": {
-            "$ref": "#/components/schemas/ConditionComparatorType"
-          },
-          "groupType": {
-            "$ref": "#/components/schemas/ConditionGroupType"
-          },
-          "children": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ICondition"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": {
-          "type": "object"
-        }
-      },
-      "StatusCondition": {
-        "type": "object",
-        "properties": {
-          "statusModelId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "boardTargetType": {
-            "$ref": "#/components/schemas/BoardTargetType"
-          },
-          "conditionStats": {
-            "$ref": "#/components/schemas/IStats"
-          },
-          "actorType": {
-            "$ref": "#/components/schemas/ActorType"
-          },
-          "comparator": {
-            "$ref": "#/components/schemas/ConditionComparatorType"
-          },
-          "groupType": {
-            "$ref": "#/components/schemas/ConditionGroupType"
-          },
-          "children": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ICondition"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": {
-          "type": "object"
-        }
       },
       "StatusContainerProperty": {
         "type": "object",
@@ -7013,6 +7496,37 @@
         },
         "additionalProperties": false
       },
+      "StatusModelCondition": {
+        "type": "object",
+        "properties": {
+          "statusModelId": {
+            "type": "string",
+            "nullable": true
+          },
+          "boardTargetType": {
+            "$ref": "#/components/schemas/BoardTargetType"
+          },
+          "actorType": {
+            "$ref": "#/components/schemas/ActorType"
+          },
+          "comparator": {
+            "$ref": "#/components/schemas/ConditionComparatorType"
+          },
+          "groupType": {
+            "$ref": "#/components/schemas/ConditionGroupType"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
       "StatusModelStats": {
         "type": "object",
         "properties": {
@@ -7036,6 +7550,67 @@
         ],
         "type": "string",
         "format": ""
+      },
+      "StatusStatsCondition": {
+        "type": "object",
+        "properties": {
+          "statusModelId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "boardTargetType": {
+            "$ref": "#/components/schemas/BoardTargetType"
+          },
+          "conditionStats": {
+            "$ref": "#/components/schemas/IStats"
+          },
+          "actorType": {
+            "$ref": "#/components/schemas/ActorType"
+          },
+          "comparator": {
+            "$ref": "#/components/schemas/ConditionComparatorType"
+          },
+          "groupType": {
+            "$ref": "#/components/schemas/ConditionGroupType"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
+      "StatusTeamCondition": {
+        "type": "object",
+        "properties": {
+          "team": {
+            "$ref": "#/components/schemas/TeamRelationType"
+          },
+          "actorType": {
+            "$ref": "#/components/schemas/ActorType"
+          },
+          "comparator": {
+            "$ref": "#/components/schemas/ConditionComparatorType"
+          },
+          "groupType": {
+            "$ref": "#/components/schemas/ConditionGroupType"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
       },
       "StatusUnbewitchStrategy": {
         "enum": [
@@ -7277,6 +7852,27 @@
           "percentValue": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Trigger": {
+        "type": "object",
+        "properties": {
+          "triggerType": {
+            "$ref": "#/components/schemas/TriggerType"
+          },
+          "triggerOrderType": {
+            "$ref": "#/components/schemas/TriggerOrderType"
+          },
+          "triggerZone": {
+            "$ref": "#/components/schemas/IZone"
+          },
+          "triggererFilter": {
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "holderCondition": {
+            "$ref": "#/components/schemas/ICondition"
           }
         },
         "additionalProperties": false

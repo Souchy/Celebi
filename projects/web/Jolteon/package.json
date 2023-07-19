@@ -17,7 +17,9 @@
     "bootstrap-toaster": "^5.2.0-beta1.1",
     "dotenv": "^16.1.0",
     "i18next-fetch-backend": "^5.0.2",
+    "idb-keyval": "^6.2.1",
     "swagger-typescript-api": "^12.0.4",
+    "three": "^0.153.0",
     "typescript-cookie": "^1.0.6"
   },
   "devDependencies": {
@@ -26,6 +28,7 @@
     "@aurelia/webpack-loader": "latest",
     "@types/jest": "^29.2.4",
     "@types/node": "^18.11.18",
+    "@types/wicg-file-system-access": "^2020.9.6",
     "@typescript-eslint/eslint-plugin": "^5.47.1",
     "@typescript-eslint/parser": "^5.47.1",
     "autoprefixer": "^10.4.13",

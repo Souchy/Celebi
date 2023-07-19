@@ -59,7 +59,18 @@ export class App implements IRouteableComponent {
 			path: 'editor/status/:uid',
 			component: import('./pages/admin/encyclopedia/statuses/status'),
 			title: 'Status',
-		}
+		},
+		{
+			path: 'assets',
+			component: import('./pages/admin/assetmanager/assetmanager'),
+			title: 'Assets',
+		},
+		{
+			path: 'mapeditor',
+			component: import('./pages/admin/encyclopedia/maps/mapeditor'),
+			title: 'Map Editor',
+		},
+
 	];
 
 	private readonly toastConfig: ToastConfigOptions = {
@@ -76,7 +87,7 @@ export class App implements IRouteableComponent {
 		private readonly auth: AuthController,
 		private readonly propertiesController: PropertiesController
 	) {
-		console.log("JOLTEON APP CTOR " + location.hostname + ", " + process.env.SERVER_URL + ", " + process.env.useUrlFragmentHash);
+		console.log("JOLTEON APP CTOR " + location.hostname + ", " + process.env.SERVER_URL + ", " + process.env.useUrlFragmentHash + ", " + store.getState());
 		// toast on saved/failed post operations to server
 		Toast.configure(this.toastConfig);
 		ea.subscribe("operation:saved", this.toastSaved);
