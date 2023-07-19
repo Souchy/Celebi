@@ -188,7 +188,7 @@ namespace souchy.celebi.spark
             services.AddSwaggerGen(c =>
             {
                 c.SchemaFilter<EnumSchemaFilter>();
-                c.SchemaFilter<CharacTypeSchemaFilter>();
+                c.SchemaFilter<StaticEnumSchemaFilter>();
                 c.SchemaFilter<AdditionalPropertiesSchemaFilter>();
                 c.SchemaFilter<EffectSchemaFilter>();
 
