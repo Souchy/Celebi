@@ -73,7 +73,7 @@ jobs:
           # your sftp server
           server: ${{ secrets.FTP_SERVER }}
           # your sftp server port, default to 22
-          #port: ${{ secrets.FTP_PORT }} # default is 22
+          port: 22 #${{ secrets.FTP_PORT }} # default is 22
           # you can copy private_key from your *.pem file, keep format
           #ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           # will put all file under this path
