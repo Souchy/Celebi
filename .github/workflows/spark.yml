@@ -99,17 +99,17 @@ jobs:
           # username
           username: ${{ secrets.FTP_USERNAME }}
           # SSH passsword，If a password is set, the secret key pair is ignored
-          #password: ${{ secrets.FTP_PASSWD }}  # optional
+          password: ${{ secrets.FTP_PASSWD }}  # optional
           # your sftp server port, default to 22
           port: 22 #${{ secrets.FTP_PORT }} # default is 22
           # will put all file under this path
-          local_path: '/home/runner/work/Celebi/Celebi/' # default is ./*      # example has './static/*'
+          local_path: './*' #'/home/runner/work/Celebi/Celebi/' # default is ./*    # example has './static/*'
           # files will copy to under remote_path
           remote_path: ${{ secrets.SPARK_PATH }} 
           # connection via sftp protocol only
           sftp_only: true # optional
           # you can copy private_key from your *.pem file, keep format
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          #ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           # sftp args
           #sftpArgs: # optional
           # This operation will delete all files in the remote path before upload. Please be careful set this to true
