@@ -78,7 +78,7 @@ jobs:
           host: ${{ secrets.FTP_SERVER }}
           port: 22
           username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWD }}
+          #password: ${{ secrets.FTP_PASSWD }}
           localPath: '/home/runner/work/Celebi/Celebi/'
           remotePath: ${{ secrets.SPARK_PATH }} 
           privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
