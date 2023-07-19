@@ -9,13 +9,14 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using souchy.celebi.eevee.neweffects.impl;
 using souchy.celebi.eevee.face.shared.conditions;
+using souchy.celebi.eevee.enums;
 
 namespace souchy.celebi.spark.util.swagger;
 
 /// <summary>
 /// Handles an enum that is defined as a Class with static readonly instances
 /// </summary>
-public class CharacTypeSchemaFilter : ISchemaFilter
+public class StaticEnumSchemaFilter : ISchemaFilter
 {
     public void Apply(OpenApiSchema schema, SchemaFilterContext context)
     {
@@ -24,6 +25,7 @@ public class CharacTypeSchemaFilter : ISchemaFilter
             
             if (!context.Type.IsAssignableTo(typeof(CharacteristicType))
                 && !context.Type.IsAssignableTo(typeof(ConditionType))
+                && !context.Type.IsAssignableTo(typeof(CellType))
                 //&& !context.Type.IsAssignableTo(typeof(EffectType))
             )
             {

@@ -21,7 +21,7 @@ namespace souchy.celebi.eevee.neweffects.impl.effects.move.teleport
             ICell cell = (ICell) currentTarget;
 
             var creatures = action.fight.board.GetCreaturesOnCell(cell.entityUid);
-            if (cell.isWalkable && creatures.Count() == 0)
+            if (cell.type.isWalkable && creatures.Count() == 0)
             {
                 source.position.set(cell.position);
             }

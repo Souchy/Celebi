@@ -4149,6 +4149,22 @@
         },
         "additionalProperties": false
       },
+      "CellType": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isWalkable": {
+            "type": "boolean"
+          },
+          "blocksLos": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
       "ChangeActor": {
         "type": "object",
         "additionalProperties": false
@@ -5371,11 +5387,11 @@
       "ICell": {
         "type": "object",
         "properties": {
-          "isWalkable": {
-            "type": "boolean"
+          "type": {
+            "$ref": "#/components/schemas/CellType"
           },
-          "blocksLos": {
-            "type": "boolean"
+          "assetOverride": {
+            "$ref": "#/components/schemas/IMapAsset"
           },
           "position": {
             "$ref": "#/components/schemas/IPosition"
@@ -5717,6 +5733,17 @@
           "nameId": {
             "type": "string"
           },
+          "mapAsset": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultAssets": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/IMapAsset"
+            },
+            "nullable": true
+          },
           "teamsStartPositions": {
             "type": "array",
             "items": {
@@ -5739,6 +5766,26 @@
             "nullable": true
           },
           "entityUid": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IMapAsset": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "nullable": true
+          },
+          "transform": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IVector3"
+            },
+            "nullable": true
+          },
+          "color": {
             "type": "string"
           }
         },
@@ -6211,6 +6258,17 @@
           },
           "nameId": {
             "type": "string"
+          },
+          "mapAsset": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultAssets": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/IMapAsset"
+            },
+            "nullable": true
           },
           "teamsStartPositions": {
             "type": "array",
