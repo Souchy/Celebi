@@ -62,7 +62,7 @@ jobs:
           name: 'Spark'
           
       - name: FTP-Deploy-Action test SamKirkLand
-        uses: SamKirkland/FTP-Deploy-Action@3.1.1
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
