@@ -65,6 +65,7 @@ module.exports = function (env, { analyze }) {
       open: false, //!process.env.CI,
       port: 9000,
       https: true
+      // server: true, ??
       // http2: true,
       // https: {
       //   key: fs.readFileSync('C:/Users/Blank/localCA.key'),
