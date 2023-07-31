@@ -29,6 +29,11 @@ namespace souchy.celebi.eevee.enums
         public static readonly CellType hole = new CellType(0, false, false);
         public static readonly CellType floor = new CellType(1, true, false);
         public static readonly CellType block = new CellType(2, false, true);
+        /// <summary>
+        /// Something you can walk through, but still blocks LoS, like a heavy mist, a fabric, a postsign...
+        /// It might be confusing to players but at least I have the option if I need it.
+        /// </summary>
+        public static readonly CellType @object = new CellType(3, true, true);
 
 
         private static List<CellType> _values = new List<CellType>();

@@ -1,6 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://frs8dejcy364"]
+[gd_scene load_steps=5 format=3 uid="uid://frs8dejcy364"]
 
 [ext_resource type="PackedScene" uid="uid://cml0nj1bgulxv" path="res://assets/effects/test/fx_beam_path_advanced.tscn" id="1_7m02d"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ce3u8"]
+sky_top_color = Color(0.113725, 0.027451, 0.678431, 1)
+sky_horizon_color = Color(0.578431, 0.549113, 0.702858, 1)
+ground_horizon_color = Color(0.578431, 0.549113, 0.702858, 1)
+
+[sub_resource type="Sky" id="Sky_q3sq7"]
+sky_material = SubResource("ProceduralSkyMaterial_ce3u8")
+
+[sub_resource type="Environment" id="Environment_022qc"]
+background_mode = 2
+sky = SubResource("Sky_q3sq7")
+tonemap_mode = 2
+glow_enabled = true
 
 [node name="testdisplay" type="Node3D"]
 
@@ -8,6 +22,15 @@
 
 [node name="Camera3D" type="Camera3D" parent="Env"]
 transform = Transform3D(0.935765, -0.283999, 0.209017, 0, 0.592746, 0.805389, -0.352624, -0.753655, 0.554671, 2.07784, 3.42217, 2.27111)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Env"]
+environment = SubResource("Environment_022qc")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Env"]
+transform = Transform3D(0.372992, -0.679678, 0.631596, 0, 0.680721, 0.732543, -0.927835, -0.273233, 0.253904, 0, 0, 0)
+light_color = Color(1, 0.745098, 0.545098, 1)
+shadow_enabled = true
+directional_shadow_max_distance = 250.0
 
 [node name="Content" type="Node" parent="."]
 

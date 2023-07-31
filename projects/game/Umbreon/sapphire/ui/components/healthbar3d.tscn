@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://oh7oefa5tech"]
+
+[ext_resource type="PackedScene" uid="uid://cxlo3x3nnyqmu" path="res://sapphire/ui/components/healthbar.tscn" id="1_j1njj"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_pchgc"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Healthbar3D" type="Sprite3D"]
+modulate = Color(1, 0.552941, 0.568627, 1)
+billboard = 1
+texture = SubResource("ViewportTexture_pchgc")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(100, 30)
+
+[node name="healthbar" parent="SubViewport" instance=ExtResource("1_j1njj")]

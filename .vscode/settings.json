@@ -138,5 +138,6 @@
 	"gradle/": true,
 	"gradlew": true,
 	"gradlew.bat": true
-}
+},
+"java.compile.nullAnalysis.mode": "automatic"
 }

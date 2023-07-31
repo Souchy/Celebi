@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" path="res://sapphire/nodes/CreatureNode.cs" id="1_36dcd"]
 [ext_resource type="PackedScene" path="res://assets/creatures/shadow.tscn" id="2_1auck"]
-[ext_resource type="PackedScene" uid="uid://oh7oefa5tech" path="res://sapphire/ui/healthbar.tscn" id="3_gmy82"]
+[ext_resource type="PackedScene" uid="uid://oh7oefa5tech" path="res://sapphire/ui/components/healthbar3d.tscn" id="3_gmy82"]
+
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_b7ayt"]
 

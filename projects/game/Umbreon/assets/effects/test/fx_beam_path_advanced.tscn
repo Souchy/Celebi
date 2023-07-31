@@ -6,6 +6,21 @@
 [ext_resource type="Texture2D" uid="uid://djvy4614cnadq" path="res://addons/kenney_particle_pack/star_06.png" id="3_u74rd"]
 [ext_resource type="Texture2D" uid="uid://yhxnbflduwq" path="res://addons/kenney_particle_pack/circle_02.png" id="5_r0iv3"]
 
+[sub_resource type="Animation" id="Animation_xjj21"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path3D/PathFollow3D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_xtsrw"]
 resource_name = "pfx"
 loop_mode = 1
@@ -20,21 +35,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]
-}
-
-[sub_resource type="Animation" id="Animation_xjj21"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Path3D/PathFollow3D:progress_ratio")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vqsp7"]
@@ -115,7 +115,7 @@ size = Vector2(0.2, 0.2)
 
 [sub_resource type="Curve3D" id="Curve3D_cp77x"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, -1, 0, 0, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 1, 0, 0, 1, 0, 1, -1, 0, 0.407, 1, 0, -0.407, 3.478, 0, -1.009, 0, 0, 0, 0, 0, 0, 4.99052, 0, -0.229613),
 "tilts": PackedFloat32Array(0, 0, 0, 0)
 }
 point_count = 4
@@ -186,11 +186,10 @@ draw_pass_1 = SubResource("QuadMesh_nyinq")
 
 [node name="Path3D" type="Path3D" parent="Moving"]
 unique_name_in_owner = true
-visible = false
 curve = SubResource("Curve3D_cp77x")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Moving/Path3D"]
-transform = Transform3D(0.707, 0, 0.707, 0, 1, 0, -0.707, 0, 0.707, 0, 0, 0)
+transform = Transform3D(-0.707004, 0, -0.707004, 0, 1, 0, 0.707004, 0, -0.707004, 0, 0, 0)
 
 [node name="MovingParticles" type="GPUParticles3D" parent="Moving/Path3D/PathFollow3D"]
 unique_name_in_owner = true

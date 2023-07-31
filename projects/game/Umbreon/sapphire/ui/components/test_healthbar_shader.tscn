@@ -1,0 +1,71 @@
+[gd_scene load_steps=15 format=3 uid="uid://ynnmr7184uyl"]
+
+[ext_resource type="Theme" uid="uid://xfu2p73erfer" path="res://assets/ui/new_theme.tres" id="1_gdr2c"]
+[ext_resource type="Shader" uid="uid://cr1ren6aqpbln" path="res://sapphire/ui/components/testsprite.tres" id="2_b28ol"]
+
+[sub_resource type="Gradient" id="Gradient_1owsu"]
+colors = PackedColorArray(1, 0, 0.00728941, 1, 0, 0.0379274, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3l2ah"]
+gradient = SubResource("Gradient_1owsu")
+
+[sub_resource type="Gradient" id="Gradient_ej7wq"]
+colors = PackedColorArray(0.968179, 1, 0, 1, 0.205262, 1, 0.10034, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3hnvc"]
+gradient = SubResource("Gradient_ej7wq")
+
+[sub_resource type="Gradient" id="Gradient_ktlvq"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5ye8b"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kgmfw"]
+height = 100
+color_ramp = SubResource("Gradient_ktlvq")
+noise = SubResource("FastNoiseLite_5ye8b")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fh0oe"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qc3ju"]
+noise = SubResource("FastNoiseLite_fh0oe")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ff0o2"]
+shader = ExtResource("2_b28ol")
+shader_parameter/Noise = SubResource("NoiseTexture2D_qc3ju")
+
+[sub_resource type="Gradient" id="Gradient_p30qb"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lv5bf"]
+gradient = SubResource("Gradient_p30qb")
+
+[node name="test" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_right = 118.0
+offset_bottom = 35.0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_top = 48.0
+offset_right = 512.0
+offset_bottom = 148.0
+theme = ExtResource("1_gdr2c")
+value = 50.0
+rounded = true
+texture_under = SubResource("GradientTexture1D_3l2ah")
+texture_over = SubResource("GradientTexture1D_3hnvc")
+texture_progress = SubResource("NoiseTexture2D_kgmfw")
+tint_under = Color(0.0901961, 1, 0.94902, 1)
+tint_progress = Color(1, 0.419608, 0.698039, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ff0o2")
+position = Vector2(136, 190)
+scale = Vector2(0.984863, 40.375)
+texture = SubResource("GradientTexture1D_lv5bf")

@@ -7,9 +7,11 @@ using souchy.celebi.eevee.face.shared.models.skins;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.shared;
 using souchy.celebi.spark.models;
+using souchy.celebi.spark.models.aggregations;
 using souchy.celebi.spark.services;
 using souchy.celebi.spark.services.models;
 using souchy.celebi.spark.util;
+using System.Collections.Generic;
 
 namespace souchy.celebi.spark.controllers.models
 {
@@ -41,6 +43,24 @@ namespace souchy.celebi.spark.controllers.models
             var list = await spells.GetAsync();
             return Ok(list);
         }
+
+        // TODO maybe, but we need the Atlas Federation for aggregation. More important thing to fix now is getting models with the new stats and pushing the build to DeathShadows
+        // These would make it faster to request all the info about the model list and the individual model, 
+        // instead of requesting the list of ids and then requesting the names/desc/stats/etc individually for each model
+        // It could disrupt my flow of data when updating values though
+        //[HttpGet("aggregation/list")]
+        //public async Task<ActionResult<List<SpellModelTextAggregation>>> GetListAggreation([FromQuery] Optional<List<ObjectId>> list)
+        //{
+        //    return Ok(await spells.GetInIdsAsync(list));
+        //}
+        //[HttpGet("aggregation/{id}")]
+        //public async Task<ActionResult<SpellModelAggregation>> GetAggregation([FromRoute] SpellIID id)
+        //{
+        //    SpellModelAggregation? model = await spells.GetOneAsync(id);
+        //    if (model is null)
+        //        return NoContent();
+        //    return Ok(model);
+        //}
 
         [HttpGet("list")]
         public async Task<ActionResult<List<ISpellModel>>> GetList([FromQuery] List<ObjectId> list)
