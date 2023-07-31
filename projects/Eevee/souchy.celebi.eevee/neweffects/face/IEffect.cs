@@ -20,7 +20,7 @@ namespace souchy.celebi.eevee.neweffects.face
         /// Acquired targets with this zone
         /// </summary>
         public IZone TargetAcquisitionZone { get; set; }
-        public IEntityList<ITrigger> Triggers { get; set; }
+        public IEntityList<ITriggerModel> Triggers { get; set; }
 
 
         public T GetProperties<T>() => (T) Schema;

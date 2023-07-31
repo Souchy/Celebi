@@ -66,7 +66,13 @@ namespace souchy.celebi.espeon.eevee.impl.controllers
             TriggerEvent triggerApply = new TriggerEvent(TriggerType.OnCreatureSpellCast, TriggerOrderType.Apply);
             TriggerEvent triggerAfter = new TriggerEvent(TriggerType.OnCreatureSpellCast, TriggerOrderType.After);
 
+            Mind.procTriggers(action, null, null, triggerBefore);
+            //sourceCrea.trigger(TriggerTypes.onCreatureSpellCast, TriggerOrderType.Before);
+
             Mind.applyEffectContainer(action, spellModel); //, targetPosition);
+
+            Mind.procTriggers(action, null, null, triggerAfter);
+            //sourceCrea.trigger(TriggerTypes.onCreatureSpellCast, TriggerOrderType.After);
 
             //// trigger before effects
             //foreach (IEffect effect in s.GetEffects())

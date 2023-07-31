@@ -86,7 +86,13 @@ namespace souchy.celebi.eevee
         }
 
 
-
+        /// <summary>
+        /// Checks every status in the game to see if they can be triggered by the action
+        /// </summary>
+        /// <param name="action"></param>
+        /// <param name="triggerEvent"></param>
+        /// <param name="effect"></param>
+        /// <param name="area"></param>
         public static void procTriggers(IAction action, IEffect effect, IEnumerable<IBoardEntity> area, TriggerEvent triggerEvent)
         {
             foreach (IStatusInstance status in action.fight.statuses.Values.SelectMany(sc => sc.instances))

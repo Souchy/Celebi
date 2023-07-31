@@ -197,7 +197,7 @@ namespace souchy.celebi.spark
                 c.MapType<IEntitySet<ObjectId>>(() => mapSchemaArray<ObjectId>());
                 c.MapType<IEntityList<ObjectId>>(() => mapSchemaArray<ObjectId>());
                 c.MapType<IEntityList<IZone>>(() => mapSchemaArray<IZone>());
-                c.MapType<IEntityList<ITrigger>>(() => mapSchemaArray<ITrigger>());
+                c.MapType<IEntityList<ITriggerModel>>(() => mapSchemaArray<ITriggerModel>());
                 c.MapType<IEntityList<ICondition>>(() => mapSchemaArray<ICondition>());
 
                 c.MapType<IValue<ZoneType>>(() => mapIValue<ZoneType>());

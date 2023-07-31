@@ -6,31 +6,36 @@ using souchy.celebi.eevee.impl.shared.triggers;
 
 namespace souchy.celebi.eevee.face.shared.triggers
 {
-    public interface ITrigger
+    public interface ITriggerModel
     {
         /// <summary>
+        /// { What to react to }
         /// Conditions for the event, ex: moved (walked, teleported), damageReceived, turnStart, etc.
         /// </summary>
         //public ICondition triggerConditions { get; set; }
-        public TriggerType TriggerType { get; set; }
+        public TriggerType triggerType { get; set; }
 
         /// <summary>
+        /// { When to react to something }
         /// Wether to insert the triggered effects before or after the cause
         /// </summary>
-        public TriggerOrderType TriggerOrderType { get; set; }
+        public TriggerOrderType triggerOrderType { get; set; }
 
         /// <summary>
+        /// { Where is the thing we can react to }
         /// Trigger zone, only creatures in that zone can activate the trigger (may not need this if we use glyphs)
         /// </summary>
-        public IZone TriggerZone { get; set; }
+        public IZone triggerZone { get; set; }
 
         /// <summary>
+        /// { Who we can react to }
         /// Additionaly Filter what kind of creature can proc this trigger (observation subject), ex: breed is a demon
         /// </summary>
-        public ICondition TriggererFilter { get; set; }
+        public ICondition triggererFilter { get; set; }
 
         /// <summary>
-        /// Additionaly Conditions on the holder of the trigger buff, ex: hp higher than 50
+        /// { How the holder is }
+        /// Additionally Conditions on the holder of the trigger buff, ex: hp higher than 50
         /// </summary>
         public ICondition HolderCondition { get; set; }
 
@@ -41,15 +46,15 @@ namespace souchy.celebi.eevee.face.shared.triggers
 
             if (!HolderCondition.check(action, triggerEvent, caster, targetCell))
                 return false;
-            if (!TriggererFilter.check(action, triggerEvent, caster, targetCell))
+            if (!triggererFilter.check(action, triggerEvent, caster, targetCell))
                 return false;
 
-            var area = TriggerZone.getArea(action.fight, targetCell.position);
+            var area = triggerZone.getArea(action.fight, targetCell.position);
             var isCasterInArea = area.Cells.Any(c => c.position == caster.position);
             if (!isCasterInArea) 
                 return false;
 
-            var isRightType = this.TriggerType == triggerEvent.type && this.TriggerOrderType == triggerEvent.orderType;
+            var isRightType = this.triggerType == triggerEvent.type && this.triggerOrderType == triggerEvent.orderType;
             if (!isRightType) 
                 return false;
 

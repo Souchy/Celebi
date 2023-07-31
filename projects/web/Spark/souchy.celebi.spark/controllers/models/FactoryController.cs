@@ -18,16 +18,16 @@ namespace souchy.celebi.spark.controllers.models
 
         [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPost("trigger")]
-        public ActionResult<ITrigger> CreateTrigger() 
+        public ActionResult<ITriggerModel> CreateTrigger() 
         {
-            var trigger = new Trigger();
+            var trigger = new TriggerModel();
             return Ok(trigger);
         }
 
 
         [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPost("condition")]
-        public async Task<ActionResult<ICondition>> CreateCondition([FromQuery] ConditionType conditionType) //[FromRoute] ObjectId id)
+        public async Task<ActionResult<ICondition>> CreateCondition() //[FromQuery] ConditionType conditionType) //[FromRoute] ObjectId id)
         {
             var condition = new CreatureStatsCondition();
             return Ok(condition);

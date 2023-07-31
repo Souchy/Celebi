@@ -27,7 +27,7 @@ namespace souchy.celebi.eevee.neweffects.impl
         public ICondition SourceCondition { get; set; }
         public ICondition TargetFilter { get; set; }
         public IZone TargetAcquisitionZone { get; set; } = new Zone();
-        public IEntityList<ITrigger> Triggers { get; set; } = new EntityList<ITrigger>();
+        public IEntityList<ITriggerModel> Triggers { get; set; } = new EntityList<ITriggerModel>();
         public IEntityList<ObjectId> EffectIds { get; set; } = new EntityList<ObjectId>();
 
 
