@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=4 format=3 uid="uid://xfu2p73erfer"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://xfu2p73erfer"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_14u5m"]
 bg_color = Color(0.6, 0.0941176, 0.180392, 0.454902)
@@ -12,6 +12,11 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 shadow_size = 24
 shadow_offset = Vector2(5, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_voifx"]
+bg_color = Color(0.6, 0.6, 0.6, 0.203922)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r73mk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ej4y8"]
 bg_color = Color(0.12549, 0.6, 0.270588, 1)
@@ -29,6 +34,8 @@ shadow_offset = Vector2(3.166, 2.133)
 
 [resource]
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_14u5m")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_voifx")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_r73mk")
 Tree/styles/bg = SubResource("StyleBoxFlat_ej4y8")
 VBoxContainer/constants/separation = 4
 VBoxContainer/styles/bg = SubResource("StyleBoxFlat_gd6b1")
