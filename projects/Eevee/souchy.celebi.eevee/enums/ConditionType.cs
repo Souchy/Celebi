@@ -1,10 +1,12 @@
 using Intellenum;
+using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.shared.conditions;
 using souchy.celebi.eevee.impl.shared.conditions.creature;
 using souchy.celebi.eevee.impl.shared.conditions.other;
 using souchy.celebi.eevee.impl.shared.conditions.spell;
 using souchy.celebi.eevee.impl.shared.conditions.status;
+using souchy.celebi.eevee.impl.util;
 
 namespace souchy.celebi.eevee.face.shared.conditions
 {
@@ -27,14 +29,13 @@ namespace souchy.celebi.eevee.face.shared.conditions
     //}
 
 
-    public record ConditionType
+    public sealed record ConditionType
     {
         public IID id { get; init; }
         public Type type { get; init; }
         public ConditionType(int id, Type type) {
             this.id = new IID(id.ToString());
             this.type = type;
-            _values.Add(this);
         }
 
         // Other / relations
@@ -67,14 +68,9 @@ namespace souchy.celebi.eevee.face.shared.conditions
 
 
         private static List<ConditionType> _values = new();
-        public static IEnumerable<ConditionType> values()
-        {
-            return _values.ToArray();
-        }
-        public static ConditionType get(IID id)
-        {
-            return _values.Find(v => v.id == id);
-        }
+        static ConditionType() => _values.AddRange(StaticEnumUtils.findValues<ConditionType>());
+        public static IEnumerable<ConditionType> values() => _values.ToArray();
+        public static ConditionType get(IID id) => _values.Find(v => v.id == id);
     }
 
     // (SchemaFactory, Script)

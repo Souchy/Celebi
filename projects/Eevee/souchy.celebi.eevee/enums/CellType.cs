@@ -1,4 +1,6 @@
-﻿using System;
+﻿using souchy.celebi.eevee.enums.characteristics.creature;
+using souchy.celebi.eevee.impl.util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,12 +20,12 @@ namespace souchy.celebi.eevee.enums
         public int id { get; }
         public bool isWalkable { get; }
         public bool blocksLos { get; }
+        private CellType() { }  
         public CellType(int id, bool isWalkable, bool blocksLos)
         {
             this.id = id;
             this.isWalkable = isWalkable;
             this.blocksLos = blocksLos;
-            _values.Add(this);
         }
 
         public static readonly CellType hole = new CellType(0, false, false);
@@ -37,6 +39,7 @@ namespace souchy.celebi.eevee.enums
 
 
         private static List<CellType> _values = new List<CellType>();
+        static CellType() => _values.AddRange(StaticEnumUtils.findValues<CellType>());
         public static CellType get(int id) => _values.Find(v => v.id == id);
         public static IEnumerable<CellType> values() => _values.ToArray();
     }

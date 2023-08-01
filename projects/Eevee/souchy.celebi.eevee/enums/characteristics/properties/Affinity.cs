@@ -1,5 +1,6 @@
 ﻿using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.impl.shared.conditions.other;
+using souchy.celebi.eevee.impl.util;
 
 namespace souchy.celebi.eevee.enums.characteristics.creature
 {
@@ -54,15 +55,9 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
         public static readonly Affinity VariancePercent     = new(28, nameof(VariancePercent));
 
 
-        public static readonly Dictionary<CharacteristicId, Affinity> values = new();
-        static Affinity()
-        {
-            var fields = typeof(Affinity).GetFields().Where(f => f.FieldType == typeof(Affinity));
-            foreach (var field in fields)
-            {
-                var value = (Affinity) field.GetValue(null);
-                values[value.ID] = value;
-            }
-        }
+        private static readonly List<Affinity> _values = new();
+        public static IEnumerable<Affinity> values => _values.ToArray();
+        public static Affinity getAffinity(CharacteristicId id) => _values.Find(v => v.ID == id);
+        static Affinity() => _values.AddRange(StaticEnumUtils.findValues<Affinity>());
     }
 }

@@ -27,7 +27,7 @@ namespace souchy.celebi.spark.controllers.models
         [HttpGet("charac/resource")]
         public List<Resource> GetResource() => Resource.values.Values.ToList();
         [HttpGet("charac/affinity")]
-        public List<Affinity> GetAffinity() => Affinity.values.Values.ToList();
+        public List<Affinity> GetAffinity() => Affinity.values.ToList();
         [HttpGet("charac/resistance")]
         public List<Resistance> GetResistance() => Resistance.values.Values.ToList();
         [HttpGet("charac/contextual")]

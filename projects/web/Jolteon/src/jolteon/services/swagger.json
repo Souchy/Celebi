@@ -1739,7 +1739,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ITrigger"
+                  "$ref": "#/components/schemas/ITriggerModel"
                 }
               }
             }
@@ -4165,6 +4165,16 @@
         },
         "additionalProperties": false
       },
+      "CellTypeTypes": {
+        "enum": [
+          "hole: CellType = {\r\n  \"id\": 0,\r\n  \"isWalkable\": false,\r\n  \"blocksLos\": false\r\n};",
+          "floor: CellType = {\r\n  \"id\": 1,\r\n  \"isWalkable\": true,\r\n  \"blocksLos\": false\r\n};",
+          "block: CellType = {\r\n  \"id\": 2,\r\n  \"isWalkable\": false,\r\n  \"blocksLos\": true\r\n};",
+          "object: CellType = {\r\n  \"id\": 3,\r\n  \"isWalkable\": true,\r\n  \"blocksLos\": true\r\n};"
+        ],
+        "type": "string",
+        "format": ""
+      },
       "ChangeActor": {
         "type": "object",
         "additionalProperties": false
@@ -5124,7 +5134,7 @@
           "triggers": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ITrigger"
+              "$ref": "#/components/schemas/ITriggerModel"
             },
             "nullable": true
           },
@@ -5165,7 +5175,7 @@
           "triggers": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ITrigger"
+              "$ref": "#/components/schemas/ITriggerModel"
             },
             "nullable": true
           },
@@ -5614,7 +5624,7 @@
           "triggers": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ITrigger"
+              "$ref": "#/components/schemas/ITriggerModel"
             },
             "nullable": true
           },
@@ -5655,7 +5665,7 @@
           "triggers": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ITrigger"
+              "$ref": "#/components/schemas/ITriggerModel"
             },
             "nullable": true
           },
@@ -6009,7 +6019,7 @@
         "type": "object",
         "additionalProperties": false
       },
-      "ITrigger": {
+      "ITriggerModel": {
         "type": "object",
         "properties": {
           "triggerType": {
@@ -7914,7 +7924,7 @@
         },
         "additionalProperties": false
       },
-      "Trigger": {
+      "TriggerModel": {
         "type": "object",
         "properties": {
           "triggerType": {
