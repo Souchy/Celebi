@@ -10,9 +10,6 @@ export class Statsimple {
     public basestat: StatSimple
     @bindable
     public growthequation: MathEquation
-    // @bindable
-    // public growthstat: StatSimple
-
 
     constructor(private readonly ea: IEventAggregator) { }
 

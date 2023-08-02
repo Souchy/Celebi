@@ -2,16 +2,20 @@ import { IEventAggregator, bindable, inject } from "aurelia";
 import { IRouteableComponent, IRouter, Navigation, Parameters, RoutingInstruction } from '@aurelia/router';
 import { ICreatureModel, IStatusModel, SpellModel } from "../../../../jolteon/services/api/data-contracts";
 import { CreatureModelController } from "../../../../jolteon/services/api/CreatureModelController";
-import { StatsType } from "../stats/statscomponent";
 import { TOAST_PLACEMENT, TOAST_STATUS, TOAST_THEME, Toast, ToastConfigOptions, ToastOptions } from "bootstrap-toaster";
 import { SpellModelController } from "../../../../jolteon/services/api/SpellModelController";
 import { Stringcomponent } from "../strings/stringcomponent";
 import { CreatureSkinController } from "../../../../jolteon/services/api/CreatureSkinController";
+import { Characteristics, Enums } from "../../../../jolteon/constants";
 
 
 @inject(IEventAggregator, IRouter, CreatureModelController, CreatureSkinController)
 export class Creature implements IRouteableComponent {
 
+    // hook enums
+    public readonly Enums: Enums = Enums;
+    public readonly Characteristics: Characteristics = Characteristics;
+    
     //#region input
     @bindable
     public model: ICreatureModel;

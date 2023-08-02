@@ -62,7 +62,7 @@
   <div class="mainSpellProperties">
     <div>
       <h4>Costs</h4>
-      <statsmini statsuid.bind="model.statsId" characsallowed.bind="Characteristics.resourcesSpellCosts" hasadddelete.bind="true" hasgrowth.bind="true"></statsmini>
+      <statsmini idsuffix.bind="'costs'" statsuid.bind="model.statsId" characsallowed.bind="Characteristics.resourcesSpellCosts" hasadddelete.bind="true" hasgrowth.bind="true"></statsmini>
       <!-- <table class="table-striped table-sm table-borderless table-responsive-sm">
         <tbody>
           <tr repeat.for="charac of Characteristics.resourcesSpellCosts">
@@ -76,7 +76,7 @@
     <div>
       <h4>Stats</h4>
       <!-- <spellstats baseuid.bind="model.statsId"></spellstats> -->
-      <statsmini statsuid.bind="model.statsId" characsallowed.bind="Characteristics.spellModels" hasadddelete.bind="true" hasgrowth.bind="true"></statsmini>
+      <statsmini idsuffix.bind="'stats'" statsuid.bind="model.statsId" characsallowed.bind="Characteristics.spellModels" hasadddelete.bind="true" hasgrowth.bind="true"></statsmini>
     </div>
     <!-- Range -->
     <div>

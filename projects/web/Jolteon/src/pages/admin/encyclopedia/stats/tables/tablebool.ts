@@ -12,7 +12,7 @@ export class Tablebool {
     @bindable
     public characs: any[];
     @bindable
-    public base: Stats 
+    public stats: Stats 
     // @bindable
     // public growth: Stats
 
@@ -24,8 +24,8 @@ export class Tablebool {
     }
 
     public getBaseStat(id): StatBool {
-        if (this.base?.base?.hasOwnProperty(id)){
-            return this.base.base[id]
+        if (this.stats?.base?.dic?.hasOwnProperty(id)){
+            return this.stats.base.dic[id]
         }
         else {
             let stat: StatBool = {
@@ -36,8 +36,8 @@ export class Tablebool {
         }
     }
     public getGrowthEquation(id): MathEquation {
-        if (this.base?.growth?.hasOwnProperty(id)){
-            return this.base.growth[id]
+        if (this.stats?.growth?.dic?.hasOwnProperty(id)){
+            return this.stats.growth.dic[id]
         }
         else {
             let equation: MathEquation = {

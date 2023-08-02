@@ -12,32 +12,33 @@ export class Tablesimple {
     @bindable
     public characs: any[];
     @bindable
-    public base: Stats = null
-    // @bindable
-    // public growth: Stats = null
+    public stats: Stats = null
 
     constructor(private readonly ea: IEventAggregator) {
     }
 
     bound() {
-        // console.log("table base stats: " + this.base);
+        // console.log("table base stats: " + this.characs.map(c => c.id));
+        // console.log(this.stats);
     }
 
     public getBaseStat(id): StatSimple {
-        if (this.base?.base?.hasOwnProperty(id)){
-            return this.base.base[id]
+        if (this.stats?.base?.dic?.hasOwnProperty(id)){
+            let stat = this.stats.base.dic[id];
+            return stat;
         }
         else {
             let stat: StatSimple = {
                 statId: id,
                 value: 0
-            }
+            };
             return stat;
         }
     }
     public getGrowthEquation(id): MathEquation {
-        if (this.base?.growth?.hasOwnProperty(id)){
-            return this.base.growth[id]
+        if (this.stats?.growth?.dic?.hasOwnProperty(id)){
+            let equation = this.stats.growth.dic[id]
+            return equation;
         }
         else {
             let equation: MathEquation = {

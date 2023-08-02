@@ -27,7 +27,7 @@ export class Effectlist {
     }
 
     binding() {
-        console.log("effectlist binding: " + this.effectids);
+        // console.log("effectlist binding: " + this.effectids);
     }
 
     public save() {

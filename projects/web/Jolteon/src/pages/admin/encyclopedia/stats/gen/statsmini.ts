@@ -1,6 +1,6 @@
 import { bindable, inject, observable } from "aurelia";
 import { watch } from '@aurelia/runtime-html';
-import { IStat, IStats, MathEquation, StatValueType, Stats } from "../../../../../jolteon/services/api/data-contracts";
+import { CharacteristicCategory, CharacteristicType, IStat, IStats, MathEquation, StatValueType, Stats } from "../../../../../jolteon/services/api/data-contracts";
 import { StatsModelController } from "../../../../../jolteon/services/api/StatsModelController";
 import { Characteristics, Constants, Enums } from "../../../../../jolteon/constants";
 
@@ -11,7 +11,9 @@ export class Statsmini {
     // public stats type (StatusInstanceStats? CreatureStats? ... -> what properties are allowed?)
 
     @bindable
-    public characsallowed: any[] = Characteristics.allSectioned;
+    public idsuffix = "";
+    @bindable
+    public characsallowed: (any | CharacteristicType)[] = Characteristics.allSectioned;
     @bindable
     public hasgrowth: boolean = false;
     @bindable
@@ -39,17 +41,27 @@ export class Statsmini {
             // console.log("load stats " + this.statsuid)
             this.statsController.getStats(this.statsuid).then(
                 res => {
-                    console.log("got stats: ")
-                    console.log( res.data)
+                    // console.log("statsmini got stats: ")
+                    // console.log(res.data)
                     this.stats = res.data;
                 },
                 rej => console.log("no stats error")
             )
         }
+        // console.log("statsmini allowed:")
+        // console.log(this.characsallowed);
         // console.log("stats mini stats: ");
         // console.log(this.stats);
         // console.log("ref: ")
         // console.log(this.statselector)
+    }
+
+    public hasSections() {
+        if (!this.characsallowed) return false;
+        let hasSections = Array.isArray(this.characsallowed[0]);
+        // console.log("hasSections: " + hasSections);
+        // console.log(this.characsallowed);
+        return hasSections;
     }
 
     // @watch("stats.dic")
@@ -58,58 +70,50 @@ export class Statsmini {
         return Object.values(this.stats.base.dic);
     }
 
-    public get getDicKeys() {
-        if (this.showall) {
-            return this.characsallowed;
+    public getFilteredDicKeys(characsAllowedSection: (CharacteristicType[] | CharacteristicType[][])) {
+        let keys = Object.keys(this.stats?.base.dic).filter(k => k != "$type" && k != "entityUid");
+        if (Array.isArray(characsAllowedSection[0])) {
+            if (this.showall) {
+                let sections = characsAllowedSection.map(s => s.map(c => (c as CharacteristicType).id));
+                return sections;
+            }
+            return keys.filter(k => characsAllowedSection.some(s => s.some(c => (c as CharacteristicType).id == k)))
         } else {
-            return Object.keys(this.stats.base.dic).filter(k => k != "$type" && k != "entityUid");
+            if (this.showall) {
+                return characsAllowedSection.map(c => c.id);
+            }
+            return keys.filter(k => characsAllowedSection.some(c => (c as CharacteristicType).id == k));
         }
     }
+    public get getDicKeys() {
+        // console.log("getDicKeys: " + this.showall + ", " + this.stats + ", " + this.statsuid); // + ", " + JSON.stringify(this.characsallowed))
+        // console.log(this.stats);
+        // if (this.showall) {
+        //     return this.characsallowed;
+        // } else {
+            if (!this.stats) {
+                // console.log("return null")
+                return null;
+            }
+            return this.getFilteredDicKeys(this.characsallowed);
+        // }
+    }
 
-    // public get getGrowthValues() {
-    //     return Object.values(this.stats.growth);
-    // }
     public getBase(statid: string) {
         return this.stats.base.dic[statid];
     }
     public getGrowth(statId) {
         return this.stats.growth.dic[statId];
     }
-
-    public getCharacName(statId: string) {
-        console.log("getCharacName for: " + statId)
-        return Characteristics.getCharac(statId).baseName;
+    
+    public getSectionName(section: CharacteristicType[]) {
+        let first = section[0];
+        return CharacteristicCategory[first.category];
     }
-    public getCharacType(statId: string) {
-        // console.log("getCharacType: " + statId)
-        return Characteristics.getCharac(statId);
-    }
-
-    public isSimple(statid: string) {
-        let stat = this.getBase(statid);
-        if (!stat) return;
-        let characType = this.getCharacType(stat.statId);
-        return characType.statValueType == StatValueType.Simple && characType.enumValueConstraint == null
-    }
-    public isBool(statid: string) {
-        let stat = this.getBase(statid);
-        if (!stat) return;
-        return this.getCharacType(stat.statId).statValueType == StatValueType.Bool
-    }
-    public isEnum(statid: string) {
-        let stat = this.getBase(statid);
-        if (!stat) return;
-        let characType = this.getCharacType(stat.statId);
-        return characType.statValueType == StatValueType.Simple && characType.enumValueConstraint != null
-    }
-    public getEnum(statid: string) {
-        let stat = this.getBase(statid);
-        if (!stat) return;
-        let characType = this.getCharacType(stat.statId);
-        if (!characType.enumValueConstraint) return "";
-        let data = characType.enumValueConstraint.split(",")[0];
-        let data2 = data.split(".");
-        return data2[data2.length - 1].trim();
+    public sectionHasValues(section: CharacteristicType[]) {
+        // console.log("section has values?")
+        // console.log(section)
+        return section?.some(c => this.stats?.base?.dic?.hasOwnProperty(c.id) || this.stats?.growth?.dic?.hasOwnProperty(c.id))
     }
 
     public onChangeStatValue() {
@@ -148,8 +152,10 @@ export class Statsmini {
     }
 
     public save() {
+        // console.log("statsmini save")
         this.callbacksavestat();
         if (this.statsuid) {
+            // console.log("spark save stats")
             this.statsController.putStats(this.statsuid, this.stats).then(
                 res => this.stats = res.data
             )

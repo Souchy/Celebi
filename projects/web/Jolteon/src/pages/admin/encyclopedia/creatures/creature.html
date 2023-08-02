@@ -2,7 +2,7 @@
 <import from="../spells/spelllist"></import>
 <import from="../strings/stringcomponent"></import>
 <import from="../stats/creature/creaturestats"></import>
-
+<import from="../stats/gen/statsmini"></import>
 
 <!-- <div if.bind="model"> -->
 
@@ -48,12 +48,15 @@
     ></statuslist>
   
     <h3 class="titleSpacer">Stats</h3>
+      <creaturestats statsuid.bind="model.statsId"></creaturestats>  <!-- growthuid.bind="model.growthStats" -->
+
+    
     <!-- TODO un stats mini pour les affinities, un pour les resources, etc? 
       p-e aussi un paramètre statsmini pour qu'il affiche tous les champs de characsAllowed, même s'il n'existent pas dans le dictionnaire 
       serait pratique pour les SpellCost p.ex.
     -->
-    <!-- <statsmini statsuid.bind="model.statsId" characsallowed.bind="Characteristics.creatures" hasadddelete.bind="true" hasgrowth.bind="true"></statsmini> -->
-    <creaturestats baseuid.bind="model.statsId" growthuid.bind="model.growthStats"></creaturestats>
+    <!-- Mini
+    <statsmini statsuid.bind="model.statsId" characsallowed.bind="Characteristics.creaturesSectioned" hasadddelete.bind="true" hasgrowth.bind="true" showall.bind="true"></statsmini> -->
   </template>
   
 

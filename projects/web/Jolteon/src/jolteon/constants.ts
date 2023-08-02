@@ -34,9 +34,13 @@ export class Characteristics {
     public static readonly statusInstances: StatusInstanceProperty[] = Object.values(StatusInstancePropertyTypes)
     
     // aggregations
-    public static readonly creatures: (Resource[] | Affinity[] | Resistance[] | State[] | OtherProperty[] | Contextual[])[] = [
-        Characteristics.resources, Characteristics.affinities, Characteristics.resistances,
-        Characteristics.states, Characteristics.others, Characteristics.contextuals,
+    public static readonly creaturesSectioned: (Resource[] | Affinity[] | Resistance[] | State[] | OtherProperty[]/*  | Contextual[] */)[] = [
+        Characteristics.resourcesCreatureModel, Characteristics.affinities, Characteristics.resistances,
+        Characteristics.states, Characteristics.others //, Characteristics.contextuals,
+    ]
+    public static readonly creatures: (Resource | Affinity | Resistance | State | OtherProperty | Contextual)[] = [
+        ...Characteristics.resources, ...Characteristics.affinities, ...Characteristics.resistances,
+        ...Characteristics.states, ...Characteristics.others, ...Characteristics.contextuals,
     ]
     public static readonly statusModels: (StatusContainerProperty[] | StatusInstanceProperty[])[] = [Characteristics.statusContainers, Characteristics.statusInstances]
     // all

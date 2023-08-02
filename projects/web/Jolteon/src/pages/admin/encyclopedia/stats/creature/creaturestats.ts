@@ -11,29 +11,31 @@ export class CreatureStats implements IRouteableComponent {
 
     // input
     @bindable
-    public baseuid: string;
+    public statsuid: string;
     // @bindable
     // public growthuid: string;
 
     // db data
-    public base: Stats = null
+    public stats: Stats = null
     // public growth: Stats = null
 
 
     constructor(private readonly ea: IEventAggregator, private readonly statsController: StatsModelController) {
         ea.subscribe("stat:base:change", (s: StatSimple | StatBool) => {
             // console
-            this.postUpdate(this.base, s);
+            this.postUpdate(this.stats, s);
         });
         // ea.subscribe("stat:growth:change", (s: StatSimple | StatBool) => {
         //     this.postUpdate(this.growth, s);
         // });
     }
 
-    binding() {
-        this.statsController
-            .getStats(this.baseuid)
-            .then(res => this.base = res.data);
+    async binding() {
+        let res = await this.statsController.getStats(this.statsuid)
+        this.stats = res.data;
+        // console.log("creature stats: ");
+        // console.log(this.stats)
+            // .then(res => this.stats = res.data);
         // this.statsController
         //     .getStats(this.growthuid)
         //     .then(res => this.growth = res.data);
