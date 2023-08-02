@@ -1,5 +1,5 @@
 import { HttpResponse } from './../../../../jolteon/services/api/http-client';
-import { SchemaDescription, ITrigger, TriggerOrderType, TriggerType, IZone, IEffect, EffT } from '../../../../jolteon/services/api/data-contracts';
+import { SchemaDescription, ITriggerModel, TriggerOrderType, TriggerType, IZone, IEffect, EffT } from '../../../../jolteon/services/api/data-contracts';
 import { IRouter } from "@aurelia/router";
 import { watch } from '@aurelia/runtime-html';
 import { IEventAggregator, bindable, inject, observable } from "aurelia";

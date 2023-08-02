@@ -1,11 +1,11 @@
 import { bindable } from "aurelia";
-import { ITrigger } from "../../../../../jolteon/services/api/data-contracts";
+import { ITriggerModel } from "../../../../../jolteon/services/api/data-contracts";
 
 
 export class Trigger {
 
     @bindable
-    public model: ITrigger;
+    public model: ITriggerModel;
     @bindable
     public callbacksave: (t) => {}
 
