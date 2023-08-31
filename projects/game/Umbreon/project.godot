@@ -14,6 +14,7 @@ config/name="Umbreon"
 config/tags=PackedStringArray("celebi")
 run/main_scene="res://testdisplay.tscn"
 config/features=PackedStringArray("4.1", "C#")
+boot_splash/bg_color=Color(0, 0, 0, 1)
 
 [autoload]
 
@@ -23,8 +24,8 @@ Umbreon="*res://common/Umbreon.cs"
 
 [display]
 
-window/size/viewport_width=1200
-window/size/viewport_height=700
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/subwindows/embed_subwindows=false
 
 [dotnet]
