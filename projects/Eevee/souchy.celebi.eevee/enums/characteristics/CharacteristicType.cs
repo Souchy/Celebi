@@ -84,17 +84,10 @@ namespace souchy.celebi.eevee.enums.characteristics
     }
     public enum ElementType
     {
-        None,
         /// <summary>
-        /// True damage. Not sure if it's an element or just a EffectTrueDamage that can't be resisted
+        /// Scales with nothing
         /// </summary>
-        True,
-        Fire,
-        Water,
-        Earth,
-        Air,
-        Dark,
-        Light,
+        None,
         /// <summary>
         /// Takes the best scaling affinity of the creature
         /// </summary>
@@ -107,7 +100,18 @@ namespace souchy.celebi.eevee.enums.characteristics
         /// <summary>
         /// Scales with every elemental affinity
         /// </summary>
-        All
+        All,
+        /// <summary>
+        /// True damage. Not sure if it's an element or just a EffectTrueDamage that can't be resisted
+        /// </summary>
+        True,
+        Fire,
+        Water,
+        Earth,
+        Air,
+        Dark,
+        Light,
+        Physical
     }
 
 

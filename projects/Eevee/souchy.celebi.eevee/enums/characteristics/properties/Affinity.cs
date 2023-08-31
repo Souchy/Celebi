@@ -20,7 +20,8 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
         public static readonly Affinity Air                 = new(5, nameof(Air),   ElementType.Air);
         public static readonly Affinity Dark                = new(6, nameof(Dark),  ElementType.Dark);
         public static readonly Affinity Light               = new(7, nameof(Light), ElementType.Light);
-
+        public static readonly Affinity Physical            = new(8, nameof(Physical), ElementType.Physical);
+        
         /// <summary>
         /// All damage
         /// </summary>
