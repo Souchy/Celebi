@@ -2,6 +2,8 @@
 using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.neweffects.impl.effects;
+using souchy.celebi.eevee.neweffects.impl.scripts.creature;
+using souchy.celebi.eevee.neweffects.impl.schemas;
 
 namespace souchy.celebi.eevee.neweffects.impl.util
 {

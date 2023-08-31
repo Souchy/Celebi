@@ -5,13 +5,9 @@ using souchy.celebi.eevee.face.objects.effectResults;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.impl.objects.effectReturn;
 using souchy.celebi.eevee.neweffects.face;
-using souchy.celebi.eevee.neweffects.impl.effects.creature;
+using souchy.celebi.eevee.neweffects.impl.scripts.creature;
+using souchy.celebi.eevee.neweffects.impl.schemas;
 using souchy.celebi.eevee.neweffects.impl.util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace souchy.celebi.eevee.neweffects.impl.effects.res
 {

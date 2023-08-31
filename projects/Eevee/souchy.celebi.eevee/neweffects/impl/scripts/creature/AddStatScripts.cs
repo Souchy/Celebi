@@ -10,8 +10,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using souchy.celebi.eevee.neweffects.impl.schemas;
 
-namespace souchy.celebi.eevee.neweffects.impl.effects.creature
+namespace souchy.celebi.eevee.neweffects.impl.scripts.creature
 {
     public class AddStatsScript : IEffectScript
     {

@@ -9,6 +9,7 @@ using souchy.celebi.eevee.impl.objects.effectReturn;
 using souchy.celebi.eevee.neweffects.face;
 using souchy.celebi.eevee.neweffects.impl.effects.res;
 using IEffect = souchy.celebi.eevee.neweffects.face.IEffect;
+using souchy.celebi.eevee.neweffects.impl.schemas;
 
 namespace souchy.celebi.eevee.neweffects.impl.effects
 {

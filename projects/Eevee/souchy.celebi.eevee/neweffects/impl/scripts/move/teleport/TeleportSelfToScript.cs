@@ -8,21 +8,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using souchy.celebi.eevee.neweffects.impl.schemas;
 
 namespace souchy.celebi.eevee.neweffects.impl.effects.move.teleport
 {
-    public class TeleportTargetToScript : IEffectScript
+    public class TeleportSelfToScript : IEffectScript
     {
-        public Type SchemaType => typeof(TeleportTargetTo);
+        public Type SchemaType => typeof(TeleportSelfTo);
 
         public IEffectReturnValue apply(ISubActionEffect action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
         {
-            TeleportTargetTo props = action.effect.GetProperties<TeleportTargetTo>();
-            //props.MoveTargetZone
-            
+            ICreature source = action.fight.creatures.Get(action.caster);
+            ICell cell = (ICell) currentTarget;
 
+            var creatures = action.fight.board.GetCreaturesOnCell(cell.entityUid);
+            if (cell.type.isWalkable && creatures.Count() == 0)
+            {
+                source.position.set(cell.position);
+            }
 
-            throw new NotImplementedException();
+            return null;
         }
 
         public IEffectPreview preview(ISubActionEffect action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)

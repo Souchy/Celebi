@@ -12,7 +12,7 @@ using souchy.celebi.eevee.impl.stats;
 using souchy.celebi.eevee.neweffects.face;
 using souchy.celebi.eevee.neweffects.impl.effects.move;
 
-namespace souchy.celebi.eevee.neweffects.impl.effects
+namespace souchy.celebi.eevee.neweffects.impl.schemas
 {
 
     #region Creature

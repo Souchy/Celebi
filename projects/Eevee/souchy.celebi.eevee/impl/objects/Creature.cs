@@ -15,7 +15,8 @@ using souchy.celebi.eevee.impl.util.math;
 using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using souchy.celebi.eevee.neweffects.impl.effects.creature;
+using souchy.celebi.eevee.neweffects.impl.scripts.creature;
+using souchy.celebi.eevee.neweffects.impl.schemas;
 using souchy.celebi.eevee.neweffects.face;
 
 namespace souchy.celebi.eevee.impl.objects

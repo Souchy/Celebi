@@ -1,17 +1,6 @@
-﻿using souchy.celebi.eevee.enums.characteristics;
-using souchy.celebi.eevee.enums;
-using souchy.celebi.eevee.face.shared.models;
-using souchy.celebi.eevee.face.util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using souchy.celebi.eevee.face.shared.conditions;
-using souchy.celebi.eevee.neweffects.face;
-using souchy.celebi.eevee.neweffects.impl.effects;
-using souchy.celebi.eevee.neweffects.impl.effects.creature;
+﻿using souchy.celebi.eevee.neweffects.face;
 using souchy.celebi.eevee.face.entity;
+using souchy.celebi.eevee.neweffects.impl.schemas;
 
 namespace souchy.celebi.eevee.neweffects.impl
 {

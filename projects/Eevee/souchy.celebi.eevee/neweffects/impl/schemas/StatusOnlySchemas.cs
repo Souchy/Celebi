@@ -9,8 +9,18 @@ using souchy.celebi.eevee.impl.objects.zones;
 using souchy.celebi.eevee.impl.stats;
 using souchy.celebi.eevee.neweffects.face;
 
-namespace souchy.celebi.eevee.neweffects.impl.effects.creature
+namespace souchy.celebi.eevee.neweffects.impl.schemas
 {
+    #region Board
+    public record BuildObstacle() : IEffectSchema {
+        //obstacle3dModelUid
+        public AssetIID modelId { get; set; } = new();
+    }
+    public record DestroyObstacle() : IEffectSchema { }
+    public record DigHole() : IEffectSchema { }
+    public record FillHole() : IEffectSchema { }
+    #endregion
+
     #region Creature
     public record AddStats() : IEffectSchema
     {
@@ -101,16 +111,6 @@ namespace souchy.celebi.eevee.neweffects.impl.effects.creature
     {
         public int reduction { get; set; } = 0;
     }
-    #endregion
-
-    #region Board
-    public record BuildObstacle() : IEffectSchema {
-        //obstacle3dModelUid
-        public AssetIID modelId { get; set; } = new();
-    }
-    public record DestroyObstacle() : IEffectSchema { }
-    public record DigHole() : IEffectSchema { }
-    public record FillHole() : IEffectSchema { }
     #endregion
 
 }

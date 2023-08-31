@@ -3,11 +3,7 @@ using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.effectResults;
 using souchy.celebi.eevee.impl.objects.effectReturn;
 using souchy.celebi.eevee.neweffects.face;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using souchy.celebi.eevee.neweffects.impl.schemas;
 
 namespace souchy.celebi.eevee.neweffects.impl.effects.meta
 {
