@@ -11,7 +11,10 @@
   </h6>
 
   <button class="btn btn-floating" data-bs-toggle="modal" data-bs-target="#effectChildModal-${modaluid}">+</button>
-  <button class="btn btn-floating" click.trigger="clickPasteNewEffect()"><i class="fa-regular fa-clipboard"></i></button>
+  <button class="btn btn-floating tooltip" click.trigger="clickPasteNewEffect()">
+    <i class="fa-regular fa-clipboard"></i>
+    <span class="tooltiptext">Tooltip text</span>
+  </button>
 
   <modal id="effectChildModal-${modaluid}" header="Add Effect Child" close.bind=false footer.bind=false>
     <effect-model-selector onselectcallback.bind="e => onAddChild(e)"></effect-model-selector>
