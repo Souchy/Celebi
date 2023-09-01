@@ -8,21 +8,27 @@ using souchy.celebi.eevee.impl.util;
 
 namespace souchy.celebi.spark.models.aggregations
 {
-    public record CreatureModelTextAggregation
+    //public record CreatureModelTextAggregation
+    //{
+    //    [BsonId]
+    //    public ObjectId entityUid { get; set; }
+    //    public IID modelUid { get; set; }
+
+    //    public IStringEntity nameId { get; set; }
+    //    public IStringEntity descriptionId { get; set; }
+    //}
+
+    public record CreatureModelAggregation //: CreatureModelTextAggregation
     {
         [BsonId]
         public ObjectId entityUid { get; set; }
         public IID modelUid { get; set; }
+        public ObjectId nameId { get; set; }
+        public ObjectId descriptionId { get; set; }
 
-        public IStringEntity nameId { get; set; }
-        public IStringEntity descriptionId { get; set; }
-    }
-
-    public record CreatureModelAggregation : CreatureModelTextAggregation
-    {
-        public CreatureStats statsId { get; set; }
-        public IEntitySet<ISpellModel> spellIds { get; init; } = new EntitySet<ISpellModel>();
-        public IEntitySet<IStatusModel> statusPassiveIds { get; init; } = new EntitySet<IStatusModel>();
-        public IEntitySet<ICreatureSkin> skinIds { get; init; } = new EntitySet<ICreatureSkin>();
+        public CreatureStats stats { get; set; }
+        public IEntitySet<SpellModelAggregation> spells { get; init; } = new EntitySet<SpellModelAggregation>();
+        public IEntitySet<IStatusModel> statusPassives { get; init; } = new EntitySet<IStatusModel>();
+        public IEntitySet<ICreatureSkin> skins { get; init; } = new EntitySet<ICreatureSkin>();
     }
 }
