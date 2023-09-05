@@ -11,7 +11,12 @@ namespace souchy.celebi.eevee.neweffects
         public ObjectId effectPermanentUid { get; init; }
         public ObjectId sourceCreatureUid { get; init; }
         public IEnumerable<ObjectId> targetUids { get; init; }
-        public IEffectSchema SchemaInstance { get; set; }
+
+        /// <summary>
+        /// often could be an AddStats schema which contains a Stats object based on ap reduction done, stats stealing, etc.
+        /// </summary>
+        public IEffectSchema SchemaInstance { get; set; } 
+        
 
         public EffectInstance(IEffectPermanent ep, ObjectId sourceCreatureUid, IEnumerable<IBoardEntity> targets)
         {
