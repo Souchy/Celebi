@@ -59,7 +59,7 @@ namespace souchy.celebi.eevee
                     targetCell = currentTargetCell.entityUid,
                     parent = parentAction,
                     effect = effect,
-                    depthLevel = parentAction.depthLevel + 1
+                    depthLevel = parentAction.depthLevel
                 };
 
                 procTriggers(subActionEffect, effect, targets,
@@ -95,9 +95,9 @@ namespace souchy.celebi.eevee
                         parent = subActionEffect,
                         effect = child,
                         parentBoardTargets = targets,
-                        depthLevel = // maybe there's an error here, we already create a new action at L55 for each target,
-                                     // so why create an action for the entire effect? hmm
-                                     // comment above also says it might break the TargetAcquisition principle....
+                        depthLevel = parentAction.depthLevel + 1 // maybe there's an error here, we already create a new action at L55 for each target,
+                                                                 // so why create an action for the entire effect? hmm
+                                                                 // comment above also says it might break the TargetAcquisition principle....
                     };
                     applyEffectContainer(sub, child);
                 }
