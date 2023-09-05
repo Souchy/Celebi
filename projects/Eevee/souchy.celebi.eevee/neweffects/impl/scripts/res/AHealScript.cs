@@ -30,7 +30,7 @@ namespace souchy.celebi.eevee.neweffects.impl.effects.res
             var sourceStats = creaSource.GetTotalStats(action);
             var targetStats = creaTarget.GetTotalStats(action);
 
-            var props = action.effect.GetProperties<ADamageSchema>();
+            var props = action.effect.GetProperties<AbstractDamageSchema>();
             int dmg = DamageUtil.calculateDamage(sourceStats, targetStats, props, appliesOffensiveStats, appliesDefensiveStats);
 
             var shield = targetStats.Get<IStatSimple>(Resource.Shield);

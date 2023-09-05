@@ -10,7 +10,7 @@ namespace souchy.celebi.eevee.neweffects.impl.util
     public static class DamageUtil
     {
         //ElementType element, int baseDamage,
-        public static int calculateDamage(IStats sourceStats, IStats targetStats, ADamageSchema props, bool applyOffensiveStats = true, bool applyDefensiveStats = true, int additionalMultiplier = 100)
+        public static int calculateDamage(IStats sourceStats, IStats targetStats, AbstractDamageSchema props, bool applyOffensiveStats = true, bool applyDefensiveStats = true, int additionalMultiplier = 100)
         {
             var element = props.element;
             var baseDamage = props.baseDamage;
