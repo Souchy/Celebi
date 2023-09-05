@@ -17,10 +17,10 @@ namespace souchy.celebi.spark.models.aggregations
         public ObjectId nameId { get; set; }
         public ObjectId descriptionId { get; set; }
         public AssetIID icon { get; set; } = new();
-        public IEntitySet<ObjectId> skinIds { get; init; } = new EntitySet<ObjectId>();
+        public IEnumerable<ObjectId> skinIds { get; init; } = new List<ObjectId>();
 
         public StatusModelStats stats { get; set; }
         public IValue<StatusPriorityType> priority { get; set; } = new Value<StatusPriorityType>();
-        public IEntityList<EffectPermanentAggregation> effects { get; set; } = new EntityList<EffectPermanentAggregation>();
+        public IEnumerable<EffectPermanentAggregation> effects { get; set; } = new List<EffectPermanentAggregation>();
     }
 }

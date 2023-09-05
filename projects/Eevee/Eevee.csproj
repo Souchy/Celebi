@@ -28,6 +28,7 @@
     <Compile Remove="souchy.celebi.eevee\impl\objects\Effect.cs" />
     <Compile Remove="souchy.celebi.eevee\impl\objects\stats\StatsMinMax.cs" />
     <Compile Remove="souchy.celebi.eevee\impl\shared\EffectModel.cs" />
+    <Compile Remove="souchy.celebi.eevee\impl\shared\triggers\schemas\TriggerSchema.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,6 +37,7 @@
     <Folder Include="souchy.celebi.eevee\face\shared\conditions\spell\" />
     <Folder Include="souchy.celebi.eevee\face\shared\conditions\status\" />
     <Folder Include="souchy.celebi.eevee\face\shared\conditions\value\" />
+    <Folder Include="souchy.celebi.eevee\global\" />
     <Folder Include="souchy.celebi.eevee\impl\net\amethyst\" />
     <Folder Include="souchy.celebi.eevee\impl\shared\conditions\value\" />
     <Folder Include="souchy.celebi.eevee\neweffects\impl\scripts\move\translate\" />

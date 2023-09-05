@@ -27,8 +27,8 @@ namespace souchy.celebi.spark.models.aggregations
         public ObjectId descriptionId { get; set; }
 
         public CreatureStats stats { get; set; }
-        public IEntitySet<SpellModelAggregation> spells { get; init; } = new EntitySet<SpellModelAggregation>();
-        public IEntitySet<IStatusModel> statusPassives { get; init; } = new EntitySet<IStatusModel>();
-        public IEntitySet<ICreatureSkin> skins { get; init; } = new EntitySet<ICreatureSkin>();
+        public IEnumerable<SpellModelAggregation> spells { get; init; } = new List<SpellModelAggregation>();
+        public IEnumerable<IStatusModel> statusPassives { get; init; } = new List<IStatusModel>();
+        public IEnumerable<ICreatureSkin> skins { get; init; } = new List<ICreatureSkin>();
     }
 }

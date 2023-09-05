@@ -20,8 +20,10 @@ namespace souchy.celebi.spark.models.aggregations
         public ICondition sourceCondition { get; set; }
         public ICondition targetFilter { get; set; }
         public IZone targetAcquisitionZone { get; set; }
-        public IEntityList<ITriggerModel> triggers { get; set; } = new EntityList<ITriggerModel>();
-        public IEntityList<EffectPermanentAggregation> effects { get; set; } = new EntityList<EffectPermanentAggregation>();
+        public IEnumerable<ITriggerModel> triggers { get; set; } = new List<ITriggerModel>();
+
+        public int depth { get; set; }
+        public IEnumerable<EffectPermanentAggregation> effects { get; set; } = new List<EffectPermanentAggregation>();
 
     }
 }

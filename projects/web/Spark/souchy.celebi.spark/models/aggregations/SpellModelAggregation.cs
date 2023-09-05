@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using souchy.celebi.eevee.enums.characteristics.other;
+using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.shared.models.skins;
@@ -19,7 +20,7 @@ namespace souchy.celebi.spark.models.aggregations
     //    public IStringEntity descriptionId { get; set; }
     //}
 
-    public record SpellModelAggregation //: SpellModelTextAggregation
+    public record SpellModelAggregation : IEntity //: SpellModelTextAggregation
     {
         [BsonId]
         public ObjectId entityUid { get; set; }
@@ -29,13 +30,18 @@ namespace souchy.celebi.spark.models.aggregations
         public ObjectId descriptionId { get; set; }
 
         public AssetIID icon { get; set; } = new();
-        public IEntitySet<ISpellSkin> skinIds { get; init; } = new EntitySet<ISpellSkin>();
+        public IEnumerable<ISpellSkin> skins { get; init; } = new List<ISpellSkin>();
 
         public SpellModelStats stats { get; set; }
         public ICondition sourceCondition { get; set; }
         public ICondition targetFilter { get; set; }
-        public IEntityList<EffectPermanentAggregation> effects { get; set; } = new EntityList<EffectPermanentAggregation>();
+        public IEnumerable<EffectPermanentAggregation> effects { get; set; } = new List<EffectPermanentAggregation>();
         public IZone rangeZoneMin { get; set; }
         public IZone rangeZoneMax { get; set; }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
