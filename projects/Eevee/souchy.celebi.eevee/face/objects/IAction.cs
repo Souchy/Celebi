@@ -41,7 +41,7 @@ namespace souchy.celebi.eevee.face.objects
         public IAction parent { get; set; } // ISpell
         public IEffect effect { get; set; }
     }
-    public class SubActionEffect : ISubActionEffect
+    public class SubActionEffectTarget : ISubActionEffect
     {
         public IFight fight { get; set; }
         public ObjectId caster { get; set; }

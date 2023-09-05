@@ -13,7 +13,7 @@ namespace souchy.celebi.eevee.neweffects.impl.effects.meta
 
         public IEffectReturnValue apply(ISubActionEffect action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
         {
-            var newAction = new SubActionEffect()
+            var newAction = new SubActionEffectTarget()
             {
                 caster = currentTarget.entityUid, // reverse the caster source
                 targetCell = action.targetCell,   // keep the same cell though i think? 

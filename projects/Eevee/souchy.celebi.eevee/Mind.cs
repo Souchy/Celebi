@@ -37,6 +37,8 @@ namespace souchy.celebi.eevee
                     new EffectInstance(null, action.caster, e.GetPossibleBoardTargets(action.fight, targetPosition))
                 );
 
+            Todo: Be careful to have a new action going from the spell to the effects
+
             // apply each effect
             foreach (var pair in effectsWithTargets)
             {
@@ -52,14 +54,14 @@ namespace souchy.celebi.eevee
             {
                 var currentTargetCell = parentAction.fight.board.GetCells().First(c => c.position == target.position);
                 //gotta use subActionEffect instead of action right? 
-                SubActionEffect subActionEffect = new()
+                SubActionEffectTarget subActionEffect = new()
                 {
                     fight = parentAction.fight,
                     caster = parentAction.caster,
                     targetCell = currentTargetCell.entityUid,
                     parent = parentAction,
                     effect = effect,
-                    depthLevel = parentAction.depthLevel
+                    depthLevel = parentAction.depthLevel // each target has the same level as the effect that applies to all of them
                 };
 
                 procTriggers(subActionEffect, effect, targets,
@@ -87,6 +89,7 @@ namespace souchy.celebi.eevee
                 // this implementation will break the TargetAcquisition principle i think, but fine for now
                 foreach (var child in effect.GetEffects())
                 {
+                    // Todo: rename SubEffectAction->SubActionEffect and give it its own targets, not the parents (in applyEffectContainer?)
                     var sub = new SubEffectAction()
                     {
                         fight = subActionEffect.fight,
@@ -112,7 +115,7 @@ namespace souchy.celebi.eevee
         /// <param name="effect">current effect to react to</param>
         /// <param name="triggerEvent"></param>
         /// <param name="area"></param>
-        public static void procTriggersOnEffect(SubActionEffect action, IEnumerable<IBoardEntity> area, TriggerEvent triggerEvent)
+        public static void procTriggersOnEffect(SubActionEffectTarget action, IEnumerable<IBoardEntity> area, TriggerEvent triggerEvent)
         {
             // Check every status
             foreach (IStatusInstance status in action.fight.statuses.Values.SelectMany(sc => sc.instances))
