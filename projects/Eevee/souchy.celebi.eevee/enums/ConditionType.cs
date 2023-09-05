@@ -37,6 +37,12 @@ namespace souchy.celebi.eevee.face.shared.conditions
             this.id = new IID(id.ToString());
             this.type = type;
         }
+        public Condition createInstance()
+        {
+            return (Condition) Activator.CreateInstance(type);
+        }
+        
+        public static readonly ConditionType Group                  = new ConditionType(000, typeof(GroupCondition));
 
         // Other / relations
         public static readonly ConditionType LineOfSight            = new ConditionType(001, typeof(LineOfSightCondition));

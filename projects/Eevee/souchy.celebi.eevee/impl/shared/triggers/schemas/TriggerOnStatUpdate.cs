@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace souchy.celebi.eevee.impl.shared.triggers.schemas
 {
-    public abstract class TriggerOnStatUpdate : TriggerSchema
+    public abstract class TriggerOnStatUpdate : ITriggerSchema
     {
         public CharacteristicId statId { get; set; }
     }

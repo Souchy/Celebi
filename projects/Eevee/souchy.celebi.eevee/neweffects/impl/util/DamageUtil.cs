@@ -15,6 +15,7 @@ namespace souchy.celebi.eevee.neweffects.impl.util
             var element = props.element;
             var baseDamage = props.baseDamage;
             var pen = props.percentPenetration;
+            var variance = props.percentVariance; // TODO
 
             // apply affinities + resistances
             IStatSimple affEle = sourceStats.Get<IStatSimple>(element.GetAffinity());

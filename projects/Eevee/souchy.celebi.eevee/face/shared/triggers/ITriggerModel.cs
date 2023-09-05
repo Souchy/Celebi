@@ -13,7 +13,12 @@ namespace souchy.celebi.eevee.face.shared.triggers
         /// Conditions for the event, ex: moved (walked, teleported), damageReceived, turnStart, etc.
         /// </summary>
         //public ICondition triggerConditions { get; set; }
-        public TriggerType triggerType { get; set; }
+        //public TriggerType triggerType { get; set; }
+
+        /// <summary>
+        /// Holds the TriggerType and trigger properties specific to each schema type
+        /// </summary>
+        public ITriggerSchema schema { get; set; }
 
         /// <summary>
         /// { When to react to something }
@@ -54,7 +59,7 @@ namespace souchy.celebi.eevee.face.shared.triggers
             if (!isCasterInArea) 
                 return false;
 
-            var isRightType = this.triggerType == triggerEvent.type && this.triggerOrderType == triggerEvent.orderType;
+            var isRightType = this.schema.triggerType == triggerEvent.type && this.triggerOrderType == triggerEvent.orderType;
             if (!isRightType) 
                 return false;
 

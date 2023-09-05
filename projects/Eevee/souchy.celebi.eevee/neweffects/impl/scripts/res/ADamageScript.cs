@@ -16,7 +16,7 @@ using souchy.celebi.eevee.neweffects.impl.schemas;
 
 namespace souchy.celebi.eevee.neweffects.impl.effects.res
 {
-    public abstract class ADamageScript : IEffectScript
+    public abstract class AbstractDamageScript : IEffectScript
     {
         public abstract Type SchemaType { get; }
 

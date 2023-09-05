@@ -12,8 +12,6 @@ namespace souchy.celebi.eevee.impl.shared.conditions
     {
         public ActorType actorType { get; set; } = ActorType.Target;
         public ConditionComparatorType comparator { get; set; } = ConditionComparatorType.EQ;
-        public ConditionGroupType groupType { get; set; } = ConditionGroupType.AND;
-        public IEntityList<ICondition> children { get; set; } = new EntityList<ICondition>();
 
         public abstract bool check(IAction action, TriggerEvent trigger, ICreature boardSource, IBoardEntity boardTarget);
 
@@ -42,4 +40,18 @@ namespace souchy.celebi.eevee.impl.shared.conditions
             return true;
         }
     }
+
+    /// <summary>
+    /// Just check children
+    /// </summary>
+    public class GroupCondition : Condition
+    {
+        public ConditionGroupType groupType { get; set; } = ConditionGroupType.AND;
+        public IEntityList<ICondition> children { get; set; } = new EntityList<ICondition>();
+        public override bool check(IAction action, TriggerEvent trigger, ICreature boardSource, IBoardEntity boardTarget)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
 }

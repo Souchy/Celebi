@@ -21,6 +21,10 @@ namespace souchy.celebi.eevee.face.objects.statuses
         /// </summary>
         public IID sourceSpellModel { get; set; }
         /// <summary>
+        /// Statuses come from effects that apply them.
+        /// </summary>
+        public IID sourceEffectPermanent { get; set; }
+        /// <summary>
         /// Creature who applied the status
         /// </summary>
         public ObjectId sourceCreature { get; set; }
