@@ -15,6 +15,11 @@ namespace souchy.celebi.eevee.face.objects
         public IFight fight { get; set; }
         public ObjectId caster { get; set; }
         public ObjectId targetCell { get; set; }
+        /// <summary>
+        /// Level of copy starts at 0 and goes deeper. <br></br>
+        /// Ex spell cast is at 0, root effects are at 1, etc
+        /// </summary>
+        public int depthLevel { get; init; }
     }
     /// <summary>
     /// for retrieving stats whenever, for the UI
@@ -43,6 +48,7 @@ namespace souchy.celebi.eevee.face.objects
         // maybe the original targetcell of the spell/status holder
         public ObjectId targetCell { get; set; }
         public IAction parent { get; set; } // ISpell
+        public int depthLevel { get; init; }  
         public IEffect effect { get; set; }
     }
     public class SubEffectAction : IAction
@@ -52,6 +58,7 @@ namespace souchy.celebi.eevee.face.objects
         // maybe the original targetcell of the spell/status holder
         public ObjectId targetCell { get; set; } 
         public ISubActionEffect parent { get; set; } // IEffect
+        public int depthLevel { get; init; }
         public IEffect effect { get; set; }
         // all targets passed down to the child effect
         public IEnumerable<IBoardEntity> parentBoardTargets { get; set; }
