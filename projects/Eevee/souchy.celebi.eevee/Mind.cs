@@ -37,13 +37,25 @@ namespace souchy.celebi.eevee
                     new EffectInstance(null, action.caster, e.GetPossibleBoardTargets(action.fight, targetPosition))
                 );
 
-            Todo: Be careful to have a new action going from the spell to the effects
 
             // apply each effect
             foreach (var pair in effectsWithTargets)
             {
+                //Todo: Be careful to have a new action for each effect: SubEffectAction
+                var sub = new SubEffectAction()
+                {
+                    fight = action.fight,
+                    caster = action.caster,
+                    targetCell = action.targetCell,
+                    parent = action,
+                    effect = pair.effect, //child,
+                    parentBoardTargets = pair.targets,
+                    depthLevel = action.depthLevel + 1 // maybe there's an error here, we already create a new action at L55 for each target,
+                                                             // so why create an action for the entire effect? hmm
+                                                             // comment above also says it might break the TargetAcquisition principle....
+                };
                 // apply to each target
-                applyEffect(action, pair.effect, pair.targets);
+                applyEffect(sub /*previously action*/, pair.effect, pair.targets);
             }
         }
 
@@ -64,7 +76,7 @@ namespace souchy.celebi.eevee
                     depthLevel = parentAction.depthLevel // each target has the same level as the effect that applies to all of them
                 };
 
-                procTriggers(subActionEffect, effect, targets,
+                procTriggersOnEffect(subActionEffect, effect, targets,
                     new TriggerEvent(TriggerType.OnEffect, TriggerOrderType.Before, effect)
                 );
 
@@ -75,7 +87,7 @@ namespace souchy.celebi.eevee
                 // -> well i think the root effect's return cannot be used obviously
                 // -> but the returnValue can be used if the effect is an implementation of IValue for example.
                 // -> or if the effect is a child of a math MetaEffect
-                procTriggers(subActionEffect, effect, targets,
+                procTriggersOnEffect(subActionEffect, effect, targets,
                     new TriggerEvent(TriggerType.OnEffect, TriggerOrderType.After, effect)
                 );
 
@@ -86,24 +98,29 @@ namespace souchy.celebi.eevee
                 // caster.contextuals.set(action.effect, returnValue)
 
                 // sub effects
+                applyEffectContainer(subActionEffect, effect);
                 // this implementation will break the TargetAcquisition principle i think, but fine for now
-                foreach (var child in effect.GetEffects())
-                {
-                    // Todo: rename SubEffectAction->SubActionEffect and give it its own targets, not the parents (in applyEffectContainer?)
-                    var sub = new SubEffectAction()
-                    {
-                        fight = subActionEffect.fight,
-                        caster = subActionEffect.caster,
-                        targetCell = subActionEffect.targetCell,
-                        parent = subActionEffect,
-                        effect = child,
-                        parentBoardTargets = targets,
-                        depthLevel = parentAction.depthLevel + 1 // maybe there's an error here, we already create a new action at L55 for each target,
-                                                                 // so why create an action for the entire effect? hmm
-                                                                 // comment above also says it might break the TargetAcquisition principle....
-                    };
-                    applyEffectContainer(sub, child);
-                }
+                //foreach (var child in effect.GetEffects())
+                //{
+                //    // Todo: rename SubEffectAction->SubActionEffect and give it its own targets, not the parents (in applyEffectContainer?)
+                //    // So I guess we create the SubActionEffect inside applyEffectContainer
+                //    // No need to  foreach (effect.GetEffects()) here
+                //    // You just have to call applyEffectContainer(subActionEffect, effect)
+                //    // Then it will create a new action for each child, just like when you cast a spell
+                //    var sub = new SubEffectAction()
+                //    {
+                //        fight = subActionEffect.fight,
+                //        caster = subActionEffect.caster,
+                //        targetCell = subActionEffect.targetCell,
+                //        parent = subActionEffect,
+                //        effect = child,
+                //        parentBoardTargets = targets,
+                //        depthLevel = parentAction.depthLevel + 1 // maybe there's an error here, we already create a new action at L55 for each target,
+                //                                                 // so why create an action for the entire effect? hmm
+                //                                                 // comment above also says it might break the TargetAcquisition principle....
+                //    };
+                //    applyEffectContainer(sub, child);
+                //}
             }
         }
 
