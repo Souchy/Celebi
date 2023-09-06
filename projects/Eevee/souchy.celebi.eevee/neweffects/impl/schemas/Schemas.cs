@@ -181,20 +181,20 @@ namespace souchy.celebi.eevee.neweffects.impl.schemas
 
     #region Resource
     #region Damage 
-            public abstract record ADamageSchema() : IEffectSchema
+            public abstract record AbstractDamageSchema() : IEffectSchema
             {
                 public ElementType element { get; set; } = ElementType.None;
                 public int baseDamage { get; set; } = 0;
                 public int percentPenetration { get; set; } = 0;
                 public int percentVariance { get; set; } = 0;
             }
-            public record DirectDamage() : ADamageSchema() { }
+            public record DirectDamage() : AbstractDamageSchema() { }
             // Indirect Damage ignore defensive stats so they can't have penetration either
-            public record IndirectDamage() : ADamageSchema() { } // no pen
+            public record IndirectDamage() : AbstractDamageSchema() { } // no pen
 
             // PercentLife damage don't benefit from offensive stats (affinities), but they calculate defensive stats (resistance, penetration)
-            public record DirectDamagePercentLifeMax() : ADamageSchema() { }
-            public record IndirectDamagePercentLifeMax() : ADamageSchema() { } // no pen
+            public record DirectDamagePercentLifeMax() : AbstractDamageSchema() { }
+            public record IndirectDamagePercentLifeMax() : AbstractDamageSchema() { } // no pen
 
             public record RedirectDamage() : IEffectSchema {
                 public int percentRedirect { get; set; } = 0;
@@ -205,7 +205,7 @@ namespace souchy.celebi.eevee.neweffects.impl.schemas
                 public int baseDamagePerCharacUsed { get; set; } = 0;
             }
             
-            public record DamagePerContextualStat() : ADamageSchema
+            public record DamagePerContextualStat() : AbstractDamageSchema
             {
                 public CharacteristicId statId { get; set; } = Contextual.DamageTaken.ID;
                 /// <summary>
@@ -255,7 +255,7 @@ namespace souchy.celebi.eevee.neweffects.impl.schemas
             }
         #endregion
         #region Both
-            public record DirectDamageStealLife() : ADamageSchema() { }
+            public record DirectDamageStealLife() : AbstractDamageSchema() { }
 
             public record TransferLife() : IEffectSchema 
             { 

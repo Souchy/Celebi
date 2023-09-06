@@ -89,13 +89,14 @@ module.exports = function (env, { analyze }) {
       ]
     },
     plugins: [
-      new HtmlWebpackPlugin({ 
-        template: 'index.ejs', 
-        favicon: 'flareon.png',
-        baseUrl: process.env.baseUrl
-      }),
       new Dotenv({
         path: `./.env${production ? '' : '.' + (process.env.NODE_ENV || 'development')}`,
+      }),
+      new HtmlWebpackPlugin({ 
+        title: 'Flareon',
+        template: 'index.ejs', 
+        favicon: 'flareon.png',
+        baseUrl: process.env.BASE_URL
       }),
       analyze && new BundleAnalyzerPlugin()
     ].filter(p => p)

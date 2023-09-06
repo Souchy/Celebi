@@ -1,0 +1,38 @@
+# FROM node
+
+# RUN apt-get update
+
+# # add your application code
+# WORKDIR /
+# # using https://github.com/Azure-Samples/dotnetcore-docs-hello-world
+# COPY . .
+
+# EXPOSE 80
+
+# RUN npm install
+
+# RUN npm run build
+
+
+#stage1 -> build app using node
+FROM node:14.17.0-alpine as build-step
+RUN mkdir -p /app
+RUN npm cache clear --force
+WORKDIR /app
+COPY package.json /app
+RUN npm install
+COPY . /app
+RUN npm run swagger
+RUN npm run build
+
+#stage2 -> copy app to nginx and start the webserver
+FROM nginx
+COPY --from=build-step /app/dist /usr/share/nginx/html
+
+EXPOSE 80
+
+STOPSIGNAL SIGTERM
+
+CMD ["nginx", "-g", "daemon off;"]
+
+# FROM steebchen/nginx-spa:stable as build-step
