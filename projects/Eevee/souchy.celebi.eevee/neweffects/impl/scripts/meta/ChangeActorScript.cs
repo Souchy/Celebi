@@ -17,9 +17,10 @@ namespace souchy.celebi.eevee.neweffects.impl.effects.meta
             {
                 caster = currentTarget.entityUid, // reverse the caster source
                 targetCell = action.targetCell,   // keep the same cell though i think? 
-                effect = action.effect,
+                effect = action.effect, // TODO make a copy of the effect like in java?
                 fight = action.fight,
-                parent = action.parent  
+                parent = action.parent,
+                depthLevel = action.depthLevel + 1,
             };
 
             // apply the children

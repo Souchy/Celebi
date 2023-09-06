@@ -41,8 +41,8 @@ namespace souchy.celebi.eevee
             // apply each effect
             foreach (var pair in effectsWithTargets)
             {
-                //Todo: Be careful to have a new action for each effect: SubEffectAction
-                var sub = new SubEffectAction()
+                //TODO: use EffectInstance
+                var sub = new SubActionEffect()
                 {
                     fight = action.fight,
                     caster = action.caster,
@@ -50,12 +50,10 @@ namespace souchy.celebi.eevee
                     parent = action,
                     effect = pair.effect, //child,
                     parentBoardTargets = pair.targets,
-                    depthLevel = action.depthLevel + 1 // maybe there's an error here, we already create a new action at L55 for each target,
-                                                             // so why create an action for the entire effect? hmm
-                                                             // comment above also says it might break the TargetAcquisition principle....
+                    depthLevel = action.depthLevel + 1 
                 };
                 // apply to each target
-                applyEffect(sub /*previously action*/, pair.effect, pair.targets);
+                applyEffect(sub, pair.effect, pair.targets);
             }
         }
 
@@ -65,7 +63,8 @@ namespace souchy.celebi.eevee
             foreach (var target in targets)
             {
                 var currentTargetCell = parentAction.fight.board.GetCells().First(c => c.position == target.position);
-                //gotta use subActionEffect instead of action right? 
+
+                //TODO: make a copy of the effect
                 SubActionEffectTarget subActionEffect = new()
                 {
                     fight = parentAction.fight,
