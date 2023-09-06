@@ -43,6 +43,21 @@ namespace souchy.celebi.eevee.face.objects
             return parent == null ? this : parent.getRootAction();
         }
     }
+
+    public class ActionContext
+    {
+        public List<ActionEffectTargetReturnValue> effectReturnValues = new List<ActionEffectTargetReturnValue>();
+        public IEnumerable<ActionEffectTargetReturnValue> getReturnsForEffect(ObjectId effectEntityId)
+        {
+            return effectReturnValues.Where(e => e.action.effect.entityUid == effectEntityId);
+        }
+    }
+    public class ActionEffectTargetReturnValue
+    {
+        public SubActionEffectTarget action { get; set; }
+        public DataType value { get; set; }
+    }
+
     /// <summary>
     /// for retrieving stats whenever, for the UI
     /// </summary>
@@ -89,7 +104,7 @@ namespace souchy.celebi.eevee.face.objects
 
         public IEffect effect { get; set; }
         // all targets passed down to the child effect
-        public IEnumerable<IBoardEntity> parentBoardTargets { get; set; }
+        public IEnumerable<IBoardEntity> boardTargets { get; set; }
     }
     public class SubActionEffectTarget : ISubActionEffect
     {

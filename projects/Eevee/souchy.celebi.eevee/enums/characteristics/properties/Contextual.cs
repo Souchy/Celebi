@@ -95,6 +95,11 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
         /// Cell IDs (int = x + y * width)                   
         /// </summary>                                       
         public static readonly Contextual PreviousPositions  = new(202, nameof(PreviousPositions), StatValueType.List);
+        /// <summary>                                        
+        /// Cell IDs (int = x + y * width) <br></br>
+        /// When going back in time, move PreviousPositions cells into NextPositions cells and inversely <br></br>
+        /// When a new move is issued, NextPositions shall be cleared.
+        /// </summary>                          
         public static readonly Contextual NextPositions      = new(203, nameof(NextPositions), StatValueType.List);
 
         // spells cast? list<(spellid, cell)>

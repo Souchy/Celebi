@@ -23,7 +23,11 @@ COPY package.json /app
 RUN npm install
 COPY . /app
 RUN npm run swagger
-RUN npm run build
+# DONE used to be 'run build'. 
+# only issue is we can't test the image in local but we dont need it. just run start in local.
+    # TODO change to 'run dev' for when u push the docker image to DeathShadows server
+RUN npm run dev
+
 
 #stage2 -> copy app to nginx and start the webserver
 FROM nginx

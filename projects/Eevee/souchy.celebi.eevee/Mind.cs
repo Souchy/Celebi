@@ -49,18 +49,18 @@ namespace souchy.celebi.eevee
                     targetCell = action.targetCell,
                     parent = action,
                     effect = pair.effect, //child,
-                    parentBoardTargets = pair.targets,
+                    boardTargets = pair.targets,
                     depthLevel = action.depthLevel + 1 
                 };
                 // apply to each target
-                applyEffect(sub, pair.effect, pair.targets);
+                applyEffect(sub); //, pair.effect, pair.targets);
             }
         }
 
-        public static void applyEffect(IAction parentAction, IEffect effect, IEnumerable<IBoardEntity> targets)
+        public static void applyEffect(SubActionEffect parentAction) //, IEffect effect, IEnumerable<IBoardEntity> targets)
         {
             // apply to each target
-            foreach (var target in targets)
+            foreach (var target in parentAction.boardTargets)
             {
                 var currentTargetCell = parentAction.fight.board.GetCells().First(c => c.position == target.position);
 
@@ -71,104 +71,102 @@ namespace souchy.celebi.eevee
                     caster = parentAction.caster,
                     targetCell = currentTargetCell.entityUid,
                     parent = parentAction,
-                    effect = effect,
+                    effect = parentAction.effect, // TODO MAKE A COPY
                     depthLevel = parentAction.depthLevel // each target has the same level as the effect that applies to all of them
                 };
 
-                procTriggersOnEffect(subActionEffect, effect, targets,
-                    new TriggerEvent(TriggerType.OnEffect, TriggerOrderType.Before, effect)
+                checkTriggers(subActionEffect,
+                    new TriggerEvent(TriggerType.OnEffect, TriggerOrderType.Before, parentAction.effect)
                 );
 
-                IEffectScript script = effect.GetScript(); // todo find script from  pair.effect.schema.GetType
-                var returnValue = script.apply(subActionEffect, target, targets);
+                IEffectScript script = parentAction.effect.GetScript(); // todo find script from  pair.effect.schema.GetType
+                var returnValue = script.apply(subActionEffect, target, parentAction.boardTargets);
 
                 // TODO how do we deal with the returnValue? 
                 // -> well i think the root effect's return cannot be used obviously
                 // -> but the returnValue can be used if the effect is an implementation of IValue for example.
                 // -> or if the effect is a child of a math MetaEffect
-                procTriggersOnEffect(subActionEffect, effect, targets,
-                    new TriggerEvent(TriggerType.OnEffect, TriggerOrderType.After, effect)
+                checkTriggers(subActionEffect,
+                    new TriggerEvent(TriggerType.OnEffect, TriggerOrderType.After, parentAction.effect)
                 );
 
 
-                // set the return value associated with effect in the cater's temporaries/contextuals?
+                // set the return value associated with effect in the caster's temporaries/contextuals?
                 var caster = parentAction.fight.creatures.Get(parentAction.caster);
                 //caster.GetNaturalStats().Set()
                 // caster.contextuals.set(action.effect, returnValue)
 
-                // sub effects
-                applyEffectContainer(subActionEffect, effect);
-                // this implementation will break the TargetAcquisition principle i think, but fine for now
-                //foreach (var child in effect.GetEffects())
-                //{
-                //    // Todo: rename SubEffectAction->SubActionEffect and give it its own targets, not the parents (in applyEffectContainer?)
-                //    // So I guess we create the SubActionEffect inside applyEffectContainer
-                //    // No need to  foreach (effect.GetEffects()) here
-                //    // You just have to call applyEffectContainer(subActionEffect, effect)
-                //    // Then it will create a new action for each child, just like when you cast a spell
-                //    var sub = new SubEffectAction()
-                //    {
-                //        fight = subActionEffect.fight,
-                //        caster = subActionEffect.caster,
-                //        targetCell = subActionEffect.targetCell,
-                //        parent = subActionEffect,
-                //        effect = child,
-                //        parentBoardTargets = targets,
-                //        depthLevel = parentAction.depthLevel + 1 // maybe there's an error here, we already create a new action at L55 for each target,
-                //                                                 // so why create an action for the entire effect? hmm
-                //                                                 // comment above also says it might break the TargetAcquisition principle....
-                //    };
-                //    applyEffectContainer(sub, child);
-                //}
+                // sub effects -> apply child effects to each target
+                applyEffectContainer(subActionEffect, parentAction.effect);
             }
         }
 
 
+        /*
         /// <summary>
         /// Checks every status in the game to see if they can be triggered by the action
         /// </summary>
-        /// <param name="action">current action to react to</param>
+        /// <param name="parentAction">current action to react to</param>
         /// <param name="effect">current effect to react to</param>
         /// <param name="triggerEvent"></param>
         /// <param name="area"></param>
-        public static void procTriggersOnEffect(SubActionEffectTarget action, IEnumerable<IBoardEntity> area, TriggerEvent triggerEvent)
+        public static void procTriggersOnEffect(SubActionEffectTarget parentAction, IEnumerable<IBoardEntity> area, TriggerEvent triggerEvent)
         {
             // Check every status
-            foreach (IStatusInstance status in action.fight.statuses.Values.SelectMany(sc => sc.instances))
+            foreach (IStatusInstance status in parentAction.fight.statuses.Values.SelectMany(sc => sc.instances))
             {
                 // Check status triggers
-                var triggeredEffects = status.checkTriggers(action, triggerEvent); // effect, area); // orderType, e);
+                var triggeredEffects = status.checkTriggers(parentAction, triggerEvent); // effect, area); // orderType, e);
                 // Apply every triggered effect
-                foreach (var e in triggeredEffects)
+                foreach (IEffect triggeredEffect in triggeredEffects)
                 {
                     ////e.apply(action, area);
                     //applyEffectContainer(action, e); //, need the position to apply right? );
 
-
                     // TODO 4sept23? need to make a sub action i think? also applyEffectContainer doesn't apply the effect itself, only its children
-                    IPosition targetPosition = action.fight.cells.Get(action.targetCell).position;
-                    var targets = e.GetPossibleBoardTargets(action.fight, targetPosition);
+                    IPosition targetPosition = parentAction.fight.cells.Get(parentAction.targetCell).position;
+                    var targets = triggeredEffect.GetPossibleBoardTargets(parentAction.fight, targetPosition);
                     //var inst = new EffectInstance(null, parentAction.caster, effect.GetPossibleBoardTargets(parentAction.fight, targetPosition));
                     //var targets = inst.targetUids;
-                    applyEffect(action, e, targets);
+                    var sub = new SubActionEffect()
+                    {
+                        fight = parentAction.fight,
+                        caster = parentAction.caster,
+                        targetCell = parentAction.targetCell,
+                        parent = parentAction,
+                        depthLevel = parentAction.depthLevel + 1,
+                        effect = triggeredEffect, 
+                        boardTargets = targets
+                    };
+                    applyEffect(sub);
                 }
             }
         }
+        */
 
-        public static void checkTriggers(IAction action, TriggerEvent triggerEvent)
+        public static void checkTriggers(IAction parentAction, TriggerEvent triggerEvent)
         {
             // Check every status
-            foreach (IStatusInstance status in action.fight.statuses.Values.SelectMany(sc => sc.instances))
+            foreach (IStatusInstance status in parentAction.fight.statuses.Values.SelectMany(sc => sc.instances))
             {
                 // Check status triggers
-                var triggeredEffects = status.checkTriggers(action, triggerEvent);
+                var triggeredEffects = status.checkTriggers(parentAction, triggerEvent);
                 // Apply every triggered effect
-                foreach (var e in triggeredEffects)
+                foreach (IEffect triggeredEffect in triggeredEffects)
                 {
-
-                    IPosition targetPosition = action.fight.cells.Get(action.targetCell).position;
-                    var targets = e.GetPossibleBoardTargets(action.fight, targetPosition);
-                    applyEffect(action, e, targets);
+                    IPosition targetPosition = parentAction.fight.cells.Get(parentAction.targetCell).position;
+                    var targets = triggeredEffect.GetPossibleBoardTargets(parentAction.fight, targetPosition);
+                    var sub = new SubActionEffect()
+                    {
+                        fight = parentAction.fight,
+                        caster = parentAction.caster,
+                        targetCell = parentAction.targetCell,
+                        parent = parentAction,
+                        depthLevel = parentAction.depthLevel + 1,
+                        effect = triggeredEffect,
+                        boardTargets = targets
+                    };
+                    applyEffect(sub); 
                 }
             }
         }
