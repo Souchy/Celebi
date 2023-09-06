@@ -94,7 +94,7 @@ export class App implements IRouteableComponent {
 		ea.subscribe("operation:failed", this.toastFailed);
 
 		// use the server url as base url
-		this.http.baseUrl = "https://flareon.ddns.net"; //"https://flareon.ddns.net"; // "https://192.168.2.15"
+		this.http.baseUrl = process.env.SERVER_URL; //"https://flareon.ddns.net"; //"https://flareon.ddns.net"; // "https://192.168.2.15"
 
 		// load server data
 		this.loadServerData();

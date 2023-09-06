@@ -19,6 +19,12 @@ const postcssLoader = {
 
 module.exports = function (env, { analyze }) {
   const production = env.production || process.env.NODE_ENV === 'production';
+  const envpath = `./.env${production ? '' : '.' + (process.env.NODE_ENV || 'development')}`;
+  require('dotenv').config({ path: envpath });
+  console.log("Webpack environment: " + envpath);
+  console.log("Env serv url: " + process.env.SERVER_URL);
+  console.log("Env hash: " + process.env.USE_URL_FRAGMENT_HASH);
+  console.log("Env base url: " + process.env.BASE_URL);
   return {
     target: 'web',
     mode: production ? 'production' : 'development',
@@ -90,10 +96,10 @@ module.exports = function (env, { analyze }) {
     },
     plugins: [
       new Dotenv({
-        path: `./.env${production ? '' : '.' + (process.env.NODE_ENV || 'development')}`,
+        path: envpath,
       }),
       new HtmlWebpackPlugin({ 
-        title: 'Flareon',
+        title: 'Jolteon',
         template: 'index.ejs', 
         favicon: 'flareon.png',
         baseUrl: process.env.BASE_URL

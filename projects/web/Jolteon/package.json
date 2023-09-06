@@ -64,7 +64,6 @@
     "pretest": "npm run lint",
     "start": "webpack serve",
     "build": "rimraf dist && webpack --env production",
-    "build2": "rimraf dist && webpack",
     "analyze": "rimraf dist && webpack --env production --analyze",
     "test": "jest",
     "swagger": "npx swagger-typescript-api -p ./src/jolteon/services/swagger.json -o src/jolteon/services/api --templates ./swagger-templates --responses --modular --module-name-first-tag --clean-output"
