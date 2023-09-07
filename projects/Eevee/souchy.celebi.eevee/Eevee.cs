@@ -7,6 +7,7 @@ using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.neweffects.face;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Security.Principal;
 
@@ -21,10 +22,10 @@ namespace souchy.celebi.eevee
         #region Properties
         public static IEntityDictionary<ObjectId, IFight> fights { get; } = EntityDictionary<ObjectId, IFight>.Create();
         public static IDiamondModels models { get; } = new DiamondModels();
-        public static Dictionary<Type, IEffectScript> effectScripts { get; } = typeof(Eevee).Assembly.GetTypes()
+        public static ImmutableDictionary<Type, IEffectScript> effectScripts { get; } = typeof(Eevee).Assembly.GetTypes()
                 .Where(t => t.IsAssignableTo(typeof(IEffectScript)) && !t.IsAbstract && t.IsClass)
                 .Select(t => (IEffectScript) Activator.CreateInstance(t))
-                .ToDictionary(s => s.SchemaType, s => s);
+                .ToImmutableDictionary(s => s.SchemaType, s => s);
         #endregion
 
         #region Public Methods
