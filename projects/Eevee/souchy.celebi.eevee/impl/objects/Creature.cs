@@ -41,10 +41,15 @@ namespace souchy.celebi.eevee.impl.objects
         private Creature() { }
         private Creature(ObjectId id, ObjectId fightId)
         {
-            entityUid = id;
+            this.entityUid = id;
             this.fightUid = fightId;
+            
         }
-        public static ICreature Create(ObjectId fightId) => new Creature(Eevee.RegisterIIDTemporary(), fightId);
+        public static ICreature Create(ObjectId fightId) { 
+            var crea = new Creature(Eevee.RegisterIIDTemporary(), fightId);
+            crea.GetFight().creatures.Add(crea.entityUid, crea);
+            return crea;
+        }
 
         public bool isSummon() => this.summoner != null;
         public ICreature? GetSummoner() => isSummon() ? null : this.GetFight().creatures.Get(this.summoner.Value);

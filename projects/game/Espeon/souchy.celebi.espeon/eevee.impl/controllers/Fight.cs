@@ -34,7 +34,7 @@ namespace souchy.celebi.espeon.eevee.impl.controllers
 
         #region Constructors
 
-        public Fight(ScopeID scopeId)
+        public Fight() //ScopeID scopeId)
         {
             //this.entityUid = scopeId;
             //this.board = Scopes.GetRequiredScoped<IBoard>(entityUid);
