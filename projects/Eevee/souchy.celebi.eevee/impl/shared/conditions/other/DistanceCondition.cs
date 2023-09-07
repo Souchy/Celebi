@@ -16,8 +16,8 @@ namespace souchy.celebi.eevee.impl.shared.conditions.other
 
         public override bool check(IAction action, TriggerEvent trigger, ICreature boardSource, IBoardEntity boardTarget)
         {
-            if (!checkChildren(action, trigger, boardSource, boardTarget)) //fightId, source, target))
-                return false;
+            //if (!checkChildren(action, trigger, boardSource, boardTarget)) //fightId, source, target))
+            //    return false;
 
             var actualDistance = boardSource.position
                 .distanceManhattan(boardTarget.position);

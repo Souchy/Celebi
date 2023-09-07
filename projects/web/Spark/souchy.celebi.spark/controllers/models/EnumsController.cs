@@ -29,7 +29,7 @@ namespace souchy.celebi.spark.controllers.models
         [HttpGet("zoneType")]
         public ZoneType[] GetZoneType() => Enum.GetValues<ZoneType>();
         [HttpGet("triggerType")]
-        public TriggerType[] GetTriggerType() => Enum.GetValues<TriggerType>();
+        public TriggerType[] GetTriggerType() => TriggerType.values(); //Enum.GetValues<TriggerType>();
         [HttpGet("towerDirectionType")]
         public TowerDirectionType[] GetTowerDirectionType() => Enum.GetValues<TowerDirectionType>();
         [HttpGet("direction8Type")]

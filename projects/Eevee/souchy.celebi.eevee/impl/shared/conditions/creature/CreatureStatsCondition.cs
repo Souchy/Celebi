@@ -15,8 +15,8 @@ namespace souchy.celebi.eevee.impl.shared.conditions.creature
 
         public override bool check(IAction action, TriggerEvent trigger, ICreature boardSource, IBoardEntity boardTarget)
         {
-            if (!checkChildren(action, trigger, boardSource, boardTarget))
-                return false;
+            //if (!checkChildren(action, trigger, boardSource, boardTarget))
+            //    return false;
 
             ObjectId checkable = actorType == ActorType.Source ? action.caster : action.targetCell;
             var creature = action.fight.creatures.Get(checkable);

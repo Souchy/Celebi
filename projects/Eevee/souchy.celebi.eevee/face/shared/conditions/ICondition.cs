@@ -18,8 +18,6 @@ namespace souchy.celebi.eevee.face.shared.conditions
         //public ConditionType conditionType { get; }
         public ActorType actorType { get; set; }
         public ConditionComparatorType comparator { get; set; }
-        public ConditionGroupType groupType { get; set; }
-        public IEntityList<ICondition> children { get; set; }
         
         public bool check(IAction action, TriggerEvent trigger, ICreature boardSource, IBoardEntity boardTarget);
     }

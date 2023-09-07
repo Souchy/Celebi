@@ -26,7 +26,7 @@ namespace souchy.celebi.eevee.impl.shared.conditions
         public IEntityList<ICondition> children { get; set; } = new EntityList<ICondition>();
         public override bool check(IAction action, TriggerEvent trigger, ICreature boardSource, IBoardEntity boardTarget)
         {
-            throw new NotImplementedException();
+            return checkChildren(action, trigger, boardSource, boardTarget);
         }
         public bool checkChildren(IAction action, TriggerEvent trigger, ICreature boardSource, IBoardEntity boardTarget)
         {

@@ -23,7 +23,7 @@ namespace souchy.celebi.eevee.face.objects
         /// Level starts at 0 and goes deeper. <br></br>
         /// Ex spell cast is at 0, root effects are at 1, etc
         /// </summary>
-        public int depthLevel { get; init; }
+        public int depthLevel { get; set; }
         /// <summary>
         /// Holds effect results for the current action
         /// </summary>
@@ -46,6 +46,11 @@ namespace souchy.celebi.eevee.face.objects
         public IAction getRootAction() {
             return parent == null ? this : parent.getRootAction();
         }
+        /// <summary>
+        /// Copy action with same depthLevel, same context reference, same parent reference. <br></br>
+        /// Useful to reverse caster/target for example?
+        /// </summary>
+        public IAction copy();
     }
     /// <summary>
     /// <inheritdoc/>
@@ -53,11 +58,24 @@ namespace souchy.celebi.eevee.face.objects
     public abstract class BaseAction : IAction
     {
         public IAction parent { get; set; } 
-        public int depthLevel { get; init; }
+        public int depthLevel { get; set; }
         public ActionContext context { get; set; } = new ActionContext();
         public IFight fight { get; set; }
         public ObjectId caster { get; set; }
         public ObjectId targetCell { get; set; }
+
+        public IAction copy()
+        {
+            IAction copy = copyImplementation();
+            copy.parent = parent;
+            copy.depthLevel = depthLevel;
+            copy.context = context;
+            copy.targetCell = targetCell;
+            copy.caster = caster;
+            copy.targetCell = targetCell;
+            return copy;
+        }
+        protected abstract IAction copyImplementation();
     }
 
     public class ActionContext
@@ -133,6 +151,14 @@ namespace souchy.celebi.eevee.face.objects
         /// Possible targets in the effect aoe
         /// </summary>
         public IEnumerable<IBoardEntity> boardTargets { get; set; }
+
+        protected override IAction copyImplementation()
+        {
+            var copy = new SubActionEffect();
+            copy.effect = effect;
+            copy.boardTargets = boardTargets.ToList();
+            return copy;
+        }
     }
     /// <summary>
     /// <inheritdoc/>
@@ -140,6 +166,13 @@ namespace souchy.celebi.eevee.face.objects
     public class SubActionEffectTarget : BaseAction,  ISubActionEffectTarget
     {
         public IEffect effect { get; set; }
+
+        protected override IAction copyImplementation()
+        {
+            var copy = new SubActionEffect();
+            copy.effect = effect;
+            return copy;
+        }
     }
 
 }

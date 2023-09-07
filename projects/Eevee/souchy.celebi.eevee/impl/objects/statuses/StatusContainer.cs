@@ -19,6 +19,7 @@ namespace souchy.celebi.eevee.impl.objects.statuses
         public IID modelUid { get; set; }
 
         public IID sourceSpellModel { get; set; }
+        public IID sourceEffectPermanent { get; set; }
         public ObjectId sourceCreature { get; set; }
         public ObjectId holderEntity { get; set; }
         public ObjectId statsId { get; set; }

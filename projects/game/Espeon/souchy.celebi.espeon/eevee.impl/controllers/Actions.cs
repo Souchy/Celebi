@@ -60,19 +60,18 @@ namespace souchy.celebi.espeon.eevee.impl.controllers
                 sourceStats.Get<IStatSimple>(cost.statId).value -= cost.value;
             }
 
-            EffectPreviewPipeline pipeline = new EffectPreviewPipeline();
+            //EffectPreviewPipeline pipeline = new EffectPreviewPipeline();
 
-            TriggerEvent triggerBefore = new TriggerEvent(TriggerType.OnCreatureSpellCast, TriggerOrderType.Before);
-            TriggerEvent triggerApply = new TriggerEvent(TriggerType.OnCreatureSpellCast, TriggerOrderType.Apply);
-            TriggerEvent triggerAfter = new TriggerEvent(TriggerType.OnCreatureSpellCast, TriggerOrderType.After);
+            TriggerEvent triggerBefore = new TriggerEvent(TriggerType.TriggerOnSpell, TriggerOrderType.Before, action);
+            //TriggerEvent triggerApply = new TriggerEvent(TriggerType.OnCreatureSpellCast, TriggerOrderType.Apply);
+            TriggerEvent triggerAfter = new TriggerEvent(TriggerType.TriggerOnSpell, TriggerOrderType.After, action);
 
-            Mind.procTriggers(action, null, null, triggerBefore);
-            //sourceCrea.trigger(TriggerTypes.onCreatureSpellCast, TriggerOrderType.Before);
-
-            Mind.applyEffectContainer(action, spellModel); //, targetPosition);
-
-            Mind.procTriggers(action, null, null, triggerAfter);
-            //sourceCrea.trigger(TriggerTypes.onCreatureSpellCast, TriggerOrderType.After);
+            // Check triggers Before
+            Mind.checkTriggers(action, triggerBefore);
+            // Apply spell
+            Mind.applyEffectContainer(action, spellModel);
+            // Check triggers After
+            Mind.checkTriggers(action, triggerAfter);
 
             //// trigger before effects
             //foreach (IEffect effect in s.GetEffects())

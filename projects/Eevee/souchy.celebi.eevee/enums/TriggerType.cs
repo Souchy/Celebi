@@ -69,7 +69,7 @@ namespace souchy.celebi.eevee.enums
         //
         private static List<TriggerType> _values = new();
         static TriggerType() => _values.AddRange(StaticEnumUtils.findValues<TriggerType>());
-        public static IEnumerable<TriggerType> values() => _values.ToArray();
+        public static TriggerType[] values() => _values.ToArray();
         public static TriggerType get(IID id) => _values.Find(v => v.id == id);
         public static TriggerType getByType(Type triggerSchemaType) => _values.Find(v => v.schemaType == triggerSchemaType);
     }

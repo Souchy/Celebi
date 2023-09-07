@@ -27,8 +27,9 @@ namespace souchy.celebi.eevee.impl.shared.conditions.status
 
         public override bool check(IAction action, TriggerEvent trigger, ICreature boardSource, IBoardEntity boardTarget)
         {
-            if (!checkChildren(action, trigger, boardSource, boardTarget))
-                return false;
+            //if (!checkChildren(action, trigger, boardSource, boardTarget))
+            //    return false;
+
             IBoardEntity targ = actorType == ActorType.Source ? boardSource : boardTarget;
             targ = boardTargetType switch
             {

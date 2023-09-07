@@ -23,8 +23,8 @@ namespace souchy.celebi.eevee.impl.shared.conditions.spell
 
         public override bool check(IAction action, TriggerEvent trigger, ICreature boardSource, IBoardEntity boardTarget)
         {
-            if (!checkChildren(action, trigger, boardSource, boardTarget)) // fightId, source, target)) 
-                return false;
+            //if (!checkChildren(action, trigger, boardSource, boardTarget)) // fightId, source, target)) 
+            //    return false;
 
             //IID checkable = this.actorType == ActorType.Source ? source : target;
             ICreature creature = (ICreature)(actorType == ActorType.Source ? boardSource : boardTarget);
