@@ -18,7 +18,7 @@ namespace souchy.celebi.eevee.neweffects.impl.scripts.creature
     {
         public Type SchemaType => typeof(AddStats);
 
-        public IEffectReturnValue apply(ISubActionEffect action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
+        public IEffectReturnValue apply(ISubActionEffectTarget action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
         {
             // this is already applied in Creature.GetTotalStats :thinking:
             // but I guess there's instant triggers that dont use statuses ?
@@ -31,7 +31,7 @@ namespace souchy.celebi.eevee.neweffects.impl.scripts.creature
             throw new NotImplementedException();
         }
 
-        public IEffectPreview preview(ISubActionEffect action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
+        public IEffectPreview preview(ISubActionEffectTarget action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
         {
             throw new NotImplementedException();
         }

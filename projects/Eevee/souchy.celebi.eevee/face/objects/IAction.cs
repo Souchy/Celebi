@@ -25,6 +25,10 @@ namespace souchy.celebi.eevee.face.objects
         /// </summary>
         public int depthLevel { get; init; }
         /// <summary>
+        /// Holds effect results for the current action
+        /// </summary>
+        public ActionContext context { get; set; }  
+        /// <summary>
         /// 
         /// </summary>
         public IFight fight { get; set; }
@@ -43,10 +47,27 @@ namespace souchy.celebi.eevee.face.objects
             return parent == null ? this : parent.getRootAction();
         }
     }
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    public abstract class BaseAction : IAction
+    {
+        public IAction parent { get; set; } 
+        public int depthLevel { get; init; }
+        public ActionContext context { get; set; } = new ActionContext();
+        public IFight fight { get; set; }
+        public ObjectId caster { get; set; }
+        public ObjectId targetCell { get; set; }
+    }
 
     public class ActionContext
     {
         public List<ActionEffectTargetReturnValue> effectReturnValues = new List<ActionEffectTargetReturnValue>();
+        /// <summary>
+        /// Get all target actions for the saame effect
+        /// </summary>
+        /// <param name="effectEntityId"></param>
+        /// <returns></returns>
         public IEnumerable<ActionEffectTargetReturnValue> getReturnsForEffect(ObjectId effectEntityId)
         {
             return effectReturnValues.Where(e => e.action.effect.entityUid == effectEntityId);
@@ -55,20 +76,20 @@ namespace souchy.celebi.eevee.face.objects
     public class ActionEffectTargetReturnValue
     {
         public SubActionEffectTarget action { get; set; }
-        public DataType value { get; set; }
+        public DataType data { get; set; }
     }
 
     /// <summary>
     /// for retrieving stats whenever, for the UI
     /// </summary>
-    public record EmptyAction(IFight fight) : IAction
-    {
-        public IAction parent { get; set; }
-        public int depthLevel { get; init; }
-        public IFight fight { get; set; } = fight;
-        public ObjectId caster { get; set; }
-        public ObjectId targetCell { get; set; }
-    }
+    //public record EmptyAction(IFight fight) : IAction
+    //{
+    //    public IAction parent { get; set; }
+    //    public int depthLevel { get; init; }
+    //    public IFight fight { get; set; } = fight;
+    //    public ObjectId caster { get; set; }
+    //    public ObjectId targetCell { get; set; }
+    //}
     public interface IActionSpell : IAction
     {
         public ObjectId spell { get; set; }
@@ -89,32 +110,35 @@ namespace souchy.celebi.eevee.face.objects
         //public IID target { get; set; }
     }
 
-    public interface ISubActionEffect : IAction
+    /// <summary>
+    /// Apply 1 effect to 1 target only
+    /// </summary>
+    public interface ISubActionEffectTarget : IAction
     {
+        /// <summary>
+        /// Effect to apply, contains the schema, conditions, etc
+        /// </summary>
         public IEffect effect { get; set; }
     }
-    public class SubActionEffect : IAction
+    /// <summary>
+    /// Apply 1 effect to its whole aoe
+    /// </summary>
+    public class SubActionEffect : BaseAction, IAction
     {
-        public IAction parent { get; set; } // ISpellAction or 
-        public int depthLevel { get; init; }
-        public IFight fight { get; set; }
-        public ObjectId caster { get; set; }
-        // maybe the original targetcell of the spell/status holder
-        public ObjectId targetCell { get; set; } 
-
+        /// <summary>
+        /// Effect to apply, contains the schema, conditions, etc
+        /// </summary>
         public IEffect effect { get; set; }
-        // all targets passed down to the child effect
+        /// <summary>
+        /// Possible targets in the effect aoe
+        /// </summary>
         public IEnumerable<IBoardEntity> boardTargets { get; set; }
     }
-    public class SubActionEffectTarget : ISubActionEffect
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    public class SubActionEffectTarget : BaseAction,  ISubActionEffectTarget
     {
-        public IAction parent { get; set; } // SubActionEffect
-        public int depthLevel { get; init; }  
-        public IFight fight { get; set; }
-        public ObjectId caster { get; set; }
-        // maybe the original targetcell of the spell/status holder
-        public ObjectId targetCell { get; set; }
-
         public IEffect effect { get; set; }
     }
 

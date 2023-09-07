@@ -17,7 +17,7 @@ namespace souchy.celebi.eevee.neweffects.face
         /// <param name="currentTarget">The target to apply to</param>
         /// <param name="allTargetsInZone">All the targets in the zone if we need to refer to them in calculations</param>
         /// <returns></returns>
-        public IEffectReturnValue apply(ISubActionEffect action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone);
-        public IEffectPreview preview(ISubActionEffect action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone);
+        public IEffectReturnValue apply(ISubActionEffectTarget action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone);
+        public IEffectPreview preview(ISubActionEffectTarget action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone);
     }
 }

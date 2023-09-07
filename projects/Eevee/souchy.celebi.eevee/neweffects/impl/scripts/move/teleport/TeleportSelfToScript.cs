@@ -16,7 +16,7 @@ namespace souchy.celebi.eevee.neweffects.impl.effects.move.teleport
     {
         public Type SchemaType => typeof(TeleportSelfTo);
 
-        public IEffectReturnValue apply(ISubActionEffect action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
+        public IEffectReturnValue apply(ISubActionEffectTarget action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
         {
             ICreature source = action.fight.creatures.Get(action.caster);
             ICell cell = (ICell) currentTarget;
@@ -30,7 +30,7 @@ namespace souchy.celebi.eevee.neweffects.impl.effects.move.teleport
             return null;
         }
 
-        public IEffectPreview preview(ISubActionEffect action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
+        public IEffectPreview preview(ISubActionEffectTarget action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
         {
             throw new NotImplementedException();
         }

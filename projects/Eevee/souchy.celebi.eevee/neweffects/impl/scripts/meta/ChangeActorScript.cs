@@ -11,7 +11,7 @@ namespace souchy.celebi.eevee.neweffects.impl.effects.meta
     {
         public Type SchemaType => typeof(ChangeActor);
 
-        public IEffectReturnValue apply(ISubActionEffect action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
+        public IEffectReturnValue apply(ISubActionEffectTarget action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
         {
             var newAction = new SubActionEffectTarget()
             {
@@ -29,7 +29,7 @@ namespace souchy.celebi.eevee.neweffects.impl.effects.meta
             return null;
         }
 
-        public IEffectPreview preview(ISubActionEffect action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
+        public IEffectPreview preview(ISubActionEffectTarget action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
         {
             throw new NotImplementedException();
         }

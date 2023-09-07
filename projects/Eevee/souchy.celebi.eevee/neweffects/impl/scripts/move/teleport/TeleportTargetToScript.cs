@@ -11,7 +11,7 @@ namespace souchy.celebi.eevee.neweffects.impl.effects.move.teleport
     {
         public Type SchemaType => typeof(TeleportTargetTo);
 
-        public IEffectReturnValue apply(ISubActionEffect action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
+        public IEffectReturnValue apply(ISubActionEffectTarget action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
         {
             TeleportTargetTo props = action.effect.GetProperties<TeleportTargetTo>();
             //props.MoveTargetZone
@@ -21,7 +21,7 @@ namespace souchy.celebi.eevee.neweffects.impl.effects.move.teleport
             throw new NotImplementedException();
         }
 
-        public IEffectPreview preview(ISubActionEffect action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
+        public IEffectPreview preview(ISubActionEffectTarget action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
         {
             throw new NotImplementedException();
         }

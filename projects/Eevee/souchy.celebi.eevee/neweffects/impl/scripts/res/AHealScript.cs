@@ -23,7 +23,7 @@ namespace souchy.celebi.eevee.neweffects.impl.effects.res
         protected abstract bool appliesOffensiveStats { get; }
         protected abstract bool appliesDefensiveStats { get; }
 
-        public IEffectReturnValue apply(ISubActionEffect action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
+        public IEffectReturnValue apply(ISubActionEffectTarget action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
         {
             var creaSource = action.fight.creatures.Get(action.caster);
             var creaTarget = (ICreature) currentTarget;
@@ -50,7 +50,7 @@ namespace souchy.celebi.eevee.neweffects.impl.effects.res
             return new IEffectReturnValue(action.effect, dmg);
         }
 
-        public IEffectPreview preview(ISubActionEffect action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
+        public IEffectPreview preview(ISubActionEffectTarget action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
         {
             var props = action.effect.GetProperties<DirectDamage>();
             throw new NotImplementedException();
