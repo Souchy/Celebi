@@ -60,7 +60,7 @@ jobs:
         uses: Creepios/sftp-action@v1.0.3
         with:
           host: ${{ secrets.FTP_SERVER }}
-          port: 22
+          port: ${{ secrets.FTP_PORT }}
           username: ${{ secrets.FTP_USERNAME }}
           #password: ${{ secrets.FTP_PASSWD }}
           localPath: '/home/runner/work/Celebi/Celebi/'
