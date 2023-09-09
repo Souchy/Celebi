@@ -11,13 +11,6 @@ namespace souchy.celebi.eevee.impl.objects
 {
     public class Timeline : ITimeline
     {
-        public Timeline()
-        {
-            // Loadup params from the db, make them public on the API.
-            // Might have to put the settings in the fight if we want different (custom) settings per fight.
-            secondsPerTurn = 30; 
-        }
-
         public ObjectId entityUid { get; set; }
         public ObjectId fightUid { get; set; }
 
