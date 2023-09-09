@@ -24,10 +24,12 @@ namespace souchy.celebi.spark.services
         #endregion
 
         #region Get List
-        public IFindFluent<T, T> GetFluentAsync() =>
-            _collection.Find(_ => true);
+        //public IFindFluent<T, T> GetFluentAsync() =>
+        //    _collection.Find(_ => true);
         public async Task<List<T>> GetAsync() =>
             await _collection.Find(_ => true).ToListAsync();
+        public async Task<Dictionary<ObjectId, T>> GetDictionaryAsync() =>
+            (await _collection.Find(_ => true).ToListAsync()).ToDictionary(t => t.entityUid, t => t);
         public async Task<List<T>> GetAsync(FilterDefinition<T> filter) =>
             await _collection.Find(filter).ToListAsync();
         public async Task<List<T>> GetInIdsAsync(IEnumerable<ObjectId> ids) =>

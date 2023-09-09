@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
+using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.objects.statuses;
 using souchy.celebi.eevee.face.util;
@@ -30,9 +31,14 @@ namespace souchy.celebi.eevee.impl.objects.statuses
         {
             this.entityUid = id;
             this.fightUid = fightUid;
-            this.statsId = Eevee.RegisterIIDTemporary();
+            //this.statsId = Eevee.RegisterIIDTemporary(); // found this way later, not sure about it
         }
-        public static IStatusContainer Create(ObjectId fightUid) => new StatusContainer(Eevee.RegisterIIDTemporary(), fightUid);
+        public static IStatusContainer Create(ObjectId fightId)
+        {
+            var status = new StatusContainer(fightId, Eevee.RegisterIIDTemporary());
+            status.GetFight().statuses.Add(status.entityUid, status);
+            return status;
+        }
 
 
         public void Dispose()

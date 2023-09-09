@@ -6,6 +6,7 @@ using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.objects.statuses;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.neweffects.face;
 using static souchy.celebi.eevee.face.entity.IEntity;
@@ -19,6 +20,7 @@ namespace souchy.celebi.espeon.eevee.impl.controllers
         [BsonId]
         public ObjectId entityUid { get; set; } = Eevee.RegisterIIDTemporary();
 
+        public FightSettings settings { get; set; }
         public ITimeline timeline { get; set; }
         public IBoard board { get; set; }
         public IEntityDictionary<ObjectId, IPlayer> players { get; init; } = EntityDictionary<ObjectId, IPlayer>.Create();

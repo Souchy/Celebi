@@ -31,7 +31,12 @@ namespace souchy.celebi.eevee.impl.objects
             fightUid = fightId;
             entityUid = id;
         }
-        public static ISpell Create(ObjectId fightId) => new Spell(fightId, Eevee.RegisterIIDTemporary());
+        public static ISpell Create(ObjectId fightId)
+        {
+            var spell = new Spell(fightId, Eevee.RegisterIIDTemporary());
+            spell.GetFight().spells.Add(spell.entityUid, spell);
+            return spell;
+        }
 
         public void Dispose()
         {

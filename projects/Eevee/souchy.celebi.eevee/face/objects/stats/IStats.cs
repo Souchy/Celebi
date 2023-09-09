@@ -27,5 +27,7 @@ namespace souchy.celebi.eevee.face.objects.stats
         /// Otherwise: use Create() and register a new ObjectId
         /// </summary>
         public IStats copy(bool anonymous = false);
+        public IStats copyToFight(ObjectId fightUid);
+        public IStats copyTo(IStats stats);
     }
 }

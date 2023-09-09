@@ -18,6 +18,7 @@ namespace souchy.celebi.eevee.impl.objects
         {
             fightUid = fightId;
             entityUid = id;
+            this.GetFight().players.Add(this.entityUid, this);
         }
         public static IPlayer Create(ObjectId fightId) => new Player(fightId, Eevee.RegisterIIDTemporary());
 

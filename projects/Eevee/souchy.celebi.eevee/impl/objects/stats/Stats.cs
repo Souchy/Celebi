@@ -66,12 +66,22 @@ namespace souchy.celebi.eevee.impl.stats
         public IStats copy(bool anonymous = false)
         {
             var c = new Stats();
-            //growth.copy();
-            foreach (var s in Pairs)
-                c.@base.Set(s.Key, s.Value.copy(anonymous));
-            foreach (var s in growth.Pairs)
-                c.growth.Set(s.Key, s.Value.copy());
-            return c;
+            return copyTo(c, anonymous);
+        }
+
+        public IStats copyToFight(ObjectId fightUid, IStats target = null)
+        {
+            var copy = target ?? this.copy(true);
+            Eevee.fights.Get(fightUid).stats.Add(copy.entityUid, copy);
+            return copy;
+        }
+        public IStats copyTo(IStats stats, bool anonymous = false)
+        {
+            foreach (var p in Pairs)
+                stats.@base.Set(p.Key, p.Value.copy(anonymous));
+            foreach (var p in growth.Pairs)
+                stats.growth.Set(p.Key, p.Value.copy());
+            return stats;
         }
 
         public bool Has(CharacteristicId key) => @base.Has(key);

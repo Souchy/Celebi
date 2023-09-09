@@ -11,7 +11,7 @@ namespace souchy.celebi.eevee.face.objects.controllers
         /// List of creatures on the board <br></br>
         /// Creatures need to be ordered in timeline order
         /// </summary>
-        public IEntityList<ObjectId> creatureIds { get; init; }
+        //public IEntityList<ObjectId> creatureIds { get; init; }
         /// <summary>
         /// List of cells on the board
         /// </summary>
@@ -26,7 +26,7 @@ namespace souchy.celebi.eevee.face.objects.controllers
         //public List<ICreature> getCreatures(IPosition pos);
         //public bool hasCreature(IPosition pos);
 
-        public IEnumerable<ICreature> GetCreatures() => creatureIds.Values.Select(crea => GetFight().creatures.Get(crea));
+        public IEnumerable<ICreature> GetCreatures() => this.GetFight().timeline.getCreatures(); //creatureIds.Values.Select(crea => GetFight().creatures.Get(crea));
         public IEnumerable<ICell> GetCells() => cells.Values.Select(cell => GetFight().cells.Get(cell));
 
         public IEnumerable<ICreature> GetCreaturesOnCell(ObjectId targetCell)

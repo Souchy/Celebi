@@ -2,6 +2,7 @@
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.objects.statuses;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.neweffects.face;
 
 namespace souchy.celebi.eevee.face.objects.controllers
@@ -15,8 +16,9 @@ namespace souchy.celebi.eevee.face.objects.controllers
     /// 
     /// We could say all of this could go inside of IFight
     /// </summary>
-    public interface IFight : IEntity 
+    public interface IFight : IEntity
     {
+        public FightSettings settings { get; set; }
         public ITimeline timeline { get; set; }
         public IBoard board { get; set; }
         public IEntityDictionary<ObjectId, IPlayer> players { get; init; }
@@ -41,7 +43,7 @@ namespace souchy.celebi.eevee.face.objects.controllers
 
 
         public IBoardEntity GetBoardEntity(ObjectId entityId) {
-            if(this.board.creatureIds.Values.Contains(entityId)) {
+            if(this.timeline.creatureIds.Contains(entityId)) { // this.board.creatureIds
                 return creatures.Get(entityId);
             }
             if(this.board.cells.Values.Contains(entityId)) {

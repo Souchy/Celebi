@@ -5,6 +5,7 @@ using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.util.math;
+using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.util;
 using static souchy.celebi.eevee.face.entity.IEntity;
 
@@ -19,13 +20,24 @@ namespace souchy.celebi.espeon.eevee.impl.controllers
         public IEntityList<ObjectId> creatureIds { get; init; } = new EntityList<ObjectId>();
         public IEntityList<ObjectId> cells { get; init; } = new EntityList<ObjectId>();
 
-        public Board(ScopeID scopeId)
+        public static IBoard Create(ObjectId fightid)
         {
-            //fightUid = scopeId;
-            this.GetFight().board = this;
-            //this.entityUid = Scopes.GetUIdGenerator(fightUid).next();
-            //this.instances = Scopes.GetRequiredScoped<IFight>(fightUid);
+            var board = new Board()
+            {
+                fightUid = fightid,
+                entityUid = Eevee.RegisterIIDTemporary()
+            };
+            board.GetFight().board = board;
+            return board;
         }
+        //public Board(ObjectId fightUid) //ScopeID scopeId)
+        //{
+        //    this.fightUid = fightUid;
+        //    //fightUid = scopeId;
+        //    this.GetFight().board = this;
+        //    //this.entityUid = Scopes.GetUIdGenerator(fightUid).next();
+        //    //this.instances = Scopes.GetRequiredScoped<IFight>(fightUid);
+        //}
 
         public ICell GetCell(IPosition pos) => this.cells.Values
             .Select(c => this.GetFight().cells.Get(c))
