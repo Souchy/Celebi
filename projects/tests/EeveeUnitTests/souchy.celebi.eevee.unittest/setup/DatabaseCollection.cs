@@ -45,6 +45,7 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest.setup
         public readonly CollectionService<IMap> _maps;
         public DatabaseFixture(MongoModelsDbService db)
         {
+            Console.WriteLine("DbFixture ctor");
             _fights = db.GetMongoService<IFight>();
             _creatures = db.GetMongoService<ICreatureModel>();
             _spells = db.GetMongoService<ISpellModel>();
@@ -57,7 +58,9 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest.setup
         }
         private async void setup()
         {
+            Console.WriteLine($"DbFixture setup collections");
             loadModels(); // need to wait until everything is loaded before creating the fights
+            Console.WriteLine($"DbFixture setup models: creatureModel count = {Eevee.models.creatureModels.Values.Count()}");
             setupFight1();
             setupFight2();
         }

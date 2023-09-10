@@ -20,7 +20,7 @@ namespace souchy.celebi.spark.controllers.models
 
         [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPost("trigger")]
-        public ActionResult<ITriggerModel> CreateTrigger([FromRoute] TriggerType triggerType) 
+        public ActionResult<ITriggerModel> CreateTrigger([FromRoute] IID triggerTypeId)
         {
             var trigger = new TriggerModel();
             return Ok(trigger);
@@ -29,10 +29,10 @@ namespace souchy.celebi.spark.controllers.models
 
         [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPost("condition")]
-        public ActionResult<ICondition> CreateCondition([FromRoute] IID conditionType) //[FromQuery] ConditionType conditionType) //[FromRoute] ObjectId id)
+        public ActionResult<ICondition> CreateCondition([FromRoute] IID conditionTypeId)
         {
             //var condition = new CreatureStatsCondition();
-            var condition = ConditionType.get(conditionType).createInstance();
+            var condition = ConditionType.get(conditionTypeId).createInstance();
             return Ok(condition);
         }
 

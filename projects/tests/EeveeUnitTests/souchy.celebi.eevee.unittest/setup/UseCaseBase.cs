@@ -34,7 +34,7 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest.setup
             //      then register them automatically in the Fight or in Eevee
             // 
 
-            IFight fight = new Fight();
+            fight = new Fight();
             // new Board
             // new Timeline
             // new 2 players

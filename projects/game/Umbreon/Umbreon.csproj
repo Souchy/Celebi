@@ -1,4 +1,4 @@
-<Project Sdk="Godot.NET.Sdk/4.1.0">
+﻿<Project Sdk="Godot.NET.Sdk/4.1.0">
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
@@ -35,10 +35,13 @@
     <Content Include="data\spells.json" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="GodotSharpExtras" Version="0.4.0-beta.4" />
+	<PackageReference Include="Godot.SourceGenerators" Version="4.1.1" />
+	<PackageReference Include="GodotSharp" Version="4.1.1" />
+	<PackageReference Include="GodotSharpEditor" Version="4.1.1" />
+    <PackageReference Include="GodotSharpExtras" Version="0.4.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
-    <PackageReference Include="MongoDB.Driver" Version="2.19.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="MongoDB.Driver" Version="2.21.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="PlayFabAllSDK" Version="1.141.221107" />
     <PackageReference Include="SimpleInjector" Version="5.4.1" />
   </ItemGroup>

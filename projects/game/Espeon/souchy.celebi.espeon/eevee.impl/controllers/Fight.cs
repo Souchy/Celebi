@@ -18,7 +18,7 @@ namespace souchy.celebi.espeon.eevee.impl.controllers
         #region Properties
 
         [BsonId]
-        public ObjectId entityUid { get; set; } = Eevee.RegisterIIDTemporary();
+        public ObjectId entityUid { get; set; }
 
         public FightSettings settings { get; set; }
         public ITimeline timeline { get; set; }
@@ -36,11 +36,22 @@ namespace souchy.celebi.espeon.eevee.impl.controllers
 
         #region Constructors
 
-        public Fight() //ScopeID scopeId)
+        private Fight() { }
+        //public Fight() //ScopeID scopeId)
+        //{
+        //    this.entityUid = Eevee.RegisterIIDTemporary();
+        //    //this.entityUid = scopeId;
+        //    //this.board = Scopes.GetRequiredScoped<IBoard>(entityUid);
+        //    Eevee.fights.Add(entityUid, this);
+        //}
+        public static IFight Create()
         {
-            //this.entityUid = scopeId;
-            //this.board = Scopes.GetRequiredScoped<IBoard>(entityUid);
-            Eevee.fights.Add(entityUid, this);
+            var fight = new Fight()
+            {
+                entityUid = Eevee.RegisterIIDTemporary()
+            };
+            Eevee.fights.Add(fight.entityUid, fight);
+            return fight;
         }
 
         #endregion Constructors

@@ -1424,44 +1424,6 @@
         }
       }
     },
-    "/api/models/enums/triggerType": {
-      "get": {
-        "tags": [
-          "EnumsController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/TriggerType"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/TriggerType"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/TriggerType"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/models/enums/towerDirectionType": {
       "get": {
         "tags": [
@@ -1728,10 +1690,97 @@
         }
       }
     },
+    "/api/models/enums/triggerType": {
+      "get": {
+        "tags": [
+          "EnumsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TriggerType"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TriggerType"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TriggerType"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/enums/conditionType": {
+      "get": {
+        "tags": [
+          "EnumsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ConditionType"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ConditionType"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ConditionType"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/models/factory/trigger": {
       "post": {
         "tags": [
           "FactoryController"
+        ],
+        "parameters": [
+          {
+            "name": "triggerTypeId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -1751,6 +1800,17 @@
       "post": {
         "tags": [
           "FactoryController"
+        ],
+        "parameters": [
+          {
+            "name": "conditionTypeId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -2514,6 +2574,71 @@
                   "items": {
                     "$ref": "#/components/schemas/ISpellModel"
                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/spell/aggregation/list": {
+      "get": {
+        "tags": [
+          "SpellModelController"
+        ],
+        "parameters": [
+          {
+            "name": "list",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TextEntityAggregation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/spell/aggregation/{id}": {
+      "get": {
+        "tags": [
+          "SpellModelController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpellModelAggregation"
                 }
               }
             }
@@ -4058,18 +4183,19 @@
       },
       "AffinityTypes": {
         "enum": [
-          "True: Affinity = {\r\n  \"element\": 1,\r\n  \"category\": 2,\r\n  \"localId\": 1,\r\n  \"baseName\": \"True\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2001\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.True\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Fire: Affinity = {\r\n  \"element\": 2,\r\n  \"category\": 2,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Fire\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2002\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Fire\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Water: Affinity = {\r\n  \"element\": 3,\r\n  \"category\": 2,\r\n  \"localId\": 3,\r\n  \"baseName\": \"Water\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2003\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Water\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Earth: Affinity = {\r\n  \"element\": 4,\r\n  \"category\": 2,\r\n  \"localId\": 4,\r\n  \"baseName\": \"Earth\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2004\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Earth\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Air: Affinity = {\r\n  \"element\": 5,\r\n  \"category\": 2,\r\n  \"localId\": 5,\r\n  \"baseName\": \"Air\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2005\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Air\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Dark: Affinity = {\r\n  \"element\": 6,\r\n  \"category\": 2,\r\n  \"localId\": 6,\r\n  \"baseName\": \"Dark\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2006\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Dark\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Light: Affinity = {\r\n  \"element\": 7,\r\n  \"category\": 2,\r\n  \"localId\": 7,\r\n  \"baseName\": \"Light\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2007\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Light\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "True: Affinity = {\r\n  \"element\": 4,\r\n  \"category\": 2,\r\n  \"localId\": 1,\r\n  \"baseName\": \"True\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2001\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.True\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Fire: Affinity = {\r\n  \"element\": 5,\r\n  \"category\": 2,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Fire\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2002\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Fire\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Water: Affinity = {\r\n  \"element\": 6,\r\n  \"category\": 2,\r\n  \"localId\": 3,\r\n  \"baseName\": \"Water\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2003\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Water\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Earth: Affinity = {\r\n  \"element\": 7,\r\n  \"category\": 2,\r\n  \"localId\": 4,\r\n  \"baseName\": \"Earth\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2004\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Earth\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Air: Affinity = {\r\n  \"element\": 8,\r\n  \"category\": 2,\r\n  \"localId\": 5,\r\n  \"baseName\": \"Air\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2005\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Air\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Dark: Affinity = {\r\n  \"element\": 9,\r\n  \"category\": 2,\r\n  \"localId\": 6,\r\n  \"baseName\": \"Dark\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2006\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Dark\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Light: Affinity = {\r\n  \"element\": 10,\r\n  \"category\": 2,\r\n  \"localId\": 7,\r\n  \"baseName\": \"Light\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2007\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Light\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Physical: Affinity = {\r\n  \"element\": 11,\r\n  \"category\": 2,\r\n  \"localId\": 8,\r\n  \"baseName\": \"Physical\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2008\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Physical\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Damage: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 20,\r\n  \"baseName\": \"Damage\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2020\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Damage\",\r\n  \"enumValueConstraint\": null\r\n};",
           "IndirectDamage: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 21,\r\n  \"baseName\": \"IndirectDamage\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2021\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.IndirectDamage\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Heal: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 22,\r\n  \"baseName\": \"Heal\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2022\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Heal\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Melee: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 23,\r\n  \"baseName\": \"Melee\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 5,\r\n      \"groupType\": 0,\r\n      \"children\": []\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2023\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Melee\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Distance: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 24,\r\n  \"baseName\": \"Distance\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 2,\r\n      \"groupType\": 0,\r\n      \"children\": []\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2024\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Distance\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Melee: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 23,\r\n  \"baseName\": \"Melee\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 5\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2023\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Melee\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Distance: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 24,\r\n  \"baseName\": \"Distance\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 2\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2024\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Distance\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Trap: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 25,\r\n  \"baseName\": \"Trap\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2025\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Trap\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Glyph: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 26,\r\n  \"baseName\": \"Glyph\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2026\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Glyph\",\r\n  \"enumValueConstraint\": null\r\n};",
           "PenetrationPercent: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 27,\r\n  \"baseName\": \"PenetrationPercent\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2027\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.PenetrationPercent\",\r\n  \"enumValueConstraint\": null\r\n};",
@@ -4333,6 +4459,40 @@
         "type": "string",
         "format": ""
       },
+      "ConditionType": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConditionTypeTypes": {
+        "enum": [
+          "Group: ConditionType = {\r\n  \"id\": \"0\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.GroupCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "LineOfSight: ConditionType = {\r\n  \"id\": \"1\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.other.LineOfSightCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "Distance: ConditionType = {\r\n  \"id\": \"2\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.other.DistanceCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "CreatureModel: ConditionType = {\r\n  \"id\": \"101\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.creature.CreatureModelCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "CreatureModelSame: ConditionType = {\r\n  \"id\": \"102\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.creature.CreatureModelCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "CreatureCurrentTeam: ConditionType = {\r\n  \"id\": \"103\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.creature.CreatureCurrentTeamCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "CreatureOriginalTeam: ConditionType = {\r\n  \"id\": \"104\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.creature.CreatureOriginalTeamCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "CreatureIsSummon: ConditionType = {\r\n  \"id\": \"105\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.creature.CreatureOriginalTeamCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "CreatureStats: ConditionType = {\r\n  \"id\": \"106\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.creature.CreatureStatsCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "StatusModel: ConditionType = {\r\n  \"id\": \"201\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.status.StatusModelCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "StatusTeam: ConditionType = {\r\n  \"id\": \"202\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.status.StatusTeamCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "StatusStats: ConditionType = {\r\n  \"id\": \"203\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.status.StatusStatsCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "SpellModel: ConditionType = {\r\n  \"id\": \"301\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.spell.SpellModelCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "SpellStats: ConditionType = {\r\n  \"id\": \"303\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.spell.SpellStatsCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};"
+        ],
+        "type": "string",
+        "format": ""
+      },
       "ConsumableDrop": {
         "type": "object",
         "properties": {
@@ -4527,16 +4687,6 @@
           },
           "comparator": {
             "$ref": "#/components/schemas/ConditionComparatorType"
-          },
-          "groupType": {
-            "$ref": "#/components/schemas/ConditionGroupType"
-          },
-          "children": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ICondition"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": {
@@ -4554,16 +4704,6 @@
           },
           "comparator": {
             "$ref": "#/components/schemas/ConditionComparatorType"
-          },
-          "groupType": {
-            "$ref": "#/components/schemas/ConditionGroupType"
-          },
-          "children": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ICondition"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": {
@@ -4628,16 +4768,6 @@
           },
           "comparator": {
             "$ref": "#/components/schemas/ConditionComparatorType"
-          },
-          "groupType": {
-            "$ref": "#/components/schemas/ConditionGroupType"
-          },
-          "children": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ICondition"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": {
@@ -4655,16 +4785,6 @@
           },
           "comparator": {
             "$ref": "#/components/schemas/ConditionComparatorType"
-          },
-          "groupType": {
-            "$ref": "#/components/schemas/ConditionGroupType"
-          },
-          "children": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ICondition"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": {
@@ -4703,16 +4823,6 @@
           },
           "comparator": {
             "$ref": "#/components/schemas/ConditionComparatorType"
-          },
-          "groupType": {
-            "$ref": "#/components/schemas/ConditionGroupType"
-          },
-          "children": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ICondition"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": {
@@ -4993,16 +5103,6 @@
           },
           "comparator": {
             "$ref": "#/components/schemas/ConditionComparatorType"
-          },
-          "groupType": {
-            "$ref": "#/components/schemas/ConditionGroupType"
-          },
-          "children": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ICondition"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": {
@@ -5106,50 +5206,6 @@
         "type": "string",
         "format": ""
       },
-      "EffectInstance": {
-        "type": "object",
-        "properties": {
-          "fightUid": {
-            "type": "string"
-          },
-          "entityUid": {
-            "type": "string"
-          },
-          "modelUid": {
-            "type": "string",
-            "nullable": true
-          },
-          "schema": {
-            "$ref": "#/components/schemas/IEffectSchema"
-          },
-          "sourceCondition": {
-            "$ref": "#/components/schemas/ICondition"
-          },
-          "targetFilter": {
-            "$ref": "#/components/schemas/ICondition"
-          },
-          "targetAcquisitionZone": {
-            "$ref": "#/components/schemas/IZone"
-          },
-          "triggers": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ITriggerModel"
-            },
-            "nullable": true
-          },
-          "effectIds": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": {
-          "type": "object"
-        }
-      },
       "EffectPermanent": {
         "type": "object",
         "properties": {
@@ -5191,19 +5247,66 @@
           "type": "object"
         }
       },
+      "EffectPermanentAggregation": {
+        "type": "object",
+        "properties": {
+          "entityUid": {
+            "type": "string"
+          },
+          "modelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "model": {
+            "$ref": "#/components/schemas/IEffectModel"
+          },
+          "schema": {
+            "$ref": "#/components/schemas/IEffectSchema"
+          },
+          "sourceCondition": {
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "targetFilter": {
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "targetAcquisitionZone": {
+            "$ref": "#/components/schemas/IZone"
+          },
+          "triggers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ITriggerModel"
+            },
+            "nullable": true
+          },
+          "depth": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "effects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EffectPermanentAggregation"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "ElementType": {
         "enum": [
           "None = 0",
-          "True = 1",
-          "Fire = 2",
-          "Water = 3",
-          "Earth = 4",
-          "Air = 5",
-          "Dark = 6",
-          "Light = 7",
-          "Best = 8",
-          "Worst = 9",
-          "All = 10"
+          "Best = 1",
+          "Worst = 2",
+          "All = 3",
+          "True = 4",
+          "Fire = 5",
+          "Water = 6",
+          "Earth = 7",
+          "Air = 8",
+          "Dark = 9",
+          "Light = 10",
+          "Physical = 11"
         ],
         "type": "string",
         "format": ""
@@ -5254,6 +5357,30 @@
           }
         },
         "additionalProperties": false
+      },
+      "GroupCondition": {
+        "type": "object",
+        "properties": {
+          "groupType": {
+            "$ref": "#/components/schemas/ConditionGroupType"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          },
+          "actorType": {
+            "$ref": "#/components/schemas/ActorType"
+          },
+          "comparator": {
+            "$ref": "#/components/schemas/ConditionComparatorType"
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
       },
       "Heal": {
         "type": "object",
@@ -5456,16 +5583,6 @@
           },
           "comparator": {
             "$ref": "#/components/schemas/ConditionComparatorType"
-          },
-          "groupType": {
-            "$ref": "#/components/schemas/ConditionGroupType"
-          },
-          "children": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ICondition"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": {
@@ -5646,6 +5763,32 @@
         "additionalProperties": {
           "type": "object"
         }
+      },
+      "IEffectModel": {
+        "type": "object",
+        "properties": {
+          "nameId": {
+            "type": "string"
+          },
+          "descriptionId": {
+            "type": "string"
+          },
+          "boardTargetType": {
+            "$ref": "#/components/schemas/BoardTargetType"
+          },
+          "schemaType": {
+            "type": "string",
+            "nullable": true
+          },
+          "modelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "entityUid": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
       },
       "IEffectPermanent": {
         "type": "object",
@@ -6022,8 +6165,8 @@
       "ITriggerModel": {
         "type": "object",
         "properties": {
-          "triggerType": {
-            "$ref": "#/components/schemas/TriggerType"
+          "schema": {
+            "$ref": "#/components/schemas/ITriggerSchema"
           },
           "triggerOrderType": {
             "$ref": "#/components/schemas/TriggerOrderType"
@@ -6036,6 +6179,15 @@
           },
           "holderCondition": {
             "$ref": "#/components/schemas/ICondition"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ITriggerSchema": {
+        "type": "object",
+        "properties": {
+          "triggerType": {
+            "$ref": "#/components/schemas/TriggerType"
           }
         },
         "additionalProperties": false
@@ -6240,16 +6392,6 @@
           },
           "comparator": {
             "$ref": "#/components/schemas/ConditionComparatorType"
-          },
-          "groupType": {
-            "$ref": "#/components/schemas/ConditionGroupType"
-          },
-          "children": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ICondition"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": {
@@ -6630,18 +6772,18 @@
       },
       "ResistanceTypes": {
         "enum": [
-          "True: Resistance = {\r\n  \"element\": 1,\r\n  \"category\": 3,\r\n  \"localId\": 1,\r\n  \"baseName\": \"True\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3001\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.True\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Fire: Resistance = {\r\n  \"element\": 2,\r\n  \"category\": 3,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Fire\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3002\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Fire\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Water: Resistance = {\r\n  \"element\": 3,\r\n  \"category\": 3,\r\n  \"localId\": 3,\r\n  \"baseName\": \"Water\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3003\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Water\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Earth: Resistance = {\r\n  \"element\": 4,\r\n  \"category\": 3,\r\n  \"localId\": 4,\r\n  \"baseName\": \"Earth\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3004\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Earth\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Air: Resistance = {\r\n  \"element\": 5,\r\n  \"category\": 3,\r\n  \"localId\": 5,\r\n  \"baseName\": \"Air\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3005\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Air\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Dark: Resistance = {\r\n  \"element\": 6,\r\n  \"category\": 3,\r\n  \"localId\": 6,\r\n  \"baseName\": \"Dark\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3006\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Dark\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Light: Resistance = {\r\n  \"element\": 7,\r\n  \"category\": 3,\r\n  \"localId\": 7,\r\n  \"baseName\": \"Light\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3007\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Light\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "True: Resistance = {\r\n  \"element\": 4,\r\n  \"category\": 3,\r\n  \"localId\": 1,\r\n  \"baseName\": \"True\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3001\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.True\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Fire: Resistance = {\r\n  \"element\": 5,\r\n  \"category\": 3,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Fire\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3002\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Fire\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Water: Resistance = {\r\n  \"element\": 6,\r\n  \"category\": 3,\r\n  \"localId\": 3,\r\n  \"baseName\": \"Water\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3003\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Water\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Earth: Resistance = {\r\n  \"element\": 7,\r\n  \"category\": 3,\r\n  \"localId\": 4,\r\n  \"baseName\": \"Earth\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3004\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Earth\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Air: Resistance = {\r\n  \"element\": 8,\r\n  \"category\": 3,\r\n  \"localId\": 5,\r\n  \"baseName\": \"Air\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3005\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Air\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Dark: Resistance = {\r\n  \"element\": 9,\r\n  \"category\": 3,\r\n  \"localId\": 6,\r\n  \"baseName\": \"Dark\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3006\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Dark\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Light: Resistance = {\r\n  \"element\": 10,\r\n  \"category\": 3,\r\n  \"localId\": 7,\r\n  \"baseName\": \"Light\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3007\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Light\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Damage: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 20,\r\n  \"baseName\": \"Damage\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3020\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Damage\",\r\n  \"enumValueConstraint\": null\r\n};",
           "IndirectDamage: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 21,\r\n  \"baseName\": \"IndirectDamage\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3021\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.IndirectDamage\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Heal: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 22,\r\n  \"baseName\": \"Heal\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3022\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Heal\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Melee: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 23,\r\n  \"baseName\": \"Melee\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 5,\r\n      \"groupType\": 0,\r\n      \"children\": []\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3023\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Melee\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Distance: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 24,\r\n  \"baseName\": \"Distance\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 2,\r\n      \"groupType\": 0,\r\n      \"children\": []\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3024\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Distance\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Melee: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 23,\r\n  \"baseName\": \"Melee\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 5\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3023\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Melee\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Distance: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 24,\r\n  \"baseName\": \"Distance\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 2\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3024\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Distance\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Trap: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 25,\r\n  \"baseName\": \"Trap\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3025\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Trap\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Glyph: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 26,\r\n  \"baseName\": \"Glyph\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3026\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Glyph\",\r\n  \"enumValueConstraint\": null\r\n};"
         ],
@@ -7053,6 +7195,58 @@
         },
         "additionalProperties": false
       },
+      "SpellModelAggregation": {
+        "type": "object",
+        "properties": {
+          "entityUid": {
+            "type": "string"
+          },
+          "modelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "nameId": {
+            "type": "string"
+          },
+          "descriptionId": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string",
+            "nullable": true
+          },
+          "skins": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ISpellSkin"
+            },
+            "nullable": true
+          },
+          "stats": {
+            "$ref": "#/components/schemas/SpellModelStats"
+          },
+          "sourceCondition": {
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "targetFilter": {
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "effects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EffectPermanentAggregation"
+            },
+            "nullable": true
+          },
+          "rangeZoneMin": {
+            "$ref": "#/components/schemas/IZone"
+          },
+          "rangeZoneMax": {
+            "$ref": "#/components/schemas/IZone"
+          }
+        },
+        "additionalProperties": false
+      },
       "SpellModelCondition": {
         "type": "object",
         "properties": {
@@ -7065,16 +7259,6 @@
           },
           "comparator": {
             "$ref": "#/components/schemas/ConditionComparatorType"
-          },
-          "groupType": {
-            "$ref": "#/components/schemas/ConditionGroupType"
-          },
-          "children": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ICondition"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": {
@@ -7241,16 +7425,6 @@
           },
           "comparator": {
             "$ref": "#/components/schemas/ConditionComparatorType"
-          },
-          "groupType": {
-            "$ref": "#/components/schemas/ConditionGroupType"
-          },
-          "children": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ICondition"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": {
@@ -7579,16 +7753,6 @@
           },
           "comparator": {
             "$ref": "#/components/schemas/ConditionComparatorType"
-          },
-          "groupType": {
-            "$ref": "#/components/schemas/ConditionGroupType"
-          },
-          "children": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ICondition"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": {
@@ -7637,16 +7801,6 @@
           },
           "comparator": {
             "$ref": "#/components/schemas/ConditionComparatorType"
-          },
-          "groupType": {
-            "$ref": "#/components/schemas/ConditionGroupType"
-          },
-          "children": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ICondition"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": {
@@ -7664,16 +7818,6 @@
           },
           "comparator": {
             "$ref": "#/components/schemas/ConditionComparatorType"
-          },
-          "groupType": {
-            "$ref": "#/components/schemas/ConditionGroupType"
-          },
-          "children": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ICondition"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": {
@@ -7874,6 +8018,25 @@
         "type": "object",
         "additionalProperties": false
       },
+      "TextEntityAggregation": {
+        "type": "object",
+        "properties": {
+          "entityUid": {
+            "type": "string"
+          },
+          "modelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "nameId": {
+            "$ref": "#/components/schemas/IStringEntity"
+          },
+          "descriptionId": {
+            "$ref": "#/components/schemas/IStringEntity"
+          }
+        },
+        "additionalProperties": false
+      },
       "TowerDirectionType": {
         "enum": [
           "up = 0",
@@ -7927,9 +8090,6 @@
       "TriggerModel": {
         "type": "object",
         "properties": {
-          "triggerType": {
-            "$ref": "#/components/schemas/TriggerType"
-          },
           "triggerOrderType": {
             "$ref": "#/components/schemas/TriggerOrderType"
           },
@@ -7941,6 +8101,9 @@
           },
           "holderCondition": {
             "$ref": "#/components/schemas/ICondition"
+          },
+          "schema": {
+            "$ref": "#/components/schemas/ITriggerSchema"
           }
         },
         "additionalProperties": false
@@ -7955,22 +8118,18 @@
         "format": ""
       },
       "TriggerType": {
-        "enum": [
-          "OnFightStart = 0",
-          "OnFightEnd = 1",
-          "OnRoundStart = 2",
-          "OnRoundEnd = 3",
-          "OnTurnStart = 4",
-          "OnTurnEnd = 5",
-          "OnTurnPass = 6",
-          "OnCreatureSpellCast = 7",
-          "OnEffect = 8",
-          "OnCreatureWalkEnterCell = 9",
-          "OnCreatureWalkExitCell = 10",
-          "OnCreatureWalkStopCell = 11"
-        ],
-        "type": "string",
-        "format": ""
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "schemaType": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "UnspawnSummon": {
         "type": "object",

@@ -1,4 +1,3 @@
-using Intellenum;
 using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.shared.conditions;
@@ -75,7 +74,7 @@ namespace souchy.celebi.eevee.face.shared.conditions
 
         private static List<ConditionType> _values = new();
         static ConditionType() => _values.AddRange(StaticEnumUtils.findValues<ConditionType>());
-        public static IEnumerable<ConditionType> values() => _values.ToArray();
+        public static ConditionType[] values() => _values.ToArray();
         public static ConditionType get(IID id) => _values.Find(v => v.id == id);
     }
 

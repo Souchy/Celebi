@@ -8,6 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
+using Microsoft.VisualStudio.TestPlatform.TestHost;
+using souchy.celebi.spark;
 
 namespace EeveeUnitTests.souchy.celebi.eevee.unittest.setup
 {
@@ -15,11 +18,32 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest.setup
     {
         public void makeServices()
         {
+
+            //var configuration = new ConfigurationBuilder()
+            //    .AddUserSecrets<Settings>()
+            //    .Build();
+            //ConfigurationManager manager;
+            //ConfigurationManager.AppSettings[""];
+            //var configuration = new ConfigurationBuilder()
+            //    .AddUserSecrets<HiromiContext>() // This should be the name of the class that inherits from DbContext.
+            //    //.AddUserSecrets(Assembly.GetEntryAssembly()) You can also do this if your database context and database design factory classes are in the same project, which should be the case 99% of the time
+            //    .Build();
+            var environment = "development";
+            IConfiguration configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .AddJsonFile($"appsettings.{environment}.json")
+                .AddUserSecrets<Spark>()
+                .Build();
+
+            var settings = configuration.GetSection(nameof(MongoSettings)).Get<MongoSettings>();
+            Console.WriteLine($"Services: config: {configuration}");
+
             var services = new ServiceCollection();
-            configureServices(services, null);
+            configureBuilder(services, configuration);
+            configureServices(services, configuration);
         }
 
-        public void configureBuilder(IServiceCollection services, ConfigurationManager configuration)
+        public void configureBuilder(IServiceCollection services, IConfiguration configuration)
         {
             services.AddIdentityMongoDbProvider<Account, AccountRole>(identity =>
             {
@@ -33,10 +57,10 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest.setup
                 mongo =>
                 {
                     var settings = configuration.GetSection(nameof(MongoSettings)).Get<MongoSettings>();
-                    Console.WriteLine($"Mongo settings2: {settings}: {{ {settings?.ConnectionString}, {settings?.Federation} }}");
+                    Console.WriteLine($"[UTest] Mongo settings2: {settings}: {{ {settings?.ConnectionString}, {settings?.Federation} }}");
                     if (settings == null) // for swashbuckle 'dotnet swagger' generator. secrets aren't included at that moment
                     {
-                        Console.WriteLine("Warning: No MongoSettings to configure services.AddIdentityMongoDbProvider.");
+                        Console.WriteLine("[UTest] Warning: No MongoSettings to configure services.AddIdentityMongoDbProvider.");
                         return;
                     }
                     mongo.ConnectionString = settings.ConnectionString + "/" + settings.MetaDB;
@@ -44,7 +68,7 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest.setup
                 }
             );
         }
-        public void configureServices(IServiceCollection services, ConfigurationManager configuration)
+        public void configureServices(IServiceCollection services, IConfiguration configuration)
         {
             // Mongo    
             services.Configure<MongoSettings>(configuration.GetSection(nameof(MongoSettings))); // relates to appsettings.json
