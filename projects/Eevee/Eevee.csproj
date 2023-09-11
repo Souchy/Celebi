@@ -39,7 +39,6 @@
     <Folder Include="souchy.celebi.eevee\face\shared\conditions\value\" />
     <Folder Include="souchy.celebi.eevee\impl\net\amethyst\" />
     <Folder Include="souchy.celebi.eevee\impl\shared\conditions\value\" />
-    <Folder Include="souchy.celebi.eevee\neweffects\impl\scripts\move\translate\" />
     <Folder Include="souchy.celebi.eevee\neweffects\impl\scripts\spell\" />
     <Folder Include="souchy.celebi.eevee\neweffects\impl\scripts\status\" />
     <Folder Include="souchy.celebi.eevee\neweffects\impl\scripts\special\" />

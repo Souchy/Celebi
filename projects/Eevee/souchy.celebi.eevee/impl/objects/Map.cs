@@ -26,10 +26,15 @@ namespace souchy.celebi.eevee.impl.objects
         public ICell[] cells { get; set; }
 
         private Map() { }
-        public static IMap Create() => new Map()
+        public static IMap Create()
         {
-            entityUid = Eevee.RegisterIIDTemporary(),
-        };
+            var map = new Map()
+            {
+                entityUid = Eevee.RegisterIIDTemporary(),
+            };
+            Eevee.models.maps.Add(map.entityUid, map);
+            return map;
+        }
 
         public void Dispose()
         {

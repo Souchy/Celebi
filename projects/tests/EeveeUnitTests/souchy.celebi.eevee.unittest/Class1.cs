@@ -1,7 +1,9 @@
 ﻿using Microsoft.Data.SqlClient;
 using MongoDB.Bson;
+using souchy.celebi.eevee;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.models;
+using souchy.celebi.eevee.neweffects.face;
 using souchy.celebi.spark.services;
 using System;
 using System.Collections.Generic;
@@ -21,16 +23,21 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest
         //private MongoModelsDbService db;
         private readonly CollectionService<ICreatureModel> _creatureModels;
         private readonly CollectionService<IStats> _stats;
+        private readonly CollectionService<IEffect> _effects;
         public List<ICreatureModel> creatureModels { get; set; } = new List<ICreatureModel>();
         public DatabaseFixture(MongoModelsDbService db)
         {
             _creatureModels = db.GetMongoService<ICreatureModel>();
             _stats = db.GetMongoService<IStats>();
+            _effects = db.GetMongoService<IEffect>();
         }
 
         public async Task InitializeAsync()
         {
             this.creatureModels = await _creatureModels.GetAsync();
+            await _effects.GetAsync();
+            await _stats.GetAsync();
+            Eevee.models.creatureModels.Add(creatureModels.First().entityUid, creatureModels.First());
         }
 
         public Task DisposeAsync() => Task.CompletedTask;
@@ -77,6 +84,7 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest
         public void test1()
         {
             this.output.WriteLine($"dic count: {fix.db.creatureModels.Count()} : {string.Join(", ", fix.db.creatureModels.Select(k => k.entityUid.ToString()))}");
+            this.output.WriteLine($"eevee count: {Eevee.models.creatureModels.Values.Count()} : {string.Join(", ", Eevee.models.creatureModels.Keys)}");
             Assert.True(true);
         }
 

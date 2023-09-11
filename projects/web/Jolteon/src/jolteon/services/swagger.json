@@ -4943,6 +4943,17 @@
         },
         "additionalProperties": false
       },
+      "DashToScript": {
+        "type": "object",
+        "properties": {
+          "schemaType": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
       "DeleteResult": {
         "type": "object",
         "properties": {
@@ -6607,6 +6618,17 @@
           },
           "moveTargetZone": {
             "$ref": "#/components/schemas/IZone"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PushByScript": {
+        "type": "object",
+        "properties": {
+          "schemaType": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
           }
         },
         "additionalProperties": false

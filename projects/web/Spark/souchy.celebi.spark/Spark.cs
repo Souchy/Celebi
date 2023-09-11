@@ -32,6 +32,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using souchy.celebi.eevee.impl.util.math;
 using System.Diagnostics;
+using souchy.celebi.eevee.neweffects.impl.schemas;
 
 namespace souchy.celebi.spark
 {
@@ -411,6 +412,7 @@ namespace souchy.celebi.spark
             BsonClassMap.RegisterClassMap<EntityDictionary<CharacteristicId, MathEquation>>();
             BsonClassMap.RegisterClassMap<Dictionary<CharacteristicId, IStat>>();
             BsonClassMap.RegisterClassMap<Dictionary<CharacteristicId, MathEquation>>();
+            BsonClassMap.RegisterClassMap<EntityList<ITriggerModel>>();
 
             BsonClassMap.RegisterClassMap<Value<ZoneType>>();
             BsonClassMap.RegisterClassMap<Value<ElementType>>();
@@ -428,6 +430,9 @@ namespace souchy.celebi.spark
                 BsonClassMap.RegisterClassMap(m);
                 m.SetIgnoreExtraElements(true);
             }
+
+            // Why is this missing?
+            //BsonClassMap.RegisterClassMap<AddStats>();
         }
 
     }

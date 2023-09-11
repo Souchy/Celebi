@@ -29,7 +29,11 @@ namespace souchy.celebi.eevee.impl.objects
 
         private Cell() { }
         private Cell(ObjectId id) => this.entityUid = id;
-        public static ICell Create() => new Cell(Eevee.RegisterIIDTemporary());
+        public static ICell Create()
+        {
+            var cell = new Cell(Eevee.RegisterIIDTemporary());
+            return cell;
+        }
 
         public void Dispose()
         {

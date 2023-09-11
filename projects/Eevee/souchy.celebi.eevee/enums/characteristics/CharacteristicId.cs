@@ -11,7 +11,13 @@ namespace souchy.celebi.eevee.enums.characteristics
     [TypeConverter(typeof(CharacIdTypeConverter))]
     public readonly record struct CharacteristicId(int ID)
     {
+        public static readonly CharacteristicId Default = new CharacteristicId(0);
+
         public static implicit operator int(CharacteristicId v) => v.ID;
+        internal CharacteristicId(int category, int localId) : this(category * 1000 + localId)
+        {
+
+        }
         public CharacteristicCategory GetCategory()
         {
             int cat = (int) Math.Floor(this.ID / 1000d);

@@ -2,6 +2,7 @@
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.impl.util;
 
 namespace souchy.celebi.eevee.impl.objects
 {
@@ -11,7 +12,7 @@ namespace souchy.celebi.eevee.impl.objects
         public ObjectId entityUid { get; set; }
         public ObjectId fightUid { get; set; }
         public ITeam team { get; set; }
-        public IEntityList<ObjectId> creatures { get; set; }
+        public IEntityList<ObjectId> creatures { get; set; } = new EntitySet<ObjectId>();
 
         private Player() { }
         private Player(ObjectId fightId, ObjectId id)

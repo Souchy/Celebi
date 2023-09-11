@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.DataProtection.KeyManagement;
+using Microsoft.CodeAnalysis;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Options;
 using Newtonsoft.Json;
 using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.enums.characteristics;
+using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.util;
@@ -41,8 +43,21 @@ namespace souchy.celebi.eevee.impl.stats
 
         public void Add(IStat value) => Add(value.statId, value);
         public void Set(IStat value) => Set(value.statId, value);
-        public T Get<T>(CharacteristicType stat) where T : IStat => Get<T>(stat.ID);
-        public T Get<T>(CharacteristicId statId) where T : IStat => (T) Get(statId);
+        public T? Get<T>(CharacteristicType stat) where T : IStat => stat != null ? Get<T>(stat.ID) : createDefaultStat<T>(CharacteristicId.Default);
+        public T Get<T>(CharacteristicId statId) where T : IStat => (T) Get(statId) ?? createDefaultStat<T>(statId);
+
+        private T createDefaultStat<T>(CharacteristicId statId) where T : IStat
+        {
+            if(typeof(T) == typeof(IStatSimple))
+            {
+                return (T) (IStat) StatSimple.Create(statId, 0);
+            }
+            if (typeof(T) == typeof(IStatBool))
+            {
+                return (T) (IStat) StatBool.Create(statId, false);
+            }
+            throw new NotImplementedException();
+        }
 
         public void applyGrowth(int currentTurn)
         {
@@ -62,22 +77,24 @@ namespace souchy.celebi.eevee.impl.stats
             }
         }
 
-        //IEntityDictionary<CharacteristicId, IStat>
         public IStats copy(bool anonymous = false)
         {
-            var c = new Stats();
-            return copyTo(c, anonymous);
+            if (anonymous)
+                return copyTo(new Stats(), anonymous);
+            else
+                return copyTo(Stats.Create(), anonymous);
         }
 
         public IStats copyToFight(ObjectId fightUid, IStats target = null)
         {
-            var copy = target ?? this.copy(true);
+            var copy = target != null ? copyTo(target) : this.copy(false);
+            // add stats to fight
             Eevee.fights.Get(fightUid).stats.Add(copy.entityUid, copy);
             return copy;
         }
         public IStats copyTo(IStats stats, bool anonymous = false)
         {
-            foreach (var p in Pairs)
+            foreach (var p in Pairs.Where(p => p.Value != null))
                 stats.@base.Set(p.Key, p.Value.copy(anonymous));
             foreach (var p in growth.Pairs)
                 stats.growth.Set(p.Key, p.Value.copy());

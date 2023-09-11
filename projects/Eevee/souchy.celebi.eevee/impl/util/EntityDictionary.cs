@@ -54,7 +54,7 @@ namespace souchy.celebi.eevee.impl.util
         public IEntityDictionary<TKey, TValue> Set(TKey key, TValue value)
         {
             dic[key] = value;
-            this.GetEntityBus().publish(nameof(Set), this, key, value);
+            this.GetEntityBus().publish(nameof(Set), this, key, value); // might need to publish the previous/old value as well
             return this;
         }
 

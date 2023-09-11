@@ -60,7 +60,7 @@ namespace souchy.celebi.eevee.enums
             return t;
         }
     }
-    public static class ZoneTypeExtentions
+    public static class ZoneTypeExtensions
     {
         public static T GetSize<T>(this IZone zone) where T : IZoneSize
         {

@@ -51,6 +51,8 @@ namespace souchy.celebi.eevee.face.objects
         /// Useful to reverse caster/target for example?
         /// </summary>
         public IAction copy();
+        public ICreature getCaster() => fight.creatures.Get(caster);
+        public ICell getCell() => fight.cells.Get(targetCell);
     }
     /// <summary>
     /// <inheritdoc/>
@@ -111,6 +113,17 @@ namespace souchy.celebi.eevee.face.objects
     public interface IActionSpell : IAction
     {
         public ObjectId spell { get; set; }
+    }
+    public class ActionSpell : BaseAction, IActionSpell
+    {
+        public ObjectId spell { get; set; }
+
+        protected override IAction copyImplementation()
+        {
+            var copy = new ActionSpell();
+            copy.spell = spell;
+            return copy;
+        }
     }
     public interface IActionMove : IAction
     {

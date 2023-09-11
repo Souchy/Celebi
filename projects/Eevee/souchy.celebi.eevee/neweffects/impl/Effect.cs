@@ -1,4 +1,6 @@
-﻿using souchy.celebi.eevee.face.entity;
+﻿using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.face.entity;
+using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.shared.triggers;
@@ -38,14 +40,33 @@ namespace souchy.celebi.eevee.neweffects.impl
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IBoardEntity> GetPossibleBoardTargets(IFight fight, IPosition targetCell)
+        /// <summary>
+        /// TODO use effect model to get the boardTargetType etc
+        /// </summary>
+        public IEnumerable<IBoardEntity> GetPossibleBoardTargets(IAction action, IPosition targetCell)
         {
-            var model = ((IEffect) this).GetModel();
-            var boardTargetType = model.BoardTargetType;
+            //var model = ((IEffect) this).GetModel();
+            //var boardTargetType = model.BoardTargetType;
 
             // use board cells + effect acquisitionZone
 
-            throw new NotImplementedException();
+            var points = TargetAcquisitionZone.GeneratePoints();
+            points.ForEach(p => p.add(targetCell));
+            var cells = points.Select(p => action.fight.cells.Values.First(c => c.position.equals(p))).ToList();
+
+            List<IBoardEntity> result;
+            if(true) // model.BoardTargetType == creatures
+            {
+                result = cells.Select(cell => action.fight.creatures.Values.First(crea => crea.position.equals(cell.position))).ToList<IBoardEntity>();
+                // TODO conditions here or somewhere else?
+                //      i think here but there was a different plan before, hence the "possible" targets name
+                // result = result.Where(crea => TargetFilter.check(action, null, action.getCaster(), crea));
+            } else
+            {
+                result = cells.ToList<IBoardEntity>();
+            }
+
+            return result;
         }
 
         public void Dispose()

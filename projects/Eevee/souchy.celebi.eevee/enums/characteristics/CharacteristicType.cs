@@ -21,7 +21,7 @@ namespace souchy.celebi.eevee.enums.characteristics
     public record CharacteristicType(CharacteristicCategory Category, int LocalId, string BaseName, object defaultValue = null, params ICondition[] conditions)
     {
         public StatValueType StatValueType { get; init; }
-        public CharacteristicId ID { get; init; } = new CharacteristicId(((int) Category) * 1000 + LocalId);
+        public CharacteristicId ID { get; init; } = new CharacteristicId((int) Category, LocalId);
         public IID nameModelUid { get; set; } = (IID) string.Join(".", nameof(CharacteristicType), Enum.GetName(Category), BaseName);
         /// <summary>
         /// If specified, the value can only be chosen within the enum's values

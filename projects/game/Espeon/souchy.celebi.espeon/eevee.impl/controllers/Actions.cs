@@ -38,7 +38,7 @@ namespace souchy.celebi.espeon.eevee.impl.controllers
             IPosition targetPosition = action.fight.cells.Get(action.targetCell).position;
             var sourceStats = sourceCrea.GetTotalStats(action); //, new TriggerEvent(TriggerType.CompileStats, TriggerOrderType.Before));
 
-            var spellStats = spell.GetStats().AddAll(spellModel.GetStats());
+            var spellStats = spell.GetStats(); //.AddAll(spellModel.GetStats());
             var costs = Resource.values
                 .Where(p => p.Value.resProp == ResourceProperty.Current)
                 .Select(p =>

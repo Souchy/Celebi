@@ -3,6 +3,7 @@ using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.objects.statuses;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.objects;
+using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.neweffects.face;
 
 namespace souchy.celebi.eevee.face.objects.controllers
@@ -46,9 +47,10 @@ namespace souchy.celebi.eevee.face.objects.controllers
             if(this.timeline.creatureIds.Contains(entityId)) { // this.board.creatureIds
                 return creatures.Get(entityId);
             }
-            if(this.board.cells.Values.Contains(entityId)) {
-                return cells.Get(entityId);
-            }
+            return cells.Get(entityId);
+            //if(this/*.board*/.cells.Values.Contains(entityId)) {
+            //    return cells.Get(entityId);
+            //}
             return null;
         }
 

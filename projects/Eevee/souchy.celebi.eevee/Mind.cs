@@ -28,13 +28,13 @@ namespace souchy.celebi.eevee
             var effectsWithTargets = container.GetEffects()
                 .Select(e => (
                     effect: e,
-                    targets: e.GetPossibleBoardTargets(action.fight, targetPosition)
+                    targets: e.GetPossibleBoardTargets(action, targetPosition)
                 ));
 
 
             var effectInstances = container.GetEffects()
                 .Select(e =>
-                    new EffectInstance(null, action.caster, e.GetPossibleBoardTargets(action.fight, targetPosition))
+                    new EffectInstance(null, action.caster, e.GetPossibleBoardTargets(action, targetPosition))
                 );
 
 
@@ -62,7 +62,7 @@ namespace souchy.celebi.eevee
             // apply to each target
             foreach (var target in parentAction.boardTargets)
             {
-                var currentTargetCell = parentAction.fight.board.GetCells().First(c => c.position == target.position);
+                var currentTargetCell = parentAction.fight.board.GetCells().First(c => c.position.equals(target.position));
 
                 //TODO: make a copy of the effect
                 SubActionEffectTarget subActionEffect = new()
@@ -155,7 +155,7 @@ namespace souchy.celebi.eevee
                 foreach (IEffect triggeredEffect in triggeredEffects)
                 {
                     IPosition targetPosition = parentAction.fight.cells.Get(parentAction.targetCell).position;
-                    var targets = triggeredEffect.GetPossibleBoardTargets(parentAction.fight, targetPosition);
+                    var targets = triggeredEffect.GetPossibleBoardTargets(parentAction, targetPosition);
                     var sub = new SubActionEffect()
                     {
                         fight = parentAction.fight,

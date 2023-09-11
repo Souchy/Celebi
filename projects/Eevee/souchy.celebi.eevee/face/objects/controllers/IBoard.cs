@@ -15,7 +15,7 @@ namespace souchy.celebi.eevee.face.objects.controllers
         /// <summary>
         /// List of cells on the board
         /// </summary>
-        public IEntityList<ObjectId> cells { get; init; }
+        //public IEntityList<ObjectId> cells { get; init; }
 
 
         // Board will be just a normal data object like the others.
@@ -27,7 +27,7 @@ namespace souchy.celebi.eevee.face.objects.controllers
         //public bool hasCreature(IPosition pos);
 
         public IEnumerable<ICreature> GetCreatures() => this.GetFight().timeline.getCreatures(); //creatureIds.Values.Select(crea => GetFight().creatures.Get(crea));
-        public IEnumerable<ICell> GetCells() => cells.Values.Select(cell => GetFight().cells.Get(cell));
+        public IEnumerable<ICell> GetCells() => GetFight().cells.Values; //cells.Values.Select(cell => GetFight().cells.Get(cell));
 
         public IEnumerable<ICreature> GetCreaturesOnCell(ObjectId targetCell)
         {

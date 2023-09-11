@@ -13,6 +13,7 @@ namespace souchy.celebi.eevee.impl.objects.zones
                 new Position()
             };
         }
+        public static Points pointRing(IZone zone) => point(zone);
 
         #region lines
         public static Points line(IZone zone)

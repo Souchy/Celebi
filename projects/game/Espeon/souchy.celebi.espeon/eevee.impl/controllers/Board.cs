@@ -17,8 +17,8 @@ namespace souchy.celebi.espeon.eevee.impl.controllers
         public ObjectId entityUid { get; set; } = Eevee.RegisterIIDTemporary();
         public ObjectId fightUid { get; set; }
 
-        public IEntityList<ObjectId> creatureIds { get; init; } = new EntityList<ObjectId>();
-        public IEntityList<ObjectId> cells { get; init; } = new EntityList<ObjectId>();
+        //public IEntityList<ObjectId> creatureIds { get; init; } = new EntityList<ObjectId>();
+        //public IEntityList<ObjectId> cells { get; init; } = new EntityList<ObjectId>();
 
         public static IBoard Create(ObjectId fightid)
         {
@@ -39,8 +39,8 @@ namespace souchy.celebi.espeon.eevee.impl.controllers
         //    //this.instances = Scopes.GetRequiredScoped<IFight>(fightUid);
         //}
 
-        public ICell GetCell(IPosition pos) => this.cells.Values
-            .Select(c => this.GetFight().cells.Get(c))
+        public ICell GetCell(IPosition pos) => ((IBoard)this).GetCells()
+            //.Select(c => this.GetFight().cells.Get(c))
             .First(c => c.position == pos);
 
         public void Dispose()

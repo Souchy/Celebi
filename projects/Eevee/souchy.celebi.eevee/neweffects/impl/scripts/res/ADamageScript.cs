@@ -39,10 +39,14 @@ namespace souchy.celebi.eevee.neweffects.impl.effects.res
             var startShield = shield.value;
             shield.value -= dmg;
             shield.value = Math.Max(0, shield.value);
-            remainingDmgAfterShield = startShield - shield.value;
+            remainingDmgAfterShield -= startShield - shield.value;
 
             var life = targetStats.Get<IStatSimple>(Resource.Life);
             life.value -= remainingDmgAfterShield;
+
+            // update actual stats
+            creaTarget.GetNaturalStats().Get<IStatSimple>(Resource.Shield).value = shield.value;
+            creaTarget.GetNaturalStats().Get<IStatSimple>(Resource.Life).value = life.value;
 
             //var compiled = new EffectPreviewDamage(damage);
             //return compiled;

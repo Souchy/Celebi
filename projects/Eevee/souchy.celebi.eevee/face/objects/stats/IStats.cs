@@ -18,6 +18,10 @@ namespace souchy.celebi.eevee.face.objects.stats
         //[JsonConverter(typeof(IIDJsonConverter<StringIID>))]
         public EntityDictionary<CharacteristicId, MathEquation> growth { get; set; }
 
+        // todo?
+        //public void applyGrowth();
+        //public void applyRegen();
+
         public void Add(IStat value);
         public void Set(IStat value);
         public T Get<T>(CharacteristicType stat) where T : IStat;
