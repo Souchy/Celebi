@@ -18,9 +18,10 @@ namespace souchy.celebi.eevee.neweffects.impl.util
             var variance = props.percentVariance; // TODO
 
             // apply affinities + resistances
-            int affEle = sourceStats.Get<IStatSimple>(element.GetAffinity())?.value ?? 0;
-            int affDmg = sourceStats.Get<IStatSimple>(Affinity.Damage)?.value ?? 0;
-            int affPen = sourceStats.Get<IStatSimple>(Affinity.PenetrationPercent)?.value ?? 0;
+            int affEle = sourceStats.Get<IStatSimple>(element.GetAffinity()).value;
+            int affDmg = sourceStats.Get<IStatSimple>(Affinity.Damage).value;
+            int affPen = sourceStats.Get<IStatSimple>(Affinity.PenetrationPercent).value;
+            //var dm = sourceStats.GetValue<IStatSimple, int>(Affinity.Damage, 0);
 
             // TODO calculate distance affinities for damage
             //var affDist = targetStats.Get<IStatSimple>(Affinity.Distance)?.value;
@@ -28,8 +29,8 @@ namespace souchy.celebi.eevee.neweffects.impl.util
             //var dist = caster.position.sub(target.position).distance();
             int affdist = 0; // dist > 1 ? affDist : affMelee
 
-            int res = targetStats.Get<IStatSimple>(element.GetResistance())?.value ?? 0;
-            int resg = targetStats.Get<IStatSimple>(Resistance.Damage)?.value ?? 0;
+            int res = targetStats.Get<IStatSimple>(element.GetResistance()).value;
+            int resg = targetStats.Get<IStatSimple>(Resistance.Damage).value;
 
             // TODO damage calculation distance resistance
             //int resdist = targetStats.Get<IStatSimple>(Resistance.Distance).value + targetStats.Get<IStatSimple>(Resistance.Melee).value;

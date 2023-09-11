@@ -1,8 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.CodeAnalysis;
+using Newtonsoft.Json;
 using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.face.values;
 using souchy.celebi.eevee.impl.stats;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.impl.util.math;
@@ -24,7 +26,13 @@ namespace souchy.celebi.eevee.face.objects.stats
 
         public void Add(IStat value);
         public void Set(IStat value);
-        public T Get<T>(CharacteristicType stat) where T : IStat;
+        /// <summary>
+        /// Returns null only if the CharacteristicType is null. <br></br>
+        /// Returns a new default stat if it is not present in the dictionary (up to you to Set it after)
+        /// </summary>
+        public T? Get<T>(CharacteristicType stat, object defaultValue = default) where T : IStat;
+        public T Get<T>(CharacteristicId characId, object defaultValue = default) where T : IStat;
+        public V GetValue<T, V>(CharacteristicType stat, V defaultValue = default) where T : IValue<V>;
 
         /// <summary>
         /// If anonymous: create an instance with new() without ObjectId and bus

@@ -26,11 +26,16 @@ namespace souchy.celebi.eevee.enums.characteristics.other
                 var current = Get<IStatSimple>(Resource.getKey(res, ResourceProperty.Current));
                 var max = Get<IStatSimple>(Resource.getKey(res, ResourceProperty.Max));
                 var initial = Get<IStatSimple>(Resource.getKey(res, ResourceProperty.InitialMax));
+                // some resources (shield) dont have a max etc
+                if (max == null || initial == null) 
+                    continue;
+                // set current/max
                 current.value = initial.value;
                 max.value = initial.value;
-                if(current.statId != CharacteristicId.Default) 
+                // 
+                //if(current.statId != CharacteristicId.Default)  // we dont do default char anymore because that means the char doesnt exist
                     this.Set(current);
-                if (max.statId != CharacteristicId.Default)
+                //if (max.statId != CharacteristicId.Default)
                     this.Set(max);
             }
         }
@@ -41,29 +46,27 @@ namespace souchy.celebi.eevee.enums.characteristics.other
                 var current = Get<IStatSimple>(Resource.getKey(res, ResourceProperty.Current));
                 var max = Get<IStatSimple>(Resource.getKey(res, ResourceProperty.Max));
                 var regen = Get<IStatSimple>(Resource.getKey(res, ResourceProperty.Regen));
-                if(regen.value == -1)
+
+                if (regen == null)
+                    continue;
+
+                if (regen.value == -1)
                 {
-                    current.value = max.value;
-                    //if (current.statId != CharacteristicId.Default)
-                    //    Set(current);
+                    if(max != null) 
+                        current.value = max.value;
                     continue;
                 }
                 if(regen.value == 0)
                 {
                     continue;
                 }
-                //if(regen.value == 1)
-                //{
                 current.value += regen.value;
-                if (current.value > max.value)
-                    current.value = max.value;
-                //if (current.statId != CharacteristicId.Default)
-                //    Set(current);
+
+                if(max != null)
+                    if (current.value > max.value)
+                        current.value = max.value;
+
                 continue;
-                //}
-                // else, 1 fois par x tours ou x = regen.value 
-                // nan jpense pas, jpense c'est juste la valeur à regen directement.
-                // par contre il faudrait un regen en % aussi
             }
         }
     }

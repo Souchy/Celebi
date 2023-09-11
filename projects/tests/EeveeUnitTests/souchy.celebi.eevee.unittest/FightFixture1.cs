@@ -50,7 +50,7 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest
                 return;
             //Assert.NotEmpty(creatureModels);
 
-            var nc = fight.settings.numberOfcreaturesOnBoardPerTeam;
+            var nc = fight.settings.numberOfCreaturesOnBoardPerTeam;
 
             // Creatures + Cells for 2 teams
             for (int j = 0; j < fight.settings.numberOfTeams; j++)

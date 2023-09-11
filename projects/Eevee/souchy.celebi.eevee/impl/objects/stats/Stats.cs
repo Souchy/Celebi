@@ -43,18 +43,31 @@ namespace souchy.celebi.eevee.impl.stats
 
         public void Add(IStat value) => Add(value.statId, value);
         public void Set(IStat value) => Set(value.statId, value);
-        public T? Get<T>(CharacteristicType stat) where T : IStat => stat != null ? Get<T>(stat.ID) : createDefaultStat<T>(CharacteristicId.Default);
-        public T Get<T>(CharacteristicId statId) where T : IStat => (T) Get(statId) ?? createDefaultStat<T>(statId);
+        public T? Get<T>(CharacteristicType charac, object defaultValue = default) where T : IStat => charac != null ? Get<T>(charac.ID, defaultValue) : default; //charac != null ? Get<T>(charac.ID) : createDefaultStat<T>(CharacteristicId.Default);
+        public T Get<T>(CharacteristicId characId, object defaultValue = default) where T : IStat => (T) Get(characId) ?? createDefaultStat<T>(characId, defaultValue);
+        public T Get<T>(CharacteristicId characId) where T : IStat => (T) Get(characId);
 
-        private T createDefaultStat<T>(CharacteristicId statId) where T : IStat
+        public V GetValue<T, V>(CharacteristicType charac, V defaultValue = default) where T : IValue<V>
+        {
+            if(charac == null)
+            {
+                return defaultValue;
+            }
+            var stat = Get(charac.ID);
+            if(stat == null) 
+                return defaultValue;
+            return (V) stat.genericValue;
+        }
+
+        private T createDefaultStat<T>(CharacteristicId statId, object defaultValue = default) where T : IStat
         {
             if(typeof(T) == typeof(IStatSimple))
             {
-                return (T) (IStat) StatSimple.Create(statId, 0);
+                return (T) (IStat) StatSimple.Create(statId, (int) (defaultValue ?? 0));
             }
             if (typeof(T) == typeof(IStatBool))
             {
-                return (T) (IStat) StatBool.Create(statId, false);
+                return (T) (IStat) StatBool.Create(statId, (bool) (defaultValue ?? false));
             }
             throw new NotImplementedException();
         }
@@ -131,5 +144,6 @@ namespace souchy.celebi.eevee.impl.stats
             // on veut plutot insérer les 2 dictionnaires dedans (base, growth) 
             throw new NotImplementedException(); 
         }
+
     }
 }

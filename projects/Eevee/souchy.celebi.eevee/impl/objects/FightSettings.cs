@@ -31,7 +31,7 @@ namespace souchy.celebi.eevee.impl.objects
         public int maximumNumberOfTurns { get; set; } = 0;
         public int numberOfTeams { get; set; } = 2;
         public int numberOfCreaturesPerTeam { get; set; } = 5;
-        public int numberOfcreaturesOnBoardPerTeam { get; set; } = 3;
+        public int numberOfCreaturesOnBoardPerTeam { get; set; } = 3;
     }
 
     public enum FightPreparationType
