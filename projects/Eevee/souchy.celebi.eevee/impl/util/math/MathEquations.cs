@@ -33,6 +33,15 @@ namespace souchy.celebi.eevee.impl.util.math
         {
             return ((baseBool ? 1 : 0) + get(x)) >= 1;
         }
+        public MathEquation copy()
+        {
+            var copy = new MathEquation();
+            foreach(var func in functions)
+            {
+                copy.functions.Add(func.copy());   
+            }
+            return copy;
+        }
     }
 
     public class MathFunction
@@ -55,6 +64,14 @@ namespace souchy.celebi.eevee.impl.util.math
                 total += slopes[i] * Math.Pow(x, i);
             }
             return total;
+        }
+        public MathFunction copy()
+        {
+            var copy = new MathFunction();
+            copy.xFromIncluded = xFromIncluded;
+            copy.xToExcluded = xToExcluded;
+            slopes.CopyTo(copy.slopes, 0);
+            return copy;
         }
     }
 

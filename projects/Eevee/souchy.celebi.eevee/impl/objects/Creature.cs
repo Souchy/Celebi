@@ -15,7 +15,8 @@ using souchy.celebi.eevee.impl.util.math;
 using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using souchy.celebi.eevee.neweffects.impl.effects.creature;
+using souchy.celebi.eevee.neweffects.impl.scripts.creature;
+using souchy.celebi.eevee.neweffects.impl.schemas;
 using souchy.celebi.eevee.neweffects.face;
 
 namespace souchy.celebi.eevee.impl.objects
@@ -29,7 +30,7 @@ namespace souchy.celebi.eevee.impl.objects
 
         public ObjectId originalOwnerUid { get; set; }
         public ObjectId currentOwnerUid { get; set; }
-        public ObjectId summonerCreature { get; set; }
+        public ObjectId? summoner { get; set; }
         public IPosition position { get; init; } = new Position();
 
         public ObjectId statsId { get; set; }
@@ -40,11 +41,18 @@ namespace souchy.celebi.eevee.impl.objects
         private Creature() { }
         private Creature(ObjectId id, ObjectId fightId)
         {
-            entityUid = id;
+            this.entityUid = id;
             this.fightUid = fightId;
+            
         }
-        public static ICreature Create(ObjectId fightId) => new Creature(Eevee.RegisterIIDTemporary(), fightId);
+        public static ICreature Create(ObjectId fightId) { 
+            var crea = new Creature(Eevee.RegisterIIDTemporary(), fightId);
+            crea.GetFight().creatures.Add(crea.entityUid, crea);
+            return crea;
+        }
 
+        public bool isSummon() => this.summoner != null;
+        public ICreature? GetSummoner() => isSummon() ? null : this.GetFight().creatures.Get(this.summoner.Value);
         public IPlayer GetOriginalOwner() => this.GetFight().players.Get(originalOwnerUid);
         public IPlayer GetCurrentOwner() => this.GetFight().players.Get(currentOwnerUid);
         public IStats GetNaturalStats() => this.GetFight().stats.Get(statsId);

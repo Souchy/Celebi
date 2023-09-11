@@ -13,6 +13,19 @@ namespace souchy.celebi.eevee.impl.objects
     /// </summary>
     public class Team : ITeam
     {
+        public ObjectId entityUid { get; set; } = ObjectId.GenerateNewId();
         public string name { get; set; }
+        /// <summary>
+        /// WIP to think about.
+        /// Not sure, maybe instead have alliedPlayers in the Player object.
+        /// I think 1 team already refers to multiple players.
+        /// </summary>
+        //public List<ObjectId> alliedTeams { get; set; } = new();
+
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

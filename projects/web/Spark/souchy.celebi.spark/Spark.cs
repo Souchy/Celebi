@@ -30,6 +30,9 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using souchy.celebi.eevee.impl.util.math;
+using System.Diagnostics;
+using souchy.celebi.eevee.neweffects.impl.schemas;
 
 namespace souchy.celebi.spark
 {
@@ -60,8 +63,8 @@ namespace souchy.celebi.spark
 
             var services = builder.Services;
             var configuration = builder.Configuration;
-            // Register types
-            configureMongo();
+            // Configure mongo types, services and connection
+            configureMongo(services, configuration);
             // services
             configureBuilder(services, configuration);
             // App
@@ -116,28 +119,6 @@ namespace souchy.celebi.spark
                 );
             });
 
-            services.AddIdentityMongoDbProvider<Account, AccountRole>(identity =>
-                {
-                    //identity.coo
-                    identity.Password.RequiredLength = 8;
-                    identity.Password.RequireNonAlphanumeric = true;
-                    identity.User.RequireUniqueEmail = true;
-                    //identity.SignIn.RequireConfirmedEmail = true;
-                    //identity.User.AllowedUserNameCharacters= new[] {}
-                },
-                mongo =>
-                {
-                    var settings = configuration.GetSection(nameof(MongoSettings)).Get<MongoSettings>();
-                    Console.WriteLine($"Mongo settings2: {settings}: {{ {settings?.ConnectionString}, {settings?.Federation} }}");
-                    if (settings == null) // for swashbuckle 'dotnet swagger' generator. secrets aren't included at that moment
-                    {
-                        Console.WriteLine("Warning: No MongoSettings to configure services.AddIdentityMongoDbProvider.");
-                        return;
-                    }
-                    mongo.ConnectionString = settings.ConnectionString + "/" + settings.MetaDB; 
-                    mongo.UsersCollection = nameof(Account);
-                }
-            );
             services.ConfigureApplicationCookie(options =>
             {
                 var settings = configuration.GetSection(nameof(JwtSettings)).Get<JwtSettings>()!;
@@ -178,7 +159,6 @@ namespace souchy.celebi.spark
                     }
                 };
             });
-
         }
 
 
@@ -187,7 +167,7 @@ namespace souchy.celebi.spark
             services.AddSwaggerGen(c =>
             {
                 c.SchemaFilter<EnumSchemaFilter>();
-                c.SchemaFilter<CharacTypeSchemaFilter>();
+                c.SchemaFilter<StaticEnumSchemaFilter>();
                 c.SchemaFilter<AdditionalPropertiesSchemaFilter>();
                 c.SchemaFilter<EffectSchemaFilter>();
 
@@ -196,7 +176,7 @@ namespace souchy.celebi.spark
                 c.MapType<IEntitySet<ObjectId>>(() => mapSchemaArray<ObjectId>());
                 c.MapType<IEntityList<ObjectId>>(() => mapSchemaArray<ObjectId>());
                 c.MapType<IEntityList<IZone>>(() => mapSchemaArray<IZone>());
-                c.MapType<IEntityList<ITrigger>>(() => mapSchemaArray<ITrigger>());
+                c.MapType<IEntityList<ITriggerModel>>(() => mapSchemaArray<ITriggerModel>());
                 c.MapType<IEntityList<ICondition>>(() => mapSchemaArray<ICondition>());
 
                 c.MapType<IValue<ZoneType>>(() => mapIValue<ZoneType>());
@@ -291,15 +271,6 @@ namespace souchy.celebi.spark
             services.Configure<GoogleSettings>(configuration.GetSection(nameof(GoogleSettings)));
             services.Configure<JwtSettings>(configuration.GetSection(nameof(JwtSettings)));
 
-            // Mongo    
-            services.Configure<MongoSettings>(configuration.GetSection(nameof(MongoSettings))); // relates to appsettings.json
-            services.AddSingleton<MongoClientService>();
-            services.AddSingleton<MongoFederationService>();
-            services.AddSingleton<MongoModelsDbService>();
-            services.AddSingleton<MongoFightsDbService>();
-            services.AddSingleton<MongoMetaDbService>();
-            services.AddSingleton<MongoI18NDbService>();
-
             // Meta
             services.AddSingleton<AccountService>();
             services.AddSingleton<CurrencyProductService>();
@@ -379,8 +350,42 @@ namespace souchy.celebi.spark
             */
         }
 
-        private static void configureMongo()
+        public static void configureMongo(IServiceCollection services, IConfiguration configuration)
         {
+            var settings = configuration.GetSection(nameof(MongoSettings)).Get<MongoSettings>();
+            // Mongo Connection
+            services.AddIdentityMongoDbProvider<Account, AccountRole>(identity =>
+            {
+                //identity.coo
+                identity.Password.RequiredLength = 8;
+                identity.Password.RequireNonAlphanumeric = true;
+                identity.User.RequireUniqueEmail = true;
+                //identity.SignIn.RequireConfirmedEmail = true;
+                //identity.User.AllowedUserNameCharacters= new[] {}
+            },
+                mongo =>
+                {
+                    Debug.WriteLine($"Mongo settings2: {settings}: {{ {settings?.ConnectionString}, {settings?.Federation} }}");
+                    if (settings == null) // for swashbuckle 'dotnet swagger' generator. secrets aren't included at that moment
+                    {
+                        Debug.WriteLine("Warning: No MongoSettings to configure services.AddIdentityMongoDbProvider.");
+                        return;
+                    }
+                    mongo.ConnectionString = settings.ConnectionString + "/" + settings.MetaDB;
+                    mongo.UsersCollection = nameof(Account);
+                }
+            );
+
+            // Mongo Services
+            services.Configure<MongoSettings>(configuration.GetSection(nameof(MongoSettings))); // relates to appsettings.json
+            services.AddSingleton<MongoClientService>();
+            services.AddSingleton<MongoFederationService>();
+            services.AddSingleton<MongoModelsDbService>();
+            services.AddSingleton<MongoFightsDbService>();
+            services.AddSingleton<MongoMetaDbService>();
+            services.AddSingleton<MongoI18NDbService>();
+
+            // Mongo Types
             var objectSerializer = new ObjectSerializer(type => 
                 ObjectSerializer.DefaultAllowedTypes(type) || type.FullName!.StartsWith("souchy.celebi")
             );
@@ -404,7 +409,10 @@ namespace souchy.celebi.spark
             BsonClassMap.RegisterClassMap<EntitySet<IID>>();
             BsonClassMap.RegisterClassMap<EntitySet<ObjectId>>();
             BsonClassMap.RegisterClassMap<EntityDictionary<CharacteristicId, IStat>>();
+            BsonClassMap.RegisterClassMap<EntityDictionary<CharacteristicId, MathEquation>>();
             BsonClassMap.RegisterClassMap<Dictionary<CharacteristicId, IStat>>();
+            BsonClassMap.RegisterClassMap<Dictionary<CharacteristicId, MathEquation>>();
+            BsonClassMap.RegisterClassMap<EntityList<ITriggerModel>>();
 
             BsonClassMap.RegisterClassMap<Value<ZoneType>>();
             BsonClassMap.RegisterClassMap<Value<ElementType>>();
@@ -420,7 +428,11 @@ namespace souchy.celebi.spark
                 var m = new BsonClassMap(t);
                 m.AutoMap();
                 BsonClassMap.RegisterClassMap(m);
+                m.SetIgnoreExtraElements(true);
             }
+
+            // Why is this missing?
+            //BsonClassMap.RegisterClassMap<AddStats>();
         }
 
     }

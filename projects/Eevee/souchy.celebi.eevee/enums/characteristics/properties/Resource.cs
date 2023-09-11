@@ -45,7 +45,7 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
 
         // peut-être comme ça à la place (IStatSimple pour chaque valeur)
         //public static readonly Resource BaseLifeMax           = new(0);
-        public static readonly Resource LifeInitialMax          = new(0, nameof(LifeInitialMax    ), ResourceEnum.Life, ResourceProperty.InitialMax); //maybe need this for erosion?
+        public static readonly Resource LifeInitialMax          = new(0, nameof(LifeInitialMax    ), ResourceEnum.Life, ResourceProperty.InitialMax); // need this for erosion
         public static readonly Resource Life                    = new(1, nameof(Life              ), ResourceEnum.Life, ResourceProperty.Current);
         public static readonly Resource LifeMax                 = new(2, nameof(LifeMax           ), ResourceEnum.Life, ResourceProperty.Max);
         public static readonly Resource LifeRegen               = new(3, nameof(LifeRegen         ), ResourceEnum.Life, ResourceProperty.Regen);

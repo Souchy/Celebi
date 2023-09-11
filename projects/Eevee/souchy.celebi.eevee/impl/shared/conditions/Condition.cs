@@ -12,11 +12,22 @@ namespace souchy.celebi.eevee.impl.shared.conditions
     {
         public ActorType actorType { get; set; } = ActorType.Target;
         public ConditionComparatorType comparator { get; set; } = ConditionComparatorType.EQ;
-        public ConditionGroupType groupType { get; set; } = ConditionGroupType.AND;
-        public IEntityList<ICondition> children { get; set; } = new EntityList<ICondition>();
 
         public abstract bool check(IAction action, TriggerEvent trigger, ICreature boardSource, IBoardEntity boardTarget);
 
+    }
+
+    /// <summary>
+    /// Just check children
+    /// </summary>
+    public class GroupCondition : Condition
+    {
+        public ConditionGroupType groupType { get; set; } = ConditionGroupType.AND;
+        public IEntityList<ICondition> children { get; set; } = new EntityList<ICondition>();
+        public override bool check(IAction action, TriggerEvent trigger, ICreature boardSource, IBoardEntity boardTarget)
+        {
+            return checkChildren(action, trigger, boardSource, boardTarget);
+        }
         public bool checkChildren(IAction action, TriggerEvent trigger, ICreature boardSource, IBoardEntity boardTarget)
         {
             if(children.Values.Count == 0) 
@@ -41,6 +52,6 @@ namespace souchy.celebi.eevee.impl.shared.conditions
             }
             return true;
         }
-
     }
+
 }

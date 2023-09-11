@@ -1,0 +1,14 @@
+<import from="./creature"></import>
+<import from="../entitylist.less"></import>
+
+
+
+<button class="btn listMenu" click.trigger="refresh()">Refresh</button>
+<button class="btn listMenu" click.trigger="clickCreate()">New creature</button>
+
+<input type="string" value.bind="filter" change.trigger="onSearch()" placeholder="search..." />
+
+<!-- todo bind creature -->
+<div class="list">
+  <creature repeat.for="crea of filteredCreatures" model.bind="crea" isvignette.bind="true"></creature>
+</div>

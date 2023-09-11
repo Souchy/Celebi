@@ -29,12 +29,12 @@ namespace souchy.celebi.espeon.eevee.impl.controllers
         public void Dispose()
         {
             Eevee.DisposeEventBus(this);
-            creatures.Clear();
-            // dispose originaly owned creatures of this player
-            this.GetFight().creatures.Remove(c => c.originalOwnerUid == entityUid);
             // reset owner of currently owned creatures of this player
             this.GetFight().creatures.Values.Where(c => c.currentOwnerUid == entityUid).ToList()
                 .ForEach(c => c.currentOwnerUid = c.originalOwnerUid);
+            // dispose originaly owned creatures of this player
+            this.GetFight().creatures.Remove(c => c.originalOwnerUid == entityUid); // TODO creature.dispose
+            creatures.Clear();
 
         }
     }

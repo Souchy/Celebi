@@ -1,12 +1,14 @@
-﻿using MongoDB.Bson.Serialization.Options;
+﻿using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.Options;
 using Newtonsoft.Json;
-using souchy.celebi.eevee.face.entity;
+using souchy.celebi.eevee.enums.characteristics;
+using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.util;
-using Swashbuckle.AspNetCore.Annotations;
+using souchy.celebi.eevee.impl.util.serialization;
 
 namespace souchy.celebi.eevee.impl.util
 {
-    public class EntityDictionary<TKey, TValue> : IEntityDictionary<TKey, TValue> where TValue : IEntity
+    public class EntityDictionary<TKey, TValue> : IEntityDictionary<TKey, TValue> // where TValue : IEntity
     {
         [BsonId]
         public ObjectId entityUid { get; set; }
@@ -22,9 +24,14 @@ namespace souchy.celebi.eevee.impl.util
         [BsonDictionaryOptions(Representation = DictionaryRepresentation.Document)]
         protected Dictionary<TKey, TValue> dic { get; init; } = new();
 
-        protected EntityDictionary() { }
+        private EntityDictionary() { }
         public static IEntityDictionary<TKey, TValue> Create() => new EntityDictionary<TKey, TValue>() { 
             entityUid = Eevee.RegisterIIDTemporary()
+        };
+        public static IEntityDictionary<TKey, TValue> Create(Dictionary<TKey, TValue> data) => new EntityDictionary<TKey, TValue>()
+        {
+            entityUid = Eevee.RegisterIIDTemporary(),
+            dic = data
         };
 
         public TValue Get(TKey key)
@@ -34,27 +41,39 @@ namespace souchy.celebi.eevee.impl.util
             else 
                 return default;
         }
+        public T Get<T>(TKey key) where T : TValue
+        {
+            return (T) Get(key);
+        }
 
         public bool Has(TKey key)
         {
             return dic.ContainsKey(key);
         }
 
-        public void Set(TKey key, TValue value)
+        public IEntityDictionary<TKey, TValue> Set(TKey key, TValue value)
         {
             dic[key] = value;
-            this.GetEntityBus().publish(nameof(Set), this, key, value);
+            this.GetEntityBus().publish(nameof(Set), this, key, value); // might need to publish the previous/old value as well
+            return this;
         }
 
-        public void Add(TKey key, TValue value)
+        public IEntityDictionary<TKey, TValue> Add(TKey key, TValue value)
         {
             dic.Add(key, value);
-            this.GetEntityBus().publish(nameof(Add), this, key, value); 
+            this.GetEntityBus().publish(nameof(Add), this, key, value);
+            return this;
         }
-        public void AddAll(IEntityDictionary<TKey, TValue> dictionary)
+        public IEntityDictionary<TKey, TValue> AddAll(IEntityDictionary<TKey, TValue> dictionary)
         {
-            foreach(var pair in dictionary.Pairs)
+            dictionary.ForEach((key, value) => this.Add(key, value));
+            return this;
+        }
+        public IEntityDictionary<TKey, TValue> AddAll(Dictionary<TKey, TValue> dictionary)
+        {
+            foreach (var pair in dictionary)
                 Add(pair.Key, pair.Value);
+            return this;
         }
 
         public bool Remove(TKey key)
@@ -83,20 +102,30 @@ namespace souchy.celebi.eevee.impl.util
 
         public void Clear()
         {
-            foreach (var k in Keys.ToList())
+            foreach (var k in this.dic.Keys.ToList())
                 Remove(k);
         }
 
-        public void ForEach(Action<TValue> action)
+        public IEntityDictionary<TKey, TValue> ForEach(Action<TValue> action)
         {
-            foreach (var v in Values)
+            foreach (var v in this.dic.Values)
                 action(v);
+            return this;
         }
 
-        public void ForEach(Action<TKey, TValue> action)
+        public IEntityDictionary<TKey, TValue> ForEach(Action<TKey, TValue> action)
         {
             foreach(var pair in dic)
                 action(pair.Key, pair.Value);
+            return this;
+        }
+
+        public IEntityDictionary<TKey, TValue> copy(bool anonymous = true)
+        {
+            var copy = anonymous ? new EntityDictionary<TKey, TValue>() : EntityDictionary<TKey, TValue>.Create();
+            foreach (var p in Pairs)
+                copy.Add(p.Key, p.Value);
+            return copy;
         }
 
         public void Dispose()
@@ -105,5 +134,9 @@ namespace souchy.celebi.eevee.impl.util
             this.Clear();
         }
 
+        public void serialize(BsonSerializationContext context)
+        {
+            BsonSerializer.Serialize(context.Writer, dic);
+        }
     }
 }

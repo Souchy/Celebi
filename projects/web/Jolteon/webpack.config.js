@@ -19,6 +19,12 @@ const postcssLoader = {
 
 module.exports = function (env, { analyze }) {
   const production = env.production || process.env.NODE_ENV === 'production';
+  const envpath = `./.env${production ? '' : '.' + (process.env.NODE_ENV || 'development')}`;
+  require('dotenv').config({ path: envpath });
+  console.log("Webpack environment: " + envpath);
+  console.log("Env serv url: " + process.env.SERVER_URL);
+  console.log("Env hash: " + process.env.USE_URL_FRAGMENT_HASH);
+  console.log("Env base url: " + process.env.BASE_URL);
   return {
     target: 'web',
     mode: production ? 'production' : 'development',
@@ -65,6 +71,7 @@ module.exports = function (env, { analyze }) {
       open: false, //!process.env.CI,
       port: 9000,
       https: true
+      // server: true, ??
       // http2: true,
       // https: {
       //   key: fs.readFileSync('C:/Users/Blank/localCA.key'),
@@ -88,13 +95,14 @@ module.exports = function (env, { analyze }) {
       ]
     },
     plugins: [
+      new Dotenv({
+        path: envpath,
+      }),
       new HtmlWebpackPlugin({ 
+        title: 'Jolteon',
         template: 'index.ejs', 
         favicon: 'flareon.png',
-        baseUrl: process.env.baseUrl
-      }),
-      new Dotenv({
-        path: `./.env${production ? '' : '.' + (process.env.NODE_ENV || 'development')}`,
+        baseUrl: process.env.BASE_URL
       }),
       analyze && new BundleAnalyzerPlugin()
     ].filter(p => p)

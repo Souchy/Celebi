@@ -30,7 +30,7 @@ namespace souchy.celebi.eevee.impl.util
             typeof(IEffect), 
             typeof(IStats), typeof(IStat), typeof(IStatusInstance),
              // TODO those idk yet
-            typeof(ICondition), typeof(ITrigger), typeof(IZone),
+            typeof(ICondition), typeof(ITriggerModel), typeof(IZone),
             // LAST ONE for things like fight entities (creature, spell, stats, etc)
             typeof(IEntity)
         };

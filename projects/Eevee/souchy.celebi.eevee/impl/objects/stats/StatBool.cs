@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.face.entity;
@@ -13,6 +14,8 @@ namespace souchy.celebi.eevee.impl.stats
         [BsonId]
         public ObjectId entityUid { get; set; }
         public CharacteristicId statId { get; init; }
+        [JsonIgnore]
+        public object genericValue => this.value;
 
         private bool _value;
         public bool value { get => _value; 

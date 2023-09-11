@@ -6,6 +6,7 @@ using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.objects.statuses;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.neweffects.face;
 using static souchy.celebi.eevee.face.entity.IEntity;
@@ -17,8 +18,9 @@ namespace souchy.celebi.espeon.eevee.impl.controllers
         #region Properties
 
         [BsonId]
-        public ObjectId entityUid { get; set; } = Eevee.RegisterIIDTemporary();
+        public ObjectId entityUid { get; set; }
 
+        public FightSettings settings { get; set; }
         public ITimeline timeline { get; set; }
         public IBoard board { get; set; }
         public IEntityDictionary<ObjectId, IPlayer> players { get; init; } = EntityDictionary<ObjectId, IPlayer>.Create();
@@ -34,11 +36,22 @@ namespace souchy.celebi.espeon.eevee.impl.controllers
 
         #region Constructors
 
-        public Fight(ScopeID scopeId)
+        private Fight() { }
+        //public Fight() //ScopeID scopeId)
+        //{
+        //    this.entityUid = Eevee.RegisterIIDTemporary();
+        //    //this.entityUid = scopeId;
+        //    //this.board = Scopes.GetRequiredScoped<IBoard>(entityUid);
+        //    Eevee.fights.Add(entityUid, this);
+        //}
+        public static IFight Create()
         {
-            //this.entityUid = scopeId;
-            //this.board = Scopes.GetRequiredScoped<IBoard>(entityUid);
-            Eevee.fights.Add(entityUid, this);
+            var fight = new Fight()
+            {
+                entityUid = Eevee.RegisterIIDTemporary()
+            };
+            Eevee.fights.Add(fight.entityUid, fight);
+            return fight;
         }
 
         #endregion Constructors

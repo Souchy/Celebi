@@ -1,0 +1,296 @@
+[gd_scene load_steps=20 format=3 uid="uid://desyh6iqf3xkx"]
+
+[ext_resource type="Script" path="res://common_spells/fireball/fireball.gd" id="1_smfg7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ncn1p"]
+size = Vector3(0.1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_k2l4b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Projectile/Explosion/GPUParticles3D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Projectile/Explosion/GPUParticles3D2:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Projectile/MeshInstance3D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Projectile/Explosion/OmniLight3D:light_energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Projectile/Explosion/OmniLight3D:light_indirect_energy")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Projectile/Explosion/OmniLight3D:light_volumetric_fog_energy")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_ui0i5"]
+resource_name = "launch"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Projectile/Explosion/GPUParticles3D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Projectile/Explosion/GPUParticles3D2:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Projectile/MeshInstance3D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Projectile/Explosion/OmniLight3D:light_energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 15, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Projectile/Explosion/OmniLight3D:light_indirect_energy")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 15, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Projectile/Explosion/OmniLight3D:light_volumetric_fog_energy")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 15, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4)
+}
+tracks/6/type = "position_3d"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Projectile:position")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.26, 1, 0.5, 0, 0, 0.5, 1, 1, 0, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ugq63"]
+_data = {
+"RESET": SubResource("Animation_k2l4b"),
+"launch": SubResource("Animation_ui0i5")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e8t12"]
+albedo_color = Color(0.52549, 0.211765, 0.0196078, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_4tf5d"]
+material = SubResource("StandardMaterial3D_e8t12")
+
+[sub_resource type="Gradient" id="Gradient_5j41w"]
+colors = PackedColorArray(0.921875, 0.70991, 0.347055, 1, 1, 0.196222, 0.121519, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mpxxg"]
+gradient = SubResource("Gradient_5j41w")
+
+[sub_resource type="Gradient" id="Gradient_jovdc"]
+offsets = PackedFloat32Array(0, 0.293103, 1)
+colors = PackedColorArray(0.713726, 0.619608, 0.247059, 1, 0.823453, 0.482816, 0.270319, 1, 0.765625, 0.262506, 0.251082, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_t17wr"]
+gradient = SubResource("Gradient_jovdc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_riwwu"]
+emission_shape = 1
+emission_sphere_radius = 0.5
+direction = Vector3(0, 1, 0)
+spread = 15.0
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+scale_max = 2.0
+color = Color(0.901961, 0.784314, 0.313726, 1)
+color_ramp = SubResource("GradientTexture1D_t17wr")
+color_initial_ramp = SubResource("GradientTexture1D_mpxxg")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kqfms"]
+transparency = 1
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_k6c0u"]
+material = SubResource("StandardMaterial3D_kqfms")
+radius = 0.05
+height = 0.1
+
+[sub_resource type="Gradient" id="Gradient_ogtu0"]
+colors = PackedColorArray(0.545098, 0.321569, 0.180392, 0.603922, 0.0666667, 0.0235294, 0.0235294, 0.211765)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gqwfh"]
+gradient = SubResource("Gradient_ogtu0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i2vx4"]
+emission_shape = 1
+emission_sphere_radius = 0.5
+direction = Vector3(0, 1, 0)
+spread = 75.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 4.0
+initial_velocity_max = 5.0
+scale_min = 3.0
+scale_max = 8.0
+color = Color(0.729412, 0.427451, 0.239216, 0.580392)
+color_ramp = SubResource("GradientTexture1D_gqwfh")
+turbulence_enabled = true
+turbulence_noise_strength = 2.0
+turbulence_noise_speed_random = 4.52
+turbulence_influence_min = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_12m03"]
+transparency = 1
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_75ie3"]
+material = SubResource("StandardMaterial3D_12m03")
+radius = 0.05
+height = 0.1
+
+[node name="fireball" type="Node3D"]
+script = ExtResource("1_smfg7")
+
+[node name="env" type="Node" parent="."]
+
+[node name="obstacle" type="MeshInstance3D" parent="env"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+mesh = SubResource("BoxMesh_ncn1p")
+skeleton = NodePath("../..")
+
+[node name="Camera3D" type="Camera3D" parent="env"]
+transform = Transform3D(0.998761, 0.0297395, -0.0398924, 0, 0.801731, 0.597685, 0.0497578, -0.596944, 0.800738, 4.43343, 3.34918, 5.68109)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ugq63")
+}
+
+[node name="Projectile" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Projectile"]
+mesh = SubResource("SphereMesh_4tf5d")
+skeleton = NodePath("../..")
+
+[node name="Explosion" type="Node3D" parent="Projectile"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Projectile/Explosion"]
+emitting = false
+amount = 200
+lifetime = 1.5
+one_shot = true
+explosiveness = 0.92
+randomness = 0.26
+process_material = SubResource("ParticleProcessMaterial_riwwu")
+draw_pass_1 = SubResource("SphereMesh_k6c0u")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="Projectile/Explosion"]
+emitting = false
+amount = 400
+lifetime = 1.5
+one_shot = true
+explosiveness = 0.92
+randomness = 0.26
+process_material = SubResource("ParticleProcessMaterial_i2vx4")
+draw_pass_1 = SubResource("SphereMesh_75ie3")
+
+[node name="Decal" type="Decal" parent="Projectile/Explosion"]
+visible = false
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Projectile/Explosion"]
+light_color = Color(1, 0.768627, 0.662745, 1)
+light_energy = 0.0
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+light_size = 0.5
+omni_range = 4.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Projectile/Explosion"]

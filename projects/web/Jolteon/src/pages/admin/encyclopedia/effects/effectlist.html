@@ -1,0 +1,33 @@
+
+<import from="./modelSelector/effectModelSelector"></import>
+<import from="../../../../components/modal/modal"></import>
+<import from="./effect"></import>
+
+<!-- children section -->
+<div class="effectSection" if.bind="effectids">
+  <h6 class="clickable" data-bs-toggle="collapse" data-bs-target="#collapseEffects-${modaluid}">
+    Effects
+    <!-- (${model.effectIds.length}) -->
+  </h6>
+
+  <button class="btn btn-floating" data-bs-toggle="modal" data-bs-target="#effectChildModal-${modaluid}">+</button>
+  <button class="btn btn-floating tooltip" click.trigger="clickPasteNewEffect()">
+    <i class="fa-regular fa-clipboard"></i>
+    <span class="tooltiptext">Tooltip text</span>
+  </button>
+
+  <modal id="effectChildModal-${modaluid}" header="Add Effect Child" close.bind=false footer.bind=false>
+    <effect-model-selector onselectcallback.bind="e => onAddChild(e)"></effect-model-selector>
+  </modal>
+
+  <div class="effectlist collapse show" id="collapseEffects-${modaluid}">
+    <effect id.bind="effectid" repeat.for="effectid of effectids" uid.bind="effectid" 
+        draggable="true" drop.trigger="e => onDrop(e, effectid)" 
+        dragstart.trigger="e => onDrag(e, effectid)" dragover.trigger="e => onDragOver(e, effectid)"
+        callbackmoveup.bind="e => onMoveEffectUp(e)" 
+        callbackmovedown.bind="e => onMoveEffectDown(e)" 
+        callbackremove.bind="e => onRemoveEffect(e)"
+    ></effect>
+  </div>
+
+</div>

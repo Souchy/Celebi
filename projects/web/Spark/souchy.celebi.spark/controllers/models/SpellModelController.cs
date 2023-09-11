@@ -1,45 +1,38 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
-using souchy.celebi.eevee.face.entity;
-using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.stats;
-using souchy.celebi.eevee.face.shared;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.shared.models.skins;
 using souchy.celebi.eevee.face.util;
-using souchy.celebi.eevee.impl.objects.zones;
 using souchy.celebi.eevee.impl.shared;
-using souchy.celebi.eevee.neweffects;
-using souchy.celebi.eevee.neweffects.face;
-using souchy.celebi.eevee.neweffects.impl;
-using souchy.celebi.eevee.neweffects.impl.effects;
 using souchy.celebi.spark.models;
+using souchy.celebi.spark.models.aggregations;
 using souchy.celebi.spark.services;
-using souchy.celebi.spark.services.fights;
 using souchy.celebi.spark.services.models;
 using souchy.celebi.spark.util;
+using System.Collections.Generic;
 
 namespace souchy.celebi.spark.controllers.models
 {
     [ApiController]
     [Produces("application/json")]
     [Route(Routes.Models + "spell")]
-    public class SpellModelController : ControllerBase
+    public class SpellModelController : EffectContainerControllerBase<ISpellModel>
     {
-        private readonly CollectionService<ISpellModel> _spellService;
+        private readonly CollectionService<ISpellModel> spells;
+        private readonly CollectionService<SpellModelAggregation> spellsView;
         private readonly CollectionService<IStats> _stats;
-        private readonly CollectionService<IEffect> _effects;
         private readonly CollectionService<ISpellSkin> _skins;
         private readonly StringService _strings;
         private readonly IDCounterService _ids;
         private readonly MongoFederationService _federation;
 
-        public SpellModelController(MongoModelsDbService db, StringService strings, IDCounterService ids, MongoFederationService federation)
+        public SpellModelController(MongoModelsDbService db, StringService strings, IDCounterService ids, MongoFederationService federation) : base(db)
         {
-            _spellService = db.GetMongoService<ISpellModel>();
+            spells = db.GetMongoService<ISpellModel>();
+            spellsView = db.GetMongoService<SpellModelAggregation>();
             _stats = db.GetMongoService<IStats>();
-            _effects = db.GetMongoService<IEffect>();
             _skins = db.GetMongoService<ISpellSkin>();
             _strings = strings;
             _ids = ids;
@@ -49,17 +42,43 @@ namespace souchy.celebi.spark.controllers.models
         [HttpGet("all")]
         public async Task<ActionResult<List<ISpellModel>>> GetAll()
         {
-            var list = await _spellService.GetAsync();
+            var list = await spells.GetAsync();
             return Ok(list);
         }
 
+        // TODO maybe, but we need the Atlas Federation for aggregation. More important thing to fix now is getting models with the new stats and pushing the build to DeathShadows
+        // These would make it faster to request all the info about the model list and the individual model, 
+        // instead of requesting the list of ids and then requesting the names/desc/stats/etc individually for each model
+        // It could disrupt my flow of data when updating values though
+        /// <summary>
+        /// Good for lists of spells containing just the name and description
+        /// </summary>
+        [HttpGet("aggregation/list")]
+        public async Task<ActionResult<IEnumerable<TextEntityAggregation>>> GetListAggregation([FromQuery] List<ObjectId> list)
+        {
+            return Ok(await spellsView.GetInIdsAsync(list));
+        }
+        /// <summary>
+        /// This is probably not usable for the editor because we need a SpellModel object for updating. <br></br>
+        /// But it's good for encyclopedias, the game and public apis
+        /// </summary>
+        [HttpGet("aggregation/{id}")]
+        public async Task<ActionResult<SpellModelAggregation>> GetAggregation([FromRoute] SpellIID id)
+        {
+            SpellModelAggregation? model = await spellsView.GetOneAsync(id);
+            if (model is null)
+                return NoContent();
+            return Ok(model);
+        }
+
+
         [HttpGet("list")]
-        public async Task<ActionResult<List<ISpellModel>>> GetList([FromQuery] List<ObjectId> list) 
-            => Ok(await _spellService.GetAsync(Builders<ISpellModel>.Filter.In("_id", list)));
+        public async Task<ActionResult<List<ISpellModel>>> GetList([FromQuery] List<ObjectId> list)
+            => Ok(await spells.GetInIdsAsync(list));
 
         [HttpGet("filtered")]
         public async Task<ActionResult<List<ISpellModel>>> GetFiltered(FilterDefinition<ISpellModel> filter)
-            => Ok(await _spellService.GetAsync(filter));
+            => Ok(await spells.GetAsync(filter));
 
         [HttpGet("byString/{str}")]
         public async Task<List<ISpellModel>> GetByString(string str) => await _federation.FindSpellsByString(str);
@@ -68,20 +87,11 @@ namespace souchy.celebi.spark.controllers.models
         [HttpGet("{id}")]
         public async Task<ActionResult<ISpellModel>> Get([FromRoute] SpellIID id)
         {
-            var filter = Builders<ISpellModel>.Filter.Eq(nameof(ISpellModel.modelUid), id.value);
-            ISpellModel? model = await _spellService.GetOneAsync(filter);
+            ISpellModel? model = await spells.GetOneAsync(id);
             if (model is null)
-                return NotFound();
+                return NoContent();
             return Ok(model);
         }
-
-        //[Authorize]
-        //[HttpPost("")]
-        //public async Task<ActionResult<ISpellModel>> Post([FromBody] SpellModel newSpellModel)
-        //{
-        //    await _spellService.CreateAsync(newSpellModel);
-        //    return CreatedAtAction(nameof(Get), new { id = newSpellModel.entityUid }, newSpellModel);
-        //}
 
         [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPost("new")]
@@ -89,7 +99,7 @@ namespace souchy.celebi.spark.controllers.models
         {
             var model = await Factories.newSpellModel(_ids);
 
-            await _spellService.CreateAsync(model.spell);
+            await spells.CreateAsync(model.spell);
             await _strings.CreateAsync(model.name);
             await _strings.CreateAsync(model.desc);
             await _stats.CreateAsync(model.stats);
@@ -102,80 +112,32 @@ namespace souchy.celebi.spark.controllers.models
         [HttpPut("{id}")]
         public async Task<ActionResult<ISpellModel>> Update([FromRoute] SpellIID id, [FromBody] SpellModel updatedModel)
         {
-            var filter = Builders<ISpellModel>.Filter.Eq(nameof(ISpellModel.modelUid), id.value);
-            var model = await _spellService.GetOneAsync(filter);
+            var model = await spells.GetOneAsync(id);
             if (model is null)
-                return NotFound();
+                return NoContent();
             updatedModel.entityUid = model.entityUid;
-            var result = await _spellService.UpdateAsync(filter, updatedModel);
-            if(result.MatchedCount > 0) return Ok(updatedModel);
-            else return Ok(model);
-        }
-
-        [Authorize(Roles = nameof(AccountType.Admin))]
-        [HttpPost("{id}/effect")]
-        public async Task<ActionResult<ISpellModel>> AddEffect([FromRoute] SpellIID id, [FromQuery] ObjectId? effectParentId, [FromQuery] string schemaName)
-        {
-            var filter = Builders<ISpellModel>.Filter.Eq(nameof(ISpellModel.modelUid), id.value);
-            var model = await _spellService.GetOneAsync(filter);
-            if (model is null)
-                return NotFound();
-
-            var schemaType = typeof(IEntity).Assembly
-                .GetTypes().FirstOrDefault(t => t.Name == schemaName);
-            if(schemaType == null)
-                return NotFound();
-
-            var eff = new EffectPermanent();
-            eff.entityUid = ObjectId.GenerateNewId();
-            eff.Schema = (IEffectSchema) Activator.CreateInstance(schemaType)!;
-            eff.modelUid = (IID) (int) Enum.Parse<EffT>(schemaName);
-
-            if(!addEffectToParent(model, eff, effectParentId))
-            {
-                model.EffectIds.Add(eff.entityUid);
-            }
-
-            await _effects.CreateAsync(eff);
-            var result = await _spellService.UpdateAsync(model.entityUid, model);
-
+            var result = await spells.UpdateAsync(id, updatedModel);
+            if(result.MatchedCount > 0) 
+                return Ok(updatedModel);
             return Ok(model);
-        }
-        private bool addEffectToParent(IEffectsContainer container, IEffect eff, ObjectId? parentId)
-        {
-            if (parentId == null || parentId != ObjectId.Empty || container == null || container.EffectIds == null || container.EffectIds.Values.Count == 0) 
-                return false;
-
-            foreach (var child in container.GetEffects())
-            {
-                if (child.entityUid == parentId)
-                {
-                    child.EffectIds.Add(eff.entityUid);
-                    return true;
-                }
-                else
-                if (addEffectToParent(child, eff, parentId))
-                {
-                    return true;
-                }
-            }
-            return false;
         }
 
         [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpDelete("{id}")]
         public async Task<ActionResult<DeleteResult>> Delete([FromRoute] SpellIID id)
         {
-            var filter = Builders<ISpellModel>.Filter.Eq(nameof(ISpellModel.modelUid), id.value);
-            var model = await _spellService.GetOneAsync(filter);
+            var model = await spells.GetOneAsync(id);
             if (model is null)
-                return NotFound();
-            var result = await _spellService.RemoveAsync(filter);
+                return NoContent();
+            var result = await spells.RemoveAsync(id);
             await _strings.RemoveAsync(model.nameId);
             await _strings.RemoveAsync(model.descriptionId);
             await _stats.RemoveAsync(model.statsId);
-            return Ok(result);
+            if(result.DeletedCount> 0)
+                return Ok(result);
+            return BadRequest();
         }
+
 
     }
 }

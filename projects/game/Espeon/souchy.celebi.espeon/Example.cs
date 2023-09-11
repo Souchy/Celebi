@@ -46,13 +46,13 @@ namespace souchy.celebi.espeon
         private void addCreature(IPlayer player)
         {
             // create
-            var creature = Creature.Create(fight.entityUid); // Scopes.GetRequiredScoped<ICreature>(fight.entityUid);
+            var creature = Scopes.GetRequiredScoped<ICreature>(fight.entityUid);
             creature.modelUid = (IID) 1; //Scopes.GetUIdGenerator(fight.entityUid).next();
             // player control
             player.creatures.Add(creature.entityUid);
             creature.currentOwnerUid = player.entityUid;
             // add to board
-            Scopes.GetRequiredScoped<IBoard>(fight.entityUid).creatureIds.Add(creature.entityUid);
+            Scopes.GetRequiredScoped<ITimeline>(fight.entityUid).creatureIds.Add(creature.entityUid);
             creature.position.set(rng.Next(10), rng.Next(10));
             // add stats, spells...
             addStats(creature);

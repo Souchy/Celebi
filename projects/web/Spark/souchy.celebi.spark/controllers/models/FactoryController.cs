@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.shared.triggers;
+using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.impl.shared.conditions.creature;
+using souchy.celebi.eevee.impl.shared.triggers;
 using souchy.celebi.spark.models;
 using System.Data;
 
@@ -14,40 +18,22 @@ namespace souchy.celebi.spark.controllers.models
     public class FactoryController : ControllerBase
     {
 
-
         [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPost("trigger")]
-        //[HttpPost("{id}/trigger")]
-        public async Task<ActionResult<ITrigger>> CreateTrigger() //[FromRoute] ObjectId id)
+        public ActionResult<ITriggerModel> CreateTrigger([FromRoute] IID triggerTypeId)
         {
-            //var model = await _effects.GetOneAsync(id);
-            //if (model is null)
-            //    return NotFound();
-
-            var trigger = new Trigger();
-            //model.Triggers.Add(trigger);
-
-            //var result = await _effects.UpdateAsync(model.entityUid, model);
-            //return Ok(model);
+            var trigger = new TriggerModel();
             return Ok(trigger);
         }
 
 
         [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPost("condition")]
-        //[HttpPost("{id}/trigger")]
-        public async Task<ActionResult<ICondition>> CreateCondition([FromQuery] ConditionType conditionType) //[FromRoute] ObjectId id)
+        public ActionResult<ICondition> CreateCondition([FromRoute] IID conditionTypeId)
         {
-            //var model = await _effects.GetOneAsync(id);
-            //if (model is null)
-            //    return NotFound();
-
-            var trigger = new Trigger();
-            //model.Triggers.Add(trigger);
-
-            //var result = await _effects.UpdateAsync(model.entityUid, model);
-            //return Ok(model);
-            return Ok(trigger);
+            //var condition = new CreatureStatsCondition();
+            var condition = ConditionType.get(conditionTypeId).createInstance();
+            return Ok(condition);
         }
 
 

@@ -1,0 +1,45 @@
+<template as-custom-element="directory">
+  <bindable property="dir"></bindable>
+  ${dir.name}
+  <!-- - ${fileType(f)} -->
+</template>
+<template as-custom-element="file">
+  <bindable property="file"></bindable>
+  <bindable property="type"></bindable>
+  <bindable property="path"></bindable>
+  
+  <div class="title">${file.name}</div>
+  <template switch.bind="type">
+    <img case="image" src="${path}">
+  </template>
+
+</template>
+
+
+<h1>hi assets</h1>
+
+<!-- <input type="file" onchange.trigger="e => clickSelectFiles(e)">
+
+<input type="file" id="filepicker" name="fileList" webkitdirectory multiple onchange.trigger="e => clickSelectFiles(e)"/> -->
+
+<button class="btn" click.trigger="e => clickImport(e)">Piranha import</button>
+<button class="btn" click.trigger="recoverFileSystem()">Piranha reload</button>
+
+
+<h3>Current directory: <span innerhtml.bind="currentDirectory"></span></h3>
+<div class="fileSystem">
+
+  <!-- <div class.bind="instanceType(file)" repeat.for="file of fileSystem" click.trigger="clickFile(file)">
+    ${file.name} - ${fileType(file)}
+  </div> -->
+
+  <div class="directory" click.trigger="clickFile(null)">...</div>
+
+  <!-- <div> -->
+  <template repeat.for="file of getFilteredFileSystem" switch.bind="instanceType(file)">
+    <directory class.bind="instanceType(file)" case="directory" dir.bind="file" click.trigger="clickFile(file)"></directory>
+    <file class.bind="instanceType(file)" case="file" file.bind="file" type.bind="fileType(file)" path.bind="getPath(file)" click.trigger="clickFile(file)"></file>
+  </template>
+  <!-- </div> -->
+
+</div>

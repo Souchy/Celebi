@@ -1,5 +1,6 @@
 ﻿using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.entity;
+using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.shared;
 using souchy.celebi.eevee.face.shared.conditions;
@@ -20,7 +21,7 @@ namespace souchy.celebi.eevee.neweffects.face
         /// Acquired targets with this zone
         /// </summary>
         public IZone TargetAcquisitionZone { get; set; }
-        public IEntityList<ITrigger> Triggers { get; set; }
+        public IEntityList<ITriggerModel> Triggers { get; set; }
 
 
         public T GetProperties<T>() => (T) Schema;
@@ -30,7 +31,7 @@ namespace souchy.celebi.eevee.neweffects.face
         /// <summary>
         /// Get unfiltered entities in this effect's area
         /// </summary>
-        public IEnumerable<IBoardEntity> GetPossibleBoardTargets(IFight fight, IPosition targetCell);
+        public IEnumerable<IBoardEntity> GetPossibleBoardTargets(IAction action, IPosition targetCell);
         /// <summary>
         /// Copy basic properties to passed effect. (not model nor model-specific properties)
         /// </summary>

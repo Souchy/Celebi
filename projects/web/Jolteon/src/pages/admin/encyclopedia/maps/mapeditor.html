@@ -1,0 +1,63 @@
+<import from="../../assetmanager/assetmanager"></import>
+
+
+<h1>hi map editor</h1>
+
+<div class="hz">
+  <div class="renderer">
+    ${renderer.domElement}
+  </div>
+
+  <div class="properties">
+    <div>
+      <h1>Map properties</h1>
+      <div class="buttonset">
+        <span>View</span>
+        <div>
+          <button style="width: 50px;" class="btn" click.trigger="clickView()" innerhtml.bind="btnViewText"></button>
+          <button class="btn" click.trigger="clickLayer()">Layer 0</button>
+        </div>
+      </div>
+      <div class="buttonset">
+        <span>Brush</span>
+        <div>
+          <input type="checkbox" class="btn-check" id="btn-check-block" autocomplete="off" checked.bind="mode[prop]" change.trigger="onChange()">
+          <label class="btn btn-outline shadow-none" for="btn-check-block">Block</label><br>
+          <input type="checkbox" class="btn-check" id="btn-check-floor" autocomplete="off" checked.bind="mode[prop]" change.trigger="onChange()">
+          <label class="btn btn-outline shadow-none" for="btn-check-floor">Floor</label><br>
+          <input type="checkbox" class="btn-check" id="btn-check-hole" autocomplete="off" checked.bind="mode[prop]" change.trigger="onChange()">
+          <label class="btn btn-outline shadow-none" for="btn-check-hole">Hole</label><br>
+        </div>
+      </div>
+      <div class="buttonset">
+        <span>Mode</span>
+        <div>
+          <input type="checkbox" class="btn-check" id="btn-check-select" autocomplete="off" checked.bind="mode[prop]" change.trigger="onChange()">
+          <label class="btn btn-outline shadow-none" for="btn-check-select">Select</label><br>
+          <input type="checkbox" class="btn-check" id="btn-check-draw" autocomplete="off" checked.bind="mode[prop]" change.trigger="onChange()">
+          <label class="btn btn-outline shadow-none" for="btn-check-draw">Draw</label><br>
+          <input type="checkbox" class="btn-check" id="btn-check-erase" autocomplete="off" checked.bind="mode[prop]" change.trigger="onChange()">
+          <label class="btn btn-outline shadow-none" for="btn-check-erase">Erase</label><br>
+        </div>
+      </div>
+      <div class="buttonset">
+        <div innerhtml.bind="getPointerText"></div>
+        <div>Selected: ${selected.position.x} ${selected.position.y}</div>
+      </div>
+
+      <div class="buttonset">
+        <div>
+          Block model:
+          <!-- <button class="btn">Select...</button> -->
+          <input type="file" id="fileSelector-blockModel" onchange.trigger="e => clickSelectFiles(e)" />
+          <label class="btn btn-outline shadow-none" for="fileSelector-blockModel">Select...</label><br>
+        </div>
+        <div>
+          Floor model: <button class="btn">Select...</button>
+        </div>
+      </div>
+
+    </div>
+    <assetmanager></assetmanager>
+  </div>
+</div>

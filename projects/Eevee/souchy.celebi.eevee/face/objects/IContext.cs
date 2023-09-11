@@ -18,8 +18,8 @@ namespace souchy.celebi.eevee.face.objects
 
         public Dictionary<string, object> valuesStored { get; set; }
 
-        public Dictionary<ResourceEnum, int> resourceUsed { get; set; }
         /*
+        //public Dictionary<ResourceEnum, int> resourceUsed { get; set; }
         public Dictionary<ResourceType, int> resourceGained { get; set; }
         public Dictionary<ResourceType, int> resourceLost { get; set; }
         public Dictionary<ResourceType, int> resourceIncreased { get; set; } // Given

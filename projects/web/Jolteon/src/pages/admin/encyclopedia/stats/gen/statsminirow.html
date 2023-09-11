@@ -1,0 +1,36 @@
+<td>${getCharacName()}</td>
+
+<td if.bind="isSimple()">
+  <input type="number" value.bind="getBase().value" change.trigger="onChangeStatValue" />
+</td>
+<td if.bind="isSimple() && hasgrowth">
+  (growth)
+</td>
+
+
+<td if.bind="isBool()">
+  <input type="checkbox" class="btn-check" id="btn-check-outlined ${statId}" autocomplete="off" checked.bind="getBase().value" change.trigger="onChangeStatValue">
+  <label class="btn btn-outline shadow-none" for="btn-check-outlined ${statId}">${getBase().value ? 'True' : 'False'}</label><br>
+</td>
+<td if.bind="isBool() && hasgrowth">
+  (growth)
+</td>
+
+
+<td if.bind="isEnum()">
+  <template switch.bind="getEnum()">
+    <select case='StatusMergeStrategy' value.bind="getBase().value" change.trigger="onChangeStatValue">
+      <option repeat.for="val of Enums.statusMergeStrategies" model.bind="$index">${val}</option>
+    </select>
+    <select case='StatusUnbewitchStrategy' value.bind="getBase().value" change.trigger="onChangeStatValue">
+      <option repeat.for="val of Enums.statusUnbewitchStrategies" model.bind="$index">${val}</option>
+    </select>
+  </template>
+</td>
+<td if.bind="isEnum() && hasgrowth">
+  (growth)
+</td>
+
+<td if.bind="hasadddelete">
+  <button class="btn btn-outline btn-icon" click.trigger="clickRemoveStat()">x</button>
+</td>

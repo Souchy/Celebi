@@ -10,7 +10,7 @@ namespace souchy.celebi.eevee.face.objects
 {
     public interface ICreature : IBoardEntity
     {
-        public ObjectId summonerCreature { get; set; }
+        public ObjectId? summoner { get; set; }
         /// <summary>
         /// Original player owner of the creature (set once)
         /// </summary>

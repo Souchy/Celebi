@@ -7,24 +7,24 @@ namespace souchy.celebi.espeon.implementation.net
     public class UmbreonServer
     {
 
-        [RPC(MultiplayerAPI.RPCMode.AnyPeer)]
+        [Rpc(MultiplayerApi.RpcMode.AnyPeer)]
         public void sendDirectMessage(IID destinationUserId, string msg)
         {
 
         }
-        [RPC(MultiplayerAPI.RPCMode.AnyPeer)]
+        [Rpc(MultiplayerApi.RpcMode.AnyPeer)]
         public void sendMessage(MessageChannelType channel, string msg)
         {
 
         }
 
 
-        [RPC(MultiplayerAPI.RPCMode.AnyPeer)]
+        [Rpc(MultiplayerApi.RpcMode.AnyPeer)]
         public void requestJoinFight(IID fightID)
         {
 
         }
-        [RPC(MultiplayerAPI.RPCMode.Authority, CallLocal = true)]
+        [Rpc(MultiplayerApi.RpcMode.Authority, CallLocal = true)]
         public void sendJoinFight(IID fightID) // int peerId ?
         {
 
@@ -40,12 +40,12 @@ namespace souchy.celebi.espeon.implementation.net
         }
 
 
-        [RPC(MultiplayerAPI.RPCMode.AnyPeer)]
+        [Rpc(MultiplayerApi.RpcMode.AnyPeer)]
         public void requestUserInfo(IID userID)
         {
 
         }
-        [RPC(MultiplayerAPI.RPCMode.Authority, CallLocal = true)]
+        [Rpc(MultiplayerApi.RpcMode.Authority, CallLocal = true)]
         public void responseUserInfo(IID userID) // int peerId ?
         {
 

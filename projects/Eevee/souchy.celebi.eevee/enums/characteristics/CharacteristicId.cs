@@ -11,7 +11,13 @@ namespace souchy.celebi.eevee.enums.characteristics
     [TypeConverter(typeof(CharacIdTypeConverter))]
     public readonly record struct CharacteristicId(int ID)
     {
+        public static readonly CharacteristicId Default = new CharacteristicId(0);
+
         public static implicit operator int(CharacteristicId v) => v.ID;
+        internal CharacteristicId(int category, int localId) : this(category * 1000 + localId)
+        {
+
+        }
         public CharacteristicCategory GetCategory()
         {
             int cat = (int) Math.Floor(this.ID / 1000d);
@@ -26,13 +32,13 @@ namespace souchy.celebi.eevee.enums.characteristics
     public static class CharacteristicIdExtentions
     {
         public static CharacteristicId GetAffinity(this ElementType stat) =>
-            Affinity.values.Values.First(v => v.Element == stat).ID;
+            Affinity.values.First(v => v.Element == stat).ID;
         public static CharacteristicId GetResistance(this ElementType stat) =>
             Resistance.values.Values.First(v => v.Element == stat).ID;
         public static IEnumerable<CharacteristicType> GetCharacs(this CharacteristicCategory cat) => cat switch
         {
             CharacteristicCategory.Resource => Enumerable.OfType<CharacteristicType>(Resource.values.Values),
-            CharacteristicCategory.Affinity => Enumerable.OfType<CharacteristicType>(Affinity.values.Values),
+            CharacteristicCategory.Affinity => Enumerable.OfType<CharacteristicType>(Affinity.values),
             CharacteristicCategory.Resistance => Enumerable.OfType<CharacteristicType>(Resistance.values.Values),
 
             CharacteristicCategory.Contextual => Enumerable.OfType<CharacteristicType>(Contextual.values.Values),

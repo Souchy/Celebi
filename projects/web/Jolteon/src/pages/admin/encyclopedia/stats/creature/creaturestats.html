@@ -1,0 +1,30 @@
+<import from="../components/statsimple"></import>
+<import from="../components/statbool"></import>
+<import from="../tables/tablesimple"></import>
+<import from="../tables/tablebool"></import>
+
+
+<div style="display: flex; width: 100%;" if.bind="stats">
+
+  <!-- column -->
+  <div style="width: 33%;">
+    <h5>Resource</h5>
+    <tablesimple characs.bind="Characteristics.resourcesCreatureModel" stats.bind="stats"></tablesimple>
+    <h5>Other</h5>
+    <tablesimple characs.bind="Characteristics.others" stats.bind="stats"></tablesimple>
+  </div>
+  
+  <!-- column -->
+  <div style="width: 33%;">
+    <h5>Affinity</h5>
+    <tablesimple characs.bind="Characteristics.affinities" stats.bind="stats"></tablesimple>
+    <h5>State</h5>
+    <tablebool characs.bind="Characteristics.states" stats.bind="stats"></tablebool>
+  </div>
+
+  <div style="width: 33%;">
+    <h5>Resistance</h5>
+    <tablesimple characs.bind="Characteristics.resistances" stats.bind="stats"></tablesimple>
+  </div>
+
+</div>

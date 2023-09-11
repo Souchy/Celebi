@@ -47,14 +47,30 @@ export class App implements IRouteableComponent {
 		},
 		{
 			path: 'editor/creature/:uid',
-			component: import('./pages/encyclopedia/creatures/creature'),
+			component: import('./pages/admin/encyclopedia/creatures/creature'),
 			title: 'Creature',
 		},
 		{
 			path: 'editor/spell/:uid',
-			component: import('./pages/encyclopedia/spells/spell'),
+			component: import('./pages/admin/encyclopedia/spells/spell'),
 			title: 'Spell',
-		}
+		},
+		{
+			path: 'editor/status/:uid',
+			component: import('./pages/admin/encyclopedia/statuses/status'),
+			title: 'Status',
+		},
+		{
+			path: 'assets',
+			component: import('./pages/admin/assetmanager/assetmanager'),
+			title: 'Assets',
+		},
+		{
+			path: 'mapeditor',
+			component: import('./pages/admin/encyclopedia/maps/mapeditor'),
+			title: 'Map Editor',
+		},
+
 	];
 
 	private readonly toastConfig: ToastConfigOptions = {
@@ -71,14 +87,14 @@ export class App implements IRouteableComponent {
 		private readonly auth: AuthController,
 		private readonly propertiesController: PropertiesController
 	) {
-		console.log("JOLTEON APP CTOR " + location.hostname + ", " + process.env.SERVER_URL + ", " + process.env.useUrlFragmentHash);
+		console.log("JOLTEON APP CTOR " + location.hostname + ", " + process.env.SERVER_URL + ", " + process.env.useUrlFragmentHash + ", " + store.getState());
 		// toast on saved/failed post operations to server
 		Toast.configure(this.toastConfig);
 		ea.subscribe("operation:saved", this.toastSaved);
 		ea.subscribe("operation:failed", this.toastFailed);
 
 		// use the server url as base url
-		this.http.baseUrl = "https://flareon.ddns.net"; //"https://flareon.ddns.net"; // "https://192.168.2.15"
+		this.http.baseUrl = process.env.SERVER_URL; //"https://flareon.ddns.net"; //"https://flareon.ddns.net"; // "https://192.168.2.15"
 
 		// load server data
 		this.loadServerData();

@@ -25,13 +25,20 @@ namespace souchy.celebi.eevee.enums
         [ZoneSize<ZoneSizeRadius2>] crossHalf,
         [ZoneSize<ZoneSizeRadius2>] xcrossHalf,
 
-        [ZoneSize<ZoneSizeRadius>] circle,      // like a diamond
+        [ZoneSize<ZoneSizeRadius>] circle = 8,      // like a diamond
         [ZoneSize<ZoneSizeRadius>] circleHalf,  // cone, like a triangle
         [ZoneSize<ZoneSizeRadius>] square,      // orthogonal square
         [ZoneSize<ZoneSizeRadius>] squareHalf,  // orthogonal half square makes a bit of a rectangle
         [ZoneSize<ZoneSizeRadius2>] rectangle,
         [ZoneSize<ZoneSizeRadius2>] ellipse,     // ellipse : radius, radius
         [ZoneSize<ZoneSizeRadius2>] ellipseHalf,
+
+        // everyone on the board
+        board,
+        // everyone off the board (creatures available in their party)
+        offboard,
+        // everyone on & off the board
+        all
     }
 
     public abstract class IZoneSizeAttribute : Attribute
@@ -53,7 +60,7 @@ namespace souchy.celebi.eevee.enums
             return t;
         }
     }
-    public static class ZoneTypeExtentions
+    public static class ZoneTypeExtensions
     {
         public static T GetSize<T>(this IZone zone) where T : IZoneSize
         {

@@ -3,6 +3,7 @@ using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.enums.characteristics.properties;
+using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.neweffects.impl;
 
 namespace souchy.celebi.spark.controllers.models
@@ -28,8 +29,6 @@ namespace souchy.celebi.spark.controllers.models
         public TeamRelationType[] GetTeamRelationType() => Enum.GetValues<TeamRelationType>();
         [HttpGet("zoneType")]
         public ZoneType[] GetZoneType() => Enum.GetValues<ZoneType>();
-        [HttpGet("triggerType")]
-        public TriggerType[] GetTriggerType() => Enum.GetValues<TriggerType>();
         [HttpGet("towerDirectionType")]
         public TowerDirectionType[] GetTowerDirectionType() => Enum.GetValues<TowerDirectionType>();
         [HttpGet("direction8Type")]
@@ -46,6 +45,11 @@ namespace souchy.celebi.spark.controllers.models
 
         [HttpGet("effectType")]
         public EffT[] GetEffectType() => Enum.GetValues<EffT>();
+
+        [HttpGet("triggerType")]
+        public TriggerType[] GetTriggerType() => TriggerType.values();
+        [HttpGet("conditionType")]
+        public ConditionType[] GetConditionType() => ConditionType.values();
 
 
     }

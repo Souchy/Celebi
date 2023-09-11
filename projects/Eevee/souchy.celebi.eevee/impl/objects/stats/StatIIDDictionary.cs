@@ -1,4 +1,5 @@
-﻿using souchy.celebi.eevee.enums.characteristics;
+﻿using Newtonsoft.Json;
+using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.impl.util;
 
@@ -11,8 +12,10 @@ namespace souchy.celebi.eevee.impl.objects.stats
     {
         [BsonId]
         public ObjectId entityUid { get; set; }
-
         public CharacteristicId statId { get; init; }
+        [JsonIgnore]
+        public object genericValue => this.value;
+
         public Dictionary<ObjectId, IStat> value { get; set; }
 
         public void set(ObjectId key, IStat val)

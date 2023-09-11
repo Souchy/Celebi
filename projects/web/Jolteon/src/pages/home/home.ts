@@ -13,9 +13,7 @@ export class Home {
 	public name: string = "myname";
 
 	constructor(readonly ea: IEventAggregator, readonly auth: AuthController) {
-		// this.auth = new AuthController(http);
-
-		console.log("ctor home auth: " + this.auth);
+		console.log("ctor home ");
 	}
     
 	public testRequest() {

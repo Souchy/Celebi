@@ -1,0 +1,63 @@
+<import from="../../../../components/modal/modal"></import>
+<import from="../spells/spelllist"></import>
+<import from="../strings/stringcomponent"></import>
+<import from="../stats/creature/creaturestats"></import>
+<import from="../stats/gen/statsmini"></import>
+
+<!-- <div if.bind="model"> -->
+
+  <template if.bind="isvignette">
+    <button class="title btn-outline" click.trigger="clickCreature()">
+      <stringcomponent uid.bind="model.nameId" editable.bind="!isvignette"></stringcomponent>
+      <!-- view-model.ref="name"  -->
+      <!-- ${name.entity.value} -->
+      <!-- <au-slot></au-slot> -->
+    </button>
+  
+    <!-- delete & confirm -->
+    <button class="btn close" data-bs-toggle="modal" data-bs-target="#deleteCreature-${model.entityUid}">x</button>
+    <modal id="deleteCreature-${model.entityUid}" header="Delete Creature?" close.bind=false footer.bind=true callbackok.bind="() => clickRemove()">
+      Confirm delete ${name.entity.value}?
+    </modal>
+  </template>
+  
+  
+  <template else>
+    <h3>Creature #${model.modelUid}</h3>
+    <div class="d-flex">
+      <stringcomponent uid.bind="model.nameId" editable=true></stringcomponent>
+      <stringcomponent uid.bind="model.descriptionId" editable=true large=true class="large"></stringcomponent>
+      <!-- view-model.ref="name"
+           view-model.ref="desc" -->
+    </div>
+  
+  
+    <h3 class="titleSpacer">Skins</h3>
+    <!-- <spelllist mode="creature" spellids.bind="model.spellIds" creatureid.bind="model.modelUid" 
+        callbackadd.bind="s => onAddSpell(s)" callbackremove.bind="s => onRemoveSpell(s)"
+    ></spelllist> -->
+
+    <h3 class="titleSpacer">Spells</h3>
+    <spelllist mode="creature" spellids.bind="model.spellIds" creatureid.bind="model.modelUid" 
+        callbackadd.bind="s => onAddSpell(s)" callbackremove.bind="s => onRemoveSpell(s)"
+    ></spelllist>
+  
+    <h3 class="titleSpacer">Passives</h3>
+    <statuslist mode="creature" passiveids.bind="model.statusPassiveIds"
+      callbackadd.bind="s => onAddPassive(s)" callbackremove.bind="s => onRemovePassive(s)"
+    ></statuslist>
+  
+    <h3 class="titleSpacer">Stats</h3>
+      <creaturestats statsuid.bind="model.statsId"></creaturestats>  <!-- growthuid.bind="model.growthStats" -->
+
+    
+    <!-- TODO un stats mini pour les affinities, un pour les resources, etc? 
+      p-e aussi un paramètre statsmini pour qu'il affiche tous les champs de characsAllowed, même s'il n'existent pas dans le dictionnaire 
+      serait pratique pour les SpellCost p.ex.
+    -->
+    <!-- Mini
+    <statsmini statsuid.bind="model.statsId" characsallowed.bind="Characteristics.creaturesSectioned" hasadddelete.bind="true" hasgrowth.bind="true" showall.bind="true"></statsmini> -->
+  </template>
+  
+
+<!-- </div> -->

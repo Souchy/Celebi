@@ -879,22 +879,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/EffectPermanent"
+                "$ref": "#/components/schemas/IEffect"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/EffectPermanent"
+                "$ref": "#/components/schemas/IEffect"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/EffectPermanent"
+                "$ref": "#/components/schemas/IEffect"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/EffectPermanent"
+                "$ref": "#/components/schemas/IEffect"
               }
             }
           }
@@ -970,8 +970,51 @@
         }
       }
     },
-    "/api/models/effect/{id}/child": {
+    "/api/models/effect/copy": {
       "post": {
+        "tags": [
+          "EffectPermanentController"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IEffect"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IEffect"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IEffect"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IEffect"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IEffect"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/effect/{id}/schema": {
+      "put": {
         "tags": [
           "EffectPermanentController"
         ],
@@ -989,6 +1032,75 @@
             "name": "schemaName",
             "in": "query",
             "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IEffect"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/effect/{id}/addEffect/{addid}": {
+      "put": {
+        "tags": [
+          "EffectPermanentController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "addid",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IEffect"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/effect/removeEffect/{id}": {
+      "put": {
+        "tags": [
+          "EffectPermanentController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
             "schema": {
               "type": "string"
             }
@@ -1312,44 +1424,6 @@
         }
       }
     },
-    "/api/models/enums/triggerType": {
-      "get": {
-        "tags": [
-          "EnumsController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/TriggerType"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/TriggerType"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/TriggerType"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/models/enums/towerDirectionType": {
       "get": {
         "tags": [
@@ -1609,6 +1683,293 @@
                   "items": {
                     "$ref": "#/components/schemas/EffT"
                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/enums/triggerType": {
+      "get": {
+        "tags": [
+          "EnumsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TriggerType"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TriggerType"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TriggerType"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/enums/conditionType": {
+      "get": {
+        "tags": [
+          "EnumsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ConditionType"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ConditionType"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ConditionType"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/factory/trigger": {
+      "post": {
+        "tags": [
+          "FactoryController"
+        ],
+        "parameters": [
+          {
+            "name": "triggerTypeId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITriggerModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/factory/condition": {
+      "post": {
+        "tags": [
+          "FactoryController"
+        ],
+        "parameters": [
+          {
+            "name": "conditionTypeId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ICondition"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/map/all": {
+      "get": {
+        "tags": [
+          "MapModelController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IMap"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/map/{id}": {
+      "get": {
+        "tags": [
+          "MapModelController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IMap"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MapModelController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Map"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Map"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Map"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Map"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReplaceOneResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MapModelController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/map/new": {
+      "post": {
+        "tags": [
+          "MapModelController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IMap"
                 }
               }
             }
@@ -2220,6 +2581,71 @@
         }
       }
     },
+    "/api/models/spell/aggregation/list": {
+      "get": {
+        "tags": [
+          "SpellModelController"
+        ],
+        "parameters": [
+          {
+            "name": "list",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TextEntityAggregation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/spell/aggregation/{id}": {
+      "get": {
+        "tags": [
+          "SpellModelController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpellModelAggregation"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/models/spell/list": {
       "get": {
         "tags": [
@@ -2463,8 +2889,8 @@
         }
       }
     },
-    "/api/models/spell/{id}/effect": {
-      "post": {
+    "/api/models/spell/{id}/addEffect/{addid}": {
+      "put": {
         "tags": [
           "SpellModelController"
         ],
@@ -2479,17 +2905,10 @@
             }
           },
           {
-            "name": "effectParentId",
-            "in": "query",
-            "style": "form",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "schemaName",
-            "in": "query",
-            "style": "form",
+            "name": "addid",
+            "in": "path",
+            "required": true,
+            "style": "simple",
             "schema": {
               "type": "string"
             }
@@ -2501,7 +2920,37 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ISpellModel"
+                  "$ref": "#/components/schemas/IEffect"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/spell/removeEffect/{id}": {
+      "put": {
+        "tags": [
+          "SpellModelController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IEffect"
                 }
               }
             }
@@ -3249,6 +3698,75 @@
         }
       }
     },
+    "/api/models/status/{id}/addEffect/{addid}": {
+      "put": {
+        "tags": [
+          "StatusModelController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "addid",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IEffect"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/status/removeEffect/{id}": {
+      "put": {
+        "tags": [
+          "StatusModelController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IEffect"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/models/string/all": {
       "get": {
         "tags": [
@@ -3532,8 +4050,8 @@
       },
       "ActorType": {
         "enum": [
-          "Source",
-          "Target"
+          "Source = 0",
+          "Target = 1"
         ],
         "type": "string",
         "format": ""
@@ -3562,6 +4080,27 @@
         "type": "object",
         "properties": {
           "stats": {
+            "$ref": "#/components/schemas/IStats"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddStatsPerStat": {
+        "type": "object",
+        "properties": {
+          "statsFrom": {
+            "$ref": "#/components/schemas/IStats"
+          },
+          "statsTo": {
+            "$ref": "#/components/schemas/IStats"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddStatsPercent": {
+        "type": "object",
+        "properties": {
+          "statsPercent": {
             "$ref": "#/components/schemas/IStats"
           }
         },
@@ -3644,18 +4183,19 @@
       },
       "AffinityTypes": {
         "enum": [
-          "True: Affinity = {\r\n  \"element\": 1,\r\n  \"category\": 2,\r\n  \"localId\": 1,\r\n  \"baseName\": \"True\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2001\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.True\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Fire: Affinity = {\r\n  \"element\": 2,\r\n  \"category\": 2,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Fire\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2002\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Fire\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Water: Affinity = {\r\n  \"element\": 3,\r\n  \"category\": 2,\r\n  \"localId\": 3,\r\n  \"baseName\": \"Water\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2003\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Water\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Earth: Affinity = {\r\n  \"element\": 4,\r\n  \"category\": 2,\r\n  \"localId\": 4,\r\n  \"baseName\": \"Earth\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2004\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Earth\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Air: Affinity = {\r\n  \"element\": 5,\r\n  \"category\": 2,\r\n  \"localId\": 5,\r\n  \"baseName\": \"Air\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2005\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Air\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Dark: Affinity = {\r\n  \"element\": 6,\r\n  \"category\": 2,\r\n  \"localId\": 6,\r\n  \"baseName\": \"Dark\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2006\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Dark\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Light: Affinity = {\r\n  \"element\": 7,\r\n  \"category\": 2,\r\n  \"localId\": 7,\r\n  \"baseName\": \"Light\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2007\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Light\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "True: Affinity = {\r\n  \"element\": 4,\r\n  \"category\": 2,\r\n  \"localId\": 1,\r\n  \"baseName\": \"True\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2001\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.True\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Fire: Affinity = {\r\n  \"element\": 5,\r\n  \"category\": 2,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Fire\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2002\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Fire\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Water: Affinity = {\r\n  \"element\": 6,\r\n  \"category\": 2,\r\n  \"localId\": 3,\r\n  \"baseName\": \"Water\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2003\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Water\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Earth: Affinity = {\r\n  \"element\": 7,\r\n  \"category\": 2,\r\n  \"localId\": 4,\r\n  \"baseName\": \"Earth\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2004\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Earth\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Air: Affinity = {\r\n  \"element\": 8,\r\n  \"category\": 2,\r\n  \"localId\": 5,\r\n  \"baseName\": \"Air\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2005\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Air\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Dark: Affinity = {\r\n  \"element\": 9,\r\n  \"category\": 2,\r\n  \"localId\": 6,\r\n  \"baseName\": \"Dark\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2006\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Dark\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Light: Affinity = {\r\n  \"element\": 10,\r\n  \"category\": 2,\r\n  \"localId\": 7,\r\n  \"baseName\": \"Light\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2007\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Light\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Physical: Affinity = {\r\n  \"element\": 11,\r\n  \"category\": 2,\r\n  \"localId\": 8,\r\n  \"baseName\": \"Physical\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2008\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Physical\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Damage: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 20,\r\n  \"baseName\": \"Damage\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2020\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Damage\",\r\n  \"enumValueConstraint\": null\r\n};",
           "IndirectDamage: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 21,\r\n  \"baseName\": \"IndirectDamage\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2021\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.IndirectDamage\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Heal: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 22,\r\n  \"baseName\": \"Heal\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2022\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Heal\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Melee: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 23,\r\n  \"baseName\": \"Melee\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 5,\r\n      \"groupType\": 0,\r\n      \"children\": []\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2023\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Melee\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Distance: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 24,\r\n  \"baseName\": \"Distance\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 2,\r\n      \"groupType\": 0,\r\n      \"children\": []\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2024\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Distance\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Melee: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 23,\r\n  \"baseName\": \"Melee\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 5\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2023\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Melee\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Distance: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 24,\r\n  \"baseName\": \"Distance\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 2\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2024\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Distance\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Trap: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 25,\r\n  \"baseName\": \"Trap\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2025\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Trap\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Glyph: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 26,\r\n  \"baseName\": \"Glyph\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2026\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Glyph\",\r\n  \"enumValueConstraint\": null\r\n};",
           "PenetrationPercent: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 27,\r\n  \"baseName\": \"PenetrationPercent\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2027\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.PenetrationPercent\",\r\n  \"enumValueConstraint\": null\r\n};",
@@ -3696,8 +4236,8 @@
       },
       "BoardTargetType": {
         "enum": [
-          "Cell",
-          "Creature"
+          "Cell = 0",
+          "Creature = 1"
         ],
         "type": "string",
         "format": ""
@@ -3721,6 +4261,45 @@
           }
         },
         "additionalProperties": false
+      },
+      "CellMovedHistory": {
+        "type": "object",
+        "properties": {
+          "cellID": {
+            "type": "string",
+            "nullable": true
+          },
+          "moveType": {
+            "$ref": "#/components/schemas/MoveType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CellType": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isWalkable": {
+            "type": "boolean"
+          },
+          "blocksLos": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CellTypeTypes": {
+        "enum": [
+          "hole: CellType = {\r\n  \"id\": 0,\r\n  \"isWalkable\": false,\r\n  \"blocksLos\": false\r\n};",
+          "floor: CellType = {\r\n  \"id\": 1,\r\n  \"isWalkable\": true,\r\n  \"blocksLos\": false\r\n};",
+          "block: CellType = {\r\n  \"id\": 2,\r\n  \"isWalkable\": false,\r\n  \"blocksLos\": true\r\n};",
+          "object: CellType = {\r\n  \"id\": 3,\r\n  \"isWalkable\": true,\r\n  \"blocksLos\": true\r\n};"
+        ],
+        "type": "string",
+        "format": ""
       },
       "ChangeActor": {
         "type": "object",
@@ -3759,19 +4338,34 @@
       },
       "CharacteristicCategory": {
         "enum": [
-          "Resource",
-          "Affinity",
-          "Resistance",
-          "State",
-          "Contextual",
-          "Other",
-          "Spell",
-          "SpellModel",
-          "StatusContainer",
-          "StatusInstance"
+          "Resource = 1",
+          "Affinity = 2",
+          "Resistance = 3",
+          "State = 4",
+          "Contextual = 5",
+          "Other = 6",
+          "Spell = 7",
+          "SpellModel = 8",
+          "StatusContainer = 9",
+          "StatusInstance = 10"
         ],
         "type": "string",
         "format": ""
+      },
+      "CharacteristicIdIStatEntityDictionary": {
+        "type": "object",
+        "properties": {
+          "entityUid": {
+            "type": "string"
+          },
+          "dic": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/IStat"
+            }
+          }
+        },
+        "additionalProperties": false
       },
       "CharacteristicIdIStatKeyValuePair": {
         "type": "object",
@@ -3781,6 +4375,21 @@
           },
           "value": {
             "$ref": "#/components/schemas/IStat"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CharacteristicIdMathEquationEntityDictionary": {
+        "type": "object",
+        "properties": {
+          "entityUid": {
+            "type": "string"
+          },
+          "dic": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/MathEquation"
+            }
           }
         },
         "additionalProperties": false
@@ -3832,20 +4441,54 @@
       },
       "ConditionComparatorType": {
         "enum": [
-          "EQ",
-          "NE",
-          "GT",
-          "GE",
-          "LT",
-          "LE"
+          "EQ = 0",
+          "NE = 1",
+          "GT = 2",
+          "GE = 3",
+          "LT = 4",
+          "LE = 5"
         ],
         "type": "string",
         "format": ""
       },
       "ConditionGroupType": {
         "enum": [
-          "AND",
-          "OR"
+          "AND = 0",
+          "OR = 1"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "ConditionType": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConditionTypeTypes": {
+        "enum": [
+          "Group: ConditionType = {\r\n  \"id\": \"0\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.GroupCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "LineOfSight: ConditionType = {\r\n  \"id\": \"1\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.other.LineOfSightCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "Distance: ConditionType = {\r\n  \"id\": \"2\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.other.DistanceCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "CreatureModel: ConditionType = {\r\n  \"id\": \"101\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.creature.CreatureModelCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "CreatureModelSame: ConditionType = {\r\n  \"id\": \"102\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.creature.CreatureModelCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "CreatureCurrentTeam: ConditionType = {\r\n  \"id\": \"103\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.creature.CreatureCurrentTeamCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "CreatureOriginalTeam: ConditionType = {\r\n  \"id\": \"104\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.creature.CreatureOriginalTeamCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "CreatureIsSummon: ConditionType = {\r\n  \"id\": \"105\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.creature.CreatureOriginalTeamCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "CreatureStats: ConditionType = {\r\n  \"id\": \"106\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.creature.CreatureStatsCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "StatusModel: ConditionType = {\r\n  \"id\": \"201\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.status.StatusModelCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "StatusTeam: ConditionType = {\r\n  \"id\": \"202\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.status.StatusTeamCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "StatusStats: ConditionType = {\r\n  \"id\": \"203\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.status.StatusStatsCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "SpellModel: ConditionType = {\r\n  \"id\": \"301\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.spell.SpellModelCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "SpellStats: ConditionType = {\r\n  \"id\": \"303\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.spell.SpellStatsCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};"
         ],
         "type": "string",
         "format": ""
@@ -3905,8 +4548,19 @@
       },
       "ConsumableType": {
         "enum": [
-          "All",
-          "Random"
+          "All = 0",
+          "Random = 1"
+        ],
+        "type": "string",
+        "format": ""
+      },
+      "ContextType": {
+        "enum": [
+          "Fight = 0",
+          "Round = 1",
+          "Turn = 2",
+          "Action = 3",
+          "Effect = 4"
         ],
         "type": "string",
         "format": ""
@@ -3954,23 +4608,34 @@
       },
       "ContextualTypes": {
         "enum": [
-          "LifeGained: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 0,\r\n  \"baseName\": \"LifeGained\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5000\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.LifeGained\",\r\n  \"enumValueConstraint\": null\r\n};",
           "LifeUsed: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 1,\r\n  \"baseName\": \"LifeUsed\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5001\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.LifeUsed\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "LifeLost: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 2,\r\n  \"baseName\": \"LifeLost\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5002\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.LifeLost\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "ManaGained: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 3,\r\n  \"baseName\": \"ManaGained\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5003\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.ManaGained\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "ManaUsed: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 4,\r\n  \"baseName\": \"ManaUsed\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5004\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.ManaUsed\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "ManaLost: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 5,\r\n  \"baseName\": \"ManaLost\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5005\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.ManaLost\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "MovementGained: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 6,\r\n  \"baseName\": \"MovementGained\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5006\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.MovementGained\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "MovementUsed: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 7,\r\n  \"baseName\": \"MovementUsed\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5007\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.MovementUsed\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "MovementLost: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 8,\r\n  \"baseName\": \"MovementLost\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5008\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.MovementLost\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "CountHitsGiven: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 9,\r\n  \"baseName\": \"CountHitsGiven\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5009\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.CountHitsGiven\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "CountHitsTaken: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 10,\r\n  \"baseName\": \"CountHitsTaken\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5010\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.CountHitsTaken\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "HealReceived: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 2,\r\n  \"baseName\": \"HealReceived\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5002\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.HealReceived\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "HealDone: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 3,\r\n  \"baseName\": \"HealReceived\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5003\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.HealReceived\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "DamageTaken: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 4,\r\n  \"baseName\": \"DamageTaken\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5004\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.DamageTaken\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "DamageDone: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 5,\r\n  \"baseName\": \"DamageDone\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5005\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.DamageDone\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "ManaUsed: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 11,\r\n  \"baseName\": \"ManaUsed\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5011\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.ManaUsed\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "ManaGained: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 12,\r\n  \"baseName\": \"ManaGained\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5012\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.ManaGained\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "ManaGiven: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 13,\r\n  \"baseName\": \"ManaGained\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5013\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.ManaGained\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "ManaLost: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 14,\r\n  \"baseName\": \"ManaLost\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5014\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.ManaLost\",\r\n  \"enumValueConstraint\": null\r\n};",
           "ManaReduced: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 15,\r\n  \"baseName\": \"ManaReduced\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5015\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.ManaReduced\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "MovementReduced: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 16,\r\n  \"baseName\": \"MovementReduced\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5016\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.MovementReduced\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "StartTurnPosition: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 11,\r\n  \"baseName\": \"StartTurnPosition\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5011\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.StartTurnPosition\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "StartFightPosition: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 12,\r\n  \"baseName\": \"StartFightPosition\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5012\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.StartFightPosition\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "PreviousPositions: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 13,\r\n  \"baseName\": \"PreviousPositions\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 3,\r\n  \"id\": \"5013\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.PreviousPositions\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "NextPositions: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 14,\r\n  \"baseName\": \"NextPositions\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 3,\r\n  \"id\": \"5014\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.NextPositions\",\r\n  \"enumValueConstraint\": null\r\n};"
+          "MovementUsed: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 21,\r\n  \"baseName\": \"MovementUsed\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5021\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.MovementUsed\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MovementGained: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 22,\r\n  \"baseName\": \"MovementGained\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5022\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.MovementGained\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MovementGiven: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 23,\r\n  \"baseName\": \"MovementGained\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5023\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.MovementGained\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MovementLost: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 24,\r\n  \"baseName\": \"MovementLost\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5024\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.MovementLost\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MovementReduced: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 25,\r\n  \"baseName\": \"MovementReduced\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5025\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.MovementReduced\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "RageUsed: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 31,\r\n  \"baseName\": \"RageUsed\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5031\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.RageUsed\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "RageGained: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 32,\r\n  \"baseName\": \"RageGained\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5032\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.RageGained\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "RageGiven: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 33,\r\n  \"baseName\": \"RageGained\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5033\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.RageGained\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "RageLost: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 34,\r\n  \"baseName\": \"RageLost\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5034\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.RageLost\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "RageReduced: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 35,\r\n  \"baseName\": \"RageReduced\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5035\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.RageReduced\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "CountHitsGiven: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 100,\r\n  \"baseName\": \"CountHitsGiven\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5100\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.CountHitsGiven\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "CountHitsTaken: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 101,\r\n  \"baseName\": \"CountHitsTaken\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5101\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.CountHitsTaken\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "SwapInRemainingCooldown: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 102,\r\n  \"baseName\": \"SwapInRemainingCooldown\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5102\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.SwapInRemainingCooldown\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "SwapOutRemainingCooldown: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 103,\r\n  \"baseName\": \"SwapOutRemainingCooldown\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5103\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.SwapOutRemainingCooldown\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "StartTurnPosition: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 200,\r\n  \"baseName\": \"StartTurnPosition\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5200\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.StartTurnPosition\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "StartFightPosition: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 201,\r\n  \"baseName\": \"StartFightPosition\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"5201\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.StartFightPosition\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "PreviousPositions: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 202,\r\n  \"baseName\": \"PreviousPositions\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 3,\r\n  \"id\": \"5202\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.PreviousPositions\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "NextPositions: Contextual = {\r\n  \"category\": 5,\r\n  \"localId\": 203,\r\n  \"baseName\": \"NextPositions\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 3,\r\n  \"id\": \"5203\",\r\n  \"nameModelUid\": \"CharacteristicType.Contextual.NextPositions\",\r\n  \"enumValueConstraint\": null\r\n};"
         ],
         "type": "string",
         "format": ""
@@ -4010,6 +4675,40 @@
           }
         },
         "additionalProperties": false
+      },
+      "CreatureCurrentTeamCondition": {
+        "type": "object",
+        "properties": {
+          "team": {
+            "$ref": "#/components/schemas/TeamRelationType"
+          },
+          "actorType": {
+            "$ref": "#/components/schemas/ActorType"
+          },
+          "comparator": {
+            "$ref": "#/components/schemas/ConditionComparatorType"
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
+      "CreatureIsSummonCondition": {
+        "type": "object",
+        "properties": {
+          "isSummon": {
+            "type": "boolean"
+          },
+          "actorType": {
+            "$ref": "#/components/schemas/ActorType"
+          },
+          "comparator": {
+            "$ref": "#/components/schemas/ConditionComparatorType"
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
       },
       "CreatureModel": {
         "type": "object",
@@ -4057,6 +4756,9 @@
       "CreatureModelCondition": {
         "type": "object",
         "properties": {
+          "sameAsSource": {
+            "type": "boolean"
+          },
           "creatureModelId": {
             "type": "string",
             "nullable": true
@@ -4066,16 +4768,23 @@
           },
           "comparator": {
             "$ref": "#/components/schemas/ConditionComparatorType"
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
+      "CreatureOriginalTeamCondition": {
+        "type": "object",
+        "properties": {
+          "team": {
+            "$ref": "#/components/schemas/TeamRelationType"
           },
-          "groupType": {
-            "$ref": "#/components/schemas/ConditionGroupType"
+          "actorType": {
+            "$ref": "#/components/schemas/ActorType"
           },
-          "children": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ICondition"
-            },
-            "nullable": true
+          "comparator": {
+            "$ref": "#/components/schemas/ConditionComparatorType"
           }
         },
         "additionalProperties": {
@@ -4085,24 +4794,40 @@
       "CreatureStats": {
         "type": "object",
         "properties": {
-          "growth": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/MathEquation"
-            },
-            "nullable": true
-          },
           "entityUid": {
             "type": "string"
           },
-          "dic": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/IStat"
-            }
+          "base": {
+            "$ref": "#/components/schemas/CharacteristicIdIStatEntityDictionary"
+          },
+          "growth": {
+            "$ref": "#/components/schemas/CharacteristicIdMathEquationEntityDictionary"
           }
         },
         "additionalProperties": false
+      },
+      "CreatureStatsCondition": {
+        "type": "object",
+        "properties": {
+          "useNaturalStats": {
+            "type": "boolean"
+          },
+          "compareWithTarget": {
+            "type": "boolean"
+          },
+          "conditionStats": {
+            "$ref": "#/components/schemas/IStats"
+          },
+          "actorType": {
+            "$ref": "#/components/schemas/ActorType"
+          },
+          "comparator": {
+            "$ref": "#/components/schemas/ConditionComparatorType"
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
       },
       "CurrencyProduct": {
         "type": "object",
@@ -4138,6 +4863,38 @@
         },
         "additionalProperties": false
       },
+      "DamagePerContextualStat": {
+        "type": "object",
+        "properties": {
+          "isMultiplierPercentage": {
+            "type": "boolean"
+          },
+          "statId": {
+            "type": "string"
+          },
+          "multiplier": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "element": {
+            "$ref": "#/components/schemas/ElementType"
+          },
+          "baseDamage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "percentPenetration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "percentVariance": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "DamagePerDynamicResourceUsedForSpell": {
         "type": "object",
         "properties": {
@@ -4145,26 +4902,6 @@
             "type": "string"
           },
           "baseDamagePerCharacUsed": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
-      "DamagePerManaReducedInTurn": {
-        "type": "object",
-        "properties": {
-          "baseDamagePerCharacReduced": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
-      "DamagePerMovementReducedInTurn": {
-        "type": "object",
-        "properties": {
-          "baseDamagePerCharacReduced": {
             "type": "integer",
             "format": "int32"
           }
@@ -4202,6 +4939,17 @@
         "properties": {
           "moveTargetZone": {
             "$ref": "#/components/schemas/IZone"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DashToScript": {
+        "type": "object",
+        "properties": {
+          "schemaType": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
           }
         },
         "additionalProperties": false
@@ -4327,29 +5075,29 @@
       },
       "Direction8Type": {
         "enum": [
-          "top",
-          "topright",
-          "right",
-          "bottomright",
-          "bottom",
-          "bottomleft",
-          "left",
-          "topleft"
+          "top = 0",
+          "topright = 1",
+          "right = 2",
+          "bottomright = 3",
+          "bottom = 4",
+          "bottomleft = 5",
+          "left = 6",
+          "topleft = 7"
         ],
         "type": "string",
         "format": ""
       },
       "Direction9Type": {
         "enum": [
-          "center",
-          "top",
-          "topright",
-          "right",
-          "bottomright",
-          "bottom",
-          "bottomleft",
-          "left",
-          "topleft"
+          "center = 0",
+          "top = 1",
+          "topright = 2",
+          "right = 3",
+          "bottomright = 4",
+          "bottom = 5",
+          "bottomleft = 6",
+          "left = 7",
+          "topleft = 8"
         ],
         "type": "string",
         "format": ""
@@ -4366,16 +5114,6 @@
           },
           "comparator": {
             "$ref": "#/components/schemas/ConditionComparatorType"
-          },
-          "groupType": {
-            "$ref": "#/components/schemas/ConditionGroupType"
-          },
-          "children": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ICondition"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": {
@@ -4384,129 +5122,100 @@
       },
       "EffT": {
         "enum": [
-          "AddStats",
-          "LearnSpell",
-          "ForgetSpell",
-          "ChangeAppearance",
-          "ChangeAnimationSet",
-          "ReduceDamageReceived",
-          "AddSpellRange",
-          "AddSpellEffectBaseDamage",
-          "ChangeSpellRangeZone",
-          "ChangeSpellEffectZone",
-          "BuildObstacle",
-          "DestroyObstacle",
-          "DigHole",
-          "FillHole",
-          "Kill",
-          "Revive",
-          "EndTurn",
-          "SpawnSummon",
-          "UnspawnSummon",
-          "SpawnSummonDouble",
-          "SpawnSummonDoubleIllusion",
-          "RevealCreatureSpells",
-          "Walk",
-          "PushBy",
-          "PullBy",
-          "DashBy",
-          "DashAwayBy",
-          "PushTo",
-          "PullTo",
-          "DashTo",
-          "SwapSelfWith",
-          "SwapTargetWith",
-          "TeleportSelfTo",
-          "TeleportTargetTo",
-          "TeleportSelfBy",
-          "TeleportTargetBy",
-          "TeleportSymmetricallySelfOverTarget",
-          "TeleportSymmetricallyTargetOverSelf",
-          "TeleportSymmetricallyAoeOverTarget",
-          "TeleportToPreviousPosition",
-          "TeleportToStartOfTurnPosition",
-          "TeleportToStartOfFightPosition",
-          "ChangeActor",
-          "CastSubSpell",
-          "RandomChild",
-          "RandomPointsInZone",
-          "EmptyText",
-          "AddStatusCreature",
-          "AddTrap",
-          "AddGlyph",
-          "AddGlyphAura",
-          "CreateStatusCreature",
-          "CreateTrap",
-          "CreateGlyph",
-          "CreateGlyphAura",
-          "RemoveStatusCreature",
-          "RemoveTrap",
-          "RemoveGlyph",
-          "DirectDamage",
-          "DirectDamagePercentLifeMax",
-          "DirectDamageStealLife",
-          "IndirectDamage",
-          "IndirectDamagePercentLifeMax",
-          "RedirectDamage",
-          "Heal",
-          "HealPercentLifeMax",
-          "HealPercentLifeDamageReceived",
-          "HealPercentLifeDamageDone",
-          "TransferLife",
-          "TransferPercentLifeMax",
-          "DamagePerDynamicResourceUsedForSpell",
-          "DamagePerManaReducedInTurn",
-          "DamagePerMovementReducedInTurn",
-          "SwapOut",
-          "SwapIn",
-          "SpellChain"
+          "AddStats = 0",
+          "LearnSpell = 1",
+          "ForgetSpell = 2",
+          "ChangeAppearance = 3",
+          "ChangeAnimationSet = 4",
+          "ReduceDamageReceived = 5",
+          "BuildObstacle = 10",
+          "DestroyObstacle = 11",
+          "DigHole = 12",
+          "FillHole = 13",
+          "Kill = 14",
+          "Revive = 15",
+          "EndTurn = 16",
+          "SpawnSummon = 17",
+          "UnspawnSummon = 18",
+          "SpawnSummonDouble = 19",
+          "SpawnSummonDoubleIllusion = 20",
+          "RevealCreatureSpells = 21",
+          "Walk = 22",
+          "PushBy = 23",
+          "PullBy = 24",
+          "DashBy = 25",
+          "DashAwayBy = 26",
+          "PushTo = 27",
+          "PullTo = 28",
+          "DashTo = 29",
+          "SwapSelfWith = 30",
+          "SwapTargetWith = 31",
+          "TeleportSelfTo = 32",
+          "TeleportTargetTo = 33",
+          "TeleportSelfBy = 34",
+          "TeleportTargetBy = 35",
+          "TeleportSymmetricallySelfOverTarget = 36",
+          "TeleportSymmetricallyTargetOverSelf = 37",
+          "TeleportSymmetricallyAoeOverTarget = 38",
+          "TeleportToPreviousPosition = 39",
+          "TeleportToStartOfTurnPosition = 40",
+          "TeleportToStartOfFightPosition = 41",
+          "ChangeActor = 42",
+          "CastSubSpell = 43",
+          "RandomChild = 44",
+          "RandomPointsInZone = 45",
+          "EmptyText = 46",
+          "AddStatusCreature = 47",
+          "AddTrap = 48",
+          "AddGlyph = 49",
+          "AddGlyphAura = 50",
+          "CreateStatusCreature = 51",
+          "CreateTrap = 52",
+          "CreateGlyph = 53",
+          "CreateGlyphAura = 54",
+          "RemoveStatusCreature = 55",
+          "RemoveTrap = 56",
+          "RemoveGlyph = 57",
+          "DirectDamage = 58",
+          "DirectDamagePercentLifeMax = 59",
+          "DirectDamageStealLife = 60",
+          "IndirectDamage = 61",
+          "IndirectDamagePercentLifeMax = 62",
+          "RedirectDamage = 63",
+          "Heal = 64",
+          "HealPercentLifeMax = 65",
+          "HealPercentDamageReceivedByEffect = 66",
+          "HealPercentDamageDoneByEffect = 67",
+          "TransferLife = 68",
+          "TransferPercentLifeMax = 69",
+          "DamagePerDynamicResourceUsedForSpell = 70",
+          "DamagePerContextualStat = 71",
+          "HealPerContextualStat = 72",
+          "AddStatsPerStat = 73",
+          "SwapOut = 100",
+          "SwapIn = 101",
+          "TakeDamageAsElement = 102",
+          "AddStatsPercent = 103",
+          "Chain = 104",
+          "SpellAddStats = 150",
+          "SpellMetaModifySpell = 200",
+          "SpellMetaDeactivate = 201",
+          "SpellMetaAddCosts = 202",
+          "SpellMetaConvertCosts = 203",
+          "SpellMetaChangeMinRangeZone = 204",
+          "SpellMetaChangeMaxRangeZone = 205",
+          "SpellMetaAddSpellModelStats = 206",
+          "SpellMetaAddChildEffects = 207",
+          "SpellMetaEffectChangeZone = 250",
+          "SpellMetaEffectChangeTargetFilter = 251",
+          "SpellMetaEffectAddBaseDamage = 300",
+          "SpellMetaEffectAddBaseHeal = 301",
+          "SpellMetaEffectChangeElement = 302",
+          "SpellMetaEffectChangeVariance = 303",
+          "SpellMetaEffectChangePenetration = 304"
         ],
         "type": "string",
         "format": ""
-      },
-      "EffectInstance": {
-        "type": "object",
-        "properties": {
-          "fightUid": {
-            "type": "string"
-          },
-          "entityUid": {
-            "type": "string"
-          },
-          "modelUid": {
-            "type": "string",
-            "nullable": true
-          },
-          "schema": {
-            "$ref": "#/components/schemas/IEffectSchema"
-          },
-          "sourceCondition": {
-            "$ref": "#/components/schemas/ICondition"
-          },
-          "targetFilter": {
-            "$ref": "#/components/schemas/ICondition"
-          },
-          "targetAcquisitionZone": {
-            "$ref": "#/components/schemas/IZone"
-          },
-          "triggers": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ITrigger"
-            },
-            "nullable": true
-          },
-          "effectIds": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": {
-          "type": "object"
-        }
       },
       "EffectPermanent": {
         "type": "object",
@@ -4533,7 +5242,7 @@
           "triggers": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ITrigger"
+              "$ref": "#/components/schemas/ITriggerModel"
             },
             "nullable": true
           },
@@ -4549,18 +5258,66 @@
           "type": "object"
         }
       },
+      "EffectPermanentAggregation": {
+        "type": "object",
+        "properties": {
+          "entityUid": {
+            "type": "string"
+          },
+          "modelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "model": {
+            "$ref": "#/components/schemas/IEffectModel"
+          },
+          "schema": {
+            "$ref": "#/components/schemas/IEffectSchema"
+          },
+          "sourceCondition": {
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "targetFilter": {
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "targetAcquisitionZone": {
+            "$ref": "#/components/schemas/IZone"
+          },
+          "triggers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ITriggerModel"
+            },
+            "nullable": true
+          },
+          "depth": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "effects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EffectPermanentAggregation"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "ElementType": {
         "enum": [
-          "None",
-          "True",
-          "Fire",
-          "Water",
-          "Earth",
-          "Air",
-          "Dark",
-          "Light",
-          "Best",
-          "Worst"
+          "None = 0",
+          "Best = 1",
+          "Worst = 2",
+          "All = 3",
+          "True = 4",
+          "Fire = 5",
+          "Water = 6",
+          "Earth = 7",
+          "Air = 8",
+          "Dark = 9",
+          "Light = 10",
+          "Physical = 11"
         ],
         "type": "string",
         "format": ""
@@ -4612,6 +5369,30 @@
         },
         "additionalProperties": false
       },
+      "GroupCondition": {
+        "type": "object",
+        "properties": {
+          "groupType": {
+            "$ref": "#/components/schemas/ConditionGroupType"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICondition"
+            },
+            "nullable": true
+          },
+          "actorType": {
+            "$ref": "#/components/schemas/ActorType"
+          },
+          "comparator": {
+            "$ref": "#/components/schemas/ConditionComparatorType"
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
       "Heal": {
         "type": "object",
         "properties": {
@@ -4629,7 +5410,35 @@
         },
         "additionalProperties": false
       },
-      "HealPercentLifeDamageDone": {
+      "HealPerContextualStat": {
+        "type": "object",
+        "properties": {
+          "isMultiplierPercentage": {
+            "type": "boolean"
+          },
+          "statId": {
+            "type": "string"
+          },
+          "multiplier": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "element": {
+            "$ref": "#/components/schemas/ElementType"
+          },
+          "baseHeal": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "percentVariance": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "HealPercentDamageDoneByEffect": {
         "type": "object",
         "properties": {
           "element": {
@@ -4642,7 +5451,7 @@
         },
         "additionalProperties": false
       },
-      "HealPercentLifeDamageDoneScript": {
+      "HealPercentDamageDoneByEffectScript": {
         "type": "object",
         "properties": {
           "schemaType": {
@@ -4653,7 +5462,7 @@
         },
         "additionalProperties": false
       },
-      "HealPercentLifeDamageReceived": {
+      "HealPercentDamageReceivedByEffect": {
         "type": "object",
         "properties": {
           "element": {
@@ -4666,7 +5475,7 @@
         },
         "additionalProperties": false
       },
-      "HealPercentLifeDamageReceivedScript": {
+      "HealPercentDamageReceivedByEffectScript": {
         "type": "object",
         "properties": {
           "schemaType": {
@@ -4717,11 +5526,65 @@
       },
       "I18NType": {
         "enum": [
-          "fr",
-          "en"
+          "fr = 0",
+          "en = 1"
         ],
         "type": "string",
         "format": ""
+      },
+      "ICell": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/CellType"
+          },
+          "assetOverride": {
+            "$ref": "#/components/schemas/IMapAsset"
+          },
+          "position": {
+            "$ref": "#/components/schemas/IPosition"
+          },
+          "statuses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "contexts": {
+            "type": "object",
+            "properties": {
+              "Fight": {
+                "$ref": "#/components/schemas/IContext"
+              },
+              "Round": {
+                "$ref": "#/components/schemas/IContext"
+              },
+              "Turn": {
+                "$ref": "#/components/schemas/IContext"
+              },
+              "Action": {
+                "$ref": "#/components/schemas/IContext"
+              },
+              "Effect": {
+                "$ref": "#/components/schemas/IContext"
+              }
+            },
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "modelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "entityUid": {
+            "type": "string"
+          },
+          "fightUid": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
       },
       "ICondition": {
         "type": "object",
@@ -4731,21 +5594,52 @@
           },
           "comparator": {
             "$ref": "#/components/schemas/ConditionComparatorType"
-          },
-          "groupType": {
-            "$ref": "#/components/schemas/ConditionGroupType"
-          },
-          "children": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ICondition"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": {
           "type": "object"
         }
+      },
+      "IContext": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ContextType"
+          },
+          "valuesStored": {
+            "type": "object",
+            "additionalProperties": {
+              "nullable": true
+            },
+            "nullable": true
+          },
+          "spellsCast": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpellCastHistory"
+            },
+            "nullable": true
+          },
+          "cellsMoved": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CellMovedHistory"
+            },
+            "nullable": true
+          },
+          "compiledEffects": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/IEffectPreview"
+              },
+              "nullable": true
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "ICreatureModel": {
         "type": "object",
@@ -4858,7 +5752,7 @@
           "triggers": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ITrigger"
+              "$ref": "#/components/schemas/ITriggerModel"
             },
             "nullable": true
           },
@@ -4880,6 +5774,32 @@
         "additionalProperties": {
           "type": "object"
         }
+      },
+      "IEffectModel": {
+        "type": "object",
+        "properties": {
+          "nameId": {
+            "type": "string"
+          },
+          "descriptionId": {
+            "type": "string"
+          },
+          "boardTargetType": {
+            "$ref": "#/components/schemas/BoardTargetType"
+          },
+          "schemaType": {
+            "type": "string",
+            "nullable": true
+          },
+          "modelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "entityUid": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
       },
       "IEffectPermanent": {
         "type": "object",
@@ -4899,7 +5819,7 @@
           "triggers": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ITrigger"
+              "$ref": "#/components/schemas/ITriggerModel"
             },
             "nullable": true
           },
@@ -4922,11 +5842,133 @@
           "type": "object"
         }
       },
+      "IEffectPreview": {
+        "type": "object",
+        "properties": {
+          "sourceID": {
+            "type": "string",
+            "nullable": true
+          },
+          "targetID": {
+            "type": "string",
+            "nullable": true
+          },
+          "spellID": {
+            "type": "string",
+            "nullable": true
+          },
+          "effectModelID": {
+            "type": "string",
+            "nullable": true
+          },
+          "effectInstanceID": {
+            "type": "string",
+            "nullable": true
+          },
+          "triggeredBefore": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IEffectPreview"
+            },
+            "nullable": true
+          },
+          "triggeredAfter": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IEffectPreview"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "IEffectSchema": {
         "type": "object",
         "properties": {
           "effType": {
             "$ref": "#/components/schemas/EffT"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IMap": {
+        "type": "object",
+        "properties": {
+          "nameId": {
+            "type": "string"
+          },
+          "mapAsset": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultAssets": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/IMapAsset"
+            },
+            "nullable": true
+          },
+          "teamsStartPositions": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/IVector3"
+              }
+            },
+            "nullable": true
+          },
+          "cells": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICell"
+            },
+            "nullable": true
+          },
+          "modelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "entityUid": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IMapAsset": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "nullable": true
+          },
+          "transform": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IVector3"
+            },
+            "nullable": true
+          },
+          "color": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IPosition": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "z": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "y": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -4956,15 +5998,6 @@
           },
           "targetFilter": {
             "$ref": "#/components/schemas/ICondition"
-          },
-          "costs": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "integer",
-              "format": "int32",
-              "nullable": true
-            },
-            "nullable": true
           },
           "statsId": {
             "type": "string"
@@ -5032,6 +6065,12 @@
       "IStats": {
         "type": "object",
         "properties": {
+          "base": {
+            "$ref": "#/components/schemas/CharacteristicIdIStatEntityDictionary"
+          },
+          "growth": {
+            "$ref": "#/components/schemas/CharacteristicIdMathEquationEntityDictionary"
+          },
           "entityUid": {
             "type": "string"
           },
@@ -5065,40 +6104,6 @@
       "IStatsFilterDefinition": {
         "type": "object",
         "additionalProperties": false
-      },
-      "IStatusCondition": {
-        "type": "object",
-        "properties": {
-          "statusModelId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "statId": {
-            "type": "string"
-          },
-          "value": {
-            "nullable": true
-          },
-          "actorType": {
-            "$ref": "#/components/schemas/ActorType"
-          },
-          "comparator": {
-            "$ref": "#/components/schemas/ConditionComparatorType"
-          },
-          "groupType": {
-            "$ref": "#/components/schemas/ConditionGroupType"
-          },
-          "children": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ICondition"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": {
-          "type": "object"
-        }
       },
       "IStatusModel": {
         "type": "object",
@@ -5168,11 +6173,11 @@
         "type": "object",
         "additionalProperties": false
       },
-      "ITrigger": {
+      "ITriggerModel": {
         "type": "object",
         "properties": {
-          "triggerType": {
-            "$ref": "#/components/schemas/TriggerType"
+          "schema": {
+            "$ref": "#/components/schemas/ITriggerSchema"
           },
           "triggerOrderType": {
             "$ref": "#/components/schemas/TriggerOrderType"
@@ -5185,6 +6190,15 @@
           },
           "holderCondition": {
             "$ref": "#/components/schemas/ICondition"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ITriggerSchema": {
+        "type": "object",
+        "properties": {
+          "triggerType": {
+            "$ref": "#/components/schemas/TriggerType"
           }
         },
         "additionalProperties": false
@@ -5372,11 +6386,72 @@
       },
       "LimitType": {
         "enum": [
-          "Owned",
-          "Bought"
+          "Owned = 0",
+          "Bought = 1"
         ],
         "type": "string",
         "format": ""
+      },
+      "LineOfSightCondition": {
+        "type": "object",
+        "properties": {
+          "lineOfSight": {
+            "type": "boolean"
+          },
+          "actorType": {
+            "$ref": "#/components/schemas/ActorType"
+          },
+          "comparator": {
+            "$ref": "#/components/schemas/ConditionComparatorType"
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
+      "Map": {
+        "type": "object",
+        "properties": {
+          "entityUid": {
+            "type": "string"
+          },
+          "modelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "nameId": {
+            "type": "string"
+          },
+          "mapAsset": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultAssets": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/IMapAsset"
+            },
+            "nullable": true
+          },
+          "teamsStartPositions": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/IVector3"
+              }
+            },
+            "nullable": true
+          },
+          "cells": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICell"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "MathEquation": {
         "type": "object",
@@ -5407,23 +6482,6 @@
               "type": "number",
               "format": "double"
             }
-          }
-        },
-        "additionalProperties": false
-      },
-      "MetaSpell": {
-        "type": "object",
-        "properties": {
-          "spell": {
-            "type": "string",
-            "nullable": true
-          },
-          "spellMods": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SpellMetaSchema"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -5464,11 +6522,11 @@
       },
       "MoveType": {
         "enum": [
-          "Walk",
-          "Translate",
-          "Teleport",
-          "Carry",
-          "Throw"
+          "Walk = 0",
+          "Translate = 1",
+          "Teleport = 2",
+          "Carry = 3",
+          "Throw = 4"
         ],
         "type": "string",
         "format": ""
@@ -5519,7 +6577,12 @@
           "Range: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 0,\r\n  \"baseName\": \"Range\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6000\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.Range\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Speed: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 1,\r\n  \"baseName\": \"Speed\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6001\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.Speed\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Erosion: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Erosion\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6002\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.Erosion\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Echo: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 3,\r\n  \"baseName\": \"Echo\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6003\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.Echo\",\r\n  \"enumValueConstraint\": null\r\n};"
+          "Echo: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 3,\r\n  \"baseName\": \"Echo\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6003\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.Echo\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Lock: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 4,\r\n  \"baseName\": \"Lock\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6004\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.Lock\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Evasion: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 5,\r\n  \"baseName\": \"Evasion\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6005\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.Evasion\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MindPower: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 6,\r\n  \"baseName\": \"MindPower\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6006\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.MindPower\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "SwapInBaseCooldown: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 7,\r\n  \"baseName\": \"SwapInBaseCooldown\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6007\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.SwapInBaseCooldown\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "SwapOutBaseCooldown: OtherProperty = {\r\n  \"category\": 6,\r\n  \"localId\": 8,\r\n  \"baseName\": \"SwapOutBaseCooldown\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"6008\",\r\n  \"nameModelUid\": \"CharacteristicType.Other.SwapOutBaseCooldown\",\r\n  \"enumValueConstraint\": null\r\n};"
         ],
         "type": "string",
         "format": ""
@@ -5555,6 +6618,17 @@
           },
           "moveTargetZone": {
             "$ref": "#/components/schemas/IZone"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PushByScript": {
+        "type": "object",
+        "properties": {
+          "schemaType": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
           }
         },
         "additionalProperties": false
@@ -5610,7 +6684,11 @@
         "type": "object",
         "properties": {
           "statusFilter": {
-            "$ref": "#/components/schemas/IStatusCondition"
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "durationToRemove": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -5619,7 +6697,7 @@
         "type": "object",
         "properties": {
           "statusFilter": {
-            "$ref": "#/components/schemas/IStatusCondition"
+            "$ref": "#/components/schemas/ICondition"
           },
           "durationToRemove": {
             "type": "integer",
@@ -5632,7 +6710,11 @@
         "type": "object",
         "properties": {
           "statusFilter": {
-            "$ref": "#/components/schemas/IStatusCondition"
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "durationToRemove": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -5712,18 +6794,18 @@
       },
       "ResistanceTypes": {
         "enum": [
-          "True: Resistance = {\r\n  \"element\": 1,\r\n  \"category\": 3,\r\n  \"localId\": 1,\r\n  \"baseName\": \"True\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3001\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.True\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Fire: Resistance = {\r\n  \"element\": 2,\r\n  \"category\": 3,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Fire\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3002\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Fire\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Water: Resistance = {\r\n  \"element\": 3,\r\n  \"category\": 3,\r\n  \"localId\": 3,\r\n  \"baseName\": \"Water\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3003\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Water\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Earth: Resistance = {\r\n  \"element\": 4,\r\n  \"category\": 3,\r\n  \"localId\": 4,\r\n  \"baseName\": \"Earth\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3004\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Earth\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Air: Resistance = {\r\n  \"element\": 5,\r\n  \"category\": 3,\r\n  \"localId\": 5,\r\n  \"baseName\": \"Air\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3005\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Air\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Dark: Resistance = {\r\n  \"element\": 6,\r\n  \"category\": 3,\r\n  \"localId\": 6,\r\n  \"baseName\": \"Dark\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3006\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Dark\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Light: Resistance = {\r\n  \"element\": 7,\r\n  \"category\": 3,\r\n  \"localId\": 7,\r\n  \"baseName\": \"Light\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3007\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Light\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "True: Resistance = {\r\n  \"element\": 4,\r\n  \"category\": 3,\r\n  \"localId\": 1,\r\n  \"baseName\": \"True\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3001\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.True\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Fire: Resistance = {\r\n  \"element\": 5,\r\n  \"category\": 3,\r\n  \"localId\": 2,\r\n  \"baseName\": \"Fire\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3002\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Fire\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Water: Resistance = {\r\n  \"element\": 6,\r\n  \"category\": 3,\r\n  \"localId\": 3,\r\n  \"baseName\": \"Water\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3003\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Water\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Earth: Resistance = {\r\n  \"element\": 7,\r\n  \"category\": 3,\r\n  \"localId\": 4,\r\n  \"baseName\": \"Earth\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3004\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Earth\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Air: Resistance = {\r\n  \"element\": 8,\r\n  \"category\": 3,\r\n  \"localId\": 5,\r\n  \"baseName\": \"Air\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3005\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Air\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Dark: Resistance = {\r\n  \"element\": 9,\r\n  \"category\": 3,\r\n  \"localId\": 6,\r\n  \"baseName\": \"Dark\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3006\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Dark\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Light: Resistance = {\r\n  \"element\": 10,\r\n  \"category\": 3,\r\n  \"localId\": 7,\r\n  \"baseName\": \"Light\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3007\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Light\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Damage: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 20,\r\n  \"baseName\": \"Damage\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3020\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Damage\",\r\n  \"enumValueConstraint\": null\r\n};",
           "IndirectDamage: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 21,\r\n  \"baseName\": \"IndirectDamage\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3021\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.IndirectDamage\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Heal: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 22,\r\n  \"baseName\": \"Heal\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3022\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Heal\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Melee: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 23,\r\n  \"baseName\": \"Melee\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 5,\r\n      \"groupType\": 0,\r\n      \"children\": []\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3023\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Melee\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Distance: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 24,\r\n  \"baseName\": \"Distance\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 2,\r\n      \"groupType\": 0,\r\n      \"children\": []\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3024\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Distance\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Melee: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 23,\r\n  \"baseName\": \"Melee\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 5\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3023\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Melee\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Distance: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 24,\r\n  \"baseName\": \"Distance\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 2\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3024\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Distance\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Trap: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 25,\r\n  \"baseName\": \"Trap\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3025\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Trap\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Glyph: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 26,\r\n  \"baseName\": \"Glyph\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3026\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Glyph\",\r\n  \"enumValueConstraint\": null\r\n};"
         ],
@@ -5779,25 +6861,25 @@
       },
       "ResourceEnum": {
         "enum": [
-          "Life",
-          "Mana",
-          "Movement",
-          "Summon",
-          "Rage",
-          "Shield"
+          "Life = 0",
+          "Mana = 1",
+          "Movement = 2",
+          "Summon = 3",
+          "Rage = 4",
+          "Shield = 5"
         ],
         "type": "string",
         "format": ""
       },
       "ResourceProperty": {
         "enum": [
-          "InitialMax",
-          "Current",
-          "Max",
-          "Missing",
-          "Regen",
-          "Percent",
-          "MissingPercent"
+          "InitialMax = 0",
+          "Current = 1",
+          "Max = 2",
+          "Missing = 3",
+          "Regen = 4",
+          "Percent = 5",
+          "MissingPercent = 6"
         ],
         "type": "string",
         "format": ""
@@ -5855,10 +6937,10 @@
       },
       "Rotation4Type": {
         "enum": [
-          "top",
-          "right",
-          "bottom",
-          "left"
+          "top = 0",
+          "right = 1",
+          "bottom = 2",
+          "left = 3"
         ],
         "type": "string",
         "format": ""
@@ -5898,11 +6980,25 @@
         "type": "object",
         "additionalProperties": false
       },
-      "SpellAddtats": {
+      "SpellAddStats": {
         "type": "object",
         "properties": {
           "stats": {
             "$ref": "#/components/schemas/SpellStats"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpellCastHistory": {
+        "type": "object",
+        "properties": {
+          "spellID": {
+            "type": "string",
+            "nullable": true
+          },
+          "cellID": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -5923,49 +7019,24 @@
         },
         "additionalProperties": false
       },
-      "SpellCondition": {
-        "type": "object",
-        "properties": {
-          "spellModelId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "statId": {
-            "type": "string"
-          },
-          "value": {
-            "nullable": true
-          },
-          "actorType": {
-            "$ref": "#/components/schemas/ActorType"
-          },
-          "comparator": {
-            "$ref": "#/components/schemas/ConditionComparatorType"
-          },
-          "groupType": {
-            "$ref": "#/components/schemas/ConditionGroupType"
-          },
-          "children": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ICondition"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": {
-          "type": "object"
-        }
-      },
       "SpellMetaAddChildEffects": {
         "type": "object",
         "properties": {
           "effectParent": {
             "type": "string"
           },
-          "order": {
+          "index": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpellMetaAddCosts": {
+        "type": "object",
+        "properties": {
+          "stats": {
+            "$ref": "#/components/schemas/IStats"
           }
         },
         "additionalProperties": false
@@ -5997,13 +7068,26 @@
         },
         "additionalProperties": false
       },
+      "SpellMetaConvertCosts": {
+        "type": "object",
+        "properties": {
+          "input": {
+            "$ref": "#/components/schemas/IStats"
+          },
+          "output": {
+            "$ref": "#/components/schemas/IStats"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpellMetaDeactivate": {
+        "type": "object",
+        "additionalProperties": false
+      },
       "SpellMetaEffectAddBaseDamage": {
         "type": "object",
         "properties": {
-          "effectId": {
-            "type": "string"
-          },
-          "dmg": {
+          "addDmg": {
             "type": "integer",
             "format": "int32"
           }
@@ -6013,10 +7097,7 @@
       "SpellMetaEffectAddBaseHeal": {
         "type": "object",
         "properties": {
-          "effectId": {
-            "type": "string"
-          },
-          "heal": {
+          "addHeal": {
             "type": "integer",
             "format": "int32"
           }
@@ -6026,11 +7107,32 @@
       "SpellMetaEffectChangeElement": {
         "type": "object",
         "properties": {
-          "effectId": {
-            "type": "string"
-          },
-          "element": {
+          "output": {
             "$ref": "#/components/schemas/ElementType"
+          },
+          "percentConversion": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpellMetaEffectChangePenetration": {
+        "type": "object",
+        "properties": {
+          "percentPenetration": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpellMetaEffectChangeVariance": {
+        "type": "object",
+        "properties": {
+          "percentVariance": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -6038,20 +7140,27 @@
       "SpellMetaEffectChangeZone": {
         "type": "object",
         "properties": {
-          "effectId": {
-            "type": "string"
-          },
           "zone": {
             "$ref": "#/components/schemas/IZone"
           }
         },
         "additionalProperties": false
       },
-      "SpellMetaSchema": {
+      "SpellMetaModifyEffect": {
         "type": "object",
         "properties": {
-          "effType": {
-            "$ref": "#/components/schemas/EffT"
+          "effectId": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpellMetaModifySpell": {
+        "type": "object",
+        "properties": {
+          "spell": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -6092,15 +7201,6 @@
           "statsId": {
             "type": "string"
           },
-          "costs": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "integer",
-              "format": "int32",
-              "nullable": true
-            },
-            "nullable": true
-          },
           "effectIds": {
             "type": "array",
             "items": {
@@ -6116,6 +7216,76 @@
           }
         },
         "additionalProperties": false
+      },
+      "SpellModelAggregation": {
+        "type": "object",
+        "properties": {
+          "entityUid": {
+            "type": "string"
+          },
+          "modelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "nameId": {
+            "type": "string"
+          },
+          "descriptionId": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string",
+            "nullable": true
+          },
+          "skins": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ISpellSkin"
+            },
+            "nullable": true
+          },
+          "stats": {
+            "$ref": "#/components/schemas/SpellModelStats"
+          },
+          "sourceCondition": {
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "targetFilter": {
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "effects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EffectPermanentAggregation"
+            },
+            "nullable": true
+          },
+          "rangeZoneMin": {
+            "$ref": "#/components/schemas/IZone"
+          },
+          "rangeZoneMax": {
+            "$ref": "#/components/schemas/IZone"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpellModelCondition": {
+        "type": "object",
+        "properties": {
+          "spellModelId": {
+            "type": "string",
+            "nullable": true
+          },
+          "actorType": {
+            "$ref": "#/components/schemas/ActorType"
+          },
+          "comparator": {
+            "$ref": "#/components/schemas/ConditionComparatorType"
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
       },
       "SpellModelProperty": {
         "type": "object",
@@ -6180,21 +7350,14 @@
       "SpellModelStats": {
         "type": "object",
         "properties": {
-          "growth": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/MathEquation"
-            },
-            "nullable": true
-          },
           "entityUid": {
             "type": "string"
           },
-          "dic": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/IStat"
-            }
+          "base": {
+            "$ref": "#/components/schemas/CharacteristicIdIStatEntityDictionary"
+          },
+          "growth": {
+            "$ref": "#/components/schemas/CharacteristicIdMathEquationEntityDictionary"
           }
         },
         "additionalProperties": false
@@ -6245,7 +7408,11 @@
           "RemainingCharges: SpellProperty = {\r\n  \"category\": 7,\r\n  \"localId\": 0,\r\n  \"baseName\": \"RemainingCharges\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"7000\",\r\n  \"nameModelUid\": \"CharacteristicType.Spell.RemainingCharges\",\r\n  \"enumValueConstraint\": null\r\n};",
           "RemainingCooldown: SpellProperty = {\r\n  \"category\": 7,\r\n  \"localId\": 1,\r\n  \"baseName\": \"RemainingCooldown\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"7001\",\r\n  \"nameModelUid\": \"CharacteristicType.Spell.RemainingCooldown\",\r\n  \"enumValueConstraint\": null\r\n};",
           "NumberOfCastsThisTurn: SpellProperty = {\r\n  \"category\": 7,\r\n  \"localId\": 2,\r\n  \"baseName\": \"NumberOfCastsThisTurn\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"7002\",\r\n  \"nameModelUid\": \"CharacteristicType.Spell.NumberOfCastsThisTurn\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "NumberOfCastsThisTurnPerEntity: SpellProperty = {\r\n  \"category\": 7,\r\n  \"localId\": 3,\r\n  \"baseName\": \"NumberOfCastsThisTurnPerEntity\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 2,\r\n  \"id\": \"7003\",\r\n  \"nameModelUid\": \"CharacteristicType.Spell.NumberOfCastsThisTurnPerEntity\",\r\n  \"enumValueConstraint\": null\r\n};"
+          "NumberOfCastsThisTurnPerEntity: SpellProperty = {\r\n  \"category\": 7,\r\n  \"localId\": 3,\r\n  \"baseName\": \"NumberOfCastsThisTurnPerEntity\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 2,\r\n  \"id\": \"7003\",\r\n  \"nameModelUid\": \"CharacteristicType.Spell.NumberOfCastsThisTurnPerEntity\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "DamageDoneThisCast: SpellProperty = {\r\n  \"category\": 7,\r\n  \"localId\": 101,\r\n  \"baseName\": \"DamageDoneThisCast\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"7101\",\r\n  \"nameModelUid\": \"CharacteristicType.Spell.DamageDoneThisCast\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "HealDoneThisCast: SpellProperty = {\r\n  \"category\": 7,\r\n  \"localId\": 102,\r\n  \"baseName\": \"HealDoneThisCast\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"7102\",\r\n  \"nameModelUid\": \"CharacteristicType.Spell.HealDoneThisCast\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "ManaReducedThisCast: SpellProperty = {\r\n  \"category\": 7,\r\n  \"localId\": 103,\r\n  \"baseName\": \"ManaReducedThisCast\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"7103\",\r\n  \"nameModelUid\": \"CharacteristicType.Spell.ManaReducedThisCast\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MovementReducedThisCast: SpellProperty = {\r\n  \"category\": 7,\r\n  \"localId\": 104,\r\n  \"baseName\": \"MovementReducedThisCast\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"7104\",\r\n  \"nameModelUid\": \"CharacteristicType.Spell.MovementReducedThisCast\",\r\n  \"enumValueConstraint\": null\r\n};"
         ],
         "type": "string",
         "format": ""
@@ -6253,24 +7420,38 @@
       "SpellStats": {
         "type": "object",
         "properties": {
-          "growth": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/MathEquation"
-            },
-            "nullable": true
-          },
           "entityUid": {
             "type": "string"
           },
-          "dic": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/IStat"
-            }
+          "base": {
+            "$ref": "#/components/schemas/CharacteristicIdIStatEntityDictionary"
+          },
+          "growth": {
+            "$ref": "#/components/schemas/CharacteristicIdMathEquationEntityDictionary"
           }
         },
         "additionalProperties": false
+      },
+      "SpellStatsCondition": {
+        "type": "object",
+        "properties": {
+          "spellModelId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "conditionStats": {
+            "$ref": "#/components/schemas/IStats"
+          },
+          "actorType": {
+            "$ref": "#/components/schemas/ActorType"
+          },
+          "comparator": {
+            "$ref": "#/components/schemas/ConditionComparatorType"
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
       },
       "StatBool": {
         "type": "object",
@@ -6286,36 +7467,6 @@
           }
         },
         "additionalProperties": false
-      },
-      "StatCondition": {
-        "type": "object",
-        "properties": {
-          "statId": {
-            "type": "string"
-          },
-          "value": {
-            "nullable": true
-          },
-          "actorType": {
-            "$ref": "#/components/schemas/ActorType"
-          },
-          "comparator": {
-            "$ref": "#/components/schemas/ConditionComparatorType"
-          },
-          "groupType": {
-            "$ref": "#/components/schemas/ConditionGroupType"
-          },
-          "children": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ICondition"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": {
-          "type": "object"
-        }
       },
       "StatSimple": {
         "type": "object",
@@ -6335,10 +7486,10 @@
       },
       "StatValueType": {
         "enum": [
-          "Simple",
-          "Bool",
-          "EntityStatDictionary",
-          "List"
+          "Simple = 0",
+          "Bool = 1",
+          "EntityStatDictionary = 2",
+          "List = 3"
         ],
         "type": "string",
         "format": ""
@@ -6403,7 +7554,11 @@
           "Pacifist: State = {\r\n  \"category\": 4,\r\n  \"localId\": 15,\r\n  \"baseName\": \"Pacifist\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4015\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Pacifist\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Invulnerable: State = {\r\n  \"category\": 4,\r\n  \"localId\": 16,\r\n  \"baseName\": \"Invulnerable\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4016\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Invulnerable\",\r\n  \"enumValueConstraint\": null\r\n};",
           "InvulnerableDistance: State = {\r\n  \"category\": 4,\r\n  \"localId\": 17,\r\n  \"baseName\": \"InvulnerableDistance\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4017\",\r\n  \"nameModelUid\": \"CharacteristicType.State.InvulnerableDistance\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "InvulnerableMelee: State = {\r\n  \"category\": 4,\r\n  \"localId\": 18,\r\n  \"baseName\": \"InvulnerableMelee\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4018\",\r\n  \"nameModelUid\": \"CharacteristicType.State.InvulnerableMelee\",\r\n  \"enumValueConstraint\": null\r\n};"
+          "InvulnerableMelee: State = {\r\n  \"category\": 4,\r\n  \"localId\": 18,\r\n  \"baseName\": \"InvulnerableMelee\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4018\",\r\n  \"nameModelUid\": \"CharacteristicType.State.InvulnerableMelee\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "UnlockLoS: State = {\r\n  \"category\": 4,\r\n  \"localId\": 19,\r\n  \"baseName\": \"UnlockLoS\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4019\",\r\n  \"nameModelUid\": \"CharacteristicType.State.UnlockLoS\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "LockLoS: State = {\r\n  \"category\": 4,\r\n  \"localId\": 20,\r\n  \"baseName\": \"LockLoS\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4020\",\r\n  \"nameModelUid\": \"CharacteristicType.State.LockLoS\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Unlockable: State = {\r\n  \"category\": 4,\r\n  \"localId\": 21,\r\n  \"baseName\": \"Unlockable\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4021\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Unlockable\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Unlocker: State = {\r\n  \"category\": 4,\r\n  \"localId\": 22,\r\n  \"baseName\": \"Unlocker\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 1,\r\n  \"id\": \"4022\",\r\n  \"nameModelUid\": \"CharacteristicType.State.Unlocker\",\r\n  \"enumValueConstraint\": null\r\n};"
         ],
         "type": "string",
         "format": ""
@@ -6411,61 +7566,17 @@
       "Stats": {
         "type": "object",
         "properties": {
-          "growth": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/MathEquation"
-            },
-            "nullable": true
-          },
           "entityUid": {
             "type": "string"
           },
-          "dic": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/IStat"
-            }
+          "base": {
+            "$ref": "#/components/schemas/CharacteristicIdIStatEntityDictionary"
+          },
+          "growth": {
+            "$ref": "#/components/schemas/CharacteristicIdMathEquationEntityDictionary"
           }
         },
         "additionalProperties": false
-      },
-      "StatusCondition": {
-        "type": "object",
-        "properties": {
-          "statusModelId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "statId": {
-            "type": "string"
-          },
-          "value": {
-            "nullable": true
-          },
-          "boardTargetType": {
-            "$ref": "#/components/schemas/BoardTargetType"
-          },
-          "actorType": {
-            "$ref": "#/components/schemas/ActorType"
-          },
-          "comparator": {
-            "$ref": "#/components/schemas/ConditionComparatorType"
-          },
-          "groupType": {
-            "$ref": "#/components/schemas/ConditionGroupType"
-          },
-          "children": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ICondition"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": {
-          "type": "object"
-        }
       },
       "StatusContainerProperty": {
         "type": "object",
@@ -6522,21 +7633,14 @@
       "StatusContainerStats": {
         "type": "object",
         "properties": {
-          "growth": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/MathEquation"
-            },
-            "nullable": true
-          },
           "entityUid": {
             "type": "string"
           },
-          "dic": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/IStat"
-            }
+          "base": {
+            "$ref": "#/components/schemas/CharacteristicIdIStatEntityDictionary"
+          },
+          "growth": {
+            "$ref": "#/components/schemas/CharacteristicIdMathEquationEntityDictionary"
           }
         },
         "additionalProperties": false
@@ -6593,29 +7697,22 @@
       "StatusInstanceStats": {
         "type": "object",
         "properties": {
-          "growth": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/MathEquation"
-            },
-            "nullable": true
-          },
           "entityUid": {
             "type": "string"
           },
-          "dic": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/IStat"
-            }
+          "base": {
+            "$ref": "#/components/schemas/CharacteristicIdIStatEntityDictionary"
+          },
+          "growth": {
+            "$ref": "#/components/schemas/CharacteristicIdMathEquationEntityDictionary"
           }
         },
         "additionalProperties": false
       },
       "StatusMergeStrategy": {
         "enum": [
-          "Ignore",
-          "ReplaceLast"
+          "Ignore = 0",
+          "ReplaceLast = 1"
         ],
         "type": "string",
         "format": ""
@@ -6663,42 +7760,97 @@
         },
         "additionalProperties": false
       },
+      "StatusModelCondition": {
+        "type": "object",
+        "properties": {
+          "statusModelId": {
+            "type": "string",
+            "nullable": true
+          },
+          "boardTargetType": {
+            "$ref": "#/components/schemas/BoardTargetType"
+          },
+          "actorType": {
+            "$ref": "#/components/schemas/ActorType"
+          },
+          "comparator": {
+            "$ref": "#/components/schemas/ConditionComparatorType"
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
       "StatusModelStats": {
         "type": "object",
         "properties": {
-          "growth": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/MathEquation"
-            },
-            "nullable": true
-          },
           "entityUid": {
             "type": "string"
           },
-          "dic": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/IStat"
-            }
+          "base": {
+            "$ref": "#/components/schemas/CharacteristicIdIStatEntityDictionary"
+          },
+          "growth": {
+            "$ref": "#/components/schemas/CharacteristicIdMathEquationEntityDictionary"
           }
         },
         "additionalProperties": false
       },
       "StatusPriorityType": {
         "enum": [
-          "System",
-          "Passive",
-          "Status"
+          "System = 0",
+          "Passive = 1",
+          "Status = 2"
         ],
         "type": "string",
         "format": ""
       },
+      "StatusStatsCondition": {
+        "type": "object",
+        "properties": {
+          "statusModelId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "boardTargetType": {
+            "$ref": "#/components/schemas/BoardTargetType"
+          },
+          "conditionStats": {
+            "$ref": "#/components/schemas/IStats"
+          },
+          "actorType": {
+            "$ref": "#/components/schemas/ActorType"
+          },
+          "comparator": {
+            "$ref": "#/components/schemas/ConditionComparatorType"
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
+      "StatusTeamCondition": {
+        "type": "object",
+        "properties": {
+          "team": {
+            "$ref": "#/components/schemas/TeamRelationType"
+          },
+          "actorType": {
+            "$ref": "#/components/schemas/ActorType"
+          },
+          "comparator": {
+            "$ref": "#/components/schemas/ConditionComparatorType"
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
       "StatusUnbewitchStrategy": {
         "enum": [
-          "Dispellable",
-          "DispellableOnDeath",
-          "NonDispellable"
+          "Dispellable = 0",
+          "DispellableOnDeath = 1",
+          "NonDispellable = 2"
         ],
         "type": "string",
         "format": ""
@@ -6722,10 +7874,34 @@
       },
       "SwapIn": {
         "type": "object",
+        "properties": {
+          "ignoreInCooldown": {
+            "type": "boolean"
+          },
+          "overrideOutCooldown": {
+            "type": "boolean"
+          },
+          "setOutCooldown": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
         "additionalProperties": false
       },
       "SwapOut": {
         "type": "object",
+        "properties": {
+          "ignoreOutCooldown": {
+            "type": "boolean"
+          },
+          "overrideInCooldown": {
+            "type": "boolean"
+          },
+          "setInCooldown": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
         "additionalProperties": false
       },
       "SwapSelfWith": {
@@ -6741,22 +7917,38 @@
         },
         "additionalProperties": false
       },
+      "TakeDamageAsElement": {
+        "type": "object",
+        "properties": {
+          "input": {
+            "$ref": "#/components/schemas/ElementType"
+          },
+          "output": {
+            "$ref": "#/components/schemas/ElementType"
+          },
+          "percentConversion": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "TargetSamplingType": {
         "enum": [
-          "closestToOrigin",
-          "furthestToOrigin",
-          "closestToSource",
-          "furthestToSource",
-          "random"
+          "closestToOrigin = 0",
+          "furthestToOrigin = 1",
+          "closestToSource = 2",
+          "furthestToSource = 3",
+          "random = 4"
         ],
         "type": "string",
         "format": ""
       },
       "TeamRelationType": {
         "enum": [
-          "Ally",
-          "Enemy",
-          "Self"
+          "Ally = 0",
+          "Enemy = 1",
+          "Self = 2"
         ],
         "type": "string",
         "format": ""
@@ -6848,11 +8040,30 @@
         "type": "object",
         "additionalProperties": false
       },
+      "TextEntityAggregation": {
+        "type": "object",
+        "properties": {
+          "entityUid": {
+            "type": "string"
+          },
+          "modelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "nameId": {
+            "$ref": "#/components/schemas/IStringEntity"
+          },
+          "descriptionId": {
+            "$ref": "#/components/schemas/IStringEntity"
+          }
+        },
+        "additionalProperties": false
+      },
       "TowerDirectionType": {
         "enum": [
-          "up",
-          "down",
-          "both"
+          "up = 0",
+          "down = 1",
+          "both = 2"
         ],
         "type": "string",
         "format": ""
@@ -6860,6 +8071,9 @@
       "TransferLife": {
         "type": "object",
         "properties": {
+          "transferFrom": {
+            "$ref": "#/components/schemas/IZone"
+          },
           "value": {
             "type": "integer",
             "format": "int32"
@@ -6885,6 +8099,9 @@
       "TransferPercentLifeMax": {
         "type": "object",
         "properties": {
+          "transferFrom": {
+            "$ref": "#/components/schemas/IZone"
+          },
           "percentValue": {
             "type": "integer",
             "format": "int32"
@@ -6892,32 +8109,49 @@
         },
         "additionalProperties": false
       },
+      "TriggerModel": {
+        "type": "object",
+        "properties": {
+          "triggerOrderType": {
+            "$ref": "#/components/schemas/TriggerOrderType"
+          },
+          "triggerZone": {
+            "$ref": "#/components/schemas/IZone"
+          },
+          "triggererFilter": {
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "holderCondition": {
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "schema": {
+            "$ref": "#/components/schemas/ITriggerSchema"
+          }
+        },
+        "additionalProperties": false
+      },
       "TriggerOrderType": {
         "enum": [
-          "Before",
-          "Apply",
-          "After"
+          "Before = 0",
+          "Apply = 1",
+          "After = 2"
         ],
         "type": "string",
         "format": ""
       },
       "TriggerType": {
-        "enum": [
-          "OnFightStart",
-          "OnFightEnd",
-          "OnRoundStart",
-          "OnRoundEnd",
-          "OnTurnStart",
-          "OnTurnEnd",
-          "OnTurnPass",
-          "OnCreatureSpellCast",
-          "OnEffect",
-          "OnCreatureWalkEnterCell",
-          "OnCreatureWalkExitCell",
-          "OnCreatureWalkStopCell"
-        ],
-        "type": "string",
-        "format": ""
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "schemaType": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "UnspawnSummon": {
         "type": "object",
@@ -6963,21 +8197,24 @@
       },
       "ZoneType": {
         "enum": [
-          "point",
-          "line",
-          "diagonal",
-          "cross",
-          "xcross",
-          "star",
-          "crossHalf",
-          "xcrossHalf",
-          "circle",
-          "circleHalf",
-          "square",
-          "squareHalf",
-          "rectangle",
-          "ellipse",
-          "ellipseHalf"
+          "point = 0",
+          "line = 1",
+          "diagonal = 2",
+          "cross = 3",
+          "xcross = 4",
+          "star = 5",
+          "crossHalf = 6",
+          "xcrossHalf = 7",
+          "circle = 8",
+          "circleHalf = 9",
+          "square = 10",
+          "squareHalf = 11",
+          "rectangle = 12",
+          "ellipse = 13",
+          "ellipseHalf = 14",
+          "board = 15",
+          "offboard = 16",
+          "all = 17"
         ],
         "type": "string",
         "format": ""

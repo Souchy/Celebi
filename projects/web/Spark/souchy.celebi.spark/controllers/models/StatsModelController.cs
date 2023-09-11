@@ -120,7 +120,7 @@ namespace souchy.celebi.spark.controllers.models
                 updatedStats.entityUid = Eevee.RegisterIIDTemporary();
             }
             var filter = _stats.filterId(stats.entityUid);
-            var update = Builders<IStats>.Update.Set(Stats.dicName + "." + updatedStats.statId, updatedStats);
+            var update = Builders<IStats>.Update.Set(nameof(IStats.@base) + "." + updatedStats.statId, updatedStats);
             var result = await _stats.Collection.UpdateOneAsync(filter, update);
             return result;
         }

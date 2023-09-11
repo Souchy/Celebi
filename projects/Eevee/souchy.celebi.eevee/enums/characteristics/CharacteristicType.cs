@@ -21,7 +21,7 @@ namespace souchy.celebi.eevee.enums.characteristics
     public record CharacteristicType(CharacteristicCategory Category, int LocalId, string BaseName, object defaultValue = null, params ICondition[] conditions)
     {
         public StatValueType StatValueType { get; init; }
-        public CharacteristicId ID { get; init; } = new CharacteristicId(((int) Category) * 1000 + LocalId);
+        public CharacteristicId ID { get; init; } = new CharacteristicId((int) Category, LocalId);
         public IID nameModelUid { get; set; } = (IID) string.Join(".", nameof(CharacteristicType), Enum.GetName(Category), BaseName);
         /// <summary>
         /// If specified, the value can only be chosen within the enum's values
@@ -42,13 +42,13 @@ namespace souchy.celebi.eevee.enums.characteristics
         public IStat Create() => this.GetFactory()(ID, this.defaultValue);
         public IStat Create(object value = null) => this.GetFactory()(ID, value);
 
-        public static IEnumerable<CharacteristicType> Characteristics = Enum.GetValues<CharacteristicCategory>().SelectMany(c => c.GetCharacs());
-        public static StatFactory SimpleFactory = (id, value) => StatSimple.Create(id, value == null ? 0 : (int) value);
+        public static readonly IEnumerable<CharacteristicType> Characteristics = Enum.GetValues<CharacteristicCategory>().SelectMany(c => c.GetCharacs());
+        public static readonly StatFactory SimpleFactory = (id, value) => StatSimple.Create(id, value == null ? 0 : (int) value);
         //public static StatFactory EnumFactory = (id, value) => StatBool.Create(id, value == null ? false : (bool) value);
-        public static StatFactory BoolFactory = (id, value) => StatBool.Create(id, value == null ? false : (bool) value);
+        public static readonly StatFactory BoolFactory = (id, value) => StatBool.Create(id, value == null ? false : (bool) value);
         //TODO ListStat public static StatFactory ListFactory = (id, value)
         //    => EntityStatDictionary.Create(id, value == null ? new() : (Dictionary<ObjectId, IStat>) value);
-        public static StatFactory EntityStatDictionaryFactory = (id, value) 
+        public static readonly StatFactory EntityStatDictionaryFactory = (id, value) 
             => EntityStatDictionary.Create(id, value == null ? new() : (Dictionary<ObjectId, IStat>) value);
 
         public static IEnumerable<T> iterate<T>() where T : CharacteristicType
@@ -84,17 +84,10 @@ namespace souchy.celebi.eevee.enums.characteristics
     }
     public enum ElementType
     {
-        None,
         /// <summary>
-        /// True damage. Not sure if it's an element or just a EffectTrueDamage
+        /// Scales with nothing
         /// </summary>
-        True,
-        Fire,
-        Water,
-        Earth,
-        Air,
-        Dark,
-        Light,
+        None,
         /// <summary>
         /// Takes the best scaling affinity of the creature
         /// </summary>
@@ -103,7 +96,22 @@ namespace souchy.celebi.eevee.enums.characteristics
         /// Takes the worst elemental affinity scaling of the creature. <br></br>
         /// We can use this as a negative spell status, like a curse from the swamp witch
         /// </summary>
-        Worst
+        Worst,
+        /// <summary>
+        /// Scales with every elemental affinity
+        /// </summary>
+        All,
+        /// <summary>
+        /// True damage. Not sure if it's an element or just a EffectTrueDamage that can't be resisted
+        /// </summary>
+        True,
+        Fire,
+        Water,
+        Earth,
+        Air,
+        Dark,
+        Light,
+        Physical
     }
 
 

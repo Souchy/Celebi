@@ -5,6 +5,9 @@ using souchy.celebi.eevee.face.shared.models;
 
 namespace souchy.celebi.eevee.neweffects.face
 {
+    /// <summary>
+    /// Just name, description and wheter the effect targets creatures or cells + the EffectSchema Type
+    /// </summary>
     public interface IEffectModel : IEntityModel
     {
         public ObjectId nameId { get; set; }

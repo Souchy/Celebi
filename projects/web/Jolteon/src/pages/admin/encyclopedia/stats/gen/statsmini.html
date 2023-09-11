@@ -1,0 +1,37 @@
+<import from="./statpropertyselector"></import>
+<import from="../../effects/modelSelector/effectModelSelector"></import>
+<import from="../../../../../components/modal/modal"></import>
+<import from="./statsminirow"></import>
+
+<temaplate if.bind="stats">
+
+
+  <button if.bind="hasadddelete" class="btn btn-outline btn-icon" data-bs-toggle="modal" data-bs-target="#statSelector-${stats.entityUid}-${idsuffix}">+</button>
+
+  <modal if.bind="hasadddelete" id="statSelector-${stats.entityUid}-${idsuffix}" header="Add Stat" close.bind=false footer.bind=false>
+    <statpropertyselector characs.bind="characsallowed" callbackselect.bind="s => onAddStat(s)"></statpropertyselector>
+  </modal>
+
+  <template if.bind="hasSections()">
+    <div repeat.for="section of characsallowed">
+      <h6 if.bind="sectionHasValues(section)">${getSectionName(section)}</h6>
+      <table class="table-striped table-sm table-borderless table-responsive-sm">
+        <tbody>
+          <tr as-element="statsminirow" repeat.for="statid of getFilteredDicKeys(section)" statid.bind="statid" base.bind="getBase(statid)" growth.bind="getGrowth(statid)" 
+          hasgrowth.bind="hasgrowth" hasadddelete.bind="hasadddelete" callbacksavestat.bind="() => save()" callbackdeletestat.bind="s => clickRemoveStat(s)"></tr>
+        </tbody>
+      </table>
+    </div>
+  </template>
+
+  <template else>
+    <table class="table-striped table-sm table-borderless table-responsive-sm">
+      <tbody>
+        <tr as-element="statsminirow" repeat.for="statid of getDicKeys" statid.bind="statid" base.bind="getBase(statid)" growth.bind="getGrowth(statid)" 
+        hasgrowth.bind="hasgrowth" hasadddelete.bind="hasadddelete" callbacksavestat.bind="() => save()" callbackdeletestat.bind="s => clickRemoveStat(s)"></tr>
+      </tbody>
+    </table>
+  </template>
+
+
+</temaplate>

@@ -1,14 +1,31 @@
-<import from="../../encyclopedia/creatures/creaturelist"></import>
-<import from="../../encyclopedia/spells/spelllist"></import>
+<import from="../encyclopedia/creatures/creaturelist"></import>
+<import from="../encyclopedia/spells/spelllist"></import>
+<import from="../encyclopedia/statuses/statuslist"></import>
 
-<h3>Hi Editor</h3>
+<!-- <h3>Editor</h3> -->
+
+<nav class="navbar navbar-expand-lg">
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+      <a click.trigger="mode = 'creature'">Creature</a>
+    </li>
+    <li class="nav-item">
+      <a click.trigger="mode = 'spell'">Spell</a>
+    </li>
+    <li class="nav-item">
+      <a click.trigger="mode = 'status'">Status</a>
+    </li>
+  </ul>
+</nav>
 
 
-<creaturelist></creaturelist>
-<spelllist></spelllist>
+<creaturelist show.bind="mode == 'creature'"></creaturelist>
+<spelllist show.bind="mode == 'spell'"></spelllist>
 
-------------------<br>
-status model list
+<!-- <statuslist show.bind="mode == 'status'"></statuslist> -->
+<statuslist ></statuslist>
+
+
 
 <!-- some statuses can be re-used, ex: 
     - eclat de surt 
@@ -27,7 +44,7 @@ status model list
 
 
     these will use the schemas CreateStatus + status properties to define a new status every time (with status identifier being the spellmodel id)
-        means you can't still stack 2 manigance even if it comes from 2 srams, because they have the same spellmodel id
+        means you still can't stack 2 manigance even if it comes from 2 srams, because they have the same spellmodel id
 -->
 
 <!-- then you could also have a button to convert a CreateStatus effect into an AddStatus + StatusModel -->
