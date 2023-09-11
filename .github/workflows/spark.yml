@@ -13,10 +13,6 @@ on:
       tags:
         description: 'Manual build'  
 
-defaults:
-  run:
-    working-directory: './projects/web/Spark/'
-
 jobs:
   test:
     name: tests
@@ -39,6 +35,9 @@ jobs:
   build:
     name: build
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: './projects/web/Spark/'
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
@@ -72,7 +71,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: 'Spark'
-    
       - name: Deploy to DeathShadows server
         id: upload
         uses: Creepios/sftp-action@v1.0.3
