@@ -19,10 +19,14 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest
         public void ConfigureServices(IServiceCollection services)
         {
             // use Spark's secrets
+#if DEBUG
             var environment = "development";
+#else
+            var environment = "production";
+#endif
             IConfiguration configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
-                .AddJsonFile($"appsettings.{environment}.json")
+                //.AddJsonFile($"appsettings.{environment}.json")
                 .AddUserSecrets<Spark>()
                 .Build();
 
