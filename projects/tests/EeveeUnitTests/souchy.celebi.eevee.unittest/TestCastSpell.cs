@@ -21,7 +21,7 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest
 
         private IActionSpell createAction()
         {
-            var caster = fight.timeline.creatureIds.First();
+            var caster = fight.timeline.slots.First().creatureId; // fight.timeline.slots.First().getCreature();
             var target = fight.timeline.getCreatures().Last();
             var spellAction = new ActionSpell()
             {
@@ -39,19 +39,19 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest
             // Arrange
             var actions = new Actions();
             var spellAction = createAction();
-            var caster = fight.timeline.creatureIds.First();
+            var caster = fight.timeline.slots.First().getCreature();
             var target = fight.timeline.getCreatures().Last();
 
             var targetStats = target.GetTotalStats(spellAction);
-            var lifeIni = targetStats.Get<IStatSimple>(Resource.Life).value;
-            var mana1 = targetStats.Get<IStatSimple>(Resource.Mana).value;
+            var lifeIni = targetStats.Get<IStatSimple>(Resource.Life)!.value;
+            var mana1 = targetStats.Get<IStatSimple>(Resource.Mana)!.value;
 
             // Act
             actions.castSpell(spellAction);
 
             // Assert
-            var lifeFinal = target.GetTotalStats(spellAction).Get<IStatSimple>(Resource.Life).value;
-            var mana2 = targetStats.Get<IStatSimple>(Resource.Mana).value;
+            var lifeFinal = target.GetTotalStats(spellAction).Get<IStatSimple>(Resource.Life)!.value;
+            var mana2 = targetStats.Get<IStatSimple>(Resource.Mana)!.value;
 
             Assert.NotEqual(lifeIni, lifeFinal);
             output.WriteLine($"Target Life: {lifeIni} -> {lifeFinal}");

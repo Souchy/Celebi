@@ -44,7 +44,7 @@ namespace souchy.celebi.eevee.face.objects.controllers
 
 
         public IBoardEntity GetBoardEntity(ObjectId entityId) {
-            if(this.timeline.creatureIds.Contains(entityId)) { // this.board.creatureIds
+            if(this.timeline.isCreatureOnBoard(entityId)) { // this.board.creatureIds
                 return creatures.Get(entityId);
             }
             return cells.Get(entityId);

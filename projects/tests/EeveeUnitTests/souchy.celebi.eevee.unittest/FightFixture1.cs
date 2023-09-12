@@ -94,7 +94,8 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest
                     nextCrea = ordered.First(c => c.GetOriginalOwner() != player1);
                 }
                 ordered.Remove(nextCrea);
-                fight.timeline.creatureIds.Add(nextCrea.entityUid);
+                //fight.timeline.creatureIds.Add(nextCrea.entityUid);
+                fight.timeline.addSlot(nextCrea.entityUid);
                 team++;
             }
 

@@ -52,7 +52,7 @@ namespace souchy.celebi.espeon
             player.creatures.Add(creature.entityUid);
             creature.currentOwnerUid = player.entityUid;
             // add to board
-            Scopes.GetRequiredScoped<ITimeline>(fight.entityUid).creatureIds.Add(creature.entityUid);
+            Scopes.GetRequiredScoped<ITimeline>(fight.entityUid).addSlot(creature.entityUid); //.creatureIds.Add(creature.entityUid);
             creature.position.set(rng.Next(10), rng.Next(10));
             // add stats, spells...
             addStats(creature);

@@ -37,7 +37,7 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest
             this.creatureModels = await _creatureModels.GetAsync();
             await _effects.GetAsync();
             await _stats.GetAsync();
-            Eevee.models.creatureModels.Add(creatureModels.First().entityUid, creatureModels.First());
+            Eevee.models.creatureModels.Set(creatureModels.First().entityUid, creatureModels.First());
         }
 
         public Task DisposeAsync() => Task.CompletedTask;
