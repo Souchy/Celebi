@@ -15,23 +15,26 @@ on:
 
 jobs:
   test:
-    name: tests
+    name: unit tests
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: './projects/tests/EeveeUnitTests/'
     steps:
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: 7.0.x
-      - run: ls
-      - name: Restore dependencies
-        run: dotnet restore
-      - name: Build
-        run: dotnet build --no-restore --configuration Release
-      - name: Test
-        run: dotnet test --no-build --verbosity normal
-    
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore --configuration Release
+    - name: Test
+      run: dotnet test --no-build --configuration Release
+
   build:
-    name: build
+    name: build spark
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -47,7 +50,7 @@ jobs:
     - name: Build
       run: dotnet build --no-restore --configuration Release
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build --configuration Release
     - name: Publish
       run: dotnet publish --no-build -c Release -o 'publish/'
     - name: Upload artifact for deployment job
@@ -55,7 +58,6 @@ jobs:
       with:
         name: 'Spark'
         path: '/home/runner/work/Celebi/Celebi/projects/web/Spark/publish/'      
-    - run: ls
         
   deployment:
     name: deployment
