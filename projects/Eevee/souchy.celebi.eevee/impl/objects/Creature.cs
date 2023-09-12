@@ -80,7 +80,7 @@ namespace souchy.celebi.eevee.impl.objects
                     //naturalStat.Add(props.stat);
                 }
             }
-            // reset conditional stats to 0
+            // check conditional stats and deactivate them (0) if necessary // TODO remove those stats instead of 0 ?
             if(action != null)
             {
                 var boardSource = this.GetFight().creatures.Get(action.caster);

@@ -6,22 +6,31 @@ using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.espeon.eevee.impl.controllers;
 using Xunit.Abstractions;
 
-namespace EeveeUnitTests.souchy.celebi.eevee.unittest
+namespace EeveeUnitTests.souchy.celebi.eevee.unittest.spells
 {
     [Collection(nameof(DiamondFixture))]
-    public class TestCastSpell : IClassFixture<FightFixture1>
+    public class TestFireball : IClassFixture<FightFixture1>
     {
         private readonly ITestOutputHelper output;
         private IFight fight;
-        public TestCastSpell(ITestOutputHelper output, FightFixture1 f)
+        public TestFireball(ITestOutputHelper output, FightFixture1 f)
         {
             this.output = output;
-            this.fight = f.fight;
+            fight = f.fight;
+        }
+
+        [Fact]
+        public void testUniqueFight()
+        {
+            var target = fight.timeline.getCreatures().Last();
+            var targetStats = target.GetTotalStats(null);
+            var lifeIni = targetStats.GetValue<IStatSimple, int>(Resource.Life);
+            Assert.Equal(1800, lifeIni);
         }
 
         private IActionSpell createAction()
         {
-            var caster = fight.timeline.slots.First().creatureId; // fight.timeline.slots.First().getCreature();
+            var caster = fight.timeline.slots.First().creatureId;
             var target = fight.timeline.getCreatures().Last();
             var spellAction = new ActionSpell()
             {
@@ -33,6 +42,7 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest
             return spellAction;
         }
 
+
         [Fact]
         public void testDamage()
         {
@@ -43,15 +53,16 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest
             var target = fight.timeline.getCreatures().Last();
 
             var targetStats = target.GetTotalStats(spellAction);
-            var lifeIni = targetStats.Get<IStatSimple>(Resource.Life)!.value;
-            var mana1 = targetStats.Get<IStatSimple>(Resource.Mana)!.value;
+            var lifeIni = targetStats.GetValue<IStatSimple, int>(Resource.Life);
+            var mana1 = targetStats.GetValue<IStatSimple, int>(Resource.Mana);
 
             // Act
             actions.castSpell(spellAction);
 
             // Assert
-            var lifeFinal = target.GetTotalStats(spellAction).Get<IStatSimple>(Resource.Life)!.value;
-            var mana2 = targetStats.Get<IStatSimple>(Resource.Mana)!.value;
+            var targetStats2 = target.GetTotalStats(spellAction);
+            var lifeFinal = targetStats2.GetValue<IStatSimple, int>(Resource.Life);
+            var mana2 = targetStats2.GetValue<IStatSimple, int>(Resource.Mana);
 
             Assert.NotEqual(lifeIni, lifeFinal);
             output.WriteLine($"Target Life: {lifeIni} -> {lifeFinal}");

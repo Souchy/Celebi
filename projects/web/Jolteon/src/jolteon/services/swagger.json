@@ -4667,6 +4667,17 @@
         },
         "additionalProperties": false
       },
+      "CreateStatusCreatureScript": {
+        "type": "object",
+        "properties": {
+          "schemaType": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
       "CreateTrap": {
         "type": "object",
         "properties": {
