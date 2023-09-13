@@ -20,34 +20,23 @@ jobs:
     defaults:
       run:
         working-directory: './projects/tests/EeveeUnitTests/'
-    env:
-      MongoSettings.ConnectionString: ${{ secrets.MongoSettings__ConnectionString}}
-      MongoSettings.Federation: ${{ secrets.MongoSettings__Federation }}
-      MongoSettings.ModelsDB: ${{ secrets.MongoSettings__ModelsDB }}
-      MongoSettings.FightsDB: ${{ secrets.MongoSettings__FightsDB }}
-      MongoSettings.MetaDB: ${{ secrets.MongoSettings__MetaDB }}
-      MongoSettings.I18NDB: ${{ secrets.MongoSettings__I18NDB }}
     steps:
-    - name: Set Web App settings
-      uses: Azure/appservice-settings@v1
-      with:
-       app-name: 'node-rnc'
-       app-settings-json: |
-         [
-            {
-              "MongoSettings:ConnectionString": ${{ secrets.MongoSettings__ConnectionString}},
-              "MongoSettings:Federation": ${{ secrets.MongoSettings__Federation }},
-              "MongoSettings:ModelsDB": ${{ secrets.MongoSettings__ModelsDB }},
-              "MongoSettings:FightsDB": ${{ secrets.MongoSettings__FightsDB }},
-              "MongoSettings:MetaDB": ${{ secrets.MongoSettings__MetaDB }},
-              "MongoSettings:I18NDB": ${{ secrets.MongoSettings__I18NDB }}
-            }
-         ]
     - uses: actions/checkout@v3
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 7.0.x
+    - name: App Settings Variable Substitution
+      uses: microsoft/variable-substitution@v1
+      with:
+        files: '../../web/Spark/appsettings.json'
+      env:
+        MongoSettings.ConnectionString: ${{ secrets.MongoSettings__ConnectionString}}
+        MongoSettings.Federation: ${{ secrets.MongoSettings__Federation }}
+        MongoSettings.ModelsDB: ${{ secrets.MongoSettings__ModelsDB }}
+        MongoSettings.FightsDB: ${{ secrets.MongoSettings__FightsDB }}
+        MongoSettings.MetaDB: ${{ secrets.MongoSettings__MetaDB }}
+        MongoSettings.I18NDB: ${{ secrets.MongoSettings__I18NDB }}
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
