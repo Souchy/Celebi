@@ -5,8 +5,8 @@ name: Aurelia CI
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  # pull_request:
+  #   branches: [ master ]
     
 defaults:
   run:
@@ -31,7 +31,8 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'# Set always-auth in npmrc.
+        cache: 'npm'
+        # Set always-auth in npmrc.
         cache-dependency-path: './projects/web/Jolteon/package-lock.json'
     
     - run: npm install
