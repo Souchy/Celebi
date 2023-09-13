@@ -365,10 +365,10 @@ namespace souchy.celebi.spark
             },
                 mongo =>
                 {
-                    Debug.WriteLine($"Mongo settings2: {settings}: {{ {settings?.ConnectionString}, {settings?.Federation} }}");
+                    Console.WriteLine($"Mongo settings2: {settings}: {{ {settings?.ConnectionString}, {settings?.Federation} }}");
                     if (settings == null) // for swashbuckle 'dotnet swagger' generator. secrets aren't included at that moment
                     {
-                        Debug.WriteLine("Warning: No MongoSettings to configure services.AddIdentityMongoDbProvider.");
+                        Console.WriteLine("Warning: No MongoSettings to configure services.AddIdentityMongoDbProvider.");
                         return;
                     }
                     mongo.ConnectionString = settings.ConnectionString + "/" + settings.MetaDB;
