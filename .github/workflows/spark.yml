@@ -20,6 +20,13 @@ jobs:
     defaults:
       run:
         working-directory: './projects/tests/EeveeUnitTests/'
+    env:
+      MongoSettings.ConnectionString: ${{ secrets.MongoSettings__ConnectionString}}
+      MongoSettings.Federation: ${{ secrets.MongoSettings__Federation }}
+      MongoSettings.ModelsDB: ${{ secrets.MongoSettings__ModelsDB }} 
+      MongoSettings.FightsDB: ${{ secrets.MongoSettings__FightsDB }}
+      MongoSettings.MetaDB: ${{ secrets.MongoSettings__MetaDB }}
+      MongoSettings.I18NDB: ${{ secrets.MongoSettings__I18NDB }}
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
