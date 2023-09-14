@@ -80,7 +80,7 @@ namespace souchy.celebi.eevee.impl.objects
                     //naturalStat.Add(props.stat);
                 }
             }
-            // reset conditional stats to 0
+            // check conditional stats and deactivate them (0) if necessary // TODO remove those stats instead of 0 ?
             if(action != null)
             {
                 var boardSource = this.GetFight().creatures.Get(action.caster);
@@ -89,6 +89,10 @@ namespace souchy.celebi.eevee.impl.objects
                 {
                     if (stat is IStatSimple simple)
                     {
+                        if(simple?.statId.GetCharactType()?.conditions == null)
+                        {
+                            throw new NullReferenceException($"Stat ID is null: {simple?.statId}. Recommend to check IEffect or IStats database and replace this statID with a valid one.");
+                        }
                         var success = simple.statId.GetCharactType().conditions.All(c =>
                         {
                             return c.check(action, null, boardSource, boardTarget);

@@ -96,8 +96,9 @@ namespace souchy.celebi.eevee
                 //caster.GetNaturalStats().Set()
                 // caster.contextuals.set(action.effect, returnValue)
 
-                // sub effects -> apply child effects to each target
-                applyEffectContainer(subActionEffect, parentAction.effect);
+                // sub effects -> apply child effects to each target only if it's not status effects
+                if(parentAction.effect is not IStatusApplicationScript)
+                    applyEffectContainer(subActionEffect, parentAction.effect);
             }
         }
 

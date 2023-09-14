@@ -26,7 +26,7 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest
 #endif
             IConfiguration configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
-                //.AddJsonFile($"appsettings.{environment}.json")
+                .AddJsonFile($"appsettings.{environment}.json")
                 .AddUserSecrets<Spark>()
                 .Build();
 

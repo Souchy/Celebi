@@ -52,12 +52,16 @@ namespace souchy.celebi.eevee.neweffects.impl
 
             var points = TargetAcquisitionZone.GeneratePoints();
             points.ForEach(p => p.add(targetCell));
-            var cells = points.Select(p => action.fight.cells.Values.First(c => c.position.equals(p))).ToList();
+            var cells = points.Select(p => action.fight.cells.Values.FirstOrDefault(c => c.position.equals(p)))
+                .Where(c => c != null)
+                .ToList();
 
             List<IBoardEntity> result;
             if(true) // model.BoardTargetType == creatures
             {
-                result = cells.Select(cell => action.fight.creatures.Values.First(crea => crea.position.equals(cell.position))).ToList<IBoardEntity>();
+                result = cells.Select(cell => action.fight.creatures.Values.FirstOrDefault(crea => crea.position.equals(cell.position)))
+                    .Where(c => c != null)
+                    .ToList<IBoardEntity>();
                 // TODO conditions here or somewhere else?
                 //      i think here but there was a different plan before, hence the "possible" targets name
                 // result = result.Where(crea => TargetFilter.check(action, null, action.getCaster(), crea));

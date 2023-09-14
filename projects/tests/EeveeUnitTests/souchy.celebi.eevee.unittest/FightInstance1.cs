@@ -26,32 +26,43 @@ using souchy.celebi.eevee.face.objects.statuses;
 
 namespace EeveeUnitTests.souchy.celebi.eevee.unittest
 {
-    [Collection(nameof(DiamondFixture))]
-    public class FightFixture1 : IDisposable
+    public class FightInstance1 : IDisposable
     {
+        private ICreatureModel[] creatureModels;
+        private int nc;
         public IFight fight { get; set; }
-        public FightFixture1(DiamondFixture fix)
+        public FightInstance1()
+        {
+            createFight();
+        }
+
+        private void createFight()
         {
             fight = Fight.Create();
             fight.settings = new FightSettings(); // Eevee.models.defaultFightSettings; // TODO load fight settigns from DB. Could have multiple modes with their own names ("normal", "draft", "blitz", "urf"...)
 
-            IMap tempMap = Map.Create(); //  Eevee.models.maps.Values.First();
-            tempMap.cells = new ICell[6];
-
-            IBoard board = Board.Create(fight.entityUid);
+            Board.Create(fight.entityUid);
             // TODO copy cells to board?
             // what do I even need a board for if all the creatures/cells are in Fight/Timeline and the positions are in the IBoardEntities
-            //  just move the board functions to the fight directly maybe
+            //     just move the board functions to the fight directly maybe
 
-            ITimeline timeline = Timeline.Create(fight.entityUid);
+            Timeline.Create(fight.entityUid);
 
-            var creatureModels = Eevee.models.creatureModels.Values.ToArray();
-            if (creatureModels.Length == 0) 
+            creatureModels = Eevee.models.creatureModels.Values.ToArray();
+            if (creatureModels.Length == 0)
                 return;
-            //Assert.NotEmpty(creatureModels);
+            Assert.NotEmpty(creatureModels);
 
-            var nc = fight.settings.numberOfCreaturesOnBoardPerTeam;
+            nc = fight.settings.numberOfCreaturesOnBoardPerTeam;
 
+            configureBoard();
+            configureTimeline();
+        }
+
+        private void configureBoard()
+        {
+            IMap tempMap = Map.Create(); //  Eevee.models.maps.Values.First();
+            tempMap.cells = new ICell[6];
             // Creatures + Cells for 2 teams
             for (int j = 0; j < fight.settings.numberOfTeams; j++)
             {
@@ -77,19 +88,25 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest
                     //timeline.creatureIds.Add(crea.entityUid); // add to timeline/board
                 }
             }
-
+            // Add map cells to the fight
+            foreach (var cell in tempMap.cells)
+                fight.cells.Add(cell.entityUid, cell);
+        }
+        private void configureTimeline()
+        {
             // Timeline ordering
             int team = 0;
             IPlayer? player1 = null;
             var ordered = fight.creatures.Values.OrderBy(c => c.GetNaturalStats().Get<IStatSimple>(OtherProperty.Speed)?.value).ToList();
-            while(ordered.Any())
+            while (ordered.Any())
             {
-                if(player1 == null) player1 = ordered.First().GetCurrentOwner();
+                if (player1 == null) player1 = ordered.First().GetCurrentOwner();
                 ICreature? nextCrea = null;
-                if(team % 2 == 0)
+                if (team % 2 == 0)
                 {
                     nextCrea = ordered.First(c => c.GetOriginalOwner() == player1);
-                } else
+                }
+                else
                 {
                     nextCrea = ordered.First(c => c.GetOriginalOwner() != player1);
                 }
@@ -97,12 +114,6 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest
                 //fight.timeline.creatureIds.Add(nextCrea.entityUid);
                 fight.timeline.addSlot(nextCrea.entityUid);
                 team++;
-            }
-
-            // Add map cells to the fight
-            foreach (var cell in tempMap.cells)
-            {
-                fight.cells.Add(cell.entityUid, cell);
             }
         }
 
@@ -155,6 +166,7 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest
 
         public void Dispose()
         {
+            fight.Dispose();
         }
     }
 }

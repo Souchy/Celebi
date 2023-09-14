@@ -28,12 +28,14 @@ namespace souchy.celebi.eevee.neweffects.impl.scripts.creature
             //{
             //    t.
             //}
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return null;
         }
 
         public IEffectPreview preview(ISubActionEffectTarget action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return null;
         }
     }
 }
