@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Spark, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "title": "Spark",
     "version": "1.0"
   },
   "paths": {

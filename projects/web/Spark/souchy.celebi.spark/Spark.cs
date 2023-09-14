@@ -47,19 +47,19 @@ namespace souchy.celebi.spark
     {
         public static void Main(string[] args)
         {
-#if DEBUG
-            var builder = WebApplication.CreateBuilder(args);
-#else
             var opts = new WebApplicationOptions()
             {
                 Args = args,
                 ApplicationName = "Spark",
                 ContentRootPath = "./",
-                EnvironmentName = "Production",
+#if DEBUG
+                EnvironmentName = "development",
+#else
+                EnvironmentName = "production",
+#endif
                 WebRootPath = "./",
             };
             var builder = WebApplication.CreateBuilder(opts);
-#endif
 
             var services = builder.Services;
             var configuration = builder.Configuration;
