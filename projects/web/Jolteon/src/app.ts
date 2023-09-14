@@ -16,11 +16,11 @@ import { PropertiesController } from './jolteon/services/api/PropertiesControlle
 @inject(IHttpClient, IStore, IEventAggregator, IRouter, AuthController)
 export class App implements IRouteableComponent {
 	static routes: IRoute[] = [
-		{
-			path: ['', 'home'],
-			component: import('./pages/home/home'),
-			title: 'Home',
-		},
+		// {
+		// 	path: ['', 'home'],
+		// component: import('./pages/home/home'),
+		// 	title: 'Home',
+		// },
 		{
 			path: 'profile',
 			component: import('./pages/profile/profile'),
@@ -38,7 +38,7 @@ export class App implements IRouteableComponent {
 		// 	}
 		// },
 		{
-			path: 'editor',
+			path: ['', 'editor'],
 			component: import('./pages/admin/editor/editor'),
 			title: 'Editor',
 			// data: {
