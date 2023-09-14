@@ -9,14 +9,15 @@ using Xunit.Abstractions;
 namespace EeveeUnitTests.souchy.celebi.eevee.unittest.spells
 {
     [Collection(nameof(DiamondFixture))]
-    public class TestFireball : IClassFixture<FightFixture1>
+    public class TestFireball // : IClassFixture<FightFixture1>
     {
         private readonly ITestOutputHelper output;
         private IFight fight;
-        public TestFireball(ITestOutputHelper output, FightFixture1 f)
+
+        public TestFireball(ITestOutputHelper output)
         {
             this.output = output;
-            fight = f.fight;
+            this.fight = new FightInstance1().fight;
         }
 
         [Fact]
