@@ -1,0 +1,1 @@
+mongoimport --db=Celebi#Models --collection=IStats --file=G:/Downloads/Celebi#Models.IStats.json --mode=upsert --uri "mongodb+srv://souchy:QrcwveJ1aYN9Nmcw@souchyatlascluster0.bbs5alz.mongodb.net/?authSource=admin&replicaSet=atlas-14ns9p-shard-0&readPreference=primary&ssl=true" --jsonArray

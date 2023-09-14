@@ -10,11 +10,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace souchy.celebi.eevee.neweffects.impl.scripts.creature
+namespace souchy.celebi.eevee.neweffects.impl.scripts.status
 {
-    public class CreateStatusCreatureScript : IEffectScript, IStatusApplicationScript
+    public class AddGlyphScript : IEffectScript, IStatusApplicationScript
     {
-        public Type SchemaType => typeof(CreateStatusCreature);
+        public Type SchemaType => typeof(AddGlyph);
 
         public IEffectReturnValue apply(ISubActionEffectTarget action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
         {

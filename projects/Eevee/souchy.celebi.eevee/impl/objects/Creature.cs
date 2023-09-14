@@ -89,6 +89,10 @@ namespace souchy.celebi.eevee.impl.objects
                 {
                     if (stat is IStatSimple simple)
                     {
+                        if(simple?.statId.GetCharactType()?.conditions == null)
+                        {
+                            throw new NullReferenceException($"Stat ID is null: {simple?.statId}. Recommend to check IEffect or IStats database and replace this statID with a valid one.");
+                        }
                         var success = simple.statId.GetCharactType().conditions.All(c =>
                         {
                             return c.check(action, null, boardSource, boardTarget);

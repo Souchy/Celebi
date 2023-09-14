@@ -4076,6 +4076,17 @@
         },
         "additionalProperties": false
       },
+      "AddGlyphScript": {
+        "type": "object",
+        "properties": {
+          "schemaType": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
       "AddStats": {
         "type": "object",
         "properties": {

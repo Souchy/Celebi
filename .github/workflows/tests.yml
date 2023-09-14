@@ -47,3 +47,4 @@ jobs:
         name: Eevee Tests           # Name of the check run which will be created
         path: "/home/runner/work/Celebi/Celebi/projects/tests/EeveeUnitTests/TestResults/test_results.trx"      # Path to test results
         reporter: dotnet-trx        # Format of test results
+        # fail-on-error: 'false'
