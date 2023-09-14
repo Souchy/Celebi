@@ -18,6 +18,8 @@ namespace souchy.celebi.eevee.impl.shared.conditions.other
         {
             //if (!checkChildren(action, trigger, boardSource, boardTarget)) //fightId, source, target))
             //    return false;
+            if (boardTarget == null) 
+                return false;
 
             var actualDistance = boardSource.position
                 .distanceManhattan(boardTarget.position);

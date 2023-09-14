@@ -6,6 +6,10 @@ using souchy.celebi.eevee.face.objects.effectResults;
 
 namespace souchy.celebi.eevee.neweffects.face
 {
+    /// <summary>
+    /// temporary (?) tag that disables the application of child effects in the mind pipeline
+    /// </summary>
+    public interface IStatusApplicationScript { }
 
     public interface IEffectScript 
     {

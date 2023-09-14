@@ -1,6 +1,7 @@
 ﻿using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.objects.stats;
+using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl;
 using souchy.celebi.eevee.impl.objects;
@@ -39,6 +40,8 @@ namespace souchy.celebi.eevee.face.objects
         public IStats GetTotalStats(IAction action); //, TriggerEvent trigger);
 
         public IEnumerable<ISpell> GetSpells();
+
+        public ICreatureModel GetModel() => Eevee.models.creatureModels.Values.First(c => c.modelUid == modelUid);
 
     }
 }

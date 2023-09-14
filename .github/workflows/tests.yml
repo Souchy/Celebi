@@ -26,7 +26,7 @@ jobs:
     - name: App Settings Variable Substitution
       uses: microsoft/variable-substitution@v1
       with:
-        files: '/home/runner/work/Celebi/Celebi/projects/web/Spark/appsettings.json'
+        files: '/home/runner/work/Celebi/Celebi/projects/web/Spark/appsettings.production.json'
       env:
         MongoSettings.ConnectionString: ${{ secrets.MongoSettings__ConnectionString}}
         MongoSettings.Federation: ${{ secrets.MongoSettings__Federation }}
@@ -39,4 +39,12 @@ jobs:
     - name: Build
       run: dotnet build --no-restore --configuration Release
     - name: Test
-      run: dotnet test --no-build --configuration Release
+      run: dotnet test --no-build --configuration Release --logger "trx;LogFileName=test_results.trx"
+    - name: Test Report
+      uses: dorny/test-reporter@v1
+      if: success() || failure()    # run this step even if previous step failed
+      with:
+        name: Eevee Tests           # Name of the check run which will be created
+        path: "/home/runner/work/Celebi/Celebi/projects/tests/EeveeUnitTests/TestResults/test_results.trx"      # Path to test results
+        reporter: dotnet-trx        # Format of test results
+        # fail-on-error: 'false'

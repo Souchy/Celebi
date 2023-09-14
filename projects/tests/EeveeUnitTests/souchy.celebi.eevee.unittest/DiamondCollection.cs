@@ -11,6 +11,7 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest
 {
     public class DiamondFixture : IAsyncLifetime
     {
+        public readonly MongoFederationService federation;
         public readonly CollectionService<IFight> _fights;
         public readonly CollectionService<ICreatureModel> _creatures;
         public readonly CollectionService<ISpellModel> _spells;
@@ -19,8 +20,9 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest
         public readonly CollectionService<IEffect> _effects;
         public readonly CollectionService<IStatusModel> _statuses;
         public readonly CollectionService<IMap> _maps;
-        public DiamondFixture(MongoModelsDbService db)
+        public DiamondFixture(MongoModelsDbService db, MongoFederationService federation)
         {
+            this.federation = federation;
             _fights = db.GetMongoService<IFight>();
             _creatures = db.GetMongoService<ICreatureModel>();
             _spells = db.GetMongoService<ISpellModel>();

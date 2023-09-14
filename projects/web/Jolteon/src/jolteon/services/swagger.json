@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Spark, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "title": "Spark",
     "version": "1.0"
   },
   "paths": {
@@ -4076,6 +4076,17 @@
         },
         "additionalProperties": false
       },
+      "AddGlyphScript": {
+        "type": "object",
+        "properties": {
+          "schemaType": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
       "AddStats": {
         "type": "object",
         "properties": {
@@ -4663,6 +4674,17 @@
         "properties": {
           "statusStats": {
             "$ref": "#/components/schemas/StatusModelStats"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateStatusCreatureScript": {
+        "type": "object",
+        "properties": {
+          "schemaType": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
           }
         },
         "additionalProperties": false
