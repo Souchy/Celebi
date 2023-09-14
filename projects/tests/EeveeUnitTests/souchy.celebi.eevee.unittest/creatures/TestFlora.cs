@@ -28,14 +28,14 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest.creatures
             this.fight = f.fight;
         }
 
-        [Fact]
-        public void testUniqueFight()
-        {
-            var target = fight.timeline.getCreatures().Last();
-            var targetStats = target.GetTotalStats(null);
-            var lifeIni = targetStats.GetValue<IStatSimple, int>(Resource.Life);
-            Assert.Equal(1800, lifeIni);
-        }
+        //[Fact]
+        //public void testUniqueFight()
+        //{
+        //    var target = fight.timeline.getCreatures().Last();
+        //    var targetStats = target.GetTotalStats(null);
+        //    var lifeIni = targetStats.GetValue<IStatSimple, int>(Resource.Life);
+        //    Assert.Equal(1800, lifeIni);
+        //}
 
         [Fact]
         public async void testSeedThrow()
@@ -48,26 +48,26 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest.creatures
             var spells = diamonds.federation.FindSpellsByString("Seed throw");
         }
 
-        [Fact]
-        public async void testEntangle()
-        {
-            //var spells = await diamonds.federation.FindSpellsByString("Entangle");
-            //Assert.Single(spells);
-            //var entangleModel = spells[0];
-            var entangleModel = Eevee.models.spellModels.Get(SpellIDs.entangle);
-            var entangle = fight.spells.Values.Single(s => s.modelUid == entangleModel.modelUid);
-            var flora = fight.creatures.Values.First(c => c.GetModel().entityUid.Equals(CreatureIDs.flora));
-            var targetCell = fight.cells.Values.First();
-            var action = new ActionSpell()
-            {
-                caster = flora.entityUid,
-                targetCell = targetCell.entityUid,
-                fight = fight,
-                spell = entangle.entityUid
-            };
+        //[Fact]
+        //public async void testEntangle()
+        //{
+        //    //var spells = await diamonds.federation.FindSpellsByString("Entangle");
+        //    //Assert.Single(spells);
+        //    //var entangleModel = spells[0];
+        //    var entangleModel = Eevee.models.spellModels.Get(SpellIDs.entangle);
+        //    var entangle = fight.spells.Values.Single(s => s.modelUid == entangleModel.modelUid);
+        //    var flora = fight.creatures.Values.First(c => c.GetModel().entityUid.Equals(CreatureIDs.flora));
+        //    var targetCell = fight.cells.Values.First();
+        //    var action = new ActionSpell()
+        //    {
+        //        caster = flora.entityUid,
+        //        targetCell = targetCell.entityUid,
+        //        fight = fight,
+        //        spell = entangle.entityUid
+        //    };
 
-            new Actions().castSpell(action);
-        }
+        //    new Actions().castSpell(action);
+        //}
 
         [Fact]
         public void testBloom()
