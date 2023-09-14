@@ -69,6 +69,17 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest.creatures
             };
 
             new Actions().castSpell(action);
+
+            var lifeResults = new int[] { 1485, 2985, 1500, 1785, 1484, 1500 };
+            int i = 0;
+            foreach(var crea in fight.creatures.Values)
+            {
+                var life = crea.GetTotalStats(null).GetValue<IStatSimple, int>(Resource.Life);
+                var lifemax = crea.GetTotalStats(null).GetValue<IStatSimple, int>(Resource.LifeMax);
+                output.WriteLine($"{crea.entityUid} life : {life} / {lifemax}.");
+                Assert.Equal(lifeResults[i], life);
+                i++;
+            }
         }
 
         [Fact]
