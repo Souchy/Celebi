@@ -26,7 +26,7 @@ jobs:
     - name: App Settings Variable Substitution
       uses: microsoft/variable-substitution@v1
       with:
-        files: '/home/runner/work/Celebi/Celebi/projects/web/Spark/appsettings.json'
+        files: '/home/runner/work/Celebi/Celebi/projects/web/Spark/appsettings.production.json'
       env:
         MongoSettings.ConnectionString: ${{ secrets.MongoSettings__ConnectionString}}
         MongoSettings.Federation: ${{ secrets.MongoSettings__Federation }}
