@@ -67,16 +67,6 @@ export class Creature implements IRouteableComponent {
     }
 
     
-    public clickCreature() {
-        this.router.load("/editor/creature/" + this.model.modelUid);
-    }
-
-    public clickRemove() {
-        // TODO: ask confirmation before delete, it's too easy to missclick
-        this.creatureController.deleteCreature(this.model.modelUid);
-    }
-
-    
     public async clickNewSkin() {
         // create skin
         let res = await this.skinController.postSkin();

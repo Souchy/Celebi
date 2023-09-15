@@ -28,12 +28,10 @@ namespace souchy.celebi.spark.services
     {
         protected readonly IMongoDatabase db;
         protected DbService(IMongoDatabase db) => this.db = db;
-        public IMongoCollection<T> GetMongoCollection<T>(string collectionName)
-            => db.GetCollection<T>(collectionName);
-        public IMongoCollection<T> GetMongoCollection<T>()
-            => db.GetCollection<T>(typeof(T).Name);
-        public CollectionService<T> GetMongoService<T>() where T : IEntity
-            => new CollectionService<T>(db.GetCollection<T>(typeof(T).Name));
+        public IMongoCollection<T> GetMongoCollection<T>(string? collectionName = null)
+            => db.GetCollection<T>(collectionName ?? typeof(T).Name);
+        public CollectionService<T> GetMongoService<T>(string? collectionName = null) where T : IEntity
+            => new CollectionService<T>(db.GetCollection<T>(collectionName ?? typeof(T).Name));
     }
     public class MongoModelsDbService : DbService
     {

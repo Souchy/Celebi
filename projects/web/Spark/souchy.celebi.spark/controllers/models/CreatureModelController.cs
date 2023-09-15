@@ -14,6 +14,7 @@ using souchy.celebi.eevee.impl.shared;
 using souchy.celebi.eevee.impl.stats;
 using souchy.celebi.eevee.impl.util;
 using souchy.celebi.spark.models;
+using souchy.celebi.spark.models.aggregations;
 using souchy.celebi.spark.services;
 using souchy.celebi.spark.services.models;
 using souchy.celebi.spark.util;
@@ -26,6 +27,7 @@ namespace souchy.celebi.spark.controllers.models
     public class CreatureModelController : ControllerBase
     {
         private readonly CollectionService<ICreatureModel> _creatureModels;
+        private readonly CollectionService<ICreatureModelView> creaturesView;
         private readonly CollectionService<IStats> _stats;
         private readonly CollectionService<ICreatureSkin> _skins;
         private readonly StringService _strings;
@@ -35,12 +37,35 @@ namespace souchy.celebi.spark.controllers.models
         public CreatureModelController(MongoModelsDbService db, StringService strings, IDCounterService ids, MongoFederationService  federation)
         {
             _creatureModels = db.GetMongoService<ICreatureModel>();
+            creaturesView = db.GetMongoService<ICreatureModelView>();
             _stats = db.GetMongoService<IStats>();
             _skins = db.GetMongoService<ICreatureSkin>();   
             _strings = strings;
             _ids = ids;
             _federation = federation;
         }
+
+        /// <summary>
+        /// Good for lists of spells containing just the name and description
+        /// </summary>
+        [HttpGet("aggregation/list")]
+        public async Task<ActionResult<IEnumerable<TextEntityAggregation>>> GetListAggregation([FromQuery] List<ObjectId> list)
+        {
+            return Ok(await _federation.GetCreaturesTextAggregation(list));
+        }
+        /// <summary>
+        /// This is probably not usable for the editor because we need a SpellModel object for updating. <br></br>
+        /// But it's good for encyclopedias, the game and public apis
+        /// </summary>
+        [HttpGet("aggregation/{id}")]
+        public async Task<ActionResult<ICreatureModelView>> GetAggregation([FromRoute] CreatureIID id)
+        {
+            ICreatureModelView? model = await creaturesView.GetOneAsync(id);
+            if (model is null)
+                return NoContent();
+            return Ok(model);
+        }
+
 
         [HttpGet("all")]
         public async Task<List<ICreatureModel>> GetAll() => await _creatureModels.GetAsync();

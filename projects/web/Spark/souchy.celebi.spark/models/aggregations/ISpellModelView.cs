@@ -20,7 +20,7 @@ namespace souchy.celebi.spark.models.aggregations
     //    public IStringEntity descriptionId { get; set; }
     //}
 
-    public record SpellModelAggregation : IEntity //: SpellModelTextAggregation
+    public record ISpellModelView : IEntity //: SpellModelTextAggregation
     {
         [BsonId]
         public ObjectId entityUid { get; set; }
@@ -35,13 +35,12 @@ namespace souchy.celebi.spark.models.aggregations
         public SpellModelStats stats { get; set; }
         public ICondition sourceCondition { get; set; }
         public ICondition targetFilter { get; set; }
-        public IEnumerable<EffectPermanentAggregation> effects { get; set; } = new List<EffectPermanentAggregation>();
+        public IEnumerable<IEffectView> effects { get; set; } = new List<IEffectView>();
         public IZone rangeZoneMin { get; set; }
         public IZone rangeZoneMax { get; set; }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
         }
     }
 }

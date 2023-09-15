@@ -1,6 +1,6 @@
 import { IEventAggregator, inject } from "aurelia";
 import { CreatureModelController } from "../../../../jolteon/services/api/CreatureModelController";
-import { ICreatureModel, CreatureModel } from '.././../../../jolteon/services/api/data-contracts';
+import { ICreatureModel, CreatureModel, TextEntityAggregation } from '.././../../../jolteon/services/api/data-contracts';
 import { IRouteableComponent, IRouter } from "@aurelia/router";
 import { Creature } from "./creature";
 
@@ -11,7 +11,7 @@ export class CreatureList implements IRouteableComponent {
     public filteredCreatures: ICreatureModel[] = []
     public selectedCreatures: ICreatureModel[] = [];
     public filter: string = ""
-
+    public textAggregation: TextEntityAggregation[] = [];
     // view-model refs
     // public refs: Creature[] = []
 
@@ -37,6 +37,10 @@ export class CreatureList implements IRouteableComponent {
             skip: this.page * this.numPerPage,
             limit: this.numPerPage
         }
+        this.creatureController.getAggregationList().then(res => {
+            this.textAggregation = res.data;
+            // this.textAggregation[0].entityUid
+        })
         this.creatureController.getAll().then(res => {
             this.creatures = res.data;
             this.filteredCreatures = [...this.creatures];
@@ -66,6 +70,15 @@ export class CreatureList implements IRouteableComponent {
         //     return  c?.name?.entity?.value.toLowerCase().includes(str) ||
         //             c?.desc?.entity?.value.toLowerCase().includes(str);
         // }).map(v => this.creatures.find(c => c.modelUid == v.model.modelUid));
+    }
+
+    public clickCreature(entity: TextEntityAggregation) {
+        this.router.load("/editor/creature/" + entity.modelUid);
+    }
+
+    public clickRemove(entity: TextEntityAggregation) {
+        // TODO: ask confirmation before delete, it's too easy to missclick
+        this.creatureController.deleteCreature(entity.modelUid);
     }
 
 }

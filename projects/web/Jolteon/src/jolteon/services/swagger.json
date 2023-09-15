@@ -318,6 +318,71 @@
         }
       }
     },
+    "/api/models/creature/aggregation/list": {
+      "get": {
+        "tags": [
+          "CreatureModelController"
+        ],
+        "parameters": [
+          {
+            "name": "list",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TextEntityAggregation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/creature/aggregation/{id}": {
+      "get": {
+        "tags": [
+          "CreatureModelController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ICreatureModelView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/models/creature/all": {
       "get": {
         "tags": [
@@ -2638,7 +2703,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SpellModelAggregation"
+                  "$ref": "#/components/schemas/ISpellModelView"
                 }
               }
             }
@@ -5280,52 +5345,6 @@
           "type": "object"
         }
       },
-      "EffectPermanentAggregation": {
-        "type": "object",
-        "properties": {
-          "entityUid": {
-            "type": "string"
-          },
-          "modelUid": {
-            "type": "string",
-            "nullable": true
-          },
-          "model": {
-            "$ref": "#/components/schemas/IEffectModel"
-          },
-          "schema": {
-            "$ref": "#/components/schemas/IEffectSchema"
-          },
-          "sourceCondition": {
-            "$ref": "#/components/schemas/ICondition"
-          },
-          "targetFilter": {
-            "$ref": "#/components/schemas/ICondition"
-          },
-          "targetAcquisitionZone": {
-            "$ref": "#/components/schemas/IZone"
-          },
-          "triggers": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ITriggerModel"
-            },
-            "nullable": true
-          },
-          "depth": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "effects": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EffectPermanentAggregation"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "ElementType": {
         "enum": [
           "None = 0",
@@ -5710,6 +5729,49 @@
         "type": "object",
         "additionalProperties": false
       },
+      "ICreatureModelView": {
+        "type": "object",
+        "properties": {
+          "entityUid": {
+            "type": "string"
+          },
+          "modelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "nameId": {
+            "type": "string"
+          },
+          "descriptionId": {
+            "type": "string"
+          },
+          "stats": {
+            "$ref": "#/components/schemas/CreatureStats"
+          },
+          "spells": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ISpellModelView"
+            },
+            "nullable": true
+          },
+          "statusPassives": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IStatusModel"
+            },
+            "nullable": true
+          },
+          "skins": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ICreatureSkin"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "ICreatureSkin": {
         "type": "object",
         "properties": {
@@ -5797,32 +5859,6 @@
           "type": "object"
         }
       },
-      "IEffectModel": {
-        "type": "object",
-        "properties": {
-          "nameId": {
-            "type": "string"
-          },
-          "descriptionId": {
-            "type": "string"
-          },
-          "boardTargetType": {
-            "$ref": "#/components/schemas/BoardTargetType"
-          },
-          "schemaType": {
-            "type": "string",
-            "nullable": true
-          },
-          "modelUid": {
-            "type": "string",
-            "nullable": true
-          },
-          "entityUid": {
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
       "IEffectPermanent": {
         "type": "object",
         "properties": {
@@ -5909,6 +5945,56 @@
         "properties": {
           "effType": {
             "$ref": "#/components/schemas/EffT"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IEffectView": {
+        "type": "object",
+        "properties": {
+          "entityUid": {
+            "type": "string"
+          },
+          "modelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "schema": {
+            "$ref": "#/components/schemas/IEffectSchema"
+          },
+          "sourceCondition": {
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "targetFilter": {
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "targetAcquisitionZone": {
+            "$ref": "#/components/schemas/IZone"
+          },
+          "triggers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ITriggerModel"
+            },
+            "nullable": true
+          },
+          "effectids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "effects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IEffectView"
+            },
+            "nullable": true
+          },
+          "depth": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -6049,6 +6135,58 @@
       },
       "ISpellModelFilterDefinition": {
         "type": "object",
+        "additionalProperties": false
+      },
+      "ISpellModelView": {
+        "type": "object",
+        "properties": {
+          "entityUid": {
+            "type": "string"
+          },
+          "modelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "nameId": {
+            "type": "string"
+          },
+          "descriptionId": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string",
+            "nullable": true
+          },
+          "skins": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ISpellSkin"
+            },
+            "nullable": true
+          },
+          "stats": {
+            "$ref": "#/components/schemas/SpellModelStats"
+          },
+          "sourceCondition": {
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "targetFilter": {
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "effects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IEffectView"
+            },
+            "nullable": true
+          },
+          "rangeZoneMin": {
+            "$ref": "#/components/schemas/IZone"
+          },
+          "rangeZoneMax": {
+            "$ref": "#/components/schemas/IZone"
+          }
+        },
         "additionalProperties": false
       },
       "ISpellSkin": {
@@ -7239,58 +7377,6 @@
         },
         "additionalProperties": false
       },
-      "SpellModelAggregation": {
-        "type": "object",
-        "properties": {
-          "entityUid": {
-            "type": "string"
-          },
-          "modelUid": {
-            "type": "string",
-            "nullable": true
-          },
-          "nameId": {
-            "type": "string"
-          },
-          "descriptionId": {
-            "type": "string"
-          },
-          "icon": {
-            "type": "string",
-            "nullable": true
-          },
-          "skins": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ISpellSkin"
-            },
-            "nullable": true
-          },
-          "stats": {
-            "$ref": "#/components/schemas/SpellModelStats"
-          },
-          "sourceCondition": {
-            "$ref": "#/components/schemas/ICondition"
-          },
-          "targetFilter": {
-            "$ref": "#/components/schemas/ICondition"
-          },
-          "effects": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EffectPermanentAggregation"
-            },
-            "nullable": true
-          },
-          "rangeZoneMin": {
-            "$ref": "#/components/schemas/IZone"
-          },
-          "rangeZoneMax": {
-            "$ref": "#/components/schemas/IZone"
-          }
-        },
-        "additionalProperties": false
-      },
       "SpellModelCondition": {
         "type": "object",
         "properties": {
@@ -8072,10 +8158,10 @@
             "type": "string",
             "nullable": true
           },
-          "nameId": {
+          "name": {
             "$ref": "#/components/schemas/IStringEntity"
           },
-          "descriptionId": {
+          "description": {
             "$ref": "#/components/schemas/IStringEntity"
           }
         },

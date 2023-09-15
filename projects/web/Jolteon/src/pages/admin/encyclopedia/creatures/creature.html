@@ -6,22 +6,6 @@
 
 <!-- <div if.bind="model"> -->
 
-  <template if.bind="isvignette">
-    <button class="title btn-outline" click.trigger="clickCreature()">
-      <stringcomponent uid.bind="model.nameId" editable.bind="!isvignette"></stringcomponent>
-      <!-- view-model.ref="name"  -->
-      <!-- ${name.entity.value} -->
-      <!-- <au-slot></au-slot> -->
-    </button>
-  
-    <!-- delete & confirm -->
-    <button class="btn close" data-bs-toggle="modal" data-bs-target="#deleteCreature-${model.entityUid}">x</button>
-    <modal id="deleteCreature-${model.entityUid}" header="Delete Creature?" close.bind=false footer.bind=true callbackok.bind="() => clickRemove()">
-      Confirm delete ${name.entity.value}?
-    </modal>
-  </template>
-  
-  
   <template else>
     <h3>Creature #${model.modelUid}</h3>
     <div class="d-flex">

@@ -13,7 +13,7 @@ namespace souchy.celebi.spark.models.aggregations
         public ObjectId entityUid { get; set; }
         public IID modelUid { get; set; }
 
-        public IStringEntity nameId { get; set; }
-        public IStringEntity descriptionId { get; set; }
+        public IStringEntity name { get; set; }
+        public IStringEntity description { get; set; }
     }
 }

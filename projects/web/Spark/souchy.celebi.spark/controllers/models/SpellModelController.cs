@@ -21,7 +21,7 @@ namespace souchy.celebi.spark.controllers.models
     public class SpellModelController : EffectContainerControllerBase<ISpellModel>
     {
         private readonly CollectionService<ISpellModel> spells;
-        private readonly CollectionService<SpellModelAggregation> spellsView;
+        private readonly CollectionService<ISpellModelView> spellsView;
         private readonly CollectionService<IStats> _stats;
         private readonly CollectionService<ISpellSkin> _skins;
         private readonly StringService _strings;
@@ -31,7 +31,7 @@ namespace souchy.celebi.spark.controllers.models
         public SpellModelController(MongoModelsDbService db, StringService strings, IDCounterService ids, MongoFederationService federation) : base(db)
         {
             spells = db.GetMongoService<ISpellModel>();
-            spellsView = db.GetMongoService<SpellModelAggregation>();
+            spellsView = db.GetMongoService<ISpellModelView>();
             _stats = db.GetMongoService<IStats>();
             _skins = db.GetMongoService<ISpellSkin>();
             _strings = strings;
@@ -56,16 +56,17 @@ namespace souchy.celebi.spark.controllers.models
         [HttpGet("aggregation/list")]
         public async Task<ActionResult<IEnumerable<TextEntityAggregation>>> GetListAggregation([FromQuery] List<ObjectId> list)
         {
-            return Ok(await spellsView.GetInIdsAsync(list));
+            return Ok(await _federation.GetSpellsTextAggregation(list));
+            //return Ok(await spellsView.GetInIdsAsync(list));
         }
         /// <summary>
         /// This is probably not usable for the editor because we need a SpellModel object for updating. <br></br>
         /// But it's good for encyclopedias, the game and public apis
         /// </summary>
         [HttpGet("aggregation/{id}")]
-        public async Task<ActionResult<SpellModelAggregation>> GetAggregation([FromRoute] SpellIID id)
+        public async Task<ActionResult<ISpellModelView>> GetAggregation([FromRoute] SpellIID id)
         {
-            SpellModelAggregation? model = await spellsView.GetOneAsync(id);
+            ISpellModelView? model = await spellsView.GetOneAsync(id);
             if (model is null)
                 return NoContent();
             return Ok(model);

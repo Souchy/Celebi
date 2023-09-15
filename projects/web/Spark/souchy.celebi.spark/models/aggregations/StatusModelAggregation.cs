@@ -21,6 +21,6 @@ namespace souchy.celebi.spark.models.aggregations
 
         public StatusModelStats stats { get; set; }
         public IValue<StatusPriorityType> priority { get; set; } = new Value<StatusPriorityType>();
-        public IEnumerable<EffectPermanentAggregation> effects { get; set; } = new List<EffectPermanentAggregation>();
+        public IEnumerable<IEffectView> effects { get; set; } = new List<IEffectView>();
     }
 }

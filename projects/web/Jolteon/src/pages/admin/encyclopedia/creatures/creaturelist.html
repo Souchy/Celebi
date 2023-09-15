@@ -10,5 +10,18 @@
 
 <!-- todo bind creature -->
 <div class="list">
-  <creature repeat.for="crea of filteredCreatures" model.bind="crea" isvignette.bind="true"></creature>
+  <!-- <creature repeat.for="crea of filteredCreatures" model.bind="crea" isvignette.bind="true"></creature> -->
+  
+  <div repeat.for="entity of textAggregation">
+    <button class="title btn-outline" click.trigger="clickCreature()">
+      ${entity.name.value}
+      <!-- <stringcomponent uid.bind="model.nameId" editable.bind="!isvignette"></stringcomponent> -->
+    </button>
+
+    <!-- delete & confirm -->
+    <button class="btn close" data-bs-toggle="modal" data-bs-target="#deleteCreature-${entity.entityUid}">x</button>
+    <modal id="deleteCreature-${entity.entityUid}" header="Delete Creature?" close.bind=false footer.bind=true callbackok.bind="() => clickRemove()">
+      Confirm delete ${entity.name.value}?
+    </modal>
+  </div>
 </div>

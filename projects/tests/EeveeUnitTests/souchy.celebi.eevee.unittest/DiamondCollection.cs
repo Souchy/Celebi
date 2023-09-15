@@ -15,7 +15,7 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest
         public readonly CollectionService<IFight> _fights;
         public readonly CollectionService<ICreatureModel> _creatures;
         public readonly CollectionService<ISpellModel> _spells;
-        public readonly CollectionService<SpellModelAggregation> _spellsView;
+        public readonly CollectionService<ISpellModelView> _spellsView;
         public readonly CollectionService<IStats> _stats;
         public readonly CollectionService<IEffect> _effects;
         public readonly CollectionService<IStatusModel> _statuses;
@@ -26,7 +26,7 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest
             _fights = db.GetMongoService<IFight>();
             _creatures = db.GetMongoService<ICreatureModel>();
             _spells = db.GetMongoService<ISpellModel>();
-            _spellsView = db.GetMongoService<SpellModelAggregation>();
+            _spellsView = db.GetMongoService<ISpellModelView>();
             _effects = db.GetMongoService<IEffect>();
             _stats = db.GetMongoService<IStats>();
             _statuses = db.GetMongoService<IStatusModel>();

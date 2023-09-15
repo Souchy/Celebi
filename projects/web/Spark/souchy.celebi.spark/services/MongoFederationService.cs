@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using souchy.celebi.eevee.face.entity;
+using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.models;
 using souchy.celebi.spark.models.aggregations;
 using System.Text.RegularExpressions;
@@ -42,9 +44,22 @@ namespace souchy.celebi.spark.services
             return await spells.Aggregate<IStatusModel>(pipelineStrings(str)).ToListAsync();
         }
 
-        public async Task<IEnumerable<CreatureModelAggregation>> FindCreatures()
+        public async Task<IEnumerable<ICreatureModelView>> FindCreatures()
         {
-            return await creatures.Aggregate<CreatureModelAggregation>(creatureAggregation).ToListAsync();
+            return await creatures.Aggregate<ICreatureModelView>(creatureAggregation).ToListAsync();
+        }
+
+        public async Task<IEnumerable<TextEntityAggregation>> GetCreaturesTextAggregation(List<ObjectId> ids)
+        {
+            return await creatures.Aggregate<TextEntityAggregation>(filterTextAggregation(ids)).ToListAsync();
+        }
+        public async Task<IEnumerable<TextEntityAggregation>> GetSpellsTextAggregation(List<ObjectId> ids)
+        {
+            return await spells.Aggregate<TextEntityAggregation>(filterTextAggregation(ids)).ToListAsync();
+        }
+        public async Task<IEnumerable<TextEntityAggregation>> GetStatusesTextAggregation(List<ObjectId> ids)
+        {
+            return await statuses.Aggregate<TextEntityAggregation>(filterTextAggregation(ids)).ToListAsync();
         }
 
         private BsonDocument?[] pipelineStrings(string str) => new[]
@@ -83,50 +98,97 @@ namespace souchy.celebi.spark.services
                     }
                 )
             };
-        
+
+        private static BsonDocument?[] filterTextAggregation(List<ObjectId> ids)
+        {
+            var filter = new[]
+            {
+                new BsonDocument("$lookup",
+                new BsonDocument
+                    {
+                        { "from", nameof(IStringEntity) },
+                        { "localField", "nameId" },
+                        { "foreignField", "_id" },
+                        { "as", nameof(TextEntityAggregation.name) }
+                    }),
+                new BsonDocument("$unwind",
+                new BsonDocument("path", "$name")),
+                new BsonDocument("$lookup",
+                new BsonDocument
+                    {
+                        { "from", nameof(IStringEntity) },
+                        { "localField", "descriptionId" },
+                        { "foreignField", "_id" },
+                        { "as", nameof(TextEntityAggregation.description) }
+                    }),
+                new BsonDocument("$unwind",
+                new BsonDocument("path", "$description")),
+                new BsonDocument("$project",
+                new BsonDocument
+                    {
+                        { "_id", 1 },
+                        { nameof(IEntityModeled.modelUid), 1 },
+                        { nameof(TextEntityAggregation.name), 1 },
+                        { nameof(TextEntityAggregation.description), 1 }
+                    })
+            }.ToList();
+            if(ids?.Count >= 1)
+            {
+                filter.Insert(0,
+                    new BsonDocument("$match",
+                        new BsonDocument("_id",
+                            new BsonDocument("$in",
+                                new BsonArray(ids)
+                            )
+                        )
+                    ));
+            }
+            return filter.ToArray();
+        }
+
         private static readonly BsonDocument?[] creatureAggregation = new []
         {
             new BsonDocument("$lookup",
             new BsonDocument
                 {
-                    { "from", "ISpellModel" },
-                    { "localField", "spellIds._v" },
+                    { "from", nameof(ISpellModel) },
+                    { "localField", nameof(ICreatureModel.spellIds) + "._v" },
                     { "foreignField", "_id" },
-                    { "as", "spells" }
+                    { "as", nameof(ICreatureModelView.spells) }
                 }),
             new BsonDocument("$lookup",
             new BsonDocument
                 {
-                    { "from", "IStatusModel" },
-                    { "localField", "statusPassiveIds._v" },
+                    { "from", nameof(IStatusModel) },
+                    { "localField", nameof(ICreatureModel.statusPassiveIds) + "._v" },
                     { "foreignField", "_id" },
-                    { "as", "statusPassives" }
+                    { "as", nameof(ICreatureModelView.statusPassives) }
                 }),
             new BsonDocument("$lookup",
             new BsonDocument
                 {
-                    { "from", "IStats" },
-                    { "localField", "statsId" },
+                    { "from", nameof(IStats) },
+                    { "localField", nameof(ICreatureModel.statsId) },
                     { "foreignField", "_id" },
-                    { "as", "stats" }
+                    { "as", nameof(ICreatureModelView.stats) }
                 }),
             new BsonDocument("$unwind",
             new BsonDocument
                 {
-                    { "path", "$stats" },
+                    { "path", "$" + nameof(ICreatureModelView.stats) },
                     { "preserveNullAndEmptyArrays", true }
                 }),
             new BsonDocument("$project",
             new BsonDocument
                 {
                     { "_t", 1 },
-                    { "modelUid", 1 },
-                    { "nameId", 1 },
-                    { "descriptionId", 1 },
-                    { "stats", 1 },
-                    { "spells", 1 },
-                    { "statusPassives", 1 },
-                    { "skinIds", 1 }
+                    { nameof(ICreatureModelView.modelUid), 1 },
+                    { nameof(ICreatureModelView.nameId), 1 },
+                    { nameof(ICreatureModelView.descriptionId), 1 },
+                    { nameof(ICreatureModelView.stats), 1 },
+                    { nameof(ICreatureModelView.spells), 1 },
+                    { nameof(ICreatureModelView.statusPassives), 1 },
+                    { "skinIds", 1 } 
                 })
         };
     }
