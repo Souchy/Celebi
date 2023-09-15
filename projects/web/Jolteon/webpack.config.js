@@ -18,8 +18,15 @@ const postcssLoader = {
 };
 
 module.exports = function (env, { analyze }) {
+  // console.log("smth: " + process.env.NODE_ENV + ", or : " + JSON.stringify(env));
   const production = env.production || process.env.NODE_ENV === 'production';
-  const envpath = `./.env${production ? '' : '.' + (process.env.NODE_ENV || 'development')}`;
+  // const envpath = `./.env${production ? '' : '.' + (process.env.NODE_ENV || 'development')}`;
+  
+  let envpath = "";
+  if(env.local || process.env.NODE_ENV === 'local') envpath = "./.env.local";
+  if(env.development || process.env.NODE_ENV === 'development') envpath = "./.env.development";
+  if(production) envpath = "./.env";
+  
   require('dotenv').config({ path: envpath });
   console.log("Webpack environment: " + envpath);
   console.log("Env serv url: " + process.env.SERVER_URL);
