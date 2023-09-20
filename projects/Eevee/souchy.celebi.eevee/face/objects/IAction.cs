@@ -41,6 +41,10 @@ namespace souchy.celebi.eevee.face.objects
         /// </summary>
         public ObjectId targetCell { get; set; }
         /// <summary>
+        /// 
+        /// </summary>
+        public IActionResult result { get; set; }
+        /// <summary>
         /// If we ever use IActionContext, then we can use the root action's context to compile actions results into
         /// </summary>
         public IAction getRootAction() {
@@ -65,6 +69,10 @@ namespace souchy.celebi.eevee.face.objects
         public IFight fight { get; set; }
         public ObjectId caster { get; set; }
         public ObjectId targetCell { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public IActionResult result { get; set; }
 
         public IAction copy()
         {
