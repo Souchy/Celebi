@@ -50,6 +50,21 @@ namespace souchy.celebi.eevee.neweffects.impl
             ChangeAppearance, // chance the skin model: berserk, harmonie, momification, ougi rage, transfo osa, masque zobal
             ChangeAnimationSet, // panda saoul, forgelance en garde
             ReduceDamageReceived = 5, // rempart/fortification flat reduction ? 
+            /// <summary>
+            /// Redirects damage to other resources. 
+            /// ex: 
+            /// - Path of Exile: 30% Mind over Matter + Eldritch battery splitting damage
+            /// - League of legends wards have 4 hit points
+            /// </summary>
+            TakeDamageAsResource = 6,
+            /// <summary>
+            /// <b>TakeDamageAsHitPoint</b> <br></br>
+            /// Not sure what to call this or if I need it. <br></br>
+            /// The goal is to use it with hit points health bars <br></br>
+            /// This applies a <b>step function</b> to damage taken so that it's <b> always 0 or 1</b> <br></br>
+            /// </summary>
+            TakeDamageAsStepFunction = 7,
+
 
             //#region Spell -> obviously status-only effects
             //    AddSpellRange,
@@ -61,19 +76,27 @@ namespace souchy.celebi.eevee.neweffects.impl
                 BuildObstacle = 10, // maybe teraforming effects are status-only on cells?
                 DestroyObstacle,
                 DigHole,
-                FillHole,
+                FillHole = 13,
             #endregion
         #endregion
 
         #region Creature
+            /// <summary>
+            /// TODO: Differentiate "dead" state from "0 life" and define the death condition for non-life characters (0 life, 0 hit points, etc). <para></para>
+            /// A creature can be declared "dead" but keep its life which is useful when Reviving.
+            /// </summary>
             Kill = 14,
-            Revive,
+            /// <summary>
+            /// Included: ReviveWithPercentLife
+            ///  { map<resource, int> percentageResources; }
+            /// </summary>
+            Revive = 15,
             EndTurn, // roublardise, holmgang, nécronyx,    // could have other effects  affect the timeline order
             SpawnSummon, // 
             UnspawnSummon, // 
             SpawnSummonDouble, // controllable sram's double, replica of caster
             SpawnSummonDoubleIllusion, // roublardise, replica of caster but unplayable and dies in 1 hit
-            RevealCreatureSpells, // show the target's spells list to know what they can cast, like revealing their deck
+            RevealCreatureSpells = 21, // show the target's spells list to know what they can cast, like revealing their deck
         #endregion
 
         #region Move
@@ -88,7 +111,7 @@ namespace souchy.celebi.eevee.neweffects.impl
                 DashAwayBy,
                 PushTo, // need a SeconaryZone in the Schema properties
                 PullTo, // 
-                DashTo,
+                DashTo = 29,
                 //DashAwayTo,
 
                 // translate effects can originate from the targetCell or the sourceCell
@@ -107,7 +130,7 @@ namespace souchy.celebi.eevee.neweffects.impl
                 TeleportSymmetricallyAoeOverTarget,  // paradoxe, poussière, engrenage
                 TeleportToPreviousPosition,          // rs, gelure, 
                 TeleportToStartOfTurnPosition,       // renvoi, rembobinage // rembo peut être codé par un Status avec l'effect trigger OnTurnEnd
-                TeleportToStartOfFightPosition,
+                TeleportToStartOfFightPosition = 41,
             #endregion
 
         #endregion
@@ -120,7 +143,7 @@ namespace souchy.celebi.eevee.neweffects.impl
             CastSubSpell,   // détonateur -> bombe -> explosion (changeSourceActor -> castSubSpell)
             RandomChild,
             RandomPointsInZone, // take a acquisitionzone then take only x random targets in that zone
-            EmptyText,
+            EmptyText = 46,
         #endregion
 
         #region Status
@@ -138,14 +161,14 @@ namespace souchy.celebi.eevee.neweffects.impl
 
             RemoveStatusCreature, // dispell
             RemoveTrap,
-            RemoveGlyph,
+            RemoveGlyph = 57,
             //AddAddStatStatus, // creates a status with AddStat ? // all ap buffs should go through a Status so it's visible 
                 // mot stimu/galva, flou, 
             //AddStealStatStatus, // creates 2 status with stolen resources? 1 for target, 1 for caster
         #endregion
 
         #region Res
-            DirectDamage, // use triggers for OnResourceUse (poison paralysant), OnResourceLost (male vaudoo), OnPushed (fleche tyra), etc
+            DirectDamage = 58, // use triggers for OnResourceUse (poison paralysant), OnResourceLost (male vaudoo), OnPushed (fleche tyra), etc
             DirectDamagePercentLifeMax,
             DirectDamageStealLife, // bain de sang, pillage, concentration de chakra, folie sanguinaire
 
@@ -208,10 +231,10 @@ namespace souchy.celebi.eevee.neweffects.impl
             /// </summary>
             HealPerContextualStat,
             /// <summary>
-            /// Ex: gain x shield for y dmg taken <br></br>
+            /// Ex: gain x {res.shield} for y {contextual.dmgTaken} <br></br>
             ///     gain 1% res per 2% life missing?  (sacrieur pog)
             /// </summary>
-            AddStatsPerStat,
+            AddStatsPerStat = 73,
         #endregion
 
         #region Fight
@@ -236,7 +259,7 @@ namespace souchy.celebi.eevee.neweffects.impl
         /// <summary>
         /// This is instant on a spell instance, like refresh a cooldown, not in a status
         /// </summary>
-        SpellAddStats = 150,
+        SpellAddStatsInstant = 150,
 
         // some effects can only be children of :
         //      - instant
