@@ -31,11 +31,13 @@ namespace souchy.celebi.eevee.face.objects
         public IPlayer GetCurrentOwner();
 
         /// <summary>
-        /// Base + Growth stats
+        /// Base + Growth stats <para></para>
+        /// <returns>Returns: the actual base stats instance</returns>
         /// </summary>
         public IStats GetNaturalStats();
         /// <summary>
-        /// Base + Growth + Status stats
+        /// Base + Growth + Status stats <para></para>
+        /// <returns>Returns: a new instance with copied stats</returns>
         /// </summary>
         public IStats GetTotalStats(IAction action); //, TriggerEvent trigger);
 

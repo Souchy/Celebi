@@ -24,33 +24,55 @@ namespace souchy.celebi.eevee.neweffects.impl.effects.res
         protected abstract bool appliesDefensiveStats { get; }
         public IEffectReturnValue apply(ISubActionEffectTarget action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
         {
+            // Getting TotalStats returns a copy object
             var creaSource = action.fight.creatures.Get(action.caster);
-            var sourceStats = creaSource.GetTotalStats(action);
+            var sourceStatsCopy = creaSource.GetTotalStats(action);
 
+            // Getting TotalStats returns a copy object
             var creaTarget = (ICreature) currentTarget;
-            var targetStats = creaTarget.GetTotalStats(action);
+            var targetStatsCopy = creaTarget.GetTotalStats(action);
 
+            // Calc damage
             var props = action.effect.GetProperties<AbstractDamageSchema>();
-            int dmg = DamageUtil.calculateDamage(sourceStats, targetStats, props, appliesOffensiveStats, appliesDefensiveStats);
+            int dmg = DamageUtil.calculateDamage(sourceStatsCopy, targetStatsCopy, props, appliesOffensiveStats, appliesDefensiveStats);
 
-            var shield = targetStats.Get<IStatSimple>(Resource.Shield);
+            // Calc shield
+            var shield = targetStatsCopy.Get<IStatSimple>(Resource.Shield);
             var remainingDmgAfterShield = dmg;
 
             var startShield = shield.value;
             shield.value -= dmg;
             shield.value = Math.Max(0, shield.value);
-            remainingDmgAfterShield -= startShield - shield.value;
+            var shieldLost = startShield - shield.value;
+            remainingDmgAfterShield += -shieldLost;
 
-            var life = targetStats.Get<IStatSimple>(Resource.Life);
-            life.value -= remainingDmgAfterShield;
+            // Calc life
+            var life = targetStatsCopy.Get<IStatSimple>(Resource.Life);
+            var lifeLost = remainingDmgAfterShield;
+            life.value += -lifeLost;
 
             // update actual stats
-            creaTarget.GetNaturalStats().Get<IStatSimple>(Resource.Shield).value = shield.value;
-            creaTarget.GetNaturalStats().Get<IStatSimple>(Resource.Life).value = life.value;
-
+            var targetStats = creaTarget.GetNaturalStats();
+            var sourceStats = creaSource.GetNaturalStats();
+            targetStats.Get<IStatSimple>(Resource.Shield).value = shield.value;
+            targetStats.Get<IStatSimple>(Resource.Life).value = life.value;
+            targetStats.Get<IStatSimple>(Contextual.DamageTaken).value += (shieldLost + lifeLost);
+            sourceStats.Get<IStatSimple>(Contextual.DamageDone).value += (shieldLost + lifeLost);
+            targetStats.Get<IStatSimple>(Contextual.CountHitsTaken).value += 1;
+            sourceStats.Get<IStatSimple>(Contextual.CountHitsGiven).value += 1;
+            
             //var compiled = new EffectPreviewDamage(damage);
             //return compiled;
             //return new IEffectReturnValue(e, dmg);
+
+            // Set results
+            var result = new EffectTargetResourceResult();
+            action.result = result;
+            if (shieldLost != 0) 
+                result.resources[Resource.Shield] = -shieldLost;
+            if (lifeLost != 0) 
+                result.resources[Resource.Life] = -lifeLost;
+
             return null;
         }
 

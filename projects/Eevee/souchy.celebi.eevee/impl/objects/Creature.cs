@@ -76,8 +76,6 @@ namespace souchy.celebi.eevee.impl.objects
                     {
                         naturalStats.Add(st);
                     }
-                    //var naturalStat = naturalStats.Get(props.stat.statId);
-                    //naturalStat.Add(props.stat);
                 }
             }
             // check conditional stats and deactivate them (0) if necessary // TODO remove those stats instead of 0 ?

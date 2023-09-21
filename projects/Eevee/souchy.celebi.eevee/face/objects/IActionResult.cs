@@ -31,7 +31,7 @@ namespace souchy.celebi.eevee.face.objects
     /// </summary>
     public class EffectTargetResourceResult : EffectTargetResult
     {
-        public Dictionary<Resource, int> values { get; set; }
+        public Dictionary<Resource, int> resources { get; set; } = new();
     }
     /// <summary>
     /// 

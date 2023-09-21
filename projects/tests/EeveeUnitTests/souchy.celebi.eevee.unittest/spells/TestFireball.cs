@@ -56,6 +56,7 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest.spells
             var targetStats = target.GetTotalStats(spellAction);
             var lifeIni = targetStats.GetValue<IStatSimple, int>(Resource.Life);
             var mana1 = targetStats.GetValue<IStatSimple, int>(Resource.Mana);
+            var damageTaken1 = targetStats.GetValue<IStatSimple, int>(Contextual.DamageTaken);
 
             // Act
             actions.castSpell(spellAction);
@@ -64,11 +65,13 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest.spells
             var targetStats2 = target.GetTotalStats(spellAction);
             var lifeFinal = targetStats2.GetValue<IStatSimple, int>(Resource.Life);
             var mana2 = targetStats2.GetValue<IStatSimple, int>(Resource.Mana);
+            var damageTaken2 = targetStats2.GetValue<IStatSimple, int>(Contextual.DamageTaken);
 
             Assert.NotEqual(lifeIni, lifeFinal);
             output.WriteLine($"Target Life: {lifeIni} -> {lifeFinal}");
             //Assert.NotEqual(mana1, mana2);
             //output.WriteLine($"Caster Mana: {mana1} -> {mana2}");
+            Assert.Equal(15, damageTaken2);
         }
 
     }

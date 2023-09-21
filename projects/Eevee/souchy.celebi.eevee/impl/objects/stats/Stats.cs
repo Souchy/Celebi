@@ -63,11 +63,15 @@ namespace souchy.celebi.eevee.impl.stats
         {
             if(typeof(T) == typeof(IStatSimple))
             {
-                return (T) (IStat) StatSimple.Create(statId, (int) (defaultValue ?? 0));
+                T stat = (T) (IStat) StatSimple.Create(statId, (int) (defaultValue ?? 0));
+                this.Add(stat);
+                return stat;
             }
             if (typeof(T) == typeof(IStatBool))
             {
-                return (T) (IStat) StatBool.Create(statId, (bool) (defaultValue ?? false));
+                T stat = (T) (IStat) StatBool.Create(statId, (bool) (defaultValue ?? false));
+                this.Add(stat);
+                return stat;
             }
             throw new NotImplementedException();
         }
