@@ -74,7 +74,9 @@ namespace souchy.celebi.eevee.impl.objects
                     var props = eff.GetProperties<AddStats>();
                     foreach(var st in props.stats.Values)
                     {
-                        naturalStats.Add(st);
+                        //naturalStats.Add(st);
+                        var naturalStat = naturalStats.Get(st.statId);
+                        naturalStat.Add(st);
                     }
                 }
             }
