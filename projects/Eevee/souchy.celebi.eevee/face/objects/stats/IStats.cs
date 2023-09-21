@@ -33,6 +33,20 @@ namespace souchy.celebi.eevee.face.objects.stats
         public T? Get<T>(CharacteristicType stat, object defaultValue = default) where T : IStat;
         public T Get<T>(CharacteristicId characId, object defaultValue = default) where T : IStat;
         public V GetValue<T, V>(CharacteristicType stat, V defaultValue = default) where T : IValue<V>;
+        /// <summary>
+        /// Automatically search for an IStatSimple
+        /// </summary>
+        /// <param name="stat"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
+        public int GetStatSimpleValue(CharacteristicType stat, int defaultValue = default);
+        /// <summary>
+        /// Automatically search for an IStatBool
+        /// </summary>
+        /// <param name="stat"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
+        public bool GetStatBoolValue(CharacteristicType stat, bool defaultValue = default);
 
         /// <summary>
         /// If anonymous: create an instance with new() without ObjectId and bus
