@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://df1o0wl6aq00s"]
+
+[ext_resource type="PackedScene" uid="uid://bxel5q1htlcm4" path="res://assets/maps/mapDofus6/map_6.tscn" id="1_iyyjb"]
+[ext_resource type="PackedScene" uid="uid://4j7eex12m7i5" path="res://sapphire/ui/sapphireHud.tscn" id="2_vndou"]
+[ext_resource type="PackedScene" uid="uid://cbsy6uf5j02c5" path="res://sapphire/controls/Controls.tscn" id="3_xw5qw"]
+[ext_resource type="PackedScene" uid="uid://ba4siyb7odwxq" path="res://assets/creatures/makima/makima3.tscn" id="4_k1jmd"]
+[ext_resource type="PackedScene" uid="uid://bmbllwohsgppj" path="res://assets/creatures/agni/agni.tscn" id="5_h61c6"]
+
+[sub_resource type="Environment" id="Environment_68pxe"]
+background_color = Color(0.207843, 0.776471, 0.294118, 1)
+tonemap_mode = 3
+tonemap_exposure = 1.5
+ssr_enabled = true
+ssao_enabled = true
+ssao_radius = 16.0
+ssil_radius = 0.17
+sdfgi_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_h41lk"]
+auto_exposure_enabled = true
+dof_blur_far_distance = 30.0
+
+[node name="test_ui" type="Node3D"]
+
+[node name="sapphireHud" parent="." instance=ExtResource("2_vndou")]
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_68pxe")
+camera_attributes = SubResource("CameraAttributesPractical_h41lk")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(-0.77198, -0.378418, 0.510732, 7.02427e-08, 0.803483, 0.595328, -0.635647, 0.459581, -0.620273, 0, 8, -5)
+light_color = Color(0.662745, 0.666667, 1, 1)
+light_energy = 2.0
+shadow_enabled = true
+shadow_bias = 0.07
+shadow_opacity = 0.55
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 25.0
+
+[node name="Map" parent="Environment" instance=ExtResource("1_iyyjb")]
+
+[node name="Controls" parent="." instance=ExtResource("3_xw5qw")]
+
+[node name="Creatures" type="Node" parent="."]
+
+[node name="makima" parent="Creatures" instance=ExtResource("4_k1jmd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 1)
+
+[node name="ybot_packed" parent="Creatures" instance=ExtResource("5_h61c6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.67085, 0, 1.39378)

@@ -26,6 +26,9 @@ dof_blur_far_distance = 30.0
 [node name="Sapphire" type="Node3D"]
 script = ExtResource("1_axpwp")
 
+[node name="sapphireHud" parent="." instance=ExtResource("8_aehap")]
+unique_name_in_owner = true
+
 [node name="Environment" type="Node" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
@@ -51,9 +54,6 @@ visible = false
 visible = false
 
 [node name="Controls" parent="." instance=ExtResource("5_oq2ih")]
-
-[node name="sapphireHud" parent="." instance=ExtResource("8_aehap")]
-unique_name_in_owner = true
 
 [node name="Creatures" type="Node" parent="."]
 
