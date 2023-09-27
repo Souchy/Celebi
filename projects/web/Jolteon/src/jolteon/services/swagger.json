@@ -1766,6 +1766,160 @@
         }
       }
     },
+    "/api/models/enums/schemas/effects": {
+      "get": {
+        "tags": [
+          "EnumsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SchemaDescription"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SchemaDescription"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SchemaDescription"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/enums/schemas/effect/{name}": {
+      "get": {
+        "tags": [
+          "EnumsController"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SchemaDescription"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SchemaDescription"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SchemaDescription"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/enums/schemas/triggers": {
+      "get": {
+        "tags": [
+          "EnumsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SchemaDescription"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SchemaDescription"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SchemaDescription"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/enums/schemas/conditions": {
+      "get": {
+        "tags": [
+          "EnumsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SchemaDescription"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SchemaDescription"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SchemaDescription"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/models/factory/trigger": {
       "post": {
         "tags": [
@@ -2350,84 +2504,6 @@
                   "items": {
                     "$ref": "#/components/schemas/StatusInstanceProperty"
                   }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/models/properties/effects/schemas": {
-      "get": {
-        "tags": [
-          "PropertiesController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/SchemaDescription"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/SchemaDescription"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/SchemaDescription"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/models/properties/effects/schema/{name}": {
-      "get": {
-        "tags": [
-          "PropertiesController"
-        ],
-        "parameters": [
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "style": "simple",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/SchemaDescription"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SchemaDescription"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SchemaDescription"
                 }
               }
             }
@@ -4016,6 +4092,36 @@
           }
         }
       }
+    },
+    "/api/models/trigger/trigger": {
+      "post": {
+        "tags": [
+          "TriggerModelController"
+        ],
+        "parameters": [
+          {
+            "name": "triggerTypeId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITriggerModel"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -4702,7 +4808,20 @@
         "type": "object",
         "properties": {
           "team": {
-            "$ref": "#/components/schemas/TeamRelationType"
+            "type": "object",
+            "properties": {
+              "Ally": {
+                "type": "boolean"
+              },
+              "Enemy": {
+                "type": "boolean"
+              },
+              "Self": {
+                "type": "boolean"
+              }
+            },
+            "additionalProperties": false,
+            "nullable": true
           },
           "actorType": {
             "$ref": "#/components/schemas/ActorType"
@@ -4800,7 +4919,20 @@
         "type": "object",
         "properties": {
           "team": {
-            "$ref": "#/components/schemas/TeamRelationType"
+            "type": "object",
+            "properties": {
+              "Ally": {
+                "type": "boolean"
+              },
+              "Enemy": {
+                "type": "boolean"
+              },
+              "Self": {
+                "type": "boolean"
+              }
+            },
+            "additionalProperties": false,
+            "nullable": true
           },
           "actorType": {
             "$ref": "#/components/schemas/ActorType"
