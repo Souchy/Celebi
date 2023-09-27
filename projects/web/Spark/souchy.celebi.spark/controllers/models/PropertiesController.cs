@@ -4,6 +4,7 @@ using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.enums.characteristics.properties;
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.shared.conditions;
+using souchy.celebi.eevee.impl.shared.triggers;
 using souchy.celebi.eevee.impl.stats;
 using souchy.celebi.eevee.impl.values;
 using souchy.celebi.eevee.neweffects.face;
@@ -11,10 +12,6 @@ using souchy.celebi.eevee.neweffects.impl;
 
 namespace souchy.celebi.spark.controllers.models
 {
-    //public record TestRecord(string name, CharacteristicCategory Category, StatFactory Factory) //CharacteristicCategory Category, int LocalId, string BaseName, StatFactory Factory)
-    //{
-
-    //}
 
     [ApiController]
     [Route(Routes.Models + "properties")]
@@ -44,24 +41,6 @@ namespace souchy.celebi.spark.controllers.models
         public List<StatusContainerProperty> GetStatusContainerProperty() => StatusContainerProperty.values.Values.ToList();
         [HttpGet("charac/statusinstance")]
         public List<StatusInstanceProperty> GetStatusInstanceProperty() => StatusInstanceProperty.values.Values.ToList();
-
-        [HttpGet("effects/schemas")]
-        public ActionResult<IEnumerable<SchemaDescription>> GetEffectSchemas()
-        {
-            var schemas = typeof(IEntity).Assembly.GetTypes()
-                .Where(t => !t.IsInterface && !t.IsAbstract)
-                .Where(t => t.IsAssignableTo(typeof(IEffectSchema)));
-            var descriptions = schemas.Select(t => SchemaDescription.GetSchemaDescription(t));
-            return Ok(descriptions);
-        }
-        [HttpGet("effects/schema/{name}")]
-        public ActionResult<SchemaDescription> GetEffectSchema(string name)
-        {
-            var type = typeof(IEntity).Assembly
-                .GetTypes().FirstOrDefault(t => t.Name == name);
-            if (type == null) return NotFound();
-            return Ok(SchemaDescription.GetSchemaDescription(type));
-        }
 
     }
 
