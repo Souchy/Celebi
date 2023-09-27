@@ -1,6 +1,6 @@
 
 import { bindable, IEventAggregator, inject } from "aurelia";
-import { TargetFilter as TargetFilterData } from "../../../../../arch/common/components/target";
+import { TargetFilter as TargetFilterData } from "../../../../../../arch/common/components/target";
 import { db } from "../../db";
 
 @inject(db)

@@ -1,6 +1,6 @@
 import { watch } from "@aurelia/runtime-html";
 import { bindable, IEventAggregator, inject } from "aurelia";
-import { Effect } from "../../../../../../arch/common/effects";
+import { Effect } from "../../../../../../../arch/common/effects";
 import { db } from "../../../db";
 
 @inject(db)
