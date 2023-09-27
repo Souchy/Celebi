@@ -7,7 +7,13 @@ namespace souchy.celebi.eevee.impl.shared.conditions.creature
 {
     public class CreatureOriginalTeamCondition : Condition
     {
-        public TeamRelationType team { get; set; }
+        public Dictionary<TeamRelationType, bool> team { get; set; }
+
+        public CreatureOriginalTeamCondition()
+        {
+            foreach (var teamRelationType in Enum.GetValues<TeamRelationType>())
+                this.team.Add(teamRelationType, true);
+        }
 
         public override bool check(IAction action, TriggerEvent trigger, ICreature boardSource, IBoardEntity boardTarget)
         {
