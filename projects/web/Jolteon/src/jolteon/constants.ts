@@ -79,7 +79,9 @@ export class Enums {
     public static readonly statusUnbewitchStrategies = Object.keys(StatusUnbewitchStrategy).filter(k => isNaN(+k));
 }
 
-export class Effects {
+export class Schemas {
     // public static readonly schemas: EffectSchemaTypes;
-    public static schemas: SchemaDescription[] = [];
+    public static effects: SchemaDescription[] = [];
+    public static conditions: SchemaDescription[] = [];
+    public static triggers: SchemaDescription[] = [];
 }

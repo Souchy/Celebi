@@ -5,7 +5,7 @@ import { watch } from '@aurelia/runtime-html';
 import { IEventAggregator, bindable, inject, observable } from "aurelia";
 import { EffectPermanentController } from "../../../../jolteon/services/api/EffectPermanentController";
 import { PropertiesController } from "../../../../jolteon/services/api/PropertiesController";
-import { Effects } from '../../../../jolteon/constants';
+import { Schemas } from '../../../../jolteon/constants';
 import { TOAST_STATUS, Toast } from 'bootstrap-toaster';
 
 @inject(IEventAggregator, IRouter) //, EffectPermanentController, PropertiesController) //, SpellModelController)
@@ -60,7 +60,7 @@ export class Effect {
         // let key = Object.keys(EffT)[id];
     }
     public get schema(): SchemaDescription {
-        let desc = Effects.schemas.find(s => s.name == this.modelName);
+        let desc = Schemas.effects.find(s => s.name == this.modelName);
         return desc;
     }
 

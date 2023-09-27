@@ -7,10 +7,11 @@ import '@fortawesome/fontawesome-free/css/all.css';
 import { IEventAggregator, IHttpClient, inject } from 'aurelia';
 import { ActionNames, LoginAction, LogoutAction } from './jolteon/action-handler';
 import { GlobalState } from './jolteon/initialstate';
-import { Constants, Effects } from './jolteon/constants';
+import { Constants, Schemas } from './jolteon/constants';
 import { AuthController } from './jolteon/services/api/AuthController';
 import { TOAST_PLACEMENT, TOAST_STATUS, Toast, ToastConfigOptions, ToastOptions } from 'bootstrap-toaster';
 import { PropertiesController } from './jolteon/services/api/PropertiesController';
+import { EnumsController } from './jolteon/services/api/EnumsController';
 
 
 @inject(IHttpClient, IStore, IEventAggregator, IRouter, AuthController)
@@ -85,6 +86,7 @@ export class App implements IRouteableComponent {
 		private readonly ea: IEventAggregator,
 		private readonly router: IRouter,
 		private readonly auth: AuthController,
+		private readonly enumController: EnumsController,
 		private readonly propertiesController: PropertiesController
 	) {
 		console.log("JOLTEON APP CTOR " + location.hostname + ", " + process.env.SERVER_URL + ", " + process.env.useUrlFragmentHash + ", " + store.getState());
@@ -123,7 +125,11 @@ export class App implements IRouteableComponent {
 
 	private async loadServerData() {
 		// load effect schemas
-		Effects.schemas = (await this.propertiesController.getEffectsSchemas()).data;
+		Schemas.effects = (await this.enumController.getSchemasEffects()).data;
+		// load condition schemas
+		Schemas.conditions = (await this.enumController.getSchemasConditions()).data;
+		// load trigger schemas
+		Schemas.triggers = (await this.enumController.getSchemasTriggers()).data;
 	}
 
 	private configureInterceptor(http: IHttpClient) {
