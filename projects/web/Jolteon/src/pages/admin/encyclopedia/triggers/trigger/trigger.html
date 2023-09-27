@@ -1,13 +1,24 @@
+<import from="../../conditions/condition"></import>
 
 
 <!-- Trigger Type -->
-<select>
-    <option></option>
-</select>
+<div class="eblock" style="flex-grow: 1;">
+  <h6>Schema</h6>
+  <!-- change type -->
+  <button class="btn btn-floating btn-changeSchema" data-bs-toggle="modal" data-bs-target="#effectSchemaTypeModal-${model.entityUid}">
+    Change type
+  </button>
+  <modal id="effectSchemaTypeModal-${model.entityUid}" header="Change Schema Type" close.bind=false footer.bind=false>
+    <effect-model-selector onselectcallback.bind="e => onChangeSchemaType(e)"></effect-model-selector>
+  </modal>
+  <!-- schema properties -->
+  <propertygrid data.bind="model.schema" schema.bind="schema" uid.bind="model.entityUid" callbacksave.bind="() => onSave()"></propertygrid>
+</div>
+
 
 <!-- Trigger OrderType -->
 <select>
-    <option></option>
+  <option></option>
 </select>
 
 <!-- Trigger Zone -->

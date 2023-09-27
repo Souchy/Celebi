@@ -6,6 +6,7 @@ using souchy.celebi.eevee.face.shared.triggers;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.shared.triggers;
 using souchy.celebi.eevee.neweffects.face;
+using souchy.celebi.eevee.neweffects.impl;
 using souchy.celebi.spark.models;
 using souchy.celebi.spark.services;
 using souchy.celebi.spark.services.models;
@@ -47,6 +48,23 @@ namespace souchy.celebi.spark.controllers.models
             return Ok(trigger);
         }
 
+        [Authorize(Roles = nameof(AccountType.Admin))]
+        [HttpPut("{id}/schema")]
+        public async Task<ActionResult<ITriggerModel>> ChangeSchema([FromRoute] ObjectId effectId, [FromRoute] ObjectId triggerId, [FromQuery] string schemaName)
+        {
+            var effect = await _effects.GetOneAsync(effectId);
+            if (effect is null)
+                return NoContent();
+
+            //var model = effect.Triggers.Values.First(t => t.en)
+
+            //effect.Schema = Enum.Parse<EffT>(schemaName).CreateSchema();
+            //effect.modelUid = (IID) (int) Enum.Parse<EffT>(schemaName);
+            //var result = await _effects.UpdateAsync(effect.entityUid, effect);
+            //if (result.ModifiedCount > 0)
+            //    return Ok(effect);
+            return BadRequest();
+        }
 
     }
 }

@@ -4122,6 +4122,62 @@
           }
         }
       }
+    },
+    "/api/models/trigger/{id}/schema": {
+      "put": {
+        "tags": [
+          "TriggerModelController"
+        ],
+        "parameters": [
+          {
+            "name": "effectId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "triggerId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "schemaName",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITriggerModel"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
