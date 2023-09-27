@@ -1,4 +1,19 @@
+import { bindable } from "aurelia";
 import { ICondition } from "../../../../jolteon/services/api/data-contracts";
+
+export class Condition {
+
+    @bindable
+    public model: ICondition;
+
+    @bindable
+    public depth: number = 0;
+
+    constructor() {
+        
+    }
+
+}
 
 /*
 Conditions:
@@ -45,12 +60,3 @@ Conditions:
         lineOfSight: true
     },
 */
-export class Condition {
-
-    public model: ICondition;
-
-    constructor() {
-        
-    }
-
-}
