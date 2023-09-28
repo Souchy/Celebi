@@ -4100,10 +4100,9 @@
         ],
         "parameters": [
           {
-            "name": "triggerTypeId",
-            "in": "path",
-            "required": true,
-            "style": "simple",
+            "name": "schemaName",
+            "in": "query",
+            "style": "form",
             "schema": {
               "type": "string"
             }
@@ -4123,7 +4122,39 @@
         }
       }
     },
-    "/api/models/trigger/{id}/schema": {
+    "/api/models/trigger/{effectId}/{triggerId}": {
+      "delete": {
+        "tags": [
+          "TriggerModelController"
+        ],
+        "parameters": [
+          {
+            "name": "effectId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "triggerId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/models/trigger/{effectId}/{triggerId}/schema": {
       "put": {
         "tags": [
           "TriggerModelController"
@@ -4151,15 +4182,6 @@
             "name": "schemaName",
             "in": "query",
             "style": "form",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "style": "simple",
             "schema": {
               "type": "string"
             }
@@ -6400,6 +6422,9 @@
           },
           "holderCondition": {
             "$ref": "#/components/schemas/ICondition"
+          },
+          "entityUid": {
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -8322,6 +8347,9 @@
       "TriggerModel": {
         "type": "object",
         "properties": {
+          "entityUid": {
+            "type": "string"
+          },
           "triggerOrderType": {
             "$ref": "#/components/schemas/TriggerOrderType"
           },

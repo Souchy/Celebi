@@ -7,6 +7,7 @@ import { EffectPermanentController } from "../../../../jolteon/services/api/Effe
 import { PropertiesController } from "../../../../jolteon/services/api/PropertiesController";
 import { Schemas } from '../../../../jolteon/constants';
 import { TOAST_STATUS, Toast } from 'bootstrap-toaster';
+import { TriggerModelController } from '../../../../jolteon/services/api/TriggerModelController';
 
 @inject(IEventAggregator, IRouter) //, EffectPermanentController, PropertiesController) //, SpellModelController)
 export class Effect {
@@ -32,6 +33,7 @@ export class Effect {
         private readonly router: IRouter,
         private readonly effectController: EffectPermanentController,
         private readonly propertiesController: PropertiesController,
+        private readonly triggerController: TriggerModelController
     ) {
     }
 
@@ -81,16 +83,6 @@ export class Effect {
         // console.log("Effect.remove: " + this.model.entityUid);
         this.callbackremove(this.model);
     }
-    // TODO add triggers
-    public clickAddTrigger() {
-        // this.model.triggers.push({
-        //     holderCondition: null,
-        //     triggererFilter: null,
-        //     triggerOrderType: TriggerOrderType.After,
-        //     triggerType: TriggerType.OnTurnEnd,
-        //     triggerZone: {}
-        // });
-    }
     public clickCopy() {
         navigator.clipboard.writeText(JSON.stringify(this.model));
         Toast.create({
@@ -113,6 +105,12 @@ export class Effect {
             .then(res => this.model = res.data)
             .then(f => this.ea.publish("operation:saved"))
             // .then(this.handleUpdate);
+    }
+    /** Add Trigger */
+    public onAddTrigger(schema: SchemaDescription) {
+        this.triggerController.postTrigger({ schemaName: schema.name })
+            .then(res => this.model.triggers.push(res.data))
+            .then(f => this.onSave());
     }
     //#endregion
 

@@ -3,24 +3,30 @@
 <import from="../../../../components/modal/modal"></import>
 <import from="./effect"></import>
 
-<!-- children section -->
+<!-- Children section -->
 <div class="effectSection" if.bind="effectids">
+
+  <!-- Title -->
   <h6 class="clickable" data-bs-toggle="collapse" data-bs-target="#collapseEffects-${modaluid}">
     Effects
-    <!-- (${model.effectIds.length}) -->
   </h6>
 
+  <!-- Add -->
   <button class="btn btn-floating" data-bs-toggle="modal" data-bs-target="#effectChildModal-${modaluid}">+</button>
+  <!-- Paste -->
   <button class="btn btn-floating tooltip" click.trigger="clickPasteNewEffect()">
     <i class="fa-regular fa-clipboard"></i>
     <span class="tooltiptext">Tooltip text</span>
   </button>
 
+  <!-- Modal model selector -->
   <modal id="effectChildModal-${modaluid}" header="Add Effect Child" close.bind=false footer.bind=false>
     <effect-model-selector onselectcallback.bind="e => onAddChild(e)"></effect-model-selector>
   </modal>
 
+  <!-- Collapse -->
   <div class="effectlist collapse show" id="collapseEffects-${modaluid}">
+    <!-- Effect List -->
     <effect id.bind="effectid" repeat.for="effectid of effectids" uid.bind="effectid" 
         draggable="true" drop.trigger="e => onDrop(e, effectid)" 
         dragstart.trigger="e => onDrag(e, effectid)" dragover.trigger="e => onDragOver(e, effectid)"
