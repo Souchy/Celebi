@@ -37,19 +37,25 @@ namespace souchy.celebi.spark.controllers.models
 
         [Authorize(Roles = nameof(AccountType.Admin))]
         [HttpPost("trigger")]
-        public ActionResult<ITriggerModel> CreateTrigger([FromRoute] IID triggerTypeId) // TriggerType triggerType) //
+        public ActionResult<ITriggerModel> CreateTrigger([FromQuery] string schemaName)
         {
-            var type = TriggerType.get(triggerTypeId);
+            var type = TriggerType.getByName(schemaName);
             if (type == null)
                 return null;
 
-            //var trigger = new TriggerModel();
             var trigger = type.createInstance();
             return Ok(trigger);
         }
 
         [Authorize(Roles = nameof(AccountType.Admin))]
-        [HttpPut("{id}/schema")]
+        [HttpDelete("{effectId}/{triggerId}")]
+        public async Task RemoveTrigger([FromRoute] ObjectId effectId, [FromRoute] ObjectId triggerId)
+        {
+
+        }
+
+        [Authorize(Roles = nameof(AccountType.Admin))]
+        [HttpPut("{effectId}/{triggerId}/schema")]
         public async Task<ActionResult<ITriggerModel>> ChangeSchema([FromRoute] ObjectId effectId, [FromRoute] ObjectId triggerId, [FromQuery] string schemaName)
         {
             var effect = await _effects.GetOneAsync(effectId);

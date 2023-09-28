@@ -1,4 +1,5 @@
 ﻿using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.shared.zones;
@@ -6,7 +7,7 @@ using souchy.celebi.eevee.impl.shared.triggers;
 
 namespace souchy.celebi.eevee.face.shared.triggers
 {
-    public interface ITriggerModel
+    public interface ITriggerModel : IEntity
     {
         /// <summary>
         /// { What to react to }

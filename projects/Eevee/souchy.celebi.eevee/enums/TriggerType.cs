@@ -67,11 +67,13 @@ namespace souchy.celebi.eevee.enums
         public static readonly TriggerType TriggerOnEffectReceive = new TriggerType(105, typeof(TriggerOnEffectReceive));
 
         //
-        private static List<TriggerType> _values = new();
         static TriggerType() => _values.AddRange(StaticEnumUtils.findValues<TriggerType>());
+        private static List<TriggerType> _values = new();
         public static TriggerType[] values() => _values.ToArray();
         public static TriggerType get(IID id) => _values.Find(v => v.id == id);
         public static TriggerType getByType(Type triggerSchemaType) => _values.Find(v => v.schemaType == triggerSchemaType);
+        public static TriggerType getByName(string schemaName) => _values.Find(v => v.schemaType.Name.Equals(schemaName));
+
     }
 
 

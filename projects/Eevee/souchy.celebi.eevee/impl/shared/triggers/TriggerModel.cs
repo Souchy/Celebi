@@ -10,6 +10,8 @@ namespace souchy.celebi.eevee.impl.shared.triggers
 {
     public class TriggerModel : ITriggerModel
     {
+        public ObjectId entityUid { get; set; } = Eevee.RegisterIIDTemporary();
+
         //public TriggerType triggerType { get; set; }
         public TriggerOrderType triggerOrderType { get; set; } = TriggerOrderType.After;
         public IZone triggerZone { get; set; }  // only targets in the zone can trigger the TriggerModel
@@ -18,7 +20,12 @@ namespace souchy.celebi.eevee.impl.shared.triggers
         /// <summary>
         /// Trigger Data
         /// </summary>
-        public ITriggerSchema schema { get; set; }  
+        public ITriggerSchema schema { get; set; }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public record TriggerEvent(
