@@ -74,10 +74,9 @@ namespace souchy.celebi.eevee.impl.objects
                     var props = eff.GetProperties<AddStats>();
                     foreach(var st in props.stats.Values)
                     {
-                        naturalStats.Add(st);
+                        var naturalStat = naturalStats.Get(st.statId);
+                        naturalStat.Add(st);
                     }
-                    //var naturalStat = naturalStats.Get(props.stat.statId);
-                    //naturalStat.Add(props.stat);
                 }
             }
             // check conditional stats and deactivate them (0) if necessary // TODO remove those stats instead of 0 ?

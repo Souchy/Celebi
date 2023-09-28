@@ -1,4 +1,5 @@
 ﻿using souchy.celebi.eevee;
+using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.controllers;
@@ -29,47 +30,41 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest.spells
             Assert.Equal(1800, lifeIni);
         }
 
-        private IActionSpell createAction()
-        {
-            var caster = fight.timeline.slots.First().creatureId;
-            var target = fight.timeline.getCreatures().Last();
-            var spellAction = new ActionSpell()
-            {
-                fight = fight,
-                caster = caster, // Première créature dans la timeline
-                targetCell = target.GetCell().entityUid, // Dernière créature dans timeline = différent player
-                spell = fight.spells.Keys.First() // normalement le premier est fireball, id: 646a933fea5ee922a0d0f1eb
-            };
-            return spellAction;
-        }
-
-
         [Fact]
         public void testDamage()
         {
             // Arrange
-            var actions = new Actions();
-            var spellAction = createAction();
             var caster = fight.timeline.slots.First().getCreature();
             var target = fight.timeline.getCreatures().Last();
+            var spellAction = new ActionSpell()
+            {
+                fight = fight,
+                caster = caster.entityUid, // Première créature dans la timeline
+                targetCell = target.GetCell().entityUid, // Dernière créature dans timeline = différent player
+                spell = fight.spells.Values.First().entityUid // normalement le premier est fireball, id: 646a933fea5ee922a0d0f1eb
+            };
 
-            var targetStats = target.GetTotalStats(spellAction);
-            var lifeIni = targetStats.GetValue<IStatSimple, int>(Resource.Life);
-            var mana1 = targetStats.GetValue<IStatSimple, int>(Resource.Mana);
+            var test = new SpellActionTest(fight, spellAction, target);
 
             // Act
-            actions.castSpell(spellAction);
+            test.act();
 
             // Assert
-            var targetStats2 = target.GetTotalStats(spellAction);
-            var lifeFinal = targetStats2.GetValue<IStatSimple, int>(Resource.Life);
-            var mana2 = targetStats2.GetValue<IStatSimple, int>(Resource.Mana);
-
-            Assert.NotEqual(lifeIni, lifeFinal);
-            output.WriteLine($"Target Life: {lifeIni} -> {lifeFinal}");
-            //Assert.NotEqual(mana1, mana2);
-            //output.WriteLine($"Caster Mana: {mana1} -> {mana2}");
+            test.assertEffects(dmg: 15);
         }
 
+
     }
+
+    /// <summary>
+    /// TODO
+    /// </summary>
+    //public class AssertExtensions : Assert
+    //{
+    //    public static void EqualStats(IStats initial, IStats final, CharacteristicType statid, int diff)
+    //    {
+    //        Assert.Equal(initial.GetStatSimpleValue(statid) + diff, final.GetStatSimpleValue(statid));
+    //    }
+    //}
+
 }

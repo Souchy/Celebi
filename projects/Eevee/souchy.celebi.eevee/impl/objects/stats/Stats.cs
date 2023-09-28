@@ -59,15 +59,28 @@ namespace souchy.celebi.eevee.impl.stats
             return (V) stat.genericValue;
         }
 
+        public int GetStatSimpleValue(CharacteristicType stat, int defaultValue = default)
+        {
+            return GetValue<IStatSimple, int>(stat, defaultValue);
+        }
+        public bool GetStatBoolValue(CharacteristicType stat, bool defaultValue = default)
+        {
+            return GetValue<IStatBool, bool>(stat, defaultValue);
+        }
+
         private T createDefaultStat<T>(CharacteristicId statId, object defaultValue = default) where T : IStat
         {
             if(typeof(T) == typeof(IStatSimple))
             {
-                return (T) (IStat) StatSimple.Create(statId, (int) (defaultValue ?? 0));
+                T stat = (T) (IStat) StatSimple.Create(statId, (int) (defaultValue ?? 0));
+                this.Add(stat);
+                return stat;
             }
             if (typeof(T) == typeof(IStatBool))
             {
-                return (T) (IStat) StatBool.Create(statId, (bool) (defaultValue ?? false));
+                T stat = (T) (IStat) StatBool.Create(statId, (bool) (defaultValue ?? false));
+                this.Add(stat);
+                return stat;
             }
             throw new NotImplementedException();
         }

@@ -13,13 +13,13 @@ namespace souchy.celebi.eevee.neweffects.impl.effects.meta
 
         public IEffectReturnValue apply(ISubActionEffectTarget action, IBoardEntity currentTarget, IEnumerable<IBoardEntity> allTargetsInZone)
         {
-            var newAction = new SubActionEffectTarget()
+            var newAction = new SubActionEffectTarget(action)
             {
                 caster = currentTarget.entityUid, // reverse the caster source
                 targetCell = action.targetCell,   // keep the same cell though i think? 
                 effect = action.effect, // TODO make a copy of the effect like in java?
                 fight = action.fight,
-                parent = action.parent,
+                //parent = action.parent,
                 depthLevel = action.depthLevel + 1,
             };
 

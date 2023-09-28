@@ -19,6 +19,10 @@ namespace souchy.celebi.eevee.face.objects
         /// </summary>
         public IAction parent { get; set; }
         /// <summary>
+        /// Children actions (ex: SubActionEffect, SubActionEffectTarget)
+        /// </summary>
+        public List<IAction> children { get; set; }
+        /// <summary>
         /// 0 by default.
         /// Level starts at 0 and goes deeper. <br></br>
         /// Ex spell cast is at 0, root effects are at 1, etc
@@ -41,6 +45,10 @@ namespace souchy.celebi.eevee.face.objects
         /// </summary>
         public ObjectId targetCell { get; set; }
         /// <summary>
+        /// 
+        /// </summary>
+        public IActionResult result { get; set; }
+        /// <summary>
         /// If we ever use IActionContext, then we can use the root action's context to compile actions results into
         /// </summary>
         public IAction getRootAction() {
@@ -59,17 +67,29 @@ namespace souchy.celebi.eevee.face.objects
     /// </summary>
     public abstract class BaseAction : IAction
     {
-        public IAction parent { get; set; } 
+        public IAction parent { get; set; }
+        public List<IAction> children { get; set; } = new();
         public int depthLevel { get; set; }
         public ActionContext context { get; set; } = new ActionContext();
         public IFight fight { get; set; }
         public ObjectId caster { get; set; }
         public ObjectId targetCell { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public IActionResult result { get; set; }
+
+        public BaseAction() { }
+        public BaseAction(IAction parent) {
+            this.parent = parent;
+            this.parent.children.Add(this);
+        }
 
         public IAction copy()
         {
             IAction copy = copyImplementation();
             copy.parent = parent;
+            copy.children.AddRange(children);
             copy.depthLevel = depthLevel;
             copy.context = context;
             copy.targetCell = targetCell;
@@ -116,6 +136,8 @@ namespace souchy.celebi.eevee.face.objects
     }
     public class ActionSpell : BaseAction, IActionSpell
     {
+        public ActionSpell() { }
+        public ActionSpell(IAction parent) : base(parent) { }
         public ObjectId spell { get; set; }
 
         protected override IAction copyImplementation()
@@ -156,6 +178,8 @@ namespace souchy.celebi.eevee.face.objects
     /// </summary>
     public class SubActionEffect : BaseAction, IAction
     {
+        public SubActionEffect() { }
+        public SubActionEffect(IAction parent) : base(parent) { }
         /// <summary>
         /// Effect to apply, contains the schema, conditions, etc
         /// </summary>
@@ -178,11 +202,13 @@ namespace souchy.celebi.eevee.face.objects
     /// </summary>
     public class SubActionEffectTarget : BaseAction,  ISubActionEffectTarget
     {
+        public SubActionEffectTarget() { }
+        public SubActionEffectTarget(IAction parent) : base(parent) { }
         public IEffect effect { get; set; }
 
         protected override IAction copyImplementation()
         {
-            var copy = new SubActionEffect();
+            var copy = new SubActionEffectTarget();
             copy.effect = effect;
             return copy;
         }

@@ -42,12 +42,12 @@ namespace souchy.celebi.eevee
             foreach (var pair in effectsWithTargets)
             {
                 //TODO: use EffectInstance
-                var sub = new SubActionEffect()
+                var sub = new SubActionEffect(action)
                 {
                     fight = action.fight,
                     caster = action.caster,
                     targetCell = action.targetCell,
-                    parent = action,
+                    //parent = action,
                     effect = pair.effect, //child,
                     boardTargets = pair.targets,
                     depthLevel = action.depthLevel + 1 
@@ -65,12 +65,11 @@ namespace souchy.celebi.eevee
                 var currentTargetCell = parentAction.fight.board.GetCells().First(c => c.position.equals(target.position));
 
                 //TODO: make a copy of the effect
-                SubActionEffectTarget subActionEffect = new()
+                SubActionEffectTarget subActionEffect = new(parentAction)
                 {
                     fight = parentAction.fight,
                     caster = parentAction.caster,
                     targetCell = currentTargetCell.entityUid,
-                    parent = parentAction,
                     effect = parentAction.effect, // TODO MAKE A COPY
                     depthLevel = parentAction.depthLevel // each target has the same level as the effect that applies to all of them
                 };
@@ -157,12 +156,12 @@ namespace souchy.celebi.eevee
                 {
                     IPosition targetPosition = parentAction.fight.cells.Get(parentAction.targetCell).position;
                     var targets = triggeredEffect.GetPossibleBoardTargets(parentAction, targetPosition);
-                    var sub = new SubActionEffect()
+                    var sub = new SubActionEffect(parentAction)
                     {
                         fight = parentAction.fight,
                         caster = parentAction.caster,
                         targetCell = parentAction.targetCell,
-                        parent = parentAction,
+                        //parent = parentAction,
                         depthLevel = parentAction.depthLevel + 1,
                         effect = triggeredEffect,
                         boardTargets = targets

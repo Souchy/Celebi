@@ -27,26 +27,41 @@ namespace souchy.celebi.eevee.neweffects.impl.effects.res
         {
             var creaSource = action.fight.creatures.Get(action.caster);
             var creaTarget = (ICreature) currentTarget;
-            var sourceStats = creaSource.GetTotalStats(action);
-            var targetStats = creaTarget.GetTotalStats(action);
+            var sourceStatsCopy = creaSource.GetTotalStats(action);
+            var targetStatsCopy = creaTarget.GetTotalStats(action);
 
             var props = action.effect.GetProperties<AbstractDamageSchema>();
-            int dmg = DamageUtil.calculateDamage(sourceStats, targetStats, props, appliesOffensiveStats, appliesDefensiveStats);
+            int dmg = DamageUtil.calculateDamage(sourceStatsCopy, targetStatsCopy, props, appliesOffensiveStats, appliesDefensiveStats);
 
-            var shield = targetStats.Get<IStatSimple>(Resource.Shield);
-            var remainingDmgAfterShield = dmg;
+            //var shield = targetStats.Get<IStatSimple>(Resource.Shield);
+            //var remainingDmgAfterShield = dmg;
 
             //var startShield = shield.value;
             //shield.value -= dmg;
             //shield.value = Math.Max(0, shield.value);
             //remainingDmgAfterShield = startShield - shield.value;
 
-            var life = targetStats.Get<IStatSimple>(Resource.Life);
-            var lifeMax = targetStats.Get<IStatSimple>(Resource.LifeMax);
-            life.value += remainingDmgAfterShield;
+            var life = targetStatsCopy.Get<IStatSimple>(Resource.Life).value;
+            var lifeMax = targetStatsCopy.Get<IStatSimple>(Resource.LifeMax).value;
+            int lifeGained = Math.Min(dmg, lifeMax - life);
+            life += lifeGained;
+
+            // update actual stats
+            var targetStats = creaTarget.GetNaturalStats();
+            var sourceStats = creaSource.GetNaturalStats();
+            targetStats.Get<IStatSimple>(Resource.Life).value = life;
+            targetStats.Get<IStatSimple>(Contextual.HealReceived).value += lifeGained;
+            sourceStats.Get<IStatSimple>(Contextual.HealDone).value += lifeGained;
 
             //var compiled = new EffectPreviewDamage(damage);
             //return compiled;
+
+            // Set results
+            var result = new EffectTargetResourceResult();
+            action.result = result;
+            if (lifeGained != 0)
+                result.resources[Resource.Life] = lifeGained;
+
             return new IEffectReturnValue(action.effect, dmg);
         }
 
