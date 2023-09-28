@@ -39,12 +39,12 @@ namespace souchy.celebi.spark.controllers.models
         [HttpPost("trigger")]
         public ActionResult<ITriggerModel> CreateTrigger([FromQuery] string schemaName)
         {
-            var type = TriggerType.getByName(schemaName);
-            if (type == null)
+            var schemaType = TriggerType.getByName(schemaName);
+            if (schemaType == null)
                 return null;
-
-            var trigger = type.createInstance();
-            return Ok(trigger);
+            var triggerModel = TriggerModel.Create();
+            triggerModel.schema = schemaType.createInstance();
+            return Ok(triggerModel);
         }
 
         [Authorize(Roles = nameof(AccountType.Admin))]

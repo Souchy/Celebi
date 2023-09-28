@@ -10,13 +10,6 @@ namespace souchy.celebi.eevee.face.shared.triggers
     public interface ITriggerModel : IEntity
     {
         /// <summary>
-        /// { What to react to }
-        /// Conditions for the event, ex: moved (walked, teleported), damageReceived, turnStart, etc.
-        /// </summary>
-        //public ICondition triggerConditions { get; set; }
-        //public TriggerType triggerType { get; set; }
-
-        /// <summary>
         /// Holds the TriggerType and trigger properties specific to each schema type
         /// </summary>
         public ITriggerSchema schema { get; set; }
