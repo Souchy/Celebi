@@ -15,7 +15,7 @@ namespace souchy.celebi.eevee.impl.shared.triggers
         /// <summary>
         /// Trigger Data
         /// </summary>
-        public ITriggerSchema schema { get; set; }
+        public TriggerSchema schema { get; set; }
         public TriggerOrderType triggerOrderType { get; set; } = TriggerOrderType.After;
         public IZone triggerZone { get; set; }  // only targets in the zone can trigger the TriggerModel
         public ICondition triggererFilter { get; set; } // who can trigger the triggerModel
@@ -41,12 +41,15 @@ namespace souchy.celebi.eevee.impl.shared.triggers
 
     public interface ITriggerSchema
     {
-        public TriggerType triggerType
+        public TriggerType triggerType { get; init; }
+    }
+
+    public abstract class TriggerSchema : ITriggerSchema
+    {
+        public TriggerType triggerType { get; init; }
+        public TriggerSchema()
         {
-            get
-            {
-                return TriggerType.getByType(this.GetType());
-            }
+            this.triggerType = TriggerType.getByType(GetType());
         }
     }
 

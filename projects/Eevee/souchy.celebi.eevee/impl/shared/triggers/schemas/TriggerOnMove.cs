@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace souchy.celebi.eevee.impl.shared.triggers.schemas
 {
-    internal class TriggerOnMove : ITriggerSchema
+    internal class TriggerOnMove : TriggerSchema
     {
         /// <summary>
         /// Walk, Teleport, Swap, Translate...
@@ -15,7 +15,7 @@ namespace souchy.celebi.eevee.impl.shared.triggers.schemas
         public MoveType moveType { get; set; }
     }
 
-    public class TriggerOnCellMovement : ITriggerSchema
+    public class TriggerOnCellMovement : TriggerSchema
     {
         /// <summary>
         /// enter cell

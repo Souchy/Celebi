@@ -3,13 +3,13 @@
 
 <!-- Trigger Type -->
 <div class="eblock" style="flex-grow: 1;">
-  <h6>Schema</h6>
+  <h6>Schema ${model.entityUid}</h6>
   <!-- change type -->
-  <button class="btn btn-floating btn-changeSchema" data-bs-toggle="modal" data-bs-target="#effectSchemaTypeModal-${model.entityUid}">
+  <button class="btn btn-floating btn-changeSchema" data-bs-toggle="modal" data-bs-target="#triggerSchemaTypeModal-${model.entityUid}">
     Change type
   </button>
-  <modal id="effectSchemaTypeModal-${model.entityUid}" header="Change Schema Type" close.bind=false footer.bind=false>
-    <effect-model-selector onselectcallback.bind="e => onChangeSchemaType(e)"></effect-model-selector>
+  <modal id="triggerSchemaTypeModal-${model.entityUid}" header="Change Trigger schema type" close.bind=false footer.bind=false>
+    <trigger-model-selector onselectcallback.bind="e => onChangeSchemaType(e)"></trigger-model-selector>
   </modal>
   <!-- schema properties -->
   <propertygrid data.bind="model.schema" schema.bind="schema" uid.bind="model.entityUid" callbacksave.bind="() => onSave()"></propertygrid>

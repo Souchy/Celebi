@@ -107,17 +107,17 @@ export class Effect {
             // .then(this.handleUpdate);
     }
     /** Add Trigger */
-    public onAddTrigger(schema: SchemaDescription) {
-        this.triggerController.postTrigger({ schemaName: schema.name })
-            .then(res => this.model.triggers.push(res.data))
-            .then(f => this.onSave());
-    }
+    // public onAddTrigger(schema: SchemaDescription) {
+    //     this.triggerController.postNew({ schemaName: schema.name })
+    //         .then(res => this.model.triggers.push(res.data))
+    //         .then(f => this.onSave());
+    // }
     //#endregion
 
 
     //#region callback handlers
     public onSave() {
-        // console.log("effect save")
+        console.log("effect save " + this.model.entityUid)
         // update db
         this.effectController.putEffect(this.model.entityUid, this.model)
             .then(

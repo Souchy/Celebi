@@ -24,9 +24,10 @@ public class StaticEnumSchemaFilter : ISchemaFilter
         {
             
             if (!context.Type.IsAssignableTo(typeof(CharacteristicType))
-                && !context.Type.IsAssignableTo(typeof(ConditionType))
                 && !context.Type.IsAssignableTo(typeof(CellType))
-                //&& !context.Type.IsAssignableTo(typeof(EffectType))
+                && !context.Type.IsAssignableTo(typeof(TriggerType))
+                && !context.Type.IsAssignableTo(typeof(ConditionType))
+            //&& !context.Type.IsAssignableTo(typeof(EffectType))
             )
             {
                 return;

@@ -34,16 +34,16 @@ namespace souchy.celebi.spark.controllers.models
             _federation = federation;
         }
 
-
         [Authorize(Roles = nameof(AccountType.Admin))]
-        [HttpPost("trigger")]
+        [HttpPost("new")]
         public ActionResult<ITriggerModel> CreateTrigger([FromQuery] string schemaName)
         {
             var schemaType = TriggerType.getByName(schemaName);
             if (schemaType == null)
-                return null;
+                return BadRequest();
             var triggerModel = TriggerModel.Create();
             triggerModel.schema = schemaType.createInstance();
+            var test = triggerModel.schema.triggerType;
             return Ok(triggerModel);
         }
 

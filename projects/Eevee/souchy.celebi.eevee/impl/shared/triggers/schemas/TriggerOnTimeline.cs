@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace souchy.celebi.eevee.impl.shared.triggers.schemas
 {
 
-    public class TriggerOnTimeline : ITriggerSchema
+    public class TriggerOnTimeline : TriggerSchema
     {
         public MomentType moment { get; set; }
         // fight start

@@ -78,7 +78,7 @@ namespace souchy.celebi.spark.controllers.models
         {
             var schemas = typeof(IEntity).Assembly.GetTypes()
                 .Where(t => !t.IsInterface && !t.IsAbstract)
-                .Where(t => t.IsAssignableTo(typeof(ITriggerSchema)));
+                .Where(t => t.IsAssignableTo(typeof(TriggerSchema)));
             var descriptions = schemas.Select(t => SchemaDescription.GetSchemaDescription(t));
             return Ok(descriptions);
         }

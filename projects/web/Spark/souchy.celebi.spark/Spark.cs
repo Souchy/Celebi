@@ -112,7 +112,7 @@ namespace souchy.celebi.spark
             {
                 options.AddDefaultPolicy(
                     builder => builder
-                        .WithOrigins("https://localhost:9000", "https://localhost:9001", "http://localhost", "https://souchy.github.io")
+                        .WithOrigins("https://localhost:9001", "http://localhost:9001", "http://localhost", "https://souchy.github.io")
                         .AllowAnyHeader()
                         .AllowAnyMethod()
                         .AllowCredentials()
@@ -124,7 +124,7 @@ namespace souchy.celebi.spark
                 var settings = configuration.GetSection(nameof(JwtSettings)).Get<JwtSettings>()!;
                 //configuration.Bind("CookieSettings", options);
                 options.Cookie.Name = "squid";
-                options.ExpireTimeSpan = TimeSpan.FromDays(14); //TimeSpan.FromSeconds(30);
+                options.ExpireTimeSpan = TimeSpan.FromDays(150); //TimeSpan.FromSeconds(30);
                 options.Cookie.SameSite = SameSiteMode.None;
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
                 //options.Cookie.Expiration = TimeSpan.FromSeconds(30);
@@ -248,10 +248,8 @@ namespace souchy.celebi.spark
                 {
                     ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
                 });
+                app.UseHttpsRedirection();
             }
-
-            
-            app.UseHttpsRedirection();
 
             // cors must be after useRouting but before useAuthorization https://learn.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-7.0
             app.UseCors();

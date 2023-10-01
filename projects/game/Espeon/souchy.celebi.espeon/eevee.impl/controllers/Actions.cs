@@ -62,9 +62,9 @@ namespace souchy.celebi.espeon.eevee.impl.controllers
 
             //EffectPreviewPipeline pipeline = new EffectPreviewPipeline();
 
-            TriggerEvent triggerBefore = new TriggerEvent(TriggerType.TriggerOnSpell, TriggerOrderType.Before, action);
+            TriggerEvent triggerBefore = new TriggerEvent(TriggerType.TriggerOnSpellCast, TriggerOrderType.Before, action);
             //TriggerEvent triggerApply = new TriggerEvent(TriggerType.OnCreatureSpellCast, TriggerOrderType.Apply);
-            TriggerEvent triggerAfter = new TriggerEvent(TriggerType.TriggerOnSpell, TriggerOrderType.After, action);
+            TriggerEvent triggerAfter = new TriggerEvent(TriggerType.TriggerOnSpellCast, TriggerOrderType.After, action);
 
             // Check triggers Before
             Mind.checkTriggers(action, triggerBefore);

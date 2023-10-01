@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace souchy.celebi.eevee.impl.shared.triggers.schemas
 {
 
-    public abstract class TriggerOnEffect : ITriggerSchema
+    public abstract class TriggerOnEffect : TriggerSchema
     {
         public List<TriggerOnEffectFilter> effectTypesInclude { get; set; }
         public List<TriggerOnEffectFilter> effectTypesExclude { get; set; }

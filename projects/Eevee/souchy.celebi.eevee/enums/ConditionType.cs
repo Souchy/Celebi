@@ -6,6 +6,7 @@ using souchy.celebi.eevee.impl.shared.conditions.other;
 using souchy.celebi.eevee.impl.shared.conditions.spell;
 using souchy.celebi.eevee.impl.shared.conditions.status;
 using souchy.celebi.eevee.impl.util;
+using System.Diagnostics;
 
 namespace souchy.celebi.eevee.face.shared.conditions
 {
@@ -31,21 +32,24 @@ namespace souchy.celebi.eevee.face.shared.conditions
     public sealed record ConditionType
     {
         public IID id { get; init; }
-        public Type type { get; init; }
-        public ConditionType(int id, Type type) {
+        public string name { get; init; }
+        public Type schemaType { get; init; }
+        public ConditionType(int id, Type schemaType) 
+        {
             this.id = new IID(id.ToString());
-            this.type = type;
+            this.name = schemaType.Name;
+            this.schemaType = schemaType;
         }
         public Condition createInstance()
         {
-            return (Condition) Activator.CreateInstance(type);
+            return (Condition) Activator.CreateInstance(schemaType);
         }
         
-        public static readonly ConditionType Group                  = new ConditionType(000, typeof(GroupCondition));
+        public static readonly ConditionType Group                  = new ConditionType(001, typeof(GroupCondition));
 
         // Other / relations
-        public static readonly ConditionType LineOfSight            = new ConditionType(001, typeof(LineOfSightCondition));
-        public static readonly ConditionType Distance               = new ConditionType(002, typeof(DistanceCondition));
+        public static readonly ConditionType LineOfSight            = new ConditionType(002, typeof(LineOfSightCondition));
+        public static readonly ConditionType Distance               = new ConditionType(003, typeof(DistanceCondition));
         //public static readonly ConditionType DistanceX              = new ConditionType(003, typeof(StatsCondition));
         //public static readonly ConditionType DistanceZ              = new ConditionType(004, typeof(StatsCondition));
         //public static readonly ConditionType DistancePath           = new ConditionType(005, typeof(StatsCondition));
@@ -76,44 +80,8 @@ namespace souchy.celebi.eevee.face.shared.conditions
         static ConditionType() => _values.AddRange(StaticEnumUtils.findValues<ConditionType>());
         public static ConditionType[] values() => _values.ToArray();
         public static ConditionType get(IID id) => _values.Find(v => v.id == id);
+        public static ConditionType getByType(Type schemaType) => _values.Find(v => v.schemaType == schemaType);
+        public static ConditionType getByName(string schemaName) => _values.Find(v => v.schemaType.Name.Equals(schemaName));
     }
-
-    // (SchemaFactory, Script)
-    //[Intellenum<ConditionEnumType>]
-    //public partial class ConditionType
-    //{
-    //    // Other / relations
-    //    public static readonly ConditionType LineOfSight            = new(new ConditionEnumType(001, typeof(LineOfSightCondition)));
-    //    public static readonly ConditionType Distance               = new(new ConditionEnumType(002, typeof(DistanceCondition)));
-    //    //public static readonly ConditionType DistanceX              = new(new ConditionEnumType(003, typeof(StatsCondition)));
-    //    //public static readonly ConditionType DistanceZ              = new(new ConditionEnumType(004, typeof(StatsCondition)));
-    //    //public static readonly ConditionType DistancePath           = new(new ConditionEnumType(005, typeof(StatsCondition)));
-
-    //    // Creature
-    //    // creature.stats.other -> isSummon, //currentTeam, originalTeam -> creatures dont rly have a team, just an owner, it's up to the condition to determine wether that owner is ally or enemy
-    //    public static readonly ConditionType CreatureModel          = new(new ConditionEnumType(101, typeof(CreatureModelCondition)));
-    //    public static readonly ConditionType CreatureModelSame      = new(new ConditionEnumType(102, typeof(CreatureModelCondition)));
-    //    public static readonly ConditionType CreatureCurrentTeam    = new(new ConditionEnumType(103, typeof(CreatureCurrentTeamCondition)));
-    //    public static readonly ConditionType CreatureOriginalTeam   = new(new ConditionEnumType(104, typeof(CreatureOriginalTeamCondition)));
-    //    public static readonly ConditionType CreatureIsSummon       = new(new ConditionEnumType(105, typeof(CreatureOriginalTeamCondition)));
-    //    public static readonly ConditionType CreatureStats          = new(new ConditionEnumType(106, typeof(CreatureStatsCondition))); // IStats object and use the Condition.comparator
-    //    //public static readonly ConditionType CreatureNaturalStats   = new(new ConditionEnumType(107, typeof(StatsCondition)));
-    //    //public static readonly ConditionType CreatureStatsDifference= new(new ConditionEnumType(108, typeof(StatsCondition))); // compare caster stats with the target
-
-    //    // Status
-    //    public static readonly ConditionType StatusModel            = new(new ConditionEnumType(201, typeof(StatusModelCondition))); // statusID / spellID
-    //    public static readonly ConditionType StatusTeam             = new(new ConditionEnumType(202, typeof(StatusTeamCondition)));
-    //    public static readonly ConditionType StatusStats            = new(new ConditionEnumType(203, typeof(StatusStatsCondition))); // stacks, duration..
-
-    //    // Spell
-    //    public static readonly ConditionType SpellModel             = new(new ConditionEnumType(301, typeof(SpellModelCondition)));
-    //    //public static readonly ConditionType SpellTeam              = new(new ConditionEnumType(302, typeof(Condition))); // what?how?why?
-    //    public static readonly ConditionType SpellStats             = new(new ConditionEnumType(303, typeof(SpellStatsCondition)));
-    //}
-
-    //public record class ConditionEnumType(int id, Type conditionType) : IComparable<ConditionEnumType>
-    //{
-    //    public int CompareTo(ConditionEnumType other) => id - other.id;
-    //}
 
 }

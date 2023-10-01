@@ -7,7 +7,7 @@ export class Trigger {
     @bindable
     public model: ITriggerModel;
     @bindable
-    public callbacksave: (t) => {}
+    public callbacksave: () => {}
 
 
     constructor() {
@@ -15,7 +15,7 @@ export class Trigger {
     }
 
     public save() {
-        this.callbacksave(this.model);
+        this.callbacksave(); //this.model);
     }
 
 

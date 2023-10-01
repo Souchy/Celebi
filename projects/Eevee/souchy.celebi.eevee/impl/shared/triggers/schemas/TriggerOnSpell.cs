@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace souchy.celebi.eevee.impl.shared.triggers.schemas
 {
-    public abstract class TriggerOnSpell : ITriggerSchema
+    public abstract class TriggerOnSpell : TriggerSchema
     {
         public List<SpellIID> spellIdsInclude { get; set; }
         public List<SpellIID> spellIdsExclude { get; set; }

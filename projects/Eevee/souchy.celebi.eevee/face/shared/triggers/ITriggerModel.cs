@@ -12,7 +12,7 @@ namespace souchy.celebi.eevee.face.shared.triggers
         /// <summary>
         /// Holds the TriggerType and trigger properties specific to each schema type
         /// </summary>
-        public ITriggerSchema schema { get; set; }
+        public TriggerSchema schema { get; set; }
 
         /// <summary>
         /// { When to react to something }

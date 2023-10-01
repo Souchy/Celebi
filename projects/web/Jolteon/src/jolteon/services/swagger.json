@@ -318,6 +318,35 @@
         }
       }
     },
+    "/api/models/condition/new": {
+      "post": {
+        "tags": [
+          "ConditionModelController"
+        ],
+        "parameters": [
+          {
+            "name": "schemaName",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ICondition"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/models/creature/all": {
       "get": {
         "tags": [
@@ -1044,6 +1073,180 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/IEffect"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/effect/{id}/triggers": {
+      "put": {
+        "tags": [
+          "EffectPermanentController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ITriggerModel"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ITriggerModel"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ITriggerModel"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ITriggerModel"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/effect/{id}/conditionTarget": {
+      "put": {
+        "tags": [
+          "EffectPermanentController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ICondition"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ICondition"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ICondition"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ICondition"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/effect/{id}/conditionSource": {
+      "put": {
+        "tags": [
+          "EffectPermanentController"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ICondition"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ICondition"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ICondition"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ICondition"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateResult"
                 }
               }
             }
@@ -1913,66 +2116,6 @@
                   "items": {
                     "$ref": "#/components/schemas/SchemaDescription"
                   }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/models/factory/trigger": {
-      "post": {
-        "tags": [
-          "FactoryController"
-        ],
-        "parameters": [
-          {
-            "name": "triggerTypeId",
-            "in": "path",
-            "required": true,
-            "style": "simple",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ITriggerModel"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/models/factory/condition": {
-      "post": {
-        "tags": [
-          "FactoryController"
-        ],
-        "parameters": [
-          {
-            "name": "conditionTypeId",
-            "in": "path",
-            "required": true,
-            "style": "simple",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ICondition"
                 }
               }
             }
@@ -4093,7 +4236,7 @@
         }
       }
     },
-    "/api/models/trigger/trigger": {
+    "/api/models/trigger/new": {
       "post": {
         "tags": [
           "TriggerModelController"
@@ -4389,8 +4532,8 @@
           "Damage: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 20,\r\n  \"baseName\": \"Damage\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2020\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Damage\",\r\n  \"enumValueConstraint\": null\r\n};",
           "IndirectDamage: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 21,\r\n  \"baseName\": \"IndirectDamage\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2021\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.IndirectDamage\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Heal: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 22,\r\n  \"baseName\": \"Heal\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2022\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Heal\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Melee: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 23,\r\n  \"baseName\": \"Melee\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 5\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2023\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Melee\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Distance: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 24,\r\n  \"baseName\": \"Distance\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 2\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2024\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Distance\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Melee: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 23,\r\n  \"baseName\": \"Melee\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"conditionType\": {\r\n        \"id\": \"3\",\r\n        \"name\": \"DistanceCondition\",\r\n        \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.other.DistanceCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n      },\r\n      \"actorType\": 1,\r\n      \"comparator\": 5\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2023\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Melee\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Distance: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 24,\r\n  \"baseName\": \"Distance\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"conditionType\": {\r\n        \"id\": \"3\",\r\n        \"name\": \"DistanceCondition\",\r\n        \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.other.DistanceCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n      },\r\n      \"actorType\": 1,\r\n      \"comparator\": 2\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2024\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Distance\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Trap: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 25,\r\n  \"baseName\": \"Trap\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2025\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Trap\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Glyph: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 26,\r\n  \"baseName\": \"Glyph\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2026\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Glyph\",\r\n  \"enumValueConstraint\": null\r\n};",
           "PenetrationPercent: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 27,\r\n  \"baseName\": \"PenetrationPercent\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2027\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.PenetrationPercent\",\r\n  \"enumValueConstraint\": null\r\n};",
@@ -4469,6 +4612,15 @@
           }
         },
         "additionalProperties": false
+      },
+      "CellMovementType": {
+        "enum": [
+          "EnterCell = 1",
+          "ExitCell = 2",
+          "StopOnCell = 3"
+        ],
+        "type": "string",
+        "format": ""
       },
       "CellType": {
         "type": "object",
@@ -4661,7 +4813,11 @@
             "type": "string",
             "nullable": true
           },
-          "type": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "schemaType": {
             "type": "string",
             "nullable": true
           }
@@ -4670,20 +4826,20 @@
       },
       "ConditionTypeTypes": {
         "enum": [
-          "Group: ConditionType = {\r\n  \"id\": \"0\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.GroupCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "LineOfSight: ConditionType = {\r\n  \"id\": \"1\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.other.LineOfSightCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "Distance: ConditionType = {\r\n  \"id\": \"2\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.other.DistanceCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "CreatureModel: ConditionType = {\r\n  \"id\": \"101\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.creature.CreatureModelCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "CreatureModelSame: ConditionType = {\r\n  \"id\": \"102\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.creature.CreatureModelCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "CreatureCurrentTeam: ConditionType = {\r\n  \"id\": \"103\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.creature.CreatureCurrentTeamCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "CreatureOriginalTeam: ConditionType = {\r\n  \"id\": \"104\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.creature.CreatureOriginalTeamCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "CreatureIsSummon: ConditionType = {\r\n  \"id\": \"105\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.creature.CreatureOriginalTeamCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "CreatureStats: ConditionType = {\r\n  \"id\": \"106\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.creature.CreatureStatsCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "StatusModel: ConditionType = {\r\n  \"id\": \"201\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.status.StatusModelCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "StatusTeam: ConditionType = {\r\n  \"id\": \"202\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.status.StatusTeamCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "StatusStats: ConditionType = {\r\n  \"id\": \"203\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.status.StatusStatsCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "SpellModel: ConditionType = {\r\n  \"id\": \"301\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.spell.SpellModelCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "SpellStats: ConditionType = {\r\n  \"id\": \"303\",\r\n  \"type\": \"souchy.celebi.eevee.impl.shared.conditions.spell.SpellStatsCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};"
+          "Group: ConditionType = {\r\n  \"id\": \"1\",\r\n  \"name\": \"GroupCondition\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.GroupCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "LineOfSight: ConditionType = {\r\n  \"id\": \"2\",\r\n  \"name\": \"LineOfSightCondition\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.other.LineOfSightCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "Distance: ConditionType = {\r\n  \"id\": \"3\",\r\n  \"name\": \"DistanceCondition\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.other.DistanceCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "CreatureModel: ConditionType = {\r\n  \"id\": \"101\",\r\n  \"name\": \"CreatureModelCondition\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.creature.CreatureModelCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "CreatureModelSame: ConditionType = {\r\n  \"id\": \"102\",\r\n  \"name\": \"CreatureModelCondition\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.creature.CreatureModelCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "CreatureCurrentTeam: ConditionType = {\r\n  \"id\": \"103\",\r\n  \"name\": \"CreatureCurrentTeamCondition\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.creature.CreatureCurrentTeamCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "CreatureOriginalTeam: ConditionType = {\r\n  \"id\": \"104\",\r\n  \"name\": \"CreatureOriginalTeamCondition\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.creature.CreatureOriginalTeamCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "CreatureIsSummon: ConditionType = {\r\n  \"id\": \"105\",\r\n  \"name\": \"CreatureOriginalTeamCondition\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.creature.CreatureOriginalTeamCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "CreatureStats: ConditionType = {\r\n  \"id\": \"106\",\r\n  \"name\": \"CreatureStatsCondition\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.creature.CreatureStatsCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "StatusModel: ConditionType = {\r\n  \"id\": \"201\",\r\n  \"name\": \"StatusModelCondition\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.status.StatusModelCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "StatusTeam: ConditionType = {\r\n  \"id\": \"202\",\r\n  \"name\": \"StatusTeamCondition\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.status.StatusTeamCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "StatusStats: ConditionType = {\r\n  \"id\": \"203\",\r\n  \"name\": \"StatusStatsCondition\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.status.StatusStatsCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "SpellModel: ConditionType = {\r\n  \"id\": \"301\",\r\n  \"name\": \"SpellModelCondition\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.spell.SpellModelCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "SpellStats: ConditionType = {\r\n  \"id\": \"303\",\r\n  \"name\": \"SpellStatsCondition\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.spell.SpellStatsCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};"
         ],
         "type": "string",
         "format": ""
@@ -4901,6 +5057,9 @@
             "additionalProperties": false,
             "nullable": true
           },
+          "conditionType": {
+            "$ref": "#/components/schemas/ConditionType"
+          },
           "actorType": {
             "$ref": "#/components/schemas/ActorType"
           },
@@ -4917,6 +5076,9 @@
         "properties": {
           "isSummon": {
             "type": "boolean"
+          },
+          "conditionType": {
+            "$ref": "#/components/schemas/ConditionType"
           },
           "actorType": {
             "$ref": "#/components/schemas/ActorType"
@@ -4982,6 +5144,9 @@
             "type": "string",
             "nullable": true
           },
+          "conditionType": {
+            "$ref": "#/components/schemas/ConditionType"
+          },
           "actorType": {
             "$ref": "#/components/schemas/ActorType"
           },
@@ -5011,6 +5176,9 @@
             },
             "additionalProperties": false,
             "nullable": true
+          },
+          "conditionType": {
+            "$ref": "#/components/schemas/ConditionType"
           },
           "actorType": {
             "$ref": "#/components/schemas/ActorType"
@@ -5049,6 +5217,9 @@
           },
           "conditionStats": {
             "$ref": "#/components/schemas/IStats"
+          },
+          "conditionType": {
+            "$ref": "#/components/schemas/ConditionType"
           },
           "actorType": {
             "$ref": "#/components/schemas/ActorType"
@@ -5184,6 +5355,10 @@
             "readOnly": true
           }
         },
+        "additionalProperties": false
+      },
+      "DataType": {
+        "type": "object",
         "additionalProperties": false
       },
       "DeleteResult": {
@@ -5340,6 +5515,9 @@
           "distance": {
             "type": "integer",
             "format": "int32"
+          },
+          "conditionType": {
+            "$ref": "#/components/schemas/ConditionType"
           },
           "actorType": {
             "$ref": "#/components/schemas/ActorType"
@@ -5614,6 +5792,9 @@
             },
             "nullable": true
           },
+          "conditionType": {
+            "$ref": "#/components/schemas/ConditionType"
+          },
           "actorType": {
             "$ref": "#/components/schemas/ActorType"
           },
@@ -5821,6 +6002,9 @@
       "ICondition": {
         "type": "object",
         "properties": {
+          "conditionType": {
+            "$ref": "#/components/schemas/ConditionType"
+          },
           "actorType": {
             "$ref": "#/components/schemas/ActorType"
           },
@@ -6409,7 +6593,7 @@
         "type": "object",
         "properties": {
           "schema": {
-            "$ref": "#/components/schemas/ITriggerSchema"
+            "$ref": "#/components/schemas/TriggerSchema"
           },
           "triggerOrderType": {
             "$ref": "#/components/schemas/TriggerOrderType"
@@ -6425,15 +6609,6 @@
           },
           "entityUid": {
             "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ITriggerSchema": {
-        "type": "object",
-        "properties": {
-          "triggerType": {
-            "$ref": "#/components/schemas/TriggerType"
           }
         },
         "additionalProperties": false
@@ -6633,6 +6808,9 @@
           "lineOfSight": {
             "type": "boolean"
           },
+          "conditionType": {
+            "$ref": "#/components/schemas/ConditionType"
+          },
           "actorType": {
             "$ref": "#/components/schemas/ActorType"
           },
@@ -6754,6 +6932,19 @@
           }
         },
         "additionalProperties": false
+      },
+      "MomentType": {
+        "enum": [
+          "FightStart = 0",
+          "FightEnd = 1",
+          "RoundStart = 2",
+          "RoundEnd = 3",
+          "TurnStart = 4",
+          "TurnEnd = 5",
+          "Pass = 6"
+        ],
+        "type": "string",
+        "format": ""
       },
       "MoveType": {
         "enum": [
@@ -7039,8 +7230,8 @@
           "Damage: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 20,\r\n  \"baseName\": \"Damage\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3020\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Damage\",\r\n  \"enumValueConstraint\": null\r\n};",
           "IndirectDamage: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 21,\r\n  \"baseName\": \"IndirectDamage\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3021\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.IndirectDamage\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Heal: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 22,\r\n  \"baseName\": \"Heal\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3022\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Heal\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Melee: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 23,\r\n  \"baseName\": \"Melee\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 5\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3023\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Melee\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Distance: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 24,\r\n  \"baseName\": \"Distance\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"actorType\": 1,\r\n      \"comparator\": 2\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3024\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Distance\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Melee: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 23,\r\n  \"baseName\": \"Melee\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"conditionType\": {\r\n        \"id\": \"3\",\r\n        \"name\": \"DistanceCondition\",\r\n        \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.other.DistanceCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n      },\r\n      \"actorType\": 1,\r\n      \"comparator\": 5\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3023\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Melee\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Distance: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 24,\r\n  \"baseName\": \"Distance\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"conditionType\": {\r\n        \"id\": \"3\",\r\n        \"name\": \"DistanceCondition\",\r\n        \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.other.DistanceCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n      },\r\n      \"actorType\": 1,\r\n      \"comparator\": 2\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3024\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Distance\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Trap: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 25,\r\n  \"baseName\": \"Trap\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3025\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Trap\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Glyph: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 26,\r\n  \"baseName\": \"Glyph\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3026\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Glyph\",\r\n  \"enumValueConstraint\": null\r\n};"
         ],
@@ -7511,6 +7702,9 @@
             "type": "string",
             "nullable": true
           },
+          "conditionType": {
+            "$ref": "#/components/schemas/ConditionType"
+          },
           "actorType": {
             "$ref": "#/components/schemas/ActorType"
           },
@@ -7676,6 +7870,9 @@
           },
           "conditionStats": {
             "$ref": "#/components/schemas/IStats"
+          },
+          "conditionType": {
+            "$ref": "#/components/schemas/ConditionType"
           },
           "actorType": {
             "$ref": "#/components/schemas/ActorType"
@@ -8005,6 +8202,9 @@
           "boardTargetType": {
             "$ref": "#/components/schemas/BoardTargetType"
           },
+          "conditionType": {
+            "$ref": "#/components/schemas/ConditionType"
+          },
           "actorType": {
             "$ref": "#/components/schemas/ActorType"
           },
@@ -8053,6 +8253,9 @@
           "conditionStats": {
             "$ref": "#/components/schemas/IStats"
           },
+          "conditionType": {
+            "$ref": "#/components/schemas/ConditionType"
+          },
           "actorType": {
             "$ref": "#/components/schemas/ActorType"
           },
@@ -8069,6 +8272,9 @@
         "properties": {
           "team": {
             "$ref": "#/components/schemas/TeamRelationType"
+          },
+          "conditionType": {
+            "$ref": "#/components/schemas/ConditionType"
           },
           "actorType": {
             "$ref": "#/components/schemas/ActorType"
@@ -8350,6 +8556,9 @@
           "entityUid": {
             "type": "string"
           },
+          "schema": {
+            "$ref": "#/components/schemas/TriggerSchema"
+          },
           "triggerOrderType": {
             "$ref": "#/components/schemas/TriggerOrderType"
           },
@@ -8361,9 +8570,179 @@
           },
           "holderCondition": {
             "$ref": "#/components/schemas/ICondition"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TriggerOnCellMovement": {
+        "type": "object",
+        "properties": {
+          "moveType": {
+            "$ref": "#/components/schemas/CellMovementType"
           },
-          "schema": {
-            "$ref": "#/components/schemas/ITriggerSchema"
+          "triggerType": {
+            "$ref": "#/components/schemas/TriggerType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TriggerOnEffectCast": {
+        "type": "object",
+        "properties": {
+          "effectTypesInclude": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TriggerOnEffectFilter"
+            },
+            "nullable": true
+          },
+          "effectTypesExclude": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TriggerOnEffectFilter"
+            },
+            "nullable": true
+          },
+          "triggerType": {
+            "$ref": "#/components/schemas/TriggerType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TriggerOnEffectFilter": {
+        "type": "object",
+        "properties": {
+          "effectType": {
+            "$ref": "#/components/schemas/EffT"
+          },
+          "valueFilter": {
+            "$ref": "#/components/schemas/DataType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TriggerOnEffectReceive": {
+        "type": "object",
+        "properties": {
+          "effectTypesInclude": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TriggerOnEffectFilter"
+            },
+            "nullable": true
+          },
+          "effectTypesExclude": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TriggerOnEffectFilter"
+            },
+            "nullable": true
+          },
+          "triggerType": {
+            "$ref": "#/components/schemas/TriggerType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TriggerOnMove": {
+        "type": "object",
+        "properties": {
+          "moveType": {
+            "$ref": "#/components/schemas/MoveType"
+          },
+          "triggerType": {
+            "$ref": "#/components/schemas/TriggerType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TriggerOnSpellCast": {
+        "type": "object",
+        "properties": {
+          "spellIdsInclude": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "spellIdsExclude": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "triggerType": {
+            "$ref": "#/components/schemas/TriggerType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TriggerOnSpellReceive": {
+        "type": "object",
+        "properties": {
+          "spellIdsInclude": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "spellIdsExclude": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "triggerType": {
+            "$ref": "#/components/schemas/TriggerType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TriggerOnStatUpdateBool": {
+        "type": "object",
+        "properties": {
+          "valueMatch": {
+            "$ref": "#/components/schemas/IStat"
+          },
+          "statId": {
+            "type": "string"
+          },
+          "triggerType": {
+            "$ref": "#/components/schemas/TriggerType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TriggerOnStatUpdateSimple": {
+        "type": "object",
+        "properties": {
+          "valueMin": {
+            "$ref": "#/components/schemas/IStat"
+          },
+          "valueMax": {
+            "$ref": "#/components/schemas/IStat"
+          },
+          "statId": {
+            "type": "string"
+          },
+          "triggerType": {
+            "$ref": "#/components/schemas/TriggerType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TriggerOnTimeline": {
+        "type": "object",
+        "properties": {
+          "moment": {
+            "$ref": "#/components/schemas/MomentType"
+          },
+          "triggerType": {
+            "$ref": "#/components/schemas/TriggerType"
           }
         },
         "additionalProperties": false
@@ -8377,10 +8756,23 @@
         "type": "string",
         "format": ""
       },
+      "TriggerSchema": {
+        "type": "object",
+        "properties": {
+          "triggerType": {
+            "$ref": "#/components/schemas/TriggerType"
+          }
+        },
+        "additionalProperties": false
+      },
       "TriggerType": {
         "type": "object",
         "properties": {
           "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
             "type": "string",
             "nullable": true
           },
@@ -8390,6 +8782,19 @@
           }
         },
         "additionalProperties": false
+      },
+      "TriggerTypeTypes": {
+        "enum": [
+          "TriggerOnTimeline: TriggerType = {\r\n  \"id\": \"1\",\r\n  \"name\": \"TriggerOnTimeline\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.triggers.schemas.TriggerOnTimeline, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "TriggerOnSpellCast: TriggerType = {\r\n  \"id\": \"11\",\r\n  \"name\": \"TriggerOnSpell\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.triggers.schemas.TriggerOnSpell, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "TriggerOnSpellReceive: TriggerType = {\r\n  \"id\": \"12\",\r\n  \"name\": \"TriggerOnSpell\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.triggers.schemas.TriggerOnSpell, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "TriggerOnMove: TriggerType = {\r\n  \"id\": \"21\",\r\n  \"name\": \"TriggerOnMove\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.triggers.schemas.TriggerOnMove, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "TriggerOnCellMovement: TriggerType = {\r\n  \"id\": \"22\",\r\n  \"name\": \"TriggerOnCellMovement\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.triggers.schemas.TriggerOnCellMovement, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "TriggerOnEffectCast: TriggerType = {\r\n  \"id\": \"31\",\r\n  \"name\": \"TriggerOnEffectCast\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.triggers.schemas.TriggerOnEffectCast, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
+          "TriggerOnEffectReceive: TriggerType = {\r\n  \"id\": \"32\",\r\n  \"name\": \"TriggerOnEffectReceive\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.triggers.schemas.TriggerOnEffectReceive, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};"
+        ],
+        "type": "string",
+        "format": ""
       },
       "UnspawnSummon": {
         "type": "object",
