@@ -1,11 +1,11 @@
 <import from="../../../../../components/modal/modal"></import>
 <import from="../trigger/trigger"></import>
-<import from="../triggerModelSelector/triggerModelSelector"></import>
+<import from="../../../components/modelSelector/modelSelector"></import>
 
 <!-- <button class="btn btn-floating" click.trigger="clickAddTrigger()">+</button> -->
 <button class="btn btn-floating" data-bs-toggle="modal" data-bs-target="#triggerAddModal-${modaluid}">+</button>
 <modal id="triggerAddModal-${modaluid}" header="Add Trigger" close.bind=false footer.bind=false>
-  <trigger-model-selector onselectcallback.bind="e => onAddTrigger(e)"></trigger-model-selector>
+  <model-selector schemas.bind="schemas" onselectcallback.bind="e => onAddTrigger(e)"></model-selector>
 </modal>
 
 <button class="btn btn-floating" data-bs-toggle="modal" data-bs-target="#triggerModalClearList-${modaluid}">Clear</button>

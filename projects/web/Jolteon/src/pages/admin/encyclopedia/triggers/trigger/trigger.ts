@@ -9,6 +9,8 @@ export class Trigger {
     public model: ITriggerModel;
     @bindable
     public callbacksave: () => {}
+    // db data
+    public schemas = Schemas.triggers;
 
 
     constructor() {

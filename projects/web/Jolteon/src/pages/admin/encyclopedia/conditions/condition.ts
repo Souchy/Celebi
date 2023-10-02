@@ -19,6 +19,9 @@ export class Condition {
     @bindable
     public callbacksave = () => {};
 
+    // db data
+    public schemas = Schemas.conditions;
+
     constructor(private readonly conditionController: ConditionModelController) {
     }
 

@@ -1,7 +1,7 @@
 
-<import from="./modelSelector/effectModelSelector"></import>
 <import from="../../../../components/modal/modal"></import>
 <import from="./effect"></import>
+<import from="../../components/modelSelector/modelSelector"></import>
 
 <!-- Children section -->
 <div class="effectSection" if.bind="effectids">
@@ -21,7 +21,7 @@
 
   <!-- Modal model selector -->
   <modal id="effectChildModal-${modaluid}" header="Add Effect Child" close.bind=false footer.bind=false>
-    <effect-model-selector onselectcallback.bind="e => onAddChild(e)"></effect-model-selector>
+    <model-selector schemas.bind="schemas" onselectcallback.bind="e => onAddChild(e)"></model-selector>
   </modal>
 
   <!-- Collapse -->

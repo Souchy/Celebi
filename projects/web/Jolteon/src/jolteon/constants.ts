@@ -93,4 +93,6 @@ export class Schemas {
     public static effects: SchemaDescription[] = [];
     public static conditions: SchemaDescription[] = [];
     public static triggers: SchemaDescription[] = [];
+
+    public static ignoredProperties = ["$type", "triggerType", "conditionType"];
 }

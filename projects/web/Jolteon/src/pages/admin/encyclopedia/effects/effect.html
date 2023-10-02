@@ -1,11 +1,10 @@
 <import from="../properties/propertygrid"></import>
 <import from="../../../../components/modal/modal"></import>
-<import from="./modelSelector/effectModelSelector"></import>
 <import from="../zone/zone"></import>
 <import from="./effectlist"></import>
 <import from="../triggers/trigger/trigger"></import>
 <import from="../triggers/triggerList/triggerList"></import>
-<import from="../triggers/triggerModelSelector/triggerModelSelector"></import>
+<import from="../../components/modelSelector/modelSelector"></import>
 
 <!-- drag.trigger="e => onDrag(e)"  -->
 <div if.bind="model">
@@ -64,7 +63,7 @@
           Change type
         </button>
         <modal id="effectSchemaTypeModal-${model.entityUid}" header="Change Schema Type" close.bind=false footer.bind=false>
-          <effect-model-selector onselectcallback.bind="e => onChangeSchemaType(e)"></effect-model-selector>
+          <model-selector schemas.bind="schemas" onselectcallback.bind="e => onChangeSchemaType(e)"></model-selector>
         </modal>
         <!-- schema properties -->
         <propertygrid data.bind="model.schema" schema.bind="schema" uid.bind="model.entityUid" callbacksave.bind="() => onSave()"></propertygrid>

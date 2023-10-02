@@ -12,6 +12,8 @@ export class TriggerList {
     // db data
     @bindable
     public effect: IEffect;
+    // db data
+    public schemas = Schemas.triggers;
 
     constructor(private readonly triggerController: TriggerModelController) {
     }

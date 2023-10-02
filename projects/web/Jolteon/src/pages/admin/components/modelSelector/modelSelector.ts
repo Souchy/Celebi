@@ -1,11 +1,12 @@
 import { bindable, customElement, inject } from 'aurelia';
-import { PropertiesController } from '../../../../../jolteon/services/api/PropertiesController';
-import { SchemaDescription } from '../../../../../jolteon/services/api/data-contracts';
-import { Schemas } from '../../../../../jolteon/constants';
+import { SchemaDescription } from '../../../../jolteon/services/api/data-contracts';
+import { Schemas } from '../../../../jolteon/constants';
 
 // @customElement('ce-effecttype-selector')
-@inject(PropertiesController)
-export class EffectModelSelector {
+export class ModelSelector {
+
+    @bindable
+    public schemas: SchemaDescription[] 
 
     // @bindable
     // public selectFunction;
@@ -17,19 +18,15 @@ export class EffectModelSelector {
     public filter: string = "";
 
     // db data
-    public schemasDescriptions: SchemaDescription[] = []
-    //
     public filteredSchemas: SchemaDescription[] = []
 
-    constructor(private readonly propertiesController: PropertiesController) {
-        // console.log("ctor effect model selector")
-        this.schemasDescriptions = Schemas.effects;
-        this.filteredSchemas = Schemas.effects;
-        // this.propertiesController.getEffectsSchemas()
-        //     .then(res => {
-        //         this.schemasDescriptions = res.data;
-        //         this.filteredSchemas = this.schemasDescriptions;
-        //     });
+    constructor() {
+        // console.log("ctor model selector")
+    }
+    binding() {
+        // console.log("binding model selector: ");
+        // console.log(this.schemas)
+        this.search();
     }
 
     public len(schema: SchemaDescription) {
@@ -40,22 +37,25 @@ export class EffectModelSelector {
         return JSON.stringify(schema.properties);
     }
     public props(schema: SchemaDescription) {
-        return Object.keys(schema.properties).filter(k => k != "$type");
+        return Object.keys(schema.properties).filter(k => !Schemas.ignoredProperties.includes(k));
     }
 
     public search() {
         // console.log("search: " + this.filter);
         let str = this.filter;
-        if(!str) this.filteredSchemas = this.schemasDescriptions;
+        if(!str) {
+            this.filteredSchemas = this.schemas;
+            return;
+        }
         str = str.toLowerCase();
-        this.filteredSchemas = this.schemasDescriptions.filter(sc => {
+        this.filteredSchemas = this.schemas.filter(sc => {
             if(sc.name.toLowerCase().includes(str)) return true;
             if(this.props(sc).some(k => k.toLowerCase().includes(str))) return true;
             if(this.props(sc).some(k => sc.properties[k].toLowerCase().includes(str))) return true;
         })
     }
 
-    public clickEffectModel(schema) {
+    public clickModel(schema) {
         // console.log("click " + schema.name)
         this.onselectcallback(schema);
     }

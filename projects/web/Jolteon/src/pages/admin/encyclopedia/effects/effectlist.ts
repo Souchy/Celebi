@@ -2,6 +2,7 @@ import { IEventAggregator, bindable, inject } from "aurelia";
 import { IEffect, SchemaDescription } from "../../../../jolteon/services/api/data-contracts";
 import { EffectPermanentController } from "../../../../jolteon/services/api/EffectPermanentController";
 import { IRouter } from "@aurelia/router";
+import { Schemas } from "../../../../jolteon/constants";
 
 
 /**
@@ -18,6 +19,9 @@ export class Effectlist {
     @bindable
     public callbacksave = () => { }
     // public callbackaddeffect = (schemaName: string) => {}
+
+    // db data
+    public schemas = Schemas.effects;
 
     constructor(
         private readonly ea: IEventAggregator,

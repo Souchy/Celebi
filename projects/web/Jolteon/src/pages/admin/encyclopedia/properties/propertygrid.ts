@@ -1,6 +1,6 @@
 import { bindable } from "aurelia";
 import { SchemaDescription } from "../../../../jolteon/services/api/data-contracts";
-import { Characteristics, Enums } from '../../../../jolteon/constants';
+import { Characteristics, Enums, Schemas } from '../../../../jolteon/constants';
 
 
 export default class PropertyGrid {
@@ -22,7 +22,7 @@ export default class PropertyGrid {
     }
 
     public get keys() {
-        return Object.keys(this.data).filter(k => k != "$type" && k != "triggerType" && k != "conditionType");
+        return Object.keys(this.data).filter(k => !Schemas.ignoredProperties.includes(k));
     }
     public get values() {
         return Object.values(this.data);

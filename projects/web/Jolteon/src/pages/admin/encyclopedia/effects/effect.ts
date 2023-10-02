@@ -27,6 +27,7 @@ export class Effect {
     private model: IEffect;
     // db data, important for propertygrid
     // private schema: SchemaDescription
+    public schemas = Schemas.effects;
 
     constructor(
         private readonly ea: IEventAggregator,

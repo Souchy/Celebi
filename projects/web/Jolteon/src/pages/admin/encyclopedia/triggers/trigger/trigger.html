@@ -1,8 +1,8 @@
 <import from="../../conditions/condition"></import>
 <import from="../../../../../components/modal/modal"></import>
-<import from="../triggerModelSelector/triggerModelSelector"></import>
 <import from="../../properties/propertygrid"></import>
 <import from="../../zone/zone"></import>
+<import from="../../../components/modelSelector/modelSelector"></import>
 
 <!-- Trigger Zone -->
 <div class="eblock" style="margin-right: 15px;">
@@ -38,7 +38,7 @@
     Change type
   </button>
   <modal id="triggerSchemaTypeModal-${model.entityUid}" header="Change Trigger schema type" close.bind=false footer.bind=false>
-    <trigger-model-selector onselectcallback.bind="e => onChangeSchemaType(e)"></trigger-model-selector>
+    <model-selector schemas.bind="schemas" onselectcallback.bind="e => onChangeSchemaType(e)"></model-selector>
   </modal>
   <propertygrid data.bind="model.schema" schema.bind="schema" uid.bind="model.entityUid" callbacksave.bind="() => onSave()"></propertygrid>
 </div>
