@@ -1,13 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.shared.conditions;
-using souchy.celebi.eevee.face.util;
-using souchy.celebi.eevee.impl.shared.triggers;
 using souchy.celebi.eevee.neweffects.face;
 using souchy.celebi.spark.models;
 using souchy.celebi.spark.services;
-using souchy.celebi.spark.services.models;
 
 namespace souchy.celebi.spark.controllers.models
 {

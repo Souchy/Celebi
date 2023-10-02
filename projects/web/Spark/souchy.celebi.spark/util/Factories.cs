@@ -28,7 +28,8 @@ namespace souchy.celebi.spark.util
     public class Factories
     {
 
-        public static async Task<(ICreatureModel crea, IStringEntity name, IStringEntity desc, IStats stats, (ICreatureSkin skin, IStringEntity name, IStringEntity desc) skin)> newCreatureModel(IDCounterService _ids)
+        public static async Task<(ICreatureModel crea, IStringEntity name, IStringEntity desc, IStats stats, (ICreatureSkin skin, IStringEntity name, IStringEntity desc) skin)> 
+            newCreatureModel(IDCounterService _ids)
         {
             // Model + Skin
             var creatureModel = CreatureModel.CreatePermanent();
@@ -68,7 +69,8 @@ namespace souchy.celebi.spark.util
 
             return (creatureModel, name, desc, baseStats, creatureSkin);
         }
-        public static async Task<(ISpellModel spell, IStringEntity name, IStringEntity desc, IStats stats, ISpellSkin skin)> newSpellModel(IDCounterService _ids)
+        public static async Task<(ISpellModel spell, IStringEntity name, IStringEntity desc, IStats stats, ISpellSkin skin)> 
+            newSpellModel(IDCounterService _ids)
         {
             // Model
             var spellModel = SpellModel.CreatePermanent();
@@ -103,7 +105,8 @@ namespace souchy.celebi.spark.util
             return (spellModel, name, desc, stats, skin);
         }
 
-        public static async Task<(IStatusModel status, IStringEntity name, IStringEntity desc, IStats stats, IStatusSkin skin)> newStatusModel(IDCounterService _ids)
+        public static async Task<(IStatusModel status, IStringEntity name, IStringEntity desc, IStats stats, IStatusSkin skin)>
+            newStatusModel(IDCounterService _ids)
         {
             // Model
             var model = StatusModel.CreatePermanent();

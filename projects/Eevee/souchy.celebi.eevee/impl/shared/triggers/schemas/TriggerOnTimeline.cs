@@ -10,7 +10,7 @@ namespace souchy.celebi.eevee.impl.shared.triggers.schemas
 
     public class TriggerOnTimeline : TriggerSchema
     {
-        public MomentType moment { get; set; }
+        public MomentType moment { get; set; } = MomentType.TurnStart;
         // fight start
         // fight end
         // round start
