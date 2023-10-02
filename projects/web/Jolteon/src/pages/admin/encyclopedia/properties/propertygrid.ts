@@ -1,6 +1,6 @@
 import { bindable } from "aurelia";
-import { SchemaDescription } from "../../../../../jolteon/services/api/data-contracts";
-import { Characteristics, Enums } from '../../../../../jolteon/constants';
+import { SchemaDescription } from "../../../../jolteon/services/api/data-contracts";
+import { Characteristics, Enums } from '../../../../jolteon/constants';
 
 
 export default class PropertyGrid {

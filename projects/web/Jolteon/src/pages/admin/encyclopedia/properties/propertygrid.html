@@ -1,7 +1,7 @@
-<import from="../../zone/zone"></import>
-<import from="../../strings/stringcomponent"></import>
-<import from="../../stats/gen/statsmini"></import>
-<import from="../../stats/gen/statpropertyselector"></import>
+<import from="../zone/zone"></import>
+<import from="../strings/stringcomponent"></import>
+<import from="../stats/gen/statsmini"></import>
+<import from="../stats/gen/statpropertyselector"></import>
 
 <div if.bind="data && schema">
   <!-- hi prop grid -->
@@ -21,11 +21,9 @@
             <select case='ElementType' value.bind="data[prop]" change.trigger="onChange()">
               <option repeat.for="e of Enums.elements" model.bind="$index">${e}</option>
             </select>
-      
             <select case='ActorType' value.bind="data[prop]" change.trigger="onChange()">
               <option repeat.for="e of Enums.actors" model.bind="$index">${e}</option>
             </select>
-            
             <select case='MomentType' value.bind="data[prop]" change.trigger="onChange()">
               <option repeat.for="e of Enums.momentTypes" model.bind="$index">${e}</option>
             </select>
@@ -47,7 +45,7 @@
             <input case="AssetIID" type="text" value.bind="data[prop]" change.trigger="onChange()"/>
             <input case="AnimationSetIID" type="text" value.bind="data[prop]" change.trigger="onChange()"/>
       
-            <template default-case switch.bind="typof(prop)">
+            <template default-case switch.bind="typeof(prop)">
               <input case="number" type="number" value.bind="data[prop]"  change.trigger="onChange()"/>
               <!-- <div case="string"> -->
                 <!-- who even has a string property -->
@@ -63,8 +61,8 @@
                       <label class="btn btn-outline shadow-none" for="btn-check-outlined ${prop}">${characName}</label><br>
                   </div>
               </div>
-      
             </template>
+
           </template>
         </td>
       </tr>

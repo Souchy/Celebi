@@ -22,8 +22,11 @@ export class Condition {
     constructor(private readonly conditionController: ConditionModelController) {
     }
 
+    public get modelName() {
+        return this.model.conditionType.name;
+    }
     public get schema(): SchemaDescription {
-        let desc = Schemas.conditions.find(s => s.name == this.model.conditionType.name);
+        let desc = Schemas.conditions.find(s => s.name == this.modelName);
         return desc;
     }
 
