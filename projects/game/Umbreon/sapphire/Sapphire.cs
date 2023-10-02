@@ -81,16 +81,3 @@ public partial class Sapphire : Node3D
     public static int mapLengthZ = 15;
 
 }
-
-
-public static class Vector3Extensions
-{
-    public static Vector3 toGodot(this Vector3 fromBoard)
-    {
-        return new Vector3(fromBoard.X - (Sapphire.mapLengthX - 1) / 2, fromBoard.Y, fromBoard.Z - (Sapphire.mapLengthZ - 1) / 2);
-    }   
-    public static Vector3 fromGodot(this Vector3 fromGodot)
-    {
-        return new Vector3(fromGodot.X + (Sapphire.mapLengthX - 1) / 2, fromGodot.Y, fromGodot.Z + (Sapphire.mapLengthZ - 1) / 2);
-    }
-} 
