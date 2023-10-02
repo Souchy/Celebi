@@ -14,11 +14,13 @@
 <!-- Conditions -->
 <div>
   <h6>Triggerer Filter</h6>
-  <condition if.bind="model.triggererFilter" model.bind="model.triggererFilter" callbacksave.bind="() => save()"></condition>
-  <button else class="btn btn-floating">Set</button>
+  <condition parent.bind="model" parentPropertyName.bind="triggererFilter" model.bind="model.triggererFilter" callbacksave.bind="() => save()"></condition>
+  <!-- <condition if.bind="model.triggererFilter" model.bind="model.triggererFilter" callbacksave.bind="() => save()"></condition>
+  <button else class="btn btn-floating">Set</button> -->
   <h6>Holder Condition</h6>
-  <condition if.bind="model.holderCondition" model.bind="model.holderCondition" callbacksave.bind="() => save()"></condition>
-  <button else class="btn btn-floating">Set</button>
+  <condition parent.bind="model" parentPropertyName.bind="holderCondition" model.bind="model.holderCondition" callbacksave.bind="() => save()"></condition>
+  <!-- <condition if.bind="model.holderCondition" model.bind="model.holderCondition" callbacksave.bind="() => save()"></condition>
+  <button else class="btn btn-floating">Set</button> -->
 </div>
 
 <!-- Trigger OrderType -->
