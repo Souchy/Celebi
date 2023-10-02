@@ -4532,8 +4532,8 @@
           "Damage: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 20,\r\n  \"baseName\": \"Damage\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2020\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Damage\",\r\n  \"enumValueConstraint\": null\r\n};",
           "IndirectDamage: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 21,\r\n  \"baseName\": \"IndirectDamage\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2021\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.IndirectDamage\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Heal: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 22,\r\n  \"baseName\": \"Heal\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2022\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Heal\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Melee: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 23,\r\n  \"baseName\": \"Melee\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"conditionType\": {\r\n        \"id\": \"3\",\r\n        \"name\": \"DistanceCondition\",\r\n        \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.other.DistanceCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n      },\r\n      \"actorType\": 1,\r\n      \"comparator\": 5\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2023\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Melee\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Distance: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 24,\r\n  \"baseName\": \"Distance\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"conditionType\": {\r\n        \"id\": \"3\",\r\n        \"name\": \"DistanceCondition\",\r\n        \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.other.DistanceCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n      },\r\n      \"actorType\": 1,\r\n      \"comparator\": 2\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2024\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Distance\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Melee: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 23,\r\n  \"baseName\": \"Melee\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"conditionType\": {\r\n        \"id\": \"3\",\r\n        \"name\": \"DistanceCondition\"\r\n      },\r\n      \"actorType\": 1,\r\n      \"comparator\": 5\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2023\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Melee\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Distance: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 24,\r\n  \"baseName\": \"Distance\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"conditionType\": {\r\n        \"id\": \"3\",\r\n        \"name\": \"DistanceCondition\"\r\n      },\r\n      \"actorType\": 1,\r\n      \"comparator\": 2\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2024\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Distance\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Trap: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 25,\r\n  \"baseName\": \"Trap\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2025\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Trap\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Glyph: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 26,\r\n  \"baseName\": \"Glyph\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2026\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.Glyph\",\r\n  \"enumValueConstraint\": null\r\n};",
           "PenetrationPercent: Affinity = {\r\n  \"element\": 0,\r\n  \"category\": 2,\r\n  \"localId\": 27,\r\n  \"baseName\": \"PenetrationPercent\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"2027\",\r\n  \"nameModelUid\": \"CharacteristicType.Affinity.PenetrationPercent\",\r\n  \"enumValueConstraint\": null\r\n};",
@@ -4638,7 +4638,7 @@
         },
         "additionalProperties": false
       },
-      "CellTypeTypes": {
+      "CellTypes": {
         "enum": [
           "hole: CellType = {\r\n  \"id\": 0,\r\n  \"isWalkable\": false,\r\n  \"blocksLos\": false\r\n};",
           "floor: CellType = {\r\n  \"id\": 1,\r\n  \"isWalkable\": true,\r\n  \"blocksLos\": false\r\n};",
@@ -4782,7 +4782,7 @@
         },
         "additionalProperties": false
       },
-      "CharacteristicTypeTypes": {
+      "CharacteristicTypes": {
         "type": "string",
         "format": ""
       },
@@ -4816,30 +4816,26 @@
           "name": {
             "type": "string",
             "nullable": true
-          },
-          "schemaType": {
-            "type": "string",
-            "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "ConditionTypeTypes": {
+      "ConditionTypes": {
         "enum": [
-          "Group: ConditionType = {\r\n  \"id\": \"1\",\r\n  \"name\": \"GroupCondition\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.GroupCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "LineOfSight: ConditionType = {\r\n  \"id\": \"2\",\r\n  \"name\": \"LineOfSightCondition\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.other.LineOfSightCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "Distance: ConditionType = {\r\n  \"id\": \"3\",\r\n  \"name\": \"DistanceCondition\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.other.DistanceCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "CreatureModel: ConditionType = {\r\n  \"id\": \"101\",\r\n  \"name\": \"CreatureModelCondition\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.creature.CreatureModelCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "CreatureModelSame: ConditionType = {\r\n  \"id\": \"102\",\r\n  \"name\": \"CreatureModelCondition\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.creature.CreatureModelCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "CreatureCurrentTeam: ConditionType = {\r\n  \"id\": \"103\",\r\n  \"name\": \"CreatureCurrentTeamCondition\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.creature.CreatureCurrentTeamCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "CreatureOriginalTeam: ConditionType = {\r\n  \"id\": \"104\",\r\n  \"name\": \"CreatureOriginalTeamCondition\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.creature.CreatureOriginalTeamCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "CreatureIsSummon: ConditionType = {\r\n  \"id\": \"105\",\r\n  \"name\": \"CreatureOriginalTeamCondition\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.creature.CreatureOriginalTeamCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "CreatureStats: ConditionType = {\r\n  \"id\": \"106\",\r\n  \"name\": \"CreatureStatsCondition\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.creature.CreatureStatsCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "StatusModel: ConditionType = {\r\n  \"id\": \"201\",\r\n  \"name\": \"StatusModelCondition\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.status.StatusModelCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "StatusTeam: ConditionType = {\r\n  \"id\": \"202\",\r\n  \"name\": \"StatusTeamCondition\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.status.StatusTeamCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "StatusStats: ConditionType = {\r\n  \"id\": \"203\",\r\n  \"name\": \"StatusStatsCondition\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.status.StatusStatsCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "SpellModel: ConditionType = {\r\n  \"id\": \"301\",\r\n  \"name\": \"SpellModelCondition\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.spell.SpellModelCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "SpellStats: ConditionType = {\r\n  \"id\": \"303\",\r\n  \"name\": \"SpellStatsCondition\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.spell.SpellStatsCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};"
+          "Group: ConditionType = {\r\n  \"id\": \"1\",\r\n  \"name\": \"GroupCondition\"\r\n};",
+          "LineOfSight: ConditionType = {\r\n  \"id\": \"2\",\r\n  \"name\": \"LineOfSightCondition\"\r\n};",
+          "Distance: ConditionType = {\r\n  \"id\": \"3\",\r\n  \"name\": \"DistanceCondition\"\r\n};",
+          "CreatureModel: ConditionType = {\r\n  \"id\": \"101\",\r\n  \"name\": \"CreatureModelCondition\"\r\n};",
+          "CreatureModelSame: ConditionType = {\r\n  \"id\": \"102\",\r\n  \"name\": \"CreatureModelCondition\"\r\n};",
+          "CreatureCurrentTeam: ConditionType = {\r\n  \"id\": \"103\",\r\n  \"name\": \"CreatureCurrentTeamCondition\"\r\n};",
+          "CreatureOriginalTeam: ConditionType = {\r\n  \"id\": \"104\",\r\n  \"name\": \"CreatureOriginalTeamCondition\"\r\n};",
+          "CreatureIsSummon: ConditionType = {\r\n  \"id\": \"105\",\r\n  \"name\": \"CreatureOriginalTeamCondition\"\r\n};",
+          "CreatureStats: ConditionType = {\r\n  \"id\": \"106\",\r\n  \"name\": \"CreatureStatsCondition\"\r\n};",
+          "StatusModel: ConditionType = {\r\n  \"id\": \"201\",\r\n  \"name\": \"StatusModelCondition\"\r\n};",
+          "StatusTeam: ConditionType = {\r\n  \"id\": \"202\",\r\n  \"name\": \"StatusTeamCondition\"\r\n};",
+          "StatusStats: ConditionType = {\r\n  \"id\": \"203\",\r\n  \"name\": \"StatusStatsCondition\"\r\n};",
+          "SpellModel: ConditionType = {\r\n  \"id\": \"301\",\r\n  \"name\": \"SpellModelCondition\"\r\n};",
+          "SpellStats: ConditionType = {\r\n  \"id\": \"303\",\r\n  \"name\": \"SpellStatsCondition\"\r\n};"
         ],
         "type": "string",
         "format": ""
@@ -7230,8 +7226,8 @@
           "Damage: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 20,\r\n  \"baseName\": \"Damage\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3020\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Damage\",\r\n  \"enumValueConstraint\": null\r\n};",
           "IndirectDamage: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 21,\r\n  \"baseName\": \"IndirectDamage\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3021\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.IndirectDamage\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Heal: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 22,\r\n  \"baseName\": \"Heal\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3022\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Heal\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Melee: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 23,\r\n  \"baseName\": \"Melee\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"conditionType\": {\r\n        \"id\": \"3\",\r\n        \"name\": \"DistanceCondition\",\r\n        \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.other.DistanceCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n      },\r\n      \"actorType\": 1,\r\n      \"comparator\": 5\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3023\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Melee\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Distance: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 24,\r\n  \"baseName\": \"Distance\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"conditionType\": {\r\n        \"id\": \"3\",\r\n        \"name\": \"DistanceCondition\",\r\n        \"schemaType\": \"souchy.celebi.eevee.impl.shared.conditions.other.DistanceCondition, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n      },\r\n      \"actorType\": 1,\r\n      \"comparator\": 2\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3024\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Distance\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Melee: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 23,\r\n  \"baseName\": \"Melee\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"conditionType\": {\r\n        \"id\": \"3\",\r\n        \"name\": \"DistanceCondition\"\r\n      },\r\n      \"actorType\": 1,\r\n      \"comparator\": 5\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3023\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Melee\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "Distance: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 24,\r\n  \"baseName\": \"Distance\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [\r\n    {\r\n      \"distance\": 2,\r\n      \"conditionType\": {\r\n        \"id\": \"3\",\r\n        \"name\": \"DistanceCondition\"\r\n      },\r\n      \"actorType\": 1,\r\n      \"comparator\": 2\r\n    }\r\n  ],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3024\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Distance\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Trap: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 25,\r\n  \"baseName\": \"Trap\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3025\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Trap\",\r\n  \"enumValueConstraint\": null\r\n};",
           "Glyph: Resistance = {\r\n  \"element\": 0,\r\n  \"category\": 3,\r\n  \"localId\": 26,\r\n  \"baseName\": \"Glyph\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"3026\",\r\n  \"nameModelUid\": \"CharacteristicType.Resistance.Glyph\",\r\n  \"enumValueConstraint\": null\r\n};"
         ],
@@ -8775,23 +8771,19 @@
           "name": {
             "type": "string",
             "nullable": true
-          },
-          "schemaType": {
-            "type": "string",
-            "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "TriggerTypeTypes": {
+      "TriggerTypes": {
         "enum": [
-          "TriggerOnTimeline: TriggerType = {\r\n  \"id\": \"1\",\r\n  \"name\": \"TriggerOnTimeline\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.triggers.schemas.TriggerOnTimeline, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "TriggerOnSpellCast: TriggerType = {\r\n  \"id\": \"11\",\r\n  \"name\": \"TriggerOnSpell\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.triggers.schemas.TriggerOnSpell, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "TriggerOnSpellReceive: TriggerType = {\r\n  \"id\": \"12\",\r\n  \"name\": \"TriggerOnSpell\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.triggers.schemas.TriggerOnSpell, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "TriggerOnMove: TriggerType = {\r\n  \"id\": \"21\",\r\n  \"name\": \"TriggerOnMove\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.triggers.schemas.TriggerOnMove, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "TriggerOnCellMovement: TriggerType = {\r\n  \"id\": \"22\",\r\n  \"name\": \"TriggerOnCellMovement\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.triggers.schemas.TriggerOnCellMovement, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "TriggerOnEffectCast: TriggerType = {\r\n  \"id\": \"31\",\r\n  \"name\": \"TriggerOnEffectCast\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.triggers.schemas.TriggerOnEffectCast, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};",
-          "TriggerOnEffectReceive: TriggerType = {\r\n  \"id\": \"32\",\r\n  \"name\": \"TriggerOnEffectReceive\",\r\n  \"schemaType\": \"souchy.celebi.eevee.impl.shared.triggers.schemas.TriggerOnEffectReceive, Eevee, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\"\r\n};"
+          "TriggerOnTimeline: TriggerType = {\r\n  \"id\": \"1\",\r\n  \"name\": \"TriggerOnTimeline\"\r\n};",
+          "TriggerOnSpellCast: TriggerType = {\r\n  \"id\": \"11\",\r\n  \"name\": \"TriggerOnSpell\"\r\n};",
+          "TriggerOnSpellReceive: TriggerType = {\r\n  \"id\": \"12\",\r\n  \"name\": \"TriggerOnSpell\"\r\n};",
+          "TriggerOnMove: TriggerType = {\r\n  \"id\": \"21\",\r\n  \"name\": \"TriggerOnMove\"\r\n};",
+          "TriggerOnCellMovement: TriggerType = {\r\n  \"id\": \"22\",\r\n  \"name\": \"TriggerOnCellMovement\"\r\n};",
+          "TriggerOnEffectCast: TriggerType = {\r\n  \"id\": \"31\",\r\n  \"name\": \"TriggerOnEffectCast\"\r\n};",
+          "TriggerOnEffectReceive: TriggerType = {\r\n  \"id\": \"32\",\r\n  \"name\": \"TriggerOnEffectReceive\"\r\n};"
         ],
         "type": "string",
         "format": ""

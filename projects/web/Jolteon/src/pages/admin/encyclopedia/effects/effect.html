@@ -35,21 +35,26 @@
 
     <!-- properties section -->
     <div class="effectSection d-flex">
-      <div class="eblock" style="margin-right: 15px;">
+      <div class="eblock">
 
         <!-- click.trigger="clickMinimize()"  -->
         <h6 class="clickable" data-bs-toggle="collapse" data-bs-target="#collapseZone-${model.entityUid}">Zone</h6>
         <zone zone.bind="model.targetAcquisitionZone" uid.bind="model.entityUid" callbacksave.bind="() => onSave()"></zone>
       </div>
 
-      <div style="margin-right: 15px;">
-        <h6>Caster Condition</h6>
+      <div>
         <h6>Target Filter</h6>
+        <condition if.bind="model.targetFilter" model.bind="model.targetFilter" callbacksave.bind="() => save()"></condition>
+        <button else class="btn btn-floating">Set</button>
+        <h6>Source Condition</h6>
+        <condition if.bind="model.sourceCondition" model.bind="model.sourceCondition" callbacksave.bind="() => save()"></condition>
+        <button else class="btn btn-floating">Set</button>
+        <condition></condition>
       </div>
 
-      <div style="margin-right: 15px;">
+      <div>
         <h6>Triggers</h6>
-        <trigger-list effect.bind="model" callbacksave.bind="() => onSave()"></trigger-list>
+        <trigger-list effect.bind="model" callbacksave.bind="() => saveTriggerList()"></trigger-list>
       </div>
 
       <div class="eblock" style="flex-grow: 1;">

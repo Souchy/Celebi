@@ -21,17 +21,13 @@ export class TriggerList {
     }
 
     binding() {
-        this.printList();
+        // this.printList();
     }
 
-    public printList() { // printTrigger(trigger: ITriggerModel) {
-        // console.log(trigger);
+    public printList() {
         console.log("Triggers for effect " + this.effect.entityUid + " : ");
         console.log(this.effect.triggers);
     }
-    // public getSchemaName(trigger: ITriggerModel) {
-    //     return Schemas.triggers.find((schema) => schema.id == trigger.schema.triggerType.id);
-    // }
 
     public onAddTrigger(schema: SchemaDescription) {
         console.log("On add trigger to effect " + this.effect.entityUid)
@@ -39,6 +35,11 @@ export class TriggerList {
         this.triggerController.postNew({ schemaName: schema.name })
             .then(res => this.effect.triggers.push(res.data))
             .then(f => this.callbacksave());
+    }
+
+    public clearList() {
+        this.effect.triggers = [];
+        this.callbacksave();
     }
 
     public save() {

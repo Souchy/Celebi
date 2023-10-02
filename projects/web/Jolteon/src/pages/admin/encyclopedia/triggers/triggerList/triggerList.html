@@ -3,28 +3,18 @@
 <import from="../triggerModelSelector/triggerModelSelector"></import>
 
 <!-- <button class="btn btn-floating" click.trigger="clickAddTrigger()">+</button> -->
-<button class="btn btn-floating" data-bs-toggle="modal" data-bs-target="#triggerModal-${modaluid}">+</button>
-<modal id="triggerModal-${modaluid}" header="Add Trigger" close.bind=false footer.bind=false>
+<button class="btn btn-floating" data-bs-toggle="modal" data-bs-target="#triggerAddModal-${modaluid}">+</button>
+<modal id="triggerAddModal-${modaluid}" header="Add Trigger" close.bind=false footer.bind=false>
   <trigger-model-selector onselectcallback.bind="e => onAddTrigger(e)"></trigger-model-selector>
 </modal>
-hi ${effect.entityUid}
-<div innerhtml.bind="JSON.stringify(effect.triggers)"></div>
-
-<!-- <trigger repeat.for="trigger of effect.triggers" model.bind="trigger" callbacksave.bind="() => save()"></trigger> -->
 
 <button class="btn btn-floating" data-bs-toggle="modal" data-bs-target="#triggerModalClearList-${modaluid}">Clear</button>
 <modal id="triggerModalClearList-${modaluid}" header="Clear trigger list" close.bind=false callbackok.bind="() => clearList()"></modal>
 
 
 <div repeat.for="trigger of effect.triggers">
-    <div>
-        ${trigger.schema}, 
-        ${trigger.schema.triggerType}, 
-        ${trigger.schema.triggerType.id}, 
-        ${trigger.schema.triggerType.schemaType},
-        ${Schemas.triggers}
-    </div>
-    <modal id="triggerEditorModal-${modaluid}" header="Edit Trigger" close.bind=true footer.bind=true>
+    <button class="btn btn-outline mb-1" data-bs-toggle="modal" data-bs-target="#triggerEditorModal-${trigger.entityUid}">${trigger.schema.triggerType.name}</button>
+    <modal id="triggerEditorModal-${trigger.entityUid}" header="Edit Trigger" close.bind=true footer.bind=true>
         <trigger model.bind="trigger" callbacksave.bind="() => save()"></trigger>
     </modal>
 </div>

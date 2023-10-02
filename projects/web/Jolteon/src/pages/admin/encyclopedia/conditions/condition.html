@@ -1,23 +1,39 @@
+<import from="../../../../components/modal/modal"></import>
+<import from="./conditionModelSelector/conditionModelSelector"></import>
+<import from="../effects/properties/propertygrid"></import>
 
-<!-- Remove this condition from its parent -->
-<button if.bind="depth > 0">-</button>
+<template if.bind="model">
+  <!-- Remove this condition from its parent -->
+  <!-- <button if.bind="depth > 0">-</button> -->
 
-<!-- Actor Type: Wether the condition applies to the caster or the target -->
-<select>
-    <option></option>
-</select>
+  <!-- Actor Type: Wether the condition applies to the caster or the target -->
+  <select value.bind="model.actorType" change.trigger="onChange()">
+    <option repeat.for="e of Enums.actorTypes" model.bind="$index">${e}</option>
+  </select>
 
-<!-- Comparator Type: EQ, NE, GT, GE, LT, LE -->
-<select>
-    <option></option>
-</select>
+  <!-- Comparator Type: EQ, NE, GT, GE, LT, LE -->
+  <select value.bind="model.comparator" change.trigger="onChange()">
+    <option repeat.for="e of Enums.comparatorTypes" model.bind="$index">${e}</option>
+  </select>
 
-<!-- Group Type: AND / OR -->
-<select>
-    <option></option>
-</select>
+  <!-- schema properties -->
+  <propertygrid data.bind="model" schema.bind="schema" uid.bind="model.entityUid" callbacksave.bind="() => onSave()"></propertygrid>
 
-<!-- Add Child -->
-<button>+</button>
-<!-- Children -->
-<condition repeat.for="child of children" model.bind="child" depth.bind="depth+1"></condition>
+  <!-- Group Type: AND / OR -->
+  <!-- <select>
+        <option></option>
+    </select> -->
+
+  <!-- Add Child -->
+  <!-- <button>+</button> -->
+  <!-- Children -->
+  <!-- <condition repeat.for="child of children" model.bind="child" depth.bind="depth+1"></condition> -->
+</template>
+
+<template else>
+  <!-- <button class="btn btn-floating" click.trigger="() => callbackCreate()">Set</button> -->
+  <button class="btn btn-floating" data-bs-toggle="modal" data-bs-target="#effectSchemaTypeModal-${model.entityUid}">Set</button>
+  <modal id="effectSchemaTypeModal-${model.entityUid}" header="Change Schema Type" close.bind=false footer.bind=false>
+    <effect-model-selector onselectcallback.bind="e => create(e)"></effect-model-selector>
+  </modal>
+</template>

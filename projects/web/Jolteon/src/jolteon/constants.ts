@@ -1,4 +1,4 @@
-import { CellMovementType, MomentType, MoveType, StatValueType, TargetSamplingType } from "./services/api/data-contracts";
+import { CellMovementType, ConditionComparatorType, ConditionGroupType, MomentType, MoveType, StatValueType, TargetSamplingType } from "./services/api/data-contracts";
 import {
     ActorType, Affinity, AffinityTypes, Contextual, ContextualTypes, Direction8Type, Direction9Type, EffT, ElementType, OtherProperty, OtherPropertyTypes,
     Resistance, ResistanceTypes, Resource, ResourceProperty, ResourceTypes, Rotation4Type, SchemaDescription, SpellModelProperty,
@@ -74,6 +74,9 @@ export class Enums {
     public static readonly actorTypes = Object.keys(ActorType).filter(k => isNaN(+k));
     public static readonly samplingTypes = Object.keys(TargetSamplingType).filter(k => isNaN(+k));
     public static readonly statValueTypes = Object.keys(StatValueType).filter(k => isNaN(+k));
+    
+    public static readonly comparatorTypes = Object.keys(ConditionComparatorType).filter(k => isNaN(+k));
+    public static readonly conditionGroupTypes = Object.keys(ConditionGroupType).filter(k => isNaN(+k));
 
     public static readonly statusMergeStrategies = Object.keys(StatusMergeStrategy).filter(k => isNaN(+k));
     public static readonly statusUnbewitchStrategies = Object.keys(StatusUnbewitchStrategy).filter(k => isNaN(+k));
@@ -81,6 +84,7 @@ export class Enums {
     public static readonly momentTypes = Object.keys(MomentType).filter(k => isNaN(+k));
     public static readonly moveTypes = Object.keys(MoveType).filter(k => isNaN(+k));
     public static readonly cellMovementTypes = Object.keys(CellMovementType).filter(k => isNaN(+k));
+
     
 }
 

@@ -19,11 +19,15 @@
             <zone uid="${uid}-schema" case="IZone" zone.bind="data[prop]" callbacksave.bind="() => onChange()"></zone>
       
             <select case='ElementType' value.bind="data[prop]" change.trigger="onChange()">
-              <option repeat.for="ele of Enums.elements" model.bind="$index">${ele}</option>
+              <option repeat.for="e of Enums.elements" model.bind="$index">${e}</option>
             </select>
       
             <select case='ActorType' value.bind="data[prop]" change.trigger="onChange()">
-              <option repeat.for="act of Enums.actors" model.bind="$index">${act}</option>
+              <option repeat.for="e of Enums.actors" model.bind="$index">${e}</option>
+            </select>
+            
+            <select case='MomentType' value.bind="data[prop]" change.trigger="onChange()">
+              <option repeat.for="e of Enums.momentTypes" model.bind="$index">${e}</option>
             </select>
       
             <statsmini case="IStats"           stats.bind="data[prop]" callbacksavestat.bind="() => onChange()" characsallowed.bind="Characteristics.allSectioned"></statsmini>

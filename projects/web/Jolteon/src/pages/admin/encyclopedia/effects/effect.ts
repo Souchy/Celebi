@@ -106,6 +106,9 @@ export class Effect {
             .then(f => this.ea.publish("operation:saved"))
             // .then(this.handleUpdate);
     }
+    public saveTriggerList() {
+        this.effectController.putTriggers(this.model.entityUid, this.model.triggers);
+    }
     /** Add Trigger */
     // public onAddTrigger(schema: SchemaDescription) {
     //     this.triggerController.postNew({ schemaName: schema.name })

@@ -22,7 +22,7 @@ export default class PropertyGrid {
     }
 
     public get keys() {
-        return Object.keys(this.data).filter(k => k != "$type");
+        return Object.keys(this.data).filter(k => k != "$type" && k != "triggerType" && k != "conditionType");
     }
     public get values() {
         return Object.values(this.data);
