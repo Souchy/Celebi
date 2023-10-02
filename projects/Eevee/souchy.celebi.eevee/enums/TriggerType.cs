@@ -8,6 +8,7 @@ using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.impl.shared.triggers.schemas;
 using souchy.celebi.eevee.impl.shared.triggers;
 using souchy.celebi.eevee.face.shared.conditions;
+using Newtonsoft.Json;
 
 namespace souchy.celebi.eevee.enums
 {
@@ -48,6 +49,8 @@ namespace souchy.celebi.eevee.enums
     {
         public IID id { get; init; }
         public string name { get; init; }
+        [JsonIgnore]
+        [BsonIgnore]
         public Type schemaType { get; init; }
         public TriggerType(int id, Type schemaType)
         {

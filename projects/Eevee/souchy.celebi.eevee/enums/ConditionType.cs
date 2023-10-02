@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.shared.conditions;
@@ -33,6 +34,8 @@ namespace souchy.celebi.eevee.face.shared.conditions
     {
         public IID id { get; init; }
         public string name { get; init; }
+        [JsonIgnore]
+        [BsonIgnore]
         public Type schemaType { get; init; }
         public ConditionType(int id, Type schemaType) 
         {
