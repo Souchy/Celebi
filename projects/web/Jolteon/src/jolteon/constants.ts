@@ -1,4 +1,4 @@
-import { StatValueType, TargetSamplingType } from "./services/api/data-contracts";
+import { CellMovementType, MomentType, MoveType, StatValueType, TargetSamplingType } from "./services/api/data-contracts";
 import {
     ActorType, Affinity, AffinityTypes, Contextual, ContextualTypes, Direction8Type, Direction9Type, EffT, ElementType, OtherProperty, OtherPropertyTypes,
     Resistance, ResistanceTypes, Resource, ResourceProperty, ResourceTypes, Rotation4Type, SchemaDescription, SpellModelProperty,
@@ -77,6 +77,11 @@ export class Enums {
 
     public static readonly statusMergeStrategies = Object.keys(StatusMergeStrategy).filter(k => isNaN(+k));
     public static readonly statusUnbewitchStrategies = Object.keys(StatusUnbewitchStrategy).filter(k => isNaN(+k));
+    
+    public static readonly momentTypes = Object.keys(MomentType).filter(k => isNaN(+k));
+    public static readonly moveTypes = Object.keys(MoveType).filter(k => isNaN(+k));
+    public static readonly cellMovementTypes = Object.keys(CellMovementType).filter(k => isNaN(+k));
+    
 }
 
 export class Schemas {

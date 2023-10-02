@@ -52,7 +52,8 @@ public class StaticEnumSchemaFilter : ISchemaFilter
             }
             sc.Type = "string";
             sc.Format = string.Empty;
-            context.SchemaRepository.AddDefinition(context.Type.Name + "Types", sc);
+            var enumName = (context.Type.Name + "Types").Replace("TypeTypes", "Types");
+            context.SchemaRepository.AddDefinition(enumName, sc);
         }
     }
     public class EnumToStringConverter : JsonConverter
