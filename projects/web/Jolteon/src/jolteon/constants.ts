@@ -1,4 +1,4 @@
-import { CellMovementType, ConditionComparatorType, ConditionGroupType, MomentType, MoveType, StatValueType, TargetSamplingType } from "./services/api/data-contracts";
+import { CellMovementType, ConditionComparatorType, ConditionGroupType, MomentType, MoveType, StatValueType, TargetSamplingType, TriggerOrderType } from "./services/api/data-contracts";
 import {
     ActorType, Affinity, AffinityTypes, Contextual, ContextualTypes, Direction8Type, Direction9Type, EffT, ElementType, OtherProperty, OtherPropertyTypes,
     Resistance, ResistanceTypes, Resource, ResourceProperty, ResourceTypes, Rotation4Type, SchemaDescription, SpellModelProperty,
@@ -85,6 +85,8 @@ export class Enums {
     public static readonly moveTypes = Object.keys(MoveType).filter(k => isNaN(+k));
     public static readonly cellMovementTypes = Object.keys(CellMovementType).filter(k => isNaN(+k));
 
+    
+    public static readonly triggerOrderTypes = Object.keys(TriggerOrderType).filter(k => isNaN(+k));
     
 }
 

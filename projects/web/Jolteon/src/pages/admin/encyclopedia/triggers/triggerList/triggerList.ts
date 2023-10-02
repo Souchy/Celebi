@@ -45,7 +45,7 @@ export class TriggerList {
     }
 
     public save() {
-        this.callbacksave;
+        this.callbacksave();
     }
 
 }

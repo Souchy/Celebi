@@ -9,7 +9,8 @@ import { Schemas } from '../../../../jolteon/constants';
 import { TOAST_STATUS, Toast } from 'bootstrap-toaster';
 import { TriggerModelController } from '../../../../jolteon/services/api/TriggerModelController';
 
-@inject(IEventAggregator, IRouter) //, EffectPermanentController, PropertiesController) //, SpellModelController)
+@inject(IEventAggregator, EffectPermanentController)
+// @inject(IEventAggregator, IRouter, EffectPermanentController, PropertiesController, TriggerModelController) //, SpellModelController)
 export class Effect {
 
     @bindable
@@ -31,10 +32,10 @@ export class Effect {
 
     constructor(
         private readonly ea: IEventAggregator,
-        private readonly router: IRouter,
+        // private readonly router: IRouter,
         private readonly effectController: EffectPermanentController,
-        private readonly propertiesController: PropertiesController,
-        private readonly triggerController: TriggerModelController
+        // private readonly propertiesController: PropertiesController,
+        // private readonly triggerController: TriggerModelController
     ) {
     }
 
@@ -98,24 +99,18 @@ export class Effect {
         let eff: IEffect = JSON.parse(text);
         this.effectController.putEffect(this.model.entityUid, eff)
             .then(res => this.model = res.data)
-            .then(f => this.ea.publish("operation:saved"))
-            // .then(this.handleUpdate);
+            .then(res => this.handleSuccess(res), rej => this.handleFailure(rej))
     }
     public onChangeSchemaType(schema: SchemaDescription) {
         this.effectController.putSchema(this.model.entityUid, { schemaName: schema.name })
             .then(res => this.model = res.data)
-            .then(f => this.ea.publish("operation:saved"))
-            // .then(this.handleUpdate);
+            .then(res => this.handleSuccess(res), rej => this.handleFailure(rej))
     }
     public saveTriggerList() {
-        this.effectController.putTriggers(this.model.entityUid, this.model.triggers);
+        // console.log("effect save trigger list")
+        this.effectController.putTriggers(this.model.entityUid, this.model.triggers)
+            .then(res => this.handleSuccess(res), rej => this.handleFailure(rej))
     }
-    /** Add Trigger */
-    // public onAddTrigger(schema: SchemaDescription) {
-    //     this.triggerController.postNew({ schemaName: schema.name })
-    //         .then(res => this.model.triggers.push(res.data))
-    //         .then(f => this.onSave());
-    // }
     //#endregion
 
 
@@ -127,12 +122,16 @@ export class Effect {
             .then(
                 res => {
                     this.model = res.data
-                    this.ea.publish("operation:saved");
+                    this.handleSuccess(res);
                 },
-                rej => {
-                    this.ea.publish("operation:failed");
-                }
+                this.handleFailure
             );
+    }
+    public handleSuccess(res) {
+        this.ea.publish("operation:saved");
+    }
+    public handleFailure(rej) {
+        this.ea.publish("operation:failed");
     }
     //#endregion
 

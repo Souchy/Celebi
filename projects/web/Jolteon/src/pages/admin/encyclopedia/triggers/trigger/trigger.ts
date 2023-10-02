@@ -1,9 +1,11 @@
 import { bindable } from "aurelia";
 import { ITriggerModel, SchemaDescription } from "../../../../../jolteon/services/api/data-contracts";
-import { Schemas } from "../../../../../jolteon/constants";
+import { Enums, Schemas } from "../../../../../jolteon/constants";
 
 
 export class Trigger {
+    // hook enums
+    public readonly Enums: Enums = Enums;
 
     @bindable
     public model: ITriggerModel;
@@ -17,8 +19,8 @@ export class Trigger {
     }
 
     public binding() {
-        console.log("trigger: ");
-        console.log(this.model);
+        // console.log("trigger: ");
+        // console.log(this.model);
     }
 
     public get schema(): SchemaDescription {
@@ -27,6 +29,7 @@ export class Trigger {
     }
 
     public save() {
+        console.log("trigger save")
         this.callbacksave(); //this.model);
     }
 

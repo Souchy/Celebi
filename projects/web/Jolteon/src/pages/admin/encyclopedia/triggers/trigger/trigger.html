@@ -26,8 +26,8 @@
 <!-- Trigger OrderType -->
 <div>
   <h6>OrderType</h6>
-  <select>
-    <option></option>
+  <select value.bind="model.triggerOrderType" change.trigger="() => save()">
+    <option repeat.for="e of Enums.triggerOrderTypes" model.bind="$index">${e}</option>
   </select>
 </div>
 

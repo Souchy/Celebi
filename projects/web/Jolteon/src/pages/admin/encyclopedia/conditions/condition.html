@@ -5,12 +5,12 @@
 <template if.bind="model">
 
   <!-- Actor Type: Wether the condition applies to the caster or the target -->
-  <select value.bind="model.actorType" change.trigger="onChange()">
+  <select value.bind="model.actorType" change.trigger="save()">
     <option repeat.for="e of Enums.actorTypes" model.bind="$index">${e}</option>
   </select>
 
   <!-- Comparator Type: EQ, NE, GT, GE, LT, LE -->
-  <select value.bind="model.comparator" change.trigger="onChange()">
+  <select value.bind="model.comparator" change.trigger="save()">
     <option repeat.for="e of Enums.comparatorTypes" model.bind="$index">${e}</option>
   </select>
 
