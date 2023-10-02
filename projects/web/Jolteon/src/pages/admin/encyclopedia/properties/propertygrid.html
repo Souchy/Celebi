@@ -22,7 +22,7 @@
               <option repeat.for="e of Enums.elements" model.bind="$index">${e}</option>
             </select>
             <select case='ActorType' value.bind="data[prop]" change.trigger="onChange()">
-              <option repeat.for="e of Enums.actors" model.bind="$index">${e}</option>
+              <option repeat.for="e of Enums.actorTypes" model.bind="$index">${e}</option>
             </select>
             <select case='MomentType' value.bind="data[prop]" change.trigger="onChange()">
               <option repeat.for="e of Enums.momentTypes" model.bind="$index">${e}</option>

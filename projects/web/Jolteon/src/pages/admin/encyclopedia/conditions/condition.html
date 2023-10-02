@@ -3,18 +3,27 @@
 <import from="../../components/modelSelector/modelSelector"></import>
 
 <template if.bind="model">
+  <button class="btn btn-floating">Change Type</button>
+  <button class="btn btn-floating">Delete</button>
 
   <!-- Actor Type: Wether the condition applies to the caster or the target -->
-  <select value.bind="model.actorType" change.trigger="save()">
-    <option repeat.for="e of Enums.actorTypes" model.bind="$index">${e}</option>
-  </select>
+  <div>
+    Actor:
+    <select value.bind="model.actorType" change.trigger="save()">
+      <option repeat.for="e of Enums.actorTypes" model.bind="$index">${e}</option>
+    </select>
+  </div>
 
   <!-- Comparator Type: EQ, NE, GT, GE, LT, LE -->
-  <select value.bind="model.comparator" change.trigger="save()">
-    <option repeat.for="e of Enums.comparatorTypes" model.bind="$index">${e}</option>
-  </select>
+  <div>
+    Comparator:
+    <select value.bind="model.comparator" change.trigger="save()">
+      <option repeat.for="e of Enums.comparatorTypes" model.bind="$index">${e}</option>
+    </select>
+  </div>
 
   <!-- schema properties -->
+  ${schema.name} schema:
   <propertygrid data.bind="model" schema.bind="schema" uid.bind="model.entityUid" callbacksave.bind="() => onSave()">
     <!-- <div if.bind="modelName == 'GroupCondition'"> -->
     <!-- Remove this condition from its parent -->

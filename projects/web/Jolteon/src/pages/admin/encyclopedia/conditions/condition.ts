@@ -1,9 +1,11 @@
 import { Bindable, bindable } from "aurelia";
 import { ICondition, SchemaDescription } from "../../../../jolteon/services/api/data-contracts";
 import { ConditionModelController } from "../../../../jolteon/services/api/ConditionModelController";
-import { Schemas } from "../../../../jolteon/constants";
+import { Enums, Schemas } from "../../../../jolteon/constants";
 
 export class Condition {
+    // hook enums
+    public readonly Enums: Enums = Enums;
 
     @bindable
     public parent: any;
