@@ -25,6 +25,8 @@ export class Creature implements IRouteableComponent {
     public uid: string;
     //#endregion
 
+    @bindable
+    public callbackclickcreature = null;
     // binded view-model
     // public name: Stringcomponent;
     // public desc: Stringcomponent;
@@ -68,7 +70,11 @@ export class Creature implements IRouteableComponent {
 
     
     public clickCreature() {
-        this.router.load("/editor/creature/" + this.model.modelUid);
+        if(this.callbackclickcreature) {
+            this.callbackclickcreature();
+        } else {
+            this.router.load("/editor/creature/" + this.model.modelUid);
+        }
     }
 
     public clickRemove() {
