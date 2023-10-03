@@ -15,12 +15,8 @@
 <div>
   <h6>Triggerer Filter</h6>
   <condition parent.bind="model" parentPropertyName.bind="triggererFilter" model.bind="model.triggererFilter" callbacksave.bind="() => save()"></condition>
-  <!-- <condition if.bind="model.triggererFilter" model.bind="model.triggererFilter" callbacksave.bind="() => save()"></condition>
-  <button else class="btn btn-floating">Set</button> -->
   <h6>Holder Condition</h6>
   <condition parent.bind="model" parentPropertyName.bind="holderCondition" model.bind="model.holderCondition" callbacksave.bind="() => save()"></condition>
-  <!-- <condition if.bind="model.holderCondition" model.bind="model.holderCondition" callbacksave.bind="() => save()"></condition>
-  <button else class="btn btn-floating">Set</button> -->
 </div>
 
 <!-- Trigger OrderType -->
@@ -33,12 +29,20 @@
 
 <!-- Trigger Type -->
 <div class="eblock" style="flex-grow: 1;">
-  <h6>Schema ${model.entityUid}</h6>
-  <button class="btn btn-floating btn-changeSchema" data-bs-toggle="modal" data-bs-target="#triggerSchemaTypeModal-${model.entityUid}">
-    Change type
-  </button>
-  <modal id="triggerSchemaTypeModal-${model.entityUid}" header="Change Trigger schema type" close.bind=false footer.bind=false>
+  <h6>${model.schema.triggerType.name} schema</h6>
+
+  <!-- Delete -->
+  <button class="btn btn-floating" data-bs-toggle="modal" data-bs-target="#triggerDeleteModal-${model.entityUid}">Delete</button>
+  <modal id="triggerDeleteModal-${model.entityUid}" header="Delete Trigger" callbackok.bind="() => delete()">
+    Are you sure you want to delete ${model.schema.triggerType.name} ${model.entityUid}
+  </modal>
+
+  <!-- Change type -->
+  <button class="btn btn-floating btn-changeSchema" data-bs-toggle="modal" data-bs-target="#triggerChangeTypeModal-${model.entityUid}">Change type</button>
+  <modal id="triggerChangeTypeModal-${model.entityUid}" header="Change Trigger schema type" footer.bind=false>
     <model-selector schemas.bind="schemas" onselectcallback.bind="e => onChangeSchemaType(e)"></model-selector>
   </modal>
-  <propertygrid data.bind="model.schema" schema.bind="schema" uid.bind="model.entityUid" callbacksave.bind="() => onSave()"></propertygrid>
+
+  <!-- Properties -->
+  <propertygrid data.bind="model.schema" schema.bind="schema" uid.bind="model.entityUid" callbacksave.bind="() => save()"></propertygrid>
 </div>

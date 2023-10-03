@@ -44,6 +44,17 @@ export class TriggerList {
         this.callbacksave();
     }
 
+    public onDelete(trigger: ITriggerModel) {
+        let i = this.effect.triggers.indexOf(trigger);
+        this.effect.triggers.splice(i, 1);
+        this.save();
+    }
+
+    public onChangeType(trigger: ITriggerModel, e: SchemaDescription) {
+        this.triggerController.putSchema(this.effect.entityUid, trigger.entityUid, { schemaName: e.name})
+            .then(res => this.save());
+    }
+
     public save() {
         this.callbacksave();
     }

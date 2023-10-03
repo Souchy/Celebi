@@ -14,7 +14,7 @@
 
 <div repeat.for="trigger of effect.triggers">
     <button class="btn btn-outline mb-1" data-bs-toggle="modal" data-bs-target="#triggerEditorModal-${trigger.entityUid}">${trigger.schema.triggerType.name}</button>
-    <modal id="triggerEditorModal-${trigger.entityUid}" header="Edit Trigger ${trigger.entityUid}" close.bind=true footer.bind=true>
-        <trigger model.bind="trigger" callbacksave.bind="() => save()"></trigger>
+    <modal id="triggerEditorModal-${trigger.entityUid}" header="Edit Trigger ${trigger.entityUid}" close.bind=true footer.bind=false buttons.bind=false>
+        <trigger model.bind="trigger" callbacksave.bind="() => save()" callbackdelete.bind="() => onDelete(trigger)" callbackchange.bind="(e) => onChangeType(trigger, e)"></trigger>
     </modal>
 </div>

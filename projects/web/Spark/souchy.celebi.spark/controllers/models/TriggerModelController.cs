@@ -62,13 +62,13 @@ namespace souchy.celebi.spark.controllers.models
             if (effect is null)
                 return NoContent();
 
-            //var model = effect.Triggers.Values.First(t => t.en)
+            var model = effect.Triggers.Values.First(t => t.entityUid == triggerId);
+            model.schema = TriggerType.getByName(schemaName).createInstance();
 
-            //effect.Schema = Enum.Parse<EffT>(schemaName).CreateSchema();
-            //effect.modelUid = (IID) (int) Enum.Parse<EffT>(schemaName);
-            //var result = await _effects.UpdateAsync(effect.entityUid, effect);
-            //if (result.ModifiedCount > 0)
-            //    return Ok(effect);
+            var result = await _effects.UpdateAsync(effect.entityUid, effect);
+
+            if (result.ModifiedCount > 0)
+                return Ok(effect);
             return BadRequest();
         }
 
