@@ -44,7 +44,7 @@ namespace souchy.celebi.espeon.eevee.impl.controllers
             }
 
             // Apply timeline & proc Triggers
-            timeline.nextTurn();
+            timeline.nextTurn(action);
         }
 
         // only on server
