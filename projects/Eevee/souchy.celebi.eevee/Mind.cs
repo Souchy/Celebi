@@ -76,7 +76,7 @@ namespace souchy.celebi.eevee
                 };
 
                 checkTriggers(subActionEffect,
-                    new TriggerEvent(TriggerType.TriggerOnEffectCast, TriggerOrderType.Before, parentAction)
+                    new TriggerEvent(TriggerType.TriggerOnEffectCast, TriggerOrderType.Before)
                 );
 
                 IEffectScript script = parentAction.effect.GetScript(); // todo find script from  pair.effect.schema.GetType
@@ -87,7 +87,7 @@ namespace souchy.celebi.eevee
                 // -> but the returnValue can be used if the effect is an implementation of IValue for example.
                 // -> or if the effect is a child of a math MetaEffect
                 checkTriggers(subActionEffect,
-                    new TriggerEvent(TriggerType.TriggerOnEffectCast, TriggerOrderType.After, parentAction)
+                    new TriggerEvent(TriggerType.TriggerOnEffectCast, TriggerOrderType.After)
                 );
 
 
