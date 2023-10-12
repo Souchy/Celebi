@@ -18,6 +18,7 @@ using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.entity;
 using Microsoft.AspNetCore.Hosting;
 using souchy.celebi.eevee.enums.characteristics.creature;
+using souchy.celebi.eevee.impl.shared.triggers.schemas;
 
 namespace souchy.celebi.espeon.eevee.impl.controllers
 {

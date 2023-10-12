@@ -42,18 +42,13 @@ namespace souchy.celebi.eevee
             foreach (var pair in effectsWithTargets)
             {
                 //TODO: use EffectInstance
-                var sub = new SubActionEffect()
+                var sub = new SubActionEffect(action)
                 {
-                    fight = action.fight,
-                    caster = action.caster,
-                    targetCell = action.targetCell,
-                    parent = action,
-                    effect = pair.effect, //child,
+                    effect = pair.effect,
                     boardTargets = pair.targets,
-                    depthLevel = action.depthLevel + 1 
                 };
                 // apply to each target
-                applyEffect(sub); //, pair.effect, pair.targets);
+                applyEffect(sub);
             }
         }
 
@@ -65,14 +60,14 @@ namespace souchy.celebi.eevee
                 var currentTargetCell = parentAction.fight.board.GetCells().First(c => c.position.equals(target.position));
 
                 //TODO: make a copy of the effect
-                SubActionEffectTarget subActionEffect = new()
+                SubActionEffectTarget subActionEffect = new(parentAction)
                 {
-                    fight = parentAction.fight,
-                    caster = parentAction.caster,
+                    //fight = parentAction.fight,
+                    //caster = parentAction.caster,
+                    //parent = parentAction,
                     targetCell = currentTargetCell.entityUid,
-                    parent = parentAction,
                     effect = parentAction.effect, // TODO MAKE A COPY
-                    depthLevel = parentAction.depthLevel // each target has the same level as the effect that applies to all of them
+                    //depthLevel = parentAction.depthLevel // each target has the same level as the effect that applies to all of them
                 };
 
                 checkTriggers(subActionEffect,
@@ -150,20 +145,20 @@ namespace souchy.celebi.eevee
             // Check every status
             foreach (IStatusInstance status in parentAction.fight.statuses.Values.SelectMany(sc => sc.instances))
             {
-                // Check status triggers
-                var triggeredEffects = status.checkTriggers(parentAction, triggerEvent);
-                // Apply every triggered effect
-                foreach (IEffect triggeredEffect in triggeredEffects)
+                var statusAction = new SubActionStatus(parentAction)
                 {
-                    IPosition targetPosition = parentAction.fight.cells.Get(parentAction.targetCell).position;
-                    var targets = triggeredEffect.GetPossibleBoardTargets(parentAction, targetPosition);
-                    var sub = new SubActionEffect()
+                    statusInstance = status
+                };
+
+                // Check status triggers
+                var triggeredEffects = status.checkTriggers(statusAction, triggerEvent);
+                // Apply every triggered effect
+                foreach (IEffectInstance triggeredEffect in triggeredEffects)
+                {
+                    IPosition targetPosition = statusAction.fight.cells.Get(statusAction.targetCell).position;
+                    var targets = triggeredEffect.GetPossibleBoardTargets(statusAction, targetPosition);
+                    var sub = new SubActionEffect(statusAction)
                     {
-                        fight = parentAction.fight,
-                        caster = parentAction.caster,
-                        targetCell = parentAction.targetCell,
-                        parent = parentAction,
-                        depthLevel = parentAction.depthLevel + 1,
                         effect = triggeredEffect,
                         boardTargets = targets
                     };
