@@ -84,7 +84,7 @@ namespace souchy.celebi.eevee.face.shared.zones
         /// Get the cells touched by this area at target point
         /// </summary>
         public IArea getArea(IFight fight, IPosition targetCell);
-
+        public IZone copy();
     }
 
     //public interface ZoneMulti : IZone
