@@ -2,6 +2,7 @@
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.statuses;
+using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.shared.triggers;
 using System;
@@ -32,6 +33,14 @@ namespace souchy.celebi.eevee.impl.shared.conditions.status
             IStatusContainer status = targ.GetStatuses().FirstOrDefault(s => s.modelUid == statusModelId);
 
             return status != null;
+        }
+
+        public override ICondition copyImplementation()
+        {
+            var copy = new StatusModelCondition();
+            copy.statusModelId = statusModelId;
+            copy.boardTargetType = boardTargetType; 
+            return copy;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.impl.shared.triggers;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,13 @@ namespace souchy.celebi.eevee.impl.shared.conditions.other
             //.length();
 
             return this.comparator.check(actualDistance, distance);
+        }
+
+        public override ICondition copyImplementation()
+        {
+            var copy = new DistanceCondition();
+            copy.distance = distance;
+            return copy;
         }
     }
 

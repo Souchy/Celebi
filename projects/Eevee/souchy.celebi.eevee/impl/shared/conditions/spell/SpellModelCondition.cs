@@ -1,6 +1,7 @@
 ﻿using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.shared.triggers;
 using System;
@@ -29,5 +30,13 @@ namespace souchy.celebi.eevee.impl.shared.conditions.spell
 
             return spell != null;
         }
+
+        public override ICondition copyImplementation()
+        {
+            var copy = new SpellModelCondition();
+            copy.spellModelId = spellModelId;
+            return copy;
+        }
+
     }
 }

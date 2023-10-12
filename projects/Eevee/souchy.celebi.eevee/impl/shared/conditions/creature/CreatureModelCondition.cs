@@ -1,7 +1,9 @@
 using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.util;
+using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.shared.triggers;
 
 namespace souchy.celebi.eevee.impl.shared.conditions.creature
@@ -39,5 +41,14 @@ namespace souchy.celebi.eevee.impl.shared.conditions.creature
                 }
             }
         }
+
+        public override ICondition copyImplementation()
+        {
+            var copy = new CreatureModelCondition();
+            copy.sameAsSource = sameAsSource;
+            copy.creatureModelId = creatureModelId;
+            return copy;
+        }
+
     }
 }
