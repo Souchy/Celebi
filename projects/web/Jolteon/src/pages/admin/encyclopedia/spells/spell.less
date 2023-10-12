@@ -17,4 +17,29 @@ spell {
     .mainSpellProperties>div {
         margin-right: 15px;
     }
+
+    .spellTitle {
+        display: flex;
+        flex-grow: 1;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.30);
+        margin-bottom: 8px;
+
+        h2 {
+            // word-wrap: break-word;
+            word-wrap: normal;
+            padding-right: 8px;
+            margin-right: auto;
+            margin-bottom: 0px;
+        }
+
+        h2:not(:first-of-type) {
+            opacity: 0.4;
+            color: var(--front0);
+        }
+
+        h2:last-of-type {
+            flex-grow: 1;
+            // opacity: 0.3;
+        }
+    }
 }
