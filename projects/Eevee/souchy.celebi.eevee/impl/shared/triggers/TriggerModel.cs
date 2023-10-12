@@ -15,7 +15,7 @@ namespace souchy.celebi.eevee.impl.shared.triggers
         /// <summary>
         /// Trigger Data
         /// </summary>
-        public TriggerSchema schema { get; set; }
+        public ITriggerSchema schema { get; set; }
         public TriggerOrderType triggerOrderType { get; set; } = TriggerOrderType.After;
         public IZone triggerZone { get; set; }  // only targets in the zone can trigger the TriggerModel
         public ICondition triggererFilter { get; set; } // who can trigger the triggerModel
@@ -26,6 +26,17 @@ namespace souchy.celebi.eevee.impl.shared.triggers
         {
             entityUid = Eevee.RegisterIIDTemporary()
         };
+
+        public ITriggerModel copy()
+        {
+            var copy = TriggerModel.Create();
+            copy.triggerOrderType = triggerOrderType;
+            copy.triggerZone = triggerZone.copy();
+            copy.triggererFilter = triggererFilter.copy();
+            copy.HolderCondition = HolderCondition.copy();
+            copy.schema = schema.copy();
+            return copy;
+        }
 
         public bool checkTrigger(IAction action, TriggerEvent triggerEvent)
         {
@@ -56,6 +67,7 @@ namespace souchy.celebi.eevee.impl.shared.triggers
         public void Dispose()
         {
         }
+
     }
 
     public record TriggerEvent(
@@ -69,6 +81,7 @@ namespace souchy.celebi.eevee.impl.shared.triggers
     {
         public TriggerType triggerType { get; init; }
         public bool checkTrigger(IAction action, TriggerEvent triggerEvent);
+        public ITriggerSchema copy();
     }
 
     public abstract class TriggerSchema : ITriggerSchema
@@ -79,6 +92,11 @@ namespace souchy.celebi.eevee.impl.shared.triggers
             this.triggerType = TriggerType.getByType(GetType());
         }
         public abstract bool checkTrigger(IAction action, TriggerEvent triggerEvent);
+
+        public ITriggerSchema copy()
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }
