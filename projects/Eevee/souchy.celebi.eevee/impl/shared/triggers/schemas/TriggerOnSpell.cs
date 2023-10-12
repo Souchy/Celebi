@@ -1,4 +1,5 @@
-﻿using souchy.celebi.eevee.face.util;
+﻿using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.face.util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,16 @@ namespace souchy.celebi.eevee.impl.shared.triggers.schemas
     }
     public class TriggerOnSpellCast : TriggerOnSpell
     {
+        public override bool checkTrigger(IAction action, TriggerEvent triggerEvent)
+        {
+            return true;
+        }
     }
     public class TriggerOnSpellReceive : TriggerOnSpell
     {
+        public override bool checkTrigger(IAction action, TriggerEvent triggerEvent)
+        {
+            return true;
+        }
     }
 }

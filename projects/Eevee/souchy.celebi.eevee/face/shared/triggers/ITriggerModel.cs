@@ -3,6 +3,7 @@ using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.shared.zones;
+using souchy.celebi.eevee.impl.objects.zones;
 using souchy.celebi.eevee.impl.shared.triggers;
 
 namespace souchy.celebi.eevee.face.shared.triggers
@@ -38,26 +39,8 @@ namespace souchy.celebi.eevee.face.shared.triggers
         /// </summary>
         public ICondition HolderCondition { get; set; }
 
-        public bool checkTrigger(IAction action, TriggerEvent triggerEvent)
-        {
-            var caster = action.fight.creatures.Get(action.caster); //action.fight.GetBoardEntity(action.caster);
-            var targetCell = action.fight.GetBoardEntity(action.targetCell); //.cells.Get(action.targetCell);
+        public bool checkTrigger(IAction action, TriggerEvent triggerEvent);
 
-            if (!HolderCondition.check(action, triggerEvent, caster, targetCell))
-                return false;
-            if (!triggererFilter.check(action, triggerEvent, caster, targetCell))
-                return false;
-
-            var area = triggerZone.getArea(action.fight, targetCell.position);
-            var isCasterInArea = area.Cells.Any(c => c.position == caster.position);
-            if (!isCasterInArea) 
-                return false;
-
-            var isRightType = this.schema.triggerType == triggerEvent.type && this.triggerOrderType == triggerEvent.orderType;
-            if (!isRightType) 
-                return false;
-
-            return true;
-        }
+        public ITriggerModel copy();
     }
 }

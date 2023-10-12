@@ -27,6 +27,32 @@ namespace souchy.celebi.eevee.impl.shared.triggers
             entityUid = Eevee.RegisterIIDTemporary()
         };
 
+        public bool checkTrigger(IAction action, TriggerEvent triggerEvent)
+        {
+            var caster = action.fight.creatures.Get(action.caster);
+            var targetCell = action.fight.GetBoardEntity(action.targetCell);
+
+            if (HolderCondition != null && !HolderCondition.check(action, triggerEvent, caster, targetCell))
+                return false;
+            if (triggererFilter != null && !triggererFilter.check(action, triggerEvent, caster, targetCell))
+                return false;
+
+            if (triggerZone != null)
+            {
+                var area = triggerZone.getArea(action.fight, targetCell.position);
+                var isCasterInArea = area.Cells.Any(c => c.position == caster.position);
+                if (!isCasterInArea)
+                    return false;
+            }
+
+            var isRightType = this.schema.triggerType == triggerEvent.type && this.triggerOrderType == triggerEvent.orderType;
+            if (!isRightType)
+                return false;
+
+
+            return this.schema.checkTrigger(action, triggerEvent);
+        }
+
         public void Dispose()
         {
         }
@@ -42,6 +68,7 @@ namespace souchy.celebi.eevee.impl.shared.triggers
     public interface ITriggerSchema
     {
         public TriggerType triggerType { get; init; }
+        public bool checkTrigger(IAction action, TriggerEvent triggerEvent);
     }
 
     public abstract class TriggerSchema : ITriggerSchema
@@ -51,6 +78,7 @@ namespace souchy.celebi.eevee.impl.shared.triggers
         {
             this.triggerType = TriggerType.getByType(GetType());
         }
+        public abstract bool checkTrigger(IAction action, TriggerEvent triggerEvent);
     }
 
 }

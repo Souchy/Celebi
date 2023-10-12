@@ -1,4 +1,5 @@
-﻿using souchy.celebi.eevee.face.values;
+﻿using souchy.celebi.eevee.face.objects;
+using souchy.celebi.eevee.face.values;
 using souchy.celebi.eevee.neweffects.impl;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,17 @@ namespace souchy.celebi.eevee.impl.shared.triggers.schemas
     }
     public class TriggerOnEffectCast : TriggerOnEffect
     {
+        public override bool checkTrigger(IAction action, TriggerEvent triggerEvent)
+        {
+            return true;
+        }
     }
     public class TriggerOnEffectReceive : TriggerOnEffect
     {
+        public override bool checkTrigger(IAction action, TriggerEvent triggerEvent)
+        {
+            return true;
+        }
     }
 
 

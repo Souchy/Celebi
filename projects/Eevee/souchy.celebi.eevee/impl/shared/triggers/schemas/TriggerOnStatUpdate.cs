@@ -1,4 +1,5 @@
 ﻿using souchy.celebi.eevee.enums.characteristics;
+using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.stats;
 using System;
 using System.Collections.Generic;
@@ -17,10 +18,20 @@ namespace souchy.celebi.eevee.impl.shared.triggers.schemas
     {
         public IStat valueMin { get; set; }
         public IStat valueMax { get; set; }
+
+        public override bool checkTrigger(IAction action, TriggerEvent triggerEvent)
+        {
+            return true;
+        }
     }
     public class TriggerOnStatUpdateBool : TriggerOnStatUpdate
     {
         public IStat valueMatch { get; set; }
+
+        public override bool checkTrigger(IAction action, TriggerEvent triggerEvent)
+        {
+            return true;
+        }
     }
 
 }
