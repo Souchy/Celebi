@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 namespace souchy.celebi.eevee.impl.shared.triggers.schemas
 {
 
+    public record TriggerEventTimeline(TriggerOrderType orderType, MomentType moment) : TriggerEvent(TriggerType.TriggerOnTimeline, orderType)
+    {
+    }
+
     public class TriggerOnTimeline : TriggerSchema
     {
         public MomentType moment { get; set; } = MomentType.TurnStart;

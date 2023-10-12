@@ -34,8 +34,8 @@ namespace souchy.celebi.eevee.impl.shared.triggers
 
     public record TriggerEvent(
         TriggerType type, // what you react to (spellcast, passturn, ...)
-        TriggerOrderType orderType, // when you react to it (before, after)
-        IAction action //IEntityModeled entity = null // could be Effect, Spell, ... (OnEffectX, OnCastX...)
+        TriggerOrderType orderType // when you react to it (before, after)
+        //IAction action //IEntityModeled entity = null // could be Effect, Spell, ... (OnEffectX, OnCastX...)
     );
 
 
