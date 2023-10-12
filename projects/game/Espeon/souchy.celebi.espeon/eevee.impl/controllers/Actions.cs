@@ -29,6 +29,24 @@ namespace souchy.celebi.espeon.eevee.impl.controllers
 
         }
 
+        public void passTurn(IActionPass action)
+        {
+            IFight fight = action.fight;
+            ITimeline timeline = fight.timeline;
+
+            // Check that the current player and current creature match the action
+            var currentCreature = timeline.getCurrentCreature();
+            var currentPlayer = timeline.getCurrentPlayer();
+            if (currentCreature.entityUid != action.caster ||
+                currentPlayer.entityUid != action.player.entityUid)
+            {
+                return;
+            }
+
+            // Apply timeline & proc Triggers
+            timeline.nextTurn();
+        }
+
         // only on server
         public void castSpell(IActionSpell action) //IID source,  IID target, IID spellId)
         {
