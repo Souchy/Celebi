@@ -19,15 +19,15 @@ namespace souchy.celebi.eevee.impl.objects.statuses
         public ObjectId fightUid { get; set; }
         public IID modelUid { get; set; }
 
-        public IID sourceSpellModel { get; set; }
-        public IID sourceEffectPermanent { get; set; }
+        public ObjectId sourceSpellModel { get; set; }
+        public ObjectId sourceEffectPermanent { get; set; }
         public ObjectId sourceCreature { get; set; }
         public ObjectId holderEntity { get; set; }
         public ObjectId statsId { get; set; }
 
         public List<IStatusInstance> instances { get; set; } = new List<IStatusInstance>();
 
-        protected StatusContainer(ObjectId id, ObjectId fightUid)
+        protected StatusContainer(ObjectId fightUid, ObjectId id)
         {
             this.entityUid = id;
             this.fightUid = fightUid;

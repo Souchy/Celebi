@@ -64,6 +64,20 @@ namespace souchy.celebi.eevee.face.objects
         public IAction copy();
         public ICreature getCaster() => fight.creatures.Get(caster);
         public ICell getCell() => fight.cells.Get(targetCell);
+
+        public ObjectId? getClosestSpellSource()
+        {
+            if (parent is IActionSpell actionSpell)
+            {
+                return actionSpell.spell;
+            }
+            else
+            if (parent is SubActionStatus actionStatus)
+            {
+                return actionStatus.statusInstance.GetContainer().sourceSpellModel;
+            }
+            return parent?.getClosestSpellSource();
+        }
     }
     /// <summary>
     /// <inheritdoc/>
