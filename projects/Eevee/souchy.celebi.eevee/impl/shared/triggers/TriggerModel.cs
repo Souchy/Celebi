@@ -93,10 +93,7 @@ namespace souchy.celebi.eevee.impl.shared.triggers
         }
         public abstract bool checkTrigger(IAction action, TriggerEvent triggerEvent);
 
-        public ITriggerSchema copy()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract ITriggerSchema copy();
     }
 
 }

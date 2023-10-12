@@ -29,6 +29,13 @@ namespace souchy.celebi.eevee.impl.shared.triggers.schemas
 
             return timelineEvent.moment.Equals(moment);
         }
+
+        public override ITriggerSchema copy()
+        {
+            var copy = new TriggerOnTimeline();
+            copy.moment = this.moment;
+            return copy;
+        }
     }
 
 }

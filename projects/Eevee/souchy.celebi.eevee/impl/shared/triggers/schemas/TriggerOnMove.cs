@@ -19,6 +19,13 @@ namespace souchy.celebi.eevee.impl.shared.triggers.schemas
         {
             return true;
         }
+
+        public override ITriggerSchema copy()
+        {
+            var copy = new TriggerOnMove();
+            copy.moveType = moveType;
+            return copy;
+        }
     }
 
     public class TriggerOnCellMovement : TriggerSchema
@@ -33,6 +40,13 @@ namespace souchy.celebi.eevee.impl.shared.triggers.schemas
         public override bool checkTrigger(IAction action, TriggerEvent triggerEvent)
         {
             return true;
+        }
+
+        public override ITriggerSchema copy()
+        {
+            var copy = new TriggerOnCellMovement();
+            copy.moveType = moveType;
+            return copy;
         }
     }
 }

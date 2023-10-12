@@ -19,12 +19,28 @@ namespace souchy.celebi.eevee.impl.shared.triggers.schemas
         {
             return true;
         }
+
+        public override ITriggerSchema copy()
+        {
+            var copy = new TriggerOnSpellCast();
+            copy.spellIdsExclude.AddRange(spellIdsExclude);
+            copy.spellIdsInclude.AddRange(spellIdsInclude);
+            return copy;
+        }
     }
     public class TriggerOnSpellReceive : TriggerOnSpell
     {
         public override bool checkTrigger(IAction action, TriggerEvent triggerEvent)
         {
             return true;
+        }
+
+        public override ITriggerSchema copy()
+        {
+            var copy = new TriggerOnSpellReceive();
+            copy.spellIdsExclude.AddRange(spellIdsExclude);
+            copy.spellIdsInclude.AddRange(spellIdsInclude);
+            return copy;
         }
     }
 }

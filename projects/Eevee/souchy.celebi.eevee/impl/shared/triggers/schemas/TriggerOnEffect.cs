@@ -21,12 +21,30 @@ namespace souchy.celebi.eevee.impl.shared.triggers.schemas
         {
             return true;
         }
+        public override ITriggerSchema copy()
+        {
+            var copy = new TriggerOnEffectCast();
+            foreach (var e in effectTypesExclude)
+                copy.effectTypesExclude.Add(e.copy());
+            foreach (var e in effectTypesInclude)
+                copy.effectTypesInclude.Add(e.copy());
+            return copy;
+        }
     }
     public class TriggerOnEffectReceive : TriggerOnEffect
     {
         public override bool checkTrigger(IAction action, TriggerEvent triggerEvent)
         {
             return true;
+        }
+        public override ITriggerSchema copy()
+        {
+            var copy = new TriggerOnEffectReceive();
+            foreach (var e in effectTypesExclude)
+                copy.effectTypesExclude.Add(e.copy());
+            foreach (var e in effectTypesInclude)
+                copy.effectTypesInclude.Add(e.copy());
+            return copy;
         }
     }
 
@@ -45,6 +63,13 @@ namespace souchy.celebi.eevee.impl.shared.triggers.schemas
         ///     (match the properties names?)
         /// </summary>
         public DataType valueFilter { get; set; }
+        public TriggerOnEffectFilter copy()
+        {
+            var copy = new TriggerOnEffectFilter();
+            copy.effectType = effectType;
+            copy.valueFilter = valueFilter.copy();
+            return copy;
+        }
     }
 
 }

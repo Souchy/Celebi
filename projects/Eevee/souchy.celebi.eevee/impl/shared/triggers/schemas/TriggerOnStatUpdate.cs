@@ -23,6 +23,15 @@ namespace souchy.celebi.eevee.impl.shared.triggers.schemas
         {
             return true;
         }
+
+        public override ITriggerSchema copy()
+        {
+            var copy = new TriggerOnStatUpdateSimple();
+            copy.statId = this.statId;
+            copy.valueMin = this.valueMin;
+            copy.valueMax = this.valueMax;
+            return copy;
+        }
     }
     public class TriggerOnStatUpdateBool : TriggerOnStatUpdate
     {
@@ -31,6 +40,14 @@ namespace souchy.celebi.eevee.impl.shared.triggers.schemas
         public override bool checkTrigger(IAction action, TriggerEvent triggerEvent)
         {
             return true;
+        }
+
+        public override ITriggerSchema copy()
+        {
+            var copy = new TriggerOnStatUpdateBool();
+            copy.statId = this.statId;
+            copy.valueMatch = this.valueMatch.copy();
+            return copy;
         }
     }
 
