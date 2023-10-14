@@ -122,10 +122,10 @@ namespace souchy.celebi.eevee.neweffects.impl
             /// Ex: rogue cast détonateur on bomb, bomb cast explosion. <br></br>
             /// Ex: Toxic breath explodes flask, does aoe damage, flask cast toxic breath on near flasks, explodes them for aoe damage. this chains.
             /// </summary>
-            CastSubSpell,   // détonateur -> bombe -> explosion (changeSourceActor -> castSubSpell)
-            RandomChild,
-            RandomPointsInZone, // take a acquisitionzone then take only x random targets in that zone
-            EmptyText,
+            CastSubSpell = 43,   // détonateur -> bombe -> explosion (changeSourceActor -> castSubSpell)
+            RandomChild = 44,
+            //RandomPointsInZone, // take a acquisitionzone then take only x random targets in that zone
+            EmptyText = 46,
         #endregion
 
         #region Status
