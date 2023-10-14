@@ -19,6 +19,13 @@ namespace souchy.celebi.eevee.enums.characteristics.other
         {
             entityUid = Eevee.RegisterIIDTemporary()
         };
+
+        protected override IStats copyImplementation(bool anonymous = false)
+        {
+            if (anonymous) return new CreatureStats();
+            else return CreatureStats.Create();
+        }
+
         public void setStarterCurrentValues()
         {
             foreach (var res in Enum.GetValues<ResourceEnum>())

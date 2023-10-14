@@ -20,6 +20,13 @@ namespace souchy.celebi.eevee.enums.characteristics.other
         {
             entityUid = Eevee.RegisterIIDTemporary()
         };
+
+        protected override IStats copyImplementation(bool anonymous = false)
+        {
+            if (anonymous) return new SpellStats();
+            else return SpellStats.Create();
+        }
+
         // charges remaining
         // cd remaining
         // # casts per entity this turn
