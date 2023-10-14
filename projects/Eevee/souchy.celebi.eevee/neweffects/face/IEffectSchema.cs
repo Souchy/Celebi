@@ -16,5 +16,6 @@ namespace souchy.celebi.eevee.neweffects.face
                 return Enum.Parse<EffT>(this.GetType().Name);
             }
         }
-    }
+        public IEffectSchema copy();
+}
 }

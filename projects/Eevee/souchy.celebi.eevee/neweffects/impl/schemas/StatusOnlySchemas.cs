@@ -8,6 +8,7 @@ using souchy.celebi.eevee.face.values;
 using souchy.celebi.eevee.impl.objects.zones;
 using souchy.celebi.eevee.impl.stats;
 using souchy.celebi.eevee.neweffects.face;
+using System.Xml.Linq;
 
 namespace souchy.celebi.eevee.neweffects.impl.schemas
 {
@@ -15,20 +16,46 @@ namespace souchy.celebi.eevee.neweffects.impl.schemas
     public record BuildObstacle() : IEffectSchema {
         //obstacle3dModelUid
         public AssetIID modelId { get; set; } = new();
+
+        public IEffectSchema copy() => new BuildObstacle()
+        {
+            modelId = modelId,
+        };
     }
-    public record DestroyObstacle() : IEffectSchema { }
-    public record DigHole() : IEffectSchema { }
-    public record FillHole() : IEffectSchema { }
+    public record DestroyObstacle() : IEffectSchema
+    {
+        public IEffectSchema copy() => new DestroyObstacle();
+    }
+    public record DigHole() : IEffectSchema
+    {
+        public IEffectSchema copy() => new DigHole();
+    }
+    public record FillHole() : IEffectSchema
+    {
+        public IEffectSchema copy() => new FillHole();
+    }
     #endregion
 
     #region Creature
     public record AddStats() : IEffectSchema
     {
         public IStats stats { get; set; } = Stats.Create();
+        public int percentVariance { get; set; } = 0;
+        public IEffectSchema copy() => new AddStats()
+        {
+            stats = stats.copy(),
+            percentVariance = percentVariance,
+        };
     }
     public record AddStatsPercent() : IEffectSchema
     {
         public IStats statsPercent { get; set; } = Stats.Create();
+        public int percentVariance { get; set; } = 0;
+        public IEffectSchema copy() => new AddStatsPercent()
+        {
+            statsPercent = statsPercent.copy(),
+            percentVariance = percentVariance,
+        };
     }
     /// <summary>
     /// Take x% of "from" stats and add them as y% of "to" stats.
@@ -40,6 +67,11 @@ namespace souchy.celebi.eevee.neweffects.impl.schemas
     {
         public IStats statsFrom { get; set; } = Stats.Create();
         public IStats statsTo { get; set; } = Stats.Create();
+        public IEffectSchema copy() => new AddStatsPerStat()
+        {
+            statsFrom = statsFrom.copy(),
+            statsTo = statsTo.copy(),
+        };
     }
     
     // maybe?
@@ -81,6 +113,11 @@ namespace souchy.celebi.eevee.neweffects.impl.schemas
     {
         public ElementType element { get; set; } = ElementType.None;
         public int percentHeal { get; set; } = 0;
+        public IEffectSchema copy() => new HealPercentDamageReceivedByEffect()
+        {
+            element = element,
+            percentHeal = percentHeal,
+        };
     }
 
     /// <summary>
@@ -91,25 +128,51 @@ namespace souchy.celebi.eevee.neweffects.impl.schemas
         public ElementType input { get; set; } = ElementType.All;
         public ElementType output { get; set; } = ElementType.None;
         public int percentConversion { get; set; } = 100;
+        public IEffectSchema copy() => new TakeDamageAsElement()
+        {
+            input = input,
+            output = output,
+            percentConversion = percentConversion,
+        };
     }
 
     public record LearnSpell() : IEffectSchema
     {
         public SpellIID modelId { get; set; } = new();
+        public IEffectSchema copy() => new LearnSpell()
+        {
+            modelId = modelId,
+        };
     }
     public record ForgetSpell() : IEffectSchema {
         public SpellIID modelId { get; set; } = new();
+        public IEffectSchema copy() => new ForgetSpell()
+        {
+            modelId = modelId,
+        };
     }
     public record ChangeAppearance() : IEffectSchema
     {
         public AssetIID modelId { get; set; } = new(); // any asset file (scene, 3d model, texture, music...)
+        public IEffectSchema copy() => new ChangeAppearance()
+        {
+            modelId = modelId,
+        };
     }
     public record ChangeAnimationSet() : IEffectSchema {
         public AnimationSetIID modelId { get; set; } = new();
+        public IEffectSchema copy() => new ChangeAnimationSet()
+        {
+            modelId = modelId,
+        };
     }
     public record ReduceDamageReceived() : IEffectSchema
     {
         public int reduction { get; set; } = 0;
+        public IEffectSchema copy() => new ReduceDamageReceived()
+        {
+            reduction = reduction,
+        };
     }
     #endregion
 
