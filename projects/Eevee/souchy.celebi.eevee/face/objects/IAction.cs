@@ -92,7 +92,7 @@ namespace souchy.celebi.eevee.face.objects
         public IFight fight { get; set; }
         public ObjectId caster { get; set; }
         public ObjectId targetCell { get; set; }
-        public BaseAction() { }
+        protected BaseAction() { }
         public BaseAction(IAction parentAction)
         {
             fight = parentAction.fight;
@@ -199,7 +199,7 @@ namespace souchy.celebi.eevee.face.objects
         /// <summary>
         /// Effect to apply, contains the schema, conditions, etc
         /// </summary>
-        public IEffect effect { get; set; }
+        public IEffectInstance effect { get; set; }
     }
     /// <summary>
     /// Apply 1 effect to its whole aoe
@@ -209,12 +209,13 @@ namespace souchy.celebi.eevee.face.objects
         /// <summary>
         /// Effect to apply, contains the schema, conditions, etc
         /// </summary>
-        public IEffect effect { get; set; }
+        public IEffectInstance effect { get; set; }
         /// <summary>
         /// Possible targets in the effect aoe
         /// </summary>
         public IEnumerable<IBoardEntity> boardTargets { get; set; }
 
+        private SubActionEffect() { }
         public SubActionEffect(IAction parent) : base(parent) { }
 
         protected override IAction copyImplementation()
@@ -230,7 +231,8 @@ namespace souchy.celebi.eevee.face.objects
     /// </summary>
     public class SubActionEffectTarget : BaseAction,  ISubActionEffectTarget
     {
-        public IEffect effect { get; set; }
+        public IEffectInstance effect { get; set; }
+        private SubActionEffectTarget() { }
         public SubActionEffectTarget(IAction parent) : base(parent) { }
 
         protected override IAction copyImplementation()
@@ -244,6 +246,7 @@ namespace souchy.celebi.eevee.face.objects
     public class SubActionStatus : BaseAction
     {
         public IStatusInstance statusInstance { get; set; }
+        private SubActionStatus() { }
         public SubActionStatus(IAction parent) : base(parent) { }
 
         protected override IAction copyImplementation()

@@ -37,7 +37,15 @@ namespace souchy.celebi.eevee.neweffects.impl
 
         public void CopyBasicTo(IEffectInstance e)
         {
-            throw new NotImplementedException();
+            e.modelUid = modelUid;
+            e.Schema = Schema.copy();
+            e.SourceCondition = SourceCondition.copy();
+            e.TargetFilter = TargetFilter.copy();
+            e.TargetAcquisitionZone = TargetAcquisitionZone.copy();
+            foreach(var trigger in Triggers.Values)
+                e.Triggers.Add(trigger.copy());
+            foreach (var effect in this.GetEffects())
+                e.EffectIds.Add(EffectInstance.Create(e.fightUid, effect).entityUid);
         }
 
         /// <summary>

@@ -14,9 +14,15 @@ using souchy.celebi.eevee.neweffects.face;
 using System.ComponentModel;
 using souchy.celebi.eevee.neweffects;
 using static System.Collections.Specialized.BitVector32;
+using souchy.celebi.eevee.impl.shared.triggers.schemas;
 
 namespace souchy.celebi.eevee
 {
+    public enum EffectParentChildrenOrder
+    {
+        ParentBefore,
+        ChildrenBefore
+    }
     public static class Mind
     {
 
@@ -24,35 +30,31 @@ namespace souchy.celebi.eevee
         {
             IPosition targetPosition = action.fight.cells.Get(action.targetCell).position;
 
-            // acquire targets for each effects before applying them
-            var effectsWithTargets = container.GetEffects()
-                .Select(e => (
-                    effect: e,
-                    targets: e.GetPossibleBoardTargets(action, targetPosition)
-                ));
-
-
             var effectInstances = container.GetEffects()
-                .Select(e =>
-                    new EffectInstance(null, action.caster, e.GetPossibleBoardTargets(action, targetPosition))
-                );
-
+                .Select(e => {
+                    var targets = e.GetPossibleBoardTargets(action, targetPosition);
+                    return
+                    (
+                        effect: EffectInstance.Create(action.fight.entityUid, e), //EffectInstance.Create(action.fight.entityUid, (IEffectPermanent) e, action.caster, targets),
+                        targets: targets
+                    );
+                });
 
             // apply each effect
-            foreach (var pair in effectsWithTargets)
+            foreach (var pair in effectInstances) //effectsWithTargets)
             {
                 //TODO: use EffectInstance
                 var sub = new SubActionEffect(action)
                 {
-                    effect = pair.effect,
+                    effect = EffectInstance.Create(action.fight.entityUid, pair.effect),
                     boardTargets = pair.targets,
                 };
                 // apply to each target
-                applyEffect(sub);
+                applyEffectZone(sub);
             }
         }
 
-        public static void applyEffect(SubActionEffect parentAction) //, IEffect effect, IEnumerable<IBoardEntity> targets)
+        public static void applyEffectZone(SubActionEffect parentAction) //, IEffect effect, IEnumerable<IBoardEntity> targets)
         {
             // apply to each target
             foreach (var target in parentAction.boardTargets)
@@ -66,35 +68,55 @@ namespace souchy.celebi.eevee
                     //caster = parentAction.caster,
                     //parent = parentAction,
                     targetCell = currentTargetCell.entityUid,
-                    effect = parentAction.effect, // TODO MAKE A COPY
+                    effect = EffectInstance.Create(parentAction.fight.entityUid, parentAction.effect),
                     //depthLevel = parentAction.depthLevel // each target has the same level as the effect that applies to all of them
                 };
 
-                checkTriggers(subActionEffect,
+                var order = EffectParentChildrenOrder.ParentBefore; // put this in Effect
+                if (order == EffectParentChildrenOrder.ParentBefore)
+                {
+                    applyEffect(parentAction, subActionEffect, target);
+                    applyChildren(parentAction, subActionEffect);
+                } else 
+                if(order == EffectParentChildrenOrder.ChildrenBefore)
+                {
+                    applyChildren(parentAction, subActionEffect);
+                    applyEffect(parentAction, subActionEffect, target);
+                }
+
+            }
+        }
+        private static void applyChildren(SubActionEffect parentAction, SubActionEffectTarget subActionEffect)
+        {
+            // sub effects -> apply child effects to each target only if it's not status effects
+            if (parentAction.effect is not IStatusApplicationScript)
+            {
+                applyEffectContainer(subActionEffect, parentAction.effect);
+            }
+        }
+        private static void applyEffect(SubActionEffect parentAction, SubActionEffectTarget subActionEffect, IBoardEntity target)
+        {
+
+            checkTriggers(subActionEffect,
                     new TriggerEvent(TriggerType.TriggerOnEffectCast, TriggerOrderType.Before)
                 );
 
-                IEffectScript script = parentAction.effect.GetScript(); // todo find script from  pair.effect.schema.GetType
-                var returnValue = script.apply(subActionEffect, target, parentAction.boardTargets);
+            IEffectScript script = parentAction.effect.GetScript(); // todo find script from  pair.effect.schema.GetType
+            var returnValue = script.apply(subActionEffect, target, parentAction.boardTargets);
 
-                // TODO how do we deal with the returnValue? 
-                // -> well i think the root effect's return cannot be used obviously
-                // -> but the returnValue can be used if the effect is an implementation of IValue for example.
-                // -> or if the effect is a child of a math MetaEffect
-                checkTriggers(subActionEffect,
-                    new TriggerEvent(TriggerType.TriggerOnEffectCast, TriggerOrderType.After)
-                );
+            // TODO how do we deal with the returnValue? 
+            // -> well i think the root effect's return cannot be used obviously
+            // -> but the returnValue can be used if the effect is an implementation of IValue for example.
+            // -> or if the effect is a child of a math MetaEffect
+            checkTriggers(subActionEffect,
+                new TriggerEvent(TriggerType.TriggerOnEffectCast, TriggerOrderType.After)
+            );
 
 
-                // set the return value associated with effect in the caster's temporaries/contextuals?
-                var caster = parentAction.fight.creatures.Get(parentAction.caster);
-                //caster.GetNaturalStats().Set()
-                // caster.contextuals.set(action.effect, returnValue)
-
-                // sub effects -> apply child effects to each target only if it's not status effects
-                if(parentAction.effect is not IStatusApplicationScript)
-                    applyEffectContainer(subActionEffect, parentAction.effect);
-            }
+            // set the return value associated with effect in the caster's temporaries/contextuals?
+            var caster = parentAction.fight.creatures.Get(parentAction.caster);
+            //caster.GetNaturalStats().Set()
+            // caster.contextuals.set(action.effect, returnValue)
         }
 
 
@@ -143,6 +165,8 @@ namespace souchy.celebi.eevee
         public static void checkTriggers(IAction parentAction, TriggerEvent triggerEvent)
         {
             // Check every status
+            // TODO we dont want to trigger the same StatusContainer twice if it contains 2 StatusInstances with triggers right?
+            //          Maybe... bc we can use the MergeStrategy to allow only 1 StatusInstance if we dont want to trigger twice
             foreach (IStatusInstance status in parentAction.fight.statuses.Values.SelectMany(sc => sc.instances))
             {
                 var statusAction = new SubActionStatus(parentAction)
@@ -159,10 +183,10 @@ namespace souchy.celebi.eevee
                     var targets = triggeredEffect.GetPossibleBoardTargets(statusAction, targetPosition);
                     var sub = new SubActionEffect(statusAction)
                     {
-                        effect = triggeredEffect,
+                        effect = EffectInstance.Create(parentAction.fight.entityUid, triggeredEffect),
                         boardTargets = targets
                     };
-                    applyEffect(sub); 
+                    applyEffectZone(sub); 
                 }
             }
         }

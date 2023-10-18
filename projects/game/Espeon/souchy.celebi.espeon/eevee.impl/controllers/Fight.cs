@@ -30,7 +30,7 @@ namespace souchy.celebi.espeon.eevee.impl.controllers
         public IEntityDictionary<ObjectId, ICell> cells { get; init; } = EntityDictionary<ObjectId, ICell>.Create();
 
         public IEntityDictionary<ObjectId, IStats> stats { get; init; } = EntityDictionary<ObjectId, IStats>.Create();
-        public IEntityDictionary<ObjectId, IEffect> effects { get; init; } = EntityDictionary<ObjectId, IEffect>.Create();
+        public IEntityDictionary<ObjectId, IEffectInstance> effects { get; init; } = EntityDictionary<ObjectId, IEffectInstance>.Create();
 
         #endregion Properties
 
