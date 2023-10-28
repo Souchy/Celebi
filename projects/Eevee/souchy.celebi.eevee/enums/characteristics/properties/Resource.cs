@@ -16,7 +16,7 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
         Movement,
         Summon,
         Rage,
-        Shield
+        //Shield
     }
 
     public enum ResourceProperty
@@ -28,7 +28,9 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
         // -1 = full every turn, 0 = no regen, 1 = 1/turn, 0.25 = 1 per 4 turns // string to parse for different regens
         Regen,
         Percent,
-        MissingPercent
+        MissingPercent,
+        Shield,
+        ShieldRegen
     }
 
     public sealed record Resource : CharacteristicType
@@ -91,8 +93,14 @@ namespace souchy.celebi.eevee.enums.characteristics.creature
 
         //public static readonly Resource BaseShield              = new(37);
         //public static readonly Resource ShieldIntial            = new(0, ResourceEnum.Life, ResourceProperty.InitialMax); // since theres no max, i think Shield is just the initial no?
-        public static readonly Resource Shield                  = new(38, nameof(Shield     ), ResourceEnum.Shield, ResourceProperty.Current);
-        public static readonly Resource ShieldRegen             = new(39, nameof(ShieldRegen), ResourceEnum.Shield, ResourceProperty.Regen);
+        //public static readonly Resource Shield                  = new(38, nameof(Shield     ), ResourceEnum.Shield, ResourceProperty.Current);
+        //public static readonly Resource ShieldRegen             = new(39, nameof(ShieldRegen), ResourceEnum.Shield, ResourceProperty.Regen);
+        public static readonly Resource LifeShield                    = new(40, nameof(LifeShield), ResourceEnum.Life, ResourceProperty.Shield);
+        public static readonly Resource LifeShieldRegen               = new(40, nameof(LifeShieldRegen), ResourceEnum.Life, ResourceProperty.ShieldRegen);
+        public static readonly Resource ManaShield                    = new(41, nameof(ManaShield), ResourceEnum.Mana, ResourceProperty.Shield);
+        public static readonly Resource ManaShieldRegen               = new(40, nameof(ManaShieldRegen), ResourceEnum.Mana, ResourceProperty.ShieldRegen);
+        public static readonly Resource MovementShield                = new(42, nameof(MovementShield), ResourceEnum.Movement, ResourceProperty.Shield);
+        public static readonly Resource MovementShieldRegen           = new(40, nameof(MovementShieldRegen), ResourceEnum.Movement, ResourceProperty.ShieldRegen);
 
         public static readonly Dictionary<CharacteristicId, Resource> values = new();
         static Resource()
