@@ -35,6 +35,7 @@ Creatures have:
 - chosen spells
 - base passives
   - Some passives can trigger when itself or another creature gets swapped in or swapped out.
+- resource bars 1,2,3 associated to resourceEnums
 
 ## Game Modes
 - Constructed 1v1 : 
