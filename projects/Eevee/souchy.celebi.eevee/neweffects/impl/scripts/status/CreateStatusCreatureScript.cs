@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using souchy.celebi.eevee.statuses;
 using souchy.celebi.eevee.impl.objects.statuses;
 using souchy.celebi.eevee.enums.characteristics.other;
+using souchy.celebi.eevee.impl.util.math;
 
 namespace souchy.celebi.eevee.neweffects.impl.scripts.status
 {
@@ -39,6 +40,12 @@ namespace souchy.celebi.eevee.neweffects.impl.scripts.status
             {
                 IEffectInstance effectInst = EffectInstance.Create(action.fight.entityUid, effect); //EffectInstance.Create(action.fight.entityUid, (IEffectPermanent) effect, action.caster, allTargetsInZone);
                 // TODO some effects need variable Schemas, ex steal 150 to 170 stats, modify the schema instance.
+                // Consume variance 
+                Variance.consumeVariance(effectInst.Schema);
+
+                // Some effects need to consume variance when applying them to a Status ((AddStats))
+                // Y'a aussi des effets comme retrait -> faut que tu applique puis créé un status à partir de ça.
+                // I.Ex.: ReduceAp.apply() {  int ap = rnd(). new status(addstats(ap)); }
 
                 inst.EffectIds.Add(effectInst.entityUid);
             }

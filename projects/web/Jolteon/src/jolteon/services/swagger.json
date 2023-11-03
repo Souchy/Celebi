@@ -4419,6 +4419,10 @@
         "properties": {
           "stats": {
             "$ref": "#/components/schemas/IStats"
+          },
+          "percentVariance": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -4440,6 +4444,10 @@
         "properties": {
           "statsPercent": {
             "$ref": "#/components/schemas/IStats"
+          },
+          "percentVariance": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -5271,11 +5279,6 @@
           "statId": {
             "type": "string"
           },
-          "multiplier": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
           "element": {
             "$ref": "#/components/schemas/ElementType"
           },
@@ -5569,7 +5572,6 @@
           "ChangeActor = 42",
           "CastSubSpell = 43",
           "RandomChild = 44",
-          "RandomPointsInZone = 45",
           "EmptyText = 46",
           "AddStatusCreature = 47",
           "AddTrap = 48",
@@ -5622,6 +5624,50 @@
         ],
         "type": "string",
         "format": ""
+      },
+      "EffectInstance": {
+        "type": "object",
+        "properties": {
+          "fightUid": {
+            "type": "string"
+          },
+          "entityUid": {
+            "type": "string"
+          },
+          "modelUid": {
+            "type": "string",
+            "nullable": true
+          },
+          "schema": {
+            "$ref": "#/components/schemas/IEffectSchema"
+          },
+          "sourceCondition": {
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "targetFilter": {
+            "$ref": "#/components/schemas/ICondition"
+          },
+          "targetAcquisitionZone": {
+            "$ref": "#/components/schemas/IZone"
+          },
+          "triggers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ITriggerModel"
+            },
+            "nullable": true
+          },
+          "effectIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
       },
       "EffectPermanent": {
         "type": "object",
@@ -5828,11 +5874,6 @@
           "statId": {
             "type": "string"
           },
-          "multiplier": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
           "element": {
             "$ref": "#/components/schemas/ElementType"
           },
@@ -5998,9 +6039,6 @@
       "ICondition": {
         "type": "object",
         "properties": {
-          "conditionType": {
-            "$ref": "#/components/schemas/ConditionType"
-          },
           "actorType": {
             "$ref": "#/components/schemas/ActorType"
           },
@@ -6589,7 +6627,7 @@
         "type": "object",
         "properties": {
           "schema": {
-            "$ref": "#/components/schemas/TriggerSchema"
+            "$ref": "#/components/schemas/ITriggerSchema"
           },
           "triggerOrderType": {
             "$ref": "#/components/schemas/TriggerOrderType"
@@ -6605,6 +6643,15 @@
           },
           "entityUid": {
             "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ITriggerSchema": {
+        "type": "object",
+        "properties": {
+          "triggerType": {
+            "$ref": "#/components/schemas/TriggerType"
           }
         },
         "additionalProperties": false
@@ -7066,18 +7113,18 @@
       },
       "RandomChild": {
         "type": "object",
-        "additionalProperties": false
-      },
-      "RandomPointsInZone": {
-        "type": "object",
         "properties": {
-          "maximumPointsCount": {
+          "samplingCount": {
             "type": "integer",
             "format": "int32"
           },
-          "percentChancePerPoint": {
-            "type": "integer",
-            "format": "int32"
+          "weights": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -8553,7 +8600,7 @@
             "type": "string"
           },
           "schema": {
-            "$ref": "#/components/schemas/TriggerSchema"
+            "$ref": "#/components/schemas/ITriggerSchema"
           },
           "triggerOrderType": {
             "$ref": "#/components/schemas/TriggerOrderType"
@@ -8751,15 +8798,6 @@
         ],
         "type": "string",
         "format": ""
-      },
-      "TriggerSchema": {
-        "type": "object",
-        "properties": {
-          "triggerType": {
-            "$ref": "#/components/schemas/TriggerType"
-          }
-        },
-        "additionalProperties": false
       },
       "TriggerType": {
         "type": "object",
