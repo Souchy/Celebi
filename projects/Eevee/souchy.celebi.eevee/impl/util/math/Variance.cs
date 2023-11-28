@@ -1,11 +1,6 @@
 ﻿using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.neweffects.face;
 using souchy.celebi.eevee.neweffects.impl.schemas;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace souchy.celebi.eevee.impl.util.math
 {

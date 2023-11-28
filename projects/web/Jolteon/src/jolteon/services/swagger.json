@@ -4414,6 +4414,15 @@
         },
         "additionalProperties": false
       },
+      "AddSpellStats": {
+        "type": "object",
+        "properties": {
+          "stats": {
+            "$ref": "#/components/schemas/SpellStats"
+          }
+        },
+        "additionalProperties": false
+      },
       "AddStats": {
         "type": "object",
         "properties": {
@@ -5018,6 +5027,13 @@
         "properties": {
           "statusStats": {
             "$ref": "#/components/schemas/StatusModelStats"
+          },
+          "effectIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -5111,6 +5127,13 @@
           "descriptionId": {
             "type": "string"
           },
+          "skinIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
           "statsId": {
             "type": "string"
           },
@@ -5128,10 +5151,10 @@
             },
             "nullable": true
           },
-          "skinIds": {
+          "resourceBars": {
             "type": "array",
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/ResourceEnum"
             },
             "nullable": true
           }
@@ -6121,6 +6144,13 @@
             "type": "array",
             "items": {
               "type": "string"
+            },
+            "nullable": true
+          },
+          "resourceBars": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceEnum"
             },
             "nullable": true
           },
@@ -7334,8 +7364,7 @@
           "Mana = 1",
           "Movement = 2",
           "Summon = 3",
-          "Rage = 4",
-          "Shield = 5"
+          "Rage = 4"
         ],
         "type": "string",
         "format": ""
@@ -7348,7 +7377,9 @@
           "Missing = 3",
           "Regen = 4",
           "Percent = 5",
-          "MissingPercent = 6"
+          "MissingPercent = 6",
+          "Shield = 7",
+          "ShieldRegen = 8"
         ],
         "type": "string",
         "format": ""
@@ -7390,8 +7421,12 @@
           "RageMissing: Resource = {\r\n  \"resType\": 4,\r\n  \"resProp\": 3,\r\n  \"category\": 1,\r\n  \"localId\": 34,\r\n  \"baseName\": \"RageMissing\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1034\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.RageMissing\",\r\n  \"enumValueConstraint\": null\r\n};",
           "RagePercent: Resource = {\r\n  \"resType\": 4,\r\n  \"resProp\": 5,\r\n  \"category\": 1,\r\n  \"localId\": 35,\r\n  \"baseName\": \"RagePercent\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1035\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.RagePercent\",\r\n  \"enumValueConstraint\": null\r\n};",
           "RageMissingPercent: Resource = {\r\n  \"resType\": 4,\r\n  \"resProp\": 6,\r\n  \"category\": 1,\r\n  \"localId\": 36,\r\n  \"baseName\": \"RageMissingPercent\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1036\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.RageMissingPercent\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "Shield: Resource = {\r\n  \"resType\": 5,\r\n  \"resProp\": 1,\r\n  \"category\": 1,\r\n  \"localId\": 38,\r\n  \"baseName\": \"Shield\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1038\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.Shield\",\r\n  \"enumValueConstraint\": null\r\n};",
-          "ShieldRegen: Resource = {\r\n  \"resType\": 5,\r\n  \"resProp\": 4,\r\n  \"category\": 1,\r\n  \"localId\": 39,\r\n  \"baseName\": \"ShieldRegen\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1039\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.ShieldRegen\",\r\n  \"enumValueConstraint\": null\r\n};"
+          "LifeShield: Resource = {\r\n  \"resType\": 0,\r\n  \"resProp\": 7,\r\n  \"category\": 1,\r\n  \"localId\": 40,\r\n  \"baseName\": \"LifeShield\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1040\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.LifeShield\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "LifeShieldRegen: Resource = {\r\n  \"resType\": 0,\r\n  \"resProp\": 8,\r\n  \"category\": 1,\r\n  \"localId\": 40,\r\n  \"baseName\": \"LifeShieldRegen\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1040\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.LifeShieldRegen\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "ManaShield: Resource = {\r\n  \"resType\": 1,\r\n  \"resProp\": 7,\r\n  \"category\": 1,\r\n  \"localId\": 41,\r\n  \"baseName\": \"ManaShield\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1041\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.ManaShield\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "ManaShieldRegen: Resource = {\r\n  \"resType\": 1,\r\n  \"resProp\": 8,\r\n  \"category\": 1,\r\n  \"localId\": 40,\r\n  \"baseName\": \"ManaShieldRegen\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1040\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.ManaShieldRegen\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MovementShield: Resource = {\r\n  \"resType\": 2,\r\n  \"resProp\": 7,\r\n  \"category\": 1,\r\n  \"localId\": 42,\r\n  \"baseName\": \"MovementShield\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1042\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.MovementShield\",\r\n  \"enumValueConstraint\": null\r\n};",
+          "MovementShieldRegen: Resource = {\r\n  \"resType\": 2,\r\n  \"resProp\": 8,\r\n  \"category\": 1,\r\n  \"localId\": 40,\r\n  \"baseName\": \"MovementShieldRegen\",\r\n  \"defaultValue\": null,\r\n  \"conditions\": [],\r\n  \"statValueType\": 0,\r\n  \"id\": \"1040\",\r\n  \"nameModelUid\": \"CharacteristicType.Resource.MovementShieldRegen\",\r\n  \"enumValueConstraint\": null\r\n};"
         ],
         "type": "string",
         "format": ""
@@ -7447,15 +7482,6 @@
       },
       "SpawnSummonDoubleIllusion": {
         "type": "object",
-        "additionalProperties": false
-      },
-      "SpellAddStats": {
-        "type": "object",
-        "properties": {
-          "stats": {
-            "$ref": "#/components/schemas/SpellStats"
-          }
-        },
         "additionalProperties": false
       },
       "SpellCastHistory": {
