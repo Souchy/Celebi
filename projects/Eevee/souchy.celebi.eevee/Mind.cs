@@ -31,7 +31,8 @@ namespace souchy.celebi.eevee
             IPosition targetPosition = action.fight.cells.Get(action.targetCell).position;
 
             var effectInstances = container.GetEffects()
-                .Select(e => {
+                .Select(e =>
+                {
                     var targets = e.GetPossibleBoardTargets(action, targetPosition);
                     return
                     (
@@ -77,8 +78,9 @@ namespace souchy.celebi.eevee
                 {
                     applyEffect(parentAction, subActionEffect, target);
                     applyChildren(parentAction, subActionEffect);
-                } else 
-                if(order == EffectParentChildrenOrder.ChildrenBefore)
+                }
+                else
+                if (order == EffectParentChildrenOrder.ChildrenBefore)
                 {
                     applyChildren(parentAction, subActionEffect);
                     applyEffect(parentAction, subActionEffect, target);
@@ -86,14 +88,17 @@ namespace souchy.celebi.eevee
 
             }
         }
+        
         private static void applyChildren(SubActionEffect parentAction, SubActionEffectTarget subActionEffect)
         {
-            // sub effects -> apply child effects to each target only if it's not status effects
-            if (parentAction.effect is not IStatusApplicationScript)
-            {
-                applyEffectContainer(subActionEffect, parentAction.effect);
-            }
+            /*
+            2023-11-28: Dont need the 'IStatusApplicationScript' check anymore since we put Status effects 
+            inside another data list in ICreateStatusSchema, separate from the children effects. Meaning we can have both.
+            */
+            // sub effects -> apply child effects to each target 
+            applyEffectContainer(subActionEffect, parentAction.effect);
         }
+
         private static void applyEffect(SubActionEffect parentAction, SubActionEffectTarget subActionEffect, IBoardEntity target)
         {
 
@@ -186,7 +191,7 @@ namespace souchy.celebi.eevee
                         effect = EffectInstance.Create(parentAction.fight.entityUid, triggeredEffect),
                         boardTargets = targets
                     };
-                    applyEffectZone(sub); 
+                    applyEffectZone(sub);
                 }
             }
         }

@@ -8,33 +8,58 @@ using souchy.celebi.eevee.neweffects.face;
 namespace souchy.celebi.eevee.neweffects.impl.schemas;
 
 #region Status Create
-public record CreateStatusCreature() : IEffectSchema
+public interface ICreateStatusSchema : IEffectsContainer
+{
+}
+
+public record CreateStatusCreature() : IEffectSchema, ICreateStatusSchema
 {
     public StatusModelStats statusStats { get; set; } = StatusModelStats.Create();
+    /// <summary>
+    /// Effects to add to the status
+    /// </summary>
+    public IEntityList<ObjectId> EffectIds { get; set; } = new EntityList<ObjectId>();
+    public IEnumerable<IEffect> GetEffects() => this.EffectIds.Values.Select(i => Eevee.models.effects.Get(i));
+
     public IEffectSchema copy() => new CreateStatusCreature()
     {
         statusStats = (StatusModelStats)statusStats.copy()
     };
 }
-public record CreateTrap() : IEffectSchema
+public record CreateTrap() : IEffectSchema, ICreateStatusSchema
 {
     public StatusModelStats statusStats { get; set; } = StatusModelStats.Create();
+    /// <summary>
+    /// Effects to add to the status
+    /// </summary>
+    public IEntityList<ObjectId> EffectIds { get; set; } = new EntityList<ObjectId>();
+    public IEnumerable<IEffect> GetEffects() => this.EffectIds.Values.Select(i => Eevee.models.effects.Get(i));
     public IEffectSchema copy() => new CreateTrap()
     {
         statusStats = (StatusModelStats)statusStats.copy()
     };
 }
-public record CreateGlyph() : IEffectSchema
+public record CreateGlyph() : IEffectSchema, ICreateStatusSchema
 {
     public StatusModelStats statusStats { get; set; } = StatusModelStats.Create();
+    /// <summary>
+    /// Effects to add to the status
+    /// </summary>
+    public IEntityList<ObjectId> EffectIds { get; set; } = new EntityList<ObjectId>();
+    public IEnumerable<IEffect> GetEffects() => this.EffectIds.Values.Select(i => Eevee.models.effects.Get(i));
     public IEffectSchema copy() => new CreateGlyph()
     {
         statusStats = (StatusModelStats)statusStats.copy()
     };
 }
-public record CreateGlyphAura() : IEffectSchema
+public record CreateGlyphAura() : IEffectSchema, ICreateStatusSchema
 {
     public StatusModelStats statusStats { get; set; } = StatusModelStats.Create();
+    /// <summary>
+    /// Effects to add to the status
+    /// </summary>
+    public IEntityList<ObjectId> EffectIds { get; set; } = new EntityList<ObjectId>();
+    public IEnumerable<IEffect> GetEffects() => this.EffectIds.Values.Select(i => Eevee.models.effects.Get(i));
     public IEffectSchema copy() => new CreateGlyphAura()
     {
         statusStats = (StatusModelStats)statusStats.copy()

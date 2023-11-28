@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace souchy.celebi.eevee.neweffects.impl.scripts.status
 {
-    public class AddGlyphScript : IEffectScript, IStatusApplicationScript
+    public class AddGlyphScript : IEffectScript
     {
         public Type SchemaType => typeof(AddGlyph);
 
