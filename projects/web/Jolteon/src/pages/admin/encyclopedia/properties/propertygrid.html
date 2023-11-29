@@ -12,6 +12,7 @@
         <td style="padding-right: 8px; color: var(--accent2);" data-bs-toggle="collapse" data-bs-target="#collapseZone-${uid}-schema">
           ${prop}: 
           ${propName(prop)}
+          <!-- , ${typeof(data[prop])} -->
         </td>
         <td>
           <template switch.bind="propName(prop)">
@@ -47,7 +48,8 @@
             <input case="AssetIID" type="text" value.bind="data[prop]" change.trigger="onChange()"/>
             <input case="AnimationSetIID" type="text" value.bind="data[prop]" change.trigger="onChange()"/>
       
-            <template default-case switch.bind="typeof(prop)">
+            <template default-case switch.bind="type(prop)">
+              <!-- <input case="Int32" type="number" value.bind="data[prop]"  change.trigger="onChange()"/> -->
               <input case="number" type="number" value.bind="data[prop]"  change.trigger="onChange()"/>
               <!-- <div case="string"> -->
                 <!-- who even has a string property -->

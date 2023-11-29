@@ -21,13 +21,20 @@ export default class PropertyGrid {
     constructor() {
     }
 
+    binding() {
+        // if(this.schema.name == "DirectDamage") {
+        //     console.log("PropertyGrid data: ")
+        //     console.log(this.data);
+        // }
+    }
+
     public get keys() {
         return Object.keys(this.data).filter(k => !Schemas.ignoredProperties.includes(k));
     }
     public get values() {
         return Object.values(this.data);
     }
-    public typof(prop) {
+    public type(prop) {
         return typeof this.data[prop];
     }
     public propName(prop: string) {

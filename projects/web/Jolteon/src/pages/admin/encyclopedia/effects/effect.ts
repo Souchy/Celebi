@@ -65,7 +65,13 @@ export class Effect {
     }
     public get schema(): SchemaDescription {
         let desc = Schemas.effects.find(s => s.name == this.modelName);
+        // if(desc.name == "DirectDamage")
+        //     console.log("Effect get schema description: " + JSON.stringify(desc));
         return desc;
+    }
+
+    public get hasStatusEffects() {
+        return "effectIds" in this.model.schema;
     }
 
     //#region click handlers
