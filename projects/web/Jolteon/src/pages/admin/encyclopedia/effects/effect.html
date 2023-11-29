@@ -10,10 +10,9 @@
 <div if.bind="model">
 
   <div class="effecttitle">
-    <!-- title -->
+    <!-- Title -->
     <div class="effecttitletitle clickable" data-bs-toggle="collapse" data-bs-target="#collapseEffectContent-${model.entityUid}">
       <h5 click.trigger="clickMinimize()">${modelName}</h5>
-      <!-- <h5 click.trigger="clickMinimize()">(${model.effectIds.length})</h5> -->
       <h5 click.trigger="clickMinimize()">${model.entityUid}</h5>
     </div>
     <button class="btn btn-floating" click.trigger="clickCopy()"><i class="fa-regular fa-copy"></i></button>
@@ -28,19 +27,17 @@
 
   </div>
 
-  <!-- content -->
-  <!--  if.bind="!minimized" -->
+  <!-- Content -->
   <div class="collapse show" id="collapseEffectContent-${model.entityUid}" if.bind="model">
 
-    <!-- properties section -->
+    <!-- Properties section -->
     <div class="effectSection d-flex">
       <div class="eblock">
-
-        <!-- click.trigger="clickMinimize()"  -->
         <h6 class="clickable" data-bs-toggle="collapse" data-bs-target="#collapseZone-${model.entityUid}">Zone</h6>
         <zone zone.bind="model.targetAcquisitionZone" uid.bind="model.entityUid" callbacksave.bind="() => onSave()"></zone>
       </div>
 
+      <!-- Conditions -->
       <div>
         <h6>Target Filter</h6>
         <condition if.bind="model.targetFilter" model.bind="model.targetFilter" callbacksave.bind="() => save()"></condition>
@@ -49,13 +46,11 @@
         <condition if.bind="model.sourceCondition" model.bind="model.sourceCondition" callbacksave.bind="() => save()"></condition>
         <button else class="btn btn-floating">Set</button>
         <condition></condition>
-      </div>
-
-      <div>
         <h6>Triggers</h6>
         <trigger-list effect.bind="model" callbacksave.bind="() => saveTriggerList()"></trigger-list>
       </div>
 
+      <!-- Schema -->
       <div class="eblock" style="flex-grow: 1;">
         <h6>Schema</h6>
         <!-- change type -->
@@ -70,7 +65,9 @@
       </div>
     </div>
 
-    <!-- children section -->
+    <!-- Status Effects -->
+    <effectlist if.bind="model.schema.effectIds" effectids.bind="model.schema.effectIds" modaluid.bind="model.entityUid + 'status'" callbacksave.bind="() => onSave()" title="Status Effects"></effectlist>
+    <!-- Children Effects -->
     <effectlist if.bind="model.effectIds" effectids.bind="model.effectIds" modaluid.bind="model.entityUid" callbacksave.bind="() => onSave()"></effectlist>
 
   </div>

@@ -12,6 +12,8 @@ import { Schemas } from "../../../../jolteon/constants";
 export class Effectlist {
 
     @bindable
+    public title = "Effects";
+    @bindable
     public effectids = []
     @bindable
     public modaluid = ""

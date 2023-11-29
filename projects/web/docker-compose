@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  cockroach:
+    image: cockroachdb/cockroach
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: secret
+      ID: CockroachDb
+    ports:
+      - '32572:5432'
+    labels:
+      ARTIFACT_CATEGORY: Database
+      Replicas: 2
+    volumes:
+      - 'cockroach-db:/var/lib/cockroach/data'
+
+  # cockroach-master:
+  #   image: cockroachdb/cockroach
+  #   restart: always
+  #   environment:
+  #     POSTGRES_PASSWORD: secret
+  #     ID: CockroachDbMaster
+  #   ports:
+  #     - '32572:5432'
+  #   labels:
+  #     ARTIFACT_CATEGORY: Database
+  #   volumes:
+  #     - 'cockroach-db:/var/lib/cockroach/data'
+
+volumes:
+  cockroach-db: null
