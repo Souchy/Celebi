@@ -32,6 +32,14 @@ namespace EeveeUnitTests.souchy.celebi.eevee.unittest.spells
             Assert.Equal(1800, lifeIni);
         }
 
+        [Fact]
+        public void testDifferentTeamCasterTarget()
+        {
+            var caster = fight.timeline.slots.First().getCreature();
+            var target = fight.timeline.getCreatures().Last();
+            Assert.NotEqual(caster.GetCurrentOwner().team, target.GetCurrentOwner().team);
+        }
+
         private IActionSpell createAction()
         {
             var caster = fight.timeline.slots.First().getCreature();

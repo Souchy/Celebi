@@ -35,17 +35,17 @@ namespace souchy.celebi.eevee.neweffects.impl
 
         public abstract IEnumerable<IEffect> GetEffects();
 
-        public void CopyBasicTo(IEffectInstance e)
+        public void CopyBasicTo(IEffectInstance copy)
         {
-            e.modelUid = modelUid;
-            e.Schema = Schema.copy();
-            e.SourceCondition = SourceCondition.copy();
-            e.TargetFilter = TargetFilter.copy();
-            e.TargetAcquisitionZone = TargetAcquisitionZone.copy();
+            copy.modelUid = modelUid;
+            copy.Schema = Schema.copy();
+            copy.SourceCondition = SourceCondition?.copy();
+            copy.TargetFilter = TargetFilter?.copy();
+            copy.TargetAcquisitionZone = TargetAcquisitionZone.copy();
             foreach(var trigger in Triggers.Values)
-                e.Triggers.Add(trigger.copy());
-            foreach (var effect in this.GetEffects())
-                e.EffectIds.Add(EffectInstance.Create(e.fightUid, effect).entityUid);
+                copy.Triggers.Add(trigger.copy());
+            foreach (var effect in this.GetEffects().Where(effect => effect != null))
+                copy.EffectIds.Add(EffectInstance.Create(copy.fightUid, effect).entityUid);
         }
 
         /// <summary>
@@ -59,7 +59,9 @@ namespace souchy.celebi.eevee.neweffects.impl
             // use board cells + effect acquisitionZone
 
             var points = TargetAcquisitionZone.GeneratePoints();
+            // move points to board position
             points.ForEach(p => p.add(targetCell));
+            // select cells
             var cells = points.Select(p => action.fight.cells.Values.FirstOrDefault(c => c.position.equals(p)))
                 .Where(c => c != null)
                 .ToList();
