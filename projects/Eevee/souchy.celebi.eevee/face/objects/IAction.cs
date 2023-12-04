@@ -1,23 +1,57 @@
 ﻿using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects.controllers;
+using souchy.celebi.eevee.face.objects.statuses;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.neweffects.face;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Collections.Specialized.BitVector32;
 
 namespace souchy.celebi.eevee.face.objects
 {
+    public class MessageTCP
+    {
+        /// <summary>
+        /// Determines the message class to deserialize
+        /// </summary>
+        public object messageType { get; set; }
+    }
+    /// <summary>
+    /// this is all you need to send the message. unless it's a spellaction, then you add the spellId
+    /// </summary>
+    public class ActionMessageTCP
+    {
+        public IFight fight { get; set; }
+        public ObjectId caster { get; set; }
+        public ObjectId targetCell { get; set; }
+        /// <summary>
+        /// Determines the action to create
+        /// </summary>
+        public object actionType { get; set; }
+    }
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IAction
     {
+        /// <summary>
+        /// Player who sent that action message. 
+        /// </summary>
+        public IPlayer player { get; set; }
         /// <summary>
         /// Null by default.
         /// This action's parent action. Null for root actions (spell cast, move). <br></br>
         /// A root effect action will refer to the spell action that casts it.
         /// </summary>
         public IAction parent { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public HashSet<IAction> children { get; set; }
         /// <summary>
         /// 0 by default.
         /// Level starts at 0 and goes deeper. <br></br>
@@ -53,26 +87,55 @@ namespace souchy.celebi.eevee.face.objects
         public IAction copy();
         public ICreature getCaster() => fight.creatures.Get(caster);
         public ICell getCell() => fight.cells.Get(targetCell);
+
+        public ObjectId? getClosestSpellSource()
+        {
+            if (parent is IActionSpell actionSpell)
+            {
+                return actionSpell.spell;
+            }
+            else
+            if (parent is SubActionStatus actionStatus)
+            {
+                return actionStatus.statusInstance.GetContainer().sourceSpellModel;
+            }
+            return parent?.getClosestSpellSource();
+        }
     }
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
     public abstract class BaseAction : IAction
     {
-        public IAction parent { get; set; } 
+        public IPlayer player { get; set; }
+        public IAction parent { get; set; }
+        public HashSet<IAction> children { get; set; } = new();
         public int depthLevel { get; set; }
         public ActionContext context { get; set; } = new ActionContext();
         public IFight fight { get; set; }
         public ObjectId caster { get; set; }
         public ObjectId targetCell { get; set; }
+        protected BaseAction() { }
+        public BaseAction(IAction parentAction)
+        {
+            fight = parentAction.fight;
+            parent = parentAction;
+            caster = parentAction.caster;
+            targetCell = parentAction.targetCell;
+            depthLevel = parentAction.depthLevel + 1;
+            parent.children.Add(this);
+        }
 
         public IAction copy()
         {
             IAction copy = copyImplementation();
+            copy.fight = fight;
+            copy.player = player;
+            foreach(var child in children)
+                copy.children.Add(child);
             copy.parent = parent;
             copy.depthLevel = depthLevel;
             copy.context = context;
-            copy.targetCell = targetCell;
             copy.caster = caster;
             copy.targetCell = targetCell;
             return copy;
@@ -135,6 +198,16 @@ namespace souchy.celebi.eevee.face.objects
         //public IID caster { get; set; }
         //public IID target { get; set; }
     }
+
+    public class ActionPass : BaseAction, IActionPass
+    {
+        protected override IAction copyImplementation()
+        {
+            var copy = new ActionPass();
+            return copy;
+        }
+    }
+
     public interface IActionSwapOut : IAction
     {
         //public IID caster { get; set; }
@@ -149,7 +222,7 @@ namespace souchy.celebi.eevee.face.objects
         /// <summary>
         /// Effect to apply, contains the schema, conditions, etc
         /// </summary>
-        public IEffect effect { get; set; }
+        public IEffectInstance effect { get; set; }
     }
     /// <summary>
     /// Apply 1 effect to its whole aoe
@@ -159,15 +232,18 @@ namespace souchy.celebi.eevee.face.objects
         /// <summary>
         /// Effect to apply, contains the schema, conditions, etc
         /// </summary>
-        public IEffect effect { get; set; }
+        public IEffectInstance effect { get; set; }
         /// <summary>
         /// Possible targets in the effect aoe
         /// </summary>
         public IEnumerable<IBoardEntity> boardTargets { get; set; }
 
+        private SubActionEffect() { }
+        public SubActionEffect(IAction parent) : base(parent) { }
+
         protected override IAction copyImplementation()
         {
-            var copy = new SubActionEffect();
+            var copy = new SubActionEffect(parent);
             copy.effect = effect;
             copy.boardTargets = boardTargets.ToList();
             return copy;
@@ -178,12 +254,28 @@ namespace souchy.celebi.eevee.face.objects
     /// </summary>
     public class SubActionEffectTarget : BaseAction,  ISubActionEffectTarget
     {
-        public IEffect effect { get; set; }
+        public IEffectInstance effect { get; set; }
+        private SubActionEffectTarget() { }
+        public SubActionEffectTarget(IAction parent) : base(parent) { }
 
         protected override IAction copyImplementation()
         {
-            var copy = new SubActionEffect();
+            var copy = new SubActionEffect(parent);
             copy.effect = effect;
+            return copy;
+        }
+    }
+
+    public class SubActionStatus : BaseAction
+    {
+        public IStatusInstance statusInstance { get; set; }
+        private SubActionStatus() { }
+        public SubActionStatus(IAction parent) : base(parent) { }
+
+        protected override IAction copyImplementation()
+        {
+            var copy = new SubActionStatus(parent);
+            copy.statusInstance = statusInstance;
             return copy;
         }
     }

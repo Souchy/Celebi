@@ -117,10 +117,15 @@ namespace souchy.celebi.eevee.neweffects.impl
             //ChangeSourceLocation, // Rebase, //Reposition,  // cast the effect from the target location // pas sur de voir l'intérêt vs Zone.actor
                 // on peut utiliser un EmptyText aussi je pense, les children vont alors sourcer à la position des target du parent
                 // ex: poison proximité: EmptyText filter trees 64 -> AddStatus aoe2
-            CastSubSpell,   // détonateur -> bombe -> explosion (changeSourceActor -> castSubSpell)
-            RandomChild,
-            RandomPointsInZone, // take a acquisitionzone then take only x random targets in that zone
-            EmptyText,
+            /// <summary>
+            /// Very important if you want to do something recursive. <br></br>
+            /// Ex: rogue cast détonateur on bomb, bomb cast explosion. <br></br>
+            /// Ex: Toxic breath explodes flask, does aoe damage, flask cast toxic breath on near flasks, explodes them for aoe damage. this chains.
+            /// </summary>
+            CastSubSpell = 43,   // détonateur -> bombe -> explosion (changeSourceActor -> castSubSpell)
+            RandomChild = 44,
+            //RandomPointsInZone, // take a acquisitionzone then take only x random targets in that zone
+            EmptyText = 46,
         #endregion
 
         #region Status

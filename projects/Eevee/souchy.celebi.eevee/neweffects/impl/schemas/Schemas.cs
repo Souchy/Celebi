@@ -1,4 +1,5 @@
-﻿using souchy.celebi.eevee.enums;
+﻿using Newtonsoft.Json.Linq;
+using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.enums.characteristics.other;
@@ -9,99 +10,101 @@ using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
 using souchy.celebi.eevee.impl.objects.zones;
 using souchy.celebi.eevee.impl.stats;
+using souchy.celebi.eevee.impl.values;
 using souchy.celebi.eevee.neweffects.face;
 using souchy.celebi.eevee.neweffects.impl.effects.move;
+using System;
+using System.Xml.Linq;
 
 namespace souchy.celebi.eevee.neweffects.impl.schemas
 {
 
     #region Creature
-    public record Kill() : IEffectSchema { }
-    public record Revive() : IEffectSchema { }
-    public record EndTurn() : IEffectSchema { }
+    public record Kill() : IEffectSchema
+    {
+        public IEffectSchema copy() => new Kill();
+    }
+    public record Revive() : IEffectSchema
+    {
+        public IEffectSchema copy() => new Revive();
+    }
+    public record EndTurn() : IEffectSchema
+    {
+        public IEffectSchema copy() => new EndTurn();
+    }
     public record SpawnSummon() : IEffectSchema {
         public CreatureIID modelId { get; set; } = new();
+        public IEffectSchema copy() => new SpawnSummon()
+        {
+            modelId = modelId
+        };
     }
-    public record UnspawnSummon() : IEffectSchema { }
-    public record SpawnSummonDouble() : IEffectSchema { }
-    public record SpawnSummonDoubleIllusion() : IEffectSchema { }
-    public record RevealCreatureSpells() : IEffectSchema { }
+    public record UnspawnSummon() : IEffectSchema
+    {
+        public IEffectSchema copy() => new UnspawnSummon();
+    }
+    public record SpawnSummonDouble() : IEffectSchema
+    {
+        public IEffectSchema copy() => new SpawnSummonDouble();
+    }
+    public record SpawnSummonDoubleIllusion() : IEffectSchema
+    {
+        public IEffectSchema copy() => new SpawnSummonDoubleIllusion();
+    }
+    public record RevealCreatureSpells() : IEffectSchema
+    {
+        public IEffectSchema copy() => new RevealCreatureSpells();
+    }
     /// <summary>
-    /// This is instanced SpellStats <br></br>
+    /// This is instant SpellStats <br></br>
     /// As opposed to SpellMeta's  SpellModelStats <br></br>
     /// Can be used to refresh the current cooldown, add charges..
     /// </summary>
-    public record SpellAddStats() : SpellMetaSchema
+    public record AddSpellStats() : SpellMetaSchema
     {
         public SpellStats stats { get; set; } = SpellStats.Create();
+        public IEffectSchema copy() => new AddSpellStats()
+        {
+            stats = (SpellStats) stats.copy()
+        };
     }
-    #endregion
-
-    #region Move Translation
-    public record Walk() : IMoveSchema { }
-    public record PushBy() : IMoveSchema
-    {
-        public int distance { get; set; } = 1;
-    }
-    public record PullBy() : IMoveSchema
-    {
-        public int distance { get; set; } = 1;
-    }
-    public record DashBy() : IMoveSchema
-    {
-        public int distance { get; set; } = 1;
-    }
-    public record DashAwayBy() : IMoveSchema
-    {
-        public int distance { get; set; } = 1;
-    }
-    public record PushTo() : IMoveSchema { }
-    public record PullTo() : IMoveSchema { }
-    public record DashTo() : IMoveSchema { }
-    #endregion
-
-    #region Move Teleportation
-    public record SwapSelfWith() : IEffectSchema { }
-    public record SwapTargetWith() : IMoveSchema { }
-    /// <summary>
-    /// BoardTargeetType = cell
-    /// </summary>
-    public record TeleportSelfTo() : IEffectSchema { }
-    /// <summary>
-    /// BoardTargetType = creature
-    /// </summary>
-    public record TeleportTargetTo() : IMoveSchema { }
-    public record TeleportSelfBy() : IEffectSchema
-    {
-        public int distance { get; set; } = 1;
-    }
-    public record TeleportTargetBy() : IMoveSchema
-    {
-        public int distance { get; set; } = 1;
-    }
-    public record TeleportSymmetricallySelfOverTarget() : IEffectSchema { }
-    public record TeleportSymmetricallyTargetOverSelf() : IEffectSchema { }
-    public record TeleportSymmetricallyAoeOverTarget() : IMoveSchema { }
-    public record TeleportToPreviousPosition() : IEffectSchema { }
-    public record TeleportToStartOfTurnPosition() : IEffectSchema { }
-    public record TeleportToStartOfFightPosition() : IEffectSchema { }
     #endregion
 
     #region Meta
-    public record ChangeActor() : IEffectSchema { }
+    public record ChangeActor() : IEffectSchema
+    {
+        public IEffectSchema copy() => new ChangeActor();
+    }
     public record CastSubSpell() : IEffectSchema
     {
         public SpellIID modelId { get; set; } = new();
+        public IEffectSchema copy() => new CastSubSpell()
+        {
+            modelId = modelId
+        };
     }
-    public record RandomChild() : IEffectSchema { }
-    // this one might be thougher with Effect.GetPossibleBoardTargets then Mind.applyEffectContainer which foreaches(targets)
-    public record RandomPointsInZone() : IEffectSchema
+    public record RandomChild() : IEffectSchema 
     {
-        public int maximumPointsCount { get; set; } = int.MaxValue;
-        public int percentChancePerPoint { get; set; } = 50;
+        public int samplingCount { get; set; } = 1;
+        public List<int> weights { get; set; } = new();
+        public IEffectSchema copy() => new RandomChild()
+        {
+            samplingCount = samplingCount,
+            weights = new(weights)
+        };
     }
+    // this one might be thougher with Effect.GetPossibleBoardTargets then Mind.applyEffectContainer which foreaches(targets)
+    //public record RandomPointsInZone() : IEffectSchema
+    //{
+    //    public int maximumPointsCount { get; set; } = int.MaxValue;
+    //    public int percentChancePerPoint { get; set; } = 50;
+    //}
     public record EmptyText() : IEffectSchema {
         public StringIID modelId { get; set; } = new();
+        public IEffectSchema copy() => new EmptyText()
+        {
+            modelId = modelId,
+        };
     }
     /// <summary>
     /// This effect applies its children to the target,  <br></br>
@@ -120,156 +123,15 @@ namespace souchy.celebi.eevee.neweffects.impl.schemas
         /// </summary>
         public IZone chainZone { get; set; } = new Zone();
         public ICondition TargetFilter { get; set; }
+        public IEffectSchema copy() => new SpellChain()
+        {
+            maxChains = maxChains,
+            chainZone = chainZone.copy(),
+            TargetFilter = TargetFilter.copy()
+        };
     }
     #endregion
 
-    #region Status Add
-    public record AddStatusCreature() : IEffectSchema
-    {
-        public StatusIID modelId { get; set; } = new();
-    }
-    public record AddTrap() : IEffectSchema
-    {
-        public StatusIID modelId { get; set; } = new();
-    }
-    public record AddGlyph() : IEffectSchema
-    {
-        public StatusIID modelId { get; set; } = new();
-    }
-    public record AddGlyphAura() : IEffectSchema
-    {
-        public StatusIID modelId { get; set; } = new();
-    }
-    #endregion
-
-    #region Status Create
-    public record CreateStatusCreature() : IEffectSchema
-    {
-        public StatusModelStats statusStats { get; set; } = StatusModelStats.Create();
-    }
-    public record CreateTrap() : IEffectSchema
-    {
-        public StatusModelStats statusStats { get; set; } = StatusModelStats.Create();
-    }
-    public record CreateGlyph() : IEffectSchema
-    {
-        public StatusModelStats statusStats { get; set; } = StatusModelStats.Create();
-    }
-    public record CreateGlyphAura() : IEffectSchema
-    {
-        public StatusModelStats statusStats { get; set; } = StatusModelStats.Create();
-    }
-    #endregion
-
-    #region Status Remove
-    public record RemoveStatusCreature() : IEffectSchema
-    {
-        public ICondition statusFilter { get; set; }
-        public int durationToRemove { get; set; }
-    }
-    public record RemoveTrap() : IEffectSchema
-    {
-        public ICondition statusFilter { get; set; }
-        public int durationToRemove { get; set; }
-    }
-    public record RemoveGlyph() : IEffectSchema
-    {
-        public ICondition statusFilter { get; set; } // IStatusCondition
-        public int durationToRemove { get; set; }
-    }
-    #endregion
-
-    #region Resource
-    #region Damage 
-            public abstract record AbstractDamageSchema() : IEffectSchema
-            {
-                public ElementType element { get; set; } = ElementType.None;
-                public int baseDamage { get; set; } = 0;
-                public int percentPenetration { get; set; } = 0;
-                public int percentVariance { get; set; } = 0;
-            }
-            public record DirectDamage() : AbstractDamageSchema() { }
-            // Indirect Damage ignore defensive stats so they can't have penetration either
-            public record IndirectDamage() : AbstractDamageSchema() { } // no pen
-
-            // PercentLife damage don't benefit from offensive stats (affinities), but they calculate defensive stats (resistance, penetration)
-            public record DirectDamagePercentLifeMax() : AbstractDamageSchema() { }
-            public record IndirectDamagePercentLifeMax() : AbstractDamageSchema() { } // no pen
-
-            public record RedirectDamage() : IEffectSchema {
-                public int percentRedirect { get; set; } = 0;
-            }
-
-            public record DamagePerDynamicResourceUsedForSpell() : IEffectSchema {
-                public CharacteristicId charId { get; set; } = Resource.Life.ID;
-                public int baseDamagePerCharacUsed { get; set; } = 0;
-            }
-            
-            public record DamagePerContextualStat() : AbstractDamageSchema
-            {
-                public CharacteristicId statId { get; set; } = Contextual.DamageTaken.ID;
-                /// <summary>
-                /// multiplies the damageTaken or whatever ContextualStat
-                /// </summary>
-                public int multiplier => this.baseDamage;
-                /// <summary>
-                /// Ex: take 1000 damage, deal 100% of that back
-                /// </summary>
-                public bool isMultiplierPercentage = false;
-            }
-            public record HealPerContextualStat() : Heal
-            {
-                public CharacteristicId statId { get; set; } = Contextual.DamageTaken.ID;
-                /// <summary>
-                /// multiplies the damageTaken or whatever ContextualStat
-                /// </summary>
-                public int multiplier => this.baseHeal;
-                /// <summary>
-                /// Ex: take 1000 damage, heal 100% of that
-                /// </summary>
-                public bool isMultiplierPercentage = false;
-            }
-        #endregion
-        #region Heal
-            public record Heal() : IEffectSchema {
-                public ElementType element { get; set; } = ElementType.None;
-                public int baseHeal { get; set; } = 0;
-                public int percentVariance { get; set; } = 0;
-            }
-            public record HealPercentLifeMax() : IEffectSchema
-            {
-                public ElementType element { get; set; } = ElementType.None;
-                public int percentHeal { get; set; } = 0;
-                public ActorType percentOfWhoseLife { get; set; } = ActorType.Target;
-            }
-            /// <summary>
-            ///  child of DamageEffect
-            ///  (ex: pillage, piège fangeux, mot interdit..)
-            ///  (DmgEff selects targets, then the heal starts from their positions and heals according to its new TargetAcquisitionZone)
-            ///  That means you need to calculate Area += foreach(zone.area(target))
-            /// </summary>
-            public record HealPercentDamageDoneByEffect() : IEffectSchema
-            {
-                public ElementType element { get; set; } = ElementType.None;
-                public int percentHeal { get; set; } = 0;
-            }
-        #endregion
-        #region Both
-            public record DirectDamageStealLife() : AbstractDamageSchema() { }
-
-            public record TransferLife() : IEffectSchema 
-            { 
-                public IZone transferFrom = new Zone();
-                public int value { get; set; } = 0;
-                public int percentVariance { get; set; } = 0;
-            }
-            public record TransferPercentLifeMax() : IEffectSchema 
-            { 
-                public IZone transferFrom = new Zone();
-                public int percentValue { get; set; } = 0;
-            }
-        #endregion
-    #endregion
 
     #region Fight
     public record SwapOut() : IEffectSchema
@@ -283,12 +145,24 @@ namespace souchy.celebi.eevee.neweffects.impl.schemas
         /// </summary>
         public bool overrideInCooldown { get; set; } = false;
         public int setInCooldown { get; set; } = 0;
+        public IEffectSchema copy() => new SwapOut()
+        {
+            ignoreOutCooldown = ignoreOutCooldown,
+            overrideInCooldown = overrideInCooldown,
+            setInCooldown = setInCooldown
+        };
     }
     public record SwapIn() : IEffectSchema
     {
         public bool ignoreInCooldown { get; set; } = false;
         public bool overrideOutCooldown { get; set; } = false;
         public int setOutCooldown { get; set; } = 0;
+        public IEffectSchema copy() => new SwapIn()
+        {
+            ignoreInCooldown = ignoreInCooldown,
+            overrideOutCooldown = overrideOutCooldown,
+            setOutCooldown = setOutCooldown
+        };
     }
     #endregion
 

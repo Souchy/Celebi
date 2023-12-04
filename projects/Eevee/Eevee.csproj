@@ -1,13 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-	<TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
     <PackageId>$(AssemblyName)</PackageId>
     <RootNamespace />
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="souchy.celebi.eevee\face\objects\effects\**" />
     <Compile Remove="souchy.celebi.eevee\impl\objects\effects\**" />
@@ -16,7 +14,6 @@
     <None Remove="souchy.celebi.eevee\face\objects\effects\**" />
     <None Remove="souchy.celebi.eevee\impl\objects\effects\**" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Remove="souchy.celebi.eevee\enums\characteristics\stats\SpellCostStats.cs" />
     <Compile Remove="souchy.celebi.eevee\face\objects\IEffect.cs" />
@@ -30,7 +27,6 @@
     <Compile Remove="souchy.celebi.eevee\impl\shared\EffectModel.cs" />
     <Compile Remove="souchy.celebi.eevee\impl\shared\triggers\schemas\TriggerSchema.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Folder Include="souchy.celebi.eevee\face\net\amethyst\" />
     <Folder Include="souchy.celebi.eevee\face\shared\conditions\other\" />
@@ -42,7 +38,6 @@
     <Folder Include="souchy.celebi.eevee\neweffects\impl\scripts\spell\" />
     <Folder Include="souchy.celebi.eevee\neweffects\impl\scripts\special\" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="4.5.0-2.final" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
@@ -50,10 +45,8 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.5.0" />
   </ItemGroup>
-
   <ItemGroup>
     <Using Include="MongoDB.Bson" />
-	<Using Include="MongoDB.Bson.Serialization.Attributes" />
+    <Using Include="MongoDB.Bson.Serialization.Attributes" />
   </ItemGroup>
-
 </Project>

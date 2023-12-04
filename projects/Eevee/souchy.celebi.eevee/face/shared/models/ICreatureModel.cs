@@ -1,4 +1,5 @@
-﻿using souchy.celebi.eevee.enums.characteristics.other;
+﻿using souchy.celebi.eevee.enums.characteristics.creature;
+using souchy.celebi.eevee.enums.characteristics.other;
 using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared.models.skins;
@@ -15,8 +16,8 @@ namespace souchy.celebi.eevee.face.shared.models
         public ObjectId statsId { get; set; }
         public IEntitySet<ObjectId> spellIds { get; init; }
         public IEntitySet<ObjectId> statusPassiveIds { get; init; }
+        public List<ResourceEnum> resourceBars { get; init; }
 
-        
         public IStringEntity GetName() => Eevee.models.i18n.Get(nameId); //GetBaseSkin().GetName(); // 
         public IStringEntity GetDescription() => Eevee.models.i18n.Get(descriptionId); //GetBaseSkin().GetName(); //
         public CreatureStats GetBaseStats() => (CreatureStats) Eevee.models.stats.Get(statsId);

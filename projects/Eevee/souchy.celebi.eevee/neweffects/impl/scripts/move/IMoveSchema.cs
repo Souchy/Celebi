@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace souchy.celebi.eevee.neweffects.impl.effects.move
 {
-    public abstract record IMoveSchema() : IEffectSchema
+    public abstract record MoveSchema() : IEffectSchema
     {
 
         // Dont need an actorType to know who to apply the effect to
@@ -55,5 +55,6 @@ namespace souchy.celebi.eevee.neweffects.impl.effects.move
         /// </summary>
         public IZone MoveTargetZone { get; set; } = new Zone();
 
+        public abstract IEffectSchema copy();
     }
 }

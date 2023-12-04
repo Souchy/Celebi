@@ -24,9 +24,10 @@ public class StaticEnumSchemaFilter : ISchemaFilter
         {
             
             if (!context.Type.IsAssignableTo(typeof(CharacteristicType))
-                && !context.Type.IsAssignableTo(typeof(ConditionType))
                 && !context.Type.IsAssignableTo(typeof(CellType))
-                //&& !context.Type.IsAssignableTo(typeof(EffectType))
+                && !context.Type.IsAssignableTo(typeof(TriggerType))
+                && !context.Type.IsAssignableTo(typeof(ConditionType))
+            //&& !context.Type.IsAssignableTo(typeof(EffectType))
             )
             {
                 return;
@@ -51,7 +52,8 @@ public class StaticEnumSchemaFilter : ISchemaFilter
             }
             sc.Type = "string";
             sc.Format = string.Empty;
-            context.SchemaRepository.AddDefinition(context.Type.Name + "Types", sc);
+            var enumName = (context.Type.Name + "Types").Replace("TypeTypes", "Types");
+            context.SchemaRepository.AddDefinition(enumName, sc);
         }
     }
     public class EnumToStringConverter : JsonConverter

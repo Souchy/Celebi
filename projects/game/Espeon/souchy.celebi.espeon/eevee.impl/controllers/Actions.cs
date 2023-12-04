@@ -18,15 +18,43 @@ using souchy.celebi.eevee.face.shared.zones;
 using souchy.celebi.eevee.face.entity;
 using Microsoft.AspNetCore.Hosting;
 using souchy.celebi.eevee.enums.characteristics.creature;
+using souchy.celebi.eevee.impl.shared.triggers.schemas;
+using System.Collections.Concurrent;
 
 namespace souchy.celebi.espeon.eevee.impl.controllers
 {
+    /// <summary>
+    /// not here, in espeon, need to queue all actions in each fight so players can chain them and keep the order etc (cast #2 before #1 ends)
+    /// </summary>
+    public class TodoHandlerPerFight
+    {
+        public ConcurrentQueue<IAction> actionQueue = new ConcurrentQueue<IAction>();
+    }
     public class Actions
     {
+
         // only on client
         public void previewSpell(IActionSpell action)
         {
 
+        }
+
+        public void passTurn(IActionPass action)
+        {
+            IFight fight = action.fight;
+            ITimeline timeline = fight.timeline;
+
+            // Check that the current player and current creature match the action
+            var currentCreature = timeline.getCurrentCreature();
+            var currentPlayer = timeline.getCurrentPlayer();
+            if (currentCreature.entityUid != action.caster ||
+                currentPlayer.entityUid != action.player.entityUid)
+            {
+                return;
+            }
+
+            // Apply timeline & proc Triggers
+            timeline.nextTurn(action);
         }
 
         // only on server
@@ -62,9 +90,9 @@ namespace souchy.celebi.espeon.eevee.impl.controllers
 
             //EffectPreviewPipeline pipeline = new EffectPreviewPipeline();
 
-            TriggerEvent triggerBefore = new TriggerEvent(TriggerType.TriggerOnSpell, TriggerOrderType.Before, action);
+            TriggerEvent triggerBefore = new TriggerEvent(TriggerType.TriggerOnSpellCast, TriggerOrderType.Before);
             //TriggerEvent triggerApply = new TriggerEvent(TriggerType.OnCreatureSpellCast, TriggerOrderType.Apply);
-            TriggerEvent triggerAfter = new TriggerEvent(TriggerType.TriggerOnSpell, TriggerOrderType.After, action);
+            TriggerEvent triggerAfter = new TriggerEvent(TriggerType.TriggerOnSpellCast, TriggerOrderType.After);
 
             // Check triggers Before
             Mind.checkTriggers(action, triggerBefore);

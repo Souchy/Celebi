@@ -1,12 +1,12 @@
 <import from="../../../../components/modal/modal"></import>
 <import from="../strings/stringcomponent"></import>
 <import from="../stats/spell/spellstats"></import>
-<import from="../effects/modelSelector/effectModelSelector"></import>
 <import from="../effects/effect"></import>
 <import from="../effects/effectlist"></import>
 <import from="../zone/zone"></import>
 <import from="../stats/gen/statsmini"></import>
-<import from="../condition/condition"></import>
+<import from="../conditions/condition"></import>
+<import from="../../components/modelSelector/modelSelector"></import>
 
 
 <!-- vignette root || creature -->
@@ -43,7 +43,12 @@
 
 <!-- full spell ui, not vignette -->
 <template if.bind="!isvignette">
-  <h2>Spell #${model.modelUid}</h2>
+  <!-- title -->
+  <div class="spellTitle">
+    <h2>Spell #${model.modelUid}</h2>
+    <h2>${model.entityUid}</h2>
+  </div>
+
   <div class="d-flex">
     <stringcomponent view-model.ref="name" uid.bind="model.nameId" editable=true></stringcomponent>
     <stringcomponent view-model.ref="desc" uid.bind="model.descriptionId" editable=true large=true class="large"></stringcomponent>
@@ -91,9 +96,11 @@
     <div>
       <h5>Conditions</h5>
       <h6>Caster Condition</h6>
-      <condition model.bind="model.sourceCondition" callbacksave.bind="() => save()"></condition>
+      <condition parent.bind="model" parentPropertyName.bind="sourceCondition" model.bind="model.sourceCondition" callbacksave.bind="() => save()"></condition>
+      <!-- <condition model.bind="model.sourceCondition" callbacksave.bind="() => save()"></condition> -->
       <h6>Target Filter</h6>
-      <condition model.bind="model.targetFilter" callbacksave.bind="() => save()"></condition>
+      <condition parent.bind="model" parentPropertyName.bind="targetFilter" model.bind="model.targetFilter" callbacksave.bind="() => save()"></condition>
+      <!-- <condition model.bind="model.targetFilter" callbacksave.bind="() => save()"></condition> -->
     </div>
   </div>
 

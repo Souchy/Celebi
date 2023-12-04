@@ -14,6 +14,9 @@ namespace souchy.celebi.eevee.face.entity
     public interface IBoardEntity : IEntityModeled, IFightEntity
     {
         public IPosition position { get; init; }
+        /// <summary>
+        /// StatusContainers
+        /// </summary>
         public IEntitySet<ObjectId> statuses { get; init; } 
 
         public Dictionary<ContextType, IContext> contexts { get; set; }

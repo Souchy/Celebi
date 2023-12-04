@@ -1,0 +1,48 @@
+<import from="../../conditions/condition"></import>
+<import from="../../../../../components/modal/modal"></import>
+<import from="../../properties/propertygrid"></import>
+<import from="../../zone/zone"></import>
+<import from="../../../components/modelSelector/modelSelector"></import>
+
+<!-- Triggerer Zone -->
+<div class="eblock" style="margin-right: 15px;">
+  <h6 class="clickable" data-bs-toggle="collapse" data-bs-target="#collapseZone-${model.entityUid}">Triggerer Zone</h6>
+  <zone if.bind="model.zone" zone.bind="model.triggerZone" uid.bind="model.entityUid" callbacksave.bind="() => onSave()"></zone>
+  <button else class="btn btn-floating">Set</button>
+</div>
+
+<!-- Conditions -->
+<div>
+  <h6>Triggerer Filter</h6>
+  <condition parent.bind="model" parentPropertyName.bind="triggererFilter" model.bind="model.triggererFilter" callbacksave.bind="() => save()"></condition>
+  <h6>Holder Condition</h6>
+  <condition parent.bind="model" parentPropertyName.bind="holderCondition" model.bind="model.holderCondition" callbacksave.bind="() => save()"></condition>
+</div>
+
+<!-- Trigger OrderType -->
+<div>
+  <h6>OrderType</h6>
+  <select value.bind="model.triggerOrderType" change.trigger="() => save()">
+    <option repeat.for="e of Enums.triggerOrderTypes" model.bind="$index">${e}</option>
+  </select>
+</div>
+
+<!-- Trigger Type -->
+<div class="eblock" style="flex-grow: 1;">
+  <h6>${model.schema.triggerType.name} schema</h6>
+
+  <!-- Delete -->
+  <button class="btn btn-floating" data-bs-toggle="modal" data-bs-target="#triggerDeleteModal-${model.entityUid}">Delete</button>
+  <modal id="triggerDeleteModal-${model.entityUid}" header="Delete Trigger" callbackok.bind="() => delete()">
+    Are you sure you want to delete ${model.schema.triggerType.name} ${model.entityUid}
+  </modal>
+
+  <!-- Change type -->
+  <button class="btn btn-floating btn-changeSchema" data-bs-toggle="modal" data-bs-target="#triggerChangeTypeModal-${model.entityUid}">Change type</button>
+  <modal id="triggerChangeTypeModal-${model.entityUid}" header="Change Trigger schema type" footer.bind=false>
+    <model-selector schemas.bind="schemas" onselectcallback.bind="e => onChangeSchemaType(e)"></model-selector>
+  </modal>
+
+  <!-- Properties -->
+  <propertygrid data.bind="model.schema" schema.bind="schema" uid.bind="model.entityUid" callbacksave.bind="() => save()"></propertygrid>
+</div>

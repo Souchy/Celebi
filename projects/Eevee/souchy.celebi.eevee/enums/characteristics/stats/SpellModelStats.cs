@@ -20,6 +20,13 @@ namespace souchy.celebi.eevee.enums.characteristics.other
         {
             entityUid = Eevee.RegisterIIDTemporary()
         };
+
+        protected override IStats copyImplementation(bool anonymous = false)
+        {
+            if (anonymous) return new SpellModelStats();
+            else return SpellModelStats.Create();
+        }
+
         //----- Model
         // los
         // max charges

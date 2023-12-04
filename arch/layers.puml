@@ -1,0 +1,45 @@
+@startuml Layer diagram
+
+
+component "Jolteon" #application
+
+component "Glaceon" #application {
+}
+component "Umbreon" #cornflowerblue {
+}
+
+node DarkShadowFleet {
+    component "Spark" #LightSteelBlue
+    component "Espeon" #LightSteelBlue
+}
+
+rectangle "Eevee" #DarkSeaGreen
+
+
+' Web server
+Spark -down-> Eevee : use
+' Web client
+' Jolteon .down.> Spark : HTTP
+Jolteon .down.> () HTTP
+HTTP - Spark
+
+' Game server
+Espeon -down-> Eevee : use
+Espeon <.right.> Umbreon : TCP
+
+' Game client
+Glaceon -down-> Umbreon : use
+Glaceon .down.> Umbreon : commands
+Glaceon <.down. Umbreon : events
+Umbreon -down-> Eevee : use
+
+
+legend
+    | Element | Description |
+    |<#Application>| User application interface |
+    |<#LightSteelBlue>| Server |
+    |<#CornFlowerBlue>| Client |
+    |<#DarkSeaGreen>| Library |
+endlegend
+
+@enduml

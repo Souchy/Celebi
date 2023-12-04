@@ -5,10 +5,12 @@ import { watch } from '@aurelia/runtime-html';
 import { IEventAggregator, bindable, inject, observable } from "aurelia";
 import { EffectPermanentController } from "../../../../jolteon/services/api/EffectPermanentController";
 import { PropertiesController } from "../../../../jolteon/services/api/PropertiesController";
-import { Effects } from '../../../../jolteon/constants';
+import { Schemas } from '../../../../jolteon/constants';
 import { TOAST_STATUS, Toast } from 'bootstrap-toaster';
+import { TriggerModelController } from '../../../../jolteon/services/api/TriggerModelController';
 
-@inject(IEventAggregator, IRouter) //, EffectPermanentController, PropertiesController) //, SpellModelController)
+@inject(IEventAggregator, EffectPermanentController)
+// @inject(IEventAggregator, IRouter, EffectPermanentController, PropertiesController, TriggerModelController) //, SpellModelController)
 export class Effect {
 
     @bindable
@@ -26,12 +28,14 @@ export class Effect {
     private model: IEffect;
     // db data, important for propertygrid
     // private schema: SchemaDescription
+    public schemas = Schemas.effects;
 
     constructor(
         private readonly ea: IEventAggregator,
-        private readonly router: IRouter,
+        // private readonly router: IRouter,
         private readonly effectController: EffectPermanentController,
-        private readonly propertiesController: PropertiesController,
+        // private readonly propertiesController: PropertiesController,
+        // private readonly triggerController: TriggerModelController
     ) {
     }
 
@@ -60,8 +64,14 @@ export class Effect {
         // let key = Object.keys(EffT)[id];
     }
     public get schema(): SchemaDescription {
-        let desc = Effects.schemas.find(s => s.name == this.modelName);
+        let desc = Schemas.effects.find(s => s.name == this.modelName);
+        // if(desc.name == "DirectDamage")
+        //     console.log("Effect get schema description: " + JSON.stringify(desc));
         return desc;
+    }
+
+    public get hasStatusEffects() {
+        return "effectIds" in this.model.schema;
     }
 
     //#region click handlers
@@ -81,16 +91,6 @@ export class Effect {
         // console.log("Effect.remove: " + this.model.entityUid);
         this.callbackremove(this.model);
     }
-    // TODO add triggers
-    public clickAddTrigger() {
-        // this.model.triggers.push({
-        //     holderCondition: null,
-        //     triggererFilter: null,
-        //     triggerOrderType: TriggerOrderType.After,
-        //     triggerType: TriggerType.OnTurnEnd,
-        //     triggerZone: {}
-        // });
-    }
     public clickCopy() {
         navigator.clipboard.writeText(JSON.stringify(this.model));
         Toast.create({
@@ -105,32 +105,39 @@ export class Effect {
         let eff: IEffect = JSON.parse(text);
         this.effectController.putEffect(this.model.entityUid, eff)
             .then(res => this.model = res.data)
-            .then(f => this.ea.publish("operation:saved"))
-            // .then(this.handleUpdate);
+            .then(res => this.handleSuccess(res), rej => this.handleFailure(rej))
     }
     public onChangeSchemaType(schema: SchemaDescription) {
         this.effectController.putSchema(this.model.entityUid, { schemaName: schema.name })
             .then(res => this.model = res.data)
-            .then(f => this.ea.publish("operation:saved"))
-            // .then(this.handleUpdate);
+            .then(res => this.handleSuccess(res), rej => this.handleFailure(rej))
+    }
+    public saveTriggerList() {
+        // console.log("effect save trigger list")
+        this.effectController.putTriggers(this.model.entityUid, this.model.triggers)
+            .then(res => this.handleSuccess(res), rej => this.handleFailure(rej))
     }
     //#endregion
 
 
     //#region callback handlers
     public onSave() {
-        // console.log("effect save")
+        console.log("effect save " + this.model.entityUid)
         // update db
         this.effectController.putEffect(this.model.entityUid, this.model)
             .then(
                 res => {
                     this.model = res.data
-                    this.ea.publish("operation:saved");
+                    this.handleSuccess(res);
                 },
-                rej => {
-                    this.ea.publish("operation:failed");
-                }
+                this.handleFailure
             );
+    }
+    public handleSuccess(res) {
+        this.ea.publish("operation:saved");
+    }
+    public handleFailure(rej) {
+        this.ea.publish("operation:failed");
     }
     //#endregion
 

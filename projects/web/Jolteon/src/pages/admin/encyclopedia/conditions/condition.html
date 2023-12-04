@@ -1,0 +1,50 @@
+<import from="../../../../components/modal/modal"></import>
+<import from="../properties/propertygrid"></import>
+<import from="../../components/modelSelector/modelSelector"></import>
+
+<template if.bind="model">
+  <button class="btn btn-floating">Change Type</button>
+  <button class="btn btn-floating">Delete</button>
+
+  <!-- Actor Type: Wether the condition applies to the caster or the target -->
+  <div>
+    Actor:
+    <select value.bind="model.actorType" change.trigger="save()">
+      <option repeat.for="e of Enums.actorTypes" model.bind="$index">${e}</option>
+    </select>
+  </div>
+
+  <!-- Comparator Type: EQ, NE, GT, GE, LT, LE -->
+  <div>
+    Comparator:
+    <select value.bind="model.comparator" change.trigger="save()">
+      <option repeat.for="e of Enums.comparatorTypes" model.bind="$index">${e}</option>
+    </select>
+  </div>
+
+  <!-- schema properties -->
+  ${schema.name} schema:
+  <propertygrid data.bind="model" schema.bind="schema" uid.bind="model.entityUid" callbacksave.bind="() => onSave()">
+    <!-- <div if.bind="modelName == 'GroupCondition'"> -->
+    <!-- Remove this condition from its parent -->
+    <!-- <button if.bind="depth > 0">-</button> -->
+    <!-- Group Type: AND / OR -->
+    <!-- <select>
+                <option></option>
+            </select> -->
+    <!-- Add Child -->
+    <!-- <button>+</button> -->
+    <!-- Children -->
+    <!-- <condition repeat.for="child of children" model.bind="child" depth.bind="depth+1"></condition> -->
+    <!-- </div> -->
+  </propertygrid>
+
+</template>
+
+<template else>
+  hi
+  <button class="btn btn-floating" data-bs-toggle="modal" data-bs-target="#conditionSchemaTypeModal-${parent.entityUid}-${parentPropertyName}">Set</button>
+  <modal id="conditionSchemaTypeModal-${parent.entityUid}-${parentPropertyName}" header="Add Condition" close.bind=false footer.bind=false>
+    <model-selector schemas.bind="schemas" onselectcallback.bind="e => create(e)"></model-selector>
+  </modal>
+</template>

@@ -5,7 +5,9 @@ using souchy.celebi.eevee.face.shared;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.face.values;
 using souchy.celebi.eevee.impl;
+using souchy.celebi.eevee.impl.shared.triggers;
 using souchy.celebi.eevee.impl.stats;
+using souchy.celebi.eevee.neweffects.face;
 
 namespace souchy.celebi.eevee.face.objects.statuses
 {
@@ -19,6 +21,7 @@ namespace souchy.celebi.eevee.face.objects.statuses
 
         public ObjectId statsId { get; set; }
         public StatusInstanceStats GetStats() => (StatusInstanceStats) this.GetFight().stats.Get(statsId);
+        public IStatusContainer GetContainer() => this.GetFight().statuses.Values.First(s => s.instances.Contains(this));
     }
 
 }

@@ -76,8 +76,8 @@ module.exports = function (env, { analyze }) {
     devServer: {
       historyApiFallback: true,
       open: false, //!process.env.CI,
-      port: 9000,
-      https: true
+      port: 9001,
+      https: production
       // server: true, ??
       // http2: true,
       // https: {

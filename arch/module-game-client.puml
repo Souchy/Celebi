@@ -1,0 +1,74 @@
+@startuml Module game client
+
+
+rectangle MessageLibrary #DarkSeaGreen {
+    class MessageLibrary.Message
+}
+component Glaceon #Application {
+    ' class Glaceon.CreatureSheet
+    class Glaceon.UserAction
+
+    component Umbreon #CornflowerBlue {
+        package Umbreon.Presentation {
+            class Umbreon.Presentation.Client
+            Umbreon.Presentation.Client -down-> MessageLibrary.Message
+        }
+        package Umbreon.Logic {
+            class Umbreon.Logic.CommandAction
+            ' class Umbreon.Logic.IAction
+            ' Umbreon.Presentation.Client -up-> Umbreon.Logic.IAction
+        }
+        Glaceon.UserAction .down.> Umbreon.Logic.CommandAction : send command
+        Umbreon.Logic.CommandAction <-down-> Umbreon.Presentation.Client
+        rectangle Umbreon.Eevee #DarkSeaGreen {
+            class Umbreon.Eevee.Fight
+            class Umbreon.Eevee.Creature
+            class Umbreon.Eevee.CreatureModel
+            class Umbreon.Eevee.Diamonds
+            Umbreon.Eevee.Fight -down-> Umbreon.Eevee.Creature
+            Umbreon.Eevee.Creature -down-> Umbreon.Eevee.CreatureModel
+            Umbreon.Eevee.Diamonds -down-> Umbreon.Eevee.CreatureModel
+            Umbreon.Logic.CommandAction -> Umbreon.Eevee.Fight
+            ' Umbreon.Logic.IAction -> Umbreon.Eevee.Fight
+        }
+    }
+    CreatureSheet <..down.  Umbreon.Eevee.Creature : events
+    ' CreatureSheet <.down..  Umbreon.Eevee.Creature : events
+}
+
+component Espeon #LightSteelBlue {
+    package Espeon.Presentation {
+        class Espeon.Presentation.Server
+        Espeon.Presentation.Server -up-> MessageLibrary.Message
+        Umbreon.Presentation.Client <....> Espeon.Presentation.Server : tcp
+        ' Espeon.Presentation.Server ..> Umbreon.Eevee.Fight : tcp
+    }
+
+    package Espeon.Logic {
+        class Espeon.Logic.IAction
+        Espeon.Presentation.Server <-> Espeon.Logic.IAction
+    }
+
+    rectangle Espeon.Eevee #DarkSeaGreen {
+        class Espeon.Eevee.IAction <<deprecated?>> #DarkGrey {
+            helps separate domains like commands.
+            maybe extract it to espeon logic
+        }
+        class Espeon.Eevee.Fight
+        class Espeon.Eevee.Creature
+        class Espeon.Eevee.CreatureModel
+        class Espeon.Eevee.Diamonds
+        Espeon.Eevee.Fight -down-> Espeon.Eevee.Creature
+        Espeon.Eevee.Creature -down-> Espeon.Eevee.CreatureModel
+        Espeon.Eevee.Diamonds -down-> Espeon.Eevee.CreatureModel
+        Espeon.Eevee.IAction -> Espeon.Eevee.Fight
+        ' Espeon.Presentation.Server .> Espeon.Eevee.IAction
+        Espeon.Logic.IAction -> Espeon.Eevee.Fight
+    }
+}
+
+
+
+
+
+@enduml

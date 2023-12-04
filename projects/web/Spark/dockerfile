@@ -10,3 +10,5 @@ WORKDIR /source
 COPY . .
 
 RUN dotnet publish -c Release -o /app --self-contained false
+
+ENTRYPOINT ["dotnet", "Spark.dll"]

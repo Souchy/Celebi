@@ -1,7 +1,10 @@
-﻿using souchy.celebi.eevee.face.objects;
+﻿using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.objects.zones;
+using souchy.celebi.eevee.impl.shared.triggers;
+using souchy.celebi.eevee.impl.shared.triggers.schemas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,18 +33,35 @@ namespace souchy.celebi.eevee.impl.objects
             return timeline;
         }
 
-        public void nextRound()
+        public void nextRound(IAction action)
         {
+            // Trigger end
+            Mind.checkTriggers(action, new TriggerEventTimeline(TriggerOrderType.Before, MomentType.RoundEnd));
+            Mind.checkTriggers(action, new TriggerEventTimeline(TriggerOrderType.After, MomentType.RoundEnd));
+            // Apply
             currentRound++;
+            // Trigger TurnStart
+            Mind.checkTriggers(action, new TriggerEventTimeline(TriggerOrderType.Before, MomentType.RoundStart));
+            Mind.checkTriggers(action, new TriggerEventTimeline(TriggerOrderType.After, MomentType.RoundStart));
         }
-        public void nextTurn()
+        public void nextTurn(IAction action)
         {
+            // Trigger TurnEnd
+            Mind.checkTriggers(action, new TriggerEventTimeline(TriggerOrderType.Before, MomentType.TurnEnd));
+            Mind.checkTriggers(action, new TriggerEventTimeline(TriggerOrderType.After, MomentType.TurnEnd));
             int i = indexOf(currentTurn);
+            int size = this.size();
             i++;
-            if (i >= size())
+            if (i >= size)
+            {
                 i = 0;
+                nextRound(action);
+            }
             var next = getCreatureAt(i);
             this.currentTurn = next.entityUid;
+            // Trigger TurnStart
+            Mind.checkTriggers(action, new TriggerEventTimeline(TriggerOrderType.Before, MomentType.TurnStart));
+            Mind.checkTriggers(action, new TriggerEventTimeline(TriggerOrderType.After, MomentType.TurnStart));
         }
         public int indexOf(ObjectId creatureId)
         {
@@ -65,15 +85,21 @@ namespace souchy.celebi.eevee.impl.objects
 
         public ICreature getCreatureAt(int i)
         {
+            // number of creatures accounted for
             int count = 0;
             foreach(var slot in this.slots)
             {
-                if (i > count + slot.count)
+                // ex: 0 should return slot 0, but 1 should return crea in slot 1 if slot 0 has only one creature
+                if (i >= count + slot.count)
                 {
                     count += slot.count;
                 }
-                int localTurn = i - count;
-                return slot.get(localTurn);
+                else 
+                {
+                    // 
+                    int localTurn = i - count;
+                    return slot.get(localTurn);
+                }
             }
             throw new Exception($"Error trying to Timeline.getCurrentCreature(). CurrentTurn: {currentTurn}. Count: {count}. Size: {size()}.");
         }
@@ -82,6 +108,7 @@ namespace souchy.celebi.eevee.impl.objects
         {
             return this.GetFight().creatures.Get(currentTurn);
         }
+
         public IPlayer getCurrentPlayer()
         {
             return getCurrentCreature().GetCurrentOwner();
@@ -99,6 +126,10 @@ namespace souchy.celebi.eevee.impl.objects
 
         public void addSlot(ObjectId crea)
         {
+            // First crea starts
+            if (this.slots.Count == 0)
+                currentTurn = crea;
+
             var slot = new TimelineSlot()
             {
                 creatureId = crea,
@@ -109,7 +140,7 @@ namespace souchy.celebi.eevee.impl.objects
     }
 
     /// <summary>
-    /// For summoner's and their summons
+    /// For a summoner and their summons
     /// </summary>
     public class TimelineSlot
     {

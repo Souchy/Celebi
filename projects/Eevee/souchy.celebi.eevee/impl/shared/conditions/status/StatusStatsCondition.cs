@@ -10,6 +10,7 @@ using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.controllers;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.objects.statuses;
+using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.shared.triggers;
@@ -62,6 +63,15 @@ namespace souchy.celebi.eevee.impl.shared.conditions.status
             //    fetchedValue = statBool.value;
             //}
             //return this.comparator.check(fetchedValue, value);
+        }
+
+        public override ICondition copyImplementation()
+        {
+            var copy = new StatusStatsCondition();
+            copy.statusModelId = statusModelId;
+            copy.boardTargetType = boardTargetType;
+            copy.conditionStats = conditionStats.copy();
+            return copy;
         }
     }
 }

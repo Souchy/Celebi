@@ -1,0 +1,48 @@
+propertygrid {
+
+    // table:first-of-type {
+    //     width: 100%;
+    //     table-layout: auto;
+    //     tr {
+    //         // box-shadow: rgb(78, 78, 78) 0.1px 2px;
+    //         // border-bottom: rgb(58, 58, 58) 1px solid;
+    //         td {
+    //             padding: 16px 0px 8px 8px;
+    //         }
+    //     }
+    //     tr:first-child>td {
+    //         padding: 0px 0px 8px 8px;
+    //     }
+    // }
+
+    .property {
+        // padding: 4px;
+        /* offset-x | offset-y | blur-radius | spread-radius | color */
+        // box-shadow: red 2px 2px 2px 1px;
+        box-shadow: var(--shadow) 4px 4px 4px;
+        // border-left: 1px dashed rgba(255, 255, 255, 0.329);
+        // border-radius: 5px;
+    }
+}
+
+propertygrid > div > table {
+    width: 100%;
+    table-layout: auto;
+}
+propertygrid > div > table > tbody > tr {
+    // box-shadow: rgb(78, 78, 78) 0.1px 2px;
+    // border-bottom: rgb(58, 58, 58) 1px solid;
+    td {
+        padding: 16px 0px 8px 8px;
+    }
+}
+propertygrid > div > table > tbody > tr:first-child > td {
+    padding: 0px 0px 8px 8px;
+}
+propertygrid > div > table > tbody > tr > td:first-child {
+    // width: 50%;
+    white-space: nowrap;
+}
+propertygrid > div > table > tbody > tr > td:last-child {
+    width: 100%;
+}

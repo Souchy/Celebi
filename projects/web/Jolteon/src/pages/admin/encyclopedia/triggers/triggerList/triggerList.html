@@ -1,0 +1,20 @@
+<import from="../../../../../components/modal/modal"></import>
+<import from="../trigger/trigger"></import>
+<import from="../../../components/modelSelector/modelSelector"></import>
+
+<!-- <button class="btn btn-floating" click.trigger="clickAddTrigger()">+</button> -->
+<button class="btn btn-floating" data-bs-toggle="modal" data-bs-target="#triggerAddModal-${modaluid}">+</button>
+<modal id="triggerAddModal-${modaluid}" header="Add Trigger" close.bind=false footer.bind=false>
+  <model-selector schemas.bind="schemas" onselectcallback.bind="e => onAddTrigger(e)"></model-selector>
+</modal>
+
+<button class="btn btn-floating" data-bs-toggle="modal" data-bs-target="#triggerModalClearList-${modaluid}">Clear</button>
+<modal id="triggerModalClearList-${modaluid}" header="Clear trigger list" close.bind=false callbackok.bind="() => clearList()"></modal>
+
+
+<div repeat.for="trigger of effect.triggers">
+    <button class="btn btn-outline mb-1" data-bs-toggle="modal" data-bs-target="#triggerEditorModal-${trigger.entityUid}">${trigger.schema.triggerType.name}</button>
+    <modal id="triggerEditorModal-${trigger.entityUid}" header="Edit Trigger ${trigger.entityUid}" close.bind=true footer.bind=false buttons.bind=false>
+        <trigger model.bind="trigger" callbacksave.bind="() => save()" callbackdelete.bind="() => onDelete(trigger)" callbackchange.bind="(e) => onChangeType(trigger, e)"></trigger>
+    </modal>
+</div>

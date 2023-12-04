@@ -8,11 +8,14 @@ using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.objects.stats;
 using souchy.celebi.eevee.face.shared;
+using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.shared.models;
+using souchy.celebi.eevee.face.shared.triggers;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.impl.shared;
 using souchy.celebi.eevee.impl.shared.triggers;
+using souchy.celebi.eevee.impl.util;
 using souchy.celebi.eevee.neweffects;
 using souchy.celebi.eevee.neweffects.face;
 using souchy.celebi.eevee.neweffects.impl;
@@ -110,6 +113,48 @@ namespace souchy.celebi.spark.controllers.models
             if (result.ModifiedCount > 0)
                 return Ok(model);
             return BadRequest();
+        }
+
+
+        [Authorize(Roles = nameof(AccountType.Admin))]
+        [HttpPut("{id}/triggers")]
+        public async Task<ActionResult<UpdateResult>> UpdateTriggerList([FromRoute] ObjectId id, [FromBody] ITriggerModel[] triggers)
+        {
+            var model = await _effects.GetOneAsync(id);
+            if (model is null)
+                return NotFound();
+
+            var set = new EntitySet<ITriggerModel>(triggers);
+            var update = Builders<IEffect>.Update.Set(nameof(IEffect.Triggers), set);
+            var result = await _effects.UpdateAsync(id, update);
+            return Ok(result);
+        }
+
+
+        [Authorize(Roles = nameof(AccountType.Admin))]
+        [HttpPut("{id}/conditionTarget")]
+        public async Task<ActionResult<UpdateResult>> UpdateConditionTarget([FromRoute] ObjectId id, [FromBody] ICondition targetFilter)
+        {
+            var model = await _effects.GetOneAsync(id);
+            if (model is null)
+                return NotFound();
+
+            var update = Builders<IEffect>.Update.Set(nameof(IEffect.TargetFilter), targetFilter);
+            var result = await _effects.UpdateAsync(id, update);
+            return Ok(result);
+        }
+
+        [Authorize(Roles = nameof(AccountType.Admin))]
+        [HttpPut("{id}/conditionSource")]
+        public async Task<ActionResult<UpdateResult>> UpdateConditionSource([FromRoute] ObjectId id, [FromBody] ICondition sourceCondition)
+        {
+            var model = await _effects.GetOneAsync(id);
+            if (model is null)
+                return NotFound();
+
+            var update = Builders<IEffect>.Update.Set(nameof(IEffect.SourceCondition), sourceCondition);
+            var result = await _effects.UpdateAsync(id, update);
+            return Ok(result);
         }
 
 

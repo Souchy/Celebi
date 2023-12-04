@@ -1,7 +1,7 @@
-<import from="../../zone/zone"></import>
-<import from="../../strings/stringcomponent"></import>
-<import from="../../stats/gen/statsmini"></import>
-<import from="../../stats/gen/statpropertyselector"></import>
+<import from="../zone/zone"></import>
+<import from="../strings/stringcomponent"></import>
+<import from="../stats/gen/statsmini"></import>
+<import from="../stats/gen/statpropertyselector"></import>
 
 <div if.bind="data && schema">
   <!-- hi prop grid -->
@@ -12,18 +12,23 @@
         <td style="padding-right: 8px; color: var(--accent2);" data-bs-toggle="collapse" data-bs-target="#collapseZone-${uid}-schema">
           ${prop}: 
           ${propName(prop)}
+          <!-- , ${typeof(data[prop])} -->
         </td>
         <td>
           <template switch.bind="propName(prop)">
+
+            <div case='IEntityList`1'>Status effect list is below. Counter: ${data[prop].length}</div>
       
             <zone uid="${uid}-schema" case="IZone" zone.bind="data[prop]" callbacksave.bind="() => onChange()"></zone>
       
             <select case='ElementType' value.bind="data[prop]" change.trigger="onChange()">
-              <option repeat.for="ele of Enums.elements" model.bind="$index">${ele}</option>
+              <option repeat.for="e of Enums.elements" model.bind="$index">${e}</option>
             </select>
-      
             <select case='ActorType' value.bind="data[prop]" change.trigger="onChange()">
-              <option repeat.for="act of Enums.actors" model.bind="$index">${act}</option>
+              <option repeat.for="e of Enums.actorTypes" model.bind="$index">${e}</option>
+            </select>
+            <select case='MomentType' value.bind="data[prop]" change.trigger="onChange()">
+              <option repeat.for="e of Enums.momentTypes" model.bind="$index">${e}</option>
             </select>
       
             <statsmini case="IStats"           stats.bind="data[prop]" callbacksavestat.bind="() => onChange()" characsallowed.bind="Characteristics.allSectioned"></statsmini>
@@ -43,7 +48,8 @@
             <input case="AssetIID" type="text" value.bind="data[prop]" change.trigger="onChange()"/>
             <input case="AnimationSetIID" type="text" value.bind="data[prop]" change.trigger="onChange()"/>
       
-            <template default-case switch.bind="typof(prop)">
+            <template default-case switch.bind="type(prop)">
+              <!-- <input case="Int32" type="number" value.bind="data[prop]"  change.trigger="onChange()"/> -->
               <input case="number" type="number" value.bind="data[prop]"  change.trigger="onChange()"/>
               <!-- <div case="string"> -->
                 <!-- who even has a string property -->
@@ -59,8 +65,8 @@
                       <label class="btn btn-outline shadow-none" for="btn-check-outlined ${prop}">${characName}</label><br>
                   </div>
               </div>
-      
             </template>
+
           </template>
         </td>
       </tr>

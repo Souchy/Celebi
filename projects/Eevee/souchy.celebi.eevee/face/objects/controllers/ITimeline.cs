@@ -27,8 +27,8 @@ namespace souchy.celebi.eevee.face.objects.controllers
         public IEnumerable<ICreature> getCreatures() => slots.SelectMany(s => s.getAll()); //creatureIds.Select(crea => GetFight().creatures.Get(crea));
 
 
-        public void nextRound();
-        public void nextTurn();
+        public void nextRound(IAction action);
+        public void nextTurn(IAction action);
         public int indexOf(ObjectId creatureId);
         public int size();
         public ICreature getCreatureAt(int i);

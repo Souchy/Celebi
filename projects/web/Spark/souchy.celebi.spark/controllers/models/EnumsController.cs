@@ -3,7 +3,10 @@ using souchy.celebi.eevee.enums;
 using souchy.celebi.eevee.enums.characteristics;
 using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.enums.characteristics.properties;
+using souchy.celebi.eevee.face.entity;
 using souchy.celebi.eevee.face.shared.conditions;
+using souchy.celebi.eevee.impl.shared.triggers;
+using souchy.celebi.eevee.neweffects.face;
 using souchy.celebi.eevee.neweffects.impl;
 
 namespace souchy.celebi.spark.controllers.models
@@ -51,6 +54,44 @@ namespace souchy.celebi.spark.controllers.models
         [HttpGet("conditionType")]
         public ConditionType[] GetConditionType() => ConditionType.values();
 
+        // Schemas
+        [HttpGet("schemas/effects")]
+        public ActionResult<IEnumerable<SchemaDescription>> GetEffectSchemas()
+        {
+            var schemas = typeof(IEntity).Assembly.GetTypes()
+                .Where(t => !t.IsInterface && !t.IsAbstract)
+                .Where(t => t.IsAssignableTo(typeof(IEffectSchema)));
+            var descriptions = schemas.Select(t => SchemaDescription.GetSchemaDescription(t));
+            return Ok(descriptions);
+        }
+        [HttpGet("schemas/effect/{name}")]
+        public ActionResult<SchemaDescription> GetEffectSchema(string name)
+        {
+            var type = typeof(IEntity).Assembly
+                .GetTypes().FirstOrDefault(t => t.Name == name);
+            if (type == null) return NotFound();
+            return Ok(SchemaDescription.GetSchemaDescription(type));
+        }
+
+        [HttpGet("schemas/triggers")]
+        public ActionResult<IEnumerable<SchemaDescription>> GetTriggerSchemas()
+        {
+            var schemas = typeof(IEntity).Assembly.GetTypes()
+                .Where(t => !t.IsInterface && !t.IsAbstract)
+                .Where(t => t.IsAssignableTo(typeof(TriggerSchema)));
+            var descriptions = schemas.Select(t => SchemaDescription.GetSchemaDescription(t));
+            return Ok(descriptions);
+        }
+
+        [HttpGet("schemas/conditions")]
+        public ActionResult<IEnumerable<SchemaDescription>> GetConditionSchemas()
+        {
+            var schemas = typeof(IEntity).Assembly.GetTypes()
+                .Where(t => !t.IsInterface && !t.IsAbstract)
+                .Where(t => t.IsAssignableTo(typeof(ICondition)));
+            var descriptions = schemas.Select(t => SchemaDescription.GetSchemaDescription(t));
+            return Ok(descriptions);
+        }
 
     }
 }

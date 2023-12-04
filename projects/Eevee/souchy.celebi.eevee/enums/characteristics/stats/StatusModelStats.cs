@@ -18,6 +18,11 @@ namespace souchy.celebi.eevee.enums.characteristics.other
         {
             entityUid = Eevee.RegisterIIDTemporary()
         };
+        protected override IStats copyImplementation(bool anonymous = false)
+        {
+            if (anonymous) return new StatusModelStats();
+            else return StatusModelStats.Create();
+        }
     }
     /// <summary>
     /// status container properties only
@@ -29,6 +34,11 @@ namespace souchy.celebi.eevee.enums.characteristics.other
         {
             entityUid = Eevee.RegisterIIDTemporary()
         };
+        protected override IStats copyImplementation(bool anonymous = false)
+        {
+            if (anonymous) return new StatusContainerStats();
+            else return StatusContainerStats.Create();
+        }
     }
     /// <summary>
     /// status instance properties only
@@ -40,6 +50,11 @@ namespace souchy.celebi.eevee.enums.characteristics.other
         {
             entityUid = Eevee.RegisterIIDTemporary()
         };
+        protected override IStats copyImplementation(bool anonymous = false)
+        {
+            if (anonymous) return new StatusInstanceStats();
+            else return StatusInstanceStats.Create();
+        }
     }
 
 }

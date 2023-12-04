@@ -51,5 +51,24 @@ namespace souchy.celebi.eevee.impl.objects.zones
         {
             throw new NotImplementedException();
         }
+
+        public IZone copy()
+        {
+            var copy = new Zone();
+            copy.zoneType.value = this.zoneType.value;
+            copy.size.value = this.size.value.copy();
+            copy.negative = negative;
+            copy.worldOrigin = worldOrigin;
+            copy.worldOffset = worldOffset;
+            copy.localOrigin = localOrigin;
+            copy.rotation = rotation;
+            copy.canRotate.value = canRotate.value;
+            copy.sizeIndexExtendFromSource = sizeIndexExtendFromSource;
+            copy.maxSampleCount = maxSampleCount;
+            copy.samplingType = samplingType;
+            foreach(var child in children.Values)
+                copy.children.Add(child.copy());
+            return copy;
+        }
     }
 }

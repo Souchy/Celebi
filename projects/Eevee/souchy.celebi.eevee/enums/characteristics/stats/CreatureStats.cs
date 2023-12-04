@@ -19,6 +19,13 @@ namespace souchy.celebi.eevee.enums.characteristics.other
         {
             entityUid = Eevee.RegisterIIDTemporary()
         };
+
+        protected override IStats copyImplementation(bool anonymous = false)
+        {
+            if (anonymous) return new CreatureStats();
+            else return CreatureStats.Create();
+        }
+
         public void setStarterCurrentValues()
         {
             foreach (var res in Enum.GetValues<ResourceEnum>())
@@ -46,25 +53,28 @@ namespace souchy.celebi.eevee.enums.characteristics.other
                 var current = Get<IStatSimple>(Resource.getKey(res, ResourceProperty.Current));
                 var max = Get<IStatSimple>(Resource.getKey(res, ResourceProperty.Max));
                 var regen = Get<IStatSimple>(Resource.getKey(res, ResourceProperty.Regen));
+                var shieldRegen = Get<IStatSimple>(Resource.getKey(res, ResourceProperty.ShieldRegen));
+
+                // Shield regen
+                if (shieldRegen != null)
+                    current.value += shieldRegen.value;
 
                 if (regen == null)
                     continue;
 
+                // If -1, fill to full
                 if (regen.value == -1)
                 {
-                    if(max != null) 
+                    if (max != null)
                         current.value = max.value;
                     continue;
                 }
-                if(regen.value == 0)
-                {
-                    continue;
-                }
-                current.value += regen.value;
 
-                if(max != null)
-                    if (current.value > max.value)
-                        current.value = max.value;
+                if (regen.value == 0)
+                    continue;
+
+                // Normal regen, capped at max for regen (other boosts can go over max)
+                current.value = Math.Min(current.value + regen.value, max.value);
 
                 continue;
             }

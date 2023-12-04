@@ -14,6 +14,8 @@ using souchy.celebi.eevee.face.util.math;
 using souchy.celebi.eevee.face.shared.conditions;
 using souchy.celebi.eevee.face.util;
 using souchy.celebi.eevee.enums.characteristics;
+using souchy.celebi.eevee.enums;
+using souchy.celebi.eevee.impl.shared.triggers;
 
 namespace souchy.celebi.spark.util.swagger
 {
@@ -33,6 +35,8 @@ namespace souchy.celebi.spark.util.swagger
             //    }
             //}
 
+            context.SchemaGenerator.GenerateSchema(typeof(ConditionType), context.SchemaRepository);
+            context.SchemaGenerator.GenerateSchema(typeof(TriggerType), context.SchemaRepository);
             context.SchemaGenerator.GenerateSchema(typeof(ITriggerModel), context.SchemaRepository);
             context.SchemaGenerator.GenerateSchema(typeof(IVector3), context.SchemaRepository);
             //context.SchemaGenerator.GenerateSchema(typeof(IStatSimple), context.SchemaRepository);
@@ -49,6 +53,7 @@ namespace souchy.celebi.spark.util.swagger
                 .Where(t => t.IsAssignableTo(typeof(IStats))
                          || t.IsAssignableTo(typeof(IStat))
                          || t.IsAssignableTo(typeof(ICondition))
+                         || t.IsAssignableTo(typeof(TriggerSchema))
                          || t.IsAssignableTo(typeof(ITriggerModel))
                          || t.IsAssignableTo(typeof(IEffect))
                          || t.IsAssignableTo(typeof(IEffectSchema))

@@ -10,48 +10,24 @@ namespace souchy.celebi.eevee.impl.shared.conditions
 {
     public abstract class Condition : ICondition
     {
+        public ConditionType conditionType { get; init; }
         public ActorType actorType { get; set; } = ActorType.Target;
         public ConditionComparatorType comparator { get; set; } = ConditionComparatorType.EQ;
 
+        public Condition()
+        {
+            conditionType = ConditionType.getByType(GetType());
+        }
+
         public abstract bool check(IAction action, TriggerEvent trigger, ICreature boardSource, IBoardEntity boardTarget);
-
-    }
-
-    /// <summary>
-    /// Just check children
-    /// </summary>
-    public class GroupCondition : Condition
-    {
-        public ConditionGroupType groupType { get; set; } = ConditionGroupType.AND;
-        public IEntityList<ICondition> children { get; set; } = new EntityList<ICondition>();
-        public override bool check(IAction action, TriggerEvent trigger, ICreature boardSource, IBoardEntity boardTarget)
+        public ICondition copy()
         {
-            return checkChildren(action, trigger, boardSource, boardTarget);
+            var copy = copyImplementation();
+            copy.actorType = actorType;
+            copy.comparator = comparator;
+            return copy;
         }
-        public bool checkChildren(IAction action, TriggerEvent trigger, ICreature boardSource, IBoardEntity boardTarget)
-        {
-            if(children.Values.Count == 0) 
-                return true;
-            if (groupType == ConditionGroupType.AND)
-            {
-                bool result = true;
-                foreach (var c in children.Values)
-                {
-                    result &= c.check(action, trigger, boardSource, boardTarget);
-                }
-                return result;
-            }
-            if (groupType == ConditionGroupType.OR)
-            {
-                bool result = false;
-                foreach (var c in children.Values)
-                {
-                    result |= c.check(action, trigger, boardSource, boardTarget);
-                }
-                return result;
-            }
-            return true;
-        }
+        public abstract ICondition copyImplementation();
     }
 
 }

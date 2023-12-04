@@ -68,7 +68,7 @@ namespace souchy.celebi.eevee.impl.objects
             // add status stats
             foreach(IStatusInstance status in GetStatuses().SelectMany(s => s.instances))
             {
-                foreach(IEffect eff in status.GetEffects().Where(e => e.Schema is AddStats))
+                foreach(IEffectInstance eff in status.GetEffects().Where(e => e.Schema is AddStats))
                 {
                     // TODO: need to also check for triggers/filters (ex: 50% res vs summons, need the Action with the source/target/spell)
                     var props = eff.GetProperties<AddStats>();

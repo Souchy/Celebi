@@ -19,11 +19,11 @@ namespace souchy.celebi.eevee.face.objects.statuses
         /// <summary>
         /// That or some kind of ID that allows merging of stacks/instances
         /// </summary>
-        public IID sourceSpellModel { get; set; }
+        public ObjectId sourceSpellModel { get; set; }
         /// <summary>
         /// Statuses come from effects that apply them.
         /// </summary>
-        public IID sourceEffectPermanent { get; set; }
+        public ObjectId sourceEffectPermanent { get; set; }
         /// <summary>
         /// Creature who applied the status
         /// </summary>

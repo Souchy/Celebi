@@ -50,6 +50,10 @@ namespace souchy.celebi.spark.services
             await _collection.ReplaceOneAsync(filterId(id), updatedModel);
         public async Task<ReplaceOneResult> UpdateAsync(IID id, T updatedModel) =>
             await _collection.ReplaceOneAsync(filterModelId(id), updatedModel);
+        public async Task<UpdateResult> UpdateAsync(ObjectId id, UpdateDefinition<T> update) =>
+            await _collection.UpdateManyAsync(filterId(id), update);
+        public async Task<UpdateResult> UpdateAsync(IID id, UpdateDefinition<T> update) =>
+            await _collection.UpdateManyAsync(filterModelId(id), update);
         public async Task<ReplaceOneResult> UpdateAsync(FilterDefinition<T> filter, T updatedModel) =>
             await _collection.ReplaceOneAsync(filter, updatedModel);
         public async Task<UpdateResult> UpdateAsync(FilterDefinition<T> filter, UpdateDefinition<T> update) =>

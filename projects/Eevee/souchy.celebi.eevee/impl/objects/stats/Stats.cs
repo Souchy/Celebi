@@ -90,12 +90,14 @@ namespace souchy.celebi.eevee.impl.stats
             }
         }
 
+        protected virtual IStats copyImplementation(bool anonymous = false)
+        {
+            if (anonymous) return new Stats();
+            else return Stats.Create();
+        }
         public IStats copy(bool anonymous = false)
         {
-            if (anonymous)
-                return copyTo(new Stats(), anonymous);
-            else
-                return copyTo(Stats.Create(), anonymous);
+            return copyTo(copyImplementation(), anonymous);
         }
 
         public IStats copyToFight(ObjectId fightUid, IStats target = null)

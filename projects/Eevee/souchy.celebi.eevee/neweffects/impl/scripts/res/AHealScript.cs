@@ -33,7 +33,7 @@ namespace souchy.celebi.eevee.neweffects.impl.effects.res
             var props = action.effect.GetProperties<AbstractDamageSchema>();
             int dmg = DamageUtil.calculateDamage(sourceStats, targetStats, props, appliesOffensiveStats, appliesDefensiveStats);
 
-            var shield = targetStats.Get<IStatSimple>(Resource.Shield);
+            var shield = targetStats.Get<IStatSimple>(Resource.LifeShield);
             var remainingDmgAfterShield = dmg;
 
             //var startShield = shield.value;

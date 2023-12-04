@@ -39,7 +39,7 @@ namespace souchy.celebi.eevee.face.objects.controllers
         /// But maybe it could still be done with only static effects and adding stats idk
         /// 
         /// </summary>
-        public IEntityDictionary<ObjectId, IEffect> effects { get; init; }
+        public IEntityDictionary<ObjectId, IEffectInstance> effects { get; init; }
         public IEntityDictionary<ObjectId, IStats> stats { get; init; }
 
 
