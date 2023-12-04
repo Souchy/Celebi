@@ -13,6 +13,29 @@ using static System.Collections.Specialized.BitVector32;
 
 namespace souchy.celebi.eevee.face.objects
 {
+    public class MessageTCP
+    {
+        /// <summary>
+        /// Determines the message class to deserialize
+        /// </summary>
+        public object messageType { get; set; }
+    }
+    /// <summary>
+    /// this is all you need to send the message. unless it's a spellaction, then you add the spellId
+    /// </summary>
+    public class ActionMessageTCP
+    {
+        public IFight fight { get; set; }
+        public ObjectId caster { get; set; }
+        public ObjectId targetCell { get; set; }
+        /// <summary>
+        /// Determines the action to create
+        /// </summary>
+        public object actionType { get; set; }
+    }
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IAction
     {
         /// <summary>

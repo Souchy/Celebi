@@ -19,11 +19,20 @@ using souchy.celebi.eevee.face.entity;
 using Microsoft.AspNetCore.Hosting;
 using souchy.celebi.eevee.enums.characteristics.creature;
 using souchy.celebi.eevee.impl.shared.triggers.schemas;
+using System.Collections.Concurrent;
 
 namespace souchy.celebi.espeon.eevee.impl.controllers
 {
+    /// <summary>
+    /// not here, in espeon, need to queue all actions in each fight so players can chain them and keep the order etc (cast #2 before #1 ends)
+    /// </summary>
+    public class TodoHandlerPerFight
+    {
+        public ConcurrentQueue<IAction> actionQueue = new ConcurrentQueue<IAction>();
+    }
     public class Actions
     {
+
         // only on client
         public void previewSpell(IActionSpell action)
         {
