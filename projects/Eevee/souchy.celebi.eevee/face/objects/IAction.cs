@@ -260,7 +260,7 @@ namespace souchy.celebi.eevee.face.objects
 
         protected override IAction copyImplementation()
         {
-            var copy = new SubActionEffect(parent);
+            var copy = new SubActionEffectTarget(parent);
             copy.effect = effect;
             return copy;
         }

@@ -3,7 +3,6 @@ using Godot.Sharp.Extras;
 using Newtonsoft.Json;
 using souchy.celebi.eevee;
 using System;
-using System.Security.Cryptography.X509Certificates;
 using souchy.celebi.eevee.impl.objects;
 using souchy.celebi.eevee.face.objects;
 using souchy.celebi.eevee.face.shared.models;
