@@ -11,8 +11,8 @@ config_version=5
 [application]
 
 config/name="Amethyst Fx"
-config/tags=PackedStringArray("celebi")
-config/features=PackedStringArray("4.2", "Forward Plus")
+config/tags=PackedStringArray("assets", "celebi")
+config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [dotnet]
